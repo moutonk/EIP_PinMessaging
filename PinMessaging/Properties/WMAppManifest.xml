@@ -22,9 +22,9 @@
     <Tokens>
       <PrimaryToken TokenID="PinMessagingToken" TaskName="_default">
         <TemplateFlip>
-          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <SmallImageURI IsRelative="true" IsResource="false">Images\logo_orange.png</SmallImageURI>
           <Count>0</Count>
-          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Images\logo_orange.png</BackgroundImageURI>
           <Title>PinMessaging</Title>
           <BackContent>
           </BackContent>
