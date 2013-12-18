@@ -20,22 +20,88 @@ namespace PinMessaging.View
     public partial class PMMapView : PhoneApplicationPage
     {
         Geolocator geolocator = new Geolocator();
-        Geoposition geoposition;
+        Geoposition geoposition = null;
+        MapLayer mapLayer = new MapLayer();
+        MapOverlay userSpotLayer = new MapOverlay();
+        UserLocationMarker userSpot = new UserLocationMarker();
+       
 
         public PMMapView()
         {
             InitializeComponent();
 
+            map.Layers.Add(mapLayer);
+
+            userSpotLayer.Content = userSpot;
+
+            userSpot.Visibility = Visibility.Collapsed;
+
+            mapLayer.Add(userSpotLayer);
+
             //geolocator initialization
             geolocator.DesiredAccuracyInMeters = 1;
-            geolocator.MovementThreshold = 1;
+            geolocator.MovementThreshold = 3;
             geolocator.ReportInterval = 1000;
             geolocator.PositionChanged += geolocator_PositionChanged;
+            geolocator.StatusChanged += geolocator_StatusChanged;
 
-            //map initialization
-            map.ZoomLevel = 16;
-            map.LandmarksEnabled = true;
-            map.PedestrianFeaturesEnabled = true;
+         
+            UpdateLocation(geolocator);
+        }
+
+        private void geolocator_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
+        {
+            switch (args.Status)
+            {
+                case Windows.Devices.Geolocation.PositionStatus.Ready:
+                    // Location data is available
+                    Debug.WriteLine( "Location is available.");
+
+
+                    if (geoposition != null)
+                    {
+                        UpdateMapCenter(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+                     }
+                  
+
+                    break;
+
+                case Windows.Devices.Geolocation.PositionStatus.Initializing:
+                    // This status indicates that a GPS is still acquiring a fix
+                    Debug.WriteLine( "A GPS device is still initializing.");
+                    break;
+
+                case Windows.Devices.Geolocation.PositionStatus.NoData:
+                    // No location data is currently available
+                    Debug.WriteLine( "Data from location services is currently unavailable.");
+                    break;
+
+                case Windows.Devices.Geolocation.PositionStatus.Disabled:
+                    // The app doesn't have permission to access location,
+                    // either because location has been turned off.
+                    Debug.WriteLine( "Your location is currently turned off. " +
+                         "Change your settings through the Settings charm " +
+                         " to turn it back on.");
+                    break;
+
+                case Windows.Devices.Geolocation.PositionStatus.NotInitialized:
+                    // This status indicates that the app has not yet requested
+                    // location data by calling GetGeolocationAsync() or
+                    // registering an event handler for the positionChanged event.
+                    Debug.WriteLine( "Location status is not initialized because " +
+                        "the app has not requested location data.");
+                    break;
+
+                case Windows.Devices.Geolocation.PositionStatus.NotAvailable:
+                    // Location is not available on this version of Windows
+                    Debug.WriteLine( "You do not have the required location services " +
+                        "present on your system.");
+                    break;
+
+                default:
+                    Debug.WriteLine( "Unknown status");
+                    break;
+            }
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -43,38 +109,50 @@ namespace PinMessaging.View
             try
             {
                 UpdateLocation(geolocator);
-                UpdateMapCenter(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
-                Pushpin p0 = new Pushpin();
-                Pushpin p1 = new Pushpin();
 
-                p0.Content = "Test1";
-                p1.Content = "Test2";
+                if (geoposition != null)
+                {
+                    UpdateMapCenter(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+                    //Pushpin p0 = new Pushpin();
+                    //Pushpin p1 = new Pushpin();
 
-                p0.Tap += p0_Tap;
+                  
+                    //t.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
 
-                MapLayer layer0 = new MapLayer();
-                
-                MapOverlay overlay0 = new MapOverlay();
-                MapOverlay overlay1 = new MapOverlay();
+                    //p0.Content = "Test1";
+                    //p1.Content = "Test2";
 
-                overlay0.Content = p0;
-                overlay0.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
-                overlay1.Content = p1;
-                overlay1.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude +1, geoposition.Coordinate.Longitude);
+                    //p0.Tap += p0_Tap;
 
-                layer0.Add(overlay0);
-                layer0.Add(overlay1);
+                    
 
-                map.Layers.Add(layer0);
-               
-               // UserLocationMarkerTest.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+                    
+                    MapOverlay overlay1 = new MapOverlay();
 
-                //GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
+                    userSpotLayer.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+       
+
+                    //overlay0.Content = p0;
+                    //overlay0.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+                    //overlay1.Content = p1;
+                    //overlay1.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude + 1, geoposition.Coordinate.Longitude);
+
+                    //layer0.Add(overlay0);
+                    //layer0.Add(overlay1);
+
+                    
+
+                    // UserLocationMarkerTest.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+
+                    //GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
 
 
-               // p.Location = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+                    // p.Location = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
 
-                Debug.WriteLine("New location:" + geoposition.Coordinate.Latitude.ToString() + " " + geoposition.Coordinate.Longitude.ToString());
+                    Debug.WriteLine("New location:" + geoposition.Coordinate.Latitude.ToString() + " " + geoposition.Coordinate.Longitude.ToString());
+                }
+    
+            
 
             }
             catch (Exception ex)
@@ -88,18 +166,38 @@ namespace PinMessaging.View
             Debug.WriteLine("tap");
         }
 
-        private async void UpdateLocation(Geolocator sender)
+        private async  void UpdateLocation(Geolocator sender)
         {
-            geoposition = await sender.GetGeopositionAsync(maximumAge: TimeSpan.FromMinutes(5), timeout: TimeSpan.FromSeconds(10));
+            geoposition =  await sender.GetGeopositionAsync(maximumAge: TimeSpan.FromMinutes(5), timeout: TimeSpan.FromSeconds(10));
+
+            if (geoposition != null)
+            {
+                    UpdateMapCenter(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        if (userSpot.Visibility == Visibility.Collapsed)
+                            userSpot.Visibility = Visibility.Visible;
+                        userSpotLayer.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
+       
+                    });
+                   
+                Debug.WriteLine(geoposition.Coordinate.Latitude);
+            }
         }
-        
+
         private void UpdateMapCenter(double latitude, double longitude)
         {
-            map.Center = new GeoCoordinate(latitude, longitude);
+            Dispatcher.BeginInvoke(() =>
+            {
+                map.Center = new GeoCoordinate(latitude, longitude);
+            });  
         }
 
         private void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
+            
+            Debug.WriteLine("new pos dispo:" + args.Position.Coordinate.Latitude + " " + args.Position.Coordinate.Longitude);
+         
             UpdateLocation(sender);
         }
 
