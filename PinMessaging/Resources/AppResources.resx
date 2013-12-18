@@ -166,7 +166,7 @@
     <value>The email address in incorrectly formated</value>
   </data>
   <data name="PMWrongPasswordSyntax" xml:space="preserve">
-    <value>The password must contain at least 6 characters</value>
+    <value>The password must contain between 6 and 20 characters </value>
   </data>
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>

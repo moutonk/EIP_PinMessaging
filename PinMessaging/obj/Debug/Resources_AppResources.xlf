@@ -71,8 +71,8 @@
           <target state="new">The email address in incorrectly formated</target>
         </trans-unit>
         <trans-unit id="Resx/PMWrongPasswordSyntax" translate="yes" xml:space="preserve">
-          <source>The password must contain at least 6 characters</source>
-          <target state="new">The password must contain at least 6 characters</target>
+          <source>The password must contain between 6 and 20 characters </source>
+          <target state="new">The password must contain between 6 and 20 characters </target>
         </trans-unit>
         <trans-unit id="Resx/Previous" translate="yes" xml:space="preserve">
           <source>Previous</source>

@@ -24,7 +24,7 @@ namespace PinMessaging.Controller
             var dictionary = new Dictionary<string, string>
             {
                 {"email", logInModel.Email},
-                {"password", Encrypt.ConvertToSHA1(logInModel.Password)}
+                {"password", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1(logInModel.Password))}
             };
 
             PMWebService.SendRequest(HttpRequestType.Post, RequestType.SignIn, SyncType.Async, dictionary, null);

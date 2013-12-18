@@ -67,8 +67,8 @@
           <target state="translated">Quelque chose ne s'est pas passé correctement. Veuillez réessayer ultérieurement</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/PMWrongPasswordSyntax" xml:space="preserve">
-          <source>The password must contain at least 6 characters</source>
-          <target state="translated">Le mot de passe doit contenir au moins 6 caractères</target>
+          <source>The password must contain between 6 and 20 characters </source>
+          <target state="new">The password must contain between 6 and 20 characters </target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/PMWrongEmailSyntax" xml:space="preserve">
           <source>The email address in incorrectly formated</source>

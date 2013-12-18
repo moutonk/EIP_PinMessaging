@@ -23,8 +23,8 @@ namespace PinMessaging.Controller
             {
                 {"email", logInModel.Email},
                 {"login", logInModel.Email},
-                {"password", Encrypt.ConvertToSHA1(logInModel.Password)},
-                {"simId", Encrypt.ConvertToSHA1(logInModel.PhoneSimId)}
+                {"password", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1(logInModel.Password))},
+                {"simId", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1(logInModel.PhoneSimId))}
             };
 
             PMWebService.SendRequest(HttpRequestType.Post, RequestType.SignUp, SyncType.Async, dictionary, null);

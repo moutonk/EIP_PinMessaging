@@ -174,9 +174,7 @@
   <data name="CreateAccountPageTitle" xml:space="preserve">
     <value>Nouveau compte</value>
   </data>
-  <data name="PMWrongPasswordSyntax" xml:space="preserve">
-    <value>Le mot de passe doit contenir au moins 6 caractères</value>
-  </data>
+  
   <data name="PMWrongEmailSyntax" xml:space="preserve">
     <value>Le format de l'adresse email est invalide</value>
   </data>
