@@ -1,0 +1,164 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:edc="clr-namespace:Microsoft.Expression.Controls;assembly=Microsoft.Expression.Drawing"
+    x:Class="PinMessaging.View.PMSignInCreateStructure"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
+	<Grid x:Name="LayoutRoot" Background="{StaticResource PMGrey}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Grid x:Name="ContentPanel" Grid.RowSpan="2">
+			<TextBlock x:Name="PageSubTitle" FontSize="{StaticResource PMNormalFontSize}" HorizontalAlignment="Left" Height="68" Margin="79,301,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="335" TextAlignment="Center"/>
+			<Grid HorizontalAlignment="Center" Height="190" Margin="35,359,35,0" VerticalAlignment="Top" Width="417">
+				<Grid x:Name="GridEmailError" HorizontalAlignment="Left" Height="126" Margin="0,64,0,0" VerticalAlignment="Top" Width="417">
+					<Grid.Resources>
+						<Storyboard x:Name="MoveTextBoxEmailUp">
+							<DoubleAnimation
+								Storyboard.TargetName="GridEmailError" 
+								Storyboard.TargetProperty="GridEmailError.RenderTransform.(TranslateTransform.Y)" 
+								From="0" To="-50" 
+								Duration="0:0:0.5"
+								AutoReverse="False"
+								Completed="MoveTextBoxEmailUp_OnCompleted"/>
+						</Storyboard>
+						<Storyboard x:Name="MoveTextBoxEmailDown">
+							<DoubleAnimation
+								Storyboard.TargetName="GridEmailError" 
+								Storyboard.TargetProperty="GridEmailError.RenderTransform.(TranslateTransform.Y)" 
+								From="-50" To="0" 
+								Duration="0:0:0.5"
+								AutoReverse="False"
+								Completed="MoveTextBoxEmailDown_OnCompleted"/>
+						</Storyboard>
+					</Grid.Resources>
+					<Grid.RenderTransform>
+						<TranslateTransform Y="0" X="0"/>
+					</Grid.RenderTransform>
+					<TextBlock x:Name="TextBlockError" FontSize="{StaticResource PMErrorFontSize}" Foreground="Red" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="62" Width="407" Margin="10,0,0,0"/>
+					<TextBox x:Name="TextBoxEmail" KeyDown="TextBoxEmail_OnKeyDown" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" VerticalAlignment="Top" Width="439" Margin="-11,55,-11,-1" Text="mk@epi.eu" FontSize="{StaticResource PMNormalFontSize}"/>
+				</Grid>
+				<PasswordBox x:Name="TextBoxPassword" KeyDown="TextBoxPassword_OnKeyDown" FontSize="{StaticResource PMNormalFontSize}" HorizontalAlignment="Center" Margin="-10,119,-16,0" VerticalAlignment="Top" Width="443"/>
+			</Grid>
+			<Grid x:Name="GridLogo" HorizontalAlignment="Left" Height="212" Margin="89,63,0,0" VerticalAlignment="Top" Width="312">
+				<Grid.Background>
+					<ImageBrush ImageSource="/Assets/logo_black.png"/>
+				</Grid.Background>
+			</Grid>
+			<Grid x:Name="GridPageTitle" Opacity="0.7" HorizontalAlignment="Left" Height="238" Margin="0,-238,0,0" VerticalAlignment="Top" Width="480">
+				<Grid.Resources>
+					<Storyboard x:Name="MovePageTitle">
+						<DoubleAnimation
+							Storyboard.TargetName="GridPageTitle" 
+							Storyboard.TargetProperty="GridPageTitle.RenderTransform.(TranslateTransform.Y)" 
+							From="0" To="285" 
+							Duration="0:0:1"
+							AutoReverse="False"/>
+					</Storyboard>
+				</Grid.Resources>
+				<Grid.Background>
+					<StaticResource ResourceKey="PMOrange"/>
+				</Grid.Background>
+				<Grid.RenderTransform>
+					<TranslateTransform Y="0" X="0"/>
+				</Grid.RenderTransform>
+				<TextBlock x:Name="PageTitle" FontSize="{StaticResource PMTitleFontSize}" FontWeight="Bold" HorizontalAlignment="Left" Margin="0,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="99" Width="480" TextAlignment="Center" Style="{StaticResource PhoneTextTitle1Style}"/>
+			</Grid>
+			<Grid HorizontalAlignment="Left" Height="91" Margin="32,613,0,0" VerticalAlignment="Top" Width="417">
+				<Button x:Name="ButtonPrevious" FontSize="{StaticResource PMNormalFontSize}" Content="{Binding LocalizedResources.Previous, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="-11,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,-0.562" Width="201" Height="76" Click="ButtonPreviousClick" Background="{StaticResource PMOrange}"/>
+				<Button x:Name="ButtonValidate" Background="{StaticResource PMOrange}" FontSize="{StaticResource PMNormalFontSize}" Content="" Margin="0,10,-11,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="76" Width="201" RenderTransformOrigin="0.138,0.416"/>
+			</Grid>
+            <Grid x:Name="GridProgress" HorizontalAlignment="Left" Height="7" Margin="-481,740,0,0" VerticalAlignment="Top" Width="480" Background="{StaticResource PMOrange}">
+                <Grid.Resources>
+                    <Storyboard x:Name="MoveProgressBarSignInPart1">
+                        <DoubleAnimation
+							Storyboard.TargetName="GridProgress" 
+							Storyboard.TargetProperty="GridProgress.RenderTransform.(TranslateTransform.X)" 
+							From="0" To="240" 
+							Duration="0:0:0.5"
+							AutoReverse="False"/>
+                    </Storyboard>
+                    <Storyboard x:Name="MoveProgressBarSignInPart1Reverse">
+                        <DoubleAnimation
+							Storyboard.TargetName="GridProgress" 
+							Storyboard.TargetProperty="GridProgress.RenderTransform.(TranslateTransform.X)" 
+							From="240" To="0" 
+							Duration="0:0:0.5"
+							AutoReverse="False"/>
+                    </Storyboard>
+                    <Storyboard x:Name="MoveProgressBarSignInPart2">
+                        <DoubleAnimation
+							Storyboard.TargetName="GridProgress" 
+							Storyboard.TargetProperty="GridProgress.RenderTransform.(TranslateTransform.X)" 
+							From="240" To="480" 
+							Duration="0:0:0.5"
+							AutoReverse="False"
+                            Completed="SignInUp_OnCompleted"/>
+                    </Storyboard>
+                    <Storyboard x:Name="MoveProgressBarSignUpPart1">
+                        <DoubleAnimation
+							Storyboard.TargetName="GridProgress" 
+							Storyboard.TargetProperty="GridProgress.RenderTransform.(TranslateTransform.X)" 
+							From="0" To="160" 
+							Duration="0:0:0.5"
+							AutoReverse="False"/>
+                    </Storyboard>
+                    <Storyboard x:Name="MoveProgressBarSignUpPart1Reverse">
+                        <DoubleAnimation
+							Storyboard.TargetName="GridProgress" 
+							Storyboard.TargetProperty="GridProgress.RenderTransform.(TranslateTransform.X)" 
+							From="160" To="0" 
+							Duration="0:0:0.5"
+							AutoReverse="False"/>
+                    </Storyboard>
+                    <Storyboard x:Name="MoveProgressBarSignUpPart2">
+                        <DoubleAnimation
+							Storyboard.TargetName="GridProgress" 
+							Storyboard.TargetProperty="GridProgress.RenderTransform.(TranslateTransform.X)" 
+							From="160" To="320" 
+							Duration="0:0:1"
+							AutoReverse="False"/>
+                    </Storyboard>
+                    <Storyboard x:Name="MoveProgressBarSignUpPart2Reverse">
+                        <DoubleAnimation
+							Storyboard.TargetName="GridProgress" 
+							Storyboard.TargetProperty="GridProgress.RenderTransform.(TranslateTransform.X)" 
+							From="320" To="160" 
+							Duration="0:0:0.5"
+							AutoReverse="False"/>
+                    </Storyboard>
+                    <Storyboard x:Name="MoveProgressBarSignUpPart3">
+                        <DoubleAnimation
+							Storyboard.TargetName="GridProgress" 
+							Storyboard.TargetProperty="GridProgress.RenderTransform.(TranslateTransform.X)" 
+							From="320" To="480" 
+							Duration="0:0:0.5"
+							AutoReverse="False"
+                            Completed="SignInUp_OnCompleted"/>
+                    </Storyboard>
+                </Grid.Resources>
+                <Grid.RenderTransform>
+                    <TranslateTransform Y="0" X="0"/>
+                </Grid.RenderTransform>
+            </Grid>
+            <Rectangle HorizontalAlignment="Left" Height="69" Margin="0,699,0,0" Stroke="Black" VerticalAlignment="Top" Width="32" StrokeThickness="0" Fill="{StaticResource PMGrey}"/>
+            <Rectangle Fill="{StaticResource PMGrey}" HorizontalAlignment="Left" Height="69" Margin="449,699,0,0" Stroke="Black" VerticalAlignment="Top" Width="31" StrokeThickness="0"/>
+
+        </Grid>
+		<ProgressBar Visibility="Collapsed" x:Name="ProgressBarLoading" Foreground="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="10" Margin="12,2,0,0" VerticalAlignment="Top" Width="458"/>
+	</Grid>
+
+</phone:PhoneApplicationPage>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="fr-FR" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="PinMessaging" product-version="1.0.0.0" build-num="0">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="2.1.2010.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resx">
+        <trans-unit translate="yes" id="Resx/ButtonConnection" xml:space="preserve">
+          <source>Connection</source>
+          <target state="translated">Connexion</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ButtonCreateAccount" xml:space="preserve">
+          <source>Create Account</source>
+          <target state="translated">Créer</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/ButtonValidate" xml:space="preserve">
+          <source>Validate</source>
+          <target state="translated">Valider</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/CreateAccountPageTitle" xml:space="preserve">
+          <source>New Account</source>
+          <target state="translated">Nouveau compte</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/HaveAccountOrNot" xml:space="preserve">
+          <source>Do you already have an account?</source>
+          <target state="new">Do you already have an account?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/No" xml:space="preserve">
+          <source>No</source>
+          <target state="translated">Non</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMConnectionFailUser" xml:space="preserve">
+          <source>The password is incorrect</source>
+          <target state="translated">Le mot de passe que vous avez entré est incorrect</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMCreatePassword" xml:space="preserve">
+          <source>Create your password</source>
+          <target state="translated">Création du mot de passe</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMEmail" xml:space="preserve">
+          <source>Please enter your email</source>
+          <target state="translated">Veuillez entrer votre adresse email</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMEmailAlreadyExists" xml:space="preserve">
+          <source>The email already exists</source>
+          <target state="translated">Cette adresse email existe déjà</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMEmailDoesNotExist" xml:space="preserve">
+          <source>The email does not exist</source>
+          <target state="translated">Cette adresse email n'existe pas</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMPassword" xml:space="preserve">
+          <source>Please enter your password</source>
+          <target state="translated">Veuillez entrer votre mot de passe</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMPasswordsNotSame" xml:space="preserve">
+          <source>The passwords are not the same</source>
+          <target state="translated">Les mots de passe que vous avez entré sont différent</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMRetypePassword" xml:space="preserve">
+          <source>Retype password</source>
+          <target state="new">Retype password</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMSignUpError" xml:space="preserve">
+          <source>Something went wrong. Please try again later</source>
+          <target state="translated">Quelque chose ne s'est pas passé correctement. Veuillez réessayer ultérieurement</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMWrongPasswordSyntax" xml:space="preserve">
+          <source>The password must contain at least 6 characters</source>
+          <target state="translated">Le mot de passe doit contenir au moins 6 caractères</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/PMWrongEmailSyntax" xml:space="preserve">
+          <source>The email address in incorrectly formated</source>
+          <target state="translated">Le format de l'adresse email est invalide</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Previous" xml:space="preserve">
+          <source>Previous</source>
+          <target state="translated">Précedent</target>
+        </trans-unit>
+        <trans-unit id="Resx/ResourceFlowDirection" translate="yes" xml:space="preserve">
+          <source>LeftToRight</source>
+          <target state="translated">LeftToRight</target>
+        </trans-unit>
+        <trans-unit id="Resx/ResourceLanguage" translate="yes" xml:space="preserve">
+          <source>en-US</source>
+          <target state="translated">fr-FR</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/SignInPageTitle" xml:space="preserve">
+          <source>Sign in</source>
+          <target state="translated">Connexion</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/WelcomeSentence" xml:space="preserve">
+          <source>Welcome on PinMessaging, the new geolocated social application!</source>
+          <target state="translated">Bienvenue sur PinMessaging, la nouvelle application social par géolocalisation!</target>
+        </trans-unit>
+        <trans-unit id="Resx/Yes" translate="yes" xml:space="preserve">
+          <source>Yes</source>
+          <target state="translated">Oui</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
