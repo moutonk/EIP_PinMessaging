@@ -41,7 +41,7 @@ namespace PinMessaging.Utils
         }
     }
 
-    class PMWebService
+    public class PMWebService
     {
         private static readonly PMDataConverter DataConverter = new PMDataConverter();
         public static bool OnGoingRequest { get; set; }

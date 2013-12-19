@@ -29,7 +29,7 @@ namespace PinMessaging.Controller
 
             PMWebService.SendRequest(HttpRequestType.Post, RequestType.SignIn, SyncType.Async, dictionary, null);
 
-            WaitAnswerTimer.Start();
+            StartTimer();
         }
     }
 }

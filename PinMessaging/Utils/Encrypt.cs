@@ -76,7 +76,7 @@ namespace PinMessaging.Utils
 
             public static string ConvertToMD5(string input)
             {
-                return GetHashString(input, new UTF8Encoding());
+                return GetHashString(input, new UTF8Encoding()).ToLowerInvariant();
             }
 
             public static byte[] GetHash(byte[] input)

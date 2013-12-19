@@ -4,9 +4,11 @@ using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace PinMessaging.Controller
 {
@@ -28,14 +30,14 @@ namespace PinMessaging.Controller
 
             PMWebService.SendRequest(HttpRequestType.Post, RequestType.CheckEmail, SyncType.Async, dictionary, null);
 
-            WaitAnswerTimer.Start();
+            StartTimer();
         }
 
         protected override void waitEnd_Tick(object sender, EventArgs e)
         {
             if (PMWebService.OnGoingRequest == false)
             {
-                WaitAnswerTimer.Stop();
+                StopTimer();
 
                 //For request with a change of UI
                 if (UpdateUi != null)

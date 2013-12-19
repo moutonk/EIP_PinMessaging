@@ -1,7 +1,7 @@
 ﻿
 namespace PinMessaging.Other
 {
-    static class PMData
+    public static class PMData
     {
         public static bool IsSignInSuccess { get; set; }
         public static bool IsSignUpSuccess { get; set; }

@@ -4,12 +4,13 @@ using PinMessaging.Model;
 using PinMessaging.Other;
 using PinMessaging.Utils.WebService;
 using System.Diagnostics;
+using System.Windows;
 
 namespace PinMessaging.Utils
 {
-    class PMWebServiceEndDetector
+    public class PMWebServiceEndDetector
     {
-        protected readonly DispatcherTimer WaitAnswerTimer = new DispatcherTimer();
+        protected DispatcherTimer WaitAnswerTimer;
         protected Func<RequestType, PMLogInCreateStructureModel.ActionType, bool, bool> UpdateUi;
         protected Func<bool> ChangeView;
         protected RequestType CurrentRequestType;
@@ -17,10 +18,31 @@ namespace PinMessaging.Utils
 
         protected PMWebServiceEndDetector()
         {
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                WaitAnswerTimer = new DispatcherTimer();
+                WaitAnswerTimer.Tick += waitEnd_Tick;
+                WaitAnswerTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+            });
+
             UpdateUi = null;
             ChangeView = null;
-            WaitAnswerTimer.Tick += waitEnd_Tick;
-            WaitAnswerTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
+         }
+
+        protected void StartTimer()
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                WaitAnswerTimer.Start();
+            });
+        }
+
+        protected void StopTimer()
+        {
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                WaitAnswerTimer.Stop();
+            });
         }
 
         //function called peridodicaly (and so the overridden function inherited)
