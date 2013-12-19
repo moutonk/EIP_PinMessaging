@@ -14,6 +14,10 @@ using System.Device.Location;
 using Microsoft.Phone.Maps;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Controls;
+using PinMessaging.Model;
+using System.Windows.Shapes;
+using System.Windows.Media;
+using PinMessaging.Controller;
 
 namespace PinMessaging.View
 {
@@ -24,7 +28,6 @@ namespace PinMessaging.View
         MapLayer mapLayer = new MapLayer();
         MapOverlay userSpotLayer = new MapOverlay();
         UserLocationMarker userSpot = new UserLocationMarker();
-       
 
         public PMMapView()
         {
@@ -37,6 +40,8 @@ namespace PinMessaging.View
             userSpot.Visibility = Visibility.Collapsed;
 
             mapLayer.Add(userSpotLayer);
+
+            PMMapPushpinController.mapLayer = mapLayer;
 
             //geolocator initialization
             geolocator.DesiredAccuracyInMeters = 1;
@@ -116,7 +121,7 @@ namespace PinMessaging.View
                     //Pushpin p0 = new Pushpin();
                     //Pushpin p1 = new Pushpin();
 
-                  
+                 
                     //t.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
 
                     //p0.Content = "Test1";
@@ -124,13 +129,15 @@ namespace PinMessaging.View
 
                     //p0.Tap += p0_Tap;
 
-                    
 
-                    
-                    MapOverlay overlay1 = new MapOverlay();
 
+
+
+                    PMMapPushpinModel pin = new PMMapPushpinModel("test", "mdlknskdhlr!!!", new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude));
+                    PMMapPushpinController.AddPushpinToMap(pin);
+
+             
                     userSpotLayer.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
-       
 
                     //overlay0.Content = p0;
                     //overlay0.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);

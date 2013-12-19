@@ -1,26 +1,23 @@
 ﻿
 using System;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace PinMessaging.Utils
 {
-    class Encrypt
+    public class Encrypt
     {
         public class SHA1Core
         {
             public static string ConvertToSHA1(string toConvert)
-            {
+            {               
                 SHA1 sha1 = new SHA1Managed();
-                var returnValue = new StringBuilder();
+                StringBuilder returnValue = new StringBuilder();
 
-                var hashData = sha1.ComputeHash(Encoding.UTF8.GetBytes(toConvert));
-
-                foreach (var t in hashData)
-                {
-                    returnValue.Append(t.ToString());
-                }
-                return returnValue.ToString();
+                byte[] hashData = sha1.ComputeHash(Encoding.UTF8.GetBytes(toConvert));
+ 
+                return BitConverter.ToString(sha1.Hash).Replace("-", "").ToLowerInvariant();
             }
         }
 

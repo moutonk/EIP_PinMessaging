@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace PinMessaging.Utils
 {
-    class EmailChecker
+    public class EmailChecker
     {
         public static bool IsEmailValid(string email)
         {
