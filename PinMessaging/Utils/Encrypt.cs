@@ -13,9 +13,8 @@ namespace PinMessaging.Utils
             public static string ConvertToSHA1(string toConvert)
             {               
                 SHA1 sha1 = new SHA1Managed();
-                StringBuilder returnValue = new StringBuilder();
-
-                byte[] hashData = sha1.ComputeHash(Encoding.UTF8.GetBytes(toConvert));
+        
+                sha1.ComputeHash(Encoding.UTF8.GetBytes(toConvert));
  
                 return BitConverter.ToString(sha1.Hash).Replace("-", "").ToLowerInvariant();
             }

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -12,7 +8,7 @@ namespace PinMessaging.Utils
     {
         public static byte[] FromHexaToARGB(string hexaColor)
         {
-            byte[] argb = new byte[4];
+            var argb = new byte[4];
 
             try
             {
@@ -35,20 +31,19 @@ namespace PinMessaging.Utils
 
         public static WriteableBitmap ChangeImageColor(Uri imgSrc, SolidColorBrush newColor)
         {
-            BitmapImage bti = new BitmapImage(imgSrc);
+            var bti = new BitmapImage(imgSrc) {CreateOptions = BitmapCreateOptions.None};
 
             //new image size, otherwise if image too big takes lots of time
             //bti.DecodePixelWidth = 100;
             //bti.DecodePixelHeight = 100;
 
             //mandatory otherwise exception
-            bti.CreateOptions = BitmapCreateOptions.None;
 
-            WriteableBitmap wbmp = new WriteableBitmap(bti);
+            var wbmp = new WriteableBitmap(bti);
             byte[] pixelBytes;
-            byte[] argb = Design.FromHexaToARGB(newColor.Color.ToString());
+            var argb = FromHexaToARGB(newColor.Color.ToString());
        
-            for (int i = 0; i < wbmp.Pixels.Length; i++)
+            for (var i = 0; i < wbmp.Pixels.Length; i++)
             {
                 //get the byte array associated to the pixel
                 pixelBytes = BitConverter.GetBytes(wbmp.Pixels[i]);

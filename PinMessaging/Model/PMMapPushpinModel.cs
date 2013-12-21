@@ -1,11 +1,5 @@
-﻿using Microsoft.Phone.Maps.Toolkit;
-using System;
-using System.Collections.Generic;
-using System.Device.Location;
+﻿using System.Device.Location;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 
 namespace PinMessaging.Model
@@ -22,20 +16,17 @@ namespace PinMessaging.Model
         }
 
         public PinType pinType { get; set; }
-        public Image pinImg { get; set; }
-        public GeoCoordinate geoCoord { get; set; }
-        private string pinName { get; set; }
-        private string pinContent { get; set; }
+        public Image PinImg { get; set; }
+        public GeoCoordinate GeoCoord { get; set; }
+        private string PinName { get; set; }
+        private string PinContent { get; set; }
 
         public PMMapPushpinModel(string name, string content, GeoCoordinate pos, PinType type)
         {
-            pinImg = new Image();
-            pinImg.Width = 100;
-            pinImg.Height = 100;
-
-            pinName = name;
-            pinContent = content;
-            geoCoord = pos;
+            PinImg = new Image {Width = 100, Height = 100};
+            PinName = name;
+            PinContent = content;
+            GeoCoord = pos;
             pinType = type;
         }
 

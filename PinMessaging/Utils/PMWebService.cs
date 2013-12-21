@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading;
 using PinMessaging.Other;
 using PinMessaging.Utils.WebService;
 
