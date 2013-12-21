@@ -63,6 +63,7 @@ namespace PinMessaging.Utils
         public static void SendRequest(HttpRequestType httpReqType, RequestType reqType, SyncType syncType, Dictionary<string, string> args, Dictionary<string, string> header)
         {
             OnGoingRequest = true;
+            PMData.NetworkProblem = false;
 
             //Debug output
             Debug.WriteLine(Environment.NewLine + "SendRequest: " + httpReqType.ToString() + " " + reqType.ToString() + " " + syncType.ToString() + " " + args.Aggregate("",(current, keyValuePair) =>current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
@@ -114,6 +115,8 @@ namespace PinMessaging.Utils
             catch (WebException e)
             {
                 ManageResponseExplicitError(e);
+
+                PMData.NetworkProblem = true;
 
                 CloseStream(streamResponse);
                 CloseStream(streamRead);

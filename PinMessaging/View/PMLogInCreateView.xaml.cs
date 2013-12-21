@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PinMessaging.Controller;
@@ -314,25 +310,32 @@ namespace PinMessaging.View
         public bool AdaptUI(RequestType currentType, PMLogInCreateStructureModel.ActionType parentRequestType, bool isOperationSuccessful)
         {
             switch (currentType)
-            {
-                
+            {              
                 case RequestType.CheckEmail:
 
-                    if (isOperationSuccessful == false)
+                    if (isOperationSuccessful == false) // email exists
                     {
-                        if (parentRequestType == PMLogInCreateStructureModel.ActionType.SignIn)
+                        if (PMData.NetworkProblem == false)
                         {
-                            ResetError(); 
-                            MoveTextBoxEmailUp.Begin();
-                            MoveProgressBarSignInPart1.Begin();      
+                            if (parentRequestType == PMLogInCreateStructureModel.ActionType.SignIn)
+                            {
+                                ResetError();
+                                MoveTextBoxEmailUp.Begin();
+                                MoveProgressBarSignInPart1.Begin();
+                            }
+                            else if (parentRequestType == PMLogInCreateStructureModel.ActionType.Create)
+                            {
+                                _currentStep = StepNumber.StepDefault;
+                                TextBlockError.Text = AppResources.PMEmailAlreadyExists;
+                            }
                         }
-                        else if (parentRequestType == PMLogInCreateStructureModel.ActionType.Create)
+                        else
                         {
                             _currentStep = StepNumber.StepDefault;
-                            TextBlockError.Text = AppResources.PMEmailAlreadyExists;
+                            TextBlockError.Text = AppResources.NetworkProblem;   
                         }
                     }
-                    else
+                    else //email does not exist
                     {
                         if (parentRequestType == PMLogInCreateStructureModel.ActionType.SignIn)
                         {

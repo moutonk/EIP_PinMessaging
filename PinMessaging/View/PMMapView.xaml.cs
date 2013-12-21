@@ -27,9 +27,7 @@ namespace PinMessaging.View
             map.Layers.Add(_mapLayer);
 
             _userSpotLayer.Content = _userSpot;
-
             _userSpot.Visibility = Visibility.Collapsed;
-
             _mapLayer.Add(_userSpotLayer);
 
             PMMapPushpinController.MapLayer = _mapLayer;
@@ -41,7 +39,6 @@ namespace PinMessaging.View
             _geolocator.PositionChanged += geolocator_PositionChanged;
             _geolocator.StatusChanged += geolocator_StatusChanged;
 
-         
             UpdateLocation(_geolocator);
         }
 

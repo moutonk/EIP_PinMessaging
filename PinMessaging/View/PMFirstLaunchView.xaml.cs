@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PinMessaging.Model;
 using PinMessaging.Resources;
 using PinMessaging.Utils;
-using PinMessaging.Other;
 
 namespace PinMessaging.View
 {
@@ -34,7 +32,7 @@ namespace PinMessaging.View
         {
             try
             {
-                NavigationService.Navigate(Paths.MapView);
+                //NavigationService.Navigate(Paths.MapView);
 
                 PhoneApplicationService.Current.State[Paths.ApplicationDico.SignInUpParams] = new PMLogInCreateStructureModel(AppResources.SignInPageTitle, AppResources.PMEmail, AppResources.ButtonValidate, PMLogInCreateStructureModel.ActionType.SignIn);
                 NavigationService.Navigate(Paths.SignInCreate);

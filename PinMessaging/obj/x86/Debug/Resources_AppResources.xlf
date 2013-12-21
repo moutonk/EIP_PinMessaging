@@ -26,6 +26,10 @@
           <source>Do you already have an account?</source>
           <target state="new">Do you already have an account?</target>
         </trans-unit>
+        <trans-unit id="Resx/NetworkProblem" translate="yes" xml:space="preserve">
+          <source>Please check your internet connection and try again</source>
+          <target state="new">Please check your internet connection and try again</target>
+        </trans-unit>
         <trans-unit id="Resx/No" translate="yes" xml:space="preserve">
           <source>No</source>
           <target state="new">No</target>

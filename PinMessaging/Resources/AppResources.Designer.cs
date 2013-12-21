@@ -106,6 +106,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please check your internet connection and try again.
+        /// </summary>
+        public static string NetworkProblem {
+            get {
+                return ResourceManager.GetString("NetworkProblem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à No.
         /// </summary>
         public static string No {
