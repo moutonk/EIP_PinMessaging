@@ -169,6 +169,7 @@
     <Content Include="Images\logo_orange.png" />
     <Content Include="Images\logo_splashScreen.png" />
     <Content Include="Images\logo_black.png" />
+    <Content Include="Images\pin.png" />
     <Content Include="whiteLogo.png" />
   </ItemGroup>
   <ItemGroup>

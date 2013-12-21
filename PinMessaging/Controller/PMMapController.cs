@@ -20,38 +20,31 @@ namespace PinMessaging.Controller
 
     public static class PMMapPushpinController
     {
-        public static MapLayer mapLayer {get; set;}
-        public static Dictionary<SolidColorBrush, WriteableBitmap> coloredPins {get; set;}
+        public static MapLayer mapLayer { get; set; }
+        private static Dictionary<SolidColorBrush, WriteableBitmap> coloredPins {get; set;}
 
         public static void Initialization()
         {
             coloredPins = new Dictionary<SolidColorBrush, WriteableBitmap>();
 
-            coloredPins[App.Current.Resources["PMOrange"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.LogoSplashBlack.ToString(), UriKind.Relative), App.Current.Resources["PMOrange"] as SolidColorBrush);
-            coloredPins[App.Current.Resources["PMGreen"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.LogoSplashBlack.ToString(), UriKind.Relative), App.Current.Resources["PMGreen"] as SolidColorBrush);
-            coloredPins[App.Current.Resources["PMPurple"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.LogoSplashBlack.ToString(), UriKind.Relative), App.Current.Resources["PMPurple"] as SolidColorBrush);
-            coloredPins[App.Current.Resources["PMYellow"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.LogoSplashBlack.ToString(), UriKind.Relative), App.Current.Resources["PMYellow"] as SolidColorBrush);
+            coloredPins[App.Current.Resources["PMOrange"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST.ToString(), UriKind.Relative), App.Current.Resources["PMOrange"] as SolidColorBrush);
+            coloredPins[App.Current.Resources["PMGreen"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST.ToString(), UriKind.Relative), App.Current.Resources["PMGreen"] as SolidColorBrush);
+            coloredPins[App.Current.Resources["PMPurple"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST.ToString(), UriKind.Relative), App.Current.Resources["PMPurple"] as SolidColorBrush);
+            coloredPins[App.Current.Resources["PMYellow"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST.ToString(), UriKind.Relative), App.Current.Resources["PMYellow"] as SolidColorBrush);
         }
 
         public static void AddPushpinToMap(PMMapPushpinModel pin)
         {
             MapOverlay overlay = new MapOverlay();
 
-            pin.pinImg.Tap += img_Tap;
-            pin.pinImg.Source = coloredPins[App.Current.Resources["PMOrange"] as SolidColorBrush];
+            pin.pinImg.Tap += pin.img_Tap;
+            pin.pinImg.Source = coloredPins[DeterminePinBackgroundColor(pin)];
          
             overlay.Content = pin.pinImg;  //pin.pushpin;
             overlay.GeoCoordinate = pin.geoCoord;
 
-            //pin.pushpin.Background = DeterminePinBackgroundColor(pin);
-
             if (mapLayer != null)
                 mapLayer.Add(overlay);
-        }
-
-        static void img_Tap(object sender, System.Windows.Input.GestureEventArgs e)
-        {
-            Debug.WriteLine("ici");
         }
 
         public static void RemovePushpinFromMap(PMMapPushpinModel pin)

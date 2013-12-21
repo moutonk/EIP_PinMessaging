@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Device.Location;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,11 @@ namespace PinMessaging.Model
             pinContent = content;
             geoCoord = pos;
             pinType = type;
+        }
+
+        public void img_Tap(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            Debug.WriteLine("Pin tapped!");
         }
     }
 }

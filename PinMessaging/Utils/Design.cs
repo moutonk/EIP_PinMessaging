@@ -38,8 +38,9 @@ namespace PinMessaging.Utils
             BitmapImage bti = new BitmapImage(imgSrc);
 
             //new image size, otherwise if image too big takes lots of time
-            bti.DecodePixelWidth = 100;
-            bti.DecodePixelHeight = 100;
+            //bti.DecodePixelWidth = 100;
+            //bti.DecodePixelHeight = 100;
+
             //mandatory otherwise exception
             bti.CreateOptions = BitmapCreateOptions.None;
 
