@@ -98,7 +98,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\PMEmailController.cs" />
-    <Compile Include="Controller\PMLogInController.cs" />
+    <Compile Include="Controller\PMSignInController.cs" />
     <Compile Include="Controller\PMMapController.cs" />
     <Compile Include="Controller\PMSignUpController.cs" />
     <Compile Include="Model\PMLogInCreateStructureModel.cs" />
@@ -111,6 +111,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Utils\Design.cs" />
     <Compile Include="Utils\EmailChecker.cs" />
     <Compile Include="Utils\Encrypt.cs" />
     <Compile Include="Utils\ErrorsManager.cs" />
@@ -179,7 +180,7 @@
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\..\..\Desktop\Newtonsoft.Json.dll</HintPath>
+      <HintPath>Bin\Debug\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

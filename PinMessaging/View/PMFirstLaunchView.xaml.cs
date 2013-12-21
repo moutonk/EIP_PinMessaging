@@ -34,6 +34,8 @@ namespace PinMessaging.View
         {
             try
             {
+                NavigationService.Navigate(Paths.MapView);
+
                 PhoneApplicationService.Current.State[Paths.ApplicationDico.SignInUpParams] = new PMLogInCreateStructureModel(AppResources.SignInPageTitle, AppResources.PMEmail, AppResources.ButtonValidate, PMLogInCreateStructureModel.ActionType.SignIn);
                 NavigationService.Navigate(Paths.SignInCreate);
             }

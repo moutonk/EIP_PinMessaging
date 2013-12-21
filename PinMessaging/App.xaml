@@ -19,7 +19,19 @@
         <SolidColorBrush x:Key="PMGrey">
             <Color>#252525</Color>
         </SolidColorBrush>
-        
+
+        <SolidColorBrush x:Key="PMGreen">
+            <Color>#32CD32</Color>
+        </SolidColorBrush>
+
+        <SolidColorBrush x:Key="PMPurple">
+            <Color>#23238E</Color>
+        </SolidColorBrush>
+
+        <SolidColorBrush x:Key="PMYellow">
+            <Color>#FFB90F</Color>
+        </SolidColorBrush>
+     
         <system:Double x:Key="PMNormalFontSize">25</system:Double>
         <system:Double x:Key="PMTitleFontSize">55</system:Double>
         <system:Double x:Key="PMErrorFontSize">20</system:Double>

@@ -1,13 +1,4 @@
-C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\App.g.cs
-C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\MainPage.g.cs
-C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\PinMessagingTests.g.resources
-C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\PinMessagingTests.Resources.AppResources.resources
-C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\PinMessagingTests.csproj.GenerateResource.Cache
-C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\PinMessagingTests.csprojResolveAssemblyReference.cache
 C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\Debug\Assets\ApplicationIcon.png
-C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\Debug\Assets\Tiles\FlipCycleTileLarge.png
-C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\Debug\Assets\Tiles\FlipCycleTileMedium.png
-C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\Debug\Assets\Tiles\FlipCycleTileSmall.png
 C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\Debug\PinMessagingTests.dll
 C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\Debug\PinMessagingTests.pdb
 C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\Debug\AppManifest.xaml
@@ -72,6 +63,12 @@ C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\D
 C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\Debug\vi-VN\Microsoft.Phone.Controls.Toolkit.resources.dll
 C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\Debug\zh-CN\Microsoft.Phone.Controls.Toolkit.resources.dll
 C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\Bin\x86\Debug\zh-TW\Microsoft.Phone.Controls.Toolkit.resources.dll
+C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\PinMessagingTests.csprojResolveAssemblyReference.cache
+C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\App.g.cs
+C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\MainPage.g.cs
+C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\PinMessagingTests.g.resources
+C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\PinMessagingTests.Resources.AppResources.resources
+C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\PinMessagingTests.csproj.GenerateResource.Cache
 C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\PinMessagingTests.dll
 C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\PinMessagingTests.pdb
 C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessagingTests\obj\x86\Debug\XapCacheFile.xml

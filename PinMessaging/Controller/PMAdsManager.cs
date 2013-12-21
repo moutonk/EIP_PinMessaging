@@ -37,7 +37,7 @@ namespace PinMessaging.Controller
             {
                 _view.ActiviateProgressBar();
 
-                var pmLogInController = new PMLogInController(null, _view.InterpretResult, PinMessaging.Utils.WebService.RequestType.SignIn, PMLogInCreateStructureModel.ActionType.SignIn);
+                var pmLogInController = new PMSignInController(null, _view.InterpretResult, PinMessaging.Utils.WebService.RequestType.SignIn, PMLogInCreateStructureModel.ActionType.SignIn);
                 PMLogInModel m = RememberConnection.GetLoginPwd();
 
                 if (m == null)

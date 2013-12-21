@@ -32,6 +32,7 @@ namespace PinMessaging.View
         public PMMapView()
         {
             InitializeComponent();
+            PMMapPushpinController.Initialization();
 
             map.Layers.Add(mapLayer);
 
@@ -109,6 +110,11 @@ namespace PinMessaging.View
             }
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -133,7 +139,10 @@ namespace PinMessaging.View
 
 
 
-                    PMMapPushpinModel pin = new PMMapPushpinModel("test", "mdlknskdhlr!!!", new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude));
+                    PMMapPushpinModel pin = new PMMapPushpinModel("test",
+                                                         "mdlknskdhlr!!!",
+                                                         new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude),
+                                                         PinMessaging.Model.PMMapPushpinModel.PinType.TouristInfo);
                     PMMapPushpinController.AddPushpinToMap(pin);
 
              

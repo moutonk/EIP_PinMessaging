@@ -148,7 +148,7 @@ namespace PinMessaging.View
 
         private void EmailCheckControllerWrapper(PMLogInCreateStructureModel.ActionType actiontype)
         {
-            var pmLogInController = new PMLogInController(AdaptUI, null, RequestType.CheckEmail, actiontype);
+            var pmLogInController = new PMSignInController(AdaptUI, null, RequestType.CheckEmail, actiontype);
 
             IsUIEnabled(false);
             ResetError();
@@ -157,7 +157,7 @@ namespace PinMessaging.View
 
         private void LogInControllerWrapper()
         {
-            var pmLogInController = new PMLogInController(AdaptUI, null, RequestType.SignIn, _currentActionType);
+            var pmLogInController = new PMSignInController(AdaptUI, null, RequestType.SignIn, _currentActionType);
 
             IsUIEnabled(false);
             pmLogInController.LogIn(_pmLogInModel);

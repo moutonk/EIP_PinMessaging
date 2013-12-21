@@ -1,15 +1,14 @@
-﻿<xapCache source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\x86\Debug\PinMessaging_Debug_x86.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="18/12/2013 18:40:27">
-  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="18/12/2013 18:40:26" />
-  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\fr-FR\PinMessaging.resources.dll" archivePath="fr-FR\PinMessaging.resources.dll" lastWriteTime="18/12/2013 18:40:25" />
+﻿<xapCache source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\x86\Debug\PinMessaging_Debug_x86.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="20/12/2013 20:41:51">
+  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="20/12/2013 20:41:50" />
+  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\fr-FR\PinMessaging.resources.dll" archivePath="fr-FR\PinMessaging.resources.dll" lastWriteTime="20/12/2013 20:41:49" />
   <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\packages\WPtoolkit.4.2013.08.16\lib\wp8\fr-FR\Microsoft.Phone.Controls.Toolkit.resources.dll" archivePath="fr-FR\Microsoft.Phone.Controls.Toolkit.resources.dll" lastWriteTime="09/12/2013 21:30:08" />
   <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\logo_splashScreen.png" archivePath="Images\logo_splashScreen.png" lastWriteTime="24/11/2013 17:54:51" />
   <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\logo_black.png" archivePath="Images\logo_black.png" lastWriteTime="02/12/2013 21:49:29" />
-  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\x86\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="18/12/2013 15:22:10" />
-  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\x86\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="18/12/2013 18:40:26" />
+  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\x86\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="19/12/2013 14:19:26" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\Windows Phone\v8.0\Libraries\Microsoft.Expression.Drawing.dll" archivePath="Microsoft.Expression.Drawing.dll" lastWriteTime="24/09/2012 18:41:02" />
   <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll" archivePath="Microsoft.Phone.Controls.Toolkit.dll" lastWriteTime="09/12/2013 21:30:08" />
-  <file source="C:\Users\kevin_000\Desktop\Newtonsoft.Json.dll" archivePath="Newtonsoft.Json.dll" lastWriteTime="11/09/2013 00:36:00" />
+  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\Newtonsoft.Json.dll" archivePath="Newtonsoft.Json.dll" lastWriteTime="11/09/2013 00:36:00" />
   <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\logo_orange.png" archivePath="Images\logo_orange.png" lastWriteTime="02/12/2013 21:50:31" />
   <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\whiteLogo.png" archivePath="whiteLogo.png" lastWriteTime="25/11/2013 13:53:02" />
-  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\x86\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="18/12/2013 15:22:10" />
+  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\x86\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="19/12/2013 14:19:26" />
 </xapCache>

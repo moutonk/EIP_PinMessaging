@@ -36,7 +36,7 @@
             </maps:Map>
 
             <Button Content="add" HorizontalAlignment="Left" Margin="10,515,0,0" VerticalAlignment="Top" Height="82" Width="220" Click="Button_Click"/>
-            <Button Content="rm" HorizontalAlignment="Left" Margin="230,515,0,0" VerticalAlignment="Top" Height="82" Width="216"/>
+            <Button Content="rm" HorizontalAlignment="Left" Margin="230,515,0,0" VerticalAlignment="Top" Height="82" Width="216" Click="Button_Click_1"/>
 
         </Grid>
     </Grid>

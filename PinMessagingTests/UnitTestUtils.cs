@@ -19,13 +19,23 @@ namespace PinMessagingTests
         public class UnitTestUtilsEmail
         {
             [TestMethod]
-            public void TestEmailChecker()
+            public void TestEmailCheckerCorrect()
             {
                 Assert.IsTrue(PinMessaging.Utils.EmailChecker.IsEmailValid("test@keke.fr"));
                 Assert.IsTrue(PinMessaging.Utils.EmailChecker.IsEmailValid("test@keke.eu.fr"));
                 Assert.IsTrue(PinMessaging.Utils.EmailChecker.IsEmailValid("t@k.fr"));
                 Assert.IsTrue(PinMessaging.Utils.EmailChecker.IsEmailValid("test.kevin@keke.fr"));
                 Assert.IsTrue(PinMessaging.Utils.EmailChecker.IsEmailValid("0@keke.fr"));
+            }
+
+            [TestMethod]
+            public void TestEmailCheckerIncorrect()
+            {
+                Assert.IsFalse(PinMessaging.Utils.EmailChecker.IsEmailValid("@keke.fr"));
+                Assert.IsFalse(PinMessaging.Utils.EmailChecker.IsEmailValid("test@.eu.fr"));
+                Assert.IsFalse(PinMessaging.Utils.EmailChecker.IsEmailValid("t@.f"));
+                Assert.IsFalse(PinMessaging.Utils.EmailChecker.IsEmailValid("test.kevin@keke..fr"));
+                Assert.IsFalse(PinMessaging.Utils.EmailChecker.IsEmailValid("@."));
             }
         }
 
@@ -45,7 +55,7 @@ namespace PinMessagingTests
             }
         }
 
-       [TestClass]
+        [TestClass]
         public class UnitTestUtilsWebservice : PMWebServiceEndDetector
         {
            bool webServiceReponse;
