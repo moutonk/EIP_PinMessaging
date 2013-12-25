@@ -232,6 +232,24 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure to quit the application?.
+        /// </summary>
+        public static string QuitApp {
+            get {
+                return ResourceManager.GetString("QuitApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Quit.
+        /// </summary>
+        public static string QuitAppTitle {
+            get {
+                return ResourceManager.GetString("QuitAppTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {

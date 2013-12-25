@@ -49,9 +49,9 @@
 						<TranslateTransform Y="0" X="0"/>
 					</Grid.RenderTransform>
 					<TextBlock x:Name="TextBlockError" FontSize="{StaticResource PMErrorFontSize}" Foreground="Red" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Height="62" Width="407" Margin="10,0,0,0"/>
-					<TextBox x:Name="TextBoxEmail" KeyDown="TextBoxEmail_OnKeyDown" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" VerticalAlignment="Top" Width="439" Margin="-11,55,-11,-1" Text="mk@epi.eu" FontSize="{StaticResource PMNormalFontSize}"/>
+					<TextBox x:Name="TextBoxEmail" KeyDown="TextBoxEmail_OnKeyDown" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" VerticalAlignment="Top" Width="439" Margin="-11,55,-11,-1" Text="k.k@k.kk" FontSize="{StaticResource PMNormalFontSize}"/>
 				</Grid>
-				<PasswordBox x:Name="TextBoxPassword" KeyDown="TextBoxPassword_OnKeyDown" FontSize="{StaticResource PMNormalFontSize}" HorizontalAlignment="Center" Margin="-10,119,-16,0" VerticalAlignment="Top" Width="443"/>
+				<PasswordBox x:Name="TextBoxPassword" KeyDown="TextBoxPassword_OnKeyDown" FontSize="{StaticResource PMNormalFontSize}" HorizontalAlignment="Center" Margin="-10,119,-16,0" VerticalAlignment="Top" Width="443" Password="kkkkkk"/>
 			</Grid>
 			<Grid x:Name="GridLogo" HorizontalAlignment="Left" Height="212" Margin="89,63,0,0" VerticalAlignment="Top" Width="312">
 				<Grid.Background>

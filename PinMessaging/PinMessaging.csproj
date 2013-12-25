@@ -105,6 +105,7 @@
     <Compile Include="Model\PMMapPushpinModel.cs" />
     <Compile Include="Other\PMData.cs" />
     <Compile Include="Other\PMDataConverter.cs" />
+    <Compile Include="Other\PMGeoLocation.cs" />
     <Compile Include="Other\RememberConnection.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>

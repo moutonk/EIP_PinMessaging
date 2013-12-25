@@ -371,6 +371,7 @@ namespace PinMessaging.View
 
                     if (isOperationSuccessful)
                     {
+                        RememberConnection.SaveLoginPwd(_pmLogInModel);
                         MoveProgressBarSignUpPart3.Begin();
                     }
                     else

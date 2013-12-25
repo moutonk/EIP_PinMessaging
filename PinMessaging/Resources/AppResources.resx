@@ -174,6 +174,12 @@
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
   </data>
+  <data name="QuitApp" xml:space="preserve">
+    <value>Are you sure to quit the application?</value>
+  </data>
+  <data name="QuitAppTitle" xml:space="preserve">
+    <value>Quit</value>
+  </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
   </data>

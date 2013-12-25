@@ -45,7 +45,7 @@ namespace PinMessaging.Controller
                 MapLayer.Add(overlay);
         }
 
-        public static void RemovePushpinFromMap(PMMapPushpinModel pin)
+        public static void RemovePushpinFromMapLayer(PMMapPushpinModel pin)
         {
             if (MapLayer != null)
             {

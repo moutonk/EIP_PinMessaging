@@ -82,6 +82,14 @@
           <source>Previous</source>
           <target state="new">Previous</target>
         </trans-unit>
+        <trans-unit id="Resx/QuitApp" translate="yes" xml:space="preserve">
+          <source>Are you sure to quit the application?</source>
+          <target state="new">Are you sure to quit the application?</target>
+        </trans-unit>
+        <trans-unit id="Resx/QuitAppTitle" translate="yes" xml:space="preserve">
+          <source>Quit</source>
+          <target state="new">Quit</target>
+        </trans-unit>
         <trans-unit id="Resx/ResourceFlowDirection" translate="yes" xml:space="preserve">
           <source>LeftToRight</source>
           <target state="new">LeftToRight</target>

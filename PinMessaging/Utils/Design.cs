@@ -64,5 +64,21 @@ namespace PinMessaging.Utils
 
             return wbmp;
         }
+
+        public static int CustomMessageBox(string[] buttons, string boxTitle, string boxContent)
+        {
+            var result = Microsoft.Xna.Framework.GamerServices.Guide.BeginShowMessageBox(
+            boxTitle, boxContent, buttons, 0,
+            Microsoft.Xna.Framework.GamerServices.MessageBoxIcon.Alert, null, null);
+
+            result.AsyncWaitHandle.WaitOne();
+
+            var choice = Microsoft.Xna.Framework.GamerServices.Guide.EndShowMessageBox(result);
+
+            if (choice != null)
+                return choice.Value;
+            return -1;
+        }
     }
 }
+gjfjfhdhdnddhfhd
