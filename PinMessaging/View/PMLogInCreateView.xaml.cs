@@ -309,13 +309,13 @@ namespace PinMessaging.View
 
         public bool AdaptUI(RequestType currentType, PMLogInCreateStructureModel.ActionType parentRequestType, bool isOperationSuccessful)
         {
-            switch (currentType)
-            {              
-                case RequestType.CheckEmail:
+            if (PMData.NetworkProblem == false)
+            {  
+                switch (currentType)
+                {              
+                    case RequestType.CheckEmail:
 
-                    if (isOperationSuccessful == false) // email exists
-                    {
-                        if (PMData.NetworkProblem == false)
+                        if (isOperationSuccessful == false) // email exists
                         {
                             if (parentRequestType == PMLogInCreateStructureModel.ActionType.SignIn)
                             {
@@ -329,62 +329,60 @@ namespace PinMessaging.View
                                 TextBlockError.Text = AppResources.PMEmailAlreadyExists;
                             }
                         }
+                        else //email does not exist
+                        {
+                            if (parentRequestType == PMLogInCreateStructureModel.ActionType.SignIn)
+                            {
+                                _currentStep = StepNumber.StepDefault;
+                                TextBlockError.Text = AppResources.PMEmailDoesNotExist;   
+                            }
+                            else if (parentRequestType == PMLogInCreateStructureModel.ActionType.Create)
+                            {
+                                ResetError(); 
+                                MoveTextBoxEmailUp.Begin();
+                                MoveProgressBarSignUpPart1.Begin();
+                            }
+                        }
+                        break;
+
+                    case RequestType.SignIn:
+
+                        if (isOperationSuccessful)
+                        {
+                            RememberConnection.SaveLoginPwd(_pmLogInModel);
+                            MoveProgressBarSignInPart2.Begin();                  
+                        }
                         else
                         {
-                            _currentStep = StepNumber.StepDefault;
-                            TextBlockError.Text = AppResources.NetworkProblem;   
+                            _currentStep = StepNumber.StepEmailClick;
+                            TextBlockError.Text = AppResources.PMConnectionFailUser;
                         }
-                    }
-                    else //email does not exist
-                    {
-                        if (parentRequestType == PMLogInCreateStructureModel.ActionType.SignIn)
+                        break;
+
+                    case RequestType.SignUp:
+
+                        if (isOperationSuccessful)
                         {
-                            _currentStep = StepNumber.StepDefault;
-                            TextBlockError.Text = AppResources.PMEmailDoesNotExist;   
+                            RememberConnection.SaveLoginPwd(_pmLogInModel);
+                            MoveProgressBarSignUpPart3.Begin();
                         }
-                        else if (parentRequestType == PMLogInCreateStructureModel.ActionType.Create)
+                        else
                         {
-                            ResetError(); 
-                            MoveTextBoxEmailUp.Begin();
-                            MoveProgressBarSignUpPart1.Begin();
-                        }
-                    }
-                    IsUIEnabled(true);
-                    break;
-
-                case RequestType.SignIn:
-
-                    if (isOperationSuccessful)
-                    {
-                        RememberConnection.SaveLoginPwd(_pmLogInModel);
-                        MoveProgressBarSignInPart2.Begin();                  
-                    }
-                    else
-                    {
-                        _currentStep = StepNumber.StepEmailClick;
-                        TextBlockError.Text = AppResources.PMConnectionFailUser;
-                    }
-                    IsUIEnabled(true);
-                    break;
-
-                case RequestType.SignUp:
-
-                    if (isOperationSuccessful)
-                    {
-                        RememberConnection.SaveLoginPwd(_pmLogInModel);
-                        MoveProgressBarSignUpPart3.Begin();
-                    }
-                    else
-                    {
-                        ResetModelPasswords();
-                        _currentStep = StepNumber.StepEmailClick;
-                        TextBlockError.Text = AppResources.PMSignUpError;
+                            ResetModelPasswords();
+                            _currentStep = StepNumber.StepEmailClick;
+                            TextBlockError.Text = AppResources.PMSignUpError;
                         
-                        PageSubTitle.Text = string.Empty;
-                        IsUIEnabled(true);
-                        TextBoxEmail.IsReadOnly = true;
-                    }
-                    break;
+                            PageSubTitle.Text = string.Empty;
+                            TextBoxEmail.IsReadOnly = true;
+                        }
+                        break;
+                }
+                IsUIEnabled(true);
+            }
+            else
+            {
+                _currentStep = StepNumber.StepDefault;
+                IsUIEnabled(true);
             }
             return true;
         }

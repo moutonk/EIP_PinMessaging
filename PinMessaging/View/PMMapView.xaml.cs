@@ -36,8 +36,6 @@ namespace PinMessaging.View
 
             PMMapPushpinController.MapLayer = _mapLayer;
 
-
-
             UpdateLocation(_geoLocation._geolocator);
         }
 
@@ -55,52 +53,19 @@ namespace PinMessaging.View
                 if (_geoLocation._geoposition != null)
                 {
                     UpdateMapCenter(_geoLocation._geoposition.Coordinate.Latitude, _geoLocation._geoposition.Coordinate.Longitude);
-                    //Pushpin p0 = new Pushpin();
-                    //Pushpin p1 = new Pushpin();
+         
+                    var pin = new PMMapPushpinModel(
+                                   "test",
+                                   "mdlknskdhlr!!!",
+                                   new GeoCoordinate(_geoLocation._geoposition.Coordinate.Latitude, _geoLocation._geoposition.Coordinate.Longitude),
+                                   PinMessaging.Model.PMMapPushpinModel.PinType.TouristInfo);
 
-                 
-                    //t.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
-
-                    //p0.Content = "Test1";
-                    //p1.Content = "Test2";
-
-                    //p0.Tap += p0_Tap;
-
-
-
-
-
-                    PMMapPushpinModel pin = new PMMapPushpinModel("test",
-                                                         "mdlknskdhlr!!!",
-                                                         new GeoCoordinate(_geoLocation._geoposition.Coordinate.Latitude, _geoLocation._geoposition.Coordinate.Longitude),
-                                                         PinMessaging.Model.PMMapPushpinModel.PinType.TouristInfo);
                     PMMapPushpinController.AddPushpinToMap(pin);
-
 
                     _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation._geoposition.Coordinate.Latitude, _geoLocation._geoposition.Coordinate.Longitude);
 
-                    //overlay0.Content = p0;
-                    //overlay0.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
-                    //overlay1.Content = p1;
-                    //overlay1.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude + 1, geoposition.Coordinate.Longitude);
-
-                    //layer0.Add(overlay0);
-                    //layer0.Add(overlay1);
-
-                    
-
-                    // UserLocationMarkerTest.GeoCoordinate = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
-
-                    //GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
-
-
-                    // p.Location = new GeoCoordinate(geoposition.Coordinate.Latitude, geoposition.Coordinate.Longitude);
-
                     Debug.WriteLine("New location:" + _geoLocation._geoposition.Coordinate.Latitude.ToString() + " " + _geoLocation._geoposition.Coordinate.Longitude.ToString());
                 }
-    
-            
-
             }
             catch (Exception ex)
             {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using PinMessaging.Other;
+using PinMessaging.Resources;
 using PinMessaging.Utils.WebService;
 
 namespace PinMessaging.Utils
@@ -108,6 +109,8 @@ namespace PinMessaging.Utils
 
                 Debug.WriteLine("Answer: " + responseString);
 
+                DataConverter.ParseJson(responseString, (RequestType)tuple.Item3);
+
                 CloseStream(streamResponse);
                 CloseStream(streamRead);
                 CloseStream(response);
@@ -121,10 +124,9 @@ namespace PinMessaging.Utils
                 CloseStream(streamResponse);
                 CloseStream(streamRead);
                 CloseStream(response);
+
+                Design.CustomMessageBox(new[] {"Ok"}, "Oops !", AppResources.NetworkProblem);
             }
-
-            DataConverter.ParseJson(responseString, (RequestType)tuple.Item3);
-
             OnGoingRequest = false;
 
             Debug.WriteLine("Waiting answer END...");

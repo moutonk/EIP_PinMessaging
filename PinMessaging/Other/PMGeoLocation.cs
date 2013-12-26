@@ -35,13 +35,10 @@ namespace PinMessaging.Other
                     // Location data is available
                     Debug.WriteLine("Location is available.");
 
-
                     if (_geoposition != null)
                     {
                         _mapView.UpdateMapCenter(_geoposition.Coordinate.Latitude, _geoposition.Coordinate.Longitude);
                     }
-
-
                     break;
 
                 case PositionStatus.Initializing:

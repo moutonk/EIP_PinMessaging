@@ -1,7 +1,8 @@
-﻿<xapCache source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\x86\Debug\PinMessaging_Debug_x86.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="25/12/2013 10:52:30">
-  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="25/12/2013 10:52:26" />
-  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\fr-FR\PinMessaging.resources.dll" archivePath="fr-FR\PinMessaging.resources.dll" lastWriteTime="25/12/2013 10:52:21" />
+﻿<xapCache source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\x86\Debug\PinMessaging_Debug_x86.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="26/12/2013 07:10:14">
+  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="26/12/2013 07:10:13" />
+  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\fr-FR\PinMessaging.resources.dll" archivePath="fr-FR\PinMessaging.resources.dll" lastWriteTime="26/12/2013 07:10:12" />
   <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\packages\WPtoolkit.4.2013.08.16\lib\wp8\fr-FR\Microsoft.Phone.Controls.Toolkit.resources.dll" archivePath="fr-FR\Microsoft.Phone.Controls.Toolkit.resources.dll" lastWriteTime="09/12/2013 21:30:08" />
+  <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\event.png" archivePath="Images\event.png" lastWriteTime="26/12/2013 06:03:35" />
   <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\logo_splashScreen.png" archivePath="Images\logo_splashScreen.png" lastWriteTime="24/11/2013 17:54:51" />
   <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\logo_black.png" archivePath="Images\logo_black.png" lastWriteTime="02/12/2013 21:49:29" />
   <file source="C:\Users\kevin_000\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\pin.png" archivePath="Images\pin.png" lastWriteTime="20/12/2013 20:49:35" />

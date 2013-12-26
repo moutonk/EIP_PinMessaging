@@ -167,6 +167,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\event.png" />
     <Content Include="Images\logo_orange.png" />
     <Content Include="Images\logo_splashScreen.png" />
     <Content Include="Images\logo_black.png" />

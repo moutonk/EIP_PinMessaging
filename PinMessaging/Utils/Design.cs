@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Windows.Phone.Media.Capture;
 
 namespace PinMessaging.Utils
 {
@@ -37,8 +40,6 @@ namespace PinMessaging.Utils
             //bti.DecodePixelWidth = 100;
             //bti.DecodePixelHeight = 100;
 
-            //mandatory otherwise exception
-
             var wbmp = new WriteableBitmap(bti);
             byte[] pixelBytes;
             var argb = FromHexaToARGB(newColor.Color.ToString());
@@ -59,8 +60,14 @@ namespace PinMessaging.Utils
                 wbmp.Pixels[i] = BitConverter.ToInt32(pixelBytes, 0);
             }
 
+         //   var tb = new TextBlock {FontSize = 20, Text = "SEP" + Environment.NewLine + " 15" };
+          //  var tf = new TranslateTransform {X = 40, Y = 15};
+        
+           // wbmp.Render(tb, tf);
+
             //validate the change
             wbmp.Invalidate();
+
 
             return wbmp;
         }
@@ -81,4 +88,3 @@ namespace PinMessaging.Utils
         }
     }
 }
-gjfjfhdhdnddhfhd
