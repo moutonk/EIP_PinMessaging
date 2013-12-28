@@ -1,6 +1,6 @@
 ﻿namespace PinMessaging.Model
 {
-    class PMFlagModel
+    public class PMFlagModel
     {
         public enum FlagsType
         {

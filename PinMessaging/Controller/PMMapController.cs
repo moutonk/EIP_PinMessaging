@@ -16,19 +16,15 @@ namespace PinMessaging.Controller
 
     public static class PMMapPushpinController
     {
-        private static Dictionary<PMMapPushpinModel.PinsType, BitmapImage> PinsMap { get; set; }
-
-        public static void Initialization()
+        private static readonly Dictionary<PMMapPushpinModel.PinsType, BitmapImage> PinsMap = new Dictionary<PMMapPushpinModel.PinsType, BitmapImage>()
         {
-            PinsMap = new Dictionary<PMMapPushpinModel.PinsType, BitmapImage>();
-
-            PinsMap[PMMapPushpinModel.PinsType.PublicMessage] = Design.CreateImage(new Uri(Paths.PinPublicMessage.ToString(), UriKind.Relative));
-            PinsMap[PMMapPushpinModel.PinsType.PrivateMessage] = Design.CreateImage(new Uri(Paths.PinPrivateMessage.ToString(), UriKind.Relative));
-            PinsMap[PMMapPushpinModel.PinsType.Eye] = Design.CreateImage(new Uri(Paths.PinEye.ToString(), UriKind.Relative));
-            PinsMap[PMMapPushpinModel.PinsType.Event] = Design.CreateImage(new Uri(Paths.PinEvent.ToString(), UriKind.Relative));
-            PinsMap[PMMapPushpinModel.PinsType.PointOfInterest] = Design.CreateImage(new Uri(Paths.PinPointOfInterest.ToString(), UriKind.Relative));
-            PinsMap[PMMapPushpinModel.PinsType.CourseLastStep] = Design.CreateImage(new Uri(Paths.PinCourseLastStep.ToString(), UriKind.Relative));
-        }
+            {PMMapPushpinModel.PinsType.PublicMessage, Design.CreateImage(new Uri(Paths.PinPublicMessage.ToString(), UriKind.Relative))},
+            {PMMapPushpinModel.PinsType.PrivateMessage, Design.CreateImage(new Uri(Paths.PinPrivateMessage.ToString(), UriKind.Relative))},
+            {PMMapPushpinModel.PinsType.Eye, Design.CreateImage(new Uri(Paths.PinEye.ToString(), UriKind.Relative))},
+            {PMMapPushpinModel.PinsType.Event, Design.CreateImage(new Uri(Paths.PinEvent.ToString(), UriKind.Relative))},
+            {PMMapPushpinModel.PinsType.PointOfInterest, Design.CreateImage(new Uri(Paths.PinPointOfInterest.ToString(), UriKind.Relative))},
+            {PMMapPushpinModel.PinsType.CourseLastStep, Design.CreateImage(new Uri(Paths.PinCourseLastStep.ToString(), UriKind.Relative))},
+        };
 
         public static void AddPushpinToMap(PMMapPushpinModel pin)
         {
