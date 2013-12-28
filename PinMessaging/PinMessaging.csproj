@@ -167,11 +167,32 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\course_last_step.png" />
     <Content Include="Images\event.png" />
+    <Content Include="Images\eye.png" />
+    <Content Include="Images\Flags\AR.png" />
+    <Content Include="Images\Flags\CN.png" />
+    <Content Include="Images\Flags\DE.png" />
+    <Content Include="Images\Flags\EN.png" />
+    <Content Include="Images\Flags\ES.png" />
+    <Content Include="Images\Flags\FI.png" />
+    <Content Include="Images\Flags\FR.png" />
+    <Content Include="Images\Flags\IN.png" />
+    <Content Include="Images\Flags\IT.png" />
+    <Content Include="Images\Flags\JP.png" />
+    <Content Include="Images\Flags\KR.png" />
+    <Content Include="Images\Flags\NO.png" />
+    <Content Include="Images\Flags\OT.png" />
+    <Content Include="Images\Flags\PT.png" />
+    <Content Include="Images\Flags\RU.png" />
+    <Content Include="Images\Flags\SE.png" />
     <Content Include="Images\logo_orange.png" />
     <Content Include="Images\logo_splashScreen.png" />
     <Content Include="Images\logo_black.png" />
+    <Content Include="Images\message.png" />
     <Content Include="Images\pin.png" />
+    <Content Include="Images\poi.png" />
+    <Content Include="Images\private_message.png" />
     <Content Include="whiteLogo.png" />
   </ItemGroup>
   <ItemGroup>

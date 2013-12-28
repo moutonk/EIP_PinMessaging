@@ -44,7 +44,7 @@ namespace PinMessaging.Utils
             byte[] pixelBytes;
             var argb = FromHexaToARGB(newColor.Color.ToString());
        
-            for (var i = 0; i < wbmp.Pixels.Length; i++)
+            /*for (var i = 0; i < wbmp.Pixels.Length; i++)
             {
                 //get the byte array associated to the pixel
                 pixelBytes = BitConverter.GetBytes(wbmp.Pixels[i]);
@@ -58,7 +58,7 @@ namespace PinMessaging.Utils
 
                 //convert byte array into int
                 wbmp.Pixels[i] = BitConverter.ToInt32(pixelBytes, 0);
-            }
+            }*/
 
          //   var tb = new TextBlock {FontSize = 20, Text = "SEP" + Environment.NewLine + " 15" };
           //  var tf = new TranslateTransform {X = 40, Y = 15};

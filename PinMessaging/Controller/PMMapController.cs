@@ -24,9 +24,9 @@ namespace PinMessaging.Controller
             ColoredPins = new Dictionary<SolidColorBrush, WriteableBitmap>();
 
             ColoredPins[App.Current.Resources["PMOrange"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST.ToString(), UriKind.Relative), App.Current.Resources["PMOrange"] as SolidColorBrush);
-            ColoredPins[App.Current.Resources["PMGreen"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST2.ToString(), UriKind.Relative), App.Current.Resources["PMGreen"] as SolidColorBrush);
-            ColoredPins[App.Current.Resources["PMPurple"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST.ToString(), UriKind.Relative), App.Current.Resources["PMPurple"] as SolidColorBrush);
-            ColoredPins[App.Current.Resources["PMYellow"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST.ToString(), UriKind.Relative), App.Current.Resources["PMYellow"] as SolidColorBrush);
+            ColoredPins[App.Current.Resources["PMGreen"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST_COURSE.ToString(), UriKind.Relative), App.Current.Resources["PMGreen"] as SolidColorBrush);
+            ColoredPins[App.Current.Resources["PMPurple"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST_EVENT.ToString(), UriKind.Relative), App.Current.Resources["PMPurple"] as SolidColorBrush);
+            ColoredPins[App.Current.Resources["PMYellow"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST_EYE.ToString(), UriKind.Relative), App.Current.Resources["PMYellow"] as SolidColorBrush);
         }
 
         public static void AddPushpinToMap(PMMapPushpinModel pin)
@@ -34,7 +34,7 @@ namespace PinMessaging.Controller
             var overlay = new MapOverlay();
 
             pin.PinImg.Tap += pin.img_Tap;
-            pin.PinImg.Source = ColoredPins[App.Current.Resources["PMGreen"] as SolidColorBrush];//DeterminePinBackgroundColor(pin)];
+            pin.PinImg.Source = ColoredPins[App.Current.Resources["PMYellow"] as SolidColorBrush];//DeterminePinBackgroundColor(pin)];
 
             //center the mapoverlay, will change later
             overlay.PositionOrigin = new Point(0.4, 1);
