@@ -98,9 +98,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controller\PMEmailController.cs" />
+    <Compile Include="Controller\PMFlagsController.cs" />
     <Compile Include="Controller\PMSignInController.cs" />
     <Compile Include="Controller\PMMapController.cs" />
     <Compile Include="Controller\PMSignUpController.cs" />
+    <Compile Include="Model\PMFlagModel.cs" />
     <Compile Include="Model\PMLogInCreateStructureModel.cs" />
     <Compile Include="Model\PMMapPushpinModel.cs" />
     <Compile Include="Other\PMData.cs" />
@@ -167,9 +169,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Images\course_last_step.png" />
-    <Content Include="Images\event.png" />
-    <Content Include="Images\eye.png" />
+    <Content Include="Images\Pins\course_last_step.png" />
+    <Content Include="Images\Pins\event.png" />
+    <Content Include="Images\Pins\eye.png" />
     <Content Include="Images\Flags\AR.png" />
     <Content Include="Images\Flags\CN.png" />
     <Content Include="Images\Flags\DE.png" />
@@ -186,13 +188,12 @@
     <Content Include="Images\Flags\PT.png" />
     <Content Include="Images\Flags\RU.png" />
     <Content Include="Images\Flags\SE.png" />
-    <Content Include="Images\logo_orange.png" />
-    <Content Include="Images\logo_splashScreen.png" />
-    <Content Include="Images\logo_black.png" />
-    <Content Include="Images\message.png" />
-    <Content Include="Images\pin.png" />
-    <Content Include="Images\poi.png" />
-    <Content Include="Images\private_message.png" />
+    <Content Include="Images\Logos\logo_orange.png" />
+    <Content Include="Images\Logos\logo_splashScreen.png" />
+    <Content Include="Images\Logos\logo_black.png" />
+    <Content Include="Images\Pins\public_message.png" />
+    <Content Include="Images\Pins\poi.png" />
+    <Content Include="Images\Pins\private_message.png" />
     <Content Include="whiteLogo.png" />
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using Windows.Phone.Media.Capture;
 
 namespace PinMessaging.Utils
 {
@@ -32,6 +29,11 @@ namespace PinMessaging.Utils
             return argb;
         }
 
+        public static BitmapImage CreateImage(Uri path)
+        {
+            return new BitmapImage(path);
+        }
+
         public static WriteableBitmap ChangeImageColor(Uri imgSrc, SolidColorBrush newColor)
         {
             var bti = new BitmapImage(imgSrc) {CreateOptions = BitmapCreateOptions.None};
@@ -44,7 +46,7 @@ namespace PinMessaging.Utils
             byte[] pixelBytes;
             var argb = FromHexaToARGB(newColor.Color.ToString());
        
-            /*for (var i = 0; i < wbmp.Pixels.Length; i++)
+            for (var i = 0; i < wbmp.Pixels.Length; i++)
             {
                 //get the byte array associated to the pixel
                 pixelBytes = BitConverter.GetBytes(wbmp.Pixels[i]);
@@ -58,16 +60,15 @@ namespace PinMessaging.Utils
 
                 //convert byte array into int
                 wbmp.Pixels[i] = BitConverter.ToInt32(pixelBytes, 0);
-            }*/
+            }
 
-         //   var tb = new TextBlock {FontSize = 20, Text = "SEP" + Environment.NewLine + " 15" };
-          //  var tf = new TranslateTransform {X = 40, Y = 15};
-        
-           // wbmp.Render(tb, tf);
+            //add Textblock in the image
+            //   var tb = new TextBlock {FontSize = 20, Text = "SEP" + Environment.NewLine + " 15" };
+            //  var tf = new TranslateTransform {X = 40, Y = 15};
+            // wbmp.Render(tb, tf);
 
             //validate the change
             wbmp.Invalidate();
-
 
             return wbmp;
         }

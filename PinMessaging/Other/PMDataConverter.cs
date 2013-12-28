@@ -16,14 +16,20 @@ namespace PinMessaging.Other
                 {
                     var item = JsonConvert.DeserializeObject<JArray>(json);
 
-                    if (currentRequestType == RequestType.SignIn)
-                        PMData.IsSignInSuccess = Boolean.Parse((string) item[0]);
+                    switch (currentRequestType)
+                    {
+                        case RequestType.SignIn:
+                            PMData.IsSignInSuccess = Boolean.Parse((string) item[0]);
+                            break;
 
-                    if (currentRequestType == RequestType.CheckEmail)
-                        PMData.IsEmailDispo = Boolean.Parse((string) item[0]);
+                        case RequestType.CheckEmail:
+                            PMData.IsEmailDispo = Boolean.Parse((string) item[0]);
+                            break;
 
-                    if (currentRequestType == RequestType.SignUp)
-                        PMData.IsSignUpSuccess = Boolean.Parse((string) item[0]);
+                        case RequestType.SignUp:
+                            PMData.IsSignUpSuccess = Boolean.Parse((string) item[0]);
+                            break;
+                    }
                 }
                 catch (Exception e)
                 {

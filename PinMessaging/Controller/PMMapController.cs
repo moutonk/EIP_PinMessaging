@@ -1,32 +1,33 @@
 ﻿using Microsoft.Phone.Maps.Controls;
 using PinMessaging.Model;
+using PinMessaging.Other;
 using PinMessaging.Utils;
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace PinMessaging.Controller
 {
-    class PMMapController
+    public static class PMMapController
     {
         
     }
 
     public static class PMMapPushpinController
     {
-        public static MapLayer MapLayer { get; set; }
-        private static Dictionary<SolidColorBrush, WriteableBitmap> ColoredPins {get; set;}
+        private static Dictionary<PMMapPushpinModel.PinsType, BitmapImage> PinsMap { get; set; }
 
         public static void Initialization()
         {
-            ColoredPins = new Dictionary<SolidColorBrush, WriteableBitmap>();
+            PinsMap = new Dictionary<PMMapPushpinModel.PinsType, BitmapImage>();
 
-            ColoredPins[App.Current.Resources["PMOrange"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST.ToString(), UriKind.Relative), App.Current.Resources["PMOrange"] as SolidColorBrush);
-            ColoredPins[App.Current.Resources["PMGreen"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST_COURSE.ToString(), UriKind.Relative), App.Current.Resources["PMGreen"] as SolidColorBrush);
-            ColoredPins[App.Current.Resources["PMPurple"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST_EVENT.ToString(), UriKind.Relative), App.Current.Resources["PMPurple"] as SolidColorBrush);
-            ColoredPins[App.Current.Resources["PMYellow"] as SolidColorBrush] = Design.ChangeImageColor(new Uri(Paths.PINTEST_EYE.ToString(), UriKind.Relative), App.Current.Resources["PMYellow"] as SolidColorBrush);
+            PinsMap[PMMapPushpinModel.PinsType.PublicMessage] = Design.CreateImage(new Uri(Paths.PinPublicMessage.ToString(), UriKind.Relative));
+            PinsMap[PMMapPushpinModel.PinsType.PrivateMessage] = Design.CreateImage(new Uri(Paths.PinPrivateMessage.ToString(), UriKind.Relative));
+            PinsMap[PMMapPushpinModel.PinsType.Eye] = Design.CreateImage(new Uri(Paths.PinEye.ToString(), UriKind.Relative));
+            PinsMap[PMMapPushpinModel.PinsType.Event] = Design.CreateImage(new Uri(Paths.PinEvent.ToString(), UriKind.Relative));
+            PinsMap[PMMapPushpinModel.PinsType.PointOfInterest] = Design.CreateImage(new Uri(Paths.PinPointOfInterest.ToString(), UriKind.Relative));
+            PinsMap[PMMapPushpinModel.PinsType.CourseLastStep] = Design.CreateImage(new Uri(Paths.PinCourseLastStep.ToString(), UriKind.Relative));
         }
 
         public static void AddPushpinToMap(PMMapPushpinModel pin)
@@ -34,46 +35,24 @@ namespace PinMessaging.Controller
             var overlay = new MapOverlay();
 
             pin.PinImg.Tap += pin.img_Tap;
-            pin.PinImg.Source = ColoredPins[App.Current.Resources["PMYellow"] as SolidColorBrush];//DeterminePinBackgroundColor(pin)];
+            pin.PinImg.Source = PinsMap[pin.PinType];
 
             //center the mapoverlay, will change later
             overlay.PositionOrigin = new Point(0.4, 1);
             overlay.Content = pin.PinImg;
             overlay.GeoCoordinate = pin.GeoCoord;
 
-            if (MapLayer != null)
-                MapLayer.Add(overlay);
+            if (PMData.MapLayerContainer != null)
+                PMData.MapLayerContainer.Add(overlay);
         }
 
         public static void RemovePushpinFromMapLayer(PMMapPushpinModel pin)
         {
-            if (MapLayer != null)
+            if (PMData.MapLayerContainer != null)
             {
-
-            }
-        }
-
-        private static SolidColorBrush DeterminePinBackgroundColor(PMMapPushpinModel pin)
-        {
-            switch (pin.pinType)
-            {
-                case PMMapPushpinModel.PinType.PublicMessage:
-                    return App.Current.Resources["PMOrange"] as SolidColorBrush;
-
-                case PMMapPushpinModel.PinType.PrivateMessage:
-                    return App.Current.Resources["PMOrange"] as SolidColorBrush;
-
-                case PMMapPushpinModel.PinType.Event:
-                    return App.Current.Resources["PMPurple"] as SolidColorBrush;
-
-                case PMMapPushpinModel.PinType.TreasureHunt:
-                    return App.Current.Resources["PMYellow"] as SolidColorBrush;
-
-                case PMMapPushpinModel.PinType.TouristInfo:
-                    return App.Current.Resources["PMGreen"] as SolidColorBrush;
-
-                default:
-                    return App.Current.Resources["PMOrange"] as SolidColorBrush;
+            //    var res = from mapLayerElem in MapLayerContainer
+            //              where pin == mapLayerElem.Content
+            //              select mapLayerElem;
             }
         }
     }

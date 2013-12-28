@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using PinMessaging.View;
 
 namespace PinMessaging.Other
 {
-    class PMGeoLocation
+    public class PMGeoLocation
     {
-        public readonly Geolocator _geolocator = new Geolocator();
-        public Geoposition _geoposition = null;
+        public readonly Geolocator GeolocatorUser = new Geolocator();
+        public Geoposition GeopositionUser = null;
         private readonly PMMapView _mapView = null;
 
         public PMGeoLocation(PMMapView mapView)
@@ -20,11 +16,11 @@ namespace PinMessaging.Other
             _mapView = mapView;
 
             //geolocator initialization
-            _geolocator.DesiredAccuracyInMeters = 1;
-            _geolocator.MovementThreshold = 3;
-            _geolocator.ReportInterval = 1000;
-            _geolocator.PositionChanged += geolocator_PositionChanged;
-            _geolocator.StatusChanged += geolocator_StatusChanged;
+            GeolocatorUser.DesiredAccuracyInMeters = 1;
+            GeolocatorUser.MovementThreshold = 3;
+            GeolocatorUser.ReportInterval = 1000;
+            GeolocatorUser.PositionChanged += geolocator_PositionChanged;
+            GeolocatorUser.StatusChanged += geolocator_StatusChanged;
         }
 
         private void geolocator_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
@@ -35,9 +31,9 @@ namespace PinMessaging.Other
                     // Location data is available
                     Debug.WriteLine("Location is available.");
 
-                    if (_geoposition != null)
+                    if (GeopositionUser != null)
                     {
-                        _mapView.UpdateMapCenter(_geoposition.Coordinate.Latitude, _geoposition.Coordinate.Longitude);
+                        _mapView.UpdateMapCenter(GeopositionUser.Coordinate.Latitude, GeopositionUser.Coordinate.Longitude);
                     }
                     break;
 
@@ -81,7 +77,6 @@ namespace PinMessaging.Other
 
         private void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-
             Debug.WriteLine("new pos dispo:" + args.Position.Coordinate.Latitude + " " + args.Position.Coordinate.Longitude);
 
             _mapView.UpdateLocation(sender);

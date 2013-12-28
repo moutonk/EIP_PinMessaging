@@ -6,28 +6,33 @@ namespace PinMessaging.Model
 {
     public class PMMapPushpinModel
     {
-        public enum PinType
+        public enum PinsType
         {
             PublicMessage,
             PrivateMessage,
-            TouristInfo,
             Event,
-            TreasureHunt
+            CourseLastStep,
+            Eye,
+            PointOfInterest
         }
 
-        public PinType pinType { get; set; }
+        public PinsType PinType { get; set; }
         public Image PinImg { get; set; }
         public GeoCoordinate GeoCoord { get; set; }
         private string PinName { get; set; }
         private string PinContent { get; set; }
 
-        public PMMapPushpinModel(string name, string content, GeoCoordinate pos, PinType type)
+        public PMMapPushpinModel(PinsType type, GeoCoordinate pos)
         {
-            PinImg = new Image {Width = 100, Height = 100};
+            PinImg = new Image();
+            GeoCoord = pos;
+            PinType = type;
+        }
+
+        public void CompleteInitialization(string name, string content)
+        {
             PinName = name;
             PinContent = content;
-            GeoCoord = pos;
-            pinType = type;
         }
 
         public void img_Tap(object sender, System.Windows.Input.GestureEventArgs e)
