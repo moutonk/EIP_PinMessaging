@@ -34,7 +34,12 @@ namespace PinMessaging.View
 
             PMData.MapLayerContainer = _mapLayer;
 
-            UpdateLocation(_geoLocation.GeolocatorUser);
+            UpdateLocationUI();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            UpdateMapCenter();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -46,20 +51,14 @@ namespace PinMessaging.View
         {
             try
             {
-                UpdateLocation(_geoLocation.GeolocatorUser);
+                UpdateLocationUI();
 
                 if (_geoLocation.GeopositionUser != null)
-                {
-                    UpdateMapCenter(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
-         
+                {    
                     var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
                     pin.CompleteInitialization("test", "mdlknskdhlr!!!");
 
                     PMMapPushpinController.AddPushpinToMap(pin);
-
-                    _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
-
-                    Debug.WriteLine("New location:" + _geoLocation.GeopositionUser.Coordinate.Latitude.ToString() + " " + _geoLocation.GeopositionUser.Coordinate.Longitude.ToString());
                 }
             }
             catch (Exception ex)
@@ -68,30 +67,30 @@ namespace PinMessaging.View
             }
         }
 
-        public async void UpdateLocation(Geolocator sender)
+        public void UpdateLocationUI()
         {
-            _geoLocation.GeopositionUser = await sender.GetGeopositionAsync(maximumAge: TimeSpan.FromMinutes(5), timeout: TimeSpan.FromSeconds(10));
+            _geoLocation.UpdateLocation();
 
             if (_geoLocation.GeopositionUser != null)
             {
-                    UpdateMapCenter(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
-                    Dispatcher.BeginInvoke(() =>
-                    {
-                        if (_userSpot.Visibility == Visibility.Collapsed)
-                            _userSpot.Visibility = Visibility.Visible;
-                        _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
-       
-                    });
+                Dispatcher.BeginInvoke(() =>
+                {
+                    if (_userSpot.Visibility == Visibility.Collapsed)
+                        _userSpot.Visibility = Visibility.Visible;
+                    _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
 
-                    Debug.WriteLine(_geoLocation.GeopositionUser.Coordinate.Latitude);
+                });
             }
         }
 
-        public void UpdateMapCenter(double latitude, double longitude)
+        public void UpdateMapCenter()
         {
             Dispatcher.BeginInvoke(() =>
             {
-                map.Center = new GeoCoordinate(latitude, longitude);
+                if (_geoLocation.GeopositionUser != null)
+                {
+                    map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
+                }
             });  
         }
 

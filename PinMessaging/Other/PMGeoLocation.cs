@@ -7,20 +7,22 @@ namespace PinMessaging.Other
 {
     public class PMGeoLocation
     {
-        public readonly Geolocator GeolocatorUser = new Geolocator();
         public Geoposition GeopositionUser = null;
-        private readonly PMMapView _mapView = null;
+
+        readonly Geolocator _geolocatorUser = new Geolocator();
+        readonly PMMapView _mapView = null;
+        bool _firstPositionChanged = false;
 
         public PMGeoLocation(PMMapView mapView)
         {
             _mapView = mapView;
 
             //geolocator initialization
-            GeolocatorUser.DesiredAccuracyInMeters = 1;
-            GeolocatorUser.MovementThreshold = 3;
-            GeolocatorUser.ReportInterval = 1000;
-            GeolocatorUser.PositionChanged += geolocator_PositionChanged;
-            GeolocatorUser.StatusChanged += geolocator_StatusChanged;
+            _geolocatorUser.DesiredAccuracyInMeters = 1;
+            _geolocatorUser.MovementThreshold = 0;
+            _geolocatorUser.ReportInterval = 1000;
+            _geolocatorUser.PositionChanged += geolocator_PositionChanged;
+            _geolocatorUser.StatusChanged += geolocator_StatusChanged;
         }
 
         private void geolocator_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
@@ -31,10 +33,7 @@ namespace PinMessaging.Other
                     // Location data is available
                     Debug.WriteLine("Location is available.");
 
-                    if (GeopositionUser != null)
-                    {
-                        _mapView.UpdateMapCenter(GeopositionUser.Coordinate.Latitude, GeopositionUser.Coordinate.Longitude);
-                    }
+                    _mapView.UpdateMapCenter();
                     break;
 
                 case PositionStatus.Initializing:
@@ -77,9 +76,20 @@ namespace PinMessaging.Other
 
         private void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            Debug.WriteLine("new pos dispo:" + args.Position.Coordinate.Latitude + " " + args.Position.Coordinate.Longitude);
+            Debug.WriteLine("New pos dispo: " + args.Position.Coordinate.Latitude + " " + args.Position.Coordinate.Longitude);
 
-            _mapView.UpdateLocation(sender);
+            _mapView.UpdateLocationUI();
+
+            if (_firstPositionChanged == false)
+            {
+                _mapView.UpdateMapCenter();
+                _firstPositionChanged = true;
+            }
+        }
+
+        public async void UpdateLocation()
+        {
+            GeopositionUser = await _geolocatorUser.GetGeopositionAsync(maximumAge: TimeSpan.FromMinutes(5), timeout: TimeSpan.FromSeconds(10));
         }
     }
 }

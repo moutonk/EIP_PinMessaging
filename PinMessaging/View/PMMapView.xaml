@@ -30,12 +30,13 @@
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
-            <maps:Map Name="map" HorizontalAlignment="Left" VerticalAlignment="Top" Height="599" Width="446" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true">
+            <maps:Map Name="map" HorizontalAlignment="Left" VerticalAlignment="Top" Height="535" Width="446" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true">
 
             </maps:Map>
 
             <Button Content="add" HorizontalAlignment="Left" Margin="0,604,0,0" VerticalAlignment="Top" Height="82" Width="220" Click="Button_Click"/>
             <Button Content="rm" HorizontalAlignment="Left" Margin="230,604,0,0" VerticalAlignment="Top" Height="82" Width="216" Click="Button_Click_1"/>
+            <Button Content="Center" HorizontalAlignment="Left" Margin="169,535,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
 
         </Grid>
     </Grid>
