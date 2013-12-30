@@ -71,16 +71,17 @@ namespace PinMessaging.Utils
             Debug.WriteLine(Environment.NewLine + "SendRequest: " + httpReqType.ToString() + " " + reqType.ToString() + " " + syncType.ToString() + " " + args.Aggregate("",(current, keyValuePair) =>current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
 
             //convert the dictionnary to a string
-            string dicoToString = FormateDictionnaryToString(args);
+            var dicoToString = FormateDictionnaryToString(args);
 
             //create the request with the correct URL
-            string url = Paths.ServerAddress + RequestTypeToUrlString(reqType) + ".json";
+            var url = Paths.ServerAddress + RequestTypeToUrlString(reqType) + ".json";
 
             switch (httpReqType)
             {
                 case HttpRequestType.Post:
                     PostRequest(ref url, ref dicoToString, reqType);
                     break;
+
                 case HttpRequestType.Get:
                     GetRequest(ref url, ref dicoToString, reqType);
                     break;
@@ -94,41 +95,31 @@ namespace PinMessaging.Utils
             //get the tuple object contained in ar
             var tuple = (Tuple<HttpWebRequest, byte[], RequestType>)ar.AsyncState;
 
-            HttpWebResponse response = null;
-            Stream streamResponse = null;
-            StreamReader streamRead = null;
-
-            try
+            using (var response = (HttpWebResponse)tuple.Item1.EndGetResponse(ar))
+            using (var streamResponse = response.GetResponseStream())
+            using (var streamRead = new StreamReader(streamResponse))
             {
-                response = (HttpWebResponse)tuple.Item1.EndGetResponse(ar);
-                streamResponse = response.GetResponseStream();
-                streamRead = new StreamReader(streamResponse);
+                try
+                {
+                    var responseString = streamRead.ReadToEnd();
 
-                var responseString = streamRead.ReadToEnd();
+                    Debug.WriteLine("Answer: " + responseString);
 
-                Debug.WriteLine("Answer: " + responseString);
+                    DataConverter.ParseJson(responseString, (RequestType)tuple.Item3);
+                }
+                catch (WebException e)
+                {
+                    ManageResponseExplicitError(e);
 
-                DataConverter.ParseJson(responseString, (RequestType)tuple.Item3);
+                    PMData.NetworkProblem = true;
 
-                CloseStream(streamResponse);
-                CloseStream(streamRead);
-                CloseStream(response);
-            }
-            catch (WebException e)
-            {
-                ManageResponseExplicitError(e);
+                    Design.CustomMessageBox(new[] { "Ok" }, "Oops !", AppResources.NetworkProblem);
+                }
 
-                PMData.NetworkProblem = true;
+                OnGoingRequest = false;
 
-                CloseStream(streamResponse);
-                CloseStream(streamRead);
-                CloseStream(response);
-
-                Design.CustomMessageBox(new[] {"Ok"}, "Oops !", AppResources.NetworkProblem);
-            }
-            OnGoingRequest = false;
-
-            Debug.WriteLine("Waiting answer END...");
+                Debug.WriteLine("Waiting answer END...");
+            }         
         }
 
         private static void ManageResponseExplicitError(WebException e)
@@ -153,7 +144,7 @@ namespace PinMessaging.Utils
 
             Debug.WriteLine(url);
 
-            request.Method = "POST";
+            request.Method = HttpRequestType.Post.ToString();
 
             //convert the dictionnary with the argument to an array of bytes
             byte[] requestParams = Encoding.UTF8.GetBytes(parameters);
@@ -173,12 +164,12 @@ namespace PinMessaging.Utils
             var tuple = (Tuple<HttpWebRequest, byte[], RequestType>)ar.AsyncState;
    
             // End the operation
-            var postStream = tuple.Item1.EndGetRequestStream(ar);
-
-            //write the params in the request
-            postStream.Write(tuple.Item2, 0, tuple.Item2.Length);
-            postStream.Flush();
-            CloseStream(postStream);
+            using (var postStream = tuple.Item1.EndGetRequestStream(ar))
+            {
+                //write the params in the request
+                postStream.Write(tuple.Item2, 0, tuple.Item2.Length);
+                postStream.Flush();  
+            }
 
             Debug.WriteLine("Writing request END...");
 
@@ -192,13 +183,13 @@ namespace PinMessaging.Utils
 
             Debug.WriteLine(url + "?" + parameters);
 
-            request.Method = "GET";
+            request.Method = HttpRequestType.Get.ToString();
 
             // start the asynchronous operation
             request.BeginGetResponse(new AsyncCallback(ManageResponse), Tuple.Create(request, new byte[1], reqType));
         }
 
-        private static string FormateDictionnaryToString(Dictionary<string, string> dict)
+        private static string FormateDictionnaryToString(IReadOnlyCollection<KeyValuePair<string, string>> dict)
         {
             var builder = new StringBuilder();
 
@@ -213,24 +204,6 @@ namespace PinMessaging.Utils
             
             Debug.WriteLine("-------------------------------------------");
             return builder.ToString();
-        }
-
-        private static void CloseStream(Stream s) 
-        {
-            if (s != null)
-                s.Close();
-        }
-
-        private static void CloseStream(HttpWebResponse s)
-        {
-            if (s != null)
-                s.Close();
-        }
-
-        private static void CloseStream(StreamReader s)
-        {
-            if (s != null)
-                s.Close();
         }
     }
 }
