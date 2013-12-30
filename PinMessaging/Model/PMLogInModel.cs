@@ -1,21 +1,18 @@
 ﻿
+using System.ComponentModel;
 using System.Runtime.Serialization;
 namespace PinMessaging.Model
 {
     [DataContract]
     public class PMLogInModel
     {
-        [DataMember]
-        public string Email  {get; set;}
+        [DefaultValue("")] [DataMember] public string Email;
 
-        [DataMember]
-        public string Password = "";
+        [DefaultValue("")] [DataMember] public string Password;
 
-        [DataMember]
-        public string PasswordRetyped = "";
+        [DefaultValue("")] [DataMember] public string PasswordRetyped;
 
-        [DataMember]
-        public string PhoneSimId = "";
+        [DefaultValue("")] [DataMember] public string PhoneSimId;
     }
 }
 

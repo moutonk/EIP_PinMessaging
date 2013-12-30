@@ -39,7 +39,7 @@ namespace PinMessaging.View
             if (GridLogo != null)
                 GridLogo.Children.Add(ad);
             else
-                ErrorsManager.ShowError("attachAd: GridLogo is null", ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("attachAd: GridLogo is null", ErrorsPriority.NotCritical);
         }
 
         public void ActiviateProgressBar()
@@ -66,7 +66,7 @@ namespace PinMessaging.View
             }
             catch (Exception exp)
             {
-                ErrorsManager.ShowError(exp, ErrorsPriority.Critical);
+                Logs.Error.ShowError(exp, ErrorsPriority.Critical);
                 return false;
             }
         }
@@ -80,7 +80,7 @@ namespace PinMessaging.View
             }
             catch (Exception exp)
             {
-                ErrorsManager.ShowError(exp, ErrorsPriority.Critical);
+                Logs.Error.ShowError(exp, ErrorsPriority.Critical);
                 return false;
             }
         }

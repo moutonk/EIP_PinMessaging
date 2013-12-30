@@ -19,7 +19,7 @@ namespace PinMessaging.Utils
             }
             catch (Exception e)
             {
-                ErrorsManager.ShowError(e, ErrorsPriority.NotCritical);
+                Logs.Error.ShowError(e, ErrorsPriority.NotCritical);
 
                 argb[0] = 0;
                 argb[1] = 0;

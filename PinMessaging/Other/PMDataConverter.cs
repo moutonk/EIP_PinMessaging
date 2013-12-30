@@ -33,7 +33,7 @@ namespace PinMessaging.Other
                 }
                 catch (Exception e)
                 {
-                    ErrorsManager.ShowError(e, ErrorsPriority.NotCritical);
+                    Logs.Error.ShowError(e, ErrorsPriority.NotCritical);
                 }
             }
         }

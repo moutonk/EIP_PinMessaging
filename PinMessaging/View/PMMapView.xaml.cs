@@ -62,7 +62,7 @@ namespace PinMessaging.View
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                Logs.Output.ShowOutput(ex.Message);
             }
         }
 

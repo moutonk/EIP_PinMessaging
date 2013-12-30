@@ -20,7 +20,7 @@ namespace PinMessaging.View
                 Img.ImageSource = new BitmapImage(new Uri(Paths.LogoSplashBlack.ToString(), UriKind.Relative));
             }
             else
-                ErrorsManager.ShowError("createAd: PMFirstLaunchView instance is null", ErrorsPriority.Critical);
+                Logs.Error.ShowError("createAd: PMFirstLaunchView instance is null", ErrorsPriority.Critical);
         }
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
@@ -39,7 +39,7 @@ namespace PinMessaging.View
             }
             catch (Exception exp)
             {
-                ErrorsManager.ShowError(exp, ErrorsPriority.Critical);
+                Logs.Error.ShowError(exp, ErrorsPriority.Critical);
             }
         }
 
@@ -52,7 +52,7 @@ namespace PinMessaging.View
             }
             catch (Exception exp)
             {
-                ErrorsManager.ShowError(exp, ErrorsPriority.Critical);
+                Logs.Error.ShowError(exp, ErrorsPriority.Critical);
             }
         }   
     }

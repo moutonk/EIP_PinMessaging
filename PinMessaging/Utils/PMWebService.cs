@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using Windows.Foundation.Metadata;
 using PinMessaging.Other;
 using PinMessaging.Resources;
 using PinMessaging.Utils.WebService;
@@ -42,7 +41,7 @@ namespace PinMessaging.Utils
         }
     }
 
-    public class PMWebService
+    public static class PMWebService
     {
         private static readonly PMDataConverter DataConverter = new PMDataConverter();
         public static bool OnGoingRequest { get; private set; }
@@ -68,7 +67,7 @@ namespace PinMessaging.Utils
             PMData.NetworkProblem = false;
 
             //Debug output
-            Debug.WriteLine(Environment.NewLine + "SendRequest: " + httpReqType.ToString() + " " + reqType.ToString() + " " + syncType.ToString() + " " + args.Aggregate("",(current, keyValuePair) =>current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
+            Logs.Output.ShowOutput(Environment.NewLine + "SendRequest: " + httpReqType.ToString() + " " + reqType.ToString() + " " + syncType.ToString() + " " + args.Aggregate("",(current, keyValuePair) =>current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
 
             //convert the dictionnary to a string
             var dicoToString = FormateDictionnaryToString(args);
@@ -90,7 +89,7 @@ namespace PinMessaging.Utils
 
         private static void ManageResponse(IAsyncResult ar)
         {
-            Debug.WriteLine("Waiting answer BEGIN...");
+            Logs.Output.ShowOutput("Waiting answer BEGIN...");
 
             //get the tuple object contained in ar
             var tuple = (Tuple<HttpWebRequest, byte[], RequestType>)ar.AsyncState;
@@ -103,7 +102,7 @@ namespace PinMessaging.Utils
                 {
                     var responseString = streamRead.ReadToEnd();
 
-                    Debug.WriteLine("Answer: " + responseString);
+                    Logs.Output.ShowOutput("Answer: " + responseString);
 
                     DataConverter.ParseJson(responseString, (RequestType)tuple.Item3);
                 }
@@ -118,23 +117,23 @@ namespace PinMessaging.Utils
 
                 OnGoingRequest = false;
 
-                Debug.WriteLine("Waiting answer END...");
+                Logs.Output.ShowOutput("Waiting answer END...");
             }         
         }
 
         private static void ManageResponseExplicitError(WebException e)
         {
-            Debug.WriteLine("GetResponseCallback: " + e.Message + ": " + e.InnerException.Message);
+            Logs.Output.ShowOutput("GetResponseCallback: " + e.Message + ": " + e.InnerException.Message);
             var aResp = e.Response as HttpWebResponse;
 
             if (aResp != null)
             {
-                Debug.WriteLine("statusCode: " + (int)aResp.StatusCode);
+                Logs.Output.ShowOutput("statusCode: " + (int)aResp.StatusCode);
             }
 
             using (var reader = new StreamReader(e.Response.GetResponseStream()))
             {
-                Debug.WriteLine(reader.ReadToEnd());
+                Logs.Output.ShowOutput(reader.ReadToEnd());
             }
         }
 
@@ -142,7 +141,7 @@ namespace PinMessaging.Utils
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
 
-            Debug.WriteLine(url);
+            Logs.Output.ShowOutput(url);
 
             request.Method = HttpRequestType.Post.ToString();
 
@@ -158,7 +157,7 @@ namespace PinMessaging.Utils
 
         private static void WriteParamsInStreamCallBack(IAsyncResult ar)
         {
-            Debug.WriteLine("Writing request BEGIN...");
+            Logs.Output.ShowOutput("Writing request BEGIN...");
 
             //get the tuple object contained in ar
             var tuple = (Tuple<HttpWebRequest, byte[], RequestType>)ar.AsyncState;
@@ -171,7 +170,7 @@ namespace PinMessaging.Utils
                 postStream.Flush();  
             }
 
-            Debug.WriteLine("Writing request END...");
+            Logs.Output.ShowOutput("Writing request END...");
 
             // Start the asynchronous operation to get the response
             tuple.Item1.BeginGetResponse(new AsyncCallback(ManageResponse), ar.AsyncState);
@@ -181,7 +180,7 @@ namespace PinMessaging.Utils
         {
             var request = (HttpWebRequest)WebRequest.Create(url + "?" + parameters);
 
-            Debug.WriteLine(url + "?" + parameters);
+            Logs.Output.ShowOutput(url + "?" + parameters);
 
             request.Method = HttpRequestType.Get.ToString();
 
@@ -193,7 +192,7 @@ namespace PinMessaging.Utils
         {
             var builder = new StringBuilder();
 
-            Debug.WriteLine("-------------------------------------------");
+            Logs.Output.ShowOutput("-------------------------------------------");
 
             for (var dicoLine = 0; dicoLine < dict.Count; dicoLine++)
             {
@@ -202,7 +201,7 @@ namespace PinMessaging.Utils
                     builder.Append("&");
             }
             
-            Debug.WriteLine("-------------------------------------------");
+            Logs.Output.ShowOutput("-------------------------------------------");
             return builder.ToString();
         }
     }

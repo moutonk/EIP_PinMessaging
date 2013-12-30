@@ -1,6 +1,9 @@
-﻿using System.Device.Location;
+﻿using System;
+using System.ComponentModel;
+using System.Device.Location;
 using System.Diagnostics;
 using System.Windows.Controls;
+using PinMessaging.Utils;
 
 namespace PinMessaging.Model
 {
@@ -16,11 +19,11 @@ namespace PinMessaging.Model
             PointOfInterest
         }
 
-        public PinsType PinType { get; set; }
-        public Image PinImg { get; set; }
-        public GeoCoordinate GeoCoord { get; set; }
-        private string PinName { get; set; }
-        private string PinContent { get; set; }
+        [DefaultValue(PinsType.PublicMessage)] public PinsType PinType { get; set; }
+        [DefaultValue(null)] public Image PinImg { get; private set; }
+        [DefaultValue(null)] public GeoCoordinate GeoCoord { get; private set; }
+        [DefaultValue("")] private string PinName { get; set; }
+        [DefaultValue("")] private string PinContent { get; set; }
 
         public PMMapPushpinModel(PinsType type, GeoCoordinate pos)
         {
@@ -37,7 +40,7 @@ namespace PinMessaging.Model
 
         public void img_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
-            Debug.WriteLine("Pin tapped!");
+            Logs.Output.ShowOutput("Pin tapped!");
         }
     }
 }
