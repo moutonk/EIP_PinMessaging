@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
-    xmlns:toolkit="clr-namespace:Microsoft.Phone.Maps.Toolkit;assembly=Microsoft.Phone.Controls.Toolkit"
     x:Class="PinMessaging.View.PMMapView"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -23,9 +22,7 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MON APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-        </StackPanel>
+        <StackPanel Grid.Row="0" Margin="12,17,0,28"/>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
@@ -36,7 +33,9 @@
 
             <Button Content="add" HorizontalAlignment="Left" Margin="0,604,0,0" VerticalAlignment="Top" Height="82" Width="220" Click="Button_Click"/>
             <Button Content="rm" HorizontalAlignment="Left" Margin="230,604,0,0" VerticalAlignment="Top" Height="82" Width="216" Click="Button_Click_1"/>
-            <Button Content="Center" HorizontalAlignment="Left" Margin="169,535,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
+            <Button Content="Center" HorizontalAlignment="Left" Margin="51,535,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
+            <Button Content="ZoomIn" HorizontalAlignment="Left" Margin="174,535,0,0" VerticalAlignment="Top" Click="Button_Click_3"/>
+            <Button Content="ZoomOut" HorizontalAlignment="Left" Margin="294,535,0,0" VerticalAlignment="Top" Click="Button_Click_4"/>
 
         </Grid>
     </Grid>

@@ -14,7 +14,7 @@ namespace PinMessaging.Controller
         
     }
 
-    public static class PMMapPushpinController
+    public static class PMMapPinController
     {
         private static readonly Dictionary<PMMapPushpinModel.PinsType, BitmapImage> PinsMap = new Dictionary<PMMapPushpinModel.PinsType, BitmapImage>()
         {

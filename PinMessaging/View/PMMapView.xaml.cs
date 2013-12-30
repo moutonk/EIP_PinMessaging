@@ -58,7 +58,7 @@ namespace PinMessaging.View
                     var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
                     pin.CompleteInitialization("test", "mdlknskdhlr!!!");
 
-                    PMMapPushpinController.AddPushpinToMap(pin);
+                    PMMapPinController.AddPushpinToMap(pin);
                 }
             }
             catch (Exception ex)
@@ -107,6 +107,18 @@ namespace PinMessaging.View
             {
                 e.Cancel = true;
             }
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            if (map.ZoomLevel <= 19D)
+                map.ZoomLevel += 1D;
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            if (map.ZoomLevel >= 2D)
+            map.ZoomLevel -= 1D;
         }
     }
 }

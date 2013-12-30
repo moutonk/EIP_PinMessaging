@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using Windows.Foundation.Metadata;
 using PinMessaging.Other;
 using PinMessaging.Resources;
 using PinMessaging.Utils.WebService;
@@ -44,7 +45,7 @@ namespace PinMessaging.Utils
     public class PMWebService
     {
         private static readonly PMDataConverter DataConverter = new PMDataConverter();
-        public static bool OnGoingRequest { get; set; }
+        public static bool OnGoingRequest { get; private set; }
 
         private static string RequestTypeToUrlString(RequestType reqType)
         {
@@ -74,7 +75,6 @@ namespace PinMessaging.Utils
 
             //create the request with the correct URL
             string url = Paths.ServerAddress + RequestTypeToUrlString(reqType) + ".json";
-            Debug.WriteLine(url + "?" + dicoToString);
 
             switch (httpReqType)
             {
@@ -97,7 +97,6 @@ namespace PinMessaging.Utils
             HttpWebResponse response = null;
             Stream streamResponse = null;
             StreamReader streamRead = null;
-            string responseString = null;
 
             try
             {
@@ -105,7 +104,7 @@ namespace PinMessaging.Utils
                 streamResponse = response.GetResponseStream();
                 streamRead = new StreamReader(streamResponse);
 
-                responseString = streamRead.ReadToEnd();
+                var responseString = streamRead.ReadToEnd();
 
                 Debug.WriteLine("Answer: " + responseString);
 
@@ -152,6 +151,8 @@ namespace PinMessaging.Utils
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
 
+            Debug.WriteLine(url);
+
             request.Method = "POST";
 
             //convert the dictionnary with the argument to an array of bytes
@@ -172,7 +173,7 @@ namespace PinMessaging.Utils
             var tuple = (Tuple<HttpWebRequest, byte[], RequestType>)ar.AsyncState;
    
             // End the operation
-            Stream postStream = tuple.Item1.EndGetRequestStream(ar);
+            var postStream = tuple.Item1.EndGetRequestStream(ar);
 
             //write the params in the request
             postStream.Write(tuple.Item2, 0, tuple.Item2.Length);
@@ -189,10 +190,12 @@ namespace PinMessaging.Utils
         {
             var request = (HttpWebRequest)WebRequest.Create(url + "?" + parameters);
 
+            Debug.WriteLine(url + "?" + parameters);
+
             request.Method = "GET";
 
             // start the asynchronous operation
-            request.BeginGetResponse(new AsyncCallback(ManageResponse), Tuple.Create(request, (object)null, reqType));
+            request.BeginGetResponse(new AsyncCallback(ManageResponse), Tuple.Create(request, new byte[1], reqType));
         }
 
         private static string FormateDictionnaryToString(Dictionary<string, string> dict)
@@ -200,11 +203,14 @@ namespace PinMessaging.Utils
             var builder = new StringBuilder();
 
             Debug.WriteLine("-------------------------------------------");
-            foreach (KeyValuePair<string, string> kvp in dict)
+
+            for (var dicoLine = 0; dicoLine < dict.Count; dicoLine++)
             {
-                builder.Append(kvp.Key + "=" + kvp.Value + "&");
-                Debug.WriteLine(kvp.Key + " " + kvp.Value);
+                builder.Append(dict.ElementAt(dicoLine).Key + "=" + dict.ElementAt(dicoLine).Value);
+                if (dicoLine + 1 < dict.Count)
+                    builder.Append("&");
             }
+            
             Debug.WriteLine("-------------------------------------------");
             return builder.ToString();
         }

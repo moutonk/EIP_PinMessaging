@@ -27,7 +27,7 @@ namespace PinMessaging.Controller
                 {"password", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1(logInModel.Password))}
             };
 
-            PMWebService.SendRequest(HttpRequestType.Post, RequestType.SignIn, SyncType.Async, dictionary, null);
+            PMWebService.SendRequest(HttpRequestType.Get, RequestType.SignIn, SyncType.Async, dictionary, null);
 
             StartTimer();
         }
