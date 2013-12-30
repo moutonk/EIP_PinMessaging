@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Threading;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using Microsoft.Phone.Tasks;
 using System.Windows.Media.Imaging;
@@ -38,7 +34,7 @@ namespace PinMessaging.Controller
                 _view.ActiviateProgressBar();
 
                 var pmLogInController = new PMSignInController(null, _view.InterpretResult, PinMessaging.Utils.WebService.RequestType.SignIn, PMLogInCreateStructureModel.ActionType.SignIn);
-                PMLogInModel m = RememberConnection.GetLoginPwd();
+                var m = RememberConnection.GetLoginPwd();
 
                 if (m == null)
                     _view.DisplayNextView();
@@ -47,7 +43,7 @@ namespace PinMessaging.Controller
             }
         }
 
-        private void adClick(Object sender, EventArgs args)
+        private static void AdClick(Object sender, EventArgs args)
         {
             var webBrowserTask = new WebBrowserTask {Uri = new Uri("http://google.com", UriKind.Absolute)};
 
@@ -70,7 +66,7 @@ namespace PinMessaging.Controller
             var adBitmap = new BitmapImage(new Uri(adPath, UriKind.Relative));
 
             var img = new Image {Source = adBitmap, Stretch = System.Windows.Media.Stretch.Fill};
-            img.Tap += adClick;
+            img.Tap += AdClick;
 
             if (_view != null)
                 _view.AttachAd(img);

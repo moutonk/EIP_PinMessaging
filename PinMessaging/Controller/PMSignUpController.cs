@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
 using PinMessaging.Model;
-using PinMessaging.Other;
 
 namespace PinMessaging.Controller
 {

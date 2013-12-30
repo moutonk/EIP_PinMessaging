@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Windows.Threading;
 using PinMessaging.Model;
-using PinMessaging.Other;
 using PinMessaging.Utils.WebService;
-using System.Diagnostics;
 using System.Windows;
 
 namespace PinMessaging.Utils
@@ -31,18 +29,12 @@ namespace PinMessaging.Utils
 
         protected void StartTimer()
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                WaitAnswerTimer.Start();
-            });
+            Deployment.Current.Dispatcher.BeginInvoke(() => WaitAnswerTimer.Start());
         }
 
         protected void StopTimer()
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                WaitAnswerTimer.Stop();
-            });
+            Deployment.Current.Dispatcher.BeginInvoke(() => WaitAnswerTimer.Stop());
         }
 
         //function called peridodicaly (and so the overridden function inherited)

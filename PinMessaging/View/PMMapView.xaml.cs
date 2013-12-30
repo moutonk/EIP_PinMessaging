@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using Microsoft.Phone.Controls;
-using Windows.Devices.Geolocation;
 using System.Diagnostics;
 using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
@@ -30,7 +29,7 @@ namespace PinMessaging.View
             _userSpot.Visibility = Visibility.Collapsed;
             _mapLayer.Add(_userSpotLayer);
 
-            map.Layers.Add(_mapLayer);
+            Map.Layers.Add(_mapLayer);
 
             PMData.MapLayerContainer = _mapLayer;
 
@@ -89,7 +88,7 @@ namespace PinMessaging.View
             {
                 if (_geoLocation.GeopositionUser != null)
                 {
-                    map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
+                    Map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
                 }
             });  
         }
@@ -111,14 +110,14 @@ namespace PinMessaging.View
 
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            if (map.ZoomLevel <= 19D)
-                map.ZoomLevel += 1D;
+            if (Map.ZoomLevel <= 19D)
+                Map.ZoomLevel += 1D;
         }
 
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
-            if (map.ZoomLevel >= 2D)
-            map.ZoomLevel -= 1D;
+            if (Map.ZoomLevel >= 2D)
+            Map.ZoomLevel -= 1D;
         }
     }
 }

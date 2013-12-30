@@ -1,13 +1,5 @@
 ﻿using PinMessaging.Model;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO.IsolatedStorage;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PinMessaging.Utils;
-using System.Windows;
 
 namespace PinMessaging.Other
 {
@@ -25,45 +17,38 @@ namespace PinMessaging.Other
             public string Password { get; set; }
         }
 
-        private static readonly string connectionInfos = "pinmessagingConnectionInfos";
-        private static readonly string firstConnection = "pinmessagingFirstConnection";
+        private const string ConnectionInfos = "pinmessagingConnectionInfos";
+        private const string FirstConnection = "pinmessagingFirstConnection";
 
         public static void ResetAll()
         {
-            IsolatedStorageSettings.ApplicationSettings.Remove(connectionInfos);
-            IsolatedStorageSettings.ApplicationSettings.Remove(firstConnection);
+            IsolatedStorageSettings.ApplicationSettings.Remove(ConnectionInfos);
+            IsolatedStorageSettings.ApplicationSettings.Remove(FirstConnection);
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         public static bool IsFirstConnection()
         {
-            if (IsolatedStorageSettings.ApplicationSettings.Contains(firstConnection) == false)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return IsolatedStorageSettings.ApplicationSettings.Contains(FirstConnection) == false;
         }
 
         public static void SetFirstConnection()
         {
-            IsolatedStorageSettings.ApplicationSettings[firstConnection] = true;
+            IsolatedStorageSettings.ApplicationSettings[FirstConnection] = true;
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         public static void SaveLoginPwd(PMLogInModel model)
         {
-            IsolatedStorageSettings.ApplicationSettings[connectionInfos] = model;
+            IsolatedStorageSettings.ApplicationSettings[ConnectionInfos] = model;
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         public static PMLogInModel GetLoginPwd()
         {
-            if (IsolatedStorageSettings.ApplicationSettings.Contains(connectionInfos) == true)
-                return (PMLogInModel)IsolatedStorageSettings.ApplicationSettings[connectionInfos];
-            return null;
+            return IsolatedStorageSettings.ApplicationSettings.Contains(ConnectionInfos) == true
+                ? (PMLogInModel) IsolatedStorageSettings.ApplicationSettings[ConnectionInfos]
+                : null;
         }
     }
 }

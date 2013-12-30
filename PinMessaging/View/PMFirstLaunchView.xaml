@@ -18,7 +18,7 @@
         <TextBlock FontSize="{StaticResource PMNormalFontSize}" Text="{Binding Path=LocalizedResources.HaveAccountOrNot, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="29,350,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="85" Width="420" TextAlignment="Center"/>
         <Button x:Name="ButtonYes" FontSize="{StaticResource PMNormalFontSize}" Background="{StaticResource PMOrange}" Content="{Binding Path=LocalizedResources.Yes, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="92,523,0,0" Grid.Row="1" VerticalAlignment="Top" Height="87" Width="146" Click="ButtonYesClick"/>
         <Button x:Name="ButtonNo" FontSize="{StaticResource PMNormalFontSize}" Background="{StaticResource PMOrange}" Content="{Binding Path=LocalizedResources.No, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="243,523,0,0" Grid.Row="1" VerticalAlignment="Top" Height="87" Width="146" Click="ButtonNoClick"/>
-        <Grid x:Name="GridLogo" HorizontalAlignment="Left" Height="212" Margin="89,63,0,0" Grid.RowSpan="2" VerticalAlignment="Top" Width="312">
+        <Grid x:Name="GridLogo" HorizontalAlignment="Left" Height="212" Margin="89,63,0,0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" Width="312">
             <Grid.Background>
                 <ImageBrush x:Name="Img" ImageSource="/Images\Logos\logo_orange.png"></ImageBrush>
             </Grid.Background>

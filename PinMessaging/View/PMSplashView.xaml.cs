@@ -4,7 +4,6 @@ using Microsoft.Phone.Controls;
 using PinMessaging.Controller;
 using PinMessaging.Utils;
 using System.Windows;
-using PinMessaging.Resources;
 using PinMessaging.Other;
 
 namespace PinMessaging.View
@@ -45,8 +44,8 @@ namespace PinMessaging.View
 
         public void ActiviateProgressBar()
         {
-            progressBar.IsIndeterminate = true;
-            progressBar.Visibility = Visibility.Visible;
+            ProgressBar.IsIndeterminate = true;
+            ProgressBar.Visibility = Visibility.Visible;
         }
 
         public bool InterpretResult()

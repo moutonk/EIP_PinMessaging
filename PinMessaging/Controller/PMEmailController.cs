@@ -48,8 +48,6 @@ namespace PinMessaging.Controller
                         case RequestType.SignIn:
                             UpdateUi(CurrentRequestType, ParentRequestType, PMData.IsSignInSuccess);
                             break;
-                        default:
-                            break;
                     }
                 }
                 //For request without UI change

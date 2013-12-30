@@ -43,13 +43,12 @@ namespace PinMessaging.Utils
             //bti.DecodePixelHeight = 100;
 
             var wbmp = new WriteableBitmap(bti);
-            byte[] pixelBytes;
             var argb = FromHexaToARGB(newColor.Color.ToString());
        
             for (var i = 0; i < wbmp.Pixels.Length; i++)
             {
                 //get the byte array associated to the pixel
-                pixelBytes = BitConverter.GetBytes(wbmp.Pixels[i]);
+                var pixelBytes = BitConverter.GetBytes(wbmp.Pixels[i]);
 
                 pixelBytes[0] = argb[1];
                 pixelBytes[1] = argb[2];

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.Phone.Controls;
@@ -231,10 +230,7 @@ namespace PinMessaging.View
         {
             ProgressBarLoading.IsIndeterminate = !lockStatus;
 
-            if (ProgressBarLoading.IsIndeterminate)
-                ProgressBarLoading.Visibility = Visibility.Visible;
-            else
-                ProgressBarLoading.Visibility = Visibility.Collapsed;
+            ProgressBarLoading.Visibility = ProgressBarLoading.IsIndeterminate ? Visibility.Visible : Visibility.Collapsed;
 
             TextBoxPassword.IsEnabled = lockStatus;
             ButtonPrevious.IsEnabled = lockStatus;
@@ -317,30 +313,32 @@ namespace PinMessaging.View
 
                         if (isOperationSuccessful == false) // email exists
                         {
-                            if (parentRequestType == PMLogInCreateStructureModel.ActionType.SignIn)
+                            switch (parentRequestType)
                             {
-                                ResetError();
-                                MoveTextBoxEmailUp.Begin();
-                                MoveProgressBarSignInPart1.Begin();
-                            }
-                            else if (parentRequestType == PMLogInCreateStructureModel.ActionType.Create)
-                            {
-                                _currentStep = StepNumber.StepDefault;
-                                TextBlockError.Text = AppResources.PMEmailAlreadyExists;
+                                case PMLogInCreateStructureModel.ActionType.SignIn:
+                                    ResetError();
+                                    MoveTextBoxEmailUp.Begin();
+                                    MoveProgressBarSignInPart1.Begin();
+                                    break;
+                                case PMLogInCreateStructureModel.ActionType.Create:
+                                    _currentStep = StepNumber.StepDefault;
+                                    TextBlockError.Text = AppResources.PMEmailAlreadyExists;
+                                    break;
                             }
                         }
                         else //email does not exist
                         {
-                            if (parentRequestType == PMLogInCreateStructureModel.ActionType.SignIn)
+                            switch (parentRequestType)
                             {
-                                _currentStep = StepNumber.StepDefault;
-                                TextBlockError.Text = AppResources.PMEmailDoesNotExist;   
-                            }
-                            else if (parentRequestType == PMLogInCreateStructureModel.ActionType.Create)
-                            {
-                                ResetError(); 
-                                MoveTextBoxEmailUp.Begin();
-                                MoveProgressBarSignUpPart1.Begin();
+                                case PMLogInCreateStructureModel.ActionType.SignIn:
+                                    _currentStep = StepNumber.StepDefault;
+                                    TextBlockError.Text = AppResources.PMEmailDoesNotExist;
+                                    break;
+                                case PMLogInCreateStructureModel.ActionType.Create:
+                                    ResetError();
+                                    MoveTextBoxEmailUp.Begin();
+                                    MoveProgressBarSignUpPart1.Begin();
+                                    break;
                             }
                         }
                         break;

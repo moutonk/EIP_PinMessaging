@@ -31,7 +31,7 @@
                 </Storyboard>
             </Grid.Resources>
         </Grid>
-        <ProgressBar Name="progressBar" Visibility="Collapsed" Foreground="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="480"/>
+        <ProgressBar Name="ProgressBar" Visibility="Collapsed" Foreground="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="10" VerticalAlignment="Top" Width="480"/>
     </Grid>
 
 </phone:PhoneApplicationPage>

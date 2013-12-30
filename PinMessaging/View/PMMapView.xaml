@@ -27,7 +27,7 @@
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
 
-            <maps:Map Name="map" HorizontalAlignment="Left" VerticalAlignment="Top" Height="535" Width="446" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true">
+            <maps:Map Name="Map" HorizontalAlignment="Left" VerticalAlignment="Top" Height="535" Width="446" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true">
 
             </maps:Map>
 
