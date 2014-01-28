@@ -174,7 +174,7 @@ namespace PinMessaging.View
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError(exp, ErrorsPriority.Critical);
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
             }
         }   
 
@@ -299,7 +299,7 @@ namespace PinMessaging.View
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError(exp, ErrorsPriority.Critical);
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
             }
         }
 

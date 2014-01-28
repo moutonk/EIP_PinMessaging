@@ -94,31 +94,31 @@ namespace PinMessaging.Utils
             //get the tuple object contained in ar
             var tuple = (Tuple<HttpWebRequest, byte[], RequestType>)ar.AsyncState;
 
-            using (var response = (HttpWebResponse)tuple.Item1.EndGetResponse(ar))
-            using (var streamResponse = response.GetResponseStream())
-            using (var streamRead = new StreamReader(streamResponse))
+            try
             {
-                try
+                using (var response = (HttpWebResponse) tuple.Item1.EndGetResponse(ar))
+                using (var streamResponse = response.GetResponseStream())
+                using (var streamRead = new StreamReader(streamResponse))
                 {
                     var responseString = streamRead.ReadToEnd();
 
                     Logs.Output.ShowOutput("Answer: " + responseString);
 
-                    DataConverter.ParseJson(responseString, (RequestType)tuple.Item3);
+                    DataConverter.ParseJson(responseString, (RequestType) tuple.Item3);
                 }
-                catch (WebException e)
-                {
-                    ManageResponseExplicitError(e);
+            }
+            catch (WebException e)
+            {
+                ManageResponseExplicitError(e);
 
-                    PMData.NetworkProblem = true;
+                PMData.NetworkProblem = true;
 
-                    Design.CustomMessageBox(new[] { "Ok" }, "Oops !", AppResources.NetworkProblem);
-                }
+                Design.CustomMessageBox(new[] { "Ok" }, "Oops !", AppResources.NetworkProblem);
+            }
 
-                OnGoingRequest = false;
+            OnGoingRequest = false;
 
-                Logs.Output.ShowOutput("Waiting answer END...");
-            }         
+            Logs.Output.ShowOutput("Waiting answer END...");         
         }
 
         private static void ManageResponseExplicitError(WebException e)

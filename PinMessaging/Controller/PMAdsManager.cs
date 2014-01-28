@@ -71,7 +71,7 @@ namespace PinMessaging.Controller
             if (_view != null)
                 _view.AttachAd(img);
             else
-                Logs.Error.ShowError("createAd: PMSplashView instance is null", ErrorsPriority.Critical);
+                Logs.Error.ShowError("createAd: PMSplashView instance is null", Logs.Error.ErrorsPriority.Critical);
         }
     }
 }
