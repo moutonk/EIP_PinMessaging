@@ -11,33 +11,48 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    mc:Ignorable="d">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Canvas x:Name="CentralCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="800" Background="Black" ManipulationStarted="canvas_ManipulationStarted" ManipulationDelta="canvas_ManipulationDelta" ManipulationCompleted="canvas_ManipulationCompleted">
 
-        <!--TitlePanel contient le nom de l'application et le titre de la page-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28"/>
+        <Canvas.Resources>
+            <Storyboard x:Name="moveAnimation">
+                <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="LayoutRoot" d:IsOptimized="True" />
+            </Storyboard>
+        </Canvas.Resources>
 
-        <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+        <Canvas  CacheMode="BitmapCache" x:Name="LayoutRoot" Width="1320"  VerticalAlignment="Stretch" Background="Transparent" Canvas.Left="-420" Height="800">
+            <Border Width="420"  CacheMode="BitmapCache" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}"/>
+            <Border Width="420" Margin="900,0,0,0" CacheMode="BitmapCache" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}"/>
+            <Grid x:Name="MainGrid" Margin="420,0,0,0" CacheMode="BitmapCache" Height="{Binding ActualHeight, ElementName=LayoutRoot}" Width="480" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="76"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="76"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource PMGrey}">
+                    <Button  Click="OpenClose_Left" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80"/>
+                    <Button  Click="OpenClose_Right" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="80"/>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <maps:Map Name="Map" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
+                </Grid>
+                <StackPanel Grid.Row="2" Orientation="Horizontal" Background="{StaticResource PMGrey}">
+                    <Button Content="add" Click="Button_Click" />
+                    <Button Content="rm" Click="Button_Click_1"/>
+                    <Button Content="Center" Click="Button_Click_2" Width="93"/>
+                    <Button Content="ZoomIn" Click="Button_Click_3" Width="106"/>
+                    <Button Content="ZoomOut" Click="Button_Click_4" Width="110"/>
+                </StackPanel>
 
-            <maps:Map Name="Map" HorizontalAlignment="Left" VerticalAlignment="Top" Height="535" Width="446" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true">
+            </Grid>
+        </Canvas>
+    </Canvas>
 
-            </maps:Map>
+ 
 
-            <Button Content="add" HorizontalAlignment="Left" Margin="0,604,0,0" VerticalAlignment="Top" Height="82" Width="220" Click="Button_Click"/>
-            <Button Content="rm" HorizontalAlignment="Left" Margin="230,604,0,0" VerticalAlignment="Top" Height="82" Width="216" Click="Button_Click_1"/>
-            <Button Content="Center" HorizontalAlignment="Left" Margin="51,535,0,0" VerticalAlignment="Top" Click="Button_Click_2"/>
-            <Button Content="ZoomIn" HorizontalAlignment="Left" Margin="174,535,0,0" VerticalAlignment="Top" Click="Button_Click_3"/>
-            <Button Content="ZoomOut" HorizontalAlignment="Left" Margin="294,535,0,0" VerticalAlignment="Top" Click="Button_Click_4"/>
 
-        </Grid>
-    </Grid>
+      
 
 </phone:PhoneApplicationPage>

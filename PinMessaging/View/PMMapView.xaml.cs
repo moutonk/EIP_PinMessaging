@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media.Animation;
 using Microsoft.Phone.Controls;
 using System.Diagnostics;
 using System.Device.Location;
@@ -118,6 +121,77 @@ namespace PinMessaging.View
         {
             if (Map.ZoomLevel >= 2D)
             Map.ZoomLevel -= 1D;
+        }
+
+        ////////////////MANAGE SWIPE LEFT RIGHT/////////////////////////
+
+        private const int LeftPage = -420;
+        private const int MiddlePage = 0;
+        private const int RightPage = -840;
+        private const int Overlap = 100;
+
+        private double _initialPosition;
+        private bool _viewMoved = false;
+
+        private void OpenClose_Left(object sender, RoutedEventArgs e)
+        {
+            var left = Canvas.GetLeft(LayoutRoot);
+
+            MoveViewWindow(left > -Overlap ? LeftPage : MiddlePage);
+        }
+
+        private void OpenClose_Right(object sender, RoutedEventArgs e)
+        {
+            var left = Canvas.GetLeft(LayoutRoot);
+
+            MoveViewWindow(left > LeftPage - Overlap ? RightPage : LeftPage);
+        }
+
+        void MoveViewWindow(double left)
+        {
+            _viewMoved = true;
+
+            moveAnimation.SkipToFill();
+            ((DoubleAnimation)(moveAnimation).Children[0]).To = left;
+            moveAnimation.Begin();
+        }
+
+        private void canvas_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
+        {
+            if (e.DeltaManipulation.Translation.X != 0)
+                Canvas.SetLeft(LayoutRoot, Math.Min(Math.Max(RightPage, Canvas.GetLeft(LayoutRoot) + e.DeltaManipulation.Translation.X), 0));
+        }
+
+        private void canvas_ManipulationStarted(object sender, ManipulationStartedEventArgs e)
+        {
+            _viewMoved = false;
+            _initialPosition = Canvas.GetLeft(LayoutRoot);
+        }
+
+        private void canvas_ManipulationCompleted(object sender, ManipulationCompletedEventArgs e)
+        {
+            var left = Canvas.GetLeft(LayoutRoot);
+
+            if (_viewMoved)
+                return;
+
+            if (Math.Abs(_initialPosition - left) < Overlap)
+            {
+                //bouncing back
+                MoveViewWindow(_initialPosition);
+                return;
+            }
+
+            //change of state
+            if (_initialPosition - left > MiddlePage)
+            {
+                MoveViewWindow(_initialPosition > LeftPage ? LeftPage : RightPage);
+            }
+            else
+            {
+                //slide to the right
+                MoveViewWindow(_initialPosition < LeftPage ? LeftPage : MiddlePage);
+            }
         }
     }
 }
