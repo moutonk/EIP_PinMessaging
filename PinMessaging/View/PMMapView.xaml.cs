@@ -39,11 +39,6 @@ namespace PinMessaging.View
             UpdateLocationUI();
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            UpdateMapCenter();
-        }
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
               // PMMapPushpinController.RemovePushpinFromMapLayer(pin);
@@ -121,6 +116,11 @@ namespace PinMessaging.View
         {
             if (Map.ZoomLevel >= 2D)
             Map.ZoomLevel -= 1D;
+        }
+
+        private void Center_Click(object sender, RoutedEventArgs e)
+        {
+            UpdateMapCenter();
         }
 
         ////////////////MANAGE SWIPE LEFT RIGHT/////////////////////////

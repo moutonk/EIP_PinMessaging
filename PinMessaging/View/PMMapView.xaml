@@ -31,21 +31,33 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="76"/>
                 </Grid.RowDefinitions>
-                <Grid Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource PMGrey}">
-                    <Button  Click="OpenClose_Left" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80"/>
-                    <Button  Click="OpenClose_Right" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="80"/>
-                </Grid>
-                <Grid Grid.Row="1">
-                    <maps:Map Name="Map" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
-                </Grid>
-                <StackPanel Grid.Row="2" Orientation="Horizontal" Background="{StaticResource PMGrey}">
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Background="{StaticResource PMGrey}">
                     <Button Content="add" Click="Button_Click" />
                     <Button Content="rm" Click="Button_Click_1"/>
-                    <Button Content="Center" Click="Button_Click_2" Width="93"/>
-                    <Button Content="ZoomIn" Click="Button_Click_3" Width="106"/>
-                    <Button Content="ZoomOut" Click="Button_Click_4" Width="110"/>
+                    <Button Content="ZoomIn" Click="Button_Click_3" Width="146"/>
+                    <Button Content="ZoomOut" Click="Button_Click_4" Width="152"/>
                 </StackPanel>
-
+                <Grid Grid.Row="1">
+                    <maps:Map Name="Map" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
+                    <Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="68" Width="73" BorderThickness="0">
+                    	<Button.Background>
+                    		<ImageBrush ImageSource="target@2x.png" Stretch="UniformToFill"/>
+                    	</Button.Background>
+                    </Button>
+                </Grid>
+          
+                <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource PMGrey}">
+                    <Button  Click="OpenClose_Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80" BorderThickness="0">
+                        <Button.Background>
+                            <ImageBrush ImageSource="menu_icon_2@2x.png" Stretch="Uniform"/>
+                        </Button.Background>
+                    </Button>
+                    <Button  Click="OpenClose_Right" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="80" BorderThickness="0">
+                    	<Button.Background>
+                    		<ImageBrush ImageSource="mini_orange_star@2x.png" Stretch="Uniform"/>
+                    	</Button.Background>
+                    </Button>
+                </Grid>
             </Grid>
         </Canvas>
     </Canvas>
