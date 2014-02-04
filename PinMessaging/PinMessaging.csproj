@@ -235,6 +235,7 @@
     </XliffResource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="View\FR.png" />
     <Resource Include="View\menu_icon_2%402x.png" />
     <Resource Include="View\menu_icon_2.png" />
     <Resource Include="View\mini_orange_star%402x.png" />

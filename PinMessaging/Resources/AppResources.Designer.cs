@@ -106,6 +106,78 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à About.
+        /// </summary>
+        public static string MenuAbout {
+            get {
+                return ResourceManager.GetString("MenuAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Filters.
+        /// </summary>
+        public static string MenuFilters {
+            get {
+                return ResourceManager.GetString("MenuFilters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Log out.
+        /// </summary>
+        public static string MenuLogout {
+            get {
+                return ResourceManager.GetString("MenuLogout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Map.
+        /// </summary>
+        public static string MenuMap {
+            get {
+                return ResourceManager.GetString("MenuMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à My pins.
+        /// </summary>
+        public static string MenuPins {
+            get {
+                return ResourceManager.GetString("MenuPins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à My profil.
+        /// </summary>
+        public static string MenuProfil {
+            get {
+                return ResourceManager.GetString("MenuProfil", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Rewards.
+        /// </summary>
+        public static string MenurRewards {
+            get {
+                return ResourceManager.GetString("MenurRewards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Settings.
+        /// </summary>
+        public static string MenuSettings {
+            get {
+                return ResourceManager.GetString("MenuSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Please check your internet connection and try again.
         /// </summary>
         public static string NetworkProblem {

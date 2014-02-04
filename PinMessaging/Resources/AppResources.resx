@@ -132,6 +132,30 @@
   <data name="HaveAccountOrNot" xml:space="preserve">
     <value>Do you already have an account?</value>
   </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="MenuFilters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="MenuLogout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="MenuMap" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="MenuPins" xml:space="preserve">
+    <value>My pins</value>
+  </data>
+  <data name="MenuProfil" xml:space="preserve">
+    <value>My profil</value>
+  </data>
+  <data name="MenurRewards" xml:space="preserve">
+    <value>Rewards</value>
+  </data>
+  <data name="MenuSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="NetworkProblem" xml:space="preserve">
     <value>Please check your internet connection and try again</value>
   </data>

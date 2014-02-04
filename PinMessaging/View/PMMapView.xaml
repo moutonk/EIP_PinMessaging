@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     x:Class="PinMessaging.View.PMMapView"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -22,49 +23,93 @@
             </Storyboard>
         </Canvas.Resources>
 
-        <Canvas  CacheMode="BitmapCache" x:Name="LayoutRoot" Width="1320"  VerticalAlignment="Stretch" Background="Transparent" Canvas.Left="-420" Height="800">
-            <Border Width="420"  CacheMode="BitmapCache" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}"/>
-            <Border Width="420" Margin="900,0,0,0" CacheMode="BitmapCache" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}"/>
-            <Grid x:Name="MainGrid" Margin="420,0,0,0" CacheMode="BitmapCache" Height="{Binding ActualHeight, ElementName=LayoutRoot}" Width="480" >
+        <Canvas  x:Name="LayoutRoot" Width="1320"  VerticalAlignment="Stretch" Background="{StaticResource PMGrey}" Canvas.Left="-420" Height="800">
+            <Grid Width="420" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="76"/>
                     <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+                <ScrollViewer HorizontalAlignment="Left" Height="724" Grid.Row="1" VerticalAlignment="Top" Width="420">
+                    <Grid Height="724" Width="420">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="76"></RowDefinition>
+                            <RowDefinition Height="76"></RowDefinition>
+                            <RowDefinition Height="76"></RowDefinition>
+                            <RowDefinition Height="76"></RowDefinition>
+                            <RowDefinition Height="76"></RowDefinition>
+                            <RowDefinition Height="76"></RowDefinition>
+                            <RowDefinition Height="76"></RowDefinition>
+                            <RowDefinition Height="76"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="76"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Image  Name="ImgMap"  Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
+                        <Button Name="ButtonMap" Grid.Column="1" Grid.Row="0" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgProfil"  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
+                        <Button Name="ButtonProfil" Grid.Column="1" Grid.Row="1" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgPins"  Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
+                        <Button Name="ButtonPins" Grid.Column="1" Grid.Row="2" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgFilters" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
+                        <Button Name="ButtonFilters" Grid.Column="1" Grid.Row="3" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgSettings"  Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
+                        <Button Name="ButtonSettings" Grid.Column="1" Grid.Row="4" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgReward"  Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
+                        <Button Name="ButtonReward" Grid.Column="1" Grid.Row="5" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgAbout"  Grid.Column="0" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
+                        <Button Name="ButtonAbout" Grid.Column="1" Grid.Row="6" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgLogout"  Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
+                        <Button Name="ButtonLogout" Grid.Column="1" Grid.Row="7" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+
+            <Border Width="420" Margin="900,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}"/>
+
+            <Grid x:Name="MainGrid" Margin="420,0,0,0" Height="{Binding ActualHeight, ElementName=LayoutRoot}" Width="480" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="76"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal" Background="{StaticResource PMGrey}">
+                <StackPanel Grid.Row="0" Orientation="Horizontal">
                     <Button Content="add" Click="Button_Click" />
                     <Button Content="rm" Click="Button_Click_1"/>
                     <Button Content="ZoomIn" Click="Button_Click_3" Width="146"/>
                     <Button Content="ZoomOut" Click="Button_Click_4" Width="152"/>
                 </StackPanel>
                 <Grid Grid.Row="1">
-                    <maps:Map Name="Map" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
+                    <maps:Map x:Name="Map" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
                     <Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="68" Width="73" BorderThickness="0">
-                    	<Button.Background>
-                    		<ImageBrush ImageSource="target@2x.png" Stretch="UniformToFill"/>
-                    	</Button.Background>
+                        <Button.Background>
+                            <ImageBrush ImageSource="target@2x.png" Stretch="UniformToFill"/>
+                        </Button.Background>
                     </Button>
                 </Grid>
-          
-                <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="{StaticResource PMGrey}">
+
+                <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Button  Click="OpenClose_Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80" BorderThickness="0">
                         <Button.Background>
                             <ImageBrush ImageSource="menu_icon_2@2x.png" Stretch="Uniform"/>
                         </Button.Background>
                     </Button>
                     <Button  Click="OpenClose_Right" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="80" BorderThickness="0">
-                    	<Button.Background>
-                    		<ImageBrush ImageSource="mini_orange_star@2x.png" Stretch="Uniform"/>
-                    	</Button.Background>
+                        <Button.Background>
+                            <ImageBrush ImageSource="mini_orange_star@2x.png" Stretch="Uniform"/>
+                        </Button.Background>
                     </Button>
                 </Grid>
             </Grid>
         </Canvas>
     </Canvas>
 
- 
 
 
-      
+
+
 
 </phone:PhoneApplicationPage>
