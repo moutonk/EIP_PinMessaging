@@ -47,22 +47,22 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         
-                        <Image  Name="ImgMap"  Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
-                        <Button Name="ButtonMap" Grid.Column="1" Grid.Row="0" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
-                        <Image  Name="ImgProfil"  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
-                        <Button Name="ButtonProfil" Grid.Column="1" Grid.Row="1" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
-                        <Image  Name="ImgPins"  Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
-                        <Button Name="ButtonPins" Grid.Column="1" Grid.Row="2" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
-                        <Image  Name="ImgFilters" Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
-                        <Button Name="ButtonFilters" Grid.Column="1" Grid.Row="3" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
-                        <Image  Name="ImgSettings"  Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
-                        <Button Name="ButtonSettings" Grid.Column="1" Grid.Row="4" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
-                        <Image  Name="ImgReward"  Grid.Column="0" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
-                        <Button Name="ButtonReward" Grid.Column="1" Grid.Row="5" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
-                        <Image  Name="ImgAbout"  Grid.Column="0" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
-                        <Button Name="ButtonAbout" Grid.Column="1" Grid.Row="6" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
-                        <Image  Name="ImgLogout"  Grid.Column="0" Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Top" Source="FR.png"/>
-                        <Button Name="ButtonLogout" Grid.Column="1" Grid.Row="7" Content="sdd" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgMap"  Grid.Column="0" Grid.Row="0" Tap="ButtonMap_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" Source="\Images\Flags\FR.png"/>
+                        <Button Name="ButtonMap" Grid.Column="1" Grid.Row="0" Click="ButtonMap_OnClick" Content="{Binding Path=LocalizedResources.MenuMap, Source={StaticResource LocalizedStrings}}" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgProfil"  Grid.Column="0" Grid.Row="1" Tap="ButtonProfil_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" Source="\Images\Flags\FR.png"/>
+                        <Button Name="ButtonProfil" Grid.Column="1" Grid.Row="1" Click="ButtonProfil_OnClick" Content="{Binding Path=LocalizedResources.MenuProfil, Source={StaticResource LocalizedStrings}}" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgPins"  Grid.Column="0" Grid.Row="2" Tap="ButtonPins_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" Source="\Images\Flags\FR.png"/>
+                        <Button Name="ButtonPins" Grid.Column="1" Grid.Row="2" Click="ButtonPins_OnClick" Content="{Binding Path=LocalizedResources.MenuPins, Source={StaticResource LocalizedStrings}}" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgFilters" Grid.Column="0" Grid.Row="3" Tap="ButtonFilters_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" Source="\Images\Flags\FR.png"/>
+                        <Button Name="ButtonFilters" Grid.Column="1" Grid.Row="3" Click="ButtonFilters_OnClick" Content="{Binding Path=LocalizedResources.MenuFilters, Source={StaticResource LocalizedStrings}}" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgSettings"  Grid.Column="0" Grid.Row="4" Tap="ButtonSettings_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" Source="\Images\Flags\FR.png"/>
+                        <Button Name="ButtonSettings" Grid.Column="1" Grid.Row="4" Click="ButtonSettings_OnClick" Content="{Binding Path=LocalizedResources.MenuSettings, Source={StaticResource LocalizedStrings}}" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgReward"  Grid.Column="0" Grid.Row="5" Tap="ButtonReward_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" Source="\Images\Flags\FR.png"/>
+                        <Button Name="ButtonReward" Grid.Column="1" Grid.Row="5" Click="ButtonReward_OnClick" Content="{Binding Path=LocalizedResources.MenurRewards, Source={StaticResource LocalizedStrings}}" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgAbout"  Grid.Column="0" Grid.Row="6" Tap="ButtonAbout_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" Source="\Images\Flags\FR.png"/>
+                        <Button Name="ButtonAbout" Grid.Column="1" Grid.Row="6" Click="ButtonAbout_OnClick" Content="{Binding Path=LocalizedResources.MenuAbout, Source={StaticResource LocalizedStrings}}" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
+                        <Image  Name="ImgLogout"  Grid.Column="0" Grid.Row="7" Tap="ButtonLogout_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" Source="\Images\Flags\FR.png"/>
+                        <Button Name="ButtonLogout" Grid.Column="1" Grid.Row="7" Click="ButtonLogout_OnClick" Content="{Binding Path=LocalizedResources.MenuLogout, Source={StaticResource LocalizedStrings}}" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
 
                     </Grid>
                 </ScrollViewer>
@@ -86,7 +86,7 @@
                     <maps:Map x:Name="Map" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
                     <Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="68" Width="73" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="target@2x.png" Stretch="UniformToFill"/>
+                            <ImageBrush ImageSource="\Images\Menu\target@2x.png" Stretch="UniformToFill"/>
                         </Button.Background>
                     </Button>
                 </Grid>
@@ -94,12 +94,12 @@
                 <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Button  Click="OpenClose_Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="menu_icon_2@2x.png" Stretch="Uniform"/>
+                            <ImageBrush ImageSource="\Images\Menu\menu_icon_2@2x.png" Stretch="Uniform"/>
                         </Button.Background>
                     </Button>
                     <Button  Click="OpenClose_Right" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="80" BorderThickness="0">
                         <Button.Background>
-                            <ImageBrush ImageSource="mini_orange_star@2x.png" Stretch="Uniform"/>
+                            <ImageBrush ImageSource="\Images\Menu\mini_orange_star@2x.png" Stretch="Uniform"/>
                         </Button.Background>
                     </Button>
                 </Grid>
