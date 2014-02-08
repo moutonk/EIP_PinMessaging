@@ -24,7 +24,7 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/HaveAccountOrNot" xml:space="preserve">
           <source>Do you already have an account?</source>
-          <target state="new">Do you already have an account?</target>
+          <target state="translated">Possédez vous un compte?</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/MenuSettings" xml:space="preserve">
           <source>Settings</source>
@@ -141,6 +141,10 @@
         <trans-unit id="Resx/Yes" translate="yes" xml:space="preserve">
           <source>Yes</source>
           <target state="translated">Oui</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/LeftMenuTitle" xml:space="preserve">
+          <source>Menu</source>
+          <target state="new">Menu</target>
         </trans-unit>
       </group>
     </body>

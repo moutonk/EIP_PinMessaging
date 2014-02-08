@@ -219,4 +219,7 @@
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="LeftMenuTitle" xml:space="preserve">
+    <value>Menu</value>
+  </data>
 </root>

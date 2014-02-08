@@ -224,12 +224,6 @@
       <DependentUpon>AppResources.fr-FR.xlf</DependentUpon>
       <culture>fr-FR</culture>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\AppResources.qps-ploc.resx">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>AppResources.qps-ploc.xlf</DependentUpon>
-      <culture>qps-ploc</culture>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
@@ -240,9 +234,9 @@
       <Generator>XliffResxGenerator</Generator>
       <LastGenOutput>AppResources.fr-FR.resx</LastGenOutput>
     </XliffResource>
-    <XliffResource Include="Resources\AppResources.qps-ploc.xlf">
+    <XliffResource Include="Resources\AppResources.en-US.xlf">
       <Generator>XliffResxGenerator</Generator>
-      <LastGenOutput>AppResources.qps-ploc.resx</LastGenOutput>
+      <LastGenOutput>AppResources.en-US1.resx</LastGenOutput>
     </XliffResource>
   </ItemGroup>
   <ItemGroup />

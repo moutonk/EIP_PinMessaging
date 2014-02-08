@@ -106,6 +106,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Menu.
+        /// </summary>
+        public static string LeftMenuTitle {
+            get {
+                return ResourceManager.GetString("LeftMenuTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à About.
         /// </summary>
         public static string MenuAbout {

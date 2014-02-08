@@ -38,6 +38,16 @@
 
         <GridLength x:Key="MapMenuHeight">76</GridLength>
 
+        <system:Double x:Key="LayoutRootLeftMargin">-420</system:Double>
+        <system:Double x:Key="AdditionalMapMenuWidth">420</system:Double>
+        <system:Double x:Key="MainVerticalGridWidth">480</system:Double>
+        <system:Double x:Key="MainVerticalGridHeight">1600</system:Double> <!-- MapGridHeight * 2 -->
+        <system:Double x:Key="RightMenuGridLeftMargin">900</system:Double> <!-- AdditionalMapMenuWidth + MainVerticalGridWidth -->
+        <system:Double x:Key="LayoutRootWidth">1320</system:Double> <!-- AdditionalMapMenuWidth * 2 + MainVerticalGridWidth -->
+        
+        <system:Double x:Key="MapGridHeight">800</system:Double>
+        <GridLength x:Key="MapGridLength">800</GridLength>
+
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

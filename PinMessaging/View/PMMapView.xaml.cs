@@ -3,9 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using Windows.Foundation.Metadata;
 using Microsoft.Phone.Controls;
-using System.Diagnostics;
 using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Controls;
@@ -43,6 +41,8 @@ namespace PinMessaging.View
             PMData.MapLayerContainer = _mapLayer;
 
             UpdateLocationUI();
+
+            LoadRessources();
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -129,16 +129,70 @@ namespace PinMessaging.View
             UpdateMapCenter();
         }
 
+        private void MenuDown_OnClick(object sender, RoutedEventArgs e)
+        {
+            _currentView = CurrentMapPageView.UnderMenuView;
+            _isUnderMenuOpen = true;
+            _enableSwipe = false;
+            MainGridMap.RowDefinitions[2].Height = new GridLength(0);
+            MoveAnimationUp.Begin();
+        }
+
+        private void Map_OnTouch(object sender, RoutedEventArgs e)
+        {
+            if (_isUnderMenuOpen == true)
+            {
+                try
+                {
+                    MainGridMap.RowDefinitions[2].Height = ((GridLength)Application.Current.Resources["MapMenuHeight"]);
+                }
+                catch (Exception)
+                {
+                    Logs.Error.ShowError("Could not find the MapMenuHeight key in the App.xaml ressource file.", Logs.Error.ErrorsPriority.NotCritical);
+                    MainGridMap.RowDefinitions[2].Height = new GridLength(76);
+                }
+
+                _currentView = CurrentMapPageView.MapView;
+                _isUnderMenuOpen = false;
+                _enableSwipe = true;
+                MoveAnimationDown.Begin();
+            }
+
+            if (_currentView == CurrentMapPageView.LeftMenuView)
+            {
+                OpenClose_Left(sender, e);
+            }
+            else if (_currentView == CurrentMapPageView.RightMenuView)
+            {
+                OpenClose_Right(sender, e);
+            }
+        }
+
         ////////////////MANAGE SWIPE LEFT RIGHT/////////////////////////
 
-        private bool enableSwipe = true;
-        private const int LeftPage = -420;
+        private bool _enableSwipe = true;
+        private double _leftPage;
         private const int MiddlePage = 0;
-        private const int RightPage = -840;
+        private double _rightPage;
         private const int Overlap = 100;
 
         private double _initialPosition;
         private bool _viewMoved = false;
+
+        private void LoadRessources()
+        {
+            try
+            {
+                _leftPage = -(double)Application.Current.Resources["AdditionalMapMenuWidth"];
+                _rightPage = -2 * (double)Application.Current.Resources["AdditionalMapMenuWidth"];
+            }
+            catch (Exception)
+            {
+                Logs.Error.ShowError("Could not load AdditionalMapMenuWidth from App.xaml", Logs.Error.ErrorsPriority.NotCritical);
+                _leftPage = -420;
+                _rightPage = -840;
+            }
+        }
 
         private void OpenClose_Left(object sender, RoutedEventArgs e)
         {
@@ -147,7 +201,7 @@ namespace PinMessaging.View
             if (left > -Overlap)
             {
                 _currentView = CurrentMapPageView.MapView;
-                MoveViewWindow(LeftPage);
+                MoveViewWindow(_leftPage);
             }
             else
             {
@@ -160,15 +214,15 @@ namespace PinMessaging.View
         {
             var left = Canvas.GetLeft(LayoutRoot);
 
-            if (left > LeftPage - Overlap)
+            if (left > _leftPage - Overlap)
             {
                 _currentView = CurrentMapPageView.RightMenuView;
-                MoveViewWindow(RightPage);
+                MoveViewWindow(_rightPage);
             }
             else
             {
                 _currentView = CurrentMapPageView.MapView;
-                MoveViewWindow(LeftPage);
+                MoveViewWindow(_leftPage);
             }      
         }
 
@@ -183,9 +237,9 @@ namespace PinMessaging.View
 
         private void canvas_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
-            if (enableSwipe == true)     
+            if (_enableSwipe == true)     
                 if (e.DeltaManipulation.Translation.X != 0)
-                    Canvas.SetLeft(LayoutRoot, Math.Min(Math.Max(RightPage, Canvas.GetLeft(LayoutRoot) + e.DeltaManipulation.Translation.X), 0));
+                    Canvas.SetLeft(LayoutRoot, Math.Min(Math.Max(_rightPage, Canvas.GetLeft(LayoutRoot) + e.DeltaManipulation.Translation.X), 0));
         }
 
         private void canvas_ManipulationStarted(object sender, ManipulationStartedEventArgs e)
@@ -211,12 +265,12 @@ namespace PinMessaging.View
             //change of state
             if (_initialPosition - left > MiddlePage)
             {
-                MoveViewWindow(_initialPosition > LeftPage ? LeftPage : RightPage);
+                MoveViewWindow(_initialPosition > _leftPage ? _leftPage : _rightPage);
             }
             else
             {
                 //slide to the right
-                MoveViewWindow(_initialPosition < LeftPage ? LeftPage : MiddlePage);
+                MoveViewWindow(_initialPosition < _leftPage ? _leftPage : MiddlePage);
             }
         }
 
@@ -254,47 +308,6 @@ namespace PinMessaging.View
         private void ButtonLogout_OnClick(object sender, RoutedEventArgs e)
         {
         
-        }
-
-        private void MenuDown_OnClick(object sender, RoutedEventArgs e)
-        {
-            _currentView = CurrentMapPageView.UnderMenuView;
-            _isUnderMenuOpen = true;
-            enableSwipe = false;
-            MainGridMap.RowDefinitions[2].Height = new GridLength(0);
-            MoveAnimationUp.Begin();
-        }
-
-        private void Map_OnTouch(object sender, RoutedEventArgs e)
-        {
-            if (_isUnderMenuOpen == true)
-            {
-                try
-                {
-                    MainGridMap.RowDefinitions[2].Height = ((GridLength)Application.Current.Resources["MapMenuHeight"]);
-                }
-                catch (Exception)
-                {
-                    Logs.Error.ShowError("Could not find the MapMenuHeight key in the App.xaml ressource file.", Logs.Error.ErrorsPriority.NotCritical);
-                    MainGridMap.RowDefinitions[2].Height = new GridLength(76);
-                }
-                Debug.WriteLine("click");
-
-                _currentView = CurrentMapPageView.MapView;
-                _isUnderMenuOpen = false;
-                enableSwipe = true;
-                MoveAnimationDown.Begin();           
-            }
-
-            Debug.WriteLine(_currentView.ToString());
-            if (_currentView == CurrentMapPageView.LeftMenuView)
-            {
-                OpenClose_Left(sender, e);
-            }
-            else if (_currentView == CurrentMapPageView.RightMenuView)
-            {
-                OpenClose_Right(sender, e);               
-            }
         }
     }
 }

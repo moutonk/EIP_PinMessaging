@@ -3,7 +3,7 @@
   <DefaultLanguage xmlns="" code="en-US" />
   <Languages xmlns="">
     <Language code="fr-FR" />
-    <Language code="qps-ploc" />
+    <Language code="en-US" />
   </Languages>
   <App xmlns="" ProductID="{fd2c59b3-683b-46a7-bb75-889ab4003801}" Title="PinMessaging" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="PinMessaging author" Description="Sample description" Publisher="PinMessaging" PublisherID="{2f771583-ff49-4e88-8969-cbbf1bbbde21}">
     <IconPath IsRelative="true" IsResource="false">whiteLogo.png</IconPath>
