@@ -26,6 +26,38 @@
           <source>Do you already have an account?</source>
           <target state="new">Do you already have an account?</target>
         </trans-unit>
+        <trans-unit id="Resx/MenuAbout" translate="yes" xml:space="preserve">
+          <source>About</source>
+          <target state="new">About</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuFilters" translate="yes" xml:space="preserve">
+          <source>Filters</source>
+          <target state="new">Filters</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuLogout" translate="yes" xml:space="preserve">
+          <source>Log out</source>
+          <target state="new">Log out</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuMap" translate="yes" xml:space="preserve">
+          <source>Map</source>
+          <target state="new">Map</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuPins" translate="yes" xml:space="preserve">
+          <source>My pins</source>
+          <target state="new">My pins</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuProfil" translate="yes" xml:space="preserve">
+          <source>My profil</source>
+          <target state="new">My profil</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenurRewards" translate="yes" xml:space="preserve">
+          <source>Rewards</source>
+          <target state="new">Rewards</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuSettings" translate="yes" xml:space="preserve">
+          <source>Settings</source>
+          <target state="new">Settings</target>
+        </trans-unit>
         <trans-unit id="Resx/NetworkProblem" translate="yes" xml:space="preserve">
           <source>Please check your internet connection and try again</source>
           <target state="new">Please check your internet connection and try again</target>

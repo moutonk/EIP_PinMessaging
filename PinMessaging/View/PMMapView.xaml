@@ -24,26 +24,27 @@
         </Canvas.Resources>
 
         <Canvas  x:Name="LayoutRoot" Width="1320"  VerticalAlignment="Stretch" Background="{StaticResource PMGrey}" Canvas.Left="-420" Height="800">
-            <Grid Width="420" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}">
+            
+            <Grid Name="LeftMenuGrid" Width="420" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="76"/>
+                    <RowDefinition Height="{StaticResource MapMenuHeight}"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="Menu" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
                 <ScrollViewer HorizontalAlignment="Left" Height="724" Grid.Row="1" VerticalAlignment="Top" Width="420">
                     <Grid Height="724" Width="420">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="76"></RowDefinition>
-                            <RowDefinition Height="76"></RowDefinition>
-                            <RowDefinition Height="76"></RowDefinition>
-                            <RowDefinition Height="76"></RowDefinition>
-                            <RowDefinition Height="76"></RowDefinition>
-                            <RowDefinition Height="76"></RowDefinition>
-                            <RowDefinition Height="76"></RowDefinition>
-                            <RowDefinition Height="76"></RowDefinition>
+                            <RowDefinition Height="{StaticResource MapMenuHeight}"></RowDefinition>
+                            <RowDefinition Height="{StaticResource MapMenuHeight}"></RowDefinition>
+                            <RowDefinition Height="{StaticResource MapMenuHeight}"></RowDefinition>
+                            <RowDefinition Height="{StaticResource MapMenuHeight}"></RowDefinition>
+                            <RowDefinition Height="{StaticResource MapMenuHeight}"></RowDefinition>
+                            <RowDefinition Height="{StaticResource MapMenuHeight}"></RowDefinition>
+                            <RowDefinition Height="{StaticResource MapMenuHeight}"></RowDefinition>
+                            <RowDefinition Height="{StaticResource MapMenuHeight}"></RowDefinition>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="76"></ColumnDefinition>
+                            <ColumnDefinition Width="{StaticResource MapMenuHeight}"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         
@@ -68,42 +69,79 @@
                 </ScrollViewer>
             </Grid>
 
-            <Border Width="420" Margin="900,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}"/>
+            <Border Name="RightMenuGrid" Width="420" Margin="900,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}"/>
 
-            <Grid x:Name="MainGrid" Margin="420,0,0,0" Height="{Binding ActualHeight, ElementName=LayoutRoot}" Width="480" >
+            <Grid Name="MainVerticalGrid" Margin="420,0,0,0" Height="1600" Width="480" >
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="0"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="76"/>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="800"></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Button Content="add" Click="Button_Click" />
-                    <Button Content="rm" Click="Button_Click_1"/>
-                    <Button Content="ZoomIn" Click="Button_Click_3" Width="146"/>
-                    <Button Content="ZoomOut" Click="Button_Click_4" Width="152"/>
-                </StackPanel>
-                <Grid Grid.Row="1">
-                    <maps:Map x:Name="Map" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
-                    <Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="68" Width="73" BorderThickness="0">
-                        <Button.Background>
-                            <ImageBrush ImageSource="\Images\Menu\target@2x.png" Stretch="UniformToFill"/>
-                        </Button.Background>
-                    </Button>
+
+                <Grid.Resources>
+                    <Storyboard x:Name="MoveAnimationUp">
+                        <DoubleAnimation Duration="0:0:0.2" 
+                                             To="1000" 
+                                             Storyboard.TargetProperty="(Grid.Height)"
+                                             Storyboard.TargetName="MainVerticalGrid" 
+                                             d:IsOptimized="True"/>
+                    </Storyboard>
+                    <Storyboard x:Name="MoveAnimationDown">
+                        <DoubleAnimation Duration="0:0:0.2" 
+                                             To="1600"
+                                             Storyboard.TargetProperty="(Grid.Height)"
+                                             Storyboard.TargetName="MainVerticalGrid" 
+                                             d:IsOptimized="True"/>
+                    </Storyboard>
+                </Grid.Resources>
+
+                <Grid x:Name="MainGridMap" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                    </Grid.RowDefinitions>
+                    
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <Button Content="add" Click="Button_Click" />
+                        <Button Content="rm" Click="Button_Click_1"/>
+                        <Button Content="ZoomIn" Click="Button_Click_3" Width="146"/>
+                        <Button Content="ZoomOut" Click="Button_Click_4" Width="152"/>
+                    </StackPanel>
+
+                    <Grid Grid.Row="1" x:Name="GridMap" >
+                        <maps:Map x:Name="Map" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
+                        <Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="68" Width="73" BorderThickness="0">
+                            <Button.Background>
+                                <ImageBrush ImageSource="\Images\Menu\target@2x.png" Stretch="UniformToFill"/>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
+
+                    <Grid Grid.Row="2" Name="GridMapMenu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="80"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0" Click="OpenClose_Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80" BorderThickness="0">
+                            <Button.Background>
+                                <ImageBrush ImageSource="\Images\Menu\menu_icon_2@2x.png" Stretch="Uniform"/>
+                            </Button.Background>
+                        </Button>
+                        <Button Click="MenuDown_OnClick" Grid.Column="1" BorderThickness="0" HorizontalAlignment="Stretch">
+                        </Button>
+                        <Button Grid.Column="2" Click="OpenClose_Right" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="80" BorderThickness="0">
+                            <Button.Background>
+                                <ImageBrush ImageSource="\Images\Menu\mini_orange_star@2x.png" Stretch="Uniform"/>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
                 </Grid>
 
-                <Grid Grid.Row="2" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <Button  Click="OpenClose_Left" HorizontalAlignment="Left" VerticalAlignment="Top" Width="80" Height="80" BorderThickness="0">
-                        <Button.Background>
-                            <ImageBrush ImageSource="\Images\Menu\menu_icon_2@2x.png" Stretch="Uniform"/>
-                        </Button.Background>
-                    </Button>
-                    <Button  Click="OpenClose_Right" Content="" HorizontalAlignment="Right" VerticalAlignment="Top" Width="80" Height="80" BorderThickness="0">
-                        <Button.Background>
-                            <ImageBrush ImageSource="\Images\Menu\mini_orange_star@2x.png" Stretch="Uniform"/>
-                        </Button.Background>
-                    </Button>
-                </Grid>
+                <Grid Grid.Row="1" Name="UnderMenuGrid" Background="{StaticResource PMGrey}"/>
             </Grid>
+            
         </Canvas>
     </Canvas>
 

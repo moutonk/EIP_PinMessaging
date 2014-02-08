@@ -5,6 +5,7 @@
     <AssemblyPart x:Name="Microsoft.Phone.Controls.Toolkit" Source="Microsoft.Phone.Controls.Toolkit.dll" />
     <AssemblyPart x:Name="Newtonsoft.Json" Source="Newtonsoft.Json.dll" />
     <AssemblyPart Source="fr-FR/PinMessaging.resources.dll" />
+    <AssemblyPart Source="qps-ploc/PinMessaging.resources.dll" />
     <AssemblyPart Source="fr-FR/Microsoft.Phone.Controls.Toolkit.resources.dll" />
   </Deployment.Parts>
 </Deployment>

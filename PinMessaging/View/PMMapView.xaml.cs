@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using Windows.Foundation.Metadata;
 using Microsoft.Phone.Controls;
 using System.Diagnostics;
 using System.Device.Location;
@@ -18,6 +19,11 @@ namespace PinMessaging.View
 {
     public partial class PMMapView : PhoneApplicationPage 
     {
+        private enum CurrentMapPageView { MapView, LeftMenuView, RightMenuView, UnderMenuView}
+
+        private static CurrentMapPageView _currentView = CurrentMapPageView.MapView;
+        private static bool _isUnderMenuOpen = false;
+     
         readonly MapLayer _mapLayer = new MapLayer();
         readonly MapOverlay _userSpotLayer = new MapOverlay();
         readonly UserLocationMarker _userSpot = new UserLocationMarker();
@@ -125,6 +131,7 @@ namespace PinMessaging.View
 
         ////////////////MANAGE SWIPE LEFT RIGHT/////////////////////////
 
+        private bool enableSwipe = true;
         private const int LeftPage = -420;
         private const int MiddlePage = 0;
         private const int RightPage = -840;
@@ -137,14 +144,32 @@ namespace PinMessaging.View
         {
             var left = Canvas.GetLeft(LayoutRoot);
 
-            MoveViewWindow(left > -Overlap ? LeftPage : MiddlePage);
+            if (left > -Overlap)
+            {
+                _currentView = CurrentMapPageView.MapView;
+                MoveViewWindow(LeftPage);
+            }
+            else
+            {
+                _currentView = CurrentMapPageView.LeftMenuView;
+                MoveViewWindow(MiddlePage);
+            }  
         }
 
         private void OpenClose_Right(object sender, RoutedEventArgs e)
         {
             var left = Canvas.GetLeft(LayoutRoot);
 
-            MoveViewWindow(left > LeftPage - Overlap ? RightPage : LeftPage);
+            if (left > LeftPage - Overlap)
+            {
+                _currentView = CurrentMapPageView.RightMenuView;
+                MoveViewWindow(RightPage);
+            }
+            else
+            {
+                _currentView = CurrentMapPageView.MapView;
+                MoveViewWindow(LeftPage);
+            }      
         }
 
         void MoveViewWindow(double left)
@@ -153,13 +178,14 @@ namespace PinMessaging.View
 
             moveAnimation.SkipToFill();
             ((DoubleAnimation)(moveAnimation).Children[0]).To = left;
-            moveAnimation.Begin();
+            moveAnimation.Begin();            
         }
 
         private void canvas_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
-            if (e.DeltaManipulation.Translation.X != 0)
-                Canvas.SetLeft(LayoutRoot, Math.Min(Math.Max(RightPage, Canvas.GetLeft(LayoutRoot) + e.DeltaManipulation.Translation.X), 0));
+            if (enableSwipe == true)     
+                if (e.DeltaManipulation.Translation.X != 0)
+                    Canvas.SetLeft(LayoutRoot, Math.Min(Math.Max(RightPage, Canvas.GetLeft(LayoutRoot) + e.DeltaManipulation.Translation.X), 0));
         }
 
         private void canvas_ManipulationStarted(object sender, ManipulationStartedEventArgs e)
@@ -194,44 +220,81 @@ namespace PinMessaging.View
             }
         }
 
+        ////////////////////////////////////////////////    Left Menu    /////////////////////////////////////////////
+
         private void ButtonMap_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            OpenClose_Left(sender, e);
         }
 
         private void ButtonProfil_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void ButtonPins_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void ButtonFilters_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void ButtonReward_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void ButtonAbout_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void ButtonLogout_OnClick(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+        
+        }
+
+        private void MenuDown_OnClick(object sender, RoutedEventArgs e)
+        {
+            _currentView = CurrentMapPageView.UnderMenuView;
+            _isUnderMenuOpen = true;
+            enableSwipe = false;
+            MainGridMap.RowDefinitions[2].Height = new GridLength(0);
+            MoveAnimationUp.Begin();
+        }
+
+        private void Map_OnTouch(object sender, RoutedEventArgs e)
+        {
+            if (_isUnderMenuOpen == true)
+            {
+                try
+                {
+                    MainGridMap.RowDefinitions[2].Height = ((GridLength)Application.Current.Resources["MapMenuHeight"]);
+                }
+                catch (Exception)
+                {
+                    Logs.Error.ShowError("Could not find the MapMenuHeight key in the App.xaml ressource file.", Logs.Error.ErrorsPriority.NotCritical);
+                    MainGridMap.RowDefinitions[2].Height = new GridLength(76);
+                }
+                Debug.WriteLine("click");
+
+                _currentView = CurrentMapPageView.MapView;
+                _isUnderMenuOpen = false;
+                enableSwipe = true;
+                MoveAnimationDown.Begin();           
+            }
+
+            Debug.WriteLine(_currentView.ToString());
+            if (_currentView == CurrentMapPageView.LeftMenuView)
+            {
+                OpenClose_Left(sender, e);
+            }
+            else if (_currentView == CurrentMapPageView.RightMenuView)
+            {
+                OpenClose_Right(sender, e);               
+            }
         }
     }
 }

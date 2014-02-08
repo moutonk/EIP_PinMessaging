@@ -169,6 +169,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\Menu\images.jpg" />
+    <Content Include="Images\Menu\menu_icon%402x.png" />
+    <Content Include="Images\Menu\menu_icon.png" />
     <Content Include="Images\Menu\menu_icon_2%402x.png" />
     <Content Include="Images\Menu\menu_icon_2.png" />
     <Content Include="Images\Menu\mini_orange_star%402x.png" />

@@ -16,7 +16,7 @@ namespace PinMessaging.Utils
 
             public static void ShowError(string msg, ErrorsPriority prio)
             {
-                Output.ShowOutput(Environment.NewLine + "Priority: " + prio + Environment.NewLine + msg);
+                Output.ShowOutput(Environment.NewLine + "Priority: " + prio + ": " + msg);
             }
         }
 
