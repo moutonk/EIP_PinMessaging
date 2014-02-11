@@ -222,4 +222,16 @@
   <data name="LeftMenuTitle" xml:space="preserve">
     <value>Menu</value>
   </data>
+  <data name="Contacts" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="Menu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Pins" xml:space="preserve">
+    <value>Pins</value>
+  </data>
 </root>

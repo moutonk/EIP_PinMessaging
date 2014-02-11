@@ -144,7 +144,23 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/LeftMenuTitle" xml:space="preserve">
           <source>Menu</source>
-          <target state="new">Menu</target>
+          <target state="translated">Menu</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Pins" xml:space="preserve">
+          <source>Pins</source>
+          <target state="translated">Pins</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Notifications" xml:space="preserve">
+          <source>Notifications</source>
+          <target state="translated">Notifications</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Menu" xml:space="preserve">
+          <source>Menu</source>
+          <target state="translated">Menu</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Contacts" xml:space="preserve">
+          <source>Contacts</source>
+          <target state="translated">Contacts</target>
         </trans-unit>
       </group>
     </body>

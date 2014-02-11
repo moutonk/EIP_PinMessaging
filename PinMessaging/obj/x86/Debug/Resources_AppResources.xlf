@@ -146,6 +146,22 @@
           <source>Menu</source>
           <target state="new">Menu</target>
         </trans-unit>
+        <trans-unit id="Resx/Contacts" translate="yes" xml:space="preserve">
+          <source>Contacts</source>
+          <target state="new">Contacts</target>
+        </trans-unit>
+        <trans-unit id="Resx/Menu" translate="yes" xml:space="preserve">
+          <source>Menu</source>
+          <target state="new">Menu</target>
+        </trans-unit>
+        <trans-unit id="Resx/Notifications" translate="yes" xml:space="preserve">
+          <source>Notifications</source>
+          <target state="new">Notifications</target>
+        </trans-unit>
+        <trans-unit id="Resx/Pins" translate="yes" xml:space="preserve">
+          <source>Pins</source>
+          <target state="new">Pins</target>
+        </trans-unit>
       </group>
     </body>
   </file>

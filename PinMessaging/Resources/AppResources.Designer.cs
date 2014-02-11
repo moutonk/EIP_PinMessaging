@@ -88,6 +88,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Contacts.
+        /// </summary>
+        public static string Contacts {
+            get {
+                return ResourceManager.GetString("Contacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à New Account.
         /// </summary>
         public static string CreateAccountPageTitle {
@@ -111,6 +120,15 @@ namespace PinMessaging.Resources {
         public static string LeftMenuTitle {
             get {
                 return ResourceManager.GetString("LeftMenuTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Menu.
+        /// </summary>
+        public static string Menu {
+            get {
+                return ResourceManager.GetString("Menu", resourceCulture);
             }
         }
         
@@ -201,6 +219,24 @@ namespace PinMessaging.Resources {
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Notifications.
+        /// </summary>
+        public static string Notifications {
+            get {
+                return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pins.
+        /// </summary>
+        public static string Pins {
+            get {
+                return ResourceManager.GetString("Pins", resourceCulture);
             }
         }
         
