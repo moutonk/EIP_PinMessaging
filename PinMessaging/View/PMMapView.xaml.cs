@@ -134,6 +134,7 @@ namespace PinMessaging.View
             _currentView = CurrentMapPageView.UnderMenuView;
             _isUnderMenuOpen = true;
             _enableSwipe = false;
+            
             MainGridMap.RowDefinitions[2].Height = new GridLength(0);
             MoveAnimationUp.Begin();
         }
@@ -142,16 +143,8 @@ namespace PinMessaging.View
         {
             if (_isUnderMenuOpen == true)
             {
-                try
-                {
-                    MainGridMap.RowDefinitions[2].Height = ((GridLength)Application.Current.Resources["MapMenuHeight"]);
-                }
-                catch (Exception)
-                {
-                    Logs.Error.ShowError("Could not find the MapMenuHeight key in the App.xaml ressource file.", Logs.Error.ErrorsPriority.NotCritical);
-                    MainGridMap.RowDefinitions[2].Height = new GridLength(76);
-                }
-
+                MainGridMap.RowDefinitions[2].Height = new GridLength(90);
+           
                 _currentView = CurrentMapPageView.MapView;
                 _isUnderMenuOpen = false;
                 _enableSwipe = true;
@@ -307,7 +300,14 @@ namespace PinMessaging.View
 
         private void ButtonLogout_OnClick(object sender, RoutedEventArgs e)
         {
-        
+            try
+            {
+                 NavigationService.Navigate(Paths.FirstLaunch);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
+            }
         }
     }
 }
