@@ -99,12 +99,13 @@
     </Compile>
     <Compile Include="Controller\PMEmailController.cs" />
     <Compile Include="Controller\PMFlagsController.cs" />
+    <Compile Include="Controller\PMPinController.cs" />
     <Compile Include="Controller\PMSignInController.cs" />
     <Compile Include="Controller\PMMapController.cs" />
     <Compile Include="Controller\PMSignUpController.cs" />
     <Compile Include="Model\PMFlagModel.cs" />
     <Compile Include="Model\PMLogInCreateStructureModel.cs" />
-    <Compile Include="Model\PMMapPushpinModel.cs" />
+    <Compile Include="Model\PMPinModel.cs" />
     <Compile Include="Other\PMData.cs" />
     <Compile Include="Other\PMDataConverter.cs" />
     <Compile Include="Other\PMGeoLocation.cs" />

@@ -8,7 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    Loaded="PMFirstLaunchView_OnLoaded">
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource PMGrey}">
         <Grid.RowDefinitions>

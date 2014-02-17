@@ -54,6 +54,11 @@ namespace PinMessaging.View
             {
                 Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
             }
-        }   
+        }
+
+        private void PMFirstLaunchView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            //NavigationService.Navigate(Paths.MapView);
+        }
     }
 }

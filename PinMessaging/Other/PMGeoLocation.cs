@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using Windows.Devices.Geolocation;
+using PinMessaging.Controller;
 using PinMessaging.Utils;
 using PinMessaging.View;
 
@@ -85,6 +87,11 @@ namespace PinMessaging.Other
             {
                 _mapView.UpdateMapCenter();
                 _firstPositionChanged = true;
+
+                var pc = new PMPinController();
+                pc.GetPins(Phone.ConvertDoubleCommaToPoint(args.Position.Coordinate.Latitude.ToString()),
+                           Phone.ConvertDoubleCommaToPoint(args.Position.Coordinate.Longitude.ToString()));
+
             }
         }
 

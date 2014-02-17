@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Device.Location;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using PinMessaging.Controller;
+using PinMessaging.Model;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
 
@@ -14,20 +19,29 @@ namespace PinMessaging.Other
             {
                 try
                 {
-                    var item = JsonConvert.DeserializeObject<JArray>(json);
-
                     switch (currentRequestType)
                     {
                         case RequestType.SignIn:
-                            PMData.IsSignInSuccess = Boolean.Parse((string) item[0]);
+                            var item1 = JsonConvert.DeserializeObject<JArray>(json);                 
+                            PMData.IsSignInSuccess = Boolean.Parse((string) item1[0]);
                             break;
 
                         case RequestType.CheckEmail:
-                            PMData.IsEmailDispo = Boolean.Parse((string) item[0]);
+                            var item2 = JsonConvert.DeserializeObject<JArray>(json);
+                            PMData.IsEmailDispo = Boolean.Parse((string) item2[0]);
                             break;
 
                         case RequestType.SignUp:
-                            PMData.IsSignUpSuccess = Boolean.Parse((string) item[0]);
+                            var item3 = JsonConvert.DeserializeObject<JArray>(json);
+                            PMData.IsSignUpSuccess = Boolean.Parse((string) item3[0]);
+                            break;
+
+                        case RequestType.GetPins:
+                            ParseGetPins(json);
+                            break;
+
+                        case RequestType.CreatePin:
+                            //ParseCreatePin(item);
                             break;
                     }
                 }
@@ -36,6 +50,52 @@ namespace PinMessaging.Other
                     Logs.Error.ShowError(e, Logs.Error.ErrorsPriority.NotCritical);
                 }
             }
+        }
+
+        private void ParseCreatePin(JArray item)
+        {
+            //...parsing here
+
+            //var pin = new PMPinModel(PMPinModel.PinsType.PublicMessage, new GeoCoordinate(0, 0));
+            //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
+
+            //PMMapPinController.AddPushpinToMap(pin);
+        }
+
+        public static void ParseGetPins(string json)
+        {
+            try
+            {
+                var item = JsonConvert.DeserializeObject<JArray>(json);
+
+                Logs.Error.ShowError("ParseGetPins: could not get the pins: " + (string)item[1], Logs.Error.ErrorsPriority.NotCritical);
+            }
+            catch (Exception exp)
+            {
+                try
+                {
+                    var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(json);
+
+                    foreach (var pmMapPushpinModel in pinCollection)
+                    {
+                        PMPinController.CompleteDataMember(pmMapPushpinModel);
+                        //PMMapPinController.AddPinToMap(pmMapPushpinModel);
+
+                        pmMapPushpinModel.ShowPinContent();
+                    }
+
+                    PMData.AddToQueuePinsList(pinCollection);
+                }
+                catch (Exception exp2)
+                {
+                    Logs.Error.ShowError(exp2, Logs.Error.ErrorsPriority.NotCritical);
+                } 
+            }
+            
+
+            //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(0, 0));
+            //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
+
         }
     }   
 }

@@ -100,7 +100,7 @@
                 <Grid x:Name="MainGridMap" Grid.Row="0">
          
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="0"/>
+                        <RowDefinition Height="76"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="90"/>
                     </Grid.RowDefinitions>

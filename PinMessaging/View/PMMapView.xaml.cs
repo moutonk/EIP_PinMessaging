@@ -57,11 +57,44 @@ namespace PinMessaging.View
                 UpdateLocationUI();
 
                 if (_geoLocation.GeopositionUser != null)
-                {    
-                    var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
-                    pin.CompleteInitialization("test", "mdlknskdhlr!!!");
+                {
+                    string json = @"[
+                                   {                                
+                                        ""id"":""1"",
+                                        ""type"":""Event"",
+                                        ""description"":""\\home\\"",
+                                        ""url"":""null"",
+                                        ""lang"":""null"",
+                                        ""location"":
+                                        {
+                                            ""id"":""1"",
+                                            ""latitude"":""47.669444"",
+                                            ""longitude"":""-122.123889"",
+                                            ""name"":""\\maison\\""
+                                        },
+                                        ""creationTime"":""1392003691000""
+                                    },
+                                    {                                
+                                        ""id"":""2"",
+                                        ""type"":""Lol"",
+                                        ""description"":""\\home\\"",
+                                        ""url"":""null"",
+                                        ""lang"":""null"",
+                                        ""location"":
+                                        {
+                                            ""id"":""1"",
+                                            ""latitude"":""48.669450"",
+                                            ""longitude"":""-122.123850"",
+                                            ""name"":""\\maison\\""
+                                        },
+                                        ""creationTime"":""1392003691000""
+                                    }
+                                ]";
+                PMDataConverter.ParseGetPins(json);
+                    //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
+                    //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
 
-                    PMMapPinController.AddPushpinToMap(pin);
+                    //PMMapPinController.AddPushpinToMap(pin);
                 }
             }
             catch (Exception ex)

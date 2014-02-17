@@ -17,13 +17,14 @@ namespace PinMessaging.View
             InitializeComponent();
 
 
-            // RememberConnection.ResetAll();
+            //RememberConnection.ResetAll();
 
             //if (RememberConnection.IsFirstConnection() == true)
             //    MessageBox.Show(AppResources.WelcomeSentence);
 
             ManageIntersticialAd(Paths.LogoSplashOrange.ToString(), 1);
             _adsManager.DisplayAd();
+
 
             //_adsManager.hideAd();
         }

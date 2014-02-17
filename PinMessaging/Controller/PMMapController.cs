@@ -16,25 +16,16 @@ namespace PinMessaging.Controller
 
     public static class PMMapPinController
     {
-        private static readonly Dictionary<PMMapPushpinModel.PinsType, BitmapImage> PinsMap = new Dictionary<PMMapPushpinModel.PinsType, BitmapImage>()
-        {
-            {PMMapPushpinModel.PinsType.PublicMessage, Design.CreateImage(new Uri(Paths.PinPublicMessage.ToString(), UriKind.Relative))},
-            {PMMapPushpinModel.PinsType.PrivateMessage, Design.CreateImage(new Uri(Paths.PinPrivateMessage.ToString(), UriKind.Relative))},
-            {PMMapPushpinModel.PinsType.Eye, Design.CreateImage(new Uri(Paths.PinEye.ToString(), UriKind.Relative))},
-            {PMMapPushpinModel.PinsType.Event, Design.CreateImage(new Uri(Paths.PinEvent.ToString(), UriKind.Relative))},
-            {PMMapPushpinModel.PinsType.PointOfInterest, Design.CreateImage(new Uri(Paths.PinPointOfInterest.ToString(), UriKind.Relative))},
-            {PMMapPushpinModel.PinsType.CourseLastStep, Design.CreateImage(new Uri(Paths.PinCourseLastStep.ToString(), UriKind.Relative))},
-        };
-
-        public static void AddPushpinToMap(PMMapPushpinModel pin)
+   
+        public static void AddPinToMap(PMPinModel pin)
         {
             var overlay = new MapOverlay();
 
-            pin.PinImg.Tap += pin.img_Tap;
-            pin.PinImg.Source = PinsMap[pin.PinType];
+            //pin.PinImg.Tap += pin.img_Tap;
+            //pin.PinImg.Source = PinsMap[pin.PinTypeEnum];
 
             //center the mapoverlay, will change later
-            overlay.PositionOrigin = new Point(0.4, 1);
+            overlay.PositionOrigin = new Point(0.3, 1);
             overlay.Content = pin.PinImg;
             overlay.GeoCoordinate = pin.GeoCoord;
 
@@ -42,7 +33,7 @@ namespace PinMessaging.Controller
                 PMData.MapLayerContainer.Add(overlay);
         }
 
-        public static void RemovePushpinFromMapLayer(PMMapPushpinModel pin)
+        public static void RemovePushpinFromMapLayer(PMPinModel pin)
         {
             if (PMData.MapLayerContainer != null)
             {

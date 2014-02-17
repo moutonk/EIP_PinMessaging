@@ -37,7 +37,11 @@ namespace PinMessaging.Utils
             [Description("Used for the inscription")]
             SignUp,
             [Description("Used the check if the email is already taken")]
-            CheckEmail
+            CheckEmail,
+            [Description("Used to retrieve pins")]
+            GetPins,
+            [Description("Used to create a pin")]
+            CreatePin
         }
     }
 
@@ -45,6 +49,7 @@ namespace PinMessaging.Utils
     {
         private static readonly PMDataConverter DataConverter = new PMDataConverter();
         public static bool OnGoingRequest { get; private set; }
+        private static CookieCollection cookieColl = new CookieCollection();
 
         private static string RequestTypeToUrlString(RequestType reqType)
         {
@@ -53,9 +58,13 @@ namespace PinMessaging.Utils
                 case RequestType.CheckEmail:
                     return "check-email";
                 case RequestType.SignUp:
-                    return "new-user";
+                    return "create-user";
                 case RequestType.SignIn:
                     return "connect";
+                case RequestType.GetPins:
+                    return "get-pins";
+                case RequestType.CreatePin:
+                    return "create-pin";
                 default:
                     return reqType.ToString();
             }
@@ -71,6 +80,7 @@ namespace PinMessaging.Utils
 
             //convert the dictionnary to a string
             var dicoToString = FormateDictionnaryToString(args);
+            Logs.Output.ShowOutput("DicoToString request: " + dicoToString);
 
             //create the request with the correct URL
             var url = Paths.ServerAddress + RequestTypeToUrlString(reqType) + ".json";
@@ -101,6 +111,28 @@ namespace PinMessaging.Utils
                 using (var streamRead = new StreamReader(streamResponse))
                 {
                     var responseString = streamRead.ReadToEnd();
+
+                    cookieColl = response.Cookies;
+                    // Print the properties of each cookie. 
+                    foreach (Cookie cook in response.Cookies)
+                    {
+                        Logs.Output.ShowOutput("Cookie:");
+                        Logs.Output.ShowOutput(cook.Name + "=" + cook.Value);
+                        Logs.Output.ShowOutput("Domain: " + cook.Domain);
+                        Logs.Output.ShowOutput("Path: " + cook.Path);
+                        Logs.Output.ShowOutput("Port: " + cook.Port);
+                        Logs.Output.ShowOutput("Secure: " + cook.Secure);
+
+                        Logs.Output.ShowOutput("When issued:" + cook.TimeStamp);
+                        Logs.Output.ShowOutput("Expires: (expired?)" + cook.Expires + " " + cook.Expired);
+                        Logs.Output.ShowOutput("Don't save:" +cook.Discard);
+                        Logs.Output.ShowOutput("Comment: " +cook.Comment);
+                        Logs.Output.ShowOutput("Uri for comments: " + cook.CommentUri);
+                        Logs.Output.ShowOutput("Version: RFC " + (cook.Version == 1 ? "2109" : "2965"));
+
+                        // Show the string representation of the cookie.
+                        Logs.Output.ShowOutput("String: " + cook.ToString());
+                    }
 
                     Logs.Output.ShowOutput("Answer: " + responseString);
 
@@ -144,6 +176,8 @@ namespace PinMessaging.Utils
             Logs.Output.ShowOutput(url);
 
             request.Method = HttpRequestType.Post.ToString();
+            request.CookieContainer = new CookieContainer();
+            request.CookieContainer.Add(new Uri(Paths.ServerAddress), cookieColl);
 
             //convert the dictionnary with the argument to an array of bytes
             byte[] requestParams = Encoding.UTF8.GetBytes(parameters);
