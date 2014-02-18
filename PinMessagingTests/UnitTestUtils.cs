@@ -85,7 +85,7 @@ namespace PinMessagingTests
 
                var dictionary = new Dictionary<string, string>
                {
-                   {"email", "mk@epi.eu"},
+                   {"email", "k.k@k.kk"},
                };
 
                PMWebService.SendRequest(HttpRequestType.Post, RequestType.CheckEmail, SyncType.Async, dictionary, null);
@@ -121,8 +121,8 @@ namespace PinMessagingTests
 
                var dictionary = new Dictionary<string, string>
                {
-                    {"email", "a@a.aa"},
-                    {"password", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1("aaaaaa"))}
+                    {"login", "k.k@k.kk"},
+                    {"password", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1("kkkkkk"))}
                };
 
                PMWebService.SendRequest(HttpRequestType.Post, RequestType.SignIn, SyncType.Async, dictionary, null);
@@ -172,6 +172,25 @@ namespace PinMessagingTests
 
                Thread.Sleep(2000);
                Assert.IsTrue(PMData.IsSignUpSuccess);
+           }
+
+           [TestMethod]
+           public void TestWebServiceGetPinsCorrect()
+           {
+               webServiceReponse = false;
+        
+               var dictionary = new Dictionary<string, string>
+               {
+                {"longitude", "-118.0001"},
+                {"latitude", "33.98"},
+                {"radius", "1"} /*WILL CHANGE*/       };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPins, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(2000);
+               Assert.IsTrue(true);
            }
 
            private string CreateRandomEmail()

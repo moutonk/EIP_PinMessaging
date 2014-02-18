@@ -18,6 +18,11 @@ namespace PinMessaging.Utils
             {
                 Output.ShowOutput(Environment.NewLine + "Priority: " + prio + ": " + msg);
             }
+
+            public static void ShowError(string msg, Exception exp, ErrorsPriority prio)
+            {
+                Output.ShowOutput(Environment.NewLine + "Priority: " + prio + ": " + msg + ":" + Environment.NewLine + exp.Message);
+            }
         }
 
         public static class Output

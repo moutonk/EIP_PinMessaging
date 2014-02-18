@@ -67,7 +67,7 @@ namespace PinMessaging.Other
             try
             {
                 var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(json);
-                PMPinController pinController = new PMPinController();
+                var pinController = new PMPinController();
 
                 foreach (var pmMapPushpinModel in pinCollection)
                 {
@@ -83,8 +83,7 @@ namespace PinMessaging.Other
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("ParseGetPins: could not get the pins for the following reason: ", Logs.Error.ErrorsPriority.NotCritical);
-                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("ParseGetPins: could not get the pins for the following reason", exp, Logs.Error.ErrorsPriority.NotCritical);
 
                 try
                 {
@@ -95,7 +94,7 @@ namespace PinMessaging.Other
                 }
                 catch (Exception exp2)
                 {
-                    Logs.Error.ShowError(exp2, Logs.Error.ErrorsPriority.NotCritical);
+                    Logs.Error.ShowError("ParseGetPins: could not get the error message", exp2, Logs.Error.ErrorsPriority.NotCritical);
                 } 
             }
             //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(0, 0));

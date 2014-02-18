@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Media.Imaging;
+using Windows.ApplicationModel.Store;
 using PinMessaging.Model;
 
 namespace PinMessaging.Utils
@@ -40,15 +42,25 @@ namespace PinMessaging.Utils
         public static readonly Uri FlagRU = new Uri("/Images/Flags/RU.png", UriKind.Relative);
         public static readonly Uri FlagSE = new Uri("/Images/Flags/SE.png", UriKind.Relative);
 
-        public static readonly Dictionary<PMPinModel.PinsType, BitmapImage> PinsMapImg = new Dictionary<PMPinModel.PinsType, BitmapImage>()
+        public static Dictionary<PMPinModel.PinsType, BitmapImage> PinsMapImg;
+
+        static Paths()
         {
-            {PMPinModel.PinsType.PublicMessage, Design.CreateImage(new Uri(PinPublicMessage.ToString(), UriKind.Relative))},
-            {PMPinModel.PinsType.PrivateMessage, Design.CreateImage(new Uri(Paths.PinPrivateMessage.ToString(), UriKind.Relative))},
-            {PMPinModel.PinsType.Eye, Design.CreateImage(new Uri(Paths.PinEye.ToString(), UriKind.Relative))},
-            {PMPinModel.PinsType.Event, Design.CreateImage(new Uri(Paths.PinEvent.ToString(), UriKind.Relative))},
-            {PMPinModel.PinsType.PointOfInterest, Design.CreateImage(new Uri(Paths.PinPointOfInterest.ToString(), UriKind.Relative))},
-            {PMPinModel.PinsType.CourseLastStep, Design.CreateImage(new Uri(Paths.PinCourseLastStep.ToString(), UriKind.Relative))},
-        };
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                PinsMapImg = new Dictionary<PMPinModel.PinsType, BitmapImage>()
+                {
+                    {PMPinModel.PinsType.PublicMessage, Design.CreateImage(new Uri(PinPublicMessage.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PrivateMessage, Design.CreateImage(new Uri(Paths.PinPrivateMessage.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.Eye, Design.CreateImage(new Uri(Paths.PinEye.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.Event, Design.CreateImage(new Uri(Paths.PinEvent.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PointOfInterest, Design.CreateImage(new Uri(Paths.PinPointOfInterest.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.CourseLastStep, Design.CreateImage(new Uri(Paths.PinCourseLastStep.ToString(), UriKind.Relative))},
+                };
+            });
+            
+        }
+
 
         public static class ApplicationDico
         {
