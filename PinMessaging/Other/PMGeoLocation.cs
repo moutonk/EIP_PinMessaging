@@ -79,7 +79,7 @@ namespace PinMessaging.Other
 
         private void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            Logs.Output.ShowOutput("New pos dispo: " + args.Position.Coordinate.Latitude + " " + args.Position.Coordinate.Longitude);
+            Logs.Output.ShowOutput("New pos dispo: latitude:" + args.Position.Coordinate.Latitude + " longitude:" + args.Position.Coordinate.Longitude);
 
             _mapView.UpdateLocationUI();
 

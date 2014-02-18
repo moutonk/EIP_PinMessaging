@@ -77,7 +77,7 @@ namespace PinMessaging.Utils
         {
             var result = Microsoft.Xna.Framework.GamerServices.Guide.BeginShowMessageBox(
             boxTitle, boxContent, buttons, 0,
-            Microsoft.Xna.Framework.GamerServices.MessageBoxIcon.Alert, null, null);
+            Microsoft.Xna.Framework.GamerServices.MessageBoxIcon.None, null, null);
 
             result.AsyncWaitHandle.WaitOne();
 

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using PinMessaging.Model;
 using PinMessaging.Other;
 using PinMessaging.Utils;
@@ -13,16 +15,6 @@ namespace PinMessaging.Controller
 {
     class PMPinController : PMWebServiceEndDetector
     {
-        private static readonly Dictionary<PMPinModel.PinsType, BitmapImage> PinsMapImg = new Dictionary<PMPinModel.PinsType, BitmapImage>()
-        {
-            {PMPinModel.PinsType.PublicMessage, Design.CreateImage(new Uri(Paths.PinPublicMessage.ToString(), UriKind.Relative))},
-            {PMPinModel.PinsType.PrivateMessage, Design.CreateImage(new Uri(Paths.PinPrivateMessage.ToString(), UriKind.Relative))},
-            {PMPinModel.PinsType.Eye, Design.CreateImage(new Uri(Paths.PinEye.ToString(), UriKind.Relative))},
-            {PMPinModel.PinsType.Event, Design.CreateImage(new Uri(Paths.PinEvent.ToString(), UriKind.Relative))},
-            {PMPinModel.PinsType.PointOfInterest, Design.CreateImage(new Uri(Paths.PinPointOfInterest.ToString(), UriKind.Relative))},
-            {PMPinModel.PinsType.CourseLastStep, Design.CreateImage(new Uri(Paths.PinCourseLastStep.ToString(), UriKind.Relative))},
-        };
-
         private static void ConvertTypeToEnumAndImg(PMPinModel pin)
         {
             if (pin.Type != null)
@@ -52,12 +44,16 @@ namespace PinMessaging.Controller
             }
         }
 
-        public static void CompleteDataMember(PMPinModel pin)
+        public  void CompleteDataMember(PMPinModel pin)
         {
             ConvertGeoPosToInteger(pin);
             ConvertTypeToEnumAndImg(pin);
-            pin.PinImg = new Image {Source = PinsMapImg[pin.PinTypeEnum]};
-            pin.PinImg.Tap += pin.img_Tap;
+
+            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            {
+                pin.PinImg = new Image { Source = Paths.PinsMapImg[pin.PinTypeEnum] };
+                pin.PinImg.Tap += pin.img_Tap;
+            });
         }
 
         public void GetPins(double latitude, double longitude)
@@ -66,7 +62,7 @@ namespace PinMessaging.Controller
             {
                 {"longitude", longitude.ToString(CultureInfo.InvariantCulture)},
                 {"latitude", latitude.ToString(CultureInfo.InvariantCulture)},
-                {"radius", "90"}
+                {"radius", "1"} /*WILL CHANGE*/
             };
 
             PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPins, SyncType.Async, dictionary, null);

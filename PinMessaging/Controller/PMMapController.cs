@@ -1,4 +1,6 @@
-﻿using Microsoft.Phone.Maps.Controls;
+﻿using System.Windows.Controls;
+using System.Windows.Media;
+using Microsoft.Phone.Maps.Controls;
 using PinMessaging.Model;
 using PinMessaging.Other;
 using PinMessaging.Utils;
@@ -26,8 +28,18 @@ namespace PinMessaging.Controller
 
             //center the mapoverlay, will change later
             overlay.PositionOrigin = new Point(0.3, 1);
-            overlay.Content = pin.PinImg;
+
+            StackPanel sp = new StackPanel();
+            TextBlock tb = new TextBlock();
+            tb.Text = pin.Location["name"];
+            tb.Foreground = new SolidColorBrush(Colors.Black);
+
+            sp.Children.Add(tb);
+            sp.Children.Add(pin.PinImg);
+
+            overlay.Content = /*pin.PinImg*/sp;
             overlay.GeoCoordinate = pin.GeoCoord;
+            
 
             if (PMData.MapLayerContainer != null)
                 PMData.MapLayerContainer.Add(overlay);

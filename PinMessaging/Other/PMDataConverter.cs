@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Device.Location;
-using System.Diagnostics;
+using System.Windows;
+using System.Windows.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PinMessaging.Controller;
@@ -66,33 +66,38 @@ namespace PinMessaging.Other
         {
             try
             {
-                var item = JsonConvert.DeserializeObject<JArray>(json);
+                var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(json);
+                PMPinController pinController = new PMPinController();
 
-                Logs.Error.ShowError("ParseGetPins: could not get the pins: " + (string)item[1], Logs.Error.ErrorsPriority.NotCritical);
+                foreach (var pmMapPushpinModel in pinCollection)
+                {
+                    pinController.CompleteDataMember(pmMapPushpinModel);
+
+                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    {
+                        PMMapPinController.AddPinToMap(pmMapPushpinModel);         
+                    });
+                    pmMapPushpinModel.ShowPinContent();
+                }
+                PMData.AddToQueuePinsList(pinCollection);
             }
             catch (Exception exp)
             {
+                Logs.Error.ShowError("ParseGetPins: could not get the pins for the following reason: ", Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+
                 try
                 {
-                    var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(json);
+                    var item = JsonConvert.DeserializeObject<JArray>(json);
 
-                    foreach (var pmMapPushpinModel in pinCollection)
-                    {
-                        PMPinController.CompleteDataMember(pmMapPushpinModel);
-                        //PMMapPinController.AddPinToMap(pmMapPushpinModel);
-
-                        pmMapPushpinModel.ShowPinContent();
-                    }
-
-                    PMData.AddToQueuePinsList(pinCollection);
+                    Logs.Error.ShowError("error " + (string)item[1], Logs.Error.ErrorsPriority.NotCritical);
+        
                 }
                 catch (Exception exp2)
                 {
                     Logs.Error.ShowError(exp2, Logs.Error.ErrorsPriority.NotCritical);
                 } 
             }
-            
-
             //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(0, 0));
             //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
 
