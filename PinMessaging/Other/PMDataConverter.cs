@@ -41,7 +41,7 @@ namespace PinMessaging.Other
                             break;
 
                         case RequestType.CreatePin:
-                            //ParseCreatePin(item);
+                            ParseCreatePin(json);
                             break;
                     }
                 }
@@ -52,14 +52,41 @@ namespace PinMessaging.Other
             }
         }
 
-        private void ParseCreatePin(JArray item)
+        private void ParseCreatePin(string json)
         {
-            //...parsing here
+           try
+            {
+                var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(json);
+                var pinController = new PMPinController();
 
-            //var pin = new PMPinModel(PMPinModel.PinsType.PublicMessage, new GeoCoordinate(0, 0));
-            //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
+                foreach (var pmMapPushpinModel in pinCollection)
+                {
+                    pinController.CompleteDataMember(pmMapPushpinModel);
 
-            //PMMapPinController.AddPushpinToMap(pin);
+                    Deployment.Current.Dispatcher.BeginInvoke(() =>
+                    {
+                        PMMapPinController.AddPinToMap(pmMapPushpinModel);         
+                    });
+                    pmMapPushpinModel.ShowPinContent();
+                }
+                PMData.AddToQueuePinsList(pinCollection);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ParseCreatePins: could not get the pins for the following reason", exp, Logs.Error.ErrorsPriority.NotCritical);
+
+                try
+                {
+                    var item = JsonConvert.DeserializeObject<JArray>(json);
+
+                    Logs.Error.ShowError("error " + (string)item[1], Logs.Error.ErrorsPriority.NotCritical);
+        
+                }
+                catch (Exception exp2)
+                {
+                    Logs.Error.ShowError("ParseCreatePins: could not get the error message", exp2, Logs.Error.ErrorsPriority.NotCritical);
+                } 
+            }
         }
 
         public static void ParseGetPins(string json)

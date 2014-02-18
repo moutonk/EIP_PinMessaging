@@ -12,9 +12,11 @@ namespace PinMessaging.Model
     {
         public enum PinsType
         {
+            CulturalMessage,
+            Event,
+            Message,
             PublicMessage,
             PrivateMessage,
-            Event,
             CourseLastStep,
             Eye,
             PointOfInterest

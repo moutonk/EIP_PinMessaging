@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Windows.Devices.Geolocation;
 using PinMessaging.Model;
 using PinMessaging.Other;
 using PinMessaging.Utils;
@@ -66,6 +67,22 @@ namespace PinMessaging.Controller
             };
 
             PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPins, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
+        public void CreatePin(Geoposition geoPos, string[] stringArray)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"longitude", Phone.ConvertDoubleCommaToPoint(geoPos.Coordinate.Longitude.ToString()).ToString(CultureInfo.InvariantCulture)},
+                {"latitude", Phone.ConvertDoubleCommaToPoint(geoPos.Coordinate.Latitude.ToString()).ToString(CultureInfo.InvariantCulture)},
+                {"name", stringArray[0]},
+                {"description", stringArray[1]},
+                {"type", stringArray[2]}
+            };
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.CreatePin, SyncType.Async, dictionary, null);
 
             StartTimer();
         }

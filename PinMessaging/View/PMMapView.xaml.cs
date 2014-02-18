@@ -52,55 +52,50 @@ namespace PinMessaging.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                UpdateLocationUI();
+            PMPinController pc = new PMPinController();
 
-                if (_geoLocation.GeopositionUser != null)
-                {
-                    string json = @"[
-                                   {                                
-                                        ""id"":""1"",
-                                        ""type"":""Event"",
-                                        ""description"":""\\home\\"",
-                                        ""url"":""null"",
-                                        ""lang"":""null"",
-                                        ""location"":
-                                        {
-                                            ""id"":""1"",
-                                            ""latitude"":""47.669444"",
-                                            ""longitude"":""-122.123889"",
-                                            ""name"":""\\maison\\""
-                                        },
-                                        ""creationTime"":""1392003691000""
-                                    },
-                                    {                                
-                                        ""id"":""2"",
-                                        ""type"":""Lol"",
-                                        ""description"":""\\home\\"",
-                                        ""url"":""null"",
-                                        ""lang"":""null"",
-                                        ""location"":
-                                        {
-                                            ""id"":""1"",
-                                            ""latitude"":""48.669450"",
-                                            ""longitude"":""-122.123850"",
-                                            ""name"":""\\maison\\""
-                                        },
-                                        ""creationTime"":""1392003691000""
-                                    }
-                                ]";
-                PMDataConverter.ParseGetPins(json);
+            pc.CreatePin(_geoLocation.GeopositionUser, new[] {"Super name",
+                                                                "Ceci est un pin de test", 
+                                                                ((int)PMPinModel.PinsType.Event).ToString()});
+
+//                    string json = @"[
+//                                   {                                
+//                                        ""id"":""1"",
+//                                        ""type"":""Event"",
+//                                        ""description"":""\\home\\"",
+//                                        ""url"":""null"",
+//                                        ""lang"":""null"",
+//                                        ""location"":
+//                                        {
+//                                            ""id"":""1"",
+//                                            ""latitude"":""47.669444"",
+//                                            ""longitude"":""-122.123889"",
+//                                            ""name"":""\\maison\\""
+//                                        },
+//                                        ""creationTime"":""1392003691000""
+//                                    },
+//                                    {                                
+//                                        ""id"":""2"",
+//                                        ""type"":""Lol"",
+//                                        ""description"":""\\home\\"",
+//                                        ""url"":""null"",
+//                                        ""lang"":""null"",
+//                                        ""location"":
+//                                        {
+//                                            ""id"":""1"",
+//                                            ""latitude"":""48.669450"",
+//                                            ""longitude"":""-122.123850"",
+//                                            ""name"":""\\maison\\""
+//                                        },
+//                                        ""creationTime"":""1392003691000""
+//                                    }
+//                                ]";
+//                PMDataConverter.ParseGetPins(json);
                     //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
                     //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
 
                     //PMMapPinController.AddPushpinToMap(pin);
-                }
-            }
-            catch (Exception ex)
-            {
-                Logs.Output.ShowOutput(ex.Message);
-            }
+        
         }
 
         public void UpdateLocationUI()
