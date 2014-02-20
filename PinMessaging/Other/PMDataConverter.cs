@@ -56,20 +56,19 @@ namespace PinMessaging.Other
         {
            try
             {
-                var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(json);
+                var pin = JsonConvert.DeserializeObject<PMPinModel>(json);
                 var pinController = new PMPinController();
 
-                foreach (var pmMapPushpinModel in pinCollection)
-                {
-                    pinController.CompleteDataMember(pmMapPushpinModel);
+
+                    pinController.CompleteDataMember(pin);
 
                     Deployment.Current.Dispatcher.BeginInvoke(() =>
                     {
-                        PMMapPinController.AddPinToMap(pmMapPushpinModel);         
+                        PMMapPinController.AddPinToMap(pin);         
                     });
-                    pmMapPushpinModel.ShowPinContent();
-                }
-                PMData.AddToQueuePinsList(pinCollection);
+                    pin.ShowPinContent();
+
+                //PMData.AddToQueuePinsList(pin);
             }
             catch (Exception exp)
             {

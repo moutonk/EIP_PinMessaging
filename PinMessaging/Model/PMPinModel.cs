@@ -55,11 +55,17 @@ namespace PinMessaging.Model
 
         public void ShowPinContent()
         {
-            Logs.Output.ShowOutput("id:" + Id + " type:" + Type + " typeEnum:" + PinTypeEnum.ToString() + " description:" + Description + " url:" + Url + " lang:" + Lang + " creationTime:" + CreationTime + " location:");
-            Logs.Output.ShowOutput("\tid:" + Location["id"] + " latitude:" + GeoCoord.Latitude.ToString() + " longitude:" + GeoCoord.Longitude.ToString() + " name:" + Location["name"]);
-            foreach (var item in Location)
+            try
             {
-                Logs.Output.ShowOutput("\t" + item.Key + ":" + item.Value);
+                Logs.Output.ShowOutput("id:" + Id + " type:" + Type + " typeEnum:" + PinTypeEnum.ToString() + " description:" + Description + " url:" + Url + " lang:" + Lang + " creationTime:" + CreationTime + " location:");
+                foreach (var item in Location)
+                {
+                    Logs.Output.ShowOutput("\t" + item.Key + ":" + item.Value);
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("Pin content is incorrectly formatted", Logs.Error.ErrorsPriority.NotCritical);
             }
         }
     }

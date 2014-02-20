@@ -52,8 +52,10 @@ namespace PinMessaging.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            PMPinController pc = new PMPinController();
+            var pc = new PMPinController();
 
+     //       pc.GetPins(Phone.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()),
+       //                    Phone.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));
             pc.CreatePin(_geoLocation.GeopositionUser, new[] {"Super name",
                                                                 "Ceci est un pin de test", 
                                                                 ((int)PMPinModel.PinsType.Event).ToString()});

@@ -49,7 +49,9 @@ namespace PinMessaging.Utils
     {
         private static readonly PMDataConverter DataConverter = new PMDataConverter();
         public static bool OnGoingRequest { get; private set; }
-        private static CookieCollection cookieColl = new CookieCollection();
+        private static CookieCollection _cookieColl = new CookieCollection();
+        private static bool _firstRequest = true;
+        private static readonly CookieContainer CookieContainer = new CookieContainer();
 
         private static string RequestTypeToUrlString(RequestType reqType)
         {
@@ -97,6 +99,29 @@ namespace PinMessaging.Utils
             }
         }
 
+        private static void ShowCookiesInfos(HttpWebResponse response)
+        {
+            foreach (Cookie cook in response.Cookies)
+            {
+                Logs.Output.ShowOutput("Cookie:");
+                Logs.Output.ShowOutput(cook.Name + "=" + cook.Value);
+                Logs.Output.ShowOutput("Domain: " + cook.Domain);
+                Logs.Output.ShowOutput("Path: " + cook.Path);
+                Logs.Output.ShowOutput("Port: " + cook.Port);
+                Logs.Output.ShowOutput("Secure: " + cook.Secure);
+
+                Logs.Output.ShowOutput("When issued:" + cook.TimeStamp);
+                Logs.Output.ShowOutput("Expires: (expired?)" + cook.Expires + " " + cook.Expired);
+                Logs.Output.ShowOutput("Don't save:" + cook.Discard);
+                Logs.Output.ShowOutput("Comment: " + cook.Comment);
+                Logs.Output.ShowOutput("Uri for comments: " + cook.CommentUri);
+                Logs.Output.ShowOutput("Version: RFC " + (cook.Version == 1 ? "2109" : "2965"));
+
+                // Show the string representation of the cookie.
+                Logs.Output.ShowOutput("String: " + cook.ToString());
+            }
+        }
+
         private static void ManageResponse(IAsyncResult ar)
         {
             Logs.Output.ShowOutput("Waiting answer BEGIN...");
@@ -112,27 +137,14 @@ namespace PinMessaging.Utils
                 {
                     var responseString = streamRead.ReadToEnd();
 
-                    cookieColl = response.Cookies;
-                    // Print the properties of each cookie. 
-                    foreach (Cookie cook in response.Cookies)
+                    if (_firstRequest == true)
                     {
-                        Logs.Output.ShowOutput("Cookie:");
-                        Logs.Output.ShowOutput(cook.Name + "=" + cook.Value);
-                        Logs.Output.ShowOutput("Domain: " + cook.Domain);
-                        Logs.Output.ShowOutput("Path: " + cook.Path);
-                        Logs.Output.ShowOutput("Port: " + cook.Port);
-                        Logs.Output.ShowOutput("Secure: " + cook.Secure);
-
-                        Logs.Output.ShowOutput("When issued:" + cook.TimeStamp);
-                        Logs.Output.ShowOutput("Expires: (expired?)" + cook.Expires + " " + cook.Expired);
-                        Logs.Output.ShowOutput("Don't save:" +cook.Discard);
-                        Logs.Output.ShowOutput("Comment: " +cook.Comment);
-                        Logs.Output.ShowOutput("Uri for comments: " + cook.CommentUri);
-                        Logs.Output.ShowOutput("Version: RFC " + (cook.Version == 1 ? "2109" : "2965"));
-
-                        // Show the string representation of the cookie.
-                        Logs.Output.ShowOutput("String: " + cook.ToString());
+                        _cookieColl = response.Cookies;
+                        _firstRequest = false;
                     }
+
+                    // Print the properties of each cookie. 
+                     ShowCookiesInfos(response);
 
                     Logs.Output.ShowOutput("Answer: " + responseString);
 
@@ -175,9 +187,11 @@ namespace PinMessaging.Utils
 
             Logs.Output.ShowOutput(url);
 
+            if (_firstRequest == true)
+                CookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
+
+            request.CookieContainer = CookieContainer;
             request.Method = HttpRequestType.Post.ToString();
-            request.CookieContainer = new CookieContainer();
-            request.CookieContainer.Add(new Uri(Paths.ServerAddress), cookieColl);
 
             //convert the dictionnary with the argument to an array of bytes
             byte[] requestParams = Encoding.UTF8.GetBytes(parameters);
@@ -213,6 +227,11 @@ namespace PinMessaging.Utils
         private static void GetRequest(ref string url, ref string parameters, RequestType reqType)
         {
             var request = (HttpWebRequest)WebRequest.Create(url + "?" + parameters);
+
+            if (_firstRequest == true)
+                CookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
+
+            request.CookieContainer = CookieContainer;
 
             Logs.Output.ShowOutput(url + "?" + parameters);
 
