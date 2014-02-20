@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using Windows.Devices.Geolocation;
 using Microsoft.Phone.Controls;
 using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
@@ -164,7 +165,10 @@ namespace PinMessaging.View
             _currentView = CurrentMapPageView.UnderMenuView;
             _isUnderMenuOpen = true;
             _enableSwipe = false;
-            
+
+            Logs.Output.ShowOutput(Map.ConvertGeoCoordinateToViewportPoint(_geoLocation.GeopositionUser.Coordinate.ToGeoCoordinate()).ToString());
+
+
             MainGridMap.RowDefinitions[2].Height = new GridLength(0);
             MoveAnimationUp.Begin();
         }
@@ -338,6 +342,23 @@ namespace PinMessaging.View
             {
                 Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
             }
+        }
+
+        private void Timeline_OnCompletedUp(object sender, EventArgs e)
+        {
+            Logs.Output.ShowOutput("ici");
+            Logs.Output.ShowOutput(Map.ConvertGeoCoordinateToViewportPoint(_geoLocation.GeopositionUser.Coordinate.ToGeoCoordinate()).ToString());
+        }
+
+        private void Timeline_OnCompletedDown(object sender, EventArgs e)
+        {
+            Logs.Output.ShowOutput("la");
+            Map.InvalidateArrange();
+            Map.UpdateLayout();
+    
+            Center_Click(sender, null);
+            MainVerticalGrid.UpdateLayout();
+
         }
     }
 }

@@ -86,14 +86,16 @@
                                              To="1000" 
                                              Storyboard.TargetProperty="(Grid.Height)"
                                              Storyboard.TargetName="MainVerticalGrid" 
-                                             d:IsOptimized="True"/>
+                                             d:IsOptimized="True"
+                                            Completed="Timeline_OnCompletedUp"/>
                     </Storyboard>
                     <Storyboard x:Name="MoveAnimationDown">
                         <DoubleAnimation Duration="0:0:0.2" 
                                              To="1600"
                                              Storyboard.TargetProperty="(Grid.Height)"
                                              Storyboard.TargetName="MainVerticalGrid" 
-                                             d:IsOptimized="True"/>
+                                             d:IsOptimized="True"
+                                         Completed="Timeline_OnCompletedDown"/>
                     </Storyboard>
                 </Grid.Resources>
 

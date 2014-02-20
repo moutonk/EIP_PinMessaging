@@ -38,6 +38,18 @@ namespace PinMessaging.Utils
             SignUp,
             [Description("Used the check if the email is already taken")]
             CheckEmail,
+            [Description("Used to change the password of an existing user")]
+            ChangePassword,
+            [Description("Used to change the email of an existing account")]
+            ChangeEmail,
+            [Description("Used to add a user as the current user's favorite")]
+            AddFavoriteUser,
+            [Description("Used to remove a user as the current user's favorite")]
+            RemoveFavoriteUser,
+            [Description("Used to add a location as the current user's favorite")]
+            AddFavoriteLocation,
+            [Description("Used to remove a user as the current user's favorite")]
+            RemoveFavoriteLocation,
             [Description("Used to retrieve pins")]
             GetPins,
             [Description("Used to create a pin")]
@@ -49,8 +61,9 @@ namespace PinMessaging.Utils
     {
         private static readonly PMDataConverter DataConverter = new PMDataConverter();
         public static bool OnGoingRequest { get; private set; }
-        private static CookieCollection _cookieColl = new CookieCollection();
         private static bool _firstRequest = true;
+      
+        private static CookieCollection _cookieColl = new CookieCollection();
         private static readonly CookieContainer CookieContainer = new CookieContainer();
 
         private static string RequestTypeToUrlString(RequestType reqType)
@@ -63,6 +76,18 @@ namespace PinMessaging.Utils
                     return "create-user";
                 case RequestType.SignIn:
                     return "connect";
+                case RequestType.AddFavoriteLocation:
+                    return "addFavoriteLocation";
+                case RequestType.AddFavoriteUser:
+                    return "addFavoriteUser";
+                case RequestType.RemoveFavoriteLocation:
+                    return "removeFavoriteLocation";
+                case RequestType.RemoveFavoriteUser:
+                    return "removeFavoriteUser";
+                case RequestType.ChangeEmail:
+                    return "changeEmail";
+                case RequestType.ChangePassword:
+                    return "changePass";
                 case RequestType.GetPins:
                     return "get-pins";
                 case RequestType.CreatePin:

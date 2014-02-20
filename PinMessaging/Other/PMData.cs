@@ -29,5 +29,10 @@ namespace PinMessaging.Other
         {
             PinsList.AddRange(list);
         }
+
+        public static void AddToQueuePinsList(PMPinModel pin)
+        {
+            PinsList.Add(pin);
+        }
     }
 }
