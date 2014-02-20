@@ -93,12 +93,9 @@ namespace PinMessaging.Other
                 foreach (var pmMapPushpinModel in pinCollection)
                 {
                     pinController.CompleteDataMember(pmMapPushpinModel);
-
-                    Deployment.Current.Dispatcher.BeginInvoke(() =>
-                    {
-                        PMMapPinController.AddPinToMap(pmMapPushpinModel);         
-                    });
                     pmMapPushpinModel.ShowPinContent();
+
+                    Deployment.Current.Dispatcher.BeginInvoke(() => PMMapPinController.AddPinToMap(pmMapPushpinModel));
                 }
                 PMData.AddToQueuePinsList(pinCollection);
             }
@@ -118,9 +115,6 @@ namespace PinMessaging.Other
                     Logs.Error.ShowError("ParseGetPins: could not get the error message", exp2, Logs.Error.ErrorsPriority.NotCritical);
                 } 
             }
-            //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(0, 0));
-            //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
-
         }
     }   
 }

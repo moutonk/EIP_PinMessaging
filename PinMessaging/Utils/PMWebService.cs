@@ -169,7 +169,7 @@ namespace PinMessaging.Utils
                     }
 
                     // Print the properties of each cookie. 
-                     ShowCookiesInfos(response);
+                    ShowCookiesInfos(response);
 
                     Logs.Output.ShowOutput("Answer: " + responseString);
 

@@ -21,13 +21,9 @@ namespace PinMessaging.Controller
    
         public static void AddPinToMap(PMPinModel pin)
         {
-            var overlay = new MapOverlay();
-
-            //pin.PinImg.Tap += pin.img_Tap;
-            //pin.PinImg.Source = PinsMap[pin.PinTypeEnum];
+            var overlay = new MapOverlay {PositionOrigin = new Point(0.3, 1)};
 
             //center the mapoverlay, will change later
-            overlay.PositionOrigin = new Point(0.3, 1);
 
             StackPanel sp = new StackPanel();
             TextBlock tb = new TextBlock();
@@ -39,13 +35,12 @@ namespace PinMessaging.Controller
 
             overlay.Content = /*pin.PinImg*/sp;
             overlay.GeoCoordinate = pin.GeoCoord;
-            
 
             if (PMData.MapLayerContainer != null)
                 PMData.MapLayerContainer.Add(overlay);
         }
 
-        public static void RemovePushpinFromMapLayer(PMPinModel pin)
+        public static void RemovePinFromMap(PMPinModel pin)
         {
             if (PMData.MapLayerContainer != null)
             {

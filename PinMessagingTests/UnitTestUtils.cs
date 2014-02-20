@@ -95,7 +95,6 @@ namespace PinMessagingTests
                Thread.Sleep(2000);
                Assert.IsFalse(PMData.IsEmailDispo);
            }
-
            [TestMethod]
            public void TestWebServiceCheckEmailNotExist()
            {
@@ -132,7 +131,6 @@ namespace PinMessagingTests
                Thread.Sleep(2000);
                Assert.IsTrue(PMData.IsSignInSuccess);
            }
-
            [TestMethod]
            public void TestWebServiceSignInIncorrect()
            {
@@ -178,7 +176,8 @@ namespace PinMessagingTests
            public void TestWebServiceGetPinsCorrect()
            {
                webServiceReponse = false;
-        
+               var numberPinsBefore = PMData.PinsList.Count;
+
                var dictionary = new Dictionary<string, string>
                {
                 {"longitude", "-118.0001"},
@@ -190,7 +189,33 @@ namespace PinMessagingTests
                StartTimer();
 
                Thread.Sleep(2000);
-               Assert.IsTrue(true);
+
+               var numberPinsAfter = PMData.PinsList.Count;
+
+               Assert.IsTrue(numberPinsBefore < numberPinsAfter);
+           }
+           [TestMethod]
+           public void TestWebServiceGetPinsEmptyResult()
+           {
+               webServiceReponse = false;
+               var numberPinsBefore = PMData.PinsList.Count;
+
+               var dictionary = new Dictionary<string, string>
+               {
+                {"longitude", "0"},
+                {"latitude", "0"},
+                {"radius", "0"}
+               };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPins, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(2000);
+
+               var numberPinsAfter = PMData.PinsList.Count;
+
+               Assert.IsTrue(numberPinsBefore == numberPinsAfter);
            }
 
            private string CreateRandomEmail()
