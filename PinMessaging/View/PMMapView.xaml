@@ -87,7 +87,7 @@
                                              Storyboard.TargetProperty="(Grid.Height)"
                                              Storyboard.TargetName="MainVerticalGrid" 
                                              d:IsOptimized="True"
-                                            Completed="Timeline_OnCompletedUp"/>
+                                            />
                     </Storyboard>
                     <Storyboard x:Name="MoveAnimationDown">
                         <DoubleAnimation Duration="0:0:0.2" 
@@ -95,7 +95,7 @@
                                              Storyboard.TargetProperty="(Grid.Height)"
                                              Storyboard.TargetName="MainVerticalGrid" 
                                              d:IsOptimized="True"
-                                         Completed="Timeline_OnCompletedDown"/>
+                                         />
                     </Storyboard>
                 </Grid.Resources>
 
@@ -115,7 +115,7 @@
                     </StackPanel>
 
                     <Grid Grid.Row="1" x:Name="GridMap" >
-                        <maps:Map x:Name="Map" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
+                        <maps:Map x:Name="Map" Pitch="45" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
                         <Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
                             <Button.Background>
                                 <ImageBrush ImageSource="\Images\Menu\target@2x.png" Stretch="UniformToFill"/>

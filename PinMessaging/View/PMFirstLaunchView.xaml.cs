@@ -32,10 +32,10 @@ namespace PinMessaging.View
         {
             try
             {
-                NavigationService.Navigate(Paths.MapView);
+                //NavigationService.Navigate(Paths.MapView);
 
-                //PhoneApplicationService.Current.State[Paths.ApplicationDico.SignInUpParams] = new PMLogInCreateStructureModel(AppResources.SignInPageTitle, AppResources.PMEmail, AppResources.ButtonValidate, PMLogInCreateStructureModel.ActionType.SignIn);
-                //NavigationService.Navigate(Paths.SignInCreate);
+                PhoneApplicationService.Current.State[Paths.ApplicationDico.SignInUpParams] = new PMLogInCreateStructureModel(AppResources.SignInPageTitle, AppResources.PMEmail, AppResources.ButtonValidate, PMLogInCreateStructureModel.ActionType.SignIn);
+                NavigationService.Navigate(Paths.SignInCreate);
             }
             catch (Exception exp)
             {
@@ -58,7 +58,7 @@ namespace PinMessaging.View
 
         private void PMFirstLaunchView_OnLoaded(object sender, RoutedEventArgs e)
         {
-            //NavigationService.Navigate(Paths.MapView);
+         //   NavigationService.Navigate(Paths.MapView);
         }
     }
 }

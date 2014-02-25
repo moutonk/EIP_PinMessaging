@@ -57,12 +57,12 @@ namespace PinMessaging.Other
            try
             {
                 var pin = JsonConvert.DeserializeObject<PMPinModel>(json);
-                var pinController = new PMPinController();
+                var pinController = new PMPinController(RequestType.CreatePin);
 
                 pinController.CompleteDataMember(pin);
                 pin.ShowPinContent();
 
-                Deployment.Current.Dispatcher.BeginInvoke(() => PMMapPinController.AddPinToMap(pin));
+                //Deployment.Current.Dispatcher.BeginInvoke(() => PMMapPinController.AddPinToMap(pin));
                 PMData.AddToQueuePinsList(pin);
             }
             catch (Exception exp)
@@ -88,14 +88,14 @@ namespace PinMessaging.Other
             try
             {
                 var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(json);
-                var pinController = new PMPinController();
+                var pinController = new PMPinController(RequestType.GetPins);
 
                 foreach (var pmMapPushpinModel in pinCollection)
                 {
                     pinController.CompleteDataMember(pmMapPushpinModel);
                     pmMapPushpinModel.ShowPinContent();
 
-                    Deployment.Current.Dispatcher.BeginInvoke(() => PMMapPinController.AddPinToMap(pmMapPushpinModel));
+                    //Deployment.Current.Dispatcher.BeginInvoke(() => PMMapPinController.AddPinToMap(pmMapPushpinModel));
                 }
                 PMData.AddToQueuePinsList(pinCollection);
             }

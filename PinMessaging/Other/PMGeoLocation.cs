@@ -4,6 +4,7 @@ using System.Globalization;
 using Windows.Devices.Geolocation;
 using PinMessaging.Controller;
 using PinMessaging.Utils;
+using PinMessaging.Utils.WebService;
 using PinMessaging.View;
 
 namespace PinMessaging.Other
@@ -79,7 +80,7 @@ namespace PinMessaging.Other
 
         private void geolocator_PositionChanged(Geolocator sender, PositionChangedEventArgs args)
         {
-            Logs.Output.ShowOutput("New pos dispo: latitude:" + args.Position.Coordinate.Latitude + " longitude:" + args.Position.Coordinate.Longitude);
+            //Logs.Output.ShowOutput("New pos dispo: latitude:" + args.Position.Coordinate.Latitude + " longitude:" + args.Position.Coordinate.Longitude);
 
             _mapView.UpdateLocationUI();
 
@@ -88,7 +89,7 @@ namespace PinMessaging.Other
                 _mapView.UpdateMapCenter();
                 _firstPositionChanged = true;
 
-                var pc = new PMPinController();
+                var pc = new PMPinController(RequestType.GetPins);
                 pc.GetPins(Phone.ConvertDoubleCommaToPoint(args.Position.Coordinate.Latitude.ToString()),
                            Phone.ConvertDoubleCommaToPoint(args.Position.Coordinate.Longitude.ToString()));
 

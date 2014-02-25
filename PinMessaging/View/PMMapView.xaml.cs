@@ -13,6 +13,7 @@ using PinMessaging.Controller;
 using PinMessaging.Other;
 using PinMessaging.Resources;
 using PinMessaging.Utils;
+using PinMessaging.Utils.WebService;
 
 namespace PinMessaging.View
 {
@@ -53,7 +54,7 @@ namespace PinMessaging.View
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var pc = new PMPinController();
+            var pc = new PMPinController(RequestType.CreatePin);
 
      //       pc.GetPins(Phone.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()),
        //                    Phone.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));
@@ -160,14 +161,13 @@ namespace PinMessaging.View
             UpdateMapCenter();
         }
 
+       // private Point p;
+
         private void MenuDown_OnClick(object sender, RoutedEventArgs e)
         {
             _currentView = CurrentMapPageView.UnderMenuView;
             _isUnderMenuOpen = true;
             _enableSwipe = false;
-
-            Logs.Output.ShowOutput(Map.ConvertGeoCoordinateToViewportPoint(_geoLocation.GeopositionUser.Coordinate.ToGeoCoordinate()).ToString());
-
 
             MainGridMap.RowDefinitions[2].Height = new GridLength(0);
             MoveAnimationUp.Begin();
@@ -342,23 +342,6 @@ namespace PinMessaging.View
             {
                 Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
             }
-        }
-
-        private void Timeline_OnCompletedUp(object sender, EventArgs e)
-        {
-            Logs.Output.ShowOutput("ici");
-            Logs.Output.ShowOutput(Map.ConvertGeoCoordinateToViewportPoint(_geoLocation.GeopositionUser.Coordinate.ToGeoCoordinate()).ToString());
-        }
-
-        private void Timeline_OnCompletedDown(object sender, EventArgs e)
-        {
-            Logs.Output.ShowOutput("la");
-            Map.InvalidateArrange();
-            Map.UpdateLayout();
-    
-            Center_Click(sender, null);
-            MainVerticalGrid.UpdateLayout();
-
         }
     }
 }

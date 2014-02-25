@@ -16,6 +16,11 @@ namespace PinMessaging.Controller
 {
     class PMPinController : PMWebServiceEndDetector
     {
+        public PMPinController(RequestType currentRequestType)
+        {
+            CurrentRequestType = currentRequestType;
+        }
+
         private static void ConvertTypeToEnumAndImg(PMPinModel pin)
         {
             if (pin.Type != null)
@@ -91,6 +96,7 @@ namespace PinMessaging.Controller
         {
             if (PMWebService.OnGoingRequest == false)
             {
+                //when we are here it means that the webservice call is over and the data are parsed and stocked in PMData
                 StopTimer();
 
                 switch (CurrentRequestType)
@@ -101,6 +107,9 @@ namespace PinMessaging.Controller
                         PMData.PinsList.Clear();
                         break;
                     case RequestType.CreatePin:
+                        foreach (var pin in PMData.PinsList)
+                            PMMapPinController.AddPinToMap(pin);
+                        PMData.PinsList.Clear();
                         break;
                 }
             }
