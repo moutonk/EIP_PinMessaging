@@ -12,7 +12,10 @@ namespace PinMessaging.Other
         [DefaultValue(false)] public static bool IsSignInSuccess { get; set; }
         [DefaultValue(false)] public static bool IsSignUpSuccess { get; set; }
         [DefaultValue(false)] public static bool IsEmailDispo { get; set; }
-        [DefaultValue(false)] public static bool NetworkProblem { get; set; }
+        [DefaultValue(false)] public static bool IsChangePwdSuccess { get; set; }
+
+        [DefaultValue(false)]
+        public static bool NetworkProblem { get; set; }
 
         //pins to add to the MapLayerContainer
         [DefaultValue(null)] public static List<PMPinModel> PinsList { get; set; }

@@ -43,6 +43,11 @@ namespace PinMessaging.Other
                         case RequestType.CreatePin:
                             ParseCreatePin(json);
                             break;
+
+                        case RequestType.ChangePassword:
+                            var item4 = JsonConvert.DeserializeObject<JArray>(json);
+                            PMData.IsChangePwdSuccess = Boolean.Parse((string) item4[0]);
+                            break;
                     }
                 }
                 catch (Exception e)
@@ -62,7 +67,6 @@ namespace PinMessaging.Other
                 pinController.CompleteDataMember(pin);
                 pin.ShowPinContent();
 
-                //Deployment.Current.Dispatcher.BeginInvoke(() => PMMapPinController.AddPinToMap(pin));
                 PMData.AddToQueuePinsList(pin);
             }
             catch (Exception exp)
@@ -83,7 +87,7 @@ namespace PinMessaging.Other
             }
         }
 
-        public static void ParseGetPins(string json)
+        public  void ParseGetPins(string json)
         {
             try
             {

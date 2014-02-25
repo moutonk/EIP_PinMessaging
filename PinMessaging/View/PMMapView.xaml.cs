@@ -8,6 +8,7 @@ using Microsoft.Phone.Controls;
 using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Controls;
+using Microsoft.Phone.Shell;
 using PinMessaging.Model;
 using PinMessaging.Controller;
 using PinMessaging.Other;
@@ -322,6 +323,14 @@ namespace PinMessaging.View
 
         private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                NavigationService.Navigate(Paths.SettingsView);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
+            }
         }
 
         private void ButtonReward_OnClick(object sender, RoutedEventArgs e)

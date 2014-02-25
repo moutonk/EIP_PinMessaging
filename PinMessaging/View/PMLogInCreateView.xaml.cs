@@ -79,7 +79,7 @@ namespace PinMessaging.View
 
         private bool PasswordSyntaxCheck()
         {
-            if (TextBoxPassword.Password.Length < 6 || TextBoxPassword.Password.Length > 20)
+            if (TextBoxPassword.Password.Length < 4 || TextBoxPassword.Password.Length > 20)
             {
                 TextBlockError.Text = AppResources.PMWrongPasswordSyntax;
                 _currentStep = StepNumber.StepEmailClick;

@@ -101,6 +101,7 @@
     <Compile Include="Controller\PMFavoriteController.cs" />
     <Compile Include="Controller\PMFlagsController.cs" />
     <Compile Include="Controller\PMPinController.cs" />
+    <Compile Include="Controller\PMSettingsController.cs" />
     <Compile Include="Controller\PMSignInController.cs" />
     <Compile Include="Controller\PMMapController.cs" />
     <Compile Include="Controller\PMSignUpController.cs" />
@@ -136,6 +137,9 @@
     <Compile Include="View\PMMapView.xaml.cs">
       <DependentUpon>PMMapView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PMSettingsView.xaml.cs">
+      <DependentUpon>PMSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PMSplashView.xaml.cs">
       <DependentUpon>PMSplashView.xaml</DependentUpon>
     </Compile>
@@ -156,6 +160,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PMMapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PMSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
