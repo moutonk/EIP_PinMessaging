@@ -32,6 +32,18 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
+        public void ChangeEmail(string newEmail)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"newEmail", newEmail}
+            };
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.ChangeEmail, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
         protected override void waitEnd_Tick(object sender, EventArgs e)
         {
             if (PMWebService.OnGoingRequest == false)
@@ -43,6 +55,9 @@ namespace PinMessaging.Controller
                 {
                     case RequestType.ChangePassword:
                         MessageBox.Show("ChangePwdStatus: " + PMData.IsChangePwdSuccess);
+                        break;
+                    case RequestType.ChangeEmail:
+                        MessageBox.Show("ChangePwdStatus: " + PMData.IsChangeEmailSuccess);
                         break;
                 }
             }

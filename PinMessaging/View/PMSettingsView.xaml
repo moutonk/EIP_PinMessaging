@@ -22,9 +22,11 @@
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <PasswordBox Name="OldPwdPasswordBox" Password="kkkkkk" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="155"/>
-            <PasswordBox Name="NewPwdPasswordBox" HorizontalAlignment="Left" Margin="170,10,0,0" VerticalAlignment="Top" Width="141"/>
-            <Button Name="ModifyPwdButton" Content="Change" HorizontalAlignment="Left" Margin="311,10,0,0" VerticalAlignment="Top" Width="135" Click="ModifyPwdButton_OnClick"/>
+            <PasswordBox Name="OldPwdPasswordBox" Password="kkkkkk" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="136"/>
+            <PasswordBox Name="NewPwdPasswordBox" HorizontalAlignment="Left" Margin="146,10,0,0" VerticalAlignment="Top" Width="136"/>
+            <Button Name="ModifyPwdButton" Content="ChangePwd" HorizontalAlignment="Left" Margin="282,10,0,0" VerticalAlignment="Top" Width="174" Click="ModifyPwdButton_OnClick"/>
+            <TextBox Name="NewEmailTextBox" HorizontalAlignment="Left" Height="72" Margin="10,87,0,0" TextWrapping="Wrap" Text="test@t.tt" VerticalAlignment="Top" Width="272"/>
+            <Button Name="ModifyEmailButton" Content="Change @" HorizontalAlignment="Left" Margin="282,89,0,0" VerticalAlignment="Top" Width="174" Click="ModifyEmailButton_Click"/>
         </Grid>
     </Grid>
 

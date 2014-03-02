@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PinMessaging.Controller;
 using PinMessaging.Resources;
+using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
 
 namespace PinMessaging.View
@@ -22,22 +23,20 @@ namespace PinMessaging.View
 
         private void ModifyPwdButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (PasswordSyntaxCheck() == true)
+            if (Utils.Utils.PasswordSyntaxCheck(NewPwdPasswordBox.Password) == true)
             {
                 var sc = new PMSettingsController(RequestType.ChangePassword);
                 sc.ChangePassword(OldPwdPasswordBox.Password, NewPwdPasswordBox.Password);       
             }
         }
 
-        //to factorize with PMLogInCreate....
-        private bool PasswordSyntaxCheck()
+        private void ModifyEmailButton_Click(object sender, RoutedEventArgs e)
         {
-            if (NewPwdPasswordBox.Password.Length < 6 || NewPwdPasswordBox.Password.Length > 20)
+            if (EmailChecker.IsEmailValid(NewEmailTextBox.Text) == true)
             {
-                MessageBox.Show("wrong pwd");
-                return false;
+                var sc = new PMSettingsController(RequestType.ChangeEmail);
+                sc.ChangeEmail(NewEmailTextBox.Text);
             }
-            return true;
         }
     }
 }

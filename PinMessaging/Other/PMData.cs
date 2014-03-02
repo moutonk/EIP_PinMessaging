@@ -13,6 +13,7 @@ namespace PinMessaging.Other
         [DefaultValue(false)] public static bool IsSignUpSuccess { get; set; }
         [DefaultValue(false)] public static bool IsEmailDispo { get; set; }
         [DefaultValue(false)] public static bool IsChangePwdSuccess { get; set; }
+        [DefaultValue(false)] public static bool IsChangeEmailSuccess { get; set; }
 
         [DefaultValue(false)]
         public static bool NetworkProblem { get; set; }

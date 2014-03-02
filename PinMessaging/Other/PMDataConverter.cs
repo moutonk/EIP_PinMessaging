@@ -48,6 +48,11 @@ namespace PinMessaging.Other
                             var item4 = JsonConvert.DeserializeObject<JArray>(json);
                             PMData.IsChangePwdSuccess = Boolean.Parse((string) item4[0]);
                             break;
+
+                        case RequestType.ChangeEmail:
+                            var item5 = JsonConvert.DeserializeObject<JArray>(json);
+                            PMData.IsChangeEmailSuccess = Boolean.Parse((string)item5[0]);
+                            break;
                     }
                 }
                 catch (Exception e)
@@ -59,31 +64,42 @@ namespace PinMessaging.Other
 
         private void ParseCreatePin(string json)
         {
-           try
+             try
             {
-                var pin = JsonConvert.DeserializeObject<PMPinModel>(json);
-                var pinController = new PMPinController(RequestType.CreatePin);
+                var item = JsonConvert.DeserializeObject<JArray>(json);
 
-                pinController.CompleteDataMember(pin);
-                pin.ShowPinContent();
+                if (item.Count == 2)
+                {
+                    try
+                    {
+                        if (Convert.ToBoolean(item[0].ToString()) == true)
+                        {
+                            var pin = JsonConvert.DeserializeObject<PMPinModel>(item[1].ToString());
+                            var pinController = new PMPinController(RequestType.CreatePin);
 
-                PMData.AddToQueuePinsList(pin);
+                            pinController.CompleteDataMember(pin);
+                            pin.ShowPinContent();
+
+                            PMData.AddToQueuePinsList(pin);
+                        }
+                        else if (Convert.ToBoolean(item[0].ToString()) == false)
+                        {
+                            Logs.Error.ShowError("DO nothing for now", Logs.Error.ErrorsPriority.NotCritical);
+                        }
+                    }
+                    catch (Exception exp)
+                    {
+                        Logs.Error.ShowError("ParseCreatePin: could not create the pins for the following reason: ", exp, Logs.Error.ErrorsPriority.NotCritical);
+                    }
+                }
+                else
+                {
+                    Logs.Error.ShowError("ParseCreatePin: 2 tokens are expected, got " + item.Count, Logs.Error.ErrorsPriority.NotCritical);
+                }
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("ParseCreatePins: could not get the pins for the following reason", exp, Logs.Error.ErrorsPriority.NotCritical);
-
-                try
-                {
-                    var item = JsonConvert.DeserializeObject<JArray>(json);
-
-                    Logs.Error.ShowError("error " + (string)item[1], Logs.Error.ErrorsPriority.NotCritical);
-        
-                }
-                catch (Exception exp2)
-                {
-                    Logs.Error.ShowError("ParseCreatePins: could not get the error message", exp2, Logs.Error.ErrorsPriority.NotCritical);
-                } 
+                Logs.Error.ShowError("ParseCreatePin: could not deserialize the JSON object for the following reason: ", exp, Logs.Error.ErrorsPriority.NotCritical);                    
             }
         }
 
@@ -91,33 +107,45 @@ namespace PinMessaging.Other
         {
             try
             {
-                var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(json);
-                var pinController = new PMPinController(RequestType.GetPins);
+                var item = JsonConvert.DeserializeObject<JArray>(json);
 
-                foreach (var pmMapPushpinModel in pinCollection)
+                if (item.Count == 2)
                 {
-                    pinController.CompleteDataMember(pmMapPushpinModel);
-                    pmMapPushpinModel.ShowPinContent();
+                    try
+                    {
+                        if (Convert.ToBoolean(item[0].ToString()) == true)
+                        {
+                            var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(item[1].ToString());
+                            var pinController = new PMPinController(RequestType.GetPins);
 
-                    //Deployment.Current.Dispatcher.BeginInvoke(() => PMMapPinController.AddPinToMap(pmMapPushpinModel));
+                            foreach (var pmMapPushpinModel in pinCollection)
+                            {
+                                pinController.CompleteDataMember(pmMapPushpinModel);
+                                pmMapPushpinModel.ShowPinContent();
+
+                                //Deployment.Current.Dispatcher.BeginInvoke(() => PMMapPinController.AddPinToMap(pmMapPushpinModel));
+                            }
+                            PMData.AddToQueuePinsList(pinCollection);
+                        }
+                        else if (Convert.ToBoolean(item[0].ToString()) == false)
+                        {
+                            Logs.Error.ShowError("DO nothing for now", Logs.Error.ErrorsPriority.NotCritical);
+                               
+                        }
+                    }
+                    catch (Exception exp)
+                    {
+                        Logs.Error.ShowError("ParseGetPins: could not get the pins for the following reason: ", exp, Logs.Error.ErrorsPriority.NotCritical);
+                    }
                 }
-                PMData.AddToQueuePinsList(pinCollection);
+                else
+                {
+                    Logs.Error.ShowError("ParseGetPins: 2 tokens are expected, got " + item.Count, Logs.Error.ErrorsPriority.NotCritical);
+                }
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("ParseGetPins: could not get the pins for the following reason", exp, Logs.Error.ErrorsPriority.NotCritical);
-
-                try
-                {
-                    var item = JsonConvert.DeserializeObject<JArray>(json);
-
-                    Logs.Error.ShowError("error " + (string)item[1], Logs.Error.ErrorsPriority.NotCritical);
-        
-                }
-                catch (Exception exp2)
-                {
-                    Logs.Error.ShowError("ParseGetPins: could not get the error message", exp2, Logs.Error.ErrorsPriority.NotCritical);
-                } 
+                Logs.Error.ShowError("ParseGetPins: could not deserialize the JSON object for the following reason: ", exp, Logs.Error.ErrorsPriority.NotCritical);                    
             }
         }
     }   

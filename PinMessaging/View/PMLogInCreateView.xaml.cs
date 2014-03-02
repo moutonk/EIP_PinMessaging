@@ -77,9 +77,9 @@ namespace PinMessaging.View
             return true;
         }
 
-        private bool PasswordSyntaxCheck()
+        private bool PasswordSyntaxCheck(string pwd)
         {
-            if (TextBoxPassword.Password.Length < 4 || TextBoxPassword.Password.Length > 20)
+            if (Utils.Utils.PasswordSyntaxCheck(pwd))
             {
                 TextBlockError.Text = AppResources.PMWrongPasswordSyntax;
                 _currentStep = StepNumber.StepEmailClick;
@@ -124,7 +124,7 @@ namespace PinMessaging.View
                 //password
                 case StepNumber.StepPasswordClick:
 
-                    if (PasswordSyntaxCheck() == false)
+                    if (PasswordSyntaxCheck(TextBoxPassword.Password) == false)
                         return;
 
                     _pmLogInModel.Password = TextBoxPassword.Password;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using PinMessaging;
 using PinMessaging.Utils;
@@ -74,7 +75,7 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(2000);
+               Thread.Sleep(1000);
                Assert.IsTrue(webServiceReponse);
            }
 
@@ -92,7 +93,7 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(2000);
+               Thread.Sleep(1000);
                Assert.IsFalse(PMData.IsEmailDispo);
            }
            [TestMethod]
@@ -109,7 +110,7 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(2000);
+               Thread.Sleep(1000);
                Assert.IsTrue(PMData.IsEmailDispo);
            }
 
@@ -128,7 +129,7 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(2000);
+               Thread.Sleep(1000);
                Assert.IsTrue(PMData.IsSignInSuccess);
            }
            [TestMethod]
@@ -146,7 +147,7 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(2000);
+               Thread.Sleep(1000);
                Assert.IsFalse(PMData.IsSignInSuccess);
            }
 
@@ -168,7 +169,7 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(2000);
+               Thread.Sleep(1000);
                Assert.IsTrue(PMData.IsSignUpSuccess);
            }
 
@@ -188,7 +189,7 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(2000);
+               Thread.Sleep(1000);
 
                var numberPinsAfter = PMData.PinsList.Count;
 
@@ -211,11 +212,95 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(2000);
+               Thread.Sleep(1000);
 
                var numberPinsAfter = PMData.PinsList.Count;
 
                Assert.IsTrue(numberPinsBefore == numberPinsAfter);
+           }
+
+           [TestMethod]
+           public void TestWebServiceCreatePin()
+           {
+               webServiceReponse = false;
+               var numberPinsBefore = PMData.PinsList.Count;
+
+               var dictionary = new Dictionary<string, string>
+            {
+                {"longitude", "45.0001"},
+                {"latitude", "48.000001"},
+                {"name", "YOLO"},
+                {"description", "You only live once"},
+                {"type", "Event"}
+            };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.CreatePin, SyncType.Async, dictionary, null);
+                
+               StartTimer();
+    
+               Thread.Sleep(1000);
+
+               var numberPinsAfter = PMData.PinsList.Count;
+
+               Assert.IsTrue(numberPinsBefore < numberPinsAfter);
+           }
+
+           [TestMethod]
+           public void TestWebServiceChangeEmail()
+           {
+               webServiceReponse = false;
+
+               var dictionary = new Dictionary<string, string>
+                {
+                {"newEmail", "newemail@email.com"}
+            };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.ChangeEmail, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(1000);
+
+               Assert.IsTrue(PMData.IsChangeEmailSuccess);
+           }
+
+           [TestMethod]
+           public void TestWebServiceChangePasswordCorrect()
+           {
+               webServiceReponse = false;
+
+               var dictionary = new Dictionary<string, string>
+            {
+                {"oldPassword", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1("kkkkkk"))},
+                {"newPassword", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1("kkkkkk"))}
+            };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.ChangePassword, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(1000);
+
+               Assert.IsTrue(PMData.IsChangePwdSuccess);
+           }
+           [TestMethod]
+           public void TestWebServiceChangePasswordIncorrect()
+           {
+               webServiceReponse = false;
+
+               var dictionary = new Dictionary<string, string>
+            {
+                {"oldPassword", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1("kkkkk"))},
+                {"newPassword", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1("kkkkkk"))}
+            };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.ChangePassword, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(1000);
+
+               Assert.IsFalse(PMData.IsChangePwdSuccess);
            }
 
            private string CreateRandomEmail()
