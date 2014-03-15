@@ -58,7 +58,7 @@ namespace PinMessaging.View
 
         private void PMFirstLaunchView_OnLoaded(object sender, RoutedEventArgs e)
         {
-         //   NavigationService.Navigate(Paths.MapView);
+            NavigationService.Navigate(Paths.MapView);
         }
     }
 }

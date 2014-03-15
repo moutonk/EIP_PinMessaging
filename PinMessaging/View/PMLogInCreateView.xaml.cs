@@ -68,7 +68,7 @@ namespace PinMessaging.View
 
         private bool EmailSyntaxCheck()
         {
-            if (EmailChecker.IsEmailValid(TextBoxEmail.Text) == false)
+            if (Utils.Utils.IsEmailValid(TextBoxEmail.Text) == false)
             {
                 TextBlockError.Text = AppResources.PMWrongEmailSyntax;
                 _currentStep = StepNumber.StepDefault;
@@ -79,7 +79,7 @@ namespace PinMessaging.View
 
         private bool PasswordSyntaxCheck(string pwd)
         {
-            if (Utils.Utils.PasswordSyntaxCheck(pwd))
+            if (Utils.Utils.PasswordSyntaxCheck(pwd) == false)
             {
                 TextBlockError.Text = AppResources.PMWrongPasswordSyntax;
                 _currentStep = StepNumber.StepEmailClick;
@@ -135,7 +135,7 @@ namespace PinMessaging.View
                 case StepNumber.StepPasswordRetypedClick:
 
                     _pmLogInModel.PasswordRetyped = TextBoxPassword.Password;
-                    _pmLogInModel.PhoneSimId = Phone.GetPhoneUniqueId();
+                    _pmLogInModel.PhoneSimId = Utils.Utils.GetPhoneUniqueId();
                     PasswordRetypedToMap();
                     break;
             }

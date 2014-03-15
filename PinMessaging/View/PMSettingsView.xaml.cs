@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+﻿using System.Windows;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using PinMessaging.Controller;
-using PinMessaging.Resources;
-using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
 
 namespace PinMessaging.View
@@ -32,7 +23,7 @@ namespace PinMessaging.View
 
         private void ModifyEmailButton_Click(object sender, RoutedEventArgs e)
         {
-            if (EmailChecker.IsEmailValid(NewEmailTextBox.Text) == true)
+            if (Utils.Utils.IsEmailValid(NewEmailTextBox.Text) == true)
             {
                 var sc = new PMSettingsController(RequestType.ChangeEmail);
                 sc.ChangeEmail(NewEmailTextBox.Text);

@@ -119,13 +119,11 @@
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Utils\Design.cs" />
-    <Compile Include="Utils\EmailChecker.cs" />
     <Compile Include="Utils\Encrypt.cs" />
     <Compile Include="Utils\LocalizedStrings.cs" />
     <Compile Include="Controller\PMAdsManager.cs" />
     <Compile Include="Utils\Logs.cs" />
     <Compile Include="Utils\Paths.cs" />
-    <Compile Include="Utils\Phone.cs" />
     <Compile Include="Utils\PMWebService.cs" />
     <Compile Include="Utils\PMWebServiceEndDetector.cs" />
     <Compile Include="Utils\Utils.cs" />

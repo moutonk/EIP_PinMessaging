@@ -142,3 +142,4 @@ C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\P
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\PinMessaging.dll
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\PinMessaging.pdb
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\XapCacheFile.xml
+C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\x86\Debug\PinMessaging.csprojResolveAssemblyReference.cache

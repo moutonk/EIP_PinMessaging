@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -132,7 +133,7 @@ namespace PinMessaging.View
 
         protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
         {
-            int retValue = Design.CustomMessageBox(new[] {"Yes", "No"}, AppResources.QuitAppTitle, AppResources.QuitApp);
+            int retValue = Utils.Utils.CustomMessageBox(new[] {"Yes", "No"}, AppResources.QuitAppTitle, AppResources.QuitApp);
 
             //0 is Yes, 1 is No....
             if (retValue == 0)
@@ -169,6 +170,15 @@ namespace PinMessaging.View
             _currentView = CurrentMapPageView.UnderMenuView;
             _isUnderMenuOpen = true;
             _enableSwipe = false;
+
+            if (sender.Equals(NotificationButton))
+            {
+                DownMenuTitle.Text = AppResources.Notifications;
+            }
+            else if (sender.Equals(ContactsButton))
+            {
+                DownMenuTitle.Text = AppResources.Contacts;                
+            }
 
             MainGridMap.RowDefinitions[2].Height = new GridLength(0);
             MoveAnimationUp.Begin();

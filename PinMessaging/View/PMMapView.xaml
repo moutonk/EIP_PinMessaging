@@ -22,16 +22,16 @@
         </Canvas.Resources>
 
         <Canvas  x:Name="LayoutRoot" Width="{StaticResource LayoutRootWidth}"  VerticalAlignment="Stretch" Background="{StaticResource PMGrey}" Canvas.Left="{StaticResource LayoutRootLeftMargin}" Height="{StaticResource MapGridHeight}">
-            
+
             <Grid Name="LeftMenuGrid" Width="{StaticResource AdditionalMapMenuWidth}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
-            
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource MapMenuHeight}"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.LeftMenuTitle, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
-                
+
                 <ScrollViewer HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Top">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -48,7 +48,7 @@
                             <ColumnDefinition Width="{StaticResource MapMenuHeight}"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-                        
+
                         <Image  Name="ImgMap"  Grid.Column="0" Grid.Row="0" Tap="ButtonMap_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" Source="\Images\Flags\FR.png"/>
                         <Button Name="ButtonMap" Grid.Column="1" Grid.Row="0" Click="ButtonMap_OnClick" Content="{Binding Path=LocalizedResources.MenuMap, Source={StaticResource LocalizedStrings}}" HorizontalContentAlignment="Stretch" BorderThickness="0" FontSize="32"/>
                         <Image  Name="ImgProfil"  Grid.Column="0" Grid.Row="1" Tap="ButtonProfil_OnClick" HorizontalAlignment="Left" VerticalAlignment="Top" Source="\Images\Flags\FR.png"/>
@@ -68,13 +68,22 @@
 
                     </Grid>
                 </ScrollViewer>
-         
+
             </Grid>
 
-            <Border Name="RightMenuGrid" Width="{StaticResource AdditionalMapMenuWidth}" Canvas.Left="{StaticResource RightMenuGridLeftMargin}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}"/>
+            <Grid Name="RightMenuGrid" Width="{StaticResource AdditionalMapMenuWidth}" Canvas.Left="{StaticResource RightMenuGridLeftMargin}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}">
+                <Grid.RowDefinitions>
+                   <RowDefinition Height="{StaticResource MapMenuHeight}"></RowDefinition>
+                   <RowDefinition Height="*"></RowDefinition>
+               </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="{Binding Path=LocalizedResources.Pins, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32"/>
+
+
+            </Grid>
 
             <Grid Name="MainVerticalGrid" Canvas.Left="{StaticResource AdditionalMapMenuWidth}"  Height="{StaticResource MainVerticalGridHeight}" Width="{StaticResource MainVerticalGridWidth}" >
-            
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="{StaticResource MapGridLength}"></RowDefinition>
@@ -100,13 +109,13 @@
                 </Grid.Resources>
 
                 <Grid x:Name="MainGridMap" Grid.Row="0">
-         
+
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="76"/>
+                        <RowDefinition Height="0"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="90"/>
                     </Grid.RowDefinitions>
-                    
+
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <Button Content="add" Click="Button_Click" />
                         <Button Content="rm" Click="Button_Click_1"/>
@@ -124,7 +133,7 @@
                     </Grid>
 
                     <Grid Grid.Row="2" Name="GridMapMenu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-            
+
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -135,7 +144,7 @@
                             <RowDefinition Height="*"></RowDefinition>
                             <RowDefinition Height="30"></RowDefinition>
                         </Grid.RowDefinitions>
-                        
+
                         <Button Name="MenuButton" Grid.Column="0" Grid.Row="0" Click="OpenClose_Left" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0" Height="65" Width="120" Grid.RowSpan="2">
                             <Button.Background>
                                 <ImageBrush ImageSource="\Images\Menu\menu_icon_2@2x.png" Stretch="Uniform"/>
@@ -164,13 +173,25 @@
                         </Button>
                         <TextBlock Grid.Column="3" Grid.Row="1" Tap="OpenClose_Right" TextAlignment="Center" FontSize="15" Text="{Binding Path=LocalizedResources.Pins, Source={StaticResource LocalizedStrings}}"></TextBlock>
                     </Grid>
-                
+
                 </Grid>
 
-                <Grid Grid.Row="1" Name="UnderMenuGrid" Background="{StaticResource PMGrey}"/>
-                
+                <Grid Grid.Row="1" Name="UnderMenuGrid" Background="{StaticResource PMGrey}">
+                    <Grid Background="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="480">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="60"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Name="DownMenuTitle" FontSize="32" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="405" Height="41" Margin="10,0,0,0"/>
+
+                        <Button Content="X" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="64" Width="60" BorderThickness="0"/>
+                    </Grid>
+
+                </Grid>
+
             </Grid>
-            
+
         </Canvas>
     </Canvas>
 

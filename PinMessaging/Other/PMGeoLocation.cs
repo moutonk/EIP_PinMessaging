@@ -90,8 +90,8 @@ namespace PinMessaging.Other
                 _firstPositionChanged = true;
 
                 var pc = new PMPinController(RequestType.GetPins);
-                pc.GetPins(Phone.ConvertDoubleCommaToPoint(args.Position.Coordinate.Latitude.ToString()),
-                           Phone.ConvertDoubleCommaToPoint(args.Position.Coordinate.Longitude.ToString()));
+                pc.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Latitude.ToString()),
+                           Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Longitude.ToString()));
 
             }
         }
