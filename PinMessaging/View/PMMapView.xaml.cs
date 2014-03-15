@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,7 +22,7 @@ using PinMessaging.Utils.WebService;
 
 namespace PinMessaging.View
 {
-    public partial class PMMapView : PhoneApplicationPage 
+    public partial class PMMapView : PhoneApplicationPage, INotifyPropertyChanged
     {
         private enum CurrentMapPageView { MapView, LeftMenuView, RightMenuView, UnderMenuView}
 
@@ -47,6 +50,10 @@ namespace PinMessaging.View
             UpdateLocationUI();
 
             LoadRessources();
+
+            Langues = new List<string> { "Français", "English", "Deutsch", "Español" };
+            DataContext = this;
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
@@ -362,5 +369,56 @@ namespace PinMessaging.View
                 Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
             }
         }
+
+        private void CloseMenuDownButton_Click(object sender, RoutedEventArgs e)
+        {
+            Map_OnTouch(sender, e);
+        }
+
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(String propertyName)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (null != handler)
+            {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
+        {
+            if (object.Equals(variable, valeur)) return false;
+
+            variable = valeur;
+            NotifyPropertyChanged(nomPropriete);
+            return true;
+        }
+
+        private List<string> langues;
+        public List<string> Langues
+        {
+            get { return langues; }
+            set { NotifyPropertyChanged(ref langues, value); }
+        }
+
+
+        public class ElementsListPicker
+        {
+            public string Code {get; set; }
+            public string Name {get; set; }
+            public Uri ImgPath { get; set; }
+        }
+
+
+        public  List<ElementsListPicker> ListPickerPins = new List<ElementsListPicker> 
+        {
+            new ElementsListPicker { Code = "FR", Name = "Français", ImgPath = Paths.PinEvent},
+            new ElementsListPicker { Code = "US", Name = "English", ImgPath = Paths.PinPrivateMessage},
+            new ElementsListPicker { Code = "DE", Name = "Deutsch", ImgPath = Paths.PinPublicMessage},
+            new ElementsListPicker { Code = "ES", Name = "Español", ImgPath = Paths.PinEye},
+        };
     }
 }
