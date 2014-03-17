@@ -162,6 +162,30 @@
           <source>Pins</source>
           <target state="new">Pins</target>
         </trans-unit>
+        <trans-unit id="Resx/PinEvent" translate="yes" xml:space="preserve">
+          <source>Event</source>
+          <target state="new">Event</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinLastStep" translate="yes" xml:space="preserve">
+          <source>Last step</source>
+          <target state="new">Last step</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPointOfInterest" translate="yes" xml:space="preserve">
+          <source>Point of Interest</source>
+          <target state="new">Point of Interest</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPointOfView" translate="yes" xml:space="preserve">
+          <source>Point of View</source>
+          <target state="new">Point of View</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivateMessage" translate="yes" xml:space="preserve">
+          <source>Private Message</source>
+          <target state="new">Private Message</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPublicMessage" translate="yes" xml:space="preserve">
+          <source>Public Message</source>
+          <target state="new">Public Message</target>
+        </trans-unit>
       </group>
     </body>
   </file>

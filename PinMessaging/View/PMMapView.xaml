@@ -11,7 +11,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    mc:Ignorable="d" >
+    mc:Ignorable="d"
+    x:Name="this">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
 	<Canvas x:Name="CentralCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black" ManipulationStarted="canvas_ManipulationStarted" ManipulationDelta="canvas_ManipulationDelta" ManipulationCompleted="canvas_ManipulationCompleted">
@@ -92,10 +93,42 @@
 						</DataTemplate>
 					</phone:Pivot.HeaderTemplate>
 					
-                    <phone:PivotItem Header="Nouveau Pin" Margin="0,24,-244,6" Background="{StaticResource PMGrey}" RenderTransformOrigin="0.494,0.707">
-                        <toolkit:ListPicker  Name="List" ItemsSource="{Binding Langues}" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" Width="380" Height="212">
-                           
-                        </toolkit:ListPicker>
+                    <phone:PivotItem Header="Nouveau Pin" Margin="0,24,-244,-390" Background="{StaticResource PMGrey}" RenderTransformOrigin="0.494,0.707">
+                        <StackPanel Orientation="Vertical">
+                            <toolkit:ListPicker x:Name="ListPickerPinType" SelectionChanged="ListPickerPinType_OnSelectionChanged" ExpansionMode="FullScreenOnly" ItemsSource="{Binding ListPickerPins, ElementName=this}" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" Width="380" Height="115" RenderTransformOrigin="0.496,0.766" BorderThickness="0">
+                                <toolkit:ListPicker.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="{Binding ImgPath}" Width="70" Height="70"/>
+                                            <TextBlock Margin="20 15 0 0" Text="{Binding Name}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </toolkit:ListPicker.ItemTemplate>
+                                <toolkit:ListPicker.FullModeItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="{Binding ImgPath}" Margin="0 5 0 0" Width="100" Height="100"/>
+                                            <TextBlock Margin="20 35 0 0" Text="{Binding Name}" />
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </toolkit:ListPicker.FullModeItemTemplate>
+                            </toolkit:ListPicker>
+                            <TextBox x:Name="PinReceiver" AcceptsReturn="False" MaxLength="20" TextWrapping="Wrap" Background="{StaticResource PhoneContrastBackgroundBrush}" Text="Receiver" Height="0" BorderThickness="0" Foreground="Black" Margin="10,0,0,0"/>
+                            <TextBox x:Name="PinTitle" AcceptsReturn="False" MaxLength="20" TextWrapping="Wrap" Margin="10,0,0,0" Background="{StaticResource PhoneContrastBackgroundBrush}" Text="Title" Height="71" BorderThickness="0">
+                                <TextBox.Foreground>
+                                    <SolidColorBrush Color="Black"></SolidColorBrush>
+                                </TextBox.Foreground>
+                            </TextBox>
+                            <TextBox x:Name="PinContent" MaxWidth="400" Height="212" TextWrapping="Wrap" Text="TextBoxsdqsdqsdqsdqsdsqdqsd" Margin="10,0,0,0" Background="{StaticResource PhoneContrastBackgroundBrush}" AcceptsReturn="True" BorderThickness="0">
+                            	<TextBox.Foreground>
+                                    <SolidColorBrush Color="Black"></SolidColorBrush>
+                                </TextBox.Foreground>
+                            </TextBox>
+                            <Image x:Name="PinImage" Height="142" Margin="20,0,0,0" HorizontalAlignment="Left" Width="380"/>
+                            <Button x:Name="PostPinButton" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="10,0,0,0" Height="102"/>
+                            <TextBlock TextWrapping="Wrap" Text="TextBlock"/>
+                        </StackPanel>
+                   
                     </phone:PivotItem>
 					
                     <phone:PivotItem Header="Favoris" Margin="0,28,-137,0" Background="{StaticResource PMGreen}">

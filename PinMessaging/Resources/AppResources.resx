@@ -234,4 +234,22 @@
   <data name="Pins" xml:space="preserve">
     <value>Pins</value>
   </data>
+  <data name="PinEvent" xml:space="preserve">
+    <value>Event</value>
+  </data>
+  <data name="PinLastStep" xml:space="preserve">
+    <value>Last step</value>
+  </data>
+  <data name="PinPointOfInterest" xml:space="preserve">
+    <value>Point of Interest</value>
+  </data>
+  <data name="PinPointOfView" xml:space="preserve">
+    <value>Point of View</value>
+  </data>
+  <data name="PinPrivateMessage" xml:space="preserve">
+    <value>Private Message</value>
+  </data>
+  <data name="PinPublicMessage" xml:space="preserve">
+    <value>Public Message</value>
+  </data>
 </root>

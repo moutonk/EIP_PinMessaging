@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -51,8 +52,14 @@ namespace PinMessaging.View
 
             LoadRessources();
 
-            Langues = new List<string> { "Français", "English", "Deutsch", "Español" };
-            DataContext = this;
+            listPickerPins = new List<ElementsListPicker> 
+            {
+                new ElementsListPicker { Name = AppResources.PinPublicMessage, ImgPath = Paths.PinPublicMessage},
+                new ElementsListPicker { Name = AppResources.PinPrivateMessage, ImgPath = Paths.PinPrivateMessage},
+                new ElementsListPicker { Name = AppResources.PinEvent, ImgPath = Paths.PinEvent},
+                new ElementsListPicker { Name = AppResources.PinPointOfView, ImgPath = Paths.PinEye},
+                new ElementsListPicker { Name = AppResources.PinPointOfInterest, ImgPath = Paths.PinPointOfInterest},
+             };
 
         }
 
@@ -388,7 +395,7 @@ namespace PinMessaging.View
             }
         }
 
-        private bool NotifyPropertyChanged<T>(ref T variable, T valeur, [CallerMemberName] string nomPropriete = null)
+        private bool NotifyPropertyChanged<T>(T variable, T valeur, [CallerMemberName] string nomPropriete = null)
         {
             if (object.Equals(variable, valeur)) return false;
 
@@ -397,11 +404,10 @@ namespace PinMessaging.View
             return true;
         }
 
-        private List<string> langues;
-        public List<string> Langues
+        public IEnumerable ListPickerPins
         {
-            get { return langues; }
-            set { NotifyPropertyChanged(ref langues, value); }
+            get { return listPickerPins; }
+            set { NotifyPropertyChanged(listPickerPins, value); }
         }
 
 
@@ -412,13 +418,20 @@ namespace PinMessaging.View
             public Uri ImgPath { get; set; }
         }
 
+        private IEnumerable listPickerPins { get; set; }
 
-        public  List<ElementsListPicker> ListPickerPins = new List<ElementsListPicker> 
+        private void ListPickerPinType_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            new ElementsListPicker { Code = "FR", Name = "Français", ImgPath = Paths.PinEvent},
-            new ElementsListPicker { Code = "US", Name = "English", ImgPath = Paths.PinPrivateMessage},
-            new ElementsListPicker { Code = "DE", Name = "Deutsch", ImgPath = Paths.PinPublicMessage},
-            new ElementsListPicker { Code = "ES", Name = "Español", ImgPath = Paths.PinEye},
-        };
+            switch (ListPickerPinType.SelectedIndex)
+            {
+                case 0:
+                    PinReceiver.Height = 0;
+                    break;
+
+                case 1:
+                    PinReceiver.Height = PinTitle.Height;
+                    break;
+            }
+        }   
     }
 }
