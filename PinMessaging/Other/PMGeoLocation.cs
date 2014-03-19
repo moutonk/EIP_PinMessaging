@@ -89,7 +89,7 @@ namespace PinMessaging.Other
                 _mapView.UpdateMapCenter();
                 _firstPositionChanged = true;
 
-                var pc = new PMPinController(RequestType.GetPins);
+                var pc = new PMPinController(RequestType.GetPins, null);
                 pc.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Latitude.ToString()),
                            Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Longitude.ToString()));
 

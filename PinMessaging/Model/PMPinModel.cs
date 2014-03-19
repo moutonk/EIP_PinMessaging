@@ -12,14 +12,14 @@ namespace PinMessaging.Model
     {
         public enum PinsType
         {
-            CulturalMessage,
-            Event,
-            Message,
-            PublicMessage,
+            PublicMessage = 0,
             PrivateMessage,
-            CourseLastStep,
+            Event,
             Eye,
-            PointOfInterest
+            PointOfInterest,
+            CulturalMessage,
+            Message,            
+            CourseLastStep
         }
 
         [DefaultValue(null)] private string PinTitle { get; set; }

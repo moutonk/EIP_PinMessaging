@@ -75,7 +75,7 @@ namespace PinMessaging.Other
                         if (Convert.ToBoolean(item[0].ToString()) == true)
                         {
                             var pin = JsonConvert.DeserializeObject<PMPinModel>(item[1].ToString());
-                            var pinController = new PMPinController(RequestType.CreatePin);
+                            var pinController = new PMPinController(RequestType.CreatePin, null);
 
                             pinController.CompleteDataMember(pin);
                             pin.ShowPinContent();
@@ -116,7 +116,7 @@ namespace PinMessaging.Other
                         if (Convert.ToBoolean(item[0].ToString()) == true)
                         {
                             var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(item[1].ToString());
-                            var pinController = new PMPinController(RequestType.GetPins);
+                            var pinController = new PMPinController(RequestType.GetPins, null);
 
                             foreach (var pmMapPushpinModel in pinCollection)
                             {

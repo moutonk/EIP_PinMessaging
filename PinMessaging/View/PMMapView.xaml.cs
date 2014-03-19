@@ -2,18 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using Windows.Devices.Geolocation;
 using Microsoft.Phone.Controls;
 using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Controls;
-using Microsoft.Phone.Shell;
 using PinMessaging.Model;
 using PinMessaging.Controller;
 using PinMessaging.Other;
@@ -63,59 +60,25 @@ namespace PinMessaging.View
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        ////////////////////////////////////////////////    Middle Page    /////////////////////////////////////////////
+
+        private void MenuDown_OnClick(object sender, RoutedEventArgs e)
         {
-              // PMMapPushpinController.RemovePushpinFromMapLayer(pin);
-        }
+            _currentView = CurrentMapPageView.UnderMenuView;
+            _isUnderMenuOpen = true;
+            _enableSwipe = false;
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var pc = new PMPinController(RequestType.CreatePin);
+            if (sender.Equals(NotificationButton))
+            {
+                DownMenuTitle.Text = AppResources.Notifications;
+            }
+            else if (sender.Equals(ContactsButton))
+            {
+                DownMenuTitle.Text = AppResources.Contacts;
+            }
 
-     //       pc.GetPins(Phone.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()),
-       //                    Phone.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));
-            pc.CreatePin(_geoLocation.GeopositionUser, new[] {"Super name",
-                                                                "Ceci est un pin de test", 
-                                                                ((int)PMPinModel.PinsType.Event).ToString()});
-
-//                    string json = @"[
-//                                   {                                
-//                                        ""id"":""1"",
-//                                        ""type"":""Event"",
-//                                        ""description"":""\\home\\"",
-//                                        ""url"":""null"",
-//                                        ""lang"":""null"",
-//                                        ""location"":
-//                                        {
-//                                            ""id"":""1"",
-//                                            ""latitude"":""47.669444"",
-//                                            ""longitude"":""-122.123889"",
-//                                            ""name"":""\\maison\\""
-//                                        },
-//                                        ""creationTime"":""1392003691000""
-//                                    },
-//                                    {                                
-//                                        ""id"":""2"",
-//                                        ""type"":""Lol"",
-//                                        ""description"":""\\home\\"",
-//                                        ""url"":""null"",
-//                                        ""lang"":""null"",
-//                                        ""location"":
-//                                        {
-//                                            ""id"":""1"",
-//                                            ""latitude"":""48.669450"",
-//                                            ""longitude"":""-122.123850"",
-//                                            ""name"":""\\maison\\""
-//                                        },
-//                                        ""creationTime"":""1392003691000""
-//                                    }
-//                                ]";
-//                PMDataConverter.ParseGetPins(json);
-                    //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
-                    //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
-
-                    //PMMapPinController.AddPushpinToMap(pin);
-        
+            MainGridMap.RowDefinitions[2].Height = new GridLength(0);
+            MoveAnimationUp.Begin();
         }
 
         public void UpdateLocationUI()
@@ -160,42 +123,9 @@ namespace PinMessaging.View
             }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            if (Map.ZoomLevel <= 19D)
-                Map.ZoomLevel += 1D;
-        }
-
-        private void Button_Click_4(object sender, RoutedEventArgs e)
-        {
-            if (Map.ZoomLevel >= 2D)
-            Map.ZoomLevel -= 1D;
-        }
-
         private void Center_Click(object sender, RoutedEventArgs e)
         {
             UpdateMapCenter();
-        }
-
-       // private Point p;
-
-        private void MenuDown_OnClick(object sender, RoutedEventArgs e)
-        {
-            _currentView = CurrentMapPageView.UnderMenuView;
-            _isUnderMenuOpen = true;
-            _enableSwipe = false;
-
-            if (sender.Equals(NotificationButton))
-            {
-                DownMenuTitle.Text = AppResources.Notifications;
-            }
-            else if (sender.Equals(ContactsButton))
-            {
-                DownMenuTitle.Text = AppResources.Contacts;                
-            }
-
-            MainGridMap.RowDefinitions[2].Height = new GridLength(0);
-            MoveAnimationUp.Begin();
         }
 
         private void Map_OnTouch(object sender, RoutedEventArgs e)
@@ -377,12 +307,15 @@ namespace PinMessaging.View
             }
         }
 
+
+        ////////////////////////////////////////////////    Down Menu    /////////////////////////////////////////////
+
         private void CloseMenuDownButton_Click(object sender, RoutedEventArgs e)
         {
             Map_OnTouch(sender, e);
         }
 
-
+        ////////////////////////////////////////////////    Right Menu    /////////////////////////////////////////////
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -410,7 +343,6 @@ namespace PinMessaging.View
             set { NotifyPropertyChanged(listPickerPins, value); }
         }
 
-
         public class ElementsListPicker
         {
             public string Code {get; set; }
@@ -422,16 +354,115 @@ namespace PinMessaging.View
 
         private void ListPickerPinType_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (ListPickerPinType.SelectedIndex == ((int)PMPinModel.PinsType.PrivateMessage))
+            {
+                GridNewPinPivotItem.RowDefinitions[1].Height = GridNewPinPivotItem.RowDefinitions[2].Height;
+            }
+            else
+            {
+                GridNewPinPivotItem.RowDefinitions[1].Height = new GridLength(0);
+            }
+        }
+
+        private void PostPinButton_ClickPreJob()
+        {
+            PostPinProgressBar.Visibility = Visibility.Visible;
+            PostPinProgressBar.IsIndeterminate = true;
+            NewPinPivotItem.IsEnabled = false;
+        }
+
+        private void PostPinButton_ClickPostJob()
+        {
+            PostPinProgressBar.Visibility = Visibility.Collapsed;
+            PostPinProgressBar.IsIndeterminate = false;
+            NewPinPivotItem.IsEnabled = true;
+        }
+
+        private void PostPinButton_Click(object sender, RoutedEventArgs e)
+        {
+            var pc = new PMPinController(RequestType.CreatePin, PostPinButton_ClickPostJob);
+
+            PostPinButton_ClickPreJob();
             switch (ListPickerPinType.SelectedIndex)
             {
-                case 0:
-                    PinReceiver.Height = 0;
+                case ((int)PMPinModel.PinsType.PublicMessage):
+                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.PublicMessage).ToString() });
                     break;
 
-                case 1:
-                    PinReceiver.Height = PinTitle.Height;
+                case ((int)PMPinModel.PinsType.PrivateMessage):
+                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.PrivateMessage).ToString() });
+                    break;
+
+                case ((int)PMPinModel.PinsType.Event):
+                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.Event).ToString() });
+                    break;
+
+                case ((int)PMPinModel.PinsType.Eye):
+                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.Eye).ToString() });
+                    break;
+
+                case ((int)PMPinModel.PinsType.PointOfInterest):
+                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.PointOfInterest).ToString() });
+                    break;
+
+                default:
+                    Logs.Output.ShowOutput("rien du tout");
                     break;
             }
-        }   
+       
+            string json = @"[
+//                                   {                                
+//                                        ""id"":""1"",
+//                                        ""type"":""Event"",
+//                                        ""description"":""\\home\\"",
+//                                        ""url"":""null"",
+//                                        ""lang"":""null"",
+//                                        ""location"":
+//                                        {
+//                                            ""id"":""1"",
+//                                            ""latitude"":""47.669444"",
+//                                            ""longitude"":""-122.123889"",
+//                                            ""name"":""\\maison\\""
+//                                        },
+//                                        ""creationTime"":""1392003691000""
+//                                    },
+//                                    {                                
+//                                        ""id"":""2"",
+//                                        ""type"":""Lol"",
+//                                        ""description"":""\\home\\"",
+//                                        ""url"":""null"",
+//                                        ""lang"":""null"",
+//                                        ""location"":
+//                                        {
+//                                            ""id"":""1"",
+//                                            ""latitude"":""48.669450"",
+//                                            ""longitude"":""-122.123850"",
+//                                            ""name"":""\\maison\\""
+//                                        },
+//                                        ""creationTime"":""1392003691000""
+//                                    }
+//                                ]";
+            //                PMDataConverter.ParseGetPins(json);
+            //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
+            //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
+
+            //PMMapPinController.AddPushpinToMap(pin);
+        }
+
+        private void PinTitle_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PinContent.Focus();
+            }
+        }
+
+        private void PinReceiver_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PinTitle.Focus();
+            }
+        }
     }
 }

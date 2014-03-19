@@ -49,16 +49,20 @@ namespace PinMessaging.Utils
 
         public static int CustomMessageBox(string[] buttons, string boxTitle, string boxContent)
         {
-            var result = Guide.BeginShowMessageBox(
-                boxTitle, boxContent, buttons, 0,
-                MessageBoxIcon.None, null, null);
+            if (Guide.IsVisible == false)
+            {
+                var result = Guide.BeginShowMessageBox(
+            boxTitle, boxContent, buttons, 0,
+            MessageBoxIcon.None, null, null);
 
-            result.AsyncWaitHandle.WaitOne();
+                result.AsyncWaitHandle.WaitOne();
 
-            var choice = Guide.EndShowMessageBox(result);
+                var choice = Guide.EndShowMessageBox(result);
 
-            if (choice != null)
-                return choice.Value;
+                if (choice != null)
+                    return choice.Value;
+            }
+        
             return -1;
         }
 

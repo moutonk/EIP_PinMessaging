@@ -9,14 +9,18 @@ using PinMessaging.Model;
 using PinMessaging.Other;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
+using PinMessaging.View;
 
 namespace PinMessaging.Controller
 {
     class PMPinController : PMWebServiceEndDetector
     {
-        public PMPinController(RequestType currentRequestType)
+        private readonly Action _updateUiMethod;
+ 
+        public PMPinController(RequestType currentRequestType, Action updateUi)
         {
             CurrentRequestType = currentRequestType;
+            _updateUiMethod = updateUi;
         }
 
         private static void ConvertTypeToEnumAndImg(PMPinModel pin)
@@ -108,6 +112,8 @@ namespace PinMessaging.Controller
                         foreach (var pin in PMData.PinsList)
                             PMMapPinController.AddPinToMap(pin);
                         PMData.PinsList.Clear();
+                        if (_updateUiMethod != null)
+                            _updateUiMethod();
                         break;
                 }
             }
