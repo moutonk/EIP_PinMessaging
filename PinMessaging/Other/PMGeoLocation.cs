@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using Windows.Devices.Geolocation;
 using PinMessaging.Controller;
 using PinMessaging.Utils;

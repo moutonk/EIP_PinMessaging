@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -80,6 +81,7 @@ namespace PinMessaging.View
             if (choice == 0)
             {
                 RememberConnection.SaveAccessLocation(true);
+                LaunchLocalization();
                 return 1;
             }
             return 0;
@@ -130,19 +132,13 @@ namespace PinMessaging.View
             }
         }
 
-        private void InitLocationServices()
-        {
-            if (AccessLocationMsgBox() == 1)
-                LaunchLocalization();
-        }
-
         public void UpdateMapCenter()
         {
             Dispatcher.BeginInvoke(() =>
             {
                 if (_geoLocation == null)
                 {
-                    InitLocationServices();
+                    AccessLocationMsgBox();
                 }
                 else if (_geoLocation.GeopositionUser != null)
                 {
@@ -427,6 +423,12 @@ namespace PinMessaging.View
 
         private void PostPinButton_Click(object sender, RoutedEventArgs e)
         {
+            if (_geoLocation == null)
+                if (AccessLocationMsgBox() != 1)
+                    return;
+            if (_geoLocation != null && _geoLocation.GeopositionUser == null)
+                return;
+           
             var pc = new PMPinController(RequestType.CreatePin, PostPinButton_ClickPostJob);
 
             PostPinButton_ClickPreJob();
