@@ -30,22 +30,20 @@ namespace PinMessaging.View
         readonly MapLayer _mapLayer = new MapLayer();
         readonly MapOverlay _userSpotLayer = new MapOverlay();
         readonly UserLocationMarker _userSpot = new UserLocationMarker();
-        readonly PMGeoLocation _geoLocation = null;
+        PMGeoLocation _geoLocation = null;
 
         public PMMapView()
         {
             InitializeComponent();
 
-            _geoLocation = new PMGeoLocation(this);
-            _userSpotLayer.Content = _userSpot;
-            _userSpot.Visibility = Visibility.Collapsed;
-            _mapLayer.Add(_userSpotLayer);
+            bool? accessLoc =  RememberConnection.GetAccessLocation();
+            Logs.Output.ShowOutput(accessLoc.ToString());
 
-            Map.Layers.Add(_mapLayer);
-
-            PMData.MapLayerContainer = _mapLayer;
-
-            UpdateLocationUI();
+            if (accessLoc == true)
+            {
+                Logs.Output.ShowOutput("accesloc true");
+                LaunchLocalization();      
+            }
 
             LoadRessources();
 
@@ -57,7 +55,42 @@ namespace PinMessaging.View
                 new ElementsListPicker { Name = AppResources.PinPointOfView, ImgPath = Paths.PinEye},
                 new ElementsListPicker { Name = AppResources.PinPointOfInterest, ImgPath = Paths.PinPointOfInterest},
              };
+        }
 
+        private void LaunchLocalization()
+        {
+            _geoLocation = new PMGeoLocation(this);
+            _userSpotLayer.Content = _userSpot;
+            _userSpot.Visibility = Visibility.Collapsed;
+            _mapLayer.Add(_userSpotLayer);
+
+            Map.Layers.Add(_mapLayer);
+
+            PMData.MapLayerContainer = _mapLayer;
+
+            UpdateLocationUI();    
+        }
+
+        private int AccessLocationMsgBox()
+        {
+            int choice = Utils.Utils.CustomMessageBox(new[] { AppResources.Allow, AppResources.Cancel },
+                    AppResources.UseLocationTitle,
+                    AppResources.UseLocationContent);
+
+            if (choice == 0)
+            {
+                RememberConnection.SaveAccessLocation(true);
+                return 1;
+            }
+            return 0;
+        }
+
+        private void PMMapView_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            //if (RememberConnection.IsFirstConnection() == true)
+            //{
+            //    AccessLocationMsgBox();
+            //}
         }
 
         ////////////////////////////////////////////////    Middle Page    /////////////////////////////////////////////
@@ -77,7 +110,7 @@ namespace PinMessaging.View
                 DownMenuTitle.Text = AppResources.Contacts;
             }
 
-            MainGridMap.RowDefinitions[2].Height = new GridLength(0);
+            MainGridMap.RowDefinitions[1].Height = new GridLength(0);
             MoveAnimationUp.Begin();
         }
 
@@ -97,11 +130,21 @@ namespace PinMessaging.View
             }
         }
 
+        private void InitLocationServices()
+        {
+            if (AccessLocationMsgBox() == 1)
+                LaunchLocalization();
+        }
+
         public void UpdateMapCenter()
         {
             Dispatcher.BeginInvoke(() =>
             {
-                if (_geoLocation.GeopositionUser != null)
+                if (_geoLocation == null)
+                {
+                    InitLocationServices();
+                }
+                else if (_geoLocation.GeopositionUser != null)
                 {
                     Map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
                 }
@@ -132,7 +175,7 @@ namespace PinMessaging.View
         {
             if (_isUnderMenuOpen == true)
             {
-                MainGridMap.RowDefinitions[2].Height = new GridLength(90);
+                MainGridMap.RowDefinitions[1].Height = new GridLength(90);
            
                 _currentView = CurrentMapPageView.MapView;
                 _isUnderMenuOpen = false;
@@ -387,6 +430,7 @@ namespace PinMessaging.View
             var pc = new PMPinController(RequestType.CreatePin, PostPinButton_ClickPostJob);
 
             PostPinButton_ClickPreJob();
+
             switch (ListPickerPinType.SelectedIndex)
             {
                 case ((int)PMPinModel.PinsType.PublicMessage):
@@ -468,5 +512,6 @@ namespace PinMessaging.View
                 PinTitle.Focus();
             }
         }
+
     }
 }

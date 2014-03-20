@@ -61,6 +61,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à allow.
+        /// </summary>
+        public static string Allow {
+            get {
+                return ResourceManager.GetString("Allow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Connection.
         /// </summary>
         public static string ButtonConnection {
@@ -84,6 +93,15 @@ namespace PinMessaging.Resources {
         public static string ButtonValidate {
             get {
                 return ResourceManager.GetString("ButtonValidate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
@@ -444,6 +462,24 @@ namespace PinMessaging.Resources {
         public static string SignInPageTitle {
             get {
                 return ResourceManager.GetString("SignInPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Sharing this information helps us provide and improve the location-based services offered for this phone. We won&apos;t use the information to identify or contact you..
+        /// </summary>
+        public static string UseLocationContent {
+            get {
+                return ResourceManager.GetString("UseLocationContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Allow this application to access and use your location?.
+        /// </summary>
+        public static string UseLocationTitle {
+            get {
+                return ResourceManager.GetString("UseLocationTitle", resourceCulture);
             }
         }
         

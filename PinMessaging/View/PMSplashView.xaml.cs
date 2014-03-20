@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using Microsoft.Phone.Controls;
 using PinMessaging.Controller;
+using PinMessaging.Resources;
 using PinMessaging.Utils;
 using System.Windows;
 using PinMessaging.Other;

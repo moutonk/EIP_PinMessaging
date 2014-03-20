@@ -1,4 +1,5 @@
-﻿using PinMessaging.Model;
+﻿using System;
+using PinMessaging.Model;
 using System.IO.IsolatedStorage;
 
 namespace PinMessaging.Other
@@ -19,11 +20,13 @@ namespace PinMessaging.Other
 
         private const string ConnectionInfos = "pinmessagingConnectionInfos";
         private const string FirstConnection = "pinmessagingFirstConnection";
+        private const string AccessLocation = "pinmessagingAccessLocation";
 
         public static void ResetAll()
         {
             IsolatedStorageSettings.ApplicationSettings.Remove(ConnectionInfos);
             IsolatedStorageSettings.ApplicationSettings.Remove(FirstConnection);
+            IsolatedStorageSettings.ApplicationSettings.Remove(AccessLocation);
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
@@ -47,8 +50,21 @@ namespace PinMessaging.Other
         public static PMLogInModel GetLoginPwd()
         {
             return IsolatedStorageSettings.ApplicationSettings.Contains(ConnectionInfos) == true
-                ? (PMLogInModel) IsolatedStorageSettings.ApplicationSettings[ConnectionInfos]
+                ? (PMLogInModel)IsolatedStorageSettings.ApplicationSettings[ConnectionInfos]
                 : null;
+        }
+
+        public static void SaveAccessLocation(bool status)
+        {
+            IsolatedStorageSettings.ApplicationSettings[AccessLocation] = status;
+            IsolatedStorageSettings.ApplicationSettings.Save();
+        }
+
+        public static bool? GetAccessLocation()
+        {
+            return IsolatedStorageSettings.ApplicationSettings.Contains(AccessLocation) == true
+                ? (bool)IsolatedStorageSettings.ApplicationSettings[AccessLocation]
+                : (bool?)null;
         }
     }
 }

@@ -154,6 +154,22 @@
           <source>Public Message</source>
           <target state="translated">Message public</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/UseLocationTitle" xml:space="preserve">
+          <source>Allow this application to access and use your location?</source>
+          <target state="new">Allow this application to access and use your location?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/UseLocationContent" xml:space="preserve">
+          <source>Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</source>
+          <target state="new">Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Cancel" xml:space="preserve">
+          <source>cancel</source>
+          <target state="new">cancel</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/Allow" xml:space="preserve">
+          <source>allow</source>
+          <target state="new">allow</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/PinPrivateMessage" xml:space="preserve">
           <source>Private Message</source>
           <target state="translated">Message privé</target>
