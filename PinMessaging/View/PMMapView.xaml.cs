@@ -356,11 +356,15 @@ namespace PinMessaging.View
         {
             if (ListPickerPinType.SelectedIndex == ((int)PMPinModel.PinsType.PrivateMessage))
             {
-                GridNewPinPivotItem.RowDefinitions[1].Height = GridNewPinPivotItem.RowDefinitions[2].Height;
+                GridNewPinPivotItem.RowDefinitions[2].Height = GridNewPinPivotItem.RowDefinitions[3].Height;
+            }
+            else if (ListPickerPinType.SelectedIndex == ((int) PMPinModel.PinsType.Event))
+            {
+                GridNewPinPivotItem.RowDefinitions[1].Height = GridNewPinPivotItem.RowDefinitions[3].Height;
             }
             else
             {
-                GridNewPinPivotItem.RowDefinitions[1].Height = new GridLength(0);
+                GridNewPinPivotItem.RowDefinitions[2].Height = new GridLength(0);
             }
         }
 

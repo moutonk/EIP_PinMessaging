@@ -98,6 +98,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="0"></RowDefinition>
+                                <RowDefinition Height="0"></RowDefinition>
                                 <RowDefinition Height="70"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="210"></RowDefinition>
@@ -121,19 +122,23 @@
                                     </DataTemplate>
                                 </toolkit:ListPicker.FullModeItemTemplate>
                             </toolkit:ListPicker>
-                            <TextBox Grid.Row="1" x:Name="PinReceiver" KeyDown="PinReceiver_OnKeyDown" AcceptsReturn="False" MaxLength="20" TextWrapping="Wrap" Background="{StaticResource PhoneContrastBackgroundBrush}" Text="Receiver" BorderThickness="0" Foreground="Black" Margin="10,0,0,-10"/>
-                            <TextBox Grid.Row="2" x:Name="PinTitle" KeyDown="PinTitle_OnKeyDown" AcceptsReturn="False" MaxLength="20" TextWrapping="Wrap" Margin="10,0,0,-10" Background="{StaticResource PhoneContrastBackgroundBrush}" Text="Title" BorderThickness="0">
+                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0,0,-10">
+                                <toolkit:DatePicker x:Name="DateEvent" Height="70" Background="{StaticResource PhoneContrastBackgroundBrush}" BorderThickness="0" Foreground="Black" />
+                                <toolkit:TimePicker x:Name="TimeEvent" Height="70" Width="117"/>
+                            </StackPanel>
+                            <TextBox Grid.Row="2" x:Name="PinReceiver" KeyDown="PinReceiver_OnKeyDown" AcceptsReturn="False" MaxLength="20" TextWrapping="Wrap" Background="{StaticResource PhoneContrastBackgroundBrush}" Text="Receiver" BorderThickness="0" Foreground="Black" Margin="10,0,0,-10"/>
+                            <TextBox Grid.Row="3" x:Name="PinTitle" KeyDown="PinTitle_OnKeyDown" AcceptsReturn="False" MaxLength="20" TextWrapping="Wrap" Margin="10,0,0,-10" Background="{StaticResource PhoneContrastBackgroundBrush}" Text="Title" BorderThickness="0">
                                 <TextBox.Foreground>
                                     <SolidColorBrush Color="Black"></SolidColorBrush>
                                 </TextBox.Foreground>
                             </TextBox>
-                            <TextBox Grid.Row="3" x:Name="PinContent" MaxLength="100" TextWrapping="Wrap" Text="TextBoxsdqsdqsdqsdqsdsqdqsd" Margin="10,0,0,0" Background="{StaticResource PhoneContrastBackgroundBrush}" AcceptsReturn="True" BorderThickness="0">
+                            <TextBox Grid.Row="4" x:Name="PinContent" MaxLength="100" MaxWidth="420" TextWrapping="Wrap" Text="TextBoxsdqsdqsdqsdqsdsqdqsd" Margin="10,0,0,0" Background="{StaticResource PhoneContrastBackgroundBrush}" AcceptsReturn="True" BorderThickness="0">
                             	<TextBox.Foreground>
                                     <SolidColorBrush Color="Black"></SolidColorBrush>
                                 </TextBox.Foreground>
                             </TextBox>
-                            <Image Grid.Row="4" x:Name="PinImage" Stretch="Fill" Width="395" Source="\Images\empty_gallery.png" Margin="10,0,0,0" HorizontalAlignment="Center"/>
-                            <Button Grid.Row="5" x:Name="PostPinButton" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="10,0,0,-10" Click="PostPinButton_Click"/>
+                            <Image Grid.Row="5" x:Name="PinImage" Stretch="Fill" Width="395" Source="\Images\empty_gallery.png" Margin="10,0,0,0" HorizontalAlignment="Center"/>
+                            <Button Grid.Row="6" x:Name="PostPinButton" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="10,0,0,-10" Click="PostPinButton_Click"/>
                         </Grid>
                    
                     </phone:PivotItem>
