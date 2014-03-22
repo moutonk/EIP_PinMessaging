@@ -43,6 +43,9 @@ namespace PinMessaging.Utils
         public static readonly Uri FlagRU = new Uri("/Images/Flags/RU.png", UriKind.Relative);
         public static readonly Uri FlagSE = new Uri("/Images/Flags/SE.png", UriKind.Relative);
 
+        public static readonly Uri IconMapWhite = new Uri("/Images/Icons/map_white_icon.png", UriKind.Relative);
+
+
         public static Dictionary<PMPinModel.PinsType, BitmapImage> PinsMapImg;
 
         static Paths()

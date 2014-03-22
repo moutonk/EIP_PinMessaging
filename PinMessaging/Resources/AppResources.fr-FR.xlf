@@ -56,7 +56,7 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/MenuAbout" xml:space="preserve">
           <source>About</source>
-          <target state="translated">A propos</target>
+          <target state="translated">A propos de PinMessaging</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/NetworkProblem" xml:space="preserve">
           <source>Please check your internet connection and try again</source>
@@ -157,6 +157,10 @@
         <trans-unit translate="yes" id="Resx/UseLocationTitle" xml:space="preserve">
           <source>Allow this application to access and use your location?</source>
           <target state="new">Allow this application to access and use your location?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/MyAccount" xml:space="preserve">
+          <source>My Account</source>
+          <target state="new">My Account</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/UseLocationContent" xml:space="preserve">
           <source>Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</source>

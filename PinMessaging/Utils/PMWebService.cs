@@ -182,7 +182,9 @@ namespace PinMessaging.Utils
 
                 PMData.NetworkProblem = true;
 
-                Utils.CustomMessageBox(new[] { "Ok" }, "Oops !", AppResources.NetworkProblem);
+
+                //Enlever ca d'ici
+                //Utils.CustomMessageBox(new[] { "Ok" }, "Oops !", AppResources.NetworkProblem);
             }
 
             OnGoingRequest = false;

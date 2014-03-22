@@ -264,4 +264,7 @@
   <data name="UseLocationTitle" xml:space="preserve">
     <value>Allow this application to access and use your location?</value>
   </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>My Account</value>
+  </data>
 </root>

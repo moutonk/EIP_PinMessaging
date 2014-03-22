@@ -202,6 +202,10 @@
           <source>Allow this application to access and use your location?</source>
           <target state="new">Allow this application to access and use your location?</target>
         </trans-unit>
+        <trans-unit id="Resx/MyAccount" translate="yes" xml:space="preserve">
+          <source>My Account</source>
+          <target state="new">My Account</target>
+        </trans-unit>
       </group>
     </body>
   </file>
