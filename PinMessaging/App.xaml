@@ -4,12 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
-    xmlns:system="clr-namespace:System;assembly=mscorlib">
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:utils="clr-namespace:PinMessaging.Utils">
 
     <!--Ressources d'applications-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:PinMessaging" x:Key="LocalizedStrings"/>
-
 
         <SolidColorBrush x:Key="PMOrange">
             <Color>#FE953B</Color>

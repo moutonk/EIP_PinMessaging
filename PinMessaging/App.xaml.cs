@@ -7,6 +7,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using PinMessaging.Resources;
+using PinMessaging.Utils;
 
 namespace PinMessaging
 {
@@ -29,8 +30,9 @@ namespace PinMessaging
             // Initialisation du XAML standard
             InitializeComponent();
 
+
             // Initialisation spécifique au téléphone
-            InitializePhoneApplication();
+           InitializePhoneApplication();
 
             // Initialisation de l'affichage de la langue
             InitializeLanguage();

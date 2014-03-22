@@ -7,7 +7,9 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
@@ -37,6 +39,23 @@ namespace PinMessaging.View
         {
             InitializeComponent();
 
+            //central page
+            ImgTarget.ImageSource = new BitmapImage(Paths.TargetButton);
+            ImgMenuButton.ImageSource = new BitmapImage(Paths.MenuButton);
+            ImgNotificationButton.ImageSource = new BitmapImage(Paths.NotificationsButton);
+            ImgContactsButton.ImageSource = new BitmapImage(Paths.ContactsButton);
+            ImgPinsButton.ImageSource = new BitmapImage(Paths.PinsButton);
+
+            //left menu
+            ImgMap.Source = new BitmapImage(Paths.LeftMenuMap);
+            ImgFilters.Source = new BitmapImage(Paths.LeftMenuFilters);
+            ImgProfil.Source = new BitmapImage(Paths.LeftMenuProfil);
+            ImgPins.Source = new BitmapImage(Paths.LeftMenuPins);
+            ImgSettings.Source = new BitmapImage(Paths.LeftMenuSettings);
+            ImgAbout.Source = new BitmapImage(Paths.LeftMenuAbout);
+            ImgReward.Source = new BitmapImage(Paths.LeftMenuRewards);
+            ImgLogout.Source = new BitmapImage(Paths.LeftMenuLogout);
+      
             bool? accessLoc =  RememberConnection.GetAccessLocation();
             Logs.Output.ShowOutput(accessLoc.ToString());
 

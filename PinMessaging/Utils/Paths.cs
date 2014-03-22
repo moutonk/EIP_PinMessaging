@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media.Imaging;
-using Windows.ApplicationModel.Store;
 using PinMessaging.Model;
 
 namespace PinMessaging.Utils
 {
-    static class Paths
+    class Paths
     {
         public static readonly Uri LogInView = new Uri("/View/Logos/PMLogInView.xaml", UriKind.Relative);
         public static readonly Uri LogoSplashOrange = new Uri("/Images/Logos/logo_orange.png", UriKind.Relative);
@@ -43,7 +42,20 @@ namespace PinMessaging.Utils
         public static readonly Uri FlagRU = new Uri("/Images/Flags/RU.png", UriKind.Relative);
         public static readonly Uri FlagSE = new Uri("/Images/Flags/SE.png", UriKind.Relative);
 
-        public static readonly Uri IconMapWhite = new Uri("/Images/Icons/map_white_icon.png", UriKind.Relative);
+        public static readonly Uri TargetButton = new Uri("/Images/Menu/target@2x.png", UriKind.Relative);
+        public static readonly Uri MenuButton = new Uri("/Images/Menu/menu_icon_2@2x.png", UriKind.Relative);
+        public static readonly Uri NotificationsButton = new Uri("/Images/Icons/flag_orange_icon@2x.png", UriKind.Relative);
+        public static readonly Uri ContactsButton = new Uri("/Images/Icons/contact_orange_icon@2x.png", UriKind.Relative);
+        public static readonly Uri PinsButton = new Uri("/Images/Icons/logo_flat_orange@2x.png", UriKind.Relative);
+
+        public static readonly Uri LeftMenuMap = new Uri("/Images/Icons/map_white_icon@2x.png", UriKind.Relative);
+        public static readonly Uri LeftMenuFilters = new Uri("/Images/Icons/filer_white_icon@2x.png", UriKind.Relative);
+        public static readonly Uri LeftMenuProfil = new Uri("/Images/Icons/profile_white_icon@2x.png", UriKind.Relative);
+        public static readonly Uri LeftMenuPins = new Uri("/Images/Icons/logo_flat_white@2x.png", UriKind.Relative);
+        public static readonly Uri LeftMenuSettings = new Uri("/Images/Icons/settings_white_icon@2x.png", UriKind.Relative);
+        public static readonly Uri LeftMenuRewards = new Uri("/Images/Icons/cup_white_icon@2x.png", UriKind.Relative);
+        public static readonly Uri LeftMenuAbout = new Uri("/Images/Icons/about_white_icon@2x.png", UriKind.Relative);
+        public static readonly Uri LeftMenuLogout = new Uri("/Images/Icons/cross_white_icon@2x.png", UriKind.Relative);
 
 
         public static Dictionary<PMPinModel.PinsType, BitmapImage> PinsMapImg;
@@ -55,11 +67,11 @@ namespace PinMessaging.Utils
                 PinsMapImg = new Dictionary<PMPinModel.PinsType, BitmapImage>()
                 {
                     {PMPinModel.PinsType.PublicMessage, Design.CreateImage(new Uri(PinPublicMessage.ToString(), UriKind.Relative))},
-                    {PMPinModel.PinsType.PrivateMessage, Design.CreateImage(new Uri(Paths.PinPrivateMessage.ToString(), UriKind.Relative))},
-                    {PMPinModel.PinsType.Eye, Design.CreateImage(new Uri(Paths.PinEye.ToString(), UriKind.Relative))},
-                    {PMPinModel.PinsType.Event, Design.CreateImage(new Uri(Paths.PinEvent.ToString(), UriKind.Relative))},
-                    {PMPinModel.PinsType.PointOfInterest, Design.CreateImage(new Uri(Paths.PinPointOfInterest.ToString(), UriKind.Relative))},
-                    {PMPinModel.PinsType.CourseLastStep, Design.CreateImage(new Uri(Paths.PinCourseLastStep.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PrivateMessage, Design.CreateImage(new Uri(PinPrivateMessage.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.Eye, Design.CreateImage(new Uri(PinEye.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.Event, Design.CreateImage(new Uri(PinEvent.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PointOfInterest, Design.CreateImage(new Uri(PinPointOfInterest.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.CourseLastStep, Design.CreateImage(new Uri(PinCourseLastStep.ToString(), UriKind.Relative))},
                 };
             });
             
