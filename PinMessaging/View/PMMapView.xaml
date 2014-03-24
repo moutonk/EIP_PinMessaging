@@ -7,6 +7,7 @@
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:local="clr-namespace:PinMessaging.Utils"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     x:Class="PinMessaging.View.PMMapView"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -14,34 +15,35 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
     x:Name="this"
+    shell:SystemTray.IsVisible="True"
     Loaded="PMMapView_OnLoaded">
-   
+
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-	<Canvas x:Name="CentralCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black" ManipulationStarted="canvas_ManipulationStarted" ManipulationDelta="canvas_ManipulationDelta" ManipulationCompleted="canvas_ManipulationCompleted">
+    <Canvas x:Name="CentralCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black" ManipulationStarted="canvas_ManipulationStarted" ManipulationDelta="canvas_ManipulationDelta" ManipulationCompleted="canvas_ManipulationCompleted">
 
-		<Canvas.Resources>
-			<Storyboard x:Name="moveAnimation">
-				<DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="LayoutRoot" d:IsOptimized="True" />
-			</Storyboard>
-		</Canvas.Resources>
+        <Canvas.Resources>
+            <Storyboard x:Name="moveAnimation">
+                <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(Canvas.Left)" Storyboard.TargetName="LayoutRoot" d:IsOptimized="True" />
+            </Storyboard>
+        </Canvas.Resources>
 
-		<Canvas.Height>
-			<StaticResource ResourceKey="MapGridHeight"/>
-		</Canvas.Height>
+        <Canvas.Height>
+            <StaticResource ResourceKey="MapGridHeight"/>
+        </Canvas.Height>
 
-		<Canvas  x:Name="LayoutRoot" Width="{StaticResource LayoutRootWidth}"  VerticalAlignment="Stretch" Background="{StaticResource PMGrey}" Canvas.Left="{StaticResource LayoutRootLeftMargin}" Height="{StaticResource MapGridHeight}">
+        <Canvas  x:Name="LayoutRoot" Width="{StaticResource LayoutRootWidth}"  VerticalAlignment="Stretch" Background="{StaticResource PMGrey}" Canvas.Left="{StaticResource LayoutRootLeftMargin}" Height="{StaticResource MapGridHeight}">
 
-			<Grid x:Name="LeftMenuGrid" Width="{StaticResource AdditionalMapMenuWidth}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
+            <Grid x:Name="LeftMenuGrid" Width="{StaticResource AdditionalMapMenuWidth}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" >
 
-				<Grid.RowDefinitions>
-					<RowDefinition Height="5"/>
-					<RowDefinition Height="*"/>
-				</Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-				<ScrollViewer HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Top">
-					<Grid>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                <ScrollViewer HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Top">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource MapMenuHeight}"/>
                             <RowDefinition Height="2"/>
                             <RowDefinition Height="{StaticResource MapMenuHeight}"/>
                             <RowDefinition Height="{StaticResource MapMenuHeight}"/>
@@ -58,12 +60,12 @@
                             <RowDefinition Height="{StaticResource MapMenuHeight}"/>
                             <RowDefinition Height="2"/>
                         </Grid.RowDefinitions>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="100"/>
-							<ColumnDefinition Width="*"/>
-						</Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-						<Image  x:Name="ImgMap"  Grid.Column="0" Grid.Row="0" Tap="ButtonMap_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                        <Image  x:Name="ImgMap"  Grid.Column="0" Grid.Row="0" Tap="ButtonMap_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
                         <TextBlock x:Name="ButtonMap" Grid.Column="1" Grid.Row="0" Tap="ButtonMap_OnClick" Text="{Binding LocalizedResources.MenuMap, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
                         <Canvas Grid.Column="1" Grid.Row="1" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
                         <Image  x:Name="ImgFilters" Grid.Column="0" Grid.Row="2" Tap="ButtonFilters_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
@@ -92,26 +94,26 @@
                         <Canvas Grid.Column="1" Grid.Row="15" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
 
                     </Grid>
-				</ScrollViewer>
+                </ScrollViewer>
 
-			</Grid>
+            </Grid>
 
-			<Grid x:Name="RightMenuGrid" Width="{StaticResource AdditionalMapMenuWidth}" Canvas.Left="{StaticResource RightMenuGridLeftMargin}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}">
-				<Grid.RowDefinitions>
+            <Grid x:Name="RightMenuGrid" Width="{StaticResource AdditionalMapMenuWidth}" Canvas.Left="{StaticResource RightMenuGridLeftMargin}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="{Binding ActualHeight, ElementName=LayoutRoot}">
+                <Grid.RowDefinitions>
                     <RowDefinition Height="10"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <ProgressBar Grid.Row="0" x:Name="PostPinProgressBar" Foreground="{StaticResource PMOrange}" Visibility="Collapsed"/>
-				<phone:Pivot Grid.Row="1" Height="790" HorizontalAlignment="Left" Margin="-10,0,0,0" x:Name="pivot" Title="" VerticalAlignment="Top" Width="430" FontSize="20">
-		
+                <phone:Pivot Grid.Row="1" Height="790" HorizontalAlignment="Left" Margin="-10,0,0,0" x:Name="pivot" Title="" VerticalAlignment="Top" Width="430" FontSize="20">
+
                     <phone:Pivot.HeaderTemplate>
-						<DataTemplate>
-							<TextBlock FontSize="35" Text="{Binding}"/>
-							<!--<Image Source="/Images/Flags/FR.png"/>-->
-						</DataTemplate>
-					</phone:Pivot.HeaderTemplate>
-					
+                        <DataTemplate>
+                            <TextBlock FontSize="35" Text="{Binding}"/>
+                            <!--<Image Source="/Images/Flags/FR.png"/>-->
+                        </DataTemplate>
+                    </phone:Pivot.HeaderTemplate>
+
                     <phone:PivotItem x:Name="NewPinPivotItem" Header="Nouveau Pin" Margin="0,24,-264,-445" Background="{StaticResource PMGrey}" RenderTransformOrigin="0.494,0.707">
                         <Grid x:Name="GridNewPinPivotItem" VerticalAlignment="Stretch">
                             <Grid.RowDefinitions>
@@ -152,145 +154,148 @@
                                 </TextBox.Foreground>
                             </TextBox>
                             <TextBox Grid.Row="4" x:Name="PinContent" MaxLength="100" MaxWidth="420" TextWrapping="Wrap" Text="TextBoxsdqsdqsdqsdqsdsqdqsd" Margin="10,0,0,0" Background="{StaticResource PhoneContrastBackgroundBrush}" AcceptsReturn="True" BorderThickness="0">
-                            	<TextBox.Foreground>
+                                <TextBox.Foreground>
                                     <SolidColorBrush Color="Black"></SolidColorBrush>
                                 </TextBox.Foreground>
                             </TextBox>
                             <Image Grid.Row="5" x:Name="PinImage" Stretch="Fill" Width="395" Source="\Images\empty_gallery.png" Margin="10,0,0,0" HorizontalAlignment="Center"/>
                             <Button Grid.Row="6" x:Name="PostPinButton" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="10,0,0,-10" Click="PostPinButton_Click"/>
                         </Grid>
-                   
+
                     </phone:PivotItem>
-					
+
                     <phone:PivotItem Header="Favoris" Margin="0,28,-137,0" Background="{StaticResource PMGreen}">
-						<Grid>
-							<Image Height="150" HorizontalAlignment="Left" Margin="103,101,0,0" x:Name="image2" Stretch="Fill" VerticalAlignment="Top" Width="200" Source="Thumbnails/2.jpeg" />
-						</Grid>
-					</phone:PivotItem>
-					
+                        <Grid>
+                            <Image Height="150" HorizontalAlignment="Left" Margin="103,101,0,0" x:Name="image2" Stretch="Fill" VerticalAlignment="Top" Width="200" Source="Thumbnails/2.jpeg" />
+                        </Grid>
+                    </phone:PivotItem>
+
                     <phone:PivotItem Header="Mes Pins" Margin="0,28,-137,0" Background="{StaticResource PMYellow}">
-						<Grid>
-							<Image Height="150" HorizontalAlignment="Left" Margin="103,101,0,0" x:Name="image3" Stretch="Fill" VerticalAlignment="Top" Width="200" Source="Thumbnails/3.jpeg"/>
-						</Grid>
-					</phone:PivotItem>
-				</phone:Pivot>
+                        <Grid>
+                            <Image Height="150" HorizontalAlignment="Left" Margin="103,101,0,0" x:Name="image3" Stretch="Fill" VerticalAlignment="Top" Width="200" Source="Thumbnails/3.jpeg"/>
+                        </Grid>
+                    </phone:PivotItem>
+                </phone:Pivot>
 
-			</Grid>
+            </Grid>
 
-			<Grid x:Name="MainVerticalGrid" >
+            <Grid x:Name="MainVerticalGrid" >
 
-				<Grid.Resources>
-					<Storyboard x:Name="MoveAnimationUp">
-						<DoubleAnimation Duration="0:0:0.2" 
+                <Grid.Resources>
+                    <Storyboard x:Name="MoveAnimationUp">
+                        <DoubleAnimation Duration="0:0:0.2" 
 							To="1000" 
 							Storyboard.TargetProperty="(Grid.Height)"
 							Storyboard.TargetName="MainVerticalGrid" 
 							d:IsOptimized="True"
                                             />
-					</Storyboard>
-					<Storyboard x:Name="MoveAnimationDown">
-						<DoubleAnimation Duration="0:0:0.2" 
+                    </Storyboard>
+                    <Storyboard x:Name="MoveAnimationDown">
+                        <DoubleAnimation Duration="0:0:0.2" 
 							To="1600"
 							Storyboard.TargetProperty="(Grid.Height)"
 							Storyboard.TargetName="MainVerticalGrid" 
 							d:IsOptimized="True"
                                          />
-					</Storyboard>
-				</Grid.Resources>
+                    </Storyboard>
+                </Grid.Resources>
 
-				<Canvas.Left>
-					<StaticResource ResourceKey="AdditionalMapMenuWidth"/>
-				</Canvas.Left>
-				<Grid.Height>
-					<StaticResource ResourceKey="MainVerticalGridHeight"/>
-				</Grid.Height>
-				<Grid.Width>
-					<StaticResource ResourceKey="MainVerticalGridWidth"/>
-				</Grid.Width>
+                <Canvas.Left>
+                    <StaticResource ResourceKey="AdditionalMapMenuWidth"/>
+                </Canvas.Left>
+                <Grid.Height>
+                    <StaticResource ResourceKey="MainVerticalGridHeight"/>
+                </Grid.Height>
+                <Grid.Width>
+                    <StaticResource ResourceKey="MainVerticalGridWidth"/>
+                </Grid.Width>
 
-				<Grid.RowDefinitions>
-					<RowDefinition Height="*"/>
-					<RowDefinition Height="{StaticResource MapGridLength}"/>
-				</Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="{StaticResource MapGridLength}"/>
+                </Grid.RowDefinitions>
 
-				<Grid x:Name="MainGridMap" Grid.Row="0">
+                <Grid x:Name="MainGridMap" Grid.Row="0">
 
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="5"/>
                         <RowDefinition Height="*"/>
-                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="120"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" x:Name="GridMap" >
-						<maps:Map x:Name="Map" Pitch="45" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
-						<Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
-							<Button.Background>
+                    <ProgressBar x:Name="ProgressBarMap" Visibility="Visible" IsIndeterminate="True" Foreground="{StaticResource PMOrange}"/>
+
+                    <Grid Grid.Row="1" x:Name="GridMap" >
+                        <maps:Map x:Name="Map" Pitch="45" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
+                        <Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
+                            <Button.Background>
                                 <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill"/>
                             </Button.Background>
-						</Button>
-					</Grid>
+                        </Button>
+                    </Grid>
 
-					<Grid Grid.Row="1" x:Name="GridMapMenu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid Grid.Row="2" x:Name="GridMapMenu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="*"/>
-						</Grid.ColumnDefinitions>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="*"/>
-							<RowDefinition Height="30"/>
-						</Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
 
-                        <Button x:Name="MenuButton" Grid.Column="0" Grid.Row="0" Click="OpenClose_Left" HorizontalAlignment="Stretch" Margin="0,0,0,25" BorderThickness="0" Grid.RowSpan="2">
-							<Button.Background>
-								<ImageBrush x:Name="ImgMenuButton" Stretch="Uniform"/>
-							</Button.Background>
-						</Button>
-						<TextBlock Grid.Column="0" Grid.Row="1" Tap="OpenClose_Left" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Menu, Source={StaticResource LocalizedStrings}}"/>
+                        <Button x:Name="MenuButton" Grid.Column="0" Grid.Row="0" Click="OpenClose_Left" HorizontalAlignment="Stretch" Margin="0,0,0,47" BorderThickness="0" Grid.RowSpan="2">
+                            <Button.Background>
+                                <ImageBrush x:Name="ImgMenuButton" Stretch="Uniform"/>
+                            </Button.Background>
+                        </Button>
+                        <TextBlock Grid.Column="0" Grid.Row="1" Tap="OpenClose_Left" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Menu, Source={StaticResource LocalizedStrings}}"/>
 
-						<Button x:Name="NotificationButton" Click="MenuDown_OnClick" Grid.Column="1" Grid.Row="0" BorderThickness="0" HorizontalAlignment="Stretch" Margin="0,0,0,25" Grid.RowSpan="2">
-							<Button.Background>
-								<ImageBrush x:Name="ImgNotificationButton" Stretch="Uniform"/>
-							</Button.Background>
-						</Button>
-						<TextBlock Grid.Column="1" Grid.Row="1" Tap="MenuDown_OnClick" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Notifications, Source={StaticResource LocalizedStrings}}"/>
+                        <Button x:Name="NotificationButton" Click="MenuDown_OnClick" Grid.Column="1" Grid.Row="0" BorderThickness="0" HorizontalAlignment="Stretch" Margin="0,0,0,47" Grid.RowSpan="2">
+                            <Button.Background>
+                                <ImageBrush x:Name="ImgNotificationButton" Stretch="Uniform"/>
+                            </Button.Background>
+                        </Button>
+                        <TextBlock Grid.Column="1" Grid.Row="1" Tap="MenuDown_OnClick" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Notifications, Source={StaticResource LocalizedStrings}}"/>
 
-						<Button x:Name="ContactsButton" Grid.Column="2" Grid.Row="0" Click="MenuDown_OnClick" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Margin="0,0,0,25" Grid.RowSpan="2">
-							<Button.Background>
-								<ImageBrush x:Name="ImgContactsButton"  Stretch="Uniform"/>
-							</Button.Background>
-						</Button>
-						<TextBlock Grid.Column="2" Grid.Row="1" Tap="MenuDown_OnClick" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Contacts, Source={StaticResource LocalizedStrings}}"/>
+                        <Button x:Name="ContactsButton" Grid.Column="2" Grid.Row="0" Click="MenuDown_OnClick" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Margin="0,0,0,47" Grid.RowSpan="2">
+                            <Button.Background>
+                                <ImageBrush x:Name="ImgContactsButton"  Stretch="Uniform"/>
+                            </Button.Background>
+                        </Button>
+                        <TextBlock Grid.Column="2" Grid.Row="1" Tap="MenuDown_OnClick" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Contacts, Source={StaticResource LocalizedStrings}}"/>
 
-						<Button x:Name="PinsButton" Grid.Column="3" Grid.Row="0" Click="OpenClose_Right" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Margin="0,0,0,25" Grid.RowSpan="2">
-							<Button.Background>
-								<ImageBrush x:Name="ImgPinsButton" Stretch="Uniform"/>
-							</Button.Background>
-						</Button>
-						<TextBlock Grid.Column="3" Grid.Row="1" Tap="OpenClose_Right" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Pins, Source={StaticResource LocalizedStrings}}"/>
-					</Grid>
+                        <Button x:Name="PinsButton" Grid.Column="3" Grid.Row="0" Click="OpenClose_Right" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Margin="0,0,0,47" Grid.RowSpan="2">
+                            <Button.Background>
+                                <ImageBrush x:Name="ImgPinsButton" Stretch="Uniform"/>
+                            </Button.Background>
+                        </Button>
+                        <TextBlock Grid.Column="3" Grid.Row="1" Tap="OpenClose_Right" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Pins, Source={StaticResource LocalizedStrings}}"/>
+                    </Grid>
 
-				</Grid>
+                </Grid>
 
-				<Grid Grid.Row="1" x:Name="UnderMenuGrid" Background="{StaticResource PMGrey}">
-					<Grid Background="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="480">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="60"/>
-						</Grid.ColumnDefinitions>
+                <Grid Grid.Row="1" x:Name="UnderMenuGrid" Background="{StaticResource PMGrey}">
+                    <Grid Background="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="480">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
 
-						<TextBlock x:Name="DownMenuTitle" FontSize="32" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="405" Height="41" Margin="10,0,0,0"/>
+                        <TextBlock x:Name="DownMenuTitle" FontSize="32" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="405" Height="41" Margin="10,0,0,0"/>
 
-						<Button x:Name="CloseMenuDownButton" Content="X" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="64" Width="60" BorderThickness="0" Click="CloseMenuDownButton_Click"/>
-					</Grid>
+                        <Button x:Name="CloseMenuDownButton" Content="X" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="64" Width="60" BorderThickness="0" Click="CloseMenuDownButton_Click"/>
+                    </Grid>
 
-				</Grid>
+                </Grid>
 
-			</Grid>
+            </Grid>
 
-		</Canvas>
-	</Canvas>
+        </Canvas>
+    </Canvas>
 
 
 

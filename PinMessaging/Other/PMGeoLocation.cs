@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
+using System.Windows.Threading;
 using Windows.Devices.Geolocation;
 using PinMessaging.Controller;
 using PinMessaging.Utils;
@@ -15,6 +17,7 @@ namespace PinMessaging.Other
         readonly Geolocator _geolocatorUser = new Geolocator();
         readonly PMMapView _mapView = null;
         bool _firstPositionChanged = false;
+        private bool _firstUpdateLocationOver = false;
 
         public PMGeoLocation(PMMapView mapView)
         {
@@ -97,7 +100,15 @@ namespace PinMessaging.Other
 
         public async void UpdateLocation()
         {
-            GeopositionUser = await _geolocatorUser.GetGeopositionAsync(maximumAge: TimeSpan.FromMinutes(5), timeout: TimeSpan.FromSeconds(10));
+            GeopositionUser = await _geolocatorUser.GetGeopositionAsync();
+
+            if (_firstUpdateLocationOver == false)
+            {
+                _mapView.UpdateMapCenter();
+                _mapView.ProgressBarActive(false);
+            }
+
+            _firstUpdateLocationOver = true;
         }
     }
 }

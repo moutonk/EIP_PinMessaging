@@ -91,6 +91,24 @@ namespace PinMessaging.View
             UpdateLocationUI();    
         }
 
+        public void ProgressBarActive(bool st)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                if (st == false)
+                {
+                    ProgressBarMap.IsIndeterminate = false;
+                    ProgressBarMap.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ProgressBarMap.IsIndeterminate = true;
+                    ProgressBarMap.Visibility = Visibility.Visible;
+                }
+            });
+        
+       }
+
         private int AccessLocationMsgBox()
         {
             int choice = Utils.Utils.CustomMessageBox(new[] { AppResources.Allow, AppResources.Cancel },
@@ -131,14 +149,14 @@ namespace PinMessaging.View
                 DownMenuTitle.Text = AppResources.Contacts;
             }
 
-            MainGridMap.RowDefinitions[1].Height = new GridLength(0);
+            MainGridMap.RowDefinitions[2].Height = new GridLength(0);
             MoveAnimationUp.Begin();
         }
 
         public void UpdateLocationUI()
         {
             _geoLocation.UpdateLocation();
-
+            
             if (_geoLocation.GeopositionUser != null)
             {
                 Dispatcher.BeginInvoke(() =>
@@ -146,7 +164,6 @@ namespace PinMessaging.View
                     if (_userSpot.Visibility == Visibility.Collapsed)
                         _userSpot.Visibility = Visibility.Visible;
                     _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
-
                 });
             }
         }
@@ -190,7 +207,7 @@ namespace PinMessaging.View
         {
             if (_isUnderMenuOpen == true)
             {
-                MainGridMap.RowDefinitions[1].Height = new GridLength(90);
+                MainGridMap.RowDefinitions[2].Height = new GridLength(120);
            
                 _currentView = CurrentMapPageView.MapView;
                 _isUnderMenuOpen = false;
