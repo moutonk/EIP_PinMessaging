@@ -123,7 +123,7 @@
                                 <RowDefinition Height="70"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="210"></RowDefinition>
-                                <RowDefinition Height="80"></RowDefinition>
+                                <RowDefinition Height="110"></RowDefinition>
                             </Grid.RowDefinitions>
                             <toolkit:ListPicker Grid.Row="0" x:Name="ListPickerPinType" SelectionChanged="ListPickerPinType_OnSelectionChanged" ExpansionMode="FullScreenOnly" ItemsSource="{Binding ListPickerPins, ElementName=this}" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" Width="380" Height="115" RenderTransformOrigin="0.496,0.766" BorderThickness="0">
                                 <toolkit:ListPicker.ItemTemplate>

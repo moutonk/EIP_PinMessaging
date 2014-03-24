@@ -18,6 +18,12 @@ namespace PinMessaging.Controller
             ParentRequestType = parentRequest;
         }
 
+        public PMSignInController(RequestType currentRequest) :
+            base(null, currentRequest, PMLogInCreateStructureModel.ActionType.SignIn)
+        {
+            CurrentRequestType = currentRequest;
+        }
+
         public void LogIn(PMLogInModel logInModel)
         {
             var dictionary = new Dictionary<string, string>

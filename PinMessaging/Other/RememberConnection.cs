@@ -1,6 +1,7 @@
 ﻿using System;
 using PinMessaging.Model;
 using System.IO.IsolatedStorage;
+using PinMessaging.Utils;
 
 namespace PinMessaging.Other
 {
@@ -32,12 +33,19 @@ namespace PinMessaging.Other
 
         public static bool IsFirstConnection()
         {
-            return IsolatedStorageSettings.ApplicationSettings.Contains(FirstConnection) == false;
+            return (IsolatedStorageSettings.ApplicationSettings.Contains(FirstConnection) == false);
         }
 
         public static void SetFirstConnection()
         {
-            IsolatedStorageSettings.ApplicationSettings[FirstConnection] = true;
+            if (IsolatedStorageSettings.ApplicationSettings.Contains(FirstConnection) == true)
+            {
+                IsolatedStorageSettings.ApplicationSettings[FirstConnection] = false;
+            }
+            else
+            {
+                IsolatedStorageSettings.ApplicationSettings[FirstConnection] = true;
+            }
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 

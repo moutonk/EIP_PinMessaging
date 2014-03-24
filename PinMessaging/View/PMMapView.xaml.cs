@@ -12,6 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using System.Device.Location;
+using Microsoft.Phone.Controls.Primitives;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Controls;
 using PinMessaging.Model;
@@ -82,9 +83,17 @@ namespace PinMessaging.View
             _geoLocation = new PMGeoLocation(this);
             _userSpotLayer.Content = _userSpot;
             _userSpot.Visibility = Visibility.Collapsed;
-            _mapLayer.Add(_userSpotLayer);
 
-            Map.Layers.Add(_mapLayer);
+            try
+            {
+                _mapLayer.Add(_userSpotLayer);
+                Map.Layers.Add(_mapLayer);
+                
+            }
+            catch (Exception)
+            {
+            }
+
 
             PMData.MapLayerContainer = _mapLayer;
 
@@ -126,10 +135,11 @@ namespace PinMessaging.View
 
         private void PMMapView_OnLoaded(object sender, RoutedEventArgs e)
         {
-            //if (RememberConnection.IsFirstConnection() == true)
-            //{
-            //    AccessLocationMsgBox();
-            //}
+            if (RememberConnection.IsFirstConnection() == true)
+            {
+                AccessLocationMsgBox();
+            }
+            RememberConnection.SetFirstConnection();
         }
 
         ////////////////////////////////////////////////    Middle Page    /////////////////////////////////////////////

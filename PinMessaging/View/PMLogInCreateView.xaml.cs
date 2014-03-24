@@ -362,6 +362,8 @@ namespace PinMessaging.View
                         if (isOperationSuccessful)
                         {
                             RememberConnection.SaveLoginPwd(_pmLogInModel);
+                            PMSignInController p = new PMSignInController(RequestType.SignIn);
+                            p.LogIn(_pmLogInModel);
                             MoveProgressBarSignUpPart3.Begin();
                         }
                         else
@@ -417,8 +419,7 @@ namespace PinMessaging.View
 
         private void SignInUp_OnCompleted(object sender, EventArgs e)
         {
-            RememberConnection.SetFirstConnection();
-            NavigateToMap(); 
+               NavigateToMap(); 
         }
     }
 }

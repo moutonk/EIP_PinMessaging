@@ -3,9 +3,12 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
+using PinMessaging.Controller;
 using PinMessaging.Model;
+using PinMessaging.Other;
 using PinMessaging.Resources;
 using PinMessaging.Utils;
+using PinMessaging.Utils.WebService;
 
 namespace PinMessaging.View
 {
@@ -58,7 +61,12 @@ namespace PinMessaging.View
 
         private void PMFirstLaunchView_OnLoaded(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(Paths.MapView);
+          //  NavigationService.Navigate(Paths.MapView);
+            //if (RememberConnection.IsFirstConnection() == false)
+            //{
+            //    PMSignInController p = new PMSignInController(null, null, RequestType.SignIn, PMLogInCreateStructureModel.ActionType.SignIn);
+            //    p.LogIn(RememberConnection.GetLoginPwd());
+            //}
         }
     }
 }

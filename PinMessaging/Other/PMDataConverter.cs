@@ -32,8 +32,8 @@ namespace PinMessaging.Other
                             break;
 
                         case RequestType.SignUp:
-                            var item3 = JsonConvert.DeserializeObject<JArray>(json);
-                            PMData.IsSignUpSuccess = Boolean.Parse((string) item3[0]);
+                            var item3 = JsonConvert.DeserializeObject<JObject>(json);
+                            PMData.IsSignUpSuccess = Boolean.Parse((string) item3.GetValue("success"));
                             break;
 
                         case RequestType.GetPins:
