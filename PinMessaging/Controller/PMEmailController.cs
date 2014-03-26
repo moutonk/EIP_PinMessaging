@@ -1,5 +1,6 @@
 ﻿using PinMessaging.Model;
 using PinMessaging.Other;
+using PinMessaging.Resources;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
 using System;
@@ -39,20 +40,25 @@ namespace PinMessaging.Controller
                 {
                     switch (CurrentRequestType)
                     {
-                        case RequestType.CheckEmail:
-                            UpdateUi(CurrentRequestType, ParentRequestType, PMData.IsEmailDispo);
-                            break;
-                        case RequestType.SignUp:
-                            UpdateUi(CurrentRequestType, ParentRequestType, PMData.IsSignUpSuccess);
-                            break;
-                        case RequestType.SignIn:
-                            UpdateUi(CurrentRequestType, ParentRequestType, PMData.IsSignInSuccess);
-                            break;
+                            case RequestType.CheckEmail:
+                                UpdateUi(CurrentRequestType, ParentRequestType, PMData.IsEmailDispo);
+                                break;
+                            case RequestType.SignUp:
+                                UpdateUi(CurrentRequestType, ParentRequestType, PMData.IsSignUpSuccess);
+                                break;
+                            case RequestType.SignIn:
+                                UpdateUi(CurrentRequestType, ParentRequestType, PMData.IsSignInSuccess);
+                                break;
                     }
-                }
-                //For request without UI change
-                else if (ChangeView != null)
-                {
+                    if (PMData.NetworkProblem == true)
+                    {
+                        Utils.Utils.CustomMessageBox(new[] { "Ok" }, "Oops !", AppResources.NetworkProblem);
+                        UpdateUi = null;
+                    }
+               }
+               //For request without UI change
+               else if (ChangeView != null)
+               {
                     switch (CurrentRequestType)
                     {
                         case RequestType.SignIn:
