@@ -124,6 +124,7 @@
     <Compile Include="Controller\PMAdsManager.cs" />
     <Compile Include="Utils\Logs.cs" />
     <Compile Include="Utils\Paths.cs" />
+    <Compile Include="Utils\PMConnectivity.cs" />
     <Compile Include="Utils\PMWebService.cs" />
     <Compile Include="Utils\PMWebServiceEndDetector.cs" />
     <Compile Include="Utils\Utils.cs" />

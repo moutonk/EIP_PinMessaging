@@ -36,7 +36,7 @@
         <system:Double x:Key="PMTitleFontSize">55</system:Double>
         <system:Double x:Key="PMErrorFontSize">20</system:Double>
 
-        <GridLength x:Key="MapMenuHeight">77</GridLength>
+        <GridLength x:Key="MapMenuHeight">83</GridLength>
 
         <system:Double x:Key="LayoutRootLeftMargin">-420</system:Double>
         <system:Double x:Key="AdditionalMapMenuWidth">420</system:Double>

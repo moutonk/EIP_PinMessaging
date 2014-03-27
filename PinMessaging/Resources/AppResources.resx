@@ -267,4 +267,7 @@
   <data name="MyAccount" xml:space="preserve">
     <value>My Account</value>
   </data>
+  <data name="LogoutSentence" xml:space="preserve">
+    <value>Are you sure to logout?</value>
+  </data>
 </root>

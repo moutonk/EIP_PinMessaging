@@ -162,6 +162,10 @@
           <source>My Account</source>
           <target state="new">My Account</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/LogoutSentence" xml:space="preserve">
+          <source>Are you sure to logout?</source>
+          <target state="new">Are you sure to logout?</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/UseLocationContent" xml:space="preserve">
           <source>Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</source>
           <target state="new">Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</target>

@@ -142,6 +142,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Are you sure to logout?.
+        /// </summary>
+        public static string LogoutSentence {
+            get {
+                return ResourceManager.GetString("LogoutSentence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Menu.
         /// </summary>
         public static string Menu {

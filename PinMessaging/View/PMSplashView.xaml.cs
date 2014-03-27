@@ -17,6 +17,7 @@ namespace PinMessaging.View
         {
             InitializeComponent();
 
+            PMConnectivity.ShowConnectivity();
 
             //RememberConnection.ResetAll();
 

@@ -27,11 +27,15 @@ namespace PinMessaging.Controller
         {
             if (pin.Type != null)
             {
-                if (pin.Type.Equals("Event"))
+                if (pin.Type.Equals("Public_msg"))
+                    pin.PinTypeEnum = PMPinModel.PinsType.PublicMessage;
+                else if (pin.Type.Equals("Private_msg"))
+                    pin.PinTypeEnum = PMPinModel.PinsType.PrivateMessage;
+                else if (pin.Type.Equals("Event"))
                     pin.PinTypeEnum = PMPinModel.PinsType.Event;
-                else if (pin.Type.Equals("Eye"))
+                else if (pin.Type.Equals("View_point"))
                     pin.PinTypeEnum = PMPinModel.PinsType.Eye;                    
-                else if (pin.Type.Equals("Lol"))
+                else if (pin.Type.Equals("Interest_point"))
                     pin.PinTypeEnum = PMPinModel.PinsType.PointOfInterest;
                 else
                     pin.PinTypeEnum = PMPinModel.PinsType.PrivateMessage;

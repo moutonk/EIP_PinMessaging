@@ -109,7 +109,11 @@ namespace PinMessaging.Other
             {
                 var item = JsonConvert.DeserializeObject<JArray>(json);
 
-                if (item.Count == 2)
+                if (item.Count == 1)
+                {
+                    
+                }
+                else if (item.Count == 2)
                 {
                     try
                     {
@@ -129,8 +133,7 @@ namespace PinMessaging.Other
                         }
                         else if (Convert.ToBoolean(item[0].ToString()) == false)
                         {
-                            Logs.Error.ShowError("DO nothing for now", Logs.Error.ErrorsPriority.NotCritical);
-                               
+                            Logs.Error.ShowError("User is not connected. Error " + item[1].ToString(), Logs.Error.ErrorsPriority.NotCritical);
                         }
                     }
                     catch (Exception exp)
@@ -140,7 +143,7 @@ namespace PinMessaging.Other
                 }
                 else
                 {
-                    Logs.Error.ShowError("ParseGetPins: 2 tokens are expected, got " + item.Count, Logs.Error.ErrorsPriority.NotCritical);
+                    Logs.Error.ShowError("ParseGetPins: 1 or 2 tokens are expected, got " + item.Count, Logs.Error.ErrorsPriority.NotCritical);
                 }
             }
             catch (Exception exp)

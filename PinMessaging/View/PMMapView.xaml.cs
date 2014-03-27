@@ -382,13 +382,18 @@ namespace PinMessaging.View
 
         private void ButtonLogout_OnClick(object sender, RoutedEventArgs e)
         {
-            try
+            int choice = Utils.Utils.CustomMessageBox(new[] {AppResources.Yes, AppResources.No}, AppResources.MenuLogout, AppResources.LogoutSentence);
+
+            if (choice == 0)
             {
-                 NavigationService.Navigate(Paths.FirstLaunch);
-            }
-            catch (Exception exp)
-            {
-                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
+                try
+                {
+                    NavigationService.Navigate(Paths.FirstLaunch);
+                }
+                catch (Exception exp)
+                {
+                    Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
+                }
             }
         }
 
