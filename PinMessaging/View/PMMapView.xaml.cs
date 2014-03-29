@@ -34,7 +34,7 @@ namespace PinMessaging.View
         readonly MapLayer _mapLayer = new MapLayer();
         readonly MapOverlay _userSpotLayer = new MapOverlay();
         readonly UserLocationMarker _userSpot = new UserLocationMarker();
-        PMGeoLocation _geoLocation = null;
+        public PMGeoLocation _geoLocation = null;
 
         public PMMapView()
         {
@@ -66,6 +66,7 @@ namespace PinMessaging.View
                 LaunchLocalization();      
             }
 
+            PMMapPinController.Init(this);
             LoadRessources();
 
             listPickerPins = new List<ElementsListPicker> 

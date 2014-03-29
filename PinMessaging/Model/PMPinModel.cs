@@ -4,7 +4,9 @@ using System.ComponentModel;
 using System.Device.Location;
 using System.Diagnostics;
 using System.Windows.Controls;
+using PinMessaging.Controller;
 using PinMessaging.Utils;
+using PinMessaging.View;
 
 namespace PinMessaging.Model
 {
@@ -51,6 +53,7 @@ namespace PinMessaging.Model
         public void img_Tap(object sender, System.Windows.Input.GestureEventArgs e)
         {
             Logs.Output.ShowOutput("Pin tapped!");
+            PMMapPinController.OnPinTapped(this);
         }
 
         public void ShowPinContent()
