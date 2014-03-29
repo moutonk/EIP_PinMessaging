@@ -241,11 +241,20 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Please check your internet connection and try again.
+        ///   Recherche une chaîne localisée semblable à Please check your connection and try again.
         /// </summary>
         public static string NetworkProblem {
             get {
                 return ResourceManager.GetString("NetworkProblem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à We cannot connect you to our services. Would you like to use the application offline?.
+        /// </summary>
+        public static string NetworkProblemServer {
+            get {
+                return ResourceManager.GetString("NetworkProblemServer", resourceCulture);
             }
         }
         

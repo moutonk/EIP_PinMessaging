@@ -157,7 +157,7 @@
     <value>Settings</value>
   </data>
   <data name="NetworkProblem" xml:space="preserve">
-    <value>Please check your internet connection and try again</value>
+    <value>Please check your connection and try again</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
@@ -269,5 +269,8 @@
   </data>
   <data name="LogoutSentence" xml:space="preserve">
     <value>Are you sure to logout?</value>
+  </data>
+  <data name="NetworkProblemServer" xml:space="preserve">
+    <value>We cannot connect you to our services. Would you like to use the application offline?</value>
   </data>
 </root>

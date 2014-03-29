@@ -77,6 +77,11 @@ namespace PinMessaging.View
                 new ElementsListPicker { Name = AppResources.PinPointOfView, ImgPath = Paths.PinEye},
                 new ElementsListPicker { Name = AppResources.PinPointOfInterest, ImgPath = Paths.PinPointOfInterest},
              };
+
+            if (PMData.AppMde == PMData.ApplicationMode.Offline)
+            {
+                PostPinButton.IsEnabled = false;
+            }
         }
 
         private void LaunchLocalization()

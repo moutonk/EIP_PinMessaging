@@ -59,8 +59,8 @@
           <target state="new">Settings</target>
         </trans-unit>
         <trans-unit id="Resx/NetworkProblem" translate="yes" xml:space="preserve">
-          <source>Please check your internet connection and try again</source>
-          <target state="new">Please check your internet connection and try again</target>
+          <source>Please check your connection and try again</source>
+          <target state="new">Please check your connection and try again</target>
         </trans-unit>
         <trans-unit id="Resx/No" translate="yes" xml:space="preserve">
           <source>No</source>
@@ -209,6 +209,10 @@
         <trans-unit id="Resx/LogoutSentence" translate="yes" xml:space="preserve">
           <source>Are you sure to logout?</source>
           <target state="new">Are you sure to logout?</target>
+        </trans-unit>
+        <trans-unit id="Resx/NetworkProblemServer" translate="yes" xml:space="preserve">
+          <source>We cannot connect you to our services. Would you like to use the application offline?</source>
+          <target state="new">We cannot connect you to our services. Would you like to use the application offline?</target>
         </trans-unit>
       </group>
     </body>

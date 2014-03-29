@@ -305,6 +305,18 @@ namespace PinMessaging.View
 
         public bool AdaptUI(RequestType currentType, PMLogInCreateStructureModel.ActionType parentRequestType, bool isOperationSuccessful)
         {
+            if (PMData.NetworkProblem == true)
+            {
+                int choice = Utils.Utils.CustomMessageBox(new[] {AppResources.Yes, AppResources.No}, "Oops !",
+                    AppResources.NetworkProblemServer);
+
+                if (choice == 0)
+                {
+                    NavigationService.Navigate(Paths.MapView);
+                    PMData.AppMde = PMData.ApplicationMode.Offline;                    
+                }
+            }
+
             if (PMData.NetworkProblem == false)
             {  
                 switch (currentType)

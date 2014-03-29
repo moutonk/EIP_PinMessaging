@@ -1,10 +1,12 @@
-﻿using PinMessaging.Model;
+﻿using System.Windows.Navigation;
+using PinMessaging.Model;
 using PinMessaging.Other;
 using PinMessaging.Resources;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
 using System;
 using System.Collections.Generic;
+using PinMessaging.View;
 
 namespace PinMessaging.Controller
 {
@@ -50,11 +52,13 @@ namespace PinMessaging.Controller
                                 UpdateUi(CurrentRequestType, ParentRequestType, PMData.IsSignInSuccess);
                                 break;
                     }
-                    if (PMData.NetworkProblem == true)
-                    {
-                        Utils.Utils.CustomMessageBox(new[] { "Ok" }, "Oops !", AppResources.NetworkProblem);
-                        UpdateUi = null;
-                    }
+                    UpdateUi = null;
+
+                    //if (PMData.NetworkProblem == true)
+                    //{
+                    //    Utils.Utils.CustomMessageBox(new[] { "Ok" }, "Oops !", AppResources.NetworkProblem);
+                    //    UpdateUi = null;
+                    //}
                }
                //For request without UI change
                else if (ChangeView != null)

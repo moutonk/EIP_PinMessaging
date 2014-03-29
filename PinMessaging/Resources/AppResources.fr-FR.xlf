@@ -59,8 +59,8 @@
           <target state="translated">A propos de PinMessaging</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/NetworkProblem" xml:space="preserve">
-          <source>Please check your internet connection and try again</source>
-          <target state="new">Please check your internet connection and try again</target>
+          <source>Please check your connection and try again</source>
+          <target state="new">Please check your connection and try again</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/No" xml:space="preserve">
           <source>No</source>
@@ -165,6 +165,10 @@
         <trans-unit translate="yes" id="Resx/LogoutSentence" xml:space="preserve">
           <source>Are you sure to logout?</source>
           <target state="new">Are you sure to logout?</target>
+        </trans-unit>
+        <trans-unit translate="yes" id="Resx/NetworkProblemServer" xml:space="preserve">
+          <source>We cannot connect you to our services. Would you like to use the application offline?</source>
+          <target state="new">We cannot connect you to our services. Would you like to use the application offline?</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/UseLocationContent" xml:space="preserve">
           <source>Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</source>

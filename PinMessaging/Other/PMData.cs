@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Dynamic;
 using Microsoft.Phone.Maps.Controls;
 using PinMessaging.Model;
 
@@ -15,6 +16,10 @@ namespace PinMessaging.Other
         [DefaultValue(false)] public static bool IsChangePwdSuccess { get; set; }
         [DefaultValue(false)] public static bool IsChangeEmailSuccess { get; set; }
 
+        //offline mode / normal mode
+        public enum ApplicationMode { Normal, Offline }
+        [DefaultValue(ApplicationMode.Normal)] public static ApplicationMode AppMde { get; set; }
+ 
         [DefaultValue(false)]
         public static bool NetworkProblem { get; set; }
 
