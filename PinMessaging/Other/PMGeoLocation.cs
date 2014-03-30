@@ -91,7 +91,7 @@ namespace PinMessaging.Other
                 _mapView.UpdateMapCenter();
                 _firstPositionChanged = true;
 
-                if (PMData.AppMde == PMData.ApplicationMode.Normal)
+                if (PMData.AppMode == PMData.ApplicationMode.Normal)
                 {
                     var pc = new PMPinController(RequestType.GetPins, null);
                     pc.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Latitude.ToString()),

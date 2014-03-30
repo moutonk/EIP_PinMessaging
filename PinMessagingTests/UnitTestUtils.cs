@@ -177,7 +177,7 @@ namespace PinMessagingTests
            public void TestWebServiceGetPinsCorrect()
            {
                webServiceReponse = false;
-               var numberPinsBefore = PMData.PinsList.Count;
+               var numberPinsBefore = PMData.PinsListToAdd.Count;
 
                var dictionary = new Dictionary<string, string>
                {
@@ -191,7 +191,7 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               var numberPinsAfter = PMData.PinsList.Count;
+               var numberPinsAfter = PMData.PinsListToAdd.Count;
 
                Assert.IsTrue(numberPinsBefore < numberPinsAfter);
            }
@@ -199,7 +199,7 @@ namespace PinMessagingTests
            public void TestWebServiceGetPinsEmptyResult()
            {
                webServiceReponse = false;
-               var numberPinsBefore = PMData.PinsList.Count;
+               var numberPinsBefore = PMData.PinsListToAdd.Count;
 
                var dictionary = new Dictionary<string, string>
                {
@@ -214,7 +214,7 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               var numberPinsAfter = PMData.PinsList.Count;
+               var numberPinsAfter = PMData.PinsListToAdd.Count;
 
                Assert.IsTrue(numberPinsBefore == numberPinsAfter);
            }
@@ -223,7 +223,7 @@ namespace PinMessagingTests
            public void TestWebServiceCreatePin()
            {
                webServiceReponse = false;
-               var numberPinsBefore = PMData.PinsList.Count;
+               var numberPinsBefore = PMData.PinsListToAdd.Count;
 
                var dictionary = new Dictionary<string, string>
             {
@@ -240,7 +240,7 @@ namespace PinMessagingTests
     
                Thread.Sleep(1000);
 
-               var numberPinsAfter = PMData.PinsList.Count;
+               var numberPinsAfter = PMData.PinsListToAdd.Count;
 
                Assert.IsTrue(numberPinsBefore < numberPinsAfter);
            }

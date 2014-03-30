@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -78,10 +79,12 @@ namespace PinMessaging.View
                 new ElementsListPicker { Name = AppResources.PinPointOfInterest, ImgPath = Paths.PinPointOfInterest},
              };
 
-            if (PMData.AppMde == PMData.ApplicationMode.Offline)
+            if (PMData.AppMode == PMData.ApplicationMode.Offline)
             {
                 PostPinButton.IsEnabled = false;
             }
+
+            //PMData.LoadPins();
         }
 
         private void LaunchLocalization()
@@ -199,13 +202,14 @@ namespace PinMessaging.View
             });  
         }
 
-        protected override void OnBackKeyPress(System.ComponentModel.CancelEventArgs e)
+        protected override async void OnBackKeyPress(CancelEventArgs e)
         {
             int retValue = Utils.Utils.CustomMessageBox(new[] {"Yes", "No"}, AppResources.QuitAppTitle, AppResources.QuitApp);
 
             //0 is Yes, 1 is No....
             if (retValue == 0)
             {
+                bool ret = await PMData.SavePins();
                 Application.Current.Terminate();
             }
             else

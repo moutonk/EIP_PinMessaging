@@ -4,12 +4,14 @@ using System.ComponentModel;
 using System.Device.Location;
 using System.Diagnostics;
 using System.Windows.Controls;
+using Newtonsoft.Json;
 using PinMessaging.Controller;
 using PinMessaging.Utils;
 using PinMessaging.View;
 
 namespace PinMessaging.Model
 {
+    [JsonObject(MemberSerialization.OptIn)]
     public class PMPinModel
     {
         public enum PinsType
@@ -24,18 +26,18 @@ namespace PinMessaging.Model
             CourseLastStep
         }
 
-        [DefaultValue(null)] private string PinTitle { get; set; }
-        [DefaultValue(null)] public string Id { get; set; }
-        [DefaultValue(null)] public string Type { get; set; }
-        [DefaultValue(null)] public string Description { get; set; }
-        [DefaultValue(null)] public string Url { get; set; }
-        [DefaultValue(null)] public string Lang { get; set; }
-        [DefaultValue(null)] public string CreationTime { get; set; }
-        public Dictionary<string, string> Location { get; set; }       
+        [JsonProperty] [DefaultValue(null)] public string PinTitle { get; set; }
+        [JsonProperty] [DefaultValue(null)] public string Id { get; set; }
+        [JsonProperty] [DefaultValue(null)] public string Type { get; set; }
+        [JsonProperty] [DefaultValue(null)] public string Description { get; set; }
+        [JsonProperty] [DefaultValue(null)] public string Url { get; set; }
+        [JsonProperty] [DefaultValue(null)] public string Lang { get; set; }
+        [JsonProperty] [DefaultValue(null)] public string CreationTime { get; set; }
+        [JsonProperty] public Dictionary<string, string> Location { get; set; }
 
-        [DefaultValue(PinsType.PublicMessage)] public PinsType PinTypeEnum { get; set; }
-        [DefaultValue(null)] public Image PinImg { get; set; }
-        [DefaultValue(null)] public GeoCoordinate GeoCoord { get; set; }
+        [JsonProperty] [DefaultValue(PinsType.PublicMessage)] public PinsType PinTypeEnum { get; set; }
+                       [DefaultValue(null)] public Image PinImg { get; set; }
+        [JsonProperty] [DefaultValue(null)] public GeoCoordinate GeoCoord { get; set; }
         
         /*public PMPinModel(PinsType type, GeoCoordinate pos)
         {

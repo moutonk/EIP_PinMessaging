@@ -313,7 +313,7 @@ namespace PinMessaging.View
                 if (choice == 0)
                 {
                     NavigationService.Navigate(Paths.MapView);
-                    PMData.AppMde = PMData.ApplicationMode.Offline;                    
+                    PMData.AppMode = PMData.ApplicationMode.Offline;                    
                 }
             }
 

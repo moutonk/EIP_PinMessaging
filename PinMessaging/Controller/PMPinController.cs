@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Globalization;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using Windows.Devices.Geolocation;
@@ -16,14 +17,19 @@ namespace PinMessaging.Controller
     class PMPinController : PMWebServiceEndDetector
     {
         private readonly Action _updateUiMethod;
- 
+
+        public PMPinController()
+        {
+            
+        }
+
         public PMPinController(RequestType currentRequestType, Action updateUi)
         {
             CurrentRequestType = currentRequestType;
             _updateUiMethod = updateUi;
         }
 
-        private static void ConvertTypeToEnumAndImg(PMPinModel pin)
+        private static void ConvertTypeToEnum(PMPinModel pin)
         {
             if (pin.Type != null)
             {
@@ -59,13 +65,21 @@ namespace PinMessaging.Controller
         public  void CompleteDataMember(PMPinModel pin)
         {
             ConvertGeoPosToInteger(pin);
-            ConvertTypeToEnumAndImg(pin);
+            ConvertTypeToEnum(pin);
 
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
+            if (Deployment.Current.Dispatcher.CheckAccess() == false)
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    pin.PinImg = new Image { Source = Paths.PinsMapImg[pin.PinTypeEnum] };
+                    pin.PinImg.Tap += pin.img_Tap;
+                }); 
+            }
+            else
             {
                 pin.PinImg = new Image { Source = Paths.PinsMapImg[pin.PinTypeEnum] };
                 pin.PinImg.Tap += pin.img_Tap;
-            });
+            }
         }
 
         public void GetPins(double latitude, double longitude)
@@ -108,14 +122,16 @@ namespace PinMessaging.Controller
                 switch (CurrentRequestType)
                 {
                     case RequestType.GetPins:
-                        foreach (var pin in PMData.PinsList)
+                        foreach (var pin in PMData.PinsListToAdd)
                             PMMapPinController.AddPinToMap(pin);
-                        PMData.PinsList.Clear();
+                        PMData.PinsList.AddRange(PMData.PinsListToAdd);
+                        PMData.PinsListToAdd.Clear();
                         break;
                     case RequestType.CreatePin:
-                        foreach (var pin in PMData.PinsList)
+                        foreach (var pin in PMData.PinsListToAdd)
                             PMMapPinController.AddPinToMap(pin);
-                        PMData.PinsList.Clear();
+                        PMData.PinsList.AddRange(PMData.PinsListToAdd);
+                        PMData.PinsListToAdd.Clear();
                         if (_updateUiMethod != null)
                             _updateUiMethod();
                         break;
