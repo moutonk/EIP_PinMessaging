@@ -84,7 +84,7 @@ namespace PinMessaging.View
                 PostPinButton.IsEnabled = false;
             }
 
-            //PMData.LoadPins();
+            PMData.LoadPins();
         }
 
         private void LaunchLocalization()

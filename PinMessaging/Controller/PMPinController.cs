@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Globalization;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -62,19 +63,22 @@ namespace PinMessaging.Controller
             }
         }
 
-        public  void CompleteDataMember(PMPinModel pin)
+        public void CompleteDataMember(PMPinModel pin)
         {
             ConvertGeoPosToInteger(pin);
             ConvertTypeToEnum(pin);
 
+            //if it's the main thread
             if (Deployment.Current.Dispatcher.CheckAccess() == false)
             {
+                //we invoke the UI thread
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
                     pin.PinImg = new Image { Source = Paths.PinsMapImg[pin.PinTypeEnum] };
                     pin.PinImg.Tap += pin.img_Tap;
                 }); 
             }
+            //otherwise it's already in the UI thread
             else
             {
                 pin.PinImg = new Image { Source = Paths.PinsMapImg[pin.PinTypeEnum] };
@@ -112,6 +116,16 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
+        private void AddPinUiAndCode()
+        {
+            foreach (var pin in PMData.PinsListToAdd.Where(pin => PMMapPinController.IsPinUnique(pin) == true))
+            {
+                PMMapPinController.AddPinToMap(pin);
+                PMData.PinsList.Add(pin);
+            }
+            PMData.PinsListToAdd.Clear();
+        }
+
         protected override void waitEnd_Tick(object sender, EventArgs e)
         {
             if (PMWebService.OnGoingRequest == false)
@@ -122,20 +136,15 @@ namespace PinMessaging.Controller
                 switch (CurrentRequestType)
                 {
                     case RequestType.GetPins:
-                        foreach (var pin in PMData.PinsListToAdd)
-                            PMMapPinController.AddPinToMap(pin);
-                        PMData.PinsList.AddRange(PMData.PinsListToAdd);
-                        PMData.PinsListToAdd.Clear();
+                        AddPinUiAndCode();
                         break;
                     case RequestType.CreatePin:
-                        foreach (var pin in PMData.PinsListToAdd)
-                            PMMapPinController.AddPinToMap(pin);
-                        PMData.PinsList.AddRange(PMData.PinsListToAdd);
-                        PMData.PinsListToAdd.Clear();
+                        AddPinUiAndCode();
                         if (_updateUiMethod != null)
                             _updateUiMethod();
                         break;
                 }
+                Logs.Output.ShowOutput("PinListSize: " + PMData.PinsList.Count);
             }
         }
     }

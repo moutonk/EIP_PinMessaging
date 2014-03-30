@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Device.Location;
 using System.IO;
 using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using Windows.Storage;
-using Windows.Storage.Streams;
 using Microsoft.Phone.Maps.Controls;
-using Microsoft.Phone.Tasks;
 using Newtonsoft.Json;
 using PinMessaging.Controller;
 using PinMessaging.Model;
@@ -40,6 +35,9 @@ namespace PinMessaging.Other
         //contain all the pins
         [DefaultValue(null)] public static MapLayer MapLayerContainer { get; set; }
 
+        //contains all the pins known (serialized)
+        private const string DataFile = "pinsStorage.dat";
+
         static PMData()
         {
             PinsList = new List<PMPinModel>();
@@ -57,83 +55,60 @@ namespace PinMessaging.Other
 
         public async static void LoadPins()
         {
-            JsonSerializer serializer = new JsonSerializer();
+            Logs.Output.ShowOutput("------------------------LOAD PINS BEGIN------------------");
 
-            // Get the app data folder and create or replace the file we are storing the JSON in.            
-            StorageFolder localFolder = ApplicationData.Current.LocalFolder;
-            StorageFile textFile = await localFolder.GetFileAsync("test.dat");
+            var serializer = new JsonSerializer();
 
-            // read the JSON string!
-            using (StreamReader sw = new StreamReader(textFile.Path))
-            using (JsonReader reader = new JsonTextReader(sw))
+            if (File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + DataFile) == true)
             {
-                PinsList = serializer.Deserialize<List<PMPinModel>>(reader);
-                PMPinController pc = new PMPinController();
+                // Get the app data folder and create or replace the file we are storing the JSON in.            
+                var textFile = await ApplicationData.Current.LocalFolder.GetFileAsync(DataFile);
 
-                foreach (var pmPinModel in PinsList)
+                // read the JSON string!
+                using (var sw = new StreamReader(textFile.Path))
+                using (JsonReader reader = new JsonTextReader(sw))
                 {
-                    Logs.Output.ShowOutput("------------------------LOAD------------------");
-                    pc.CompleteDataMember(pmPinModel);
-                    pmPinModel.ShowPinContent();
-                    PMMapPinController.AddPinToMap(pmPinModel);
+                    var list = serializer.Deserialize<List<PMPinModel>>(reader);
+                    Logs.Output.ShowOutput("Deserialized " + list.Count.ToString() + " pins");                
+
+                    var pc = new PMPinController();
+
+                    foreach (var pmPinModel in list)
+                    {
+                        if (PMMapPinController.IsPinUnique(pmPinModel) == true)
+                        {
+                            pc.CompleteDataMember(pmPinModel);
+                            pmPinModel.ShowPinContent();
+                            PMMapPinController.AddPinToMap(pmPinModel);
+                            PinsList.Add(pmPinModel);
+                        }
+                    }
                 }
             }
-        }
-
-        private class Product
-        {
-            public string Name { get; set; }
-            public Dictionary<string, string> Location { get; set; }
-            public string NullTest { get; set; }
-            public GeoCoordinate geo { get; set; }
-            public Image img { get; set; }
+            else
+            {
+                Logs.Output.ShowOutput("Storage file does not exist");
+            }
+            Logs.Output.ShowOutput("------------------------LOAD PINS END------------------");
         }
 
         public async static Task<bool> SavePins()
         {
-            //List<Product> list = new List<Product>();
+            Logs.Output.ShowOutput("------------------------SAVE PINS BEGIN------------------");
 
-            //Product product = new Product();
-            //product.Name = "Apple";
-            //product.NullTest = null;
-            //product.geo = new GeoCoordinate() {Longitude = 12.000, Latitude = 45.22222};
-            //product.img = new Image() {Source = new BitmapImage(Paths.PinEvent)};
-            //product.Location = new Dictionary<string, string>()
-            //{
-            //    {"Test", "mdr"},
-            //    {"Ligne2", "plouf"}
-            //};
-            //Product product1 = new Product();
-            //product1.Name = "Pomme";
-            //product1.NullTest = null;
-            //product1.Location = new Dictionary<string, string>()
-            //{
-            //    {"qsdsqd", "aaaaa"},
-            //    {"sqs", "dsqdsqd"}
-            //};
-
-            //list.Add(product);
-            //list.Add(product1);
-
-
-            //string output = JsonConvert.SerializeObject(list);
-
-            //Logs.Output.ShowOutput(output);
-            Logs.Output.ShowOutput("------------------------SAVEPINS------------------");
-            var serializer = new JsonSerializer {NullValueHandling = NullValueHandling.Ignore};
+            var serializer = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
 
             // Get the app data folder and create or replace the file we are storing the JSON in.            
-            StorageFile textFile = await ApplicationData.Current.LocalFolder.CreateFileAsync("test.dat", CreationCollisionOption.ReplaceExisting);
+            StorageFile textFile = await ApplicationData.Current.LocalFolder.CreateFileAsync(DataFile, CreationCollisionOption.ReplaceExisting);
 
             // write the JSON string!
             using (var sw = new StreamWriter(textFile.Path))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
-                Logs.Output.ShowOutput("------------------------SAVE BEFORE------------------");
                 serializer.Serialize(writer, PinsList);
-                //Logs.Output.ShowOutput(JsonConvert.SerializeObject(PinsList));
-                Logs.Output.ShowOutput("------------------------SAVE AFTER------------------");
             }
+            Logs.Output.ShowOutput("------------------------SAVE PINS END------------------");
+
             return true;
         }
     }

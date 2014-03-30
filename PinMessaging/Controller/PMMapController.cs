@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Linq;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Microsoft.Phone.Maps.Controls;
 using PinMessaging.Model;
@@ -24,6 +25,15 @@ namespace PinMessaging.Controller
         public static void Init(PMMapView mapview)
         {
             _mapView = mapview;
+        }
+
+        public static bool IsPinUnique(PMPinModel pin)
+        {
+            bool val = !PMData.PinsList.Any(listPin => listPin.Id == pin.Id);
+
+            Logs.Output.ShowOutput(val == false ? "Pin is not unique" : "Pin is unique");
+
+            return val;
         }
 
         public static void AddPinToMap(PMPinModel pin)
