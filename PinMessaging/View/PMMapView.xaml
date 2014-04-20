@@ -259,14 +259,14 @@
                                 <ImageBrush x:Name="ImgNotificationButton" Stretch="Uniform"/>
                             </Button.Background>
                         </Button>
-                        <TextBlock Grid.Column="1" Grid.Row="1" Tap="MenuDown_OnClick" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Notifications, Source={StaticResource LocalizedStrings}}"/>
+                        <TextBlock x:Name="NotificationButtonTextBlock" Grid.Column="1" Grid.Row="1" Tap="MenuDown_OnClick" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Notifications, Source={StaticResource LocalizedStrings}}"/>
 
                         <Button x:Name="ContactsButton" Grid.Column="2" Grid.Row="0" Click="MenuDown_OnClick" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Margin="0,0,0,47" Grid.RowSpan="2">
                             <Button.Background>
                                 <ImageBrush x:Name="ImgContactsButton"  Stretch="Uniform"/>
                             </Button.Background>
                         </Button>
-                        <TextBlock Grid.Column="2" Grid.Row="1" Tap="MenuDown_OnClick" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Contacts, Source={StaticResource LocalizedStrings}}"/>
+                        <TextBlock x:Name="ContactsButtonTextBlock" Grid.Column="2" Grid.Row="1" Tap="MenuDown_OnClick" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Contacts, Source={StaticResource LocalizedStrings}}"/>
 
                         <Button x:Name="PinsButton" Grid.Column="3" Grid.Row="0" Click="OpenClose_Right" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="0" Margin="0,0,0,47" Grid.RowSpan="2">
                             <Button.Background>
@@ -297,7 +297,6 @@
 
                     <ScrollViewer Grid.Row="1">
                         <StackPanel x:Name="UnderMenuContactPanel" Orientation="Vertical">
-                            <Button Content="lolil"></Button>
                         </StackPanel>
                     </ScrollViewer>
 

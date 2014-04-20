@@ -160,13 +160,17 @@ namespace PinMessaging.View
             _isUnderMenuOpen = true;
             _enableSwipe = false;
 
-            if (sender.Equals(NotificationButton))
+            if (sender.Equals(NotificationButton) || sender.Equals(NotificationButtonTextBlock))
             {
                 DownMenuTitle.Text = AppResources.Notifications;
+                UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
+                UnderMenuGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
             }
-            else if (sender.Equals(ContactsButton))
+            else if (sender.Equals(ContactsButton) || sender.Equals(ContactsButtonTextBlock))
             {
                 DownMenuTitle.Text = AppResources.Contacts;
+                UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
+                UnderMenuGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Star);
                 LoadContacts();
             }
 
@@ -419,18 +423,18 @@ namespace PinMessaging.View
 
         private Grid CreateContactItem()
         {
-            var contactGrid = new Grid {ShowGridLines = true};
+            var contactGrid = new Grid();
 
             contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100) });
             contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(60) });
 
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(30) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(130) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(50) });
 
             var contactImg = new Image() { Source = new BitmapImage(Paths.PinEye)};
             var contactName = new TextBlock() { Text = "Nom du mec", FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
-            var onlineImg = new Image() { Source = new BitmapImage(Paths.FlagCN) };
+            var onlineImg = new Image() { Source = new BitmapImage(Paths.FlagCN), Margin = new Thickness(0, 0, 10, 0)};
             var privateMsg = new TextBlock() { Text = "Private msg", FontSize = 15, VerticalAlignment = VerticalAlignment.Center };
             var userProfil = new TextBlock() { Text = "User profil", FontSize = 15, VerticalAlignment = VerticalAlignment.Center };
             var localise = new TextBlock() { Text = "localise", FontSize = 15, VerticalAlignment = VerticalAlignment.Center };
