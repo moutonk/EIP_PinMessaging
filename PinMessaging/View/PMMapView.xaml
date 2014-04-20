@@ -279,21 +279,32 @@
                 </Grid>
 
                 <Grid Grid.Row="1" x:Name="UnderMenuGrid" Background="{StaticResource PMGrey}">
-                    <Grid Background="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="480">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0" Background="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="480">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
-
-                        <TextBlock x:Name="DownMenuTitle" FontSize="32" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="405" Height="41" Margin="10,0,0,0"/>
-
-                        <Button x:Name="CloseMenuDownButton" Content="X" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="64" Width="60" BorderThickness="0" Click="CloseMenuDownButton_Click"/>
+                        
+                        <TextBlock x:Name="DownMenuTitle" FontSize="32" Grid.Row="0" Grid.Column="0" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="405" Height="41" Margin="10,0,0,0"/>
+                        <Button x:Name="CloseMenuDownButton" Content="X" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="64" Width="60" BorderThickness="0" Click="CloseMenuDownButton_Click"/>
                     </Grid>
 
+                    <ScrollViewer Grid.Row="1">
+                        <StackPanel x:Name="UnderMenuContactPanel" Orientation="Vertical">
+                            <Button Content="lolil"></Button>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <Grid x:Name="UnderMenuPinGrid" Grid.Row="2">
+                    </Grid>
                 </Grid>
-
             </Grid>
-
         </Canvas>
     </Canvas>
 

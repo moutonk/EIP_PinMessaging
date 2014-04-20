@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using Windows.Foundation.Metadata;
 using Microsoft.Phone.Controls;
 using System.Device.Location;
-using Microsoft.Phone.Controls.Primitives;
+using Microsoft.Phone.Info;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Controls;
 using PinMessaging.Model;
@@ -22,6 +22,7 @@ using PinMessaging.Other;
 using PinMessaging.Resources;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
+using Color = Microsoft.Xna.Framework.Color;
 
 namespace PinMessaging.View
 {
@@ -166,6 +167,7 @@ namespace PinMessaging.View
             else if (sender.Equals(ContactsButton))
             {
                 DownMenuTitle.Text = AppResources.Contacts;
+                LoadContacts();
             }
 
             MainGridMap.RowDefinitions[2].Height = new GridLength(0);
@@ -413,6 +415,60 @@ namespace PinMessaging.View
         private void CloseMenuDownButton_Click(object sender, RoutedEventArgs e)
         {
             Map_OnTouch(sender, e);
+        }
+
+        private Grid CreateContactItem()
+        {
+            var contactGrid = new Grid {ShowGridLines = true};
+
+            contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100) });
+            contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(60) });
+
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(30) });
+
+            var contactImg = new Image() { Source = new BitmapImage(Paths.PinEye)};
+            var contactName = new TextBlock() { Text = "Nom du mec", FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
+            var onlineImg = new Image() { Source = new BitmapImage(Paths.FlagCN) };
+            var privateMsg = new TextBlock() { Text = "Private msg", FontSize = 15, VerticalAlignment = VerticalAlignment.Center };
+            var userProfil = new TextBlock() { Text = "User profil", FontSize = 15, VerticalAlignment = VerticalAlignment.Center };
+            var localise = new TextBlock() { Text = "localise", FontSize = 15, VerticalAlignment = VerticalAlignment.Center };
+
+            contactGrid.Children.Add(contactImg);
+            contactGrid.Children.Add(contactName);
+            contactGrid.Children.Add(onlineImg);
+            contactGrid.Children.Add(privateMsg);
+            contactGrid.Children.Add(userProfil);
+            contactGrid.Children.Add(localise);
+
+            Grid.SetRow(contactImg, 0);
+            Grid.SetColumn(contactImg, 0);
+
+            Grid.SetRow(contactName, 0);
+            Grid.SetColumn(contactName, 1);
+
+            Grid.SetRow(onlineImg, 0);
+            Grid.SetColumn(onlineImg, 2);
+
+            Grid.SetRow(privateMsg, 1);
+            Grid.SetColumn(privateMsg, 0);
+
+            Grid.SetRow(userProfil, 1);
+            Grid.SetColumn(userProfil, 1);
+
+            Grid.SetRow(localise, 1);
+            Grid.SetColumn(localise, 2);
+
+            return contactGrid;
+        }
+
+        private void LoadContacts()
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                UnderMenuContactPanel.Children.Add(CreateContactItem());
+            }
         }
 
         ////////////////////////////////////////////////    Right Menu    /////////////////////////////////////////////
