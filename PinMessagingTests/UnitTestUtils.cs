@@ -123,7 +123,7 @@ namespace PinMessagingTests
 
                var dictionary = new Dictionary<string, string>
                {
-                    {"login", "k.k@k.kk"},
+                    {"email", "k.k@k.kk"},
                     {"password", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1("kkkkkk"))}
                };
 
@@ -141,7 +141,7 @@ namespace PinMessagingTests
 
                var dictionary = new Dictionary<string, string>
                {
-                    {"login", "a@a.aa"},
+                    {"email", "a@a.aa"},
                     {"password", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1("wrongpassword!"))}
                };
 

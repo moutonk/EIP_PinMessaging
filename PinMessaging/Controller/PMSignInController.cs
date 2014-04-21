@@ -28,7 +28,7 @@ namespace PinMessaging.Controller
         {
             var dictionary = new Dictionary<string, string>
             {
-                {"login", logInModel.Email},
+                {"email", logInModel.Email},
                 {"password", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1(logInModel.Password))}
             };
 
