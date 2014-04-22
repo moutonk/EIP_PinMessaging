@@ -163,8 +163,9 @@ namespace PinMessaging.View
             if (sender.Equals(NotificationButton) || sender.Equals(NotificationButtonTextBlock))
             {
                 DownMenuTitle.Text = AppResources.Notifications;
-                UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
                 UnderMenuGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
+                UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);    
+                //UnderMenuContactPanel.Children.Clear();
             }
             else if (sender.Equals(ContactsButton) || sender.Equals(ContactsButtonTextBlock))
             {
@@ -425,19 +426,19 @@ namespace PinMessaging.View
         {
             var contactGrid = new Grid();
 
-            contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(100) });
+            contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(140) });
             contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(60) });
 
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(130) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(170) });
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(50) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
 
-            var contactImg = new Image() { Source = new BitmapImage(Paths.PinEye)};
+            var contactImg = new Canvas() {Background = new SolidColorBrush(Colors.DarkGray)}; //Image() { Source = new BitmapImage(Paths.PinEye)};
             var contactName = new TextBlock() { Text = "Nom du mec", FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
-            var onlineImg = new Image() { Source = new BitmapImage(Paths.FlagCN), Margin = new Thickness(0, 0, 10, 0)};
-            var privateMsg = new TextBlock() { Text = "Private msg", FontSize = 15, VerticalAlignment = VerticalAlignment.Center };
-            var userProfil = new TextBlock() { Text = "User profil", FontSize = 15, VerticalAlignment = VerticalAlignment.Center };
-            var localise = new TextBlock() { Text = "localise", FontSize = 15, VerticalAlignment = VerticalAlignment.Center };
+            var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0)};
+            var privateMsg = new TextBlock() { Text = "Private msg", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
+            var userProfil = new TextBlock() { Text = "User profil", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
+            var localise = new TextBlock() { Text = "localiser", FontSize = 20, Margin = new Thickness(10, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
 
             contactGrid.Children.Add(contactImg);
             contactGrid.Children.Add(contactName);

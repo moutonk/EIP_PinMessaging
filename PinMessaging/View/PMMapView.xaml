@@ -184,7 +184,7 @@
                 <Grid.Resources>
                     <Storyboard x:Name="MoveAnimationUp">
                         <DoubleAnimation Duration="0:0:0.2" 
-							To="1000" 
+							To="770" 
 							Storyboard.TargetProperty="(Grid.Height)"
 							Storyboard.TargetName="MainVerticalGrid" 
 							d:IsOptimized="True"
@@ -192,7 +192,7 @@
                     </Storyboard>
                     <Storyboard x:Name="MoveAnimationDown">
                         <DoubleAnimation Duration="0:0:0.2" 
-							To="1600"
+							To="1370"
 							Storyboard.TargetProperty="(Grid.Height)"
 							Storyboard.TargetName="MainVerticalGrid" 
 							d:IsOptimized="True"
@@ -212,7 +212,7 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="{StaticResource MapGridLength}"/>
+                    <RowDefinition Height="570"/>
                 </Grid.RowDefinitions>
 
                 <Grid x:Name="MainGridMap" Grid.Row="0">
@@ -226,7 +226,7 @@
                     <ProgressBar x:Name="ProgressBarMap" Visibility="Visible" IsIndeterminate="True" Foreground="{StaticResource PMOrange}"/>
 
                     <Grid Grid.Row="1" x:Name="GridMap" >
-                        <maps:Map x:Name="Map" Pitch="45" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
+                        <maps:Map x:Name="Map" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
                         <Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
                             <Button.Background>
                                 <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill"/>
@@ -285,7 +285,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" Background="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="74" VerticalAlignment="Top" Width="480">
+                    <Grid Grid.Row="0" Background="{StaticResource PMOrange}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="60"/>
