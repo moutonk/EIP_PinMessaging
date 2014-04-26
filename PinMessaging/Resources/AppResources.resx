@@ -273,4 +273,7 @@
   <data name="NetworkProblemServer" xml:space="preserve">
     <value>We cannot connect you to our services. Would you like to use the application offline?</value>
   </data>
+  <data name="Pin" xml:space="preserve">
+    <value>Pin</value>
+  </data>
 </root>

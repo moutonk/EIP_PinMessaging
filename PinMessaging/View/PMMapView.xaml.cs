@@ -22,7 +22,6 @@ using PinMessaging.Other;
 using PinMessaging.Resources;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
-using Color = Microsoft.Xna.Framework.Color;
 
 namespace PinMessaging.View
 {
@@ -154,29 +153,73 @@ namespace PinMessaging.View
 
         ////////////////////////////////////////////////    Middle Page    /////////////////////////////////////////////
 
-        private void MenuDown_OnClick(object sender, RoutedEventArgs e)
+        private void MenuDown_PinOnClick()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                _currentView = CurrentMapPageView.UnderMenuView;
+                _isUnderMenuOpen = true;
+                _enableSwipe = false;
+
+                DownMenuTitle.Text = AppResources.Pin;
+                UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
+                UnderMenuGrid.RowDefinitions[3].Height = new GridLength(1, GridUnitType.Star);
+                UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
+
+                MainGridMap.RowDefinitions[2].Height = new GridLength(0);
+                MoveAnimationUp.Begin();
+            });
+        }
+
+        private void MenuDown_NotificationOnClick()
+        {
+            DownMenuTitle.Text = AppResources.Notifications;
+            UnderMenuGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
+            UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
+            UnderMenuGrid.RowDefinitions[3].Height = new GridLength(0);
+            //UnderMenuContactPanel.Children.Clear();
+        }
+
+        private void MenuDown_ContactOnClick()
+        {
+            DownMenuTitle.Text = AppResources.Contacts;
+            UnderMenuGrid.RowDefinitions[3].Height = new GridLength(0);
+            UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
+            UnderMenuGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Star);
+            LoadContacts();
+        }
+
+        private void MenuDown_CommonActionsBefore()
         {
             _currentView = CurrentMapPageView.UnderMenuView;
             _isUnderMenuOpen = true;
             _enableSwipe = false;
+        }
 
-            if (sender.Equals(NotificationButton) || sender.Equals(NotificationButtonTextBlock))
+        private void MenuDown_CommonActionsAfter()
+        {
+            MainGridMap.RowDefinitions[2].Height = new GridLength(0);
+            MoveAnimationUp.Begin();
+        }
+
+        private void MenuDown_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (sender.Equals(ButtonPins))
             {
-                DownMenuTitle.Text = AppResources.Notifications;
-                UnderMenuGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
-                UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);    
-                //UnderMenuContactPanel.Children.Clear();
+                MenuDown_PinOnClick();
+            }
+            else if (sender.Equals(NotificationButton) || sender.Equals(NotificationButtonTextBlock))
+            {
+                MenuDown_CommonActionsBefore();
+                MenuDown_NotificationOnClick();
+                MenuDown_CommonActionsAfter();
             }
             else if (sender.Equals(ContactsButton) || sender.Equals(ContactsButtonTextBlock))
             {
-                DownMenuTitle.Text = AppResources.Contacts;
-                UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
-                UnderMenuGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Star);
-                LoadContacts();
+                MenuDown_CommonActionsBefore();
+                MenuDown_ContactOnClick();
+                MenuDown_CommonActionsAfter();
             }
-
-            MainGridMap.RowDefinitions[2].Height = new GridLength(0);
-            MoveAnimationUp.Begin();
         }
 
         public void UpdateLocationUI()
@@ -476,6 +519,11 @@ namespace PinMessaging.View
             }
         }
 
+        public void PinTapped(PMPinModel pin)
+        {
+            MenuDown_OnClick(ButtonPins, new RoutedEventArgs());
+        }
+
         ////////////////////////////////////////////////    Right Menu    /////////////////////////////////////////////
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -637,5 +685,9 @@ namespace PinMessaging.View
             }
         }
 
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Map.ZoomLevel -= 1;
+        }
     }
 }

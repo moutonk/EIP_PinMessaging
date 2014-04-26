@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Device.Location;
-using System.Diagnostics;
 using System.Windows.Controls;
 using Newtonsoft.Json;
 using PinMessaging.Controller;
 using PinMessaging.Utils;
-using PinMessaging.View;
 
 namespace PinMessaging.Model
 {

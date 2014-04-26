@@ -80,6 +80,7 @@ namespace PinMessaging.Controller
             if (IsAroundMe(pin) == true)
             {
                 pin.ShowPinContent();
+                _mapView.PinTapped(pin);
             }
         }
     }

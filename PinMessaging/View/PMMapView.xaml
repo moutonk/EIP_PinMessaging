@@ -232,6 +232,7 @@
                                 <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill"/>
                             </Button.Background>
                         </Button>
+                        <Button Click="ButtonBase_OnClick" Content="-" HorizontalAlignment="Left" Margin="416,0,0,0" VerticalAlignment="Top"/>
                     </Grid>
 
                     <Grid Grid.Row="2" x:Name="GridMapMenu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -283,6 +284,7 @@
                         <RowDefinition Height="{StaticResource MapMenuHeight}"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Background="{StaticResource PMOrange}">
@@ -300,7 +302,10 @@
                         </StackPanel>
                     </ScrollViewer>
 
-                    <Grid x:Name="UnderMenuPinGrid" Grid.Row="2">
+                    <Grid x:Name="UnderMenuNotificationGrid" Grid.Row="2">
+                    </Grid>
+
+                    <Grid x:Name="UnderMenuPinDescriptionGrid" Grid.Row="3" Background="BlueViolet" >
                     </Grid>
                 </Grid>
             </Grid>
