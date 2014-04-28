@@ -282,8 +282,8 @@
                 <Grid Grid.Row="1" x:Name="UnderMenuGrid" Background="{StaticResource PMGrey}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="{StaticResource MapMenuHeight}"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0"/>
+                        <RowDefinition Height="0"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -297,7 +297,7 @@
                         <Button x:Name="CloseMenuDownButton" Content="X" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="64" Width="60" BorderThickness="0" Click="CloseMenuDownButton_Click"/>
                     </Grid>
 
-                    <ScrollViewer Grid.Row="1">
+                    <ScrollViewer Grid.Row="1" x:Name="UnderMenuContactScrollViewer">
                         <StackPanel x:Name="UnderMenuContactPanel" Orientation="Vertical">
                         </StackPanel>
                     </ScrollViewer>
@@ -305,8 +305,53 @@
                     <Grid x:Name="UnderMenuNotificationGrid" Grid.Row="2">
                     </Grid>
 
-                    <Grid x:Name="UnderMenuPinDescriptionGrid" Grid.Row="3" Background="BlueViolet" >
-                    </Grid>
+                    <ScrollViewer Grid.Row="3">
+                        <Grid x:Name="UnderMenuPinDescriptionGrid" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="150"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                
+                                <Image Grid.Column="0" Source="/Images/Pins/public_message.png" Margin="10,10,10,10"/>
+                                
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock x:Name="PinTitleTextBlock" Text="{Binding LocalizedResources.PinTitle, Source={StaticResource LocalizedStrings}}" FontSize="25"  Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                    <TextBlock x:Name="PinTitleDescriptionTextBlock" FontWeight="Bold" FontSize="25" Text="Omg j'adore!!!!!!"></TextBlock>
+                                </StackPanel>
+                         
+                            </Grid>
+
+                            <StackPanel Grid.Row="1">
+                                <TextBlock x:Name="PinMessageTextBlock"  Text="{Binding LocalizedResources.PinMessage, Source={StaticResource LocalizedStrings}}" FontSize="25" Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                <TextBlock x:Name="PinMessageDescriptionTextBlock" TextWrapping="Wrap" FontSize="25" Margin="30,0,30,0" Text="Ceci est juste un text ecrit en brut pour faire un test sur l'ecran. Je sais que j'aurai pu faire un copier coller mais mes talents d'écrivains sont bien plus rénomé que ceux des journalistes écrivant au Monde. Blabla bla juste piur gagner quelque ligne et voir si tout est bon."></TextBlock>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2">
+                                <TextBlock x:Name="PinAuthorTextBlock" Text="{Binding LocalizedResources.PinAuthor, Source={StaticResource LocalizedStrings}}" FontSize="25" Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+
+                                    <Image Grid.Column="0" Grid.Row="0" Source="/Images/Flags/ES.png" Stretch="Uniform"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Text="Enrique Iglesias" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="25"></TextBlock>
+                                </Grid>
+                            </StackPanel>
+
+                        </Grid>
+                    </ScrollViewer>
+                    
                 </Grid>
             </Grid>
         </Canvas>

@@ -286,6 +286,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à PINS&apos;S AUTHOR.
+        /// </summary>
+        public static string PinAuthor {
+            get {
+                return ResourceManager.GetString("PinAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Event.
         /// </summary>
         public static string PinEvent {
@@ -300,6 +309,15 @@ namespace PinMessaging.Resources {
         public static string PinLastStep {
             get {
                 return ResourceManager.GetString("PinLastStep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à MESSAGE.
+        /// </summary>
+        public static string PinMessage {
+            get {
+                return ResourceManager.GetString("PinMessage", resourceCulture);
             }
         }
         
@@ -345,6 +363,15 @@ namespace PinMessaging.Resources {
         public static string Pins {
             get {
                 return ResourceManager.GetString("Pins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à TITLE.
+        /// </summary>
+        public static string PinTitle {
+            get {
+                return ResourceManager.GetString("PinTitle", resourceCulture);
             }
         }
         

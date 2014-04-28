@@ -276,4 +276,13 @@
   <data name="Pin" xml:space="preserve">
     <value>Pin</value>
   </data>
+  <data name="PinAuthor" xml:space="preserve">
+    <value>PINS'S AUTHOR</value>
+  </data>
+  <data name="PinMessage" xml:space="preserve">
+    <value>MESSAGE</value>
+  </data>
+  <data name="PinTitle" xml:space="preserve">
+    <value>TITLE</value>
+  </data>
 </root>

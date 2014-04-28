@@ -174,6 +174,18 @@
           <source>Pin</source>
           <target state="new">Pin</target>
         </trans-unit>
+        <trans-unit id="Resx/PinTitle" translate="yes" xml:space="preserve">
+          <source>TITLE</source>
+          <target state="new">TITLE</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinMessage" translate="yes" xml:space="preserve">
+          <source>MESSAGE</source>
+          <target state="new">MESSAGE</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinAuthor" translate="yes" xml:space="preserve">
+          <source>PINS'S AUTHOR</source>
+          <target state="new">PINS'S AUTHOR</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/UseLocationContent" xml:space="preserve">
           <source>Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</source>
           <target state="new">Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</target>

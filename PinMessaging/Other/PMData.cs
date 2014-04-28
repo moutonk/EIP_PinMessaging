@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Utils;
+using PinMessaging.View;
 
 namespace PinMessaging.Other
 {

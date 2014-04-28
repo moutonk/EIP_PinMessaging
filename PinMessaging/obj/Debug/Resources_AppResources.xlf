@@ -218,6 +218,18 @@
           <source>Pin</source>
           <target state="new">Pin</target>
         </trans-unit>
+        <trans-unit id="Resx/PinAuthor" translate="yes" xml:space="preserve">
+          <source>PINS'S AUTHOR</source>
+          <target state="new">PINS'S AUTHOR</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinMessage" translate="yes" xml:space="preserve">
+          <source>MESSAGE</source>
+          <target state="new">MESSAGE</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinTitle" translate="yes" xml:space="preserve">
+          <source>TITLE</source>
+          <target state="new">TITLE</target>
+        </trans-unit>
       </group>
     </body>
   </file>

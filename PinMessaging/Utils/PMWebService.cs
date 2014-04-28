@@ -54,6 +54,8 @@ namespace PinMessaging.Utils
             RemoveFavoriteLocation,
             [Description("Used to retrieve pins")]
             GetPins,
+            [Description("Used to retrieve a pin messages")]
+            GetPinMessages,
             [Description("Used to create a pin")]
             CreatePin
         }
@@ -92,6 +94,8 @@ namespace PinMessaging.Utils
                     return "changePass";
                 case RequestType.GetPins:
                     return "get-pins";
+                case RequestType.GetPinMessages:
+                    return "get-pin-messages";
                 case RequestType.CreatePin:
                     return "create-pin";
                 default:

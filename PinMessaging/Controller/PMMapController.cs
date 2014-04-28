@@ -1,6 +1,4 @@
 ﻿using System.Linq;
-using System.Windows.Controls;
-using System.Windows.Media;
 using Microsoft.Phone.Maps.Controls;
 using PinMessaging.Model;
 using PinMessaging.Other;
@@ -8,15 +6,45 @@ using PinMessaging.Utils;
 using System;
 using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Media.Imaging;
+using PinMessaging.Utils.WebService;
 using PinMessaging.View;
 
 namespace PinMessaging.Controller
 {
-    public static class PMMapController
+    public class PMMapController : PMWebServiceEndDetector
     {
-        
-    }
+        public PMMapController(RequestType currentRequestType)
+        {
+            CurrentRequestType = currentRequestType;
+        }
+       
+        public void GetPinInfos(PMPinModel pin)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"pinId", pin.Id},
+            };
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPinMessages, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
+        protected  override void waitEnd_Tick(object sender, EventArgs e)
+        {
+            if (PMWebService.OnGoingRequest == false)
+            {
+                StopTimer();
+
+                switch (CurrentRequestType)
+                {
+                    case RequestType.GetPinMessages:
+                        Logs.Output.ShowOutput("getpinmessages");
+                        break;
+                    }
+                }
+            }              
+        }
 
     public static class PMMapPinController
     {

@@ -163,8 +163,9 @@ namespace PinMessaging.View
 
                 DownMenuTitle.Text = AppResources.Pin;
                 UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
-                UnderMenuGrid.RowDefinitions[3].Height = new GridLength(1, GridUnitType.Star);
                 UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
+                UnderMenuGrid.RowDefinitions[3].Height = new GridLength(1, GridUnitType.Star);
+                UnderMenuContactPanel.Height = 0;
 
                 MainGridMap.RowDefinitions[2].Height = new GridLength(0);
                 MoveAnimationUp.Begin();
@@ -186,6 +187,7 @@ namespace PinMessaging.View
             UnderMenuGrid.RowDefinitions[3].Height = new GridLength(0);
             UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
             UnderMenuGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Star);
+            UnderMenuContactPanel.Height = UnderMenuContactScrollViewer.Height;
             LoadContacts();
         }
 
@@ -521,6 +523,10 @@ namespace PinMessaging.View
 
         public void PinTapped(PMPinModel pin)
         {
+            var mapC = new PMMapController(RequestType.GetPinMessages);
+
+            mapC.GetPinInfos(pin);
+
             MenuDown_OnClick(ButtonPins, new RoutedEventArgs());
         }
 
