@@ -68,6 +68,11 @@ namespace PinMessaging.Controller
             ConvertGeoPosToInteger(pin);
             ConvertTypeToEnum(pin);
 
+            if (pin.Location.ContainsKey("name") == true)
+            {
+                pin.PinTitle = pin.Location["name"];
+            }
+
             //if it's the main thread
             if (Deployment.Current.Dispatcher.CheckAccess() == false)
             {

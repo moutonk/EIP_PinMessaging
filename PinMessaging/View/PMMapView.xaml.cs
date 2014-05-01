@@ -525,7 +525,10 @@ namespace PinMessaging.View
         {
             var mapC = new PMMapController(RequestType.GetPinMessages);
 
-            mapC.GetPinInfos(pin);
+            mapC.GetPinMessage(pin);
+
+            PinTitleDescriptionTextBlock.Text = pin.PinTitle;
+            PinMessageDescriptionTextBlock.Text = pin.Description;
 
             MenuDown_OnClick(ButtonPins, new RoutedEventArgs());
         }

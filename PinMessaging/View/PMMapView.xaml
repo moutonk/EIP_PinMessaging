@@ -311,6 +311,7 @@
                                 <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="150"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             
                             <Grid Grid.Row="0">
@@ -323,7 +324,7 @@
                                 
                                 <StackPanel Grid.Column="1">
                                     <TextBlock x:Name="PinTitleTextBlock" Text="{Binding LocalizedResources.PinTitle, Source={StaticResource LocalizedStrings}}" FontSize="25"  Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
-                                    <TextBlock x:Name="PinTitleDescriptionTextBlock" FontWeight="Bold" FontSize="25" Text="Omg j'adore!!!!!!"></TextBlock>
+                                    <TextBlock x:Name="PinTitleDescriptionTextBlock" FontWeight="Bold" FontSize="25" Text="Omg j'adore!!!!!!"/>
                                 </StackPanel>
                          
                             </Grid>
@@ -347,6 +348,11 @@
                                     <Image Grid.Column="0" Grid.Row="0" Source="/Images/Flags/ES.png" Stretch="Uniform"/>
                                     <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Text="Enrique Iglesias" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="25"></TextBlock>
                                 </Grid>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="3">
+                                <TextBlock x:Name="PinCommentTextBlock"  Text="COMMENTS" FontSize="25" Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                <TextBlock x:Name="PinCommentContentTextBlock" TextWrapping="Wrap" FontSize="25" Margin="30,0,30,0" Text="Commentaire fake numero 1! Et hop ca passe sur 2 ligne maintennt."></TextBlock>
                             </StackPanel>
 
                         </Grid>

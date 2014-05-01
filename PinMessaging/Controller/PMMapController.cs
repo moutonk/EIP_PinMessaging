@@ -18,7 +18,7 @@ namespace PinMessaging.Controller
             CurrentRequestType = currentRequestType;
         }
        
-        public void GetPinInfos(PMPinModel pin)
+        public void GetPinMessage(PMPinModel pin)
         {
             var dictionary = new Dictionary<string, string>
             {
