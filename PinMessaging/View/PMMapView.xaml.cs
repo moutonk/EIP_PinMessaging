@@ -22,6 +22,7 @@ using PinMessaging.Other;
 using PinMessaging.Resources;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
+using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace PinMessaging.View
 {
@@ -164,7 +165,9 @@ namespace PinMessaging.View
                 DownMenuTitle.Text = AppResources.Pin;
                 UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
                 UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
+                UnderMenuGrid.RowDefinitions[4].Height = new GridLength(0);
                 UnderMenuGrid.RowDefinitions[3].Height = new GridLength(1, GridUnitType.Star);
+                UnderMenuPinDescriptionGrid.Height = UnderMenuPinDescriptionScrollView.Height;
                 UnderMenuContactPanel.Height = 0;
 
                 MainGridMap.RowDefinitions[2].Height = new GridLength(0);
@@ -178,6 +181,8 @@ namespace PinMessaging.View
             UnderMenuGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
             UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
             UnderMenuGrid.RowDefinitions[3].Height = new GridLength(0);
+            UnderMenuGrid.RowDefinitions[4].Height = new GridLength(0);
+            UnderMenuContactPanel.Height = 0;
             //UnderMenuContactPanel.Children.Clear();
         }
 
@@ -186,9 +191,22 @@ namespace PinMessaging.View
             DownMenuTitle.Text = AppResources.Contacts;
             UnderMenuGrid.RowDefinitions[3].Height = new GridLength(0);
             UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
+            UnderMenuGrid.RowDefinitions[4].Height = new GridLength(0);
             UnderMenuGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Star);
             UnderMenuContactPanel.Height = UnderMenuContactScrollViewer.Height;
             LoadContacts();
+        }
+
+        private void MenuDown_CreatePin()
+        {
+            DownMenuTitle.Text = "Create Pin";
+            UnderMenuGrid.RowDefinitions[3].Height = new GridLength(0);
+            UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
+            UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
+            UnderMenuGrid.RowDefinitions[4].Height = new GridLength(1, GridUnitType.Star);
+            UnderMenuContactPanel.Height = 0;
+            UnderMenuPinDescriptionGrid.Height = 0;
+            VisibilityExpandView.IsExpanded = true;
         }
 
         private void MenuDown_CommonActionsBefore()
@@ -220,6 +238,12 @@ namespace PinMessaging.View
             {
                 MenuDown_CommonActionsBefore();
                 MenuDown_ContactOnClick();
+                MenuDown_CommonActionsAfter();
+            }
+            else if (sender.Equals(CreatePinButton))
+            {
+                MenuDown_CommonActionsBefore();
+                MenuDown_CreatePin();
                 MenuDown_CommonActionsAfter();
             }
         }
@@ -697,6 +721,12 @@ namespace PinMessaging.View
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             Map.ZoomLevel -= 1;
+        }
+
+        private void CreatePincRadioButtons_OnTap(object sender, GestureEventArgs e)
+        {
+            TitleExpandView.IsExpanded = true;
+            VisibilityExpandView.IsExpanded = false;
         }
     }
 }

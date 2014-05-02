@@ -176,7 +176,6 @@
                         </Grid>
                     </phone:PivotItem>
                 </phone:Pivot>
-
             </Grid>
 
             <Grid x:Name="MainVerticalGrid" >
@@ -229,10 +228,25 @@
                         <maps:Map x:Name="Map" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
                         <Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
                             <Button.Background>
-                                <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill"/>
+                                <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill" ImageSource="target.png"/>
                             </Button.Background>
                         </Button>
                         <Button Click="ButtonBase_OnClick" Content="-" HorizontalAlignment="Left" Margin="416,0,0,0" VerticalAlignment="Top"/>
+                        <Button Name="RefreshPinButton" Click="MenuDown_OnClick" HorizontalAlignment="Left" Margin="110,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73">
+                            <Button.Background>
+                                <ImageBrush Stretch="Fill" ImageSource="refresh.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button Name="CreatePinButton" Click="MenuDown_OnClick" HorizontalAlignment="Left" Margin="206,10,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73">
+                            <Button.Background>
+                                <ImageBrush Stretch="Fill" ImageSource="new_pin_btn.png"/>
+                            </Button.Background>
+                        </Button>
+                        <Button Name="HelpButton" Click="MenuDown_OnClick" HorizontalAlignment="Left" Margin="300,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73">
+                            <Button.Background>
+                                <ImageBrush Stretch="Fill" ImageSource="help_btn.png"/>
+                            </Button.Background>
+                        </Button>
                     </Grid>
 
                     <Grid Grid.Row="2" x:Name="GridMapMenu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -284,6 +298,7 @@
                         <RowDefinition Height="{StaticResource MapMenuHeight}"/>
                         <RowDefinition Height="0"/>
                         <RowDefinition Height="0"/>
+                        <RowDefinition Height="0"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -305,7 +320,7 @@
                     <Grid x:Name="UnderMenuNotificationGrid" Grid.Row="2">
                     </Grid>
 
-                    <ScrollViewer Grid.Row="3">
+                    <ScrollViewer Grid.Row="3" x:Name="UnderMenuPinDescriptionScrollView">
                         <Grid x:Name="UnderMenuPinDescriptionGrid" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"></RowDefinition>
@@ -358,6 +373,57 @@
                         </Grid>
                     </ScrollViewer>
                     
+                    <ScrollViewer Grid.Row="4" x:Name="UnderMenuCreatePinGrid">
+                        <StackPanel>
+                            <toolkit:ExpanderView x:Name="VisibilityExpandView">
+                                <toolkit:ExpanderView.Expander>
+                                    <TextBlock FontSize="40" Foreground="{StaticResource PMOrange}" Text="Visibility" Margin="10,20,0,0"/>
+                                </toolkit:ExpanderView.Expander>
+                                <toolkit:ExpanderView.Items>
+                                    <StackPanel Orientation="Horizontal">
+                                        <RadioButton x:Name="PublicRadioButton" Tap="CreatePincRadioButtons_OnTap">Public</RadioButton>
+                                        <RadioButton x:Name="PrivateRadioButton" Tap="CreatePincRadioButtons_OnTap">Private</RadioButton>
+                                    </StackPanel>
+                                    </toolkit:ExpanderView.Items>
+                            </toolkit:ExpanderView>
+
+                            <toolkit:ExpanderView x:Name="PinTypeExpandView">
+                                <toolkit:ExpanderView.Expander>
+                                    <TextBlock FontSize="40" Text="Pin type" Margin="10,20,0,0"/>
+                                </toolkit:ExpanderView.Expander>
+                                <toolkit:ExpanderView.Items>
+                                </toolkit:ExpanderView.Items>
+                            </toolkit:ExpanderView>
+
+                            <toolkit:ExpanderView x:Name="TitleExpandView">
+                                <toolkit:ExpanderView.Expander>
+                                    <TextBlock FontSize="40" Text="Title"  Margin="10,20,0,0"/>
+                                </toolkit:ExpanderView.Expander>
+                                <toolkit:ExpanderView.Items>
+                                    <TextBox FontSize="25" MaxLength="50" Text="Fake title"/>
+                                </toolkit:ExpanderView.Items>
+                            </toolkit:ExpanderView>
+
+                            <toolkit:ExpanderView x:Name="DescriptionExpandView">
+                                <toolkit:ExpanderView.Expander >
+                                    <TextBlock FontSize="40" Text="Description" Margin="10,20,0,0"/>
+                                </toolkit:ExpanderView.Expander>
+                                <toolkit:ExpanderView.Items>
+                                    <TextBox FontSize="25" Text="Fake description" Height="200" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="200" MaxWidth="450"/>
+                                </toolkit:ExpanderView.Items>
+                            </toolkit:ExpanderView>
+
+                            <toolkit:ExpanderView>
+                                <toolkit:ExpanderView.Expander>
+                                    <TextBlock FontSize="40" Text="Event date" Margin="10,20,0,0"/>
+                                </toolkit:ExpanderView.Expander>
+                                <toolkit:ExpanderView.Items>
+                                    <toolkit:DatePicker x:Name="CreatePinDatePicker"></toolkit:DatePicker>
+                                </toolkit:ExpanderView.Items>
+                            </toolkit:ExpanderView>
+                        </StackPanel>
+                            
+                    </ScrollViewer>
                 </Grid>
             </Grid>
         </Canvas>

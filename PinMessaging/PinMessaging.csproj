@@ -226,6 +226,8 @@
     <Content Include="Images\Icons\heart_orange_icon.png" />
     <Content Include="Images\Icons\heart_white_icon%402x.png" />
     <Content Include="Images\Icons\heart_white_icon.png" />
+    <Content Include="Images\Menu\help_btn%402x.png" />
+    <Content Include="Images\Menu\help_btn.png" />
     <Content Include="Images\Icons\home_orange_icon%402x.png" />
     <Content Include="Images\Icons\home_orange_icon.png" />
     <Content Include="Images\Icons\home_white_icon%402x.png" />
@@ -246,6 +248,8 @@
     <Content Include="Images\Icons\menu_orange_icon.png" />
     <Content Include="Images\Icons\menu_white_icon%402x.png" />
     <Content Include="Images\Icons\menu_white_icon.png" />
+    <Content Include="Images\Menu\new_pin_btn%402x.png" />
+    <Content Include="Images\Menu\new_pin_btn.png" />
     <Content Include="Images\Icons\profile_orange_icon%402x.png" />
     <Content Include="Images\Icons\profile_orange_icon.png" />
     <Content Include="Images\Icons\profile_white_icon%402x.png" />
@@ -273,6 +277,8 @@
     <Content Include="Images\Menu\menu_icon_2.png" />
     <Content Include="Images\Menu\mini_orange_star%402x.png" />
     <Content Include="Images\Menu\mini_orange_star.png" />
+    <Content Include="Images\Menu\refresh%402x.png" />
+    <Content Include="Images\Menu\refresh.png" />
     <Content Include="Images\Menu\target%402x.png" />
     <Content Include="Images\Menu\target.png" />
     <Content Include="Images\Pins\course_last_step.png" />
@@ -300,6 +306,8 @@
     <Content Include="Images\Pins\public_message.png" />
     <Content Include="Images\Pins\poi.png" />
     <Content Include="Images\Pins\private_message.png" />
+    <Content Include="View\help_btn.png" />
+    <Content Include="View\refresh.png" />
     <Content Include="whiteLogo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -336,7 +344,10 @@
       <LastGenOutput>AppResources.en-US1.resx</LastGenOutput>
     </XliffResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="View\new_pin_btn.png" />
+    <Resource Include="View\target.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" />
