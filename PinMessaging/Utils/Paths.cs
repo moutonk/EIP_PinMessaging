@@ -18,13 +18,37 @@ namespace PinMessaging.Utils
 
         public static readonly string ServerAddress = "http://163.5.84.244/Spring/"; //alexis: 192.168.1.6 serveur_lapbeip:163.5.84.244/Spring/ suivi:163.5.84.52
 
-        public static readonly Uri PinEvent = new Uri("/Images/Pins/event.png", UriKind.Relative);
-        public static readonly Uri PinEye = new Uri("/Images/Pins/eye.png", UriKind.Relative);
-        public static readonly Uri PinCourseLastStep = new Uri("/Images/Pins/course_last_step.png", UriKind.Relative);
-        public static readonly Uri PinPointOfInterest = new Uri("/Images/Pins/poi.png", UriKind.Relative);
-        public static readonly Uri PinPublicMessage = new Uri("/Images/Pins/public_message.png", UriKind.Relative);
-        public static readonly Uri PinPrivateMessage = new Uri("/Images/Pins/private_message.png", UriKind.Relative);
+        public static readonly Uri PinEventIcon = new Uri("/Images/Pins/event_icon.png", UriKind.Relative);
+        public static readonly Uri PinEventIconIntermediate = new Uri("/Images/Pins/event_icon@2x.png", UriKind.Relative);
+        public static readonly Uri PinPrivateEventIcon = new Uri("/Images/Pins/private_event_icon.png", UriKind.Relative);
+        public static readonly Uri PinPrivateEventIconIntermediate = new Uri("/Images/Pins/private_event_icon@2x.png", UriKind.Relative);
 
+        public static readonly Uri PinViewIcon = new Uri("/Images/Pins/view_icon.png", UriKind.Relative);
+        public static readonly Uri PinViewIconIntermediate = new Uri("/Images/Pins/view_icon@2x.png", UriKind.Relative);
+        public static readonly Uri PinPrivateViewIcon = new Uri("/Images/Pins/private_view_icon.png", UriKind.Relative);
+        public static readonly Uri PinPrivateViewIconIntermediate = new Uri("/Images/Pins/private_view_icon@2x.png", UriKind.Relative);
+
+        public static readonly Uri PinCourseStartIcon = new Uri("/Images/Pins/course_start_icon.png", UriKind.Relative);
+        public static readonly Uri PinCourseStartIconIntermediate = new Uri("/Images/Pins/course_start_icon@2x.png", UriKind.Relative);
+        public static readonly Uri PinPrivateCourseStartIcon = new Uri("/Images/Pins/private_course_start_icon.png", UriKind.Relative);
+        public static readonly Uri PinPrivateCourseStartIconIntermediate = new Uri("/Images/Pins/private_course_start_icon@2x.png", UriKind.Relative);
+
+        public static readonly Uri PinCourseNextStepIcon = new Uri("/Images/Pins/course_next_step_icon.png", UriKind.Relative);
+        public static readonly Uri PinCourseNextStepIconIntermediate = new Uri("/Images/Pins/course_next_step_icon@2x.png", UriKind.Relative);
+        public static readonly Uri PinPrivateCourseNextStepIcon = new Uri("/Images/Pins/private_course_next_step_icon.png", UriKind.Relative);
+        public static readonly Uri PinPrivateCourseNextStepIconIntermediate = new Uri("/Images/Pins/private_course_next_step_icon@2x.png", UriKind.Relative);
+
+        public static readonly Uri PinCourseLastStepIcon = new Uri("/Images/Pins/course_last_step_icon.png", UriKind.Relative);
+        public static readonly Uri PinCourseLastStepIconIntermediate = new Uri("/Images/Pins/course_last_step_icon@2x.png", UriKind.Relative);
+        public static readonly Uri PinPrivateCourseLastStepIcon = new Uri("/Images/Pins/private_course_last_step_icon.png", UriKind.Relative);
+        public static readonly Uri PinPrivateCourseLastStepIconIntermediate = new Uri("/Images/Pins/private_course_last_step_icon@2x.png", UriKind.Relative);
+
+        public static readonly Uri PinPublicMessageIcon = new Uri("/Images/Pins/message_icon.png", UriKind.Relative);
+        public static readonly Uri PinPublicMessageIconIntermediate = new Uri("/Images/Pins/message_icon@2x.png", UriKind.Relative);
+        public static readonly Uri PinPrivateMessageIcon = new Uri("/Images/Pins/private_message_icon.png", UriKind.Relative);
+        public static readonly Uri PinPrivateMessageIconIntermediate = new Uri("/Images/Pins/private_message_icon@2x.png", UriKind.Relative);
+  
+        
         public static readonly Uri FlagAR = new Uri("/Images/Flags/AR.png", UriKind.Relative);
         public static readonly Uri FlagCN = new Uri("/Images/Flags/CN.png", UriKind.Relative);
         public static readonly Uri FlagDE = new Uri("/Images/Flags/DE.png", UriKind.Relative);
@@ -66,12 +90,23 @@ namespace PinMessaging.Utils
             {
                 PinsMapImg = new Dictionary<PMPinModel.PinsType, BitmapImage>()
                 {
-                    {PMPinModel.PinsType.PublicMessage, Design.CreateImage(new Uri(PinPublicMessage.ToString(), UriKind.Relative))},
-                    {PMPinModel.PinsType.PrivateMessage, Design.CreateImage(new Uri(PinPrivateMessage.ToString(), UriKind.Relative))},
-                    {PMPinModel.PinsType.Eye, Design.CreateImage(new Uri(PinEye.ToString(), UriKind.Relative))},
-                    {PMPinModel.PinsType.Event, Design.CreateImage(new Uri(PinEvent.ToString(), UriKind.Relative))},
-                    {PMPinModel.PinsType.PointOfInterest, Design.CreateImage(new Uri(PinPointOfInterest.ToString(), UriKind.Relative))},
-                    {PMPinModel.PinsType.CourseLastStep, Design.CreateImage(new Uri(PinCourseLastStep.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PublicMessage, Design.CreateImage(new Uri(PinPublicMessageIconIntermediate.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PrivateMessage, Design.CreateImage(new Uri(PinPrivateMessageIconIntermediate.ToString(), UriKind.Relative))},
+                    
+                    {PMPinModel.PinsType.View, Design.CreateImage(new Uri(PinViewIconIntermediate.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PrivateView, Design.CreateImage(new Uri(PinPrivateViewIconIntermediate.ToString(), UriKind.Relative))},
+                    
+                    {PMPinModel.PinsType.Event, Design.CreateImage(new Uri(PinEventIconIntermediate.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PrivateEvent, Design.CreateImage(new Uri(PinPrivateEventIconIntermediate.ToString(), UriKind.Relative))},
+                    
+                    {PMPinModel.PinsType.CourseLastStep, Design.CreateImage(new Uri(PinCourseLastStepIconIntermediate.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PrivateCourseLastStep, Design.CreateImage(new Uri(PinPrivateCourseLastStepIconIntermediate.ToString(), UriKind.Relative))},
+
+                    {PMPinModel.PinsType.CourseStart, Design.CreateImage(new Uri(PinCourseStartIconIntermediate.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PrivateCourseStart, Design.CreateImage(new Uri(PinPrivateCourseStartIconIntermediate.ToString(), UriKind.Relative))},
+
+                    {PMPinModel.PinsType.CourseNextStep, Design.CreateImage(new Uri(PinCourseNextStepIconIntermediate.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.PrivateCourseNextStep, Design.CreateImage(new Uri(PinPrivateCourseNextStepIconIntermediate.ToString(), UriKind.Relative))},
                 };
             });
             

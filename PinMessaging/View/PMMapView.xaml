@@ -17,6 +17,119 @@
     x:Name="this"
     shell:SystemTray.IsVisible="True"
     Loaded="PMMapView_OnLoaded">
+	<phone:PhoneApplicationPage.Resources>
+		<Style x:Key="ExpanderViewStyle1" TargetType="toolkit:ExpanderView">
+			<Setter Property="HorizontalAlignment" Value="Stretch"/>
+			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+			<Setter Property="ItemsPanel">
+				<Setter.Value>
+					<ItemsPanelTemplate>
+						<StackPanel/>
+					</ItemsPanelTemplate>
+				</Setter.Value>
+			</Setter>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="toolkit:ExpanderView">
+						<Grid>
+							<Grid.Resources>
+								<QuadraticEase x:Key="QuadraticEaseOut" EasingMode="EaseOut"/>
+								<QuadraticEase x:Key="QuadraticEaseInOut" EasingMode="EaseInOut"/>
+							</Grid.Resources>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="41"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="ExpansionStates">
+									<VisualStateGroup.Transitions>
+										<VisualTransition From="Collapsed" GeneratedDuration="0:0:0.15" To="Expanded">
+											<Storyboard>
+												<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="ItemsCanvas">
+													<EasingDoubleKeyFrame EasingFunction="{StaticResource QuadraticEaseOut}" KeyTime="0:0:0.00" Value="0"/>
+													<EasingDoubleKeyFrame x:Name="CollapsedToExpandedKeyFrame" EasingFunction="{StaticResource QuadraticEaseOut}" KeyTime="0:0:0.15" Value="1"/>
+												</DoubleAnimationUsingKeyFrames>
+												<DoubleAnimation Duration="0" To="1.0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ItemsCanvas"/>
+											</Storyboard>
+										</VisualTransition>
+										<VisualTransition From="Expanded" GeneratedDuration="0:0:0.15" To="Collapsed">
+											<Storyboard>
+												<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="ItemsCanvas">
+													<EasingDoubleKeyFrame x:Name="ExpandedToCollapsedKeyFrame" EasingFunction="{StaticResource QuadraticEaseInOut}" KeyTime="0:0:0.00" Value="1"/>
+													<EasingDoubleKeyFrame EasingFunction="{StaticResource QuadraticEaseInOut}" KeyTime="0:0:0.15" Value="0"/>
+												</DoubleAnimationUsingKeyFrames>
+												<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ItemsCanvas">
+													<EasingDoubleKeyFrame EasingFunction="{StaticResource QuadraticEaseInOut}" KeyTime="0:0:0.00" Value="1.0"/>
+													<EasingDoubleKeyFrame EasingFunction="{StaticResource QuadraticEaseInOut}" KeyTime="0:0:0.15" Value="0.0"/>
+												</DoubleAnimationUsingKeyFrames>
+												<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="ItemsCanvas">
+													<EasingDoubleKeyFrame EasingFunction="{StaticResource QuadraticEaseInOut}" KeyTime="0:0:0.00" Value="0.0"/>
+													<EasingDoubleKeyFrame EasingFunction="{StaticResource QuadraticEaseInOut}" KeyTime="0:0:0.15" Value="-35"/>
+												</DoubleAnimationUsingKeyFrames>
+											</Storyboard>
+										</VisualTransition>
+									</VisualStateGroup.Transitions>
+									<VisualState x:Name="Collapsed">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="ItemsCanvas"/>
+											<DoubleAnimation Duration="0" To="0.0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ItemsCanvas"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Expanded">
+										<Storyboard>
+											<DoubleAnimation Duration="0" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="ItemsCanvas"/>
+											<DoubleAnimation Duration="0" To="1.0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ItemsCanvas"/>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="ExpandabilityStates">
+									<VisualState x:Name="Expandable"/>
+									<VisualState x:Name="NonExpandable">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ExpandableContent">
+												<DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="Collapsed"/>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="NonExpandableContent">
+												<DiscreteObjectKeyFrame KeyTime="0:0:0.0" Value="Visible"/>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<ListBoxItem x:Name="ExpandableContent" Grid.ColumnSpan="2" Grid.Column="0" toolkit:TiltEffect.IsTiltEnabled="True" Grid.Row="0" Grid.RowSpan="2">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="41"/>
+										<ColumnDefinition Width="*"/>
+									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto"/>
+										<RowDefinition Height="Auto"/>
+										<RowDefinition Height="Auto"/>
+									</Grid.RowDefinitions>
+									<ContentControl x:Name="Header" Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Row="0"/>
+									<ContentControl x:Name="Expander" ContentTemplate="{TemplateBinding ExpanderTemplate}" Content="{TemplateBinding Expander}" Grid.Column="1" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Margin="11,0,0,0" Grid.Row="1"/>
+									<Grid x:Name="ExpanderPanel" Background="Transparent" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+								</Grid>
+							</ListBoxItem>
+							<ContentControl x:Name="NonExpandableContent" Grid.ColumnSpan="2" ContentTemplate="{TemplateBinding NonExpandableHeaderTemplate}" Content="{TemplateBinding NonExpandableHeader}" Grid.Column="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" Grid.Row="0" Grid.RowSpan="2" Visibility="Collapsed"/>
+							<Canvas x:Name="ItemsCanvas" Grid.Column="1" Margin="11,0,0,0" Opacity="0.0" Grid.Row="2">
+								<Canvas.RenderTransform>
+									<CompositeTransform TranslateY="0.0"/>
+								</Canvas.RenderTransform>
+								<ItemsPresenter x:Name="Presenter"/>
+							</Canvas>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Canvas x:Name="CentralCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black" ManipulationStarted="canvas_ManipulationStarted" ManipulationDelta="canvas_ManipulationDelta" ManipulationCompleted="canvas_ManipulationCompleted">
@@ -335,7 +448,7 @@
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
                                 
-                                <Image Grid.Column="0" Source="/Images/Pins/public_message.png" Margin="10,10,10,10"/>
+                                <Image Name="PinDescriptionImage" Grid.Column="0" Margin="10,10,10,10"/>
                                 
                                 <StackPanel Grid.Column="1">
                                     <TextBlock x:Name="PinTitleTextBlock" Text="{Binding LocalizedResources.PinTitle, Source={StaticResource LocalizedStrings}}" FontSize="25"  Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
@@ -375,54 +488,83 @@
                     
                     <ScrollViewer Grid.Row="4" x:Name="UnderMenuCreatePinGrid">
                         <StackPanel>
-                            <toolkit:ExpanderView x:Name="VisibilityExpandView">
+                            <toolkit:ExpanderView x:Name="VisibilityExpandView" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="40" Foreground="{StaticResource PMOrange}" Text="Visibility" Margin="10,20,0,0"/>
+                                    <TextBlock FontSize="40" Text="Visibility" Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
+                              
                                 <toolkit:ExpanderView.Items>
-                                    <StackPanel Orientation="Horizontal">
-                                        <RadioButton x:Name="PublicRadioButton" Tap="CreatePincRadioButtons_OnTap">Public</RadioButton>
-                                        <RadioButton x:Name="PrivateRadioButton" Tap="CreatePincRadioButtons_OnTap">Private</RadioButton>
-                                    </StackPanel>
+                                    <Grid Name="VisibilityExpandViewGrid" Margin="0,10,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Name="VisibilityExpandViewPublicGrid" Grid.Column="0" Tap="VisibilityExpandViewPublicGrid_OnTap">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                                <Image Name="VisibilityExpandViewPublicImage" Height="64" Width="64" Stretch="Uniform" Source="\Images\Pins/private_course_last_step_icon.png"/>
+                                                <TextBlock Name="VisibilityExpandViewPublicTitle" Text="Public" FontSize="35" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                            <TextBlock Grid.Row="1" Name="VisibilityExpandViewPublicDescription" TextAlignment="Center" TextWrapping="Wrap" Text="Anyone can see, comment and grade your pin"/>
+                                        </Grid>
+                                        <Grid Name="VisibilityExpandViewPrivateGrid" Grid.Column="1" Tap="VisibilityExpandViewPrivateGrid_OnTap">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="*"></RowDefinition>
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                                                <Image Name="VisibilityExpandViewPrivateImage" Height="64" Width="64" Stretch="Uniform" Source="\Images\Pins/private_course_next_step_icon.png"/>
+                                                <TextBlock Name="VisibilityExpandViewPrivateTitle" Text="Private" FontSize="35" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                            <TextBlock Grid.Row="1" Name="VisibilityExpandViewPrivateDescription" TextAlignment="Center" TextWrapping="Wrap" Text="This pin will be visible only by the people you share it with"/>
+                                        </Grid>
+                                       <!-- <RadioButton x:Name="PublicRadioButton" Tap="CreatePincRadioButtons_OnTap">Public</RadioButton>
+                                        <RadioButton x:Name="PrivateRadioButton" Tap="CreatePincRadioButtons_OnTap">Private</RadioButton>-->
+                                    </Grid>
                                     </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
 
-                            <toolkit:ExpanderView x:Name="PinTypeExpandView">
+                            <toolkit:ExpanderView x:Name="PinTypeExpandView" Expanded="PinTypeExpandView_OnExpanded" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="40" Text="Pin type" Margin="10,20,0,0"/>
+                                    <TextBlock FontSize="40" Text="Pin type" Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
+                                    <ScrollViewer Name="PinCreateScrollViewer" HorizontalScrollBarVisibility="Hidden" Margin="-30,20,0,0">
+                                        <StackPanel Name="PinTypeScollStackPanel" Orientation="Horizontal" Height="75"></StackPanel>
+                                    </ScrollViewer>
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
 
-                            <toolkit:ExpanderView x:Name="TitleExpandView">
+                            <toolkit:ExpanderView x:Name="TitleExpandView" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="40" Text="Title"  Margin="10,20,0,0"/>
+                                    <TextBlock FontSize="40" Text="Title"  Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
-                                    <TextBox FontSize="25" MaxLength="50" Text="Fake title"/>
+                                    <TextBox FontSize="25" MaxLength="50" Margin="-30,20,0,0" Text="Fake title"/>
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
 
-                            <toolkit:ExpanderView x:Name="DescriptionExpandView">
+                            <toolkit:ExpanderView x:Name="DescriptionExpandView" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander >
-                                    <TextBlock FontSize="40" Text="Description" Margin="10,20,0,0"/>
+                                    <TextBlock FontSize="40" Text="Description" Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
-                                    <TextBox FontSize="25" Text="Fake description" Height="200" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="200" MaxWidth="450"/>
+                                    <TextBox FontSize="25" Text="Fake description" Margin="-30,20,0,0" Height="200" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="200" MaxWidth="450"/>
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
 
-                            <toolkit:ExpanderView>
+                            <toolkit:ExpanderView Name="ExpanderViewEventDate" Style="{StaticResource ExpanderViewStyle1}" Visibility="Collapsed">
                                 <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="40" Text="Event date" Margin="10,20,0,0"/>
+                                    <TextBlock FontSize="40" Text="Event date" Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
-                                    <toolkit:DatePicker x:Name="CreatePinDatePicker"></toolkit:DatePicker>
+                                    <toolkit:DatePicker x:Name="CreatePinDatePicker" Margin="-30,20,0,0"></toolkit:DatePicker>
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
                         </StackPanel>
-                            
                     </ScrollViewer>
                 </Grid>
             </Grid>

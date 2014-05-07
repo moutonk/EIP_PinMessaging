@@ -1,6 +1,6 @@
-﻿<xapCache source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\PinMessaging_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="5/1/2014 8:22:44 PM">
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="5/1/2014 8:22:39 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\fr-FR\PinMessaging.resources.dll" archivePath="fr-FR\PinMessaging.resources.dll" lastWriteTime="5/1/2014 8:22:41 PM" />
+﻿<xapCache source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\PinMessaging_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="5/6/2014 6:15:57 PM">
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="5/6/2014 6:15:54 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\fr-FR\PinMessaging.resources.dll" archivePath="fr-FR\PinMessaging.resources.dll" lastWriteTime="5/6/2014 6:15:55 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\packages\WPtoolkit.4.2013.08.16\lib\wp8\fr-FR\Microsoft.Phone.Controls.Toolkit.resources.dll" archivePath="fr-FR\Microsoft.Phone.Controls.Toolkit.resources.dll" lastWriteTime="1/25/2014 10:31:23 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\empty_gallery.png" archivePath="Images\empty_gallery.png" lastWriteTime="3/19/2014 4:25:30 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Icons\about_orange_icon@2x.png" archivePath="Images\Icons\about_orange_icon@2x.png" lastWriteTime="3/21/2014 6:09:53 PM" />
@@ -102,9 +102,14 @@
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Menu\refresh.png" archivePath="Images\Menu\refresh.png" lastWriteTime="5/1/2014 8:18:38 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Menu\target@2x.png" archivePath="Images\Menu\target@2x.png" lastWriteTime="5/1/2014 8:18:38 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Menu\target.png" archivePath="Images\Menu\target.png" lastWriteTime="5/1/2014 8:18:38 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\course_last_step.png" archivePath="Images\Pins\course_last_step.png" lastWriteTime="1/25/2014 10:31:21 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\event.png" archivePath="Images\Pins\event.png" lastWriteTime="1/25/2014 10:31:21 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\eye.png" archivePath="Images\Pins\eye.png" lastWriteTime="1/25/2014 10:31:21 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\course_last_step_icon@2x.png" archivePath="Images\Pins\course_last_step_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\course_last_step_icon.png" archivePath="Images\Pins\course_last_step_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\course_next_step_icon@2x.png" archivePath="Images\Pins\course_next_step_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\course_next_step_icon.png" archivePath="Images\Pins\course_next_step_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\course_start_icon@2x.png" archivePath="Images\Pins\course_start_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\course_start_icon.png" archivePath="Images\Pins\course_start_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\event_icon@2x.png" archivePath="Images\Pins\event_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\event_icon.png" archivePath="Images\Pins\event_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Flags\AR.png" archivePath="Images\Flags\AR.png" lastWriteTime="1/25/2014 10:31:21 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Flags\CN.png" archivePath="Images\Flags\CN.png" lastWriteTime="1/25/2014 10:31:21 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Flags\DE.png" archivePath="Images\Flags\DE.png" lastWriteTime="1/25/2014 10:31:21 PM" />
@@ -123,16 +128,29 @@
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Flags\SE.png" archivePath="Images\Flags\SE.png" lastWriteTime="1/25/2014 10:31:21 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Logos\logo_splashScreen.png" archivePath="Images\Logos\logo_splashScreen.png" lastWriteTime="1/25/2014 10:31:21 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Logos\logo_black.png" archivePath="Images\Logos\logo_black.png" lastWriteTime="1/25/2014 10:31:21 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\public_message.png" archivePath="Images\Pins\public_message.png" lastWriteTime="1/25/2014 10:31:21 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\poi.png" archivePath="Images\Pins\poi.png" lastWriteTime="1/25/2014 10:31:21 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_message.png" archivePath="Images\Pins\private_message.png" lastWriteTime="1/25/2014 10:31:21 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\message_icon@2x.png" archivePath="Images\Pins\message_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\message_icon.png" archivePath="Images\Pins\message_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_course_last_step_icon@2x.png" archivePath="Images\Pins\private_course_last_step_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_course_last_step_icon.png" archivePath="Images\Pins\private_course_last_step_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_course_next_step_icon@2x.png" archivePath="Images\Pins\private_course_next_step_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_course_next_step_icon.png" archivePath="Images\Pins\private_course_next_step_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_course_start_icon@2x.png" archivePath="Images\Pins\private_course_start_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_course_start_icon.png" archivePath="Images\Pins\private_course_start_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_event_icon@2x.png" archivePath="Images\Pins\private_event_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_event_icon.png" archivePath="Images\Pins\private_event_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_message_icon@2x.png" archivePath="Images\Pins\private_message_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_message_icon.png" archivePath="Images\Pins\private_message_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_view_icon@2x.png" archivePath="Images\Pins\private_view_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\private_view_icon.png" archivePath="Images\Pins\private_view_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\view_icon@2x.png" archivePath="Images\Pins\view_icon@2x.png" lastWriteTime="5/6/2014 9:47:54 AM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Pins\view_icon.png" archivePath="Images\Pins\view_icon.png" lastWriteTime="5/6/2014 9:46:58 AM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\View\help_btn.png" archivePath="View\help_btn.png" lastWriteTime="5/1/2014 8:22:34 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\View\refresh.png" archivePath="View\refresh.png" lastWriteTime="5/1/2014 8:22:26 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="3/22/2014 2:52:07 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\AppManifest.xaml" archivePath="AppManifest.xaml" lastWriteTime="5/6/2014 3:34:54 PM" />
   <file source="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\Windows Phone\v8.0\Libraries\Microsoft.Expression.Drawing.dll" archivePath="Microsoft.Expression.Drawing.dll" lastWriteTime="9/25/2012 2:41:02 AM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll" archivePath="Microsoft.Phone.Controls.Toolkit.dll" lastWriteTime="1/25/2014 10:31:23 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\Newtonsoft.Json.dll" archivePath="Newtonsoft.Json.dll" lastWriteTime="1/25/2014 10:31:18 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Logos\logo_orange.png" archivePath="Images\Logos\logo_orange.png" lastWriteTime="1/25/2014 10:31:21 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\whiteLogo.png" archivePath="whiteLogo.png" lastWriteTime="1/25/2014 10:31:22 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="3/22/2014 2:52:07 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="5/6/2014 3:34:55 PM" />
 </xapCache>

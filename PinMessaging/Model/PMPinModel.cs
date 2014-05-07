@@ -16,12 +16,21 @@ namespace PinMessaging.Model
         {
             PublicMessage = 0,
             PrivateMessage,
+
             Event,
-            Eye,
-            PointOfInterest,
-            CulturalMessage,
-            Message,            
-            CourseLastStep
+            PrivateEvent,
+            
+            View,
+            PrivateView,
+            
+            CourseStart,
+            PrivateCourseStart,
+            
+            CourseNextStep,
+            PrivateCourseNextStep,
+            
+CourseLastStep,
+            PrivateCourseLastStep
         }
 
         [JsonProperty] [DefaultValue(null)] public string PinTitle { get; set; }

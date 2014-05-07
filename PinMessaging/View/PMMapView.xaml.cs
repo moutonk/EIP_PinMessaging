@@ -73,11 +73,11 @@ namespace PinMessaging.View
 
             listPickerPins = new List<ElementsListPicker> 
             {
-                new ElementsListPicker { Name = AppResources.PinPublicMessage, ImgPath = Paths.PinPublicMessage},
+               /** new ElementsListPicker { Name = AppResources.PinPublicMessage, ImgPath = Paths.PinPublicMessage},
                 new ElementsListPicker { Name = AppResources.PinPrivateMessage, ImgPath = Paths.PinPrivateMessage},
                 new ElementsListPicker { Name = AppResources.PinEvent, ImgPath = Paths.PinEvent},
                 new ElementsListPicker { Name = AppResources.PinPointOfView, ImgPath = Paths.PinEye},
-                new ElementsListPicker { Name = AppResources.PinPointOfInterest, ImgPath = Paths.PinPointOfInterest},
+                new ElementsListPicker { Name = AppResources.PinPointOfInterest, ImgPath = Paths.PinPointOfInterest},*/
              };
 
             if (PMData.AppMode == PMData.ApplicationMode.Offline)
@@ -553,6 +553,7 @@ namespace PinMessaging.View
 
             PinTitleDescriptionTextBlock.Text = pin.PinTitle;
             PinMessageDescriptionTextBlock.Text = pin.Description;
+            PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinTypeEnum];
 
             MenuDown_OnClick(ButtonPins, new RoutedEventArgs());
         }
@@ -650,12 +651,8 @@ namespace PinMessaging.View
                     pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.Event).ToString() });
                     break;
 
-                case ((int)PMPinModel.PinsType.Eye):
-                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.Eye).ToString() });
-                    break;
-
-                case ((int)PMPinModel.PinsType.PointOfInterest):
-                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.PointOfInterest).ToString() });
+                case ((int)PMPinModel.PinsType.View):
+                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.View).ToString() });
                     break;
 
                 default:
@@ -663,38 +660,7 @@ namespace PinMessaging.View
                     break;
             }
        
-            string json = @"[
-//                                   {                                
-//                                        ""id"":""1"",
-//                                        ""type"":""Event"",
-//                                        ""description"":""\\home\\"",
-//                                        ""url"":""null"",
-//                                        ""lang"":""null"",
-//                                        ""location"":
-//                                        {
-//                                            ""id"":""1"",
-//                                            ""latitude"":""47.669444"",
-//                                            ""longitude"":""-122.123889"",
-//                                            ""name"":""\\maison\\""
-//                                        },
-//                                        ""creationTime"":""1392003691000""
-//                                    },
-//                                    {                                
-//                                        ""id"":""2"",
-//                                        ""type"":""Lol"",
-//                                        ""description"":""\\home\\"",
-//                                        ""url"":""null"",
-//                                        ""lang"":""null"",
-//                                        ""location"":
-//                                        {
-//                                            ""id"":""1"",
-//                                            ""latitude"":""48.669450"",
-//                                            ""longitude"":""-122.123850"",
-//                                            ""name"":""\\maison\\""
-//                                        },
-//                                        ""creationTime"":""1392003691000""
-//                                    }
-//                                ]";
+          
             //                PMDataConverter.ParseGetPins(json);
             //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
             //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
@@ -727,6 +693,117 @@ namespace PinMessaging.View
         {
             TitleExpandView.IsExpanded = true;
             VisibilityExpandView.IsExpanded = false;
+        }
+
+        private void LoadCreatePinsPublicPins()
+        {
+            PinTypeScollStackPanel.Children.Clear();
+
+            var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PublicMessage], Name = "PublicMsg" }; img1.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img1);
+
+            var img2 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.Event], Name = "PublicEvent" }; img2.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img2);
+
+            var img3 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.View], Name = "PublicView" }; img3.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img3);
+
+            var img4 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseStart], Name = "PublicCourseStart" }; img4.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img4);
+
+            var img5 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseNextStep], Name = "PublicCourseNext" }; img5.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img5);
+
+            var img6 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseLastStep], Name = "PublicCourseLast" }; img6.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img6);   
+        }
+
+        private void CreatePinImgOnTap(object sender, GestureEventArgs gestureEventArgs)
+        {
+            var img = sender as Image;
+
+            if (img.Name.Equals("PublicMsg"))
+            {
+                
+            }
+            else if (img.Name.Equals("PublicEvent"))
+            {
+                ExpanderViewEventDate.Visibility = Visibility.Visible;
+            }
+            else if (img.Name.Equals("PrivateEvent"))
+            {
+                ExpanderViewEventDate.Visibility = Visibility.Visible;
+            }
+            Logs.Output.ShowOutput(img.Name);
+
+            CloseAllExpanderExcept(TitleExpandView);
+        }
+
+        private void CloseAllExpanderExcept(ExpanderView exp)
+        {
+            var expTab = new ExpanderView[5]
+            {
+                VisibilityExpandView,
+                PinTypeExpandView,
+                TitleExpandView,
+                DescriptionExpandView,
+                ExpanderViewEventDate
+            };
+
+            foreach (var elem in expTab)
+            {
+                if (elem != exp)
+                    elem.IsExpanded = false;
+                else
+                    elem.IsExpanded = true;
+            }
+        }
+
+        private void LoadCreatePinsPrivatePins()
+        {
+            PinTypeScollStackPanel.Children.Clear();
+
+            var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateMessage], Name = "PrivateMsg" }; img1.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img1);
+
+            var img2 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateEvent], Name = "PrivateEvent" }; img2.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img2);
+
+            var img3 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateView], Name = "PrivateView" }; img3.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img3);
+
+            var img4 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateCourseStart], Name = "PrivateCourseStart" }; img4.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img4);
+
+            var img5 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateCourseNextStep], Name = "PrivateCourseNext" }; img5.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img5);
+
+            var img6 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateCourseLastStep], Name = "PrivateCourseLast" }; img6.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img6);
+        }
+
+        private void PinTypeExpandView_OnExpanded(object sender, RoutedEventArgs e)
+        {
+            /*if (true)
+            {
+               LoadCreatePinsPublicPins();
+            }
+            else
+            {
+                LoadCreatePinsPrivatePins();
+            }*/
+        }
+
+        private void VisibilityExpandViewPublicGrid_OnTap(object sender, GestureEventArgs e)
+        {
+            LoadCreatePinsPublicPins();
+            CloseAllExpanderExcept(PinTypeExpandView);
+        }
+
+        private void VisibilityExpandViewPrivateGrid_OnTap(object sender, GestureEventArgs e)
+        {
+            LoadCreatePinsPrivatePins();
+            CloseAllExpanderExcept(PinTypeExpandView);
         }
     }
 }
