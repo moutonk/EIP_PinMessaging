@@ -490,46 +490,45 @@
                         <StackPanel>
                             <toolkit:ExpanderView x:Name="VisibilityExpandView" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="40" Text="Visibility" Foreground="DarkGray" Margin="-30,20,0,0"/>
+                                    <TextBlock FontSize="35" Text="Visibility" Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                               
                                 <toolkit:ExpanderView.Items>
-                                    <Grid Name="VisibilityExpandViewGrid" Margin="0,10,0,0">
+                                    <Grid Name="VisibilityExpandViewGrid" Margin="-30,20,30,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
+                                            <ColumnDefinition Width="30"></ColumnDefinition>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <Grid Name="VisibilityExpandViewPublicGrid" Grid.Column="0" Tap="VisibilityExpandViewPublicGrid_OnTap">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"></RowDefinition>
-                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="100"></RowDefinition>
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                                <Image Name="VisibilityExpandViewPublicImage" Height="64" Width="64" Stretch="Uniform" Source="\Images\Pins/private_course_last_step_icon.png"/>
-                                                <TextBlock Name="VisibilityExpandViewPublicTitle" Text="Public" FontSize="35" VerticalAlignment="Center"/>
+                                                <Image Name="VisibilityExpandViewPublicImage" Height="64" Width="64" Stretch="Uniform" Source="\Images\Icons\white_planet.png"/>
+                                                <TextBlock Name="VisibilityExpandViewPublicTitle" Text="Public" FontSize="35" VerticalAlignment="Center" Margin="20,0,0,0"/>
                                             </StackPanel>
-                                            <TextBlock Grid.Row="1" Name="VisibilityExpandViewPublicDescription" TextAlignment="Center" TextWrapping="Wrap" Text="Anyone can see, comment and grade your pin"/>
+                                            <TextBlock Grid.Row="1" Name="VisibilityExpandViewPublicDescription" Margin="0,10,0,0" Foreground="DarkGray" TextAlignment="Center" TextWrapping="Wrap" Text="Anyone can see, comment and grade your pin"/>
                                         </Grid>
-                                        <Grid Name="VisibilityExpandViewPrivateGrid" Grid.Column="1" Tap="VisibilityExpandViewPrivateGrid_OnTap">
+                                        <Grid Name="VisibilityExpandViewPrivateGrid" Grid.Column="2" Tap="VisibilityExpandViewPrivateGrid_OnTap">
                                             <Grid.RowDefinitions>
                                                 <RowDefinition Height="*"></RowDefinition>
-                                                <RowDefinition Height="*"></RowDefinition>
+                                                <RowDefinition Height="100"></RowDefinition>
                                             </Grid.RowDefinitions>
                                             <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                                <Image Name="VisibilityExpandViewPrivateImage" Height="64" Width="64" Stretch="Uniform" Source="\Images\Pins/private_course_next_step_icon.png"/>
-                                                <TextBlock Name="VisibilityExpandViewPrivateTitle" Text="Private" FontSize="35" VerticalAlignment="Center"/>
+                                                <Image Name="VisibilityExpandViewPrivateImage" Height="64" Width="64" Stretch="Uniform" Source="\Images\Icons\white_lock.png"/>
+                                                <TextBlock Name="VisibilityExpandViewPrivateTitle" Text="Private" FontSize="35" VerticalAlignment="Center" Margin="10,0,0,0"/>
                                             </StackPanel>
-                                            <TextBlock Grid.Row="1" Name="VisibilityExpandViewPrivateDescription" TextAlignment="Center" TextWrapping="Wrap" Text="This pin will be visible only by the people you share it with"/>
+                                            <TextBlock Grid.Row="1" Name="VisibilityExpandViewPrivateDescription" Margin="0,10,0,0" Foreground="DarkGray" TextAlignment="Center" TextWrapping="Wrap" Text="This pin will be visible only by the people you share it with"/>
                                         </Grid>
-                                       <!-- <RadioButton x:Name="PublicRadioButton" Tap="CreatePincRadioButtons_OnTap">Public</RadioButton>
-                                        <RadioButton x:Name="PrivateRadioButton" Tap="CreatePincRadioButtons_OnTap">Private</RadioButton>-->
                                     </Grid>
                                     </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
 
                             <toolkit:ExpanderView x:Name="PinTypeExpandView" Expanded="PinTypeExpandView_OnExpanded" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="40" Text="Pin type" Foreground="DarkGray" Margin="-30,20,0,0"/>
+                                    <TextBlock FontSize="35" Text="Pin type" Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
                                     <ScrollViewer Name="PinCreateScrollViewer" HorizontalScrollBarVisibility="Hidden" Margin="-30,20,0,0">
@@ -540,7 +539,7 @@
 
                             <toolkit:ExpanderView x:Name="TitleExpandView" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="40" Text="Title"  Foreground="DarkGray" Margin="-30,20,0,0"/>
+                                    <TextBlock FontSize="35" Text="Title"  Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
                                     <TextBox FontSize="25" MaxLength="50" Margin="-30,20,0,0" Text="Fake title"/>
@@ -549,7 +548,7 @@
 
                             <toolkit:ExpanderView x:Name="DescriptionExpandView" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander >
-                                    <TextBlock FontSize="40" Text="Description" Foreground="DarkGray" Margin="-30,20,0,0"/>
+                                    <TextBlock FontSize="35" Text="Description" Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
                                     <TextBox FontSize="25" Text="Fake description" Margin="-30,20,0,0" Height="200" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="200" MaxWidth="450"/>
@@ -558,7 +557,7 @@
 
                             <toolkit:ExpanderView Name="ExpanderViewEventDate" Style="{StaticResource ExpanderViewStyle1}" Visibility="Collapsed">
                                 <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="40" Text="Event date" Foreground="DarkGray" Margin="-30,20,0,0"/>
+                                    <TextBlock FontSize="35" Text="Event date" Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
                                     <toolkit:DatePicker x:Name="CreatePinDatePicker" Margin="-30,20,0,0"></toolkit:DatePicker>

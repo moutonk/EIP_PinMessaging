@@ -81,6 +81,8 @@ namespace PinMessaging.Utils
         public static readonly Uri LeftMenuAbout = new Uri("/Images/Icons/about_white_icon@2x.png", UriKind.Relative);
         public static readonly Uri LeftMenuLogout = new Uri("/Images/Icons/cross_white_icon@2x.png", UriKind.Relative);
 
+        public static readonly Uri CreatePinPublicIcon = new Uri("/Images/Icons/white_planet.png", UriKind.Relative);
+        public static readonly Uri CreatePinPrivateIcon = new Uri("/Images/Icons/white_lock.png", UriKind.Relative);
 
         public static Dictionary<PMPinModel.PinsType, BitmapImage> PinsMapImg;
 

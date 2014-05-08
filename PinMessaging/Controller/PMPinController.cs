@@ -103,7 +103,7 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
-        public void CreatePin(Geoposition geoPos, string[] stringArray)
+        public void CreatePin(Geoposition geoPos, string[] stringArray/*PMPinModel pin*/)
         {
             var dictionary = new Dictionary<string, string>
             {

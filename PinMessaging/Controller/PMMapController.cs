@@ -66,7 +66,7 @@ namespace PinMessaging.Controller
 
         public static void AddPinToMap(PMPinModel pin)
         {
-            var overlay = new MapOverlay();
+            var overlay = new MapOverlay {PositionOrigin = new Point(0.3, 0.8)};
 
             //center the mapoverlay, will change later
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +33,7 @@ namespace PinMessaging.View
 
         private static CurrentMapPageView _currentView = CurrentMapPageView.MapView;
         private static bool _isUnderMenuOpen = false;
+        private static readonly PMPinModel PinCreateModel = new PMPinModel();
      
         readonly MapLayer _mapLayer = new MapLayer();
         readonly MapOverlay _userSpotLayer = new MapOverlay();
@@ -73,11 +75,11 @@ namespace PinMessaging.View
 
             listPickerPins = new List<ElementsListPicker> 
             {
-               /** new ElementsListPicker { Name = AppResources.PinPublicMessage, ImgPath = Paths.PinPublicMessage},
-                new ElementsListPicker { Name = AppResources.PinPrivateMessage, ImgPath = Paths.PinPrivateMessage},
-                new ElementsListPicker { Name = AppResources.PinEvent, ImgPath = Paths.PinEvent},
-                new ElementsListPicker { Name = AppResources.PinPointOfView, ImgPath = Paths.PinEye},
-                new ElementsListPicker { Name = AppResources.PinPointOfInterest, ImgPath = Paths.PinPointOfInterest},*/
+                new ElementsListPicker { Name = AppResources.PinPublicMessage, ImgPath = Paths.PinPublicMessageIconIntermediate},
+          //      new ElementsListPicker { Name = AppResources.PinPrivateMessage, ImgPath = Paths.PinPrivateMessage},
+            //    new ElementsListPicker { Name = AppResources.PinEvent, ImgPath = Paths.PinEvent},
+              //  new ElementsListPicker { Name = AppResources.PinPointOfView, ImgPath = Paths.PinEye},
+                //new ElementsListPicker { Name = AppResources.PinPointOfInterest, ImgPath = Paths.PinPointOfInterest},
              };
 
             if (PMData.AppMode == PMData.ApplicationMode.Offline)
@@ -689,53 +691,88 @@ namespace PinMessaging.View
             Map.ZoomLevel -= 1;
         }
 
-        private void CreatePincRadioButtons_OnTap(object sender, GestureEventArgs e)
-        {
-            TitleExpandView.IsExpanded = true;
-            VisibilityExpandView.IsExpanded = false;
-        }
-
-        private void LoadCreatePinsPublicPins()
-        {
-            PinTypeScollStackPanel.Children.Clear();
-
-            var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PublicMessage], Name = "PublicMsg" }; img1.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img1);
-
-            var img2 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.Event], Name = "PublicEvent" }; img2.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img2);
-
-            var img3 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.View], Name = "PublicView" }; img3.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img3);
-
-            var img4 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseStart], Name = "PublicCourseStart" }; img4.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img4);
-
-            var img5 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseNextStep], Name = "PublicCourseNext" }; img5.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img5);
-
-            var img6 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseLastStep], Name = "PublicCourseLast" }; img6.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img6);   
-        }
+        
 
         private void CreatePinImgOnTap(object sender, GestureEventArgs gestureEventArgs)
         {
             var img = sender as Image;
 
-            if (img.Name.Equals("PublicMsg"))
+            if (img == null)
             {
-                
-            }
-            else if (img.Name.Equals("PublicEvent"))
-            {
-                ExpanderViewEventDate.Visibility = Visibility.Visible;
-            }
-            else if (img.Name.Equals("PrivateEvent"))
-            {
-                ExpanderViewEventDate.Visibility = Visibility.Visible;
+                Logs.Output.ShowOutput("NULL");
+                return;
             }
             Logs.Output.ShowOutput(img.Name);
 
+
+            if (img.Name.Equals("PublicMsg"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PublicMessage;
+                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+
+            }
+            else if (img.Name.Equals("PublicEvent"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.Event;
+                ExpanderViewEventDate.Visibility = Visibility.Visible;
+            }
+            else if (img.Name.Equals("PublicView"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.View;
+                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+
+            }
+            else if (img.Name.Equals("PublicCourseStart"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseStart;
+                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+
+            }
+            else if (img.Name.Equals("PublicCourseNext"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseNextStep;
+                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+
+            }
+            else if (img.Name.Equals("PublicCourseLast"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseLastStep;
+                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+
+            }
+            else if (img.Name.Equals("PrivateMsg"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PrivateMessage;
+                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+            }
+            else if (img.Name.Equals("PrivateEvent"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PrivateEvent;
+                ExpanderViewEventDate.Visibility = Visibility.Visible;
+            }
+            else if (img.Name.Equals("PrivateView"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PrivateView;
+                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+
+            }
+            else if (img.Name.Equals("PrivateCourseStart"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseStart;
+                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+
+            }
+            else if (img.Name.Equals("PrivateCourseNext"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseNextStep;
+                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+
+            }
+            else if (img.Name.Equals("PrivateCourseLast"))
+            {
+                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseLastStep;
+                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+            }
             CloseAllExpanderExcept(TitleExpandView);
         }
 
@@ -752,17 +789,33 @@ namespace PinMessaging.View
 
             foreach (var elem in expTab)
             {
-                if (elem != exp)
-                    elem.IsExpanded = false;
-                else
-                    elem.IsExpanded = true;
+                elem.IsExpanded = (elem == exp);
             }
+        }
+
+        private void LoadCreatePinsPublicPins()
+        {
+                var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PublicMessage], Name = "PublicMsg" }; img1.Tap += CreatePinImgOnTap;
+                PinTypeScollStackPanel.Children.Add(img1);
+
+                var img2 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.Event], Name = "PublicEvent" }; img2.Tap += CreatePinImgOnTap;
+                PinTypeScollStackPanel.Children.Add(img2);
+
+                var img3 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.View], Name = "PublicView" }; img3.Tap += CreatePinImgOnTap;
+                PinTypeScollStackPanel.Children.Add(img3);
+
+                var img4 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseStart], Name = "PublicCourseStart" }; img4.Tap += CreatePinImgOnTap;
+                PinTypeScollStackPanel.Children.Add(img4);
+
+                var img5 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseNextStep], Name = "PublicCourseNext" }; img5.Tap += CreatePinImgOnTap;
+                PinTypeScollStackPanel.Children.Add(img5);
+
+                var img6 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseLastStep], Name = "PublicCourseLast" }; img6.Tap += CreatePinImgOnTap;
+                PinTypeScollStackPanel.Children.Add(img6);
         }
 
         private void LoadCreatePinsPrivatePins()
         {
-            PinTypeScollStackPanel.Children.Clear();
-
             var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateMessage], Name = "PrivateMsg" }; img1.Tap += CreatePinImgOnTap;
             PinTypeScollStackPanel.Children.Add(img1);
 
@@ -784,24 +837,23 @@ namespace PinMessaging.View
 
         private void PinTypeExpandView_OnExpanded(object sender, RoutedEventArgs e)
         {
-            /*if (true)
+            if (PinTypeScollStackPanel.Children.Count == 0)
             {
-               LoadCreatePinsPublicPins();
-            }
-            else
-            {
+                LoadCreatePinsPublicPins();
                 LoadCreatePinsPrivatePins();
-            }*/
+            }
         }
 
         private void VisibilityExpandViewPublicGrid_OnTap(object sender, GestureEventArgs e)
         {
+            PinTypeScollStackPanel.Children.Clear();
             LoadCreatePinsPublicPins();
             CloseAllExpanderExcept(PinTypeExpandView);
         }
 
         private void VisibilityExpandViewPrivateGrid_OnTap(object sender, GestureEventArgs e)
         {
+            PinTypeScollStackPanel.Children.Clear();
             LoadCreatePinsPrivatePins();
             CloseAllExpanderExcept(PinTypeExpandView);
         }
