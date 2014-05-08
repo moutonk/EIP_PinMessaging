@@ -488,6 +488,7 @@
                     
                     <ScrollViewer Grid.Row="4" x:Name="UnderMenuCreatePinGrid">
                         <StackPanel>
+                            <ProgressBar x:Name="DropPinProgressBar" Foreground="{StaticResource PMOrange}" Visibility="Collapsed"/>
                             <toolkit:ExpanderView x:Name="VisibilityExpandView" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander>
                                     <TextBlock FontSize="35" Text="Visibility" Foreground="DarkGray" Margin="-30,20,0,0"/>
@@ -537,21 +538,21 @@
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
 
-                            <toolkit:ExpanderView x:Name="TitleExpandView" Style="{StaticResource ExpanderViewStyle1}">
+                            <toolkit:ExpanderView x:Name="TitleExpandView" Expanded="TitleExpandView_OnExpanded" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander>
                                     <TextBlock FontSize="35" Text="Title"  Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
-                                    <TextBox FontSize="25" MaxLength="50" Margin="-30,20,0,0" Text="Fake title"/>
+                                    <TextBox Name="TitleExpandViewTextBox" FontSize="25" MaxLength="50" Margin="-30,20,0,0" Text="Fake title" TextChanged="TitleExpandViewTextBox_OnTextChanged"/>
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
 
-                            <toolkit:ExpanderView x:Name="DescriptionExpandView" Style="{StaticResource ExpanderViewStyle1}">
+                            <toolkit:ExpanderView x:Name="DescriptionExpandView" Expanded="DescriptionExpandView_OnExpanded" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander >
                                     <TextBlock FontSize="35" Text="Description" Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
-                                    <TextBox FontSize="25" Text="Fake description" Margin="-30,20,0,0" Height="200" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="200" MaxWidth="450"/>
+                                    <TextBox Name="DescriptionExpandViewTextBox" FontSize="25" Text="Fake description" Margin="-30,20,0,0" Height="100" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="200" MaxWidth="450" TextChanged="DescriptionExpandViewTextBox_OnTextChanged"/>
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
 
@@ -563,6 +564,8 @@
                                     <toolkit:DatePicker x:Name="CreatePinDatePicker" Margin="-30,20,0,0"></toolkit:DatePicker>
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
+                            <Button x:Name="DropPinButton" Height="100" Visibility="Collapsed" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="10,0,0,-10" Click="PostPinButton_Click"/>
+
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

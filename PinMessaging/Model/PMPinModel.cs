@@ -29,8 +29,10 @@ namespace PinMessaging.Model
             CourseNextStep,
             PrivateCourseNextStep,
             
-CourseLastStep,
-            PrivateCourseLastStep
+            CourseLastStep,
+            PrivateCourseLastStep,
+
+            Default
         }
 
         [JsonProperty] [DefaultValue(null)] public string PinTitle { get; set; }

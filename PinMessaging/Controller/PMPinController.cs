@@ -103,15 +103,15 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
-        public void CreatePin(Geoposition geoPos, string[] stringArray/*PMPinModel pin*/)
+        public void CreatePin(Geoposition geoPos, PMPinModel pin)
         {
             var dictionary = new Dictionary<string, string>
             {
                 {"longitude", Utils.Utils.ConvertDoubleCommaToPoint(geoPos.Coordinate.Longitude.ToString()).ToString(CultureInfo.InvariantCulture)},
                 {"latitude", Utils.Utils.ConvertDoubleCommaToPoint(geoPos.Coordinate.Latitude.ToString()).ToString(CultureInfo.InvariantCulture)},
-                {"name", stringArray[0]},
-                {"description", stringArray[1]},
-                {"type", stringArray[2]}
+                {"name", pin.PinTitle},
+                {"description", pin.Description},
+                {"type", pin.PinTypeEnum.ToString()}
             };
 
             PMWebService.SendRequest(HttpRequestType.Post, RequestType.CreatePin, SyncType.Async, dictionary, null);

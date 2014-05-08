@@ -88,6 +88,7 @@ namespace PinMessaging.View
             }
 
             PMData.LoadPins();
+            ResetCreatePinModel();
         }
 
         private void LaunchLocalization()
@@ -613,18 +614,29 @@ namespace PinMessaging.View
             }
         }
 
+        private void ResetCreatePinModel()
+        {
+            PinCreateModel.Id = string.Empty;
+            PinCreateModel.Lang = string.Empty;
+            PinCreateModel.PinTypeEnum = PMPinModel.PinsType.Default;
+            PinCreateModel.PinTitle = string.Empty;
+            PinCreateModel.Description = string.Empty;
+            PinCreateModel.CreationTime = string.Empty;
+        }
+
         private void PostPinButton_ClickPreJob()
         {
-            PostPinProgressBar.Visibility = Visibility.Visible;
-            PostPinProgressBar.IsIndeterminate = true;
-            NewPinPivotItem.IsEnabled = false;
+            DropPinProgressBar.Visibility = Visibility.Visible;
+            DropPinProgressBar.IsIndeterminate = true;
+            //NewPinPivotItem.IsEnabled = false;
         }
 
         private void PostPinButton_ClickPostJob()
         {
-            PostPinProgressBar.Visibility = Visibility.Collapsed;
-            PostPinProgressBar.IsIndeterminate = false;
-            NewPinPivotItem.IsEnabled = true;
+            DropPinProgressBar.Visibility = Visibility.Collapsed;
+            DropPinProgressBar.IsIndeterminate = false;
+            DropPinButton.IsEnabled = false;
+            //NewPinPivotItem.IsEnabled = true;
         }
 
         private void PostPinButton_Click(object sender, RoutedEventArgs e)
@@ -639,28 +651,28 @@ namespace PinMessaging.View
 
             PostPinButton_ClickPreJob();
 
-            switch (ListPickerPinType.SelectedIndex)
-            {
-                case ((int)PMPinModel.PinsType.PublicMessage):
-                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.PublicMessage).ToString() });
-                    break;
+            //switch (ListPickerPinType.SelectedIndex)
+            //{
+            //    case ((int)PMPinModel.PinsType.PublicMessage):
+                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
+           //         break;
 
-                case ((int)PMPinModel.PinsType.PrivateMessage):
-                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.PrivateMessage).ToString() });
+           /*     case ((int)PMPinModel.PinsType.PrivateMessage):
+                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
                     break;
 
                 case ((int)PMPinModel.PinsType.Event):
-                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.Event).ToString() });
+                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
                     break;
-
+                    //new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.View).ToString() }
                 case ((int)PMPinModel.PinsType.View):
-                    pc.CreatePin(_geoLocation.GeopositionUser, new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.View).ToString() });
+                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
                     break;
 
                 default:
                     Logs.Output.ShowOutput("rien du tout");
                     break;
-            }
+            }*/
        
           
             //                PMDataConverter.ParseGetPins(json);
@@ -774,6 +786,7 @@ namespace PinMessaging.View
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
             }
             CloseAllExpanderExcept(TitleExpandView);
+            CheckCanCreatePin();
         }
 
         private void CloseAllExpanderExcept(ExpanderView exp)
@@ -856,6 +869,53 @@ namespace PinMessaging.View
             PinTypeScollStackPanel.Children.Clear();
             LoadCreatePinsPrivatePins();
             CloseAllExpanderExcept(PinTypeExpandView);
+        }
+
+        private void CheckCanCreatePin()
+        {
+            bool canCreate = false;
+
+            if (PinCreateModel.Description.Length != 0 && PinCreateModel.PinTitle.Length != 0)
+            {
+                if (PinCreateModel.PinTypeEnum != PMPinModel.PinsType.Default)
+                {
+                    if (PinCreateModel.PinTypeEnum == PMPinModel.PinsType.Event || PinCreateModel.PinTypeEnum == PMPinModel.PinsType.PrivateEvent)
+                    {
+                        if (PinCreateModel.CreationTime.Length != 0)
+                        {
+                            canCreate = true;
+                        }
+                    }
+                    else
+                    {
+                        canCreate = true;
+                    }
+                }
+            }
+            
+            if (canCreate == true)
+                DropPinButton.Visibility = Visibility.Visible;
+        }
+
+        private void TitleExpandView_OnExpanded(object sender, RoutedEventArgs e)
+        {
+        }
+
+        private void DescriptionExpandView_OnExpanded(object sender, RoutedEventArgs e)
+        {
+            TitleExpandView.IsExpanded = false;
+        }
+
+        private void TitleExpandViewTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            PinCreateModel.PinTitle = TitleExpandViewTextBox.Text;
+            CheckCanCreatePin();
+        }
+
+        private void DescriptionExpandViewTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            PinCreateModel.Description = DescriptionExpandViewTextBox.Text;
+            CheckCanCreatePin();
         }
     }
 }
