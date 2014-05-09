@@ -56,6 +56,8 @@ namespace PinMessaging.Utils
             GetPins,
             [Description("Used to retrieve a pin messages")]
             GetPinMessages,
+            [Description("Used to create a pin comment")]
+            CreatePinMessage,
             [Description("Used to create a pin")]
             CreatePin
         }
@@ -96,6 +98,8 @@ namespace PinMessaging.Utils
                     return "get-pins";
                 case RequestType.GetPinMessages:
                     return "get-pin-messages";
+                case RequestType.CreatePinMessage:
+                    return "create-pin-message";
                 case RequestType.CreatePin:
                     return "create-pin";
                 default:

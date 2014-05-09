@@ -454,7 +454,6 @@
                                     <TextBlock x:Name="PinTitleTextBlock" Text="{Binding LocalizedResources.PinTitle, Source={StaticResource LocalizedStrings}}" FontSize="25"  Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
                                     <TextBlock x:Name="PinTitleDescriptionTextBlock" FontWeight="Bold" FontSize="25" Text="Omg j'adore!!!!!!"/>
                                 </StackPanel>
-                         
                             </Grid>
 
                             <StackPanel Grid.Row="1">
@@ -463,7 +462,7 @@
                             </StackPanel>
 
                             <StackPanel Grid.Row="2">
-                                <TextBlock x:Name="PinAuthorTextBlock" Text="{Binding LocalizedResources.PinAuthor, Source={StaticResource LocalizedStrings}}" FontSize="25" Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                <TextBlock x:Name="PinAuthorTextBlock" Text="{Binding LocalizedResources.PinAuthor, Source={StaticResource LocalizedStrings}}" FontSize="25" Margin="10,10,0,0" Foreground="{StaticResource PMOrange}"></TextBlock>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="100"></ColumnDefinition>
@@ -473,13 +472,21 @@
                                         <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
 
-                                    <Image Grid.Column="0" Grid.Row="0" Source="/Images/Flags/ES.png" Stretch="Uniform"/>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Text="Enrique Iglesias" VerticalAlignment="Center" Margin="20,0,0,0" FontSize="25"></TextBlock>
+                                    <Image Grid.Column="0" Grid.Row="0" Source="/Images/4.jpg" Stretch="Uniform" Margin="10,10,0,10"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Text="Enrique Iglesias" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="25"></TextBlock>
                                 </Grid>
                             </StackPanel>
 
-                            <StackPanel Grid.Row="3">
-                                <TextBlock x:Name="PinCommentTextBlock"  Text="COMMENTS" FontSize="25" Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
+                            <StackPanel Name="CommentStackPanel"  Grid.Row="3">
+                                <TextBlock x:Name="PinCommentTextBlock"  Text="COMMENTS" FontSize="25"  Margin="10,0,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                <Grid x:Name="PinCommentCreateGrid">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="75"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0" x:Name="PinCommentContentTextBox" TextWrapping="Wrap" BorderThickness="0" FontSize="25" Margin="10,0,0,0"></TextBox>
+                                    <Button Grid.Column="1" x:Name="PinCommentPostButton" Click="PinCommentPostButton_OnClick" BorderThickness="0" Background="{StaticResource PMOrange}" Margin="-10,0,10,0" Content="GO"></Button>
+                                </Grid>
                                 <TextBlock x:Name="PinCommentContentTextBlock" TextWrapping="Wrap" FontSize="25" Margin="30,0,30,0" Text="Commentaire fake numero 1! Et hop ca passe sur 2 ligne maintennt."></TextBlock>
                             </StackPanel>
 

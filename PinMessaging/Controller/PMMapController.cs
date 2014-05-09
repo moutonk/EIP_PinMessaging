@@ -89,8 +89,8 @@ namespace PinMessaging.Controller
 
         private static bool IsAroundMe(PMPinModel pin)
         {
-            double pinLongitude = Utils.Utils.ConvertDoubleCommaToPoint(pin.Location["longitude"]);
-            double pinLatitude = Utils.Utils.ConvertDoubleCommaToPoint(pin.Location["latitude"]);
+            double pinLongitude = Utils.Utils.ConvertDoubleCommaToPoint(pin.Longitude);
+            double pinLatitude = Utils.Utils.ConvertDoubleCommaToPoint(pin.Latitude);
 
             if (_mapView != null && _mapView._geoLocation != null)
             {

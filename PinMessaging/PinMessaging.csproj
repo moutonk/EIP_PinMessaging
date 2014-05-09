@@ -109,6 +109,7 @@
     <Compile Include="Model\PMFavoriteModel.cs" />
     <Compile Include="Model\PMFlagModel.cs" />
     <Compile Include="Model\PMLogInCreateStructureModel.cs" />
+    <Compile Include="Model\PMPinCommentModel.cs" />
     <Compile Include="Model\PMPinModel.cs" />
     <Compile Include="Other\PMData.cs" />
     <Compile Include="Other\PMDataConverter.cs" />

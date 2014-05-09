@@ -78,7 +78,7 @@ namespace PinMessaging.Other
                     {
                         if (PMMapPinController.IsPinUnique(pmPinModel) == true)
                         {
-                            pc.CompleteDataMember(pmPinModel);
+                            //pc.CompleteDataMember(pmPinModel);
                             pmPinModel.ShowPinContent();
                             PMMapPinController.AddPinToMap(pmPinModel);
                             PinsList.Add(pmPinModel);

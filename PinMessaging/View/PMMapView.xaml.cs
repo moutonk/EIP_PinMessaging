@@ -34,6 +34,7 @@ namespace PinMessaging.View
         private static CurrentMapPageView _currentView = CurrentMapPageView.MapView;
         private static bool _isUnderMenuOpen = false;
         private static readonly PMPinModel PinCreateModel = new PMPinModel();
+        private PMPinModel _currentPinFocused;
      
         readonly MapLayer _mapLayer = new MapLayer();
         readonly MapOverlay _userSpotLayer = new MapOverlay();
@@ -521,17 +522,17 @@ namespace PinMessaging.View
             }
             else if (mdrlol == 1)
             {
-                t = "robindesbois_2";
+                t = "Robindesbois_2";
                 p = "/Images/5.jpg";
             }
             else if (mdrlol == 2)
             {
-                t = "joelatortue";
+                t = "Joelatortue";
                 p = "/Images/6.jpg";
             }
             else if (mdrlol == 3)
             {
-                t = "marcelLaSalade";
+                t = "MarcelLaSalade";
                 p = "/Images/7.jpg";
             }
             else
@@ -593,9 +594,12 @@ namespace PinMessaging.View
 
             mapC.GetPinMessage(pin);
 
-            PinTitleDescriptionTextBlock.Text = pin.PinTitle;
-            PinMessageDescriptionTextBlock.Text = pin.Description;
+            PinTitleDescriptionTextBlock.Text = pin.Title;
+            PinMessageDescriptionTextBlock.Text = pin.Content;
+            PinAuthorDescriptionTextBlock.Text = pin.Author;
             PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinTypeEnum];
+
+            _currentPinFocused = pin;
 
             MenuDown_OnClick(ButtonPins, new RoutedEventArgs());
         }
@@ -658,8 +662,8 @@ namespace PinMessaging.View
             PinCreateModel.Id = string.Empty;
             PinCreateModel.Lang = string.Empty;
             PinCreateModel.PinTypeEnum = PMPinModel.PinsType.Default;
-            PinCreateModel.PinTitle = string.Empty;
-            PinCreateModel.Description = string.Empty;
+            PinCreateModel.Title = string.Empty;
+            PinCreateModel.Content = string.Empty;
             PinCreateModel.CreationTime = string.Empty;
         }
 
@@ -693,9 +697,10 @@ namespace PinMessaging.View
             //switch (ListPickerPinType.SelectedIndex)
             //{
             //    case ((int)PMPinModel.PinsType.PublicMessage):
-            PinCreateModel.PinTitle = TitleExpandViewTextBox.Text;
-            PinCreateModel.Description = DescriptionExpandViewTextBox.Text;
+            PinCreateModel.Title = TitleExpandViewTextBox.Text;
+            PinCreateModel.Content = DescriptionExpandViewTextBox.Text;
             PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PublicMessage;
+            PinCreateModel.ContentType = "Texte";
                     pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
            //         break;
 
@@ -917,7 +922,7 @@ namespace PinMessaging.View
         {
             bool canCreate = false;
 
-            if (PinCreateModel.Description.Length != 0 && PinCreateModel.PinTitle.Length != 0)
+            if (PinCreateModel.Content.Length != 0 && PinCreateModel.Title.Length != 0)
             {
                 if (PinCreateModel.PinTypeEnum != PMPinModel.PinsType.Default)
                 {
@@ -950,14 +955,26 @@ namespace PinMessaging.View
 
         private void TitleExpandViewTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            PinCreateModel.PinTitle = TitleExpandViewTextBox.Text;
+            PinCreateModel.Title = TitleExpandViewTextBox.Text;
             CheckCanCreatePin();
         }
 
         private void DescriptionExpandViewTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            PinCreateModel.Description = DescriptionExpandViewTextBox.Text;
+            PinCreateModel.Content = DescriptionExpandViewTextBox.Text;
             CheckCanCreatePin();
+        }
+
+        private void PinCommentPostButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var pinController = new PMPinController(RequestType.CreatePinMessage, PinCommentPostButton_PostResponse);
+
+            pinController.CreatePinMessage(_currentPinFocused.Id, PMPinModel.PinsContentType.Text, PinCommentContentTextBox.Text);
+        }
+
+        private void PinCommentPostButton_PostResponse()
+        {
+            Logs.Output.ShowOutput("You can update UI now");
         }
     }
 }

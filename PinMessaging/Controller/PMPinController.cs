@@ -30,65 +30,6 @@ namespace PinMessaging.Controller
             _updateUiMethod = updateUi;
         }
 
-        private static void ConvertTypeToEnum(PMPinModel pin)
-        {
-            if (pin.Type != null)
-            {
-                if (pin.Type.Equals("Public_msg"))
-                    pin.PinTypeEnum = PMPinModel.PinsType.PublicMessage;
-                else if (pin.Type.Equals("Private_msg"))
-                    pin.PinTypeEnum = PMPinModel.PinsType.PrivateMessage;
-                else if (pin.Type.Equals("Event"))
-                    pin.PinTypeEnum = PMPinModel.PinsType.Event;
-                else if (pin.Type.Equals("View_point"))
-                    pin.PinTypeEnum = PMPinModel.PinsType.View;                    
-                else
-                    pin.PinTypeEnum = PMPinModel.PinsType.PrivateMessage;
-            }         
-        }
-
-        private static void ConvertGeoPosToInteger(PMPinModel pin)
-        {
-            try
-            {
-                pin.GeoCoord = new GeoCoordinate(Double.Parse(pin.Location["latitude"], CultureInfo.InvariantCulture),
-                                                 Double.Parse(pin.Location["longitude"], CultureInfo.InvariantCulture));
-            }
-            catch (Exception exp)
-            {
-                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
-                pin.GeoCoord = new GeoCoordinate(0, 0);
-            }
-        }
-
-        public void CompleteDataMember(PMPinModel pin)
-        {
-            ConvertGeoPosToInteger(pin);
-            ConvertTypeToEnum(pin);
-
-            if (pin.Location.ContainsKey("name") == true)
-            {
-                pin.PinTitle = pin.Location["name"];
-            }
-
-            //if it's the main thread
-            if (Deployment.Current.Dispatcher.CheckAccess() == false)
-            {
-                //we invoke the UI thread
-                Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    pin.PinImg = new Image { Source = Paths.PinsMapImg[pin.PinTypeEnum] };
-                    pin.PinImg.Tap += pin.img_Tap;
-                }); 
-            }
-            //otherwise it's already in the UI thread
-            else
-            {
-                pin.PinImg = new Image { Source = Paths.PinsMapImg[pin.PinTypeEnum] };
-                pin.PinImg.Tap += pin.img_Tap;
-            }
-        }
-
         public void GetPins(double latitude, double longitude)
         {
             var dictionary = new Dictionary<string, string>
@@ -109,8 +50,8 @@ namespace PinMessaging.Controller
             {
                 {"longitude", Utils.Utils.ConvertDoubleCommaToPoint(geoPos.Coordinate.Longitude.ToString()).ToString(CultureInfo.InvariantCulture)},
                 {"latitude", Utils.Utils.ConvertDoubleCommaToPoint(geoPos.Coordinate.Latitude.ToString()).ToString(CultureInfo.InvariantCulture)},
-                {"name", pin.PinTitle},
-                {"description", pin.Description},
+                {"title", pin.Title},
+                {"content", pin.Content},
                 {"type", pin.PinTypeEnum.ToString()}
             };
 
@@ -118,6 +59,21 @@ namespace PinMessaging.Controller
 
             StartTimer();
         }
+
+        public void CreatePinMessage(string pinId, PMPinModel.PinsContentType type, string content)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"pinId", pinId},
+                {"type", ((int)type).ToString()},
+                {"content", content}
+            };  
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.CreatePinMessage, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
 
         private void AddPinUiAndCode()
         {
@@ -146,6 +102,11 @@ namespace PinMessaging.Controller
                         if (_updateUiMethod != null)
                             _updateUiMethod();
                         break;
+                    case RequestType.CreatePinMessage:
+                        if (_updateUiMethod != null)
+                            _updateUiMethod();
+                        break;
+
                 }
                 Logs.Output.ShowOutput("PinListSize: " + PMData.PinsList.Count);
             }
