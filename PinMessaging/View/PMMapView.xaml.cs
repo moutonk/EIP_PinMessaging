@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Windows.Foundation.Metadata;
 using Microsoft.Phone.Controls;
 using System.Device.Location;
-using Microsoft.Phone.Info;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Controls;
 using PinMessaging.Model;
@@ -27,7 +19,7 @@ using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace PinMessaging.View
 {
-    public partial class PMMapView : PhoneApplicationPage, INotifyPropertyChanged
+    public partial class PMMapView : PhoneApplicationPage
     {
         private enum CurrentMapPageView { MapView, LeftMenuView, RightMenuView, UnderMenuView}
 
@@ -74,15 +66,6 @@ namespace PinMessaging.View
             PMMapPinController.Init(this);
             LoadRessources();
 
-            listPickerPins = new List<ElementsListPicker> 
-            {
-                new ElementsListPicker { Name = AppResources.PinPublicMessage, ImgPath = Paths.PinPublicMessageIconIntermediate},
-          //      new ElementsListPicker { Name = AppResources.PinPrivateMessage, ImgPath = Paths.PinPrivateMessage},
-            //    new ElementsListPicker { Name = AppResources.PinEvent, ImgPath = Paths.PinEvent},
-              //  new ElementsListPicker { Name = AppResources.PinPointOfView, ImgPath = Paths.PinEye},
-                //new ElementsListPicker { Name = AppResources.PinPointOfInterest, ImgPath = Paths.PinPointOfInterest},
-             };
-
             if (PMData.AppMode == PMData.ApplicationMode.Offline)
             {
                 PostPinButton.IsEnabled = false;
@@ -114,24 +97,6 @@ namespace PinMessaging.View
             UpdateLocationUI();    
         }
 
-        public void ProgressBarActive(bool st)
-        {
-            Dispatcher.BeginInvoke(() =>
-            {
-                if (st == false)
-                {
-                    ProgressBarMap.IsIndeterminate = false;
-                    ProgressBarMap.Visibility = Visibility.Collapsed;
-                }
-                else
-                {
-                    ProgressBarMap.IsIndeterminate = true;
-                    ProgressBarMap.Visibility = Visibility.Visible;
-                }
-            });
-        
-       }
-
         private int AccessLocationMsgBox()
         {
             int choice = Utils.Utils.CustomMessageBox(new[] { AppResources.Allow, AppResources.Cancel },
@@ -157,6 +122,29 @@ namespace PinMessaging.View
         }
 
         ////////////////////////////////////////////////    Middle Page    /////////////////////////////////////////////
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            Map.ZoomLevel -= 1;
+        }
+
+        public void ProgressBarActive(bool st)
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                if (st == false)
+                {
+                    ProgressBarMap.IsIndeterminate = false;
+                    ProgressBarMap.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    ProgressBarMap.IsIndeterminate = true;
+                    ProgressBarMap.Visibility = Visibility.Visible;
+                }
+            });
+
+        }
 
         private void MenuDown_PinOnClick()
         {
@@ -325,7 +313,7 @@ namespace PinMessaging.View
             }
         }
 
-        ////////////////MANAGE SWIPE LEFT RIGHT/////////////////////////
+        ///////////////////////////////////     MANAGE SWIPE LEFT RIGHT        //////////////////////////////////
 
         private bool _enableSwipe = true;
         private double _leftPage;
@@ -492,13 +480,14 @@ namespace PinMessaging.View
             }
         }
 
-
         ////////////////////////////////////////////////    Down Menu    /////////////////////////////////////////////
 
         private void CloseMenuDownButton_Click(object sender, RoutedEventArgs e)
         {
             Map_OnTouch(sender, e);
         }
+
+        /// ///////////////////////////////////////////    Contact    //////////////////////////////////////////////////
 
         static int mdrlol = 0;
         private Grid CreateContactItem()
@@ -588,16 +577,7 @@ namespace PinMessaging.View
             }
         }
 
-        public void GetPinMessages_Post()
-        {
-            foreach (var comment in PMData.PinsCommentsListTmp)
-            {
-                var tb = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30, 0, 30, 0), Text = comment.Message.Content };
-                CommentStackPanel.Children.Add(tb);
-            }
-            PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
-            PMData.PinsCommentsListTmp.Clear();
-        }
+        /// //////////////////////////////////////////     Pin description      ////////////////////////////////////////
 
         public void PinTapped(PMPinModel pin)
         {
@@ -615,153 +595,18 @@ namespace PinMessaging.View
             MenuDown_OnClick(ButtonPins, new RoutedEventArgs());
         }
 
-        ////////////////////////////////////////////////    Right Menu    /////////////////////////////////////////////
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void NotifyPropertyChanged(String propertyName)
+        public void GetPinMessages_Post()
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
-            if (null != handler)
+            foreach (var comment in PMData.PinsCommentsListTmp)
             {
-                handler(this, new PropertyChangedEventArgs(propertyName));
+                var tb = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30, 0, 30, 0), Text = comment.Message.Content };
+                CommentStackPanel.Children.Add(tb);
             }
-        }
+            PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
+            PMData.PinsCommentsListTmp.Clear();
+        }      //MERGE
 
-        private bool NotifyPropertyChanged<T>(T variable, T valeur, [CallerMemberName] string nomPropriete = null)
-        {
-            if (object.Equals(variable, valeur)) return false;
-
-            variable = valeur;
-            NotifyPropertyChanged(nomPropriete);
-            return true;
-        }
-
-        public IEnumerable ListPickerPins
-        {
-            get { return listPickerPins; }
-            set { NotifyPropertyChanged(listPickerPins, value); }
-        }
-
-        public class ElementsListPicker
-        {
-            public string Code {get; set; }
-            public string Name {get; set; }
-            public Uri ImgPath { get; set; }
-        }
-
-        private IEnumerable listPickerPins { get; set; }
-
-        private void ListPickerPinType_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ListPickerPinType.SelectedIndex == ((int)PMPinModel.PinsType.PrivateMessage))
-            {
-                GridNewPinPivotItem.RowDefinitions[2].Height = GridNewPinPivotItem.RowDefinitions[3].Height;
-            }
-            else if (ListPickerPinType.SelectedIndex == ((int) PMPinModel.PinsType.Event))
-            {
-                GridNewPinPivotItem.RowDefinitions[1].Height = GridNewPinPivotItem.RowDefinitions[3].Height;
-            }
-            else
-            {
-                GridNewPinPivotItem.RowDefinitions[2].Height = new GridLength(0);
-            }
-        }
-
-        private void ResetCreatePinModel()
-        {
-            PinCreateModel.Id = string.Empty;
-            PinCreateModel.Lang = string.Empty;
-            PinCreateModel.PinTypeEnum = PMPinModel.PinsType.Default;
-            PinCreateModel.Title = string.Empty;
-            PinCreateModel.Content = string.Empty;
-            PinCreateModel.CreationTime = string.Empty;
-        }
-
-        private void PostPinButton_ClickPreJob()
-        {
-            DropPinProgressBar.Visibility = Visibility.Visible;
-            DropPinProgressBar.IsIndeterminate = true;
-            //NewPinPivotItem.IsEnabled = false;
-        }
-
-        private void PostPinButton_ClickPostJob()
-        {
-            DropPinProgressBar.Visibility = Visibility.Collapsed;
-            DropPinProgressBar.IsIndeterminate = false;
-            DropPinButton.IsEnabled = false;
-            //NewPinPivotItem.IsEnabled = true;
-        }
-
-        private void PostPinButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (_geoLocation == null)
-                if (AccessLocationMsgBox() != 1)
-                    return;
-            if (_geoLocation != null && _geoLocation.GeopositionUser == null)
-                return;
-           
-            var pc = new PMPinController(RequestType.CreatePin, PostPinButton_ClickPostJob);
-
-            PostPinButton_ClickPreJob();
-
-            //switch (ListPickerPinType.SelectedIndex)
-            //{
-            //    case ((int)PMPinModel.PinsType.PublicMessage):
-            PinCreateModel.Title = TitleExpandViewTextBox.Text;
-            PinCreateModel.Content = DescriptionExpandViewTextBox.Text;
-            PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PublicMessage;
-            PinCreateModel.ContentType = "Texte";
-                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
-           //         break;
-
-           /*     case ((int)PMPinModel.PinsType.PrivateMessage):
-                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
-                    break;
-
-                case ((int)PMPinModel.PinsType.Event):
-                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
-                    break;
-                    //new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.View).ToString() }
-                case ((int)PMPinModel.PinsType.View):
-                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
-                    break;
-
-                default:
-                    Logs.Output.ShowOutput("rien du tout");
-                    break;
-            }*/
-       
-          
-            //                PMDataConverter.ParseGetPins(json);
-            //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
-            //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
-
-            //PMMapPinController.AddPushpinToMap(pin);
-        }
-
-        private void PinTitle_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                PinContent.Focus();
-            }
-        }
-
-        private void PinReceiver_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                PinTitle.Focus();
-            }
-        }
-
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            Map.ZoomLevel -= 1;
-        }
-
-        
+        ////////////////////////////////////////////////    Create pin         //////////////////////////////////////////
 
         private void CreatePinImgOnTap(object sender, GestureEventArgs gestureEventArgs)
         {
@@ -866,23 +711,23 @@ namespace PinMessaging.View
 
         private void LoadCreatePinsPublicPins()
         {
-                var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PublicMessage], Name = "PublicMsg" }; img1.Tap += CreatePinImgOnTap;
-                PinTypeScollStackPanel.Children.Add(img1);
+            var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PublicMessage], Name = "PublicMsg" }; img1.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img1);
 
-                var img2 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.Event], Name = "PublicEvent" }; img2.Tap += CreatePinImgOnTap;
-                PinTypeScollStackPanel.Children.Add(img2);
+            var img2 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.Event], Name = "PublicEvent" }; img2.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img2);
 
-                var img3 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.View], Name = "PublicView" }; img3.Tap += CreatePinImgOnTap;
-                PinTypeScollStackPanel.Children.Add(img3);
+            var img3 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.View], Name = "PublicView" }; img3.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img3);
 
-                var img4 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseStart], Name = "PublicCourseStart" }; img4.Tap += CreatePinImgOnTap;
-                PinTypeScollStackPanel.Children.Add(img4);
+            var img4 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseStart], Name = "PublicCourseStart" }; img4.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img4);
 
-                var img5 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseNextStep], Name = "PublicCourseNext" }; img5.Tap += CreatePinImgOnTap;
-                PinTypeScollStackPanel.Children.Add(img5);
+            var img5 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseNextStep], Name = "PublicCourseNext" }; img5.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img5);
 
-                var img6 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseLastStep], Name = "PublicCourseLast" }; img6.Tap += CreatePinImgOnTap;
-                PinTypeScollStackPanel.Children.Add(img6);
+            var img6 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseLastStep], Name = "PublicCourseLast" }; img6.Tap += CreatePinImgOnTap;
+            PinTypeScollStackPanel.Children.Add(img6);
         }
 
         private void LoadCreatePinsPrivatePins()
@@ -950,9 +795,9 @@ namespace PinMessaging.View
                     }
                 }
             }
-            
+
             //if (canCreate == true)
-                DropPinButton.Visibility = Visibility.Visible;
+            DropPinButton.Visibility = Visibility.Visible;
         }
 
         private void TitleExpandView_OnExpanded(object sender, RoutedEventArgs e)
@@ -976,6 +821,96 @@ namespace PinMessaging.View
             CheckCanCreatePin();
         }
 
+        private void ResetCreatePinModel()
+        {
+            PinCreateModel.Id = string.Empty;
+            PinCreateModel.Lang = string.Empty;
+            PinCreateModel.PinTypeEnum = PMPinModel.PinsType.Default;
+            PinCreateModel.Title = string.Empty;
+            PinCreateModel.Content = string.Empty;
+            PinCreateModel.CreationTime = string.Empty;
+        }
+
+        private void PostPinButton_ClickPreJob()
+        {
+            DropPinProgressBar.Visibility = Visibility.Visible;
+            DropPinProgressBar.IsIndeterminate = true;
+            //NewPinPivotItem.IsEnabled = false;
+        }
+
+        private void PostPinButton_ClickPostJob()
+        {
+            DropPinProgressBar.Visibility = Visibility.Collapsed;
+            DropPinProgressBar.IsIndeterminate = false;
+            DropPinButton.IsEnabled = false;
+            //NewPinPivotItem.IsEnabled = true;
+        }
+
+        private void PostPinButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (_geoLocation == null)
+                if (AccessLocationMsgBox() != 1)
+                    return;
+            if (_geoLocation != null && _geoLocation.GeopositionUser == null)
+                return;
+           
+            var pc = new PMPinController(RequestType.CreatePin, PostPinButton_ClickPostJob);
+
+            PostPinButton_ClickPreJob();
+
+            //switch (ListPickerPinType.SelectedIndex)
+            //{
+            //    case ((int)PMPinModel.PinsType.PublicMessage):
+            PinCreateModel.Title = TitleExpandViewTextBox.Text;
+            PinCreateModel.Content = DescriptionExpandViewTextBox.Text;
+            PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PublicMessage;
+            PinCreateModel.ContentType = "Texte";
+                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
+           //         break;
+
+           /*     case ((int)PMPinModel.PinsType.PrivateMessage):
+                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
+                    break;
+
+                case ((int)PMPinModel.PinsType.Event):
+                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
+                    break;
+                    //new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.View).ToString() }
+                case ((int)PMPinModel.PinsType.View):
+                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
+                    break;
+
+                default:
+                    Logs.Output.ShowOutput("rien du tout");
+                    break;
+            }*/
+       
+          
+            //                PMDataConverter.ParseGetPins(json);
+            //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
+            //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
+
+            //PMMapPinController.AddPushpinToMap(pin);
+        }
+
+        private void PinTitle_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PinContent.Focus();
+            }
+        }
+
+        private void PinReceiver_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PinTitle.Focus();
+            }
+        }
+
+        /// ////////////////////////////////////////      Commments     ////////////////////////////////////////
+
         private void PinCommentPostButton_OnClick(object sender, RoutedEventArgs e)
         {
             var pinController = new PMPinController(RequestType.CreatePinMessage, PinCommentPostButton_PostResponse);
@@ -993,6 +928,6 @@ namespace PinMessaging.View
             }
             PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
             PMData.PinsCommentsListTmp.Clear();
-        }
+        }     //// MERGE
     }
 }
