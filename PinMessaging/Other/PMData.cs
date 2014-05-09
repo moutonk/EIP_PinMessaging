@@ -36,6 +36,9 @@ namespace PinMessaging.Other
         //contain all the pins
         [DefaultValue(null)] public static MapLayer MapLayerContainer { get; set; }
 
+        [DefaultValue(null)] public static List<PMPinCommentModel> PinsCommentsList { get; set; }
+        [DefaultValue(null)] public static List<PMPinCommentModel> PinsCommentsListTmp { get; set; }
+
         //contains all the pins known (serialized)
         private const string DataFile = "pinsStorage.dat";
 
@@ -43,6 +46,8 @@ namespace PinMessaging.Other
         {
             PinsList = new List<PMPinModel>();
             PinsListToAdd = new List<PMPinModel>();
+            PinsCommentsList = new List<PMPinCommentModel>();
+            PinsCommentsListTmp = new List<PMPinCommentModel>();
         }
 
         public static void AddToQueuePinsList(List<PMPinModel> list)
@@ -52,6 +57,14 @@ namespace PinMessaging.Other
         public static void AddToQueuePinsList(PMPinModel pin)
         {
             PinsListToAdd.Add(pin);
+        }
+        public static void AddToQueuePinComments(List<PMPinCommentModel> comments)
+        {
+            PinsCommentsList.AddRange(comments);
+        }
+        public static void AddToQueuePinCommentsTmp(List<PMPinCommentModel> comments)
+        {
+            PinsCommentsListTmp.AddRange(comments);
         }
 
         public async static void LoadPins()

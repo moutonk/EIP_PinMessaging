@@ -17,34 +17,17 @@ namespace PinMessaging.Controller
         {
             CurrentRequestType = currentRequestType;
         }
-       
-        public void GetPinMessage(PMPinModel pin)
-        {
-            var dictionary = new Dictionary<string, string>
-            {
-                {"pinId", pin.Id},
-            };
 
-            PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPinMessages, SyncType.Async, dictionary, null);
-
-            StartTimer();
-        }
-
-        protected  override void waitEnd_Tick(object sender, EventArgs e)
+        protected override void waitEnd_Tick(object sender, EventArgs e)
         {
             if (PMWebService.OnGoingRequest == false)
             {
                 StopTimer();
 
-                switch (CurrentRequestType)
-                {
-                    case RequestType.GetPinMessages:
-                        Logs.Output.ShowOutput("getpinmessages");
-                        break;
-                    }
-                }
-            }              
+                Logs.Output.ShowOutput("should not be here");
+            }
         }
+    }
 
     public static class PMMapPinController
     {

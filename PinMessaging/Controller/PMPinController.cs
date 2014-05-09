@@ -60,6 +60,18 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
+        public void GetPinMessage(PMPinModel pin)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"pinId", pin.Id},
+            };
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPinMessages, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
         public void CreatePinMessage(string pinId, PMPinModel.PinsContentType type, string content)
         {
             var dictionary = new Dictionary<string, string>
@@ -73,7 +85,6 @@ namespace PinMessaging.Controller
 
             StartTimer();
         }
-
 
         private void AddPinUiAndCode()
         {
@@ -103,6 +114,10 @@ namespace PinMessaging.Controller
                             _updateUiMethod();
                         break;
                     case RequestType.CreatePinMessage:
+                        if (_updateUiMethod != null)
+                            _updateUiMethod();
+                        break;
+                    case RequestType.GetPinMessages:
                         if (_updateUiMethod != null)
                             _updateUiMethod();
                         break;

@@ -588,11 +588,22 @@ namespace PinMessaging.View
             }
         }
 
+        public void GetPinMessages_Post()
+        {
+            foreach (var comment in PMData.PinsCommentsListTmp)
+            {
+                var tb = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30, 0, 30, 0), Text = comment.Message.Content };
+                CommentStackPanel.Children.Add(tb);
+            }
+            PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
+            PMData.PinsCommentsListTmp.Clear();
+        }
+
         public void PinTapped(PMPinModel pin)
         {
-            var mapC = new PMMapController(RequestType.GetPinMessages);
+            var pinC = new PMPinController(RequestType.GetPinMessages, GetPinMessages_Post);
 
-            mapC.GetPinMessage(pin);
+            pinC.GetPinMessage(pin);
 
             PinTitleDescriptionTextBlock.Text = pin.Title;
             PinMessageDescriptionTextBlock.Text = pin.Content;
@@ -974,7 +985,14 @@ namespace PinMessaging.View
 
         private void PinCommentPostButton_PostResponse()
         {
-            Logs.Output.ShowOutput("You can update UI now");
+            PinCommentContentTextBox.Text = "";
+            foreach (var comment in PMData.PinsCommentsListTmp)
+            {
+                var tb = new TextBlock {TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30,0,30,0), Text = comment.Message.Content};
+                CommentStackPanel.Children.Add(tb);
+            }
+            PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
+            PMData.PinsCommentsListTmp.Clear();
         }
     }
 }

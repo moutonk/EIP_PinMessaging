@@ -10,7 +10,7 @@ using PinMessaging.Utils;
 namespace PinMessaging.Model
 {
     [JsonObject(MemberSerialization.OptIn)]
-    class PMPinCommentModel
+    public class PMPinCommentModel
     {
         [JsonProperty] [DefaultValue(null)] public string Id { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Up { get; set; }
