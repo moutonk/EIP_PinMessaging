@@ -386,6 +386,11 @@ namespace PinMessaging.View
         {
             _viewMoved = true;
 
+            if (left == 0 || left == -840)
+                Map.IsEnabled = false;
+            else
+                Map.IsEnabled = true;
+
             moveAnimation.SkipToFill();
             ((DoubleAnimation)(moveAnimation).Children[0]).To = left;
             moveAnimation.Begin();            
@@ -494,30 +499,64 @@ namespace PinMessaging.View
             Map_OnTouch(sender, e);
         }
 
+        static int mdrlol = 0;
         private Grid CreateContactItem()
         {
-            var contactGrid = new Grid();
+            var contactGrid = new Grid {Margin = new Thickness(-5,0,0,0)};
 
-            contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(140) });
-            contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(60) });
+            contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(110) });
+            //     contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(70) });
 
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(170) });
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
 
-            var contactImg = new Canvas() {Background = new SolidColorBrush(Colors.DarkGray)}; //Image() { Source = new BitmapImage(Paths.PinEye)};
-            var contactName = new TextBlock() { Text = "Nom du mec", FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
-            var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0)};
-            var privateMsg = new TextBlock() { Text = "Private msg", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            var userProfil = new TextBlock() { Text = "User profil", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            var localise = new TextBlock() { Text = "localiser", FontSize = 20, Margin = new Thickness(10, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
+            var t = "";
+            var p = "";
 
+            if (mdrlol == 0)
+            {
+                t = "Totodu06";
+                p = "/Images/4.jpg";
+            }
+            else if (mdrlol == 1)
+            {
+                t = "robindesbois_2";
+                p = "/Images/5.jpg";
+            }
+            else if (mdrlol == 2)
+            {
+                t = "joelatortue";
+                p = "/Images/6.jpg";
+            }
+            else if (mdrlol == 3)
+            {
+                t = "marcelLaSalade";
+                p = "/Images/7.jpg";
+            }
+            else
+            {
+                t = "superkeke";
+                p = "/Images/8.jpg";
+          
+            }
+
+            mdrlol++;
+            if (mdrlol > 4)
+                mdrlol = 0;
+            var contactImg = new Image() { Source = new BitmapImage(new Uri(p, UriKind.Relative))};
+            var contactName = new TextBlock() { Text = t, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
+            var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0)};
+            /*var privateMsg = new TextBlock() { Text = "Private message", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
+            var userProfil = new TextBlock() { Text = "User profil", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
+            var localise = new TextBlock() { Text = "Localize", FontSize = 20, Margin = new Thickness(10, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
+*/
             contactGrid.Children.Add(contactImg);
             contactGrid.Children.Add(contactName);
             contactGrid.Children.Add(onlineImg);
-            contactGrid.Children.Add(privateMsg);
+           /* contactGrid.Children.Add(privateMsg);
             contactGrid.Children.Add(userProfil);
-            contactGrid.Children.Add(localise);
+            contactGrid.Children.Add(localise*/
 
             Grid.SetRow(contactImg, 0);
             Grid.SetColumn(contactImg, 0);
@@ -528,21 +567,21 @@ namespace PinMessaging.View
             Grid.SetRow(onlineImg, 0);
             Grid.SetColumn(onlineImg, 2);
 
-            Grid.SetRow(privateMsg, 1);
+/*            Grid.SetRow(privateMsg, 1);
             Grid.SetColumn(privateMsg, 0);
 
             Grid.SetRow(userProfil, 1);
             Grid.SetColumn(userProfil, 1);
 
             Grid.SetRow(localise, 1);
-            Grid.SetColumn(localise, 2);
+            Grid.SetColumn(localise, 2);*/
 
             return contactGrid;
         }
 
         private void LoadContacts()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 5; i++)
             {
                 UnderMenuContactPanel.Children.Add(CreateContactItem());
             }
@@ -654,6 +693,9 @@ namespace PinMessaging.View
             //switch (ListPickerPinType.SelectedIndex)
             //{
             //    case ((int)PMPinModel.PinsType.PublicMessage):
+            PinCreateModel.PinTitle = TitleExpandViewTextBox.Text;
+            PinCreateModel.Description = DescriptionExpandViewTextBox.Text;
+            PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PublicMessage;
                     pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
            //         break;
 
@@ -893,7 +935,7 @@ namespace PinMessaging.View
                 }
             }
             
-            if (canCreate == true)
+            //if (canCreate == true)
                 DropPinButton.Visibility = Visibility.Visible;
         }
 

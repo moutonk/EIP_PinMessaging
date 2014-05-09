@@ -181,6 +181,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Images\4.jpg" />
+    <Content Include="Images\5.jpg" />
+    <Content Include="Images\6.jpg" />
+    <Content Include="Images\7.jpg" />
+    <Content Include="Images\8.jpg" />
     <Content Include="Images\empty_gallery.png" />
     <Content Include="Images\Icons\about_orange_icon%402x.png" />
     <Content Include="Images\Icons\about_orange_icon.png" />
