@@ -124,6 +124,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Create Pin.
+        /// </summary>
+        public static string CreatePinTitle {
+            get {
+                return ResourceManager.GetString("CreatePinTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Do you already have an account?.
         /// </summary>
         public static string HaveAccountOrNot {

@@ -230,6 +230,10 @@
           <source>TITLE</source>
           <target state="new">TITLE</target>
         </trans-unit>
+        <trans-unit id="Resx/CreatePinTitle" translate="yes" xml:space="preserve">
+          <source>Create Pin</source>
+          <target state="new">Create Pin</target>
+        </trans-unit>
       </group>
     </body>
   </file>

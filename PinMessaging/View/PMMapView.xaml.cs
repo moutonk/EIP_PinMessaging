@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -68,7 +69,7 @@ namespace PinMessaging.View
 
             if (PMData.AppMode == PMData.ApplicationMode.Offline)
             {
-                PostPinButton.IsEnabled = false;
+                //PostPinButton.IsEnabled = false;
             }
 
             PMData.LoadPins();
@@ -146,6 +147,16 @@ namespace PinMessaging.View
 
         }
 
+        private void AdaptUiUnderMenuClick(RowDefinition exept, bool pinDescFull, bool contactFull)
+        {
+            for (var i = 1; i < UnderMenuGrid.RowDefinitions.Count; i++)
+            {
+                UnderMenuGrid.RowDefinitions[i].Height = UnderMenuGrid.RowDefinitions[i].Equals(exept) == false ? new GridLength(0) : new GridLength(1, GridUnitType.Star);
+            }
+            UnderMenuPinDescriptionGrid.Height = (pinDescFull == true ? UnderMenuPinDescriptionScrollView.Height : 0);
+            UnderMenuContactPanel.Height = (contactFull == true ? UnderMenuContactScrollViewer.Height : 0);
+        }
+
         private void MenuDown_PinOnClick()
         {
             Dispatcher.BeginInvoke(() =>
@@ -155,13 +166,8 @@ namespace PinMessaging.View
                 _enableSwipe = false;
 
                 DownMenuTitle.Text = AppResources.Pin;
-                UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
-                UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
-                UnderMenuGrid.RowDefinitions[4].Height = new GridLength(0);
-                UnderMenuGrid.RowDefinitions[3].Height = new GridLength(1, GridUnitType.Star);
-                UnderMenuPinDescriptionGrid.Height = UnderMenuPinDescriptionScrollView.Height;
-                UnderMenuContactPanel.Height = 0;
-
+                AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[3], true, false);
+      
                 MainGridMap.RowDefinitions[2].Height = new GridLength(0);
                 MoveAnimationUp.Begin();
             });
@@ -170,34 +176,22 @@ namespace PinMessaging.View
         private void MenuDown_NotificationOnClick()
         {
             DownMenuTitle.Text = AppResources.Notifications;
-            UnderMenuGrid.RowDefinitions[2].Height = new GridLength(1, GridUnitType.Star);
-            UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
-            UnderMenuGrid.RowDefinitions[3].Height = new GridLength(0);
-            UnderMenuGrid.RowDefinitions[4].Height = new GridLength(0);
-            UnderMenuContactPanel.Height = 0;
-            //UnderMenuContactPanel.Children.Clear();
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[2], false, false);
         }
 
         private void MenuDown_ContactOnClick()
         {
             DownMenuTitle.Text = AppResources.Contacts;
-            UnderMenuGrid.RowDefinitions[3].Height = new GridLength(0);
-            UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
-            UnderMenuGrid.RowDefinitions[4].Height = new GridLength(0);
-            UnderMenuGrid.RowDefinitions[1].Height = new GridLength(1, GridUnitType.Star);
-            UnderMenuContactPanel.Height = UnderMenuContactScrollViewer.Height;
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[1], false, true);
+
             LoadContacts();
         }
 
         private void MenuDown_CreatePin()
         {
-            DownMenuTitle.Text = "Create Pin";
-            UnderMenuGrid.RowDefinitions[3].Height = new GridLength(0);
-            UnderMenuGrid.RowDefinitions[2].Height = new GridLength(0);
-            UnderMenuGrid.RowDefinitions[1].Height = new GridLength(0);
-            UnderMenuGrid.RowDefinitions[4].Height = new GridLength(1, GridUnitType.Star);
-            UnderMenuContactPanel.Height = 0;
-            UnderMenuPinDescriptionGrid.Height = 0;
+            DownMenuTitle.Text = AppResources.CreatePinTitle;
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[4], false, false);
+
             VisibilityExpandView.IsExpanded = true;
         }
 
@@ -218,7 +212,9 @@ namespace PinMessaging.View
         {
             if (sender.Equals(ButtonPins))
             {
+                MenuDown_CommonActionsBefore();
                 MenuDown_PinOnClick();
+                MenuDown_CommonActionsAfter();
             }
             else if (sender.Equals(NotificationButton) || sender.Equals(NotificationButtonTextBlock))
             {
@@ -579,6 +575,16 @@ namespace PinMessaging.View
 
         /// //////////////////////////////////////////     Pin description      ////////////////////////////////////////
 
+        private void AddCommentsToUi()
+        {
+            foreach (var tb in PMData.PinsCommentsListTmp.Select(comment => new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30, 0, 30, 0), Text = comment.Message.Content }))
+            {
+                CommentStackPanel.Children.Add(tb);
+            }
+            PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
+            PMData.PinsCommentsListTmp.Clear();
+        }
+
         public void PinTapped(PMPinModel pin)
         {
             var pinC = new PMPinController(RequestType.GetPinMessages, GetPinMessages_Post);
@@ -597,14 +603,9 @@ namespace PinMessaging.View
 
         public void GetPinMessages_Post()
         {
-            foreach (var comment in PMData.PinsCommentsListTmp)
-            {
-                var tb = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30, 0, 30, 0), Text = comment.Message.Content };
-                CommentStackPanel.Children.Add(tb);
-            }
-            PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
-            PMData.PinsCommentsListTmp.Clear();
-        }      //MERGE
+            CommentStackPanel.Children.Clear();
+            AddCommentsToUi();
+        }
 
         ////////////////////////////////////////////////    Create pin         //////////////////////////////////////////
 
@@ -835,6 +836,7 @@ namespace PinMessaging.View
         {
             DropPinProgressBar.Visibility = Visibility.Visible;
             DropPinProgressBar.IsIndeterminate = true;
+            DropPinButton.IsEnabled = false;
             //NewPinPivotItem.IsEnabled = false;
         }
 
@@ -842,7 +844,7 @@ namespace PinMessaging.View
         {
             DropPinProgressBar.Visibility = Visibility.Collapsed;
             DropPinProgressBar.IsIndeterminate = false;
-            DropPinButton.IsEnabled = false;
+            DropPinButton.IsEnabled = true;
             //NewPinPivotItem.IsEnabled = true;
         }
 
@@ -858,55 +860,11 @@ namespace PinMessaging.View
 
             PostPinButton_ClickPreJob();
 
-            //switch (ListPickerPinType.SelectedIndex)
-            //{
-            //    case ((int)PMPinModel.PinsType.PublicMessage):
             PinCreateModel.Title = TitleExpandViewTextBox.Text;
             PinCreateModel.Content = DescriptionExpandViewTextBox.Text;
             PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PublicMessage;
             PinCreateModel.ContentType = "Texte";
-                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
-           //         break;
-
-           /*     case ((int)PMPinModel.PinsType.PrivateMessage):
-                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
-                    break;
-
-                case ((int)PMPinModel.PinsType.Event):
-                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
-                    break;
-                    //new[] { PinTitle.Text, PinContent.Text, ((int)PMPinModel.PinsType.View).ToString() }
-                case ((int)PMPinModel.PinsType.View):
-                    pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
-                    break;
-
-                default:
-                    Logs.Output.ShowOutput("rien du tout");
-                    break;
-            }*/
-       
-          
-            //                PMDataConverter.ParseGetPins(json);
-            //var pin = new PMMapPushpinModel(PMMapPushpinModel.PinsType.PublicMessage, new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude));
-            //pin.CompleteInitialization("test", "mdlknskdhlr!!!");
-
-            //PMMapPinController.AddPushpinToMap(pin);
-        }
-
-        private void PinTitle_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                PinContent.Focus();
-            }
-        }
-
-        private void PinReceiver_OnKeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter)
-            {
-                PinTitle.Focus();
-            }
+            pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
         }
 
         /// ////////////////////////////////////////      Commments     ////////////////////////////////////////
@@ -921,13 +879,7 @@ namespace PinMessaging.View
         private void PinCommentPostButton_PostResponse()
         {
             PinCommentContentTextBox.Text = "";
-            foreach (var comment in PMData.PinsCommentsListTmp)
-            {
-                var tb = new TextBlock {TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30,0,30,0), Text = comment.Message.Content};
-                CommentStackPanel.Children.Add(tb);
-            }
-            PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
-            PMData.PinsCommentsListTmp.Clear();
-        }     //// MERGE
+            AddCommentsToUi();
+        }
     }
 }

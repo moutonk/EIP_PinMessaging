@@ -228,7 +228,7 @@
                     </phone:Pivot.HeaderTemplate>
 
                     <phone:PivotItem x:Name="NewPinPivotItem" Header="Nouveau Pin" Margin="0,24,-264,-445" Background="{StaticResource PMGrey}" RenderTransformOrigin="0.494,0.707">
-                        <Grid x:Name="GridNewPinPivotItem" VerticalAlignment="Stretch">
+                   <!--     <Grid x:Name="GridNewPinPivotItem" VerticalAlignment="Stretch">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="0"></RowDefinition>
@@ -238,7 +238,7 @@
                                 <RowDefinition Height="210"></RowDefinition>
                                 <RowDefinition Height="110"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <toolkit:ListPicker Grid.Row="0" x:Name="ListPickerPinType" SelectionChanged="ListPickerPinType_OnSelectionChanged" ExpansionMode="FullScreenOnly" ItemsSource="{Binding ListPickerPins, ElementName=this}" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" Width="380" Height="115" RenderTransformOrigin="0.496,0.766" BorderThickness="0">
+                            <toolkit:ListPicker Grid.Row="0" x:Name="ListPickerPinType" ExpansionMode="FullScreenOnly" ItemsSource="{Binding ListPickerPins, ElementName=this}" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" Width="380" Height="115" RenderTransformOrigin="0.496,0.766" BorderThickness="0">
                                 <toolkit:ListPicker.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -273,7 +273,7 @@
                             </TextBox>
                             <Image Grid.Row="5" x:Name="PinImage" Stretch="Fill" Width="395" Source="\Images\empty_gallery.png" Margin="10,0,0,0" HorizontalAlignment="Center"/>
                             <Button Grid.Row="6" x:Name="PostPinButton" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="10,0,0,-10" Click="PostPinButton_Click"/>
-                        </Grid>
+                        </Grid>-->
 
                     </phone:PivotItem>
 
@@ -412,7 +412,7 @@
                         <RowDefinition Height="0"/>
                         <RowDefinition Height="0"/>
                         <RowDefinition Height="0"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="0"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Background="{StaticResource PMOrange}">
@@ -434,7 +434,7 @@
                     </Grid>
 
                     <ScrollViewer Grid.Row="3" x:Name="UnderMenuPinDescriptionScrollView">
-                        <Grid x:Name="UnderMenuPinDescriptionGrid" >
+                        <Grid x:Name="UnderMenuPinDescriptionGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
@@ -465,29 +465,30 @@
                                 <TextBlock x:Name="PinAuthorTextBlock" Text="{Binding LocalizedResources.PinAuthor, Source={StaticResource LocalizedStrings}}" FontSize="25" Margin="10,10,0,0" Foreground="{StaticResource PMOrange}"></TextBlock>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"></ColumnDefinition>
+                                        <ColumnDefinition Width="150"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
 
-                                    <Image Grid.Column="0" Grid.Row="0" Source="/Images/4.jpg" Stretch="Uniform" Margin="10,10,0,10"/>
+                                    <Image Grid.Column="0" Grid.Row="0" Source="/Images/4.jpg" Stretch="Uniform" Margin="30,20,0,20"/>
                                     <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Text="Enrique Iglesias" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="25"></TextBlock>
                                 </Grid>
                             </StackPanel>
 
-                            <StackPanel Name="CommentStackPanel"  Grid.Row="3">
-                                <TextBlock x:Name="PinCommentTextBlock"  Text="COMMENTS" FontSize="25"  Margin="10,0,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
+                            <StackPanel Grid.Row="3">
+                                <TextBlock x:Name="PinCommentTextBlock"  Text="COMMENTS" FontSize="25"  Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
                                 <Grid x:Name="PinCommentCreateGrid">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                         <ColumnDefinition Width="75"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" x:Name="PinCommentContentTextBox" TextWrapping="Wrap" BorderThickness="0" FontSize="25" Margin="10,0,0,0"></TextBox>
+                                    <TextBox Grid.Column="0" x:Name="PinCommentContentTextBox" TextWrapping="Wrap" BorderThickness="0" FontSize="25" Margin="20,0,0,0"></TextBox>
                                     <Button Grid.Column="1" x:Name="PinCommentPostButton" Click="PinCommentPostButton_OnClick" BorderThickness="0" Background="{StaticResource PMOrange}" Margin="-10,0,10,0" Content="GO"></Button>
                                 </Grid>
-                                <TextBlock x:Name="PinCommentContentTextBlock" TextWrapping="Wrap" FontSize="25" Margin="30,0,30,0" Text="Commentaire fake numero 1! Et hop ca passe sur 2 ligne maintennt."></TextBlock>
+                                <StackPanel Name="CommentStackPanel">
+                                </StackPanel>
                             </StackPanel>
 
                         </Grid>
