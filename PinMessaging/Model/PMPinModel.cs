@@ -18,21 +18,17 @@ namespace PinMessaging.Model
         public enum PinsType
         {
             PublicMessage = 0,
-            PrivateMessage,
-
             Event,
-            PrivateEvent,
-            
             View,
-            PrivateView,
-            
             CourseStart,
-            PrivateCourseStart,
-            
             CourseNextStep,
-            PrivateCourseNextStep,
-            
             CourseLastStep,
+
+            PrivateMessage,
+            PrivateEvent,
+            PrivateView,
+            PrivateCourseStart,
+            PrivateCourseNextStep,
             PrivateCourseLastStep,
 
             Default
@@ -49,16 +45,18 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(null)] public string Author { get; set; }
         [JsonProperty] [DefaultValue(null)] public string AuthorId { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Id { get; set; }
-        [JsonProperty] [DefaultValue(null)] public string PinType { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Content { get; set; }
-        [JsonProperty] [DefaultValue(null)] public string ContentType { get; set; }
+        [JsonProperty] [DefaultValue(false)] public bool Private { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Url { get; set; }
+        [JsonProperty] [DefaultValue(null)] public string AuthoriseUsersId { get; set; } 
         [JsonProperty] [DefaultValue(null)] public string Lang { get; set; }
         [JsonProperty] [DefaultValue(null)] public string CreationTime { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Latitude { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Longitude { get; set; }
         [JsonProperty] [DefaultValue(null)] public string LocationName { get; set; }
-        [JsonProperty] [DefaultValue(PinsType.PublicMessage)] public PinsType PinTypeEnum { get; set; }
+        [JsonProperty] [DefaultValue(PinsType.PublicMessage)] public PinsType PinType { get; set; }
+        [JsonProperty] [DefaultValue(PinsContentType.Text)] public PinsContentType ContentType { get; set; }
+      
                        [DefaultValue(null)] public Image PinImg { get; set; }
         [JsonProperty] [DefaultValue(null)] public GeoCoordinate GeoCoord { get; set; }
         //[JsonProperty] public Dictionary<string, string> Location { get; set; }
@@ -66,7 +64,7 @@ namespace PinMessaging.Model
         
         private void ConvertTypeToEnum()
         {
-            if (PinType != null)
+            /*if (PinType != null)
             {
                 if (PinType.Equals("Public_msg"))
                     PinTypeEnum = PinsType.PublicMessage;
@@ -78,7 +76,7 @@ namespace PinMessaging.Model
                     PinTypeEnum = PinsType.View;
                 else
                     PinTypeEnum = PinsType.PrivateMessage;
-            }
+            }*/
         }
 
         private void ConvertGeoPosToInteger()
@@ -98,7 +96,10 @@ namespace PinMessaging.Model
 
         private void ConnectImg()
         {
-            PinImg = new Image { Source = Paths.PinsMapImg[PinTypeEnum] };
+            if (Private == false)
+                PinImg = new Image { Source = Paths.PinsMapImg[PinType] };
+            else
+                PinImg = new Image { Source = Paths.PinsMapImg[PinType + 6] };
             PinImg.Tap += img_Tap;
         }
 
@@ -129,7 +130,7 @@ namespace PinMessaging.Model
         {
             try
             {
-                Logs.Output.ShowOutput("id:" + Id + " type:" + PinType + " typeEnum:" + PinTypeEnum.ToString() +
+                Logs.Output.ShowOutput("id:" + Id + " type:" + PinType + " typeEnum:" + PinType.ToString() +
                                        " description:" + Content +
                                        " url:" + Url + " lang:" + Lang + " creationTime:" + CreationTime + " author:" +
                                        AuthorId +

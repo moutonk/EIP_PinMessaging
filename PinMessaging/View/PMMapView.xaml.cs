@@ -594,7 +594,7 @@ namespace PinMessaging.View
             PinTitleDescriptionTextBlock.Text = pin.Title;
             PinMessageDescriptionTextBlock.Text = pin.Content;
             PinAuthorDescriptionTextBlock.Text = pin.Author;
-            PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinTypeEnum];
+            PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType];
 
             _currentPinFocused = pin;
 
@@ -623,70 +623,82 @@ namespace PinMessaging.View
 
             if (img.Name.Equals("PublicMsg"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PublicMessage;
+                PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
+                PinCreateModel.Private = false;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PublicEvent"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.Event;
+                PinCreateModel.PinType = PMPinModel.PinsType.Event;
+                PinCreateModel.Private = false;
                 ExpanderViewEventDate.Visibility = Visibility.Visible;
             }
             else if (img.Name.Equals("PublicView"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.View;
+                PinCreateModel.PinType = PMPinModel.PinsType.View;
+                PinCreateModel.Private = false;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PublicCourseStart"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseStart;
+                PinCreateModel.PinType = PMPinModel.PinsType.CourseStart;
+                PinCreateModel.Private = false;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PublicCourseNext"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseNextStep;
+                PinCreateModel.PinType = PMPinModel.PinsType.CourseNextStep;
+                PinCreateModel.Private = false;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PublicCourseLast"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseLastStep;
+                PinCreateModel.PinType = PMPinModel.PinsType.CourseLastStep;
+                PinCreateModel.Private = false;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PrivateMsg"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PrivateMessage;
+                PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
+                PinCreateModel.Private = true;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
             }
             else if (img.Name.Equals("PrivateEvent"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PrivateEvent;
+                PinCreateModel.PinType = PMPinModel.PinsType.Event;
+                PinCreateModel.Private = true;
                 ExpanderViewEventDate.Visibility = Visibility.Visible;
             }
             else if (img.Name.Equals("PrivateView"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PrivateView;
+                PinCreateModel.PinType = PMPinModel.PinsType.View;
+                PinCreateModel.Private = true;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PrivateCourseStart"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseStart;
+                PinCreateModel.PinType = PMPinModel.PinsType.CourseStart;
+                PinCreateModel.Private = true;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PrivateCourseNext"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseNextStep;
+                PinCreateModel.PinType = PMPinModel.PinsType.CourseNextStep;
+                PinCreateModel.Private = true;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PrivateCourseLast"))
             {
-                PinCreateModel.PinTypeEnum = PMPinModel.PinsType.CourseLastStep;
+                PinCreateModel.PinType = PMPinModel.PinsType.CourseLastStep;
+                PinCreateModel.Private = true;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
             }
             CloseAllExpanderExcept(TitleExpandView);
@@ -781,9 +793,9 @@ namespace PinMessaging.View
 
             if (PinCreateModel.Content.Length != 0 && PinCreateModel.Title.Length != 0)
             {
-                if (PinCreateModel.PinTypeEnum != PMPinModel.PinsType.Default)
+                if (PinCreateModel.PinType != PMPinModel.PinsType.Default)
                 {
-                    if (PinCreateModel.PinTypeEnum == PMPinModel.PinsType.Event || PinCreateModel.PinTypeEnum == PMPinModel.PinsType.PrivateEvent)
+                    if (PinCreateModel.PinType == PMPinModel.PinsType.Event)
                     {
                         if (PinCreateModel.CreationTime.Length != 0)
                         {
@@ -826,7 +838,7 @@ namespace PinMessaging.View
         {
             PinCreateModel.Id = string.Empty;
             PinCreateModel.Lang = string.Empty;
-            PinCreateModel.PinTypeEnum = PMPinModel.PinsType.Default;
+            PinCreateModel.PinType = PMPinModel.PinsType.Default;
             PinCreateModel.Title = string.Empty;
             PinCreateModel.Content = string.Empty;
             PinCreateModel.CreationTime = string.Empty;
@@ -862,8 +874,10 @@ namespace PinMessaging.View
 
             PinCreateModel.Title = TitleExpandViewTextBox.Text;
             PinCreateModel.Content = DescriptionExpandViewTextBox.Text;
-            PinCreateModel.PinTypeEnum = PMPinModel.PinsType.PublicMessage;
-            PinCreateModel.ContentType = "Texte";
+            //PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
+            PinCreateModel.ContentType = PMPinModel.PinsContentType.Text;
+         //   PinCreateModel.Private = "0";
+            PinCreateModel.AuthoriseUsersId = null;
             pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
         }
 
