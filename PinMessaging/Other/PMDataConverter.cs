@@ -73,13 +73,25 @@ namespace PinMessaging.Other
         {
             try
             {
-                var pinCollection = JsonConvert.DeserializeObject<List<PMPinCommentModel>>(json.ToString());
+                var item = JsonConvert.DeserializeObject<JArray>(json);
 
-                foreach (var pmMapPushpinModel in pinCollection)
+                if (Boolean.Parse(item[0].ToString()) == true)
                 {
-                    pmMapPushpinModel.ShowPinContent();
+                    if (item.Count == 1)
+                    {
+                        Logs.Error.ShowError("ParseGetPinMessages: 2 tokens are expected, got 1", Logs.Error.ErrorsPriority.NotCritical);
+                    }
+                    else if (item.Count == 2)
+                    {
+                        var pinCollection = JsonConvert.DeserializeObject<List<PMPinCommentModel>>(item[1].ToString());
+
+                        foreach (var pmMapPushpinModel in pinCollection)
+                        {
+                            pmMapPushpinModel.ShowPinContent();
+                        }
+                        PMData.AddToQueuePinCommentsTmp(pinCollection);
+                    }
                 }
-                PMData.AddToQueuePinCommentsTmp(pinCollection);
             }
             catch (Exception exp)
             {
@@ -91,13 +103,24 @@ namespace PinMessaging.Other
         {
             try
             {
-                var pinCollection = JsonConvert.DeserializeObject<List<PMPinCommentModel>>(json.ToString());
+                var item = JsonConvert.DeserializeObject<JArray>(json);
 
-                foreach (var pmMapPushpinModel in pinCollection)
+                if (Boolean.Parse(item[0].ToString()) == false)
                 {
-                    pmMapPushpinModel.ShowPinContent();
+                    Logs.Error.ShowError("ParseCreatePinMessage: unknown error", Logs.Error.ErrorsPriority.NotCritical);
                 }
-                PMData.AddToQueuePinCommentsTmp(pinCollection);
+                else
+                {
+                    if (item.Count == 1)
+                    {
+                        Logs.Error.ShowError("ParseCreatePinMessage: 2 tokens are expected, got 1", Logs.Error.ErrorsPriority.NotCritical);
+                    }
+                    else if (item.Count == 2)
+                    {
+                        var pinCollection = JsonConvert.DeserializeObject<PMPinCommentModel>(item[1].ToString());
+                        PMData.AddToQueuePinCommentsTmp(pinCollection);
+                    }
+                }
             }
             catch (Exception exp)
             {

@@ -66,6 +66,10 @@ namespace PinMessaging.Other
         {
             PinsCommentsListTmp.AddRange(comments);
         }
+        public static void AddToQueuePinCommentsTmp(PMPinCommentModel comment)
+        {
+            PinsCommentsListTmp.Add(comment);
+        }
 
         public async static void LoadPins()
         {

@@ -132,9 +132,12 @@ namespace PinMessaging.Model
             {
                 Logs.Output.ShowOutput("id:" + Id + " type:" + PinType + " typeEnum:" + PinType.ToString() +
                                        " description:" + Content +
-                                       " url:" + Url + " lang:" + Lang + " creationTime:" + CreationTime + " author:" +
-                                       AuthorId +
-                                       " authorId: " + AuthorId + " locationName: " + LocationName);
+                                       (Url == null ? "" : " url:" + Url) +
+                                       (Lang == null ? "" : " lang:" + Lang) +
+                                       (CreationTime == null ? "" : " creationTime:" + CreationTime) + 
+                                       " author:" + Author +
+                                       " authorId: " + AuthorId +
+                                       (LocationName == null ? "" : " locationName: " + LocationName));
                 if (GeoCoord != null)
                     Logs.Output.ShowOutput(" geoPos Lat:" + GeoCoord.Latitude + " geoPos Long:" + GeoCoord.Longitude );
 

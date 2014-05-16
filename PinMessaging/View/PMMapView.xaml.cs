@@ -577,7 +577,7 @@ namespace PinMessaging.View
 
         private void AddCommentsToUi()
         {
-            foreach (var tb in PMData.PinsCommentsListTmp.Select(comment => new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30, 0, 30, 0), Text = comment.Message.Content }))
+            foreach (var tb in PMData.PinsCommentsListTmp.Select(comment => new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30, 0, 30, 0), Text = comment.Content }))
             {
                 CommentStackPanel.Children.Add(tb);
             }
