@@ -339,23 +339,23 @@
 
                     <Grid Grid.Row="1" x:Name="GridMap" >
                         <maps:Map x:Name="Map" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
-                        <Button Click="Center_Click" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
+                        <Button Click="Center_Click" HorizontalAlignment="Left" Margin="42,11,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
                             <Button.Background>
                                 <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill" ImageSource="target.png"/>
                             </Button.Background>
                         </Button>
                         <Button Click="ButtonBase_OnClick" Content="-" HorizontalAlignment="Left" Margin="416,0,0,0" VerticalAlignment="Top"/>
-                        <Button Name="RefreshPinButton" Click="MenuDown_OnClick" HorizontalAlignment="Left" Margin="110,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73">
+                        <Button Name="RefreshPinButton" Click="RefreshPinButton_OnClick" HorizontalAlignment="Left" Margin="158,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73" RenderTransformOrigin="1.315,0.603">
                             <Button.Background>
                                 <ImageBrush Stretch="Fill" ImageSource="refresh.png"/>
                             </Button.Background>
                         </Button>
-                        <Button Name="CreatePinButton" Click="MenuDown_OnClick" HorizontalAlignment="Left" Margin="206,10,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73">
+                        <Button Name="CreatePinButton" Click="MenuDown_OnClick" HorizontalAlignment="Left" Margin="260,10,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73">
                             <Button.Background>
                                 <ImageBrush Stretch="Fill" ImageSource="new_pin_btn.png"/>
                             </Button.Background>
                         </Button>
-                        <Button Name="HelpButton" Click="MenuDown_OnClick" HorizontalAlignment="Left" Margin="300,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73">
+                        <Button Name="HelpButton" Click="MenuDown_OnClick" HorizontalAlignment="Left" Margin="360,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73" RenderTransformOrigin="-0.521,0.384">
                             <Button.Background>
                                 <ImageBrush Stretch="Fill" ImageSource="help_btn.png"/>
                             </Button.Background>
@@ -472,8 +472,8 @@
                                         <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
 
-                                    <Image Grid.Column="0" Grid.Row="0" Source="/Images/4.jpg" Stretch="Uniform" Margin="30,20,0,20"/>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Text="Enrique Iglesias" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="25"></TextBlock>
+                                    <Image Grid.Column="0" Grid.Row="0" Source="/Images/4.jpg" Tap="PinAuthorDescriptionTextBlock_OnTap" Stretch="Uniform" Margin="30,20,0,20"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="25"></TextBlock>
                                 </Grid>
                             </StackPanel>
 

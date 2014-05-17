@@ -77,19 +77,17 @@ namespace PinMessaging.Other
 
                 if (Boolean.Parse(item[0].ToString()) == true)
                 {
-                    if (item.Count == 1)
+                    switch (item.Count)
                     {
-                        Logs.Error.ShowError("ParseGetPinMessages: 2 tokens are expected, got 1", Logs.Error.ErrorsPriority.NotCritical);
-                    }
-                    else if (item.Count == 2)
-                    {
-                        var pinCollection = JsonConvert.DeserializeObject<List<PMPinCommentModel>>(item[1].ToString());
-
-                        foreach (var pmMapPushpinModel in pinCollection)
-                        {
-                            pmMapPushpinModel.ShowPinContent();
-                        }
-                        PMData.AddToQueuePinCommentsTmp(pinCollection);
+                        case 1:
+                            Logs.Error.ShowError("ParseGetPinMessages: 2 tokens are expected, got 1", Logs.Error.ErrorsPriority.NotCritical);
+                            break;
+                        case 2:
+                            var pinCollection = JsonConvert.DeserializeObject<List<PMPinCommentModel>>(item[1].ToString());
+                            foreach (var pmMapPushpinModel in pinCollection)
+                                pmMapPushpinModel.ShowPinContent();
+                            PMData.AddToQueuePinCommentsTmp(pinCollection);
+                            break;
                     }
                 }
             }
@@ -111,14 +109,15 @@ namespace PinMessaging.Other
                 }
                 else
                 {
-                    if (item.Count == 1)
+                    switch (item.Count)
                     {
-                        Logs.Error.ShowError("ParseCreatePinMessage: 2 tokens are expected, got 1", Logs.Error.ErrorsPriority.NotCritical);
-                    }
-                    else if (item.Count == 2)
-                    {
-                        var pinCollection = JsonConvert.DeserializeObject<PMPinCommentModel>(item[1].ToString());
-                        PMData.AddToQueuePinCommentsTmp(pinCollection);
+                        case 1:
+                            Logs.Error.ShowError("ParseCreatePinMessage: 2 tokens are expected, got 1", Logs.Error.ErrorsPriority.NotCritical);
+                            break;
+                        case 2:
+                            var pinCollection = JsonConvert.DeserializeObject<PMPinCommentModel>(item[1].ToString());
+                            PMData.AddToQueuePinCommentsTmp(pinCollection);
+                            break;
                     }
                 }
             }
@@ -153,15 +152,18 @@ namespace PinMessaging.Other
 
                 if (Boolean.Parse(item[0].ToString()) == false)
                 {
-                    if (item.Count == 1)
-                        Logs.Error.ShowError("ParseCreatePin: not supposed to happen",
-                            Logs.Error.ErrorsPriority.NotCritical);
-                    else if (item.Count == 2)
-                        Logs.Error.ShowError("ParseCreatePin: error: " + item[1].ToString(),
-                            Logs.Error.ErrorsPriority.NotCritical);
-                    else
-                        Logs.Error.ShowError("ParseCreatePin: error: " + item[1].ToString() + " " + item[2].ToString(),
-                            Logs.Error.ErrorsPriority.NotCritical);
+                    switch (item.Count)
+                    {
+                        case 1:
+                            Logs.Error.ShowError("ParseCreatePin: not supposed to happen", Logs.Error.ErrorsPriority.NotCritical);
+                            break;
+                        case 2:
+                            Logs.Error.ShowError("ParseCreatePin: error: " + item[1].ToString(), Logs.Error.ErrorsPriority.NotCritical);
+                            break;
+                        default:
+                            Logs.Error.ShowError("ParseCreatePin: error: " + item[1].ToString() + " " + item[2].ToString(), Logs.Error.ErrorsPriority.NotCritical);
+                            break;
+                    }
                 }
                 else
                 {

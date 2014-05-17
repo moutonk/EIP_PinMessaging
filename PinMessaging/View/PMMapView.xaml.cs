@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -285,6 +286,14 @@ namespace PinMessaging.View
         private void Center_Click(object sender, RoutedEventArgs e)
         {
             UpdateMapCenter();
+        }
+
+        private void RefreshPinButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var pinController = new PMPinController(RequestType.GetPins, null);
+
+            pinController.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()), 
+                                  Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));
         }
 
         private void Map_OnTouch(object sender, RoutedEventArgs e)
@@ -594,6 +603,7 @@ namespace PinMessaging.View
             PinTitleDescriptionTextBlock.Text = pin.Title;
             PinMessageDescriptionTextBlock.Text = pin.Content;
             PinAuthorDescriptionTextBlock.Text = pin.Author;
+            PinAuthorDescriptionTextBlock.Tag = pin;
             PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType];
 
             _currentPinFocused = pin;
@@ -605,6 +615,21 @@ namespace PinMessaging.View
         {
             CommentStackPanel.Children.Clear();
             AddCommentsToUi();
+        }
+
+        private void PinAuthorDescriptionTextBlock_OnTap(object sender, GestureEventArgs e)
+        {
+            var pin = PinAuthorDescriptionTextBlock.Tag as PMPinModel;
+
+            if (pin != null)
+            {
+                Logs.Output.ShowOutput(pin.Author);
+                Logs.Output.ShowOutput(pin.AuthorId);
+            }
+            else
+            {
+                Logs.Output.ShowOutput("PinAuthorDescriptionTextBlock_OnTap: could not get the info about the author");
+            }
         }
 
         ////////////////////////////////////////////////    Create pin         //////////////////////////////////////////
@@ -619,7 +644,6 @@ namespace PinMessaging.View
                 return;
             }
             Logs.Output.ShowOutput(img.Name);
-
 
             if (img.Name.Equals("PublicMsg"))
             {
@@ -839,6 +863,10 @@ namespace PinMessaging.View
             PinCreateModel.Id = string.Empty;
             PinCreateModel.Lang = string.Empty;
             PinCreateModel.PinType = PMPinModel.PinsType.Default;
+            PinCreateModel.Author = string.Empty;
+            PinCreateModel.AuthorId = string.Empty;
+            PinCreateModel.AuthoriseUsersId = null;
+            PinCreateModel.Private = false;
             PinCreateModel.Title = string.Empty;
             PinCreateModel.Content = string.Empty;
             PinCreateModel.CreationTime = string.Empty;
@@ -857,6 +885,7 @@ namespace PinMessaging.View
             DropPinProgressBar.Visibility = Visibility.Collapsed;
             DropPinProgressBar.IsIndeterminate = false;
             DropPinButton.IsEnabled = true;
+            CloseMenuDownButton_Click(null, null);
             //NewPinPivotItem.IsEnabled = true;
         }
 
