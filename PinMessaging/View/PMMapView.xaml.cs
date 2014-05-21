@@ -11,6 +11,7 @@ using Microsoft.Phone.Controls;
 using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Controls;
+using Microsoft.Phone.Shell;
 using PinMessaging.Model;
 using PinMessaging.Controller;
 using PinMessaging.Other;
@@ -621,6 +622,14 @@ namespace PinMessaging.View
         {
             Logs.Output.ShowOutput("UI now");
             //PMData.User;
+            try
+            {
+                NavigationService.Navigate(Paths.UserProfilView);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
+            }
         }
 
         private void PinAuthorDescriptionTextBlock_OnTap(object sender, GestureEventArgs e)

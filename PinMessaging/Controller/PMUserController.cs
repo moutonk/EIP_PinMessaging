@@ -36,7 +36,7 @@ namespace PinMessaging.Controller
 
                 switch (CurrentRequestType)
                 {
-                    case RequestType.GetPins:
+                    case RequestType.User:
                         if (_updateUiMethod != null)
                             _updateUiMethod();
                         break;
