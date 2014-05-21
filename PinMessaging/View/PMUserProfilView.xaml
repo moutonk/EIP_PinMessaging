@@ -39,8 +39,9 @@
         <TextBlock Grid.Column="1" Grid.Row="2" x:Name="NbrPinTextBlock" FontSize="30" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"/>
         <TextBlock Grid.Column="1" Grid.Row="3" x:Name="LoginTextBlock" FontSize="30" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center"/>
         <TextBlock Grid.Column="1" Grid.Row="4" x:Name="GradeTextBlock" FontSize="30" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center"/>
-   
+
         <Button Grid.Column="0" Grid.Row="5" x:Name="AddAsFavoriteButton" Content="Add As Favorite"  Click="AddAsFavoriteButton_OnClick"></Button>
+        <Button Grid.Column="1" Grid.Row="5" x:Name="RemoveAsFavoriteButton" Content="Remove As Favorite"  Click="RemoveAsFavoriteButton_OnClick"></Button>
     </Grid>
 
 </phone:PhoneApplicationPage>

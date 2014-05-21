@@ -20,6 +20,23 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(null)] public string SimId { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Grade { get; set; }
 
+        public PMUserModel Clone()
+        {
+            var model = new PMUserModel
+            {
+                Id = Id,
+                CreatedTime = CreatedTime,
+                NbrMessage = NbrMessage,
+                Points = Points,
+                NbrPin = NbrPin,
+                Email = Email,
+                Login = Login,
+                SimId = SimId,
+                Grade = Grade
+            };
+            return model;
+        }
+
         public void ShowUserContent()
         {
             try

@@ -29,6 +29,39 @@ namespace PinMessaging.Controller
         }
     }
 
+    public static class PMMapContactController
+    {
+        private static PMMapView _mapView = null;
+
+        public static void Init(PMMapView mapview)
+        {
+            _mapView = mapview;
+        }
+
+        public static void AddNewFavoris(PMUserModel user)
+        {
+            _mapView.AddContact(user);
+        }
+
+        public static void RemoveFavoris(PMUserModel user)
+        {
+            _mapView.RemoveContact(user);
+        }
+
+        public static bool IsFavoriteUnique(PMUserModel user)
+        {
+//            if (PMData.UserList.Count == 0)
+  //              return true;
+
+            //does the list contains an element with the same id?
+            var val = PMData.UserList.Any(listPin => listPin.Id == user.Id);
+
+            Logs.Output.ShowOutput(val == true ? "User is not unique" : "User is unique");
+
+            return !val;
+        }
+    }
+
     public static class PMMapPinController
     {
         private static PMMapView _mapView = null;

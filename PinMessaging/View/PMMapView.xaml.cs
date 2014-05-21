@@ -67,6 +67,7 @@ namespace PinMessaging.View
             }
 
             PMMapPinController.Init(this);
+            PMMapContactController.Init(this);
             LoadRessources();
 
             if (PMData.AppMode == PMData.ApplicationMode.Offline)
@@ -75,6 +76,7 @@ namespace PinMessaging.View
             }
 
             PMData.LoadPins();
+            PMData.LoadFavorites();
             ResetCreatePinModel();
         }
 
@@ -185,8 +187,6 @@ namespace PinMessaging.View
         {
             DownMenuTitle.Text = AppResources.Contacts;
             AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[1], false, true);
-
-            LoadContacts();
         }
 
         private void MenuDown_CreatePin()
@@ -275,7 +275,8 @@ namespace PinMessaging.View
             //0 is Yes, 1 is No....
             if (retValue == 0)
             {
-                bool ret = await PMData.SavePins();
+                bool retPins = await PMData.SaveData(PMData.StoredDataType.Pins);
+                bool retFav = await PMData.SaveData(PMData.StoredDataType.Favorites);
                 Application.Current.Terminate();
             }
             else
@@ -495,7 +496,6 @@ namespace PinMessaging.View
 
         /// ///////////////////////////////////////////    Contact    //////////////////////////////////////////////////
 
-        static int mdrlol = 0;
         private Grid CreateContactItem()
         {
             var contactGrid = new Grid {Margin = new Thickness(-5,0,0,0)};
@@ -507,7 +507,7 @@ namespace PinMessaging.View
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
 
-            var t = "";
+            /*var t = "";
             var p = "";
 
             if (mdrlol == 0)
@@ -539,9 +539,9 @@ namespace PinMessaging.View
 
             mdrlol++;
             if (mdrlol > 4)
-                mdrlol = 0;
-            var contactImg = new Image() { Source = new BitmapImage(new Uri(p, UriKind.Relative))};
-            var contactName = new TextBlock() { Text = t, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
+                mdrlol = 0;*/
+            var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/8.jpg", UriKind.Relative)) };
+            var contactName = new TextBlock() { Text = PMData.User.Login, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
             var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0)};
             /*var privateMsg = new TextBlock() { Text = "Private message", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
             var userProfil = new TextBlock() { Text = "User profil", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
@@ -575,12 +575,108 @@ namespace PinMessaging.View
             return contactGrid;
         }
 
-        private void LoadContacts()
+
+        private void ContactNameOnTapSub(PMUserModel user)
         {
-            for (int i = 0; i < 5; i++)
+            if (user != null)
             {
-                UnderMenuContactPanel.Children.Add(CreateContactItem());
+                var userController = new PMUserController(RequestType.User, PinAuthorDescriptionTextBlock_PostTap);
+
+                userController.GetUserInfos(user.Id);
             }
+            else
+            {
+                Logs.Output.ShowOutput("ContactNameOnTap: could not get the info about the author");
+            }
+        }
+
+        private void ContactNameOnTap(object sender, GestureEventArgs gestureEventArgs)
+        {
+            var img = sender as Image;
+
+            if (img == null)
+            {
+                var tb = sender as TextBlock;
+
+                if (tb != null)
+                    ContactNameOnTapSub(tb.Tag as PMUserModel);
+            }
+            else
+            {
+                ContactNameOnTapSub(img.Tag as PMUserModel);
+            }
+        }
+
+        private void AddContactUI(PMUserModel user)
+        {
+            var contactGrid = new Grid { Margin = new Thickness(-5, 0, 0, 0) };
+
+            contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(110) });
+
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(170) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
+
+            var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/8.jpg", UriKind.Relative)), Tag = user };
+            var contactName = new TextBlock() { Text = user.Login, Tag = user, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0) };
+            var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0) };
+
+            contactImg.Tap += ContactNameOnTap;
+            contactName.Tap += ContactNameOnTap;
+
+            contactGrid.Children.Add(contactImg);
+            contactGrid.Children.Add(contactName);
+            contactGrid.Children.Add(onlineImg);
+
+            Grid.SetRow(contactImg, 0);
+            Grid.SetColumn(contactImg, 0);
+
+            Grid.SetRow(contactName, 0);
+            Grid.SetColumn(contactName, 1);
+
+            Grid.SetRow(onlineImg, 0);
+            Grid.SetColumn(onlineImg, 2);
+
+            UnderMenuContactPanel.Children.Add(contactGrid);
+        }
+
+        private void AddContactCode(PMUserModel user)
+        {
+            PMData.AddToQueueUserList(user);
+        }
+
+        public void AddContact(PMUserModel user)
+        {
+            if (PMMapContactController.IsFavoriteUnique(user) == true)
+            {
+                AddContactUI(user);
+                AddContactCode(user);
+            }
+        }
+
+        private void RemoveContactUI(PMUserModel user)
+        {
+            if (UnderMenuContactPanel.Children.Count == 0)
+                return;
+
+            var rep = UnderMenuContactPanel.Children.First(contact => ((((contact as Grid).Children[0]) as Image).Tag as PMUserModel).Id == user.Id);
+
+            if (rep != null)
+            {
+                Logs.Output.ShowOutput((rep as Grid).Children.Count.ToString());
+                UnderMenuContactPanel.Children.Remove(rep);
+            }
+        }
+
+        private void RemoveContactCode(PMUserModel user)
+        {
+            PMData.RemoveToUserList(user);
+        }
+
+        public void RemoveContact(PMUserModel user)
+        {
+            RemoveContactUI(user);
+            RemoveContactCode(user);
         }
 
         /// //////////////////////////////////////////     Pin description      ////////////////////////////////////////
@@ -620,8 +716,6 @@ namespace PinMessaging.View
 
         private void PinAuthorDescriptionTextBlock_PostTap()
         {
-            Logs.Output.ShowOutput("UI now");
-            //PMData.User;
             try
             {
                 NavigationService.Navigate(Paths.UserProfilView);
@@ -638,9 +732,6 @@ namespace PinMessaging.View
 
             if (pin != null)
             {
-                Logs.Output.ShowOutput(pin.Author);
-                Logs.Output.ShowOutput(pin.AuthorId);
-
                 var userController = new PMUserController(RequestType.User, PinAuthorDescriptionTextBlock_PostTap);
 
                 userController.GetUserInfos(pin.AuthorId);

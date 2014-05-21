@@ -64,6 +64,16 @@ namespace PinMessaging.Other
                         case RequestType.User:
                             ParseUser(json);
                             break;
+
+                        case RequestType.AddFavoriteUser:
+                            var item6 = JsonConvert.DeserializeObject<JArray>(json);
+                            PMData.WasFavoriteAddedSuccess = Boolean.Parse((string)item6[0]);
+                            break;
+
+                        case RequestType.RemoveFavoriteUser:
+                            var item7 = JsonConvert.DeserializeObject<JArray>(json);
+                            PMData.WasFavoriteRemovedSuccess = Boolean.Parse((string)item7[0]);
+                            break;
                     }
                 }
                 catch (Exception e)
