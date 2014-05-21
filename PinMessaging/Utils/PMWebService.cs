@@ -59,7 +59,9 @@ namespace PinMessaging.Utils
             [Description("Used to create a pin comment")]
             CreatePinMessage,
             [Description("Used to create a pin")]
-            CreatePin
+            CreatePin,
+            [Description("Used to get user info")]
+            User
         }
     }
 
@@ -102,6 +104,8 @@ namespace PinMessaging.Utils
                     return "create-pin-message";
                 case RequestType.CreatePin:
                     return "create-pin";
+                case RequestType.User:
+                    return "user";
                 default:
                     return reqType.ToString();
             }

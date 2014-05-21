@@ -105,12 +105,14 @@
     <Compile Include="Controller\PMSignInController.cs" />
     <Compile Include="Controller\PMMapController.cs" />
     <Compile Include="Controller\PMSignUpController.cs" />
+    <Compile Include="Controller\PMUserController.cs" />
     <Compile Include="Model\PMContactModel.cs" />
     <Compile Include="Model\PMFavoriteModel.cs" />
     <Compile Include="Model\PMFlagModel.cs" />
     <Compile Include="Model\PMLogInCreateStructureModel.cs" />
     <Compile Include="Model\PMPinCommentModel.cs" />
     <Compile Include="Model\PMPinModel.cs" />
+    <Compile Include="Model\PMUserModel.cs" />
     <Compile Include="Other\PMData.cs" />
     <Compile Include="Other\PMDataConverter.cs" />
     <Compile Include="Other\PMGeoLocation.cs" />
@@ -147,6 +149,9 @@
     </Compile>
     <Compile Include="Model\PMLogInModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\PMUserProfil.xaml.cs">
+      <DependentUpon>PMUserProfil.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -170,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\PMSplashView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PMUserProfil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -334,8 +343,6 @@
     <Content Include="Images\Pins\private_view_icon.png" />
     <Content Include="Images\Pins\view_icon%402x.png" />
     <Content Include="Images\Pins\view_icon.png" />
-    <Content Include="View\help_btn.png" />
-    <Content Include="View\refresh.png" />
     <Content Include="whiteLogo.png" />
   </ItemGroup>
   <ItemGroup>
@@ -371,10 +378,6 @@
       <Generator>XliffResxGenerator</Generator>
       <LastGenOutput>AppResources.en-US1.resx</LastGenOutput>
     </XliffResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\new_pin_btn.png" />
-    <Resource Include="View\target.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

@@ -60,12 +60,46 @@ namespace PinMessaging.Other
                             var item5 = JsonConvert.DeserializeObject<JArray>(json);
                             PMData.IsChangeEmailSuccess = Boolean.Parse((string)item5[0]);
                             break;
+
+                        case RequestType.User:
+                            ParseUser(json);
+                            break;
                     }
                 }
                 catch (Exception e)
                 {
                     Logs.Error.ShowError(e, Logs.Error.ErrorsPriority.NotCritical);
                 }
+            }
+        }
+
+        private void ParseUser(string json)
+        {
+            try
+            {
+                var item = JsonConvert.DeserializeObject<JArray>(json);
+
+                if (Boolean.Parse(item[0].ToString()) == true)
+                {
+                    switch (item.Count)
+                    {
+                        case 1:
+                            Logs.Error.ShowError("ParseUser: 2 tokens are expected, got 1", Logs.Error.ErrorsPriority.NotCritical);
+                            break;
+                        case 2:
+                            PMData.User = JsonConvert.DeserializeObject<PMUserModel>(item[1].ToString());
+                            PMData.User.ShowUserContent();
+                            break;
+                    }
+                }
+                else
+                {
+                    Logs.Error.ShowError("ParseUser: could not get the info about the user", Logs.Error.ErrorsPriority.NotCritical);
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ParseGetPinMessages: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 

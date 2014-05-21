@@ -39,6 +39,8 @@ namespace PinMessaging.Other
         [DefaultValue(null)] public static List<PMPinCommentModel> PinsCommentsList { get; set; }
         [DefaultValue(null)] public static List<PMPinCommentModel> PinsCommentsListTmp { get; set; }
 
+        [DefaultValue(null)] public static PMUserModel User { get; set; }
+
         //contains all the pins known (serialized)
         private const string DataFile = "pinsStorage.dat";
 

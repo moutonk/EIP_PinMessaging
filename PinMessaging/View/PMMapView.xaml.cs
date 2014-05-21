@@ -617,6 +617,12 @@ namespace PinMessaging.View
             AddCommentsToUi();
         }
 
+        private void PinAuthorDescriptionTextBlock_PostTap()
+        {
+            Logs.Output.ShowOutput("UI now");
+            //PMData.User;
+        }
+
         private void PinAuthorDescriptionTextBlock_OnTap(object sender, GestureEventArgs e)
         {
             var pin = PinAuthorDescriptionTextBlock.Tag as PMPinModel;
@@ -625,6 +631,10 @@ namespace PinMessaging.View
             {
                 Logs.Output.ShowOutput(pin.Author);
                 Logs.Output.ShowOutput(pin.AuthorId);
+
+                var userController = new PMUserController(RequestType.User, PinAuthorDescriptionTextBlock_PostTap);
+
+                userController.GetUserInfos(pin.AuthorId);
             }
             else
             {

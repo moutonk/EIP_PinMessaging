@@ -341,23 +341,23 @@
                         <maps:Map x:Name="Map" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
                         <Button Click="Center_Click" HorizontalAlignment="Left" Margin="42,11,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
                             <Button.Background>
-                                <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill" ImageSource="target.png"/>
+                                <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill" ImageSource="/Images\Menu\target.png"/>
                             </Button.Background>
                         </Button>
                         <Button Click="ButtonBase_OnClick" Content="-" HorizontalAlignment="Left" Margin="416,0,0,0" VerticalAlignment="Top"/>
                         <Button Name="RefreshPinButton" Click="RefreshPinButton_OnClick" HorizontalAlignment="Left" Margin="158,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73" RenderTransformOrigin="1.315,0.603">
                             <Button.Background>
-                                <ImageBrush Stretch="Fill" ImageSource="refresh.png"/>
+                                <ImageBrush Stretch="Fill" ImageSource="/Images\Menu\refresh.png"/>
                             </Button.Background>
                         </Button>
                         <Button Name="CreatePinButton" Click="MenuDown_OnClick" HorizontalAlignment="Left" Margin="260,10,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73">
                             <Button.Background>
-                                <ImageBrush Stretch="Fill" ImageSource="new_pin_btn.png"/>
+                                <ImageBrush Stretch="Fill" ImageSource="/Images\Menu\new_pin_btn.png"/>
                             </Button.Background>
                         </Button>
                         <Button Name="HelpButton" Click="MenuDown_OnClick" HorizontalAlignment="Left" Margin="360,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73" RenderTransformOrigin="-0.521,0.384">
                             <Button.Background>
-                                <ImageBrush Stretch="Fill" ImageSource="help_btn.png"/>
+                                <ImageBrush Stretch="Fill" ImageSource="/Images\Menu\help_btn.png"/>
                             </Button.Background>
                         </Button>
                     </Grid>
