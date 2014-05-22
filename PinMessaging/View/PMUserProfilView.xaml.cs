@@ -46,6 +46,7 @@ namespace PinMessaging.View
         {
             var favController = new PMFavoriteController(RequestType.AddFavoriteUser, AddAsFavoriteButton_Post);
 
+            PMData.WasFavoriteAddedSuccess = false;
             favController.AddFavoriteUser(AddAsFavoriteButton.Tag as string);
         }
 
@@ -53,6 +54,7 @@ namespace PinMessaging.View
         {
             var favController = new PMFavoriteController(RequestType.RemoveFavoriteUser, RemoveAsFavoriteButton_Post);
 
+            PMData.WasFavoriteRemovedSuccess = false;
             favController.RemoveFavoriteUser(RemoveAsFavoriteButton.Tag as string);
         }
     }   

@@ -51,6 +51,10 @@ namespace PinMessaging.Other
                             ParseGetPinMessages(json);
                             break;
 
+                        case RequestType.DeletePin:
+                            DeletePin(json);
+                            break;
+
                         case RequestType.ChangePassword:
                             var item4 = JsonConvert.DeserializeObject<JArray>(json);
                             PMData.IsChangePwdSuccess = Boolean.Parse((string) item4[0]);
@@ -81,6 +85,32 @@ namespace PinMessaging.Other
                     Logs.Error.ShowError(e, Logs.Error.ErrorsPriority.NotCritical);
                 }
             }
+        }
+
+        private void DeletePin(string json)
+        {
+            try
+            {
+                var item = JsonConvert.DeserializeObject<JArray>(json);
+
+                if (Boolean.Parse(item[0].ToString()) == false)
+                {
+                    if (item.Count == 1)
+                        Logs.Error.ShowError("DeletePin: the pin does not exist or the user is not the owner", Logs.Error.ErrorsPriority.NotCritical);
+                    else if (item.Count == 2)
+                        Logs.Error.ShowError("DeletePin: the user is not connected " + item[1].ToString(), Logs.Error.ErrorsPriority.NotCritical);
+                    else
+                        Logs.Error.ShowError("DeletePin: unknown response ", Logs.Error.ErrorsPriority.NotCritical);
+                }
+                else
+                {
+                    PMData.WasPinDeletedSuccess = true;
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ParseGetPins: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
+            }   
         }
 
         private void ParseUser(string json)

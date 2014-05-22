@@ -23,6 +23,7 @@ namespace PinMessaging.Other
         [DefaultValue(false)] public static bool IsChangeEmailSuccess { get; set; }
         [DefaultValue(false)] public static bool WasFavoriteAddedSuccess { get; set; }
         [DefaultValue(false)] public static bool WasFavoriteRemovedSuccess { get; set; }
+        [DefaultValue(false)] public static bool WasPinDeletedSuccess { get; set; }
 
         //offline mode / normal mode
         public enum ApplicationMode { Normal, Offline }

@@ -440,6 +440,7 @@ namespace PinMessaging.View
 
         private void ButtonProfil_OnClick(object sender, RoutedEventArgs e)
         {
+            //ContactNameOnTapSub("FAKE ID");
         }
 
         private void ButtonPins_OnClick(object sender, RoutedEventArgs e)
@@ -575,13 +576,13 @@ namespace PinMessaging.View
             return contactGrid;
         }
 
-        private void ContactNameOnTapSub(PMUserModel user)
+        private void ContactNameOnTapSub(string userId)
         {
-            if (user != null)
+            if (userId != null)
             {
                 var userController = new PMUserController(RequestType.User, PinAuthorDescriptionTextBlock_PostTap);
 
-                userController.GetUserInfos(user.Id);
+                userController.GetUserInfos(userId);
             }
             else
             {
@@ -593,16 +594,23 @@ namespace PinMessaging.View
         {
             var img = sender as Image;
 
-            if (img == null)
+            try
             {
-                var tb = sender as TextBlock;
+                if (img == null)
+                {
+                    var tb = sender as TextBlock;
 
-                if (tb != null)
-                    ContactNameOnTapSub(tb.Tag as PMUserModel);
+                    if (tb != null)
+                        ContactNameOnTapSub((tb.Tag as PMUserModel).Id);
+                }
+                else
+                {
+                    ContactNameOnTapSub((img.Tag as PMUserModel).Id);
+                }
             }
-            else
+            catch (Exception exp)
             {
-                ContactNameOnTapSub(img.Tag as PMUserModel);
+                Logs.Error.ShowError("ContactNameOnTap: Tag is empty", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 

@@ -89,6 +89,18 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
+        public void DeletePin(string pinId)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"pinId", pinId}
+            };
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.DeletePin, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
         private void AddPinUiAndCode()
         {
             foreach (var pin in PMData.PinsListToAdd.Where(pin => PMMapPinController.IsPinUnique(pin) == true))
@@ -121,6 +133,10 @@ namespace PinMessaging.Controller
                             _updateUiMethod();
                         break;
                     case RequestType.GetPinMessages:
+                        if (_updateUiMethod != null)
+                            _updateUiMethod();
+                        break;
+                    case RequestType.DeletePin:
                         if (_updateUiMethod != null)
                             _updateUiMethod();
                         break;
