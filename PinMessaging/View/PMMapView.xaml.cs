@@ -575,7 +575,6 @@ namespace PinMessaging.View
             return contactGrid;
         }
 
-
         private void ContactNameOnTapSub(PMUserModel user)
         {
             if (user != null)
@@ -640,7 +639,7 @@ namespace PinMessaging.View
             UnderMenuContactPanel.Children.Add(contactGrid);
         }
 
-        private void AddContactCode(PMUserModel user)
+        private static void AddContactCode(PMUserModel user)
         {
             PMData.AddToQueueUserList(user);
         }
@@ -659,16 +658,23 @@ namespace PinMessaging.View
             if (UnderMenuContactPanel.Children.Count == 0)
                 return;
 
-            var rep = UnderMenuContactPanel.Children.First(contact => ((((contact as Grid).Children[0]) as Image).Tag as PMUserModel).Id == user.Id);
-
-            if (rep != null)
+            try
             {
-                Logs.Output.ShowOutput((rep as Grid).Children.Count.ToString());
-                UnderMenuContactPanel.Children.Remove(rep);
+                var rep = UnderMenuContactPanel.Children.First(contact => ((((contact as Grid).Children[0]) as Image).Tag as PMUserModel).Id == user.Id);
+
+                if (rep != null)
+                {
+                    Logs.Output.ShowOutput((rep as Grid).Children.Count.ToString());
+                    UnderMenuContactPanel.Children.Remove(rep);
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("RemoveContactUI: ", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 
-        private void RemoveContactCode(PMUserModel user)
+        private static void RemoveContactCode(PMUserModel user)
         {
             PMData.RemoveToUserList(user);
         }

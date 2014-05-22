@@ -92,11 +92,7 @@ namespace PinMessaging.Other
                 var value = UserList.Find(userInList => userInList.Id == user.Id);
 
                 if (value != null)
-                {
-
-                    Logs.Output.ShowOutput(UserList.Remove(value).ToString());
-                    Logs.Output.ShowOutput("^^^^^^^^^^^^^^^^^^^^^^^^^^^: " + UserList.Count.ToString());
-                }
+                    UserList.Remove(value);
             }
             catch (Exception exp)
             {
@@ -130,15 +126,11 @@ namespace PinMessaging.Other
 
                     var pc = new PMPinController();
 
-                    foreach (var pmPinModel in list)
+                    foreach (var pmPinModel in list.Where(pmPinModel => PMMapPinController.IsPinUnique(pmPinModel) == true))
                     {
-                        if (PMMapPinController.IsPinUnique(pmPinModel) == true)
-                        {
-                            //pc.CompleteDataMember(pmPinModel);
-                            pmPinModel.ShowPinContent();
-                            PMMapPinController.AddPinToMap(pmPinModel);
-                            PinsList.Add(pmPinModel);
-                        }
+                        pmPinModel.ShowPinContent();
+                        PMMapPinController.AddPinToMap(pmPinModel);
+                        PinsList.Add(pmPinModel);
                     }
                 }
             }

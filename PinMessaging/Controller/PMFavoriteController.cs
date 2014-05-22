@@ -54,6 +54,7 @@ namespace PinMessaging.Controller
                     case RequestType.AddFavoriteUser:
                         if (_updateUiMethod != null)
                             _updateUiMethod();
+                            _updateUiMethod = null;
                         break;
                     case RequestType.RemoveFavoriteUser:
                         if (_updateUiMethod != null)

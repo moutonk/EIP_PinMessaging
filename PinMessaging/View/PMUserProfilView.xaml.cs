@@ -32,14 +32,12 @@ namespace PinMessaging.View
 
         private void AddAsFavoriteButton_Post()
         {
-            Logs.Output.ShowOutput("FAV ADD FINI: " + PMData.WasFavoriteAddedSuccess.ToString());
             if (PMData.WasFavoriteAddedSuccess == true)
                 PMMapContactController.AddNewFavoris(_user);
         }
 
         private void RemoveAsFavoriteButton_Post()
         {
-            Logs.Output.ShowOutput("FAV REM FINI: " + PMData.WasFavoriteAddedSuccess.ToString());
             if (PMData.WasFavoriteRemovedSuccess == true)
                 PMMapContactController.RemoveFavoris(_user);
         }

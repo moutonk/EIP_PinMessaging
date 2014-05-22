@@ -50,9 +50,6 @@ namespace PinMessaging.Controller
 
         public static bool IsFavoriteUnique(PMUserModel user)
         {
-//            if (PMData.UserList.Count == 0)
-  //              return true;
-
             //does the list contains an element with the same id?
             var val = PMData.UserList.Any(listPin => listPin.Id == user.Id);
 
@@ -82,12 +79,14 @@ namespace PinMessaging.Controller
 
         public static void AddPinToMap(PMPinModel pin)
         {
-            var overlay = new MapOverlay {PositionOrigin = new Point(0.3, 0.8)};
+            var overlay = new MapOverlay
+            {
+                PositionOrigin = new Point(0.3, 0.8),
+                Content = pin.PinImg,
+                GeoCoordinate = pin.GeoCoord
+            };
 
             //center the mapoverlay, will change later
-
-            overlay.Content = pin.PinImg;
-            overlay.GeoCoordinate = pin.GeoCoord;
 
             if (PMData.MapLayerContainer != null)
                 PMData.MapLayerContainer.Add(overlay);
@@ -105,13 +104,13 @@ namespace PinMessaging.Controller
 
         private static bool IsAroundMe(PMPinModel pin)
         {
-            double pinLongitude = Utils.Utils.ConvertDoubleCommaToPoint(pin.Longitude);
-            double pinLatitude = Utils.Utils.ConvertDoubleCommaToPoint(pin.Latitude);
+            var pinLongitude = Utils.Utils.ConvertDoubleCommaToPoint(pin.Longitude);
+            var pinLatitude = Utils.Utils.ConvertDoubleCommaToPoint(pin.Latitude);
 
             if (_mapView != null && _mapView._geoLocation != null)
             {
-                double userLongitude = _mapView._geoLocation.GeopositionUser.Coordinate.Longitude;
-                double userLatitude = _mapView._geoLocation.GeopositionUser.Coordinate.Latitude;
+                var userLongitude = _mapView._geoLocation.GeopositionUser.Coordinate.Longitude;
+                var userLatitude = _mapView._geoLocation.GeopositionUser.Coordinate.Latitude;
 
                 Logs.Output.ShowOutput("Distance:" + (Math.Sqrt(Math.Pow(pinLongitude - userLongitude, 2) + Math.Pow(pinLatitude - userLatitude, 2))).ToString());
             }
