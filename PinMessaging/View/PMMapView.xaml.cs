@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
@@ -11,7 +10,6 @@ using Microsoft.Phone.Controls;
 using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Controls;
-using Microsoft.Phone.Shell;
 using PinMessaging.Model;
 using PinMessaging.Controller;
 using PinMessaging.Other;
@@ -508,39 +506,6 @@ namespace PinMessaging.View
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
 
-            /*var t = "";
-            var p = "";
-
-            if (mdrlol == 0)
-            {
-                t = "Totodu06";
-                p = "/Images/4.jpg";
-            }
-            else if (mdrlol == 1)
-            {
-                t = "Robindesbois_2";
-                p = "/Images/5.jpg";
-            }
-            else if (mdrlol == 2)
-            {
-                t = "Joelatortue";
-                p = "/Images/6.jpg";
-            }
-            else if (mdrlol == 3)
-            {
-                t = "MarcelLaSalade";
-                p = "/Images/7.jpg";
-            }
-            else
-            {
-                t = "superkeke";
-                p = "/Images/8.jpg";
-          
-            }
-
-            mdrlol++;
-            if (mdrlol > 4)
-                mdrlol = 0;*/
             var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/8.jpg", UriKind.Relative)) };
             var contactName = new TextBlock() { Text = PMData.User.Login, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
             var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0)};

@@ -101,6 +101,21 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
+        public void ChangePin(string pinId, string title, PMPinModel.PinsContentType contentType, string content)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"pinId", pinId},
+                {"title", title},
+                {"contentType", ((int)contentType).ToString()},
+                {"content", content}
+            };
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.ChangePin, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
         private void AddPinUiAndCode()
         {
             foreach (var pin in PMData.PinsListToAdd.Where(pin => PMMapPinController.IsPinUnique(pin) == true))
@@ -137,6 +152,10 @@ namespace PinMessaging.Controller
                             _updateUiMethod();
                         break;
                     case RequestType.DeletePin:
+                        if (_updateUiMethod != null)
+                            _updateUiMethod();
+                        break;
+                    case RequestType.ChangePin:
                         if (_updateUiMethod != null)
                             _updateUiMethod();
                         break;

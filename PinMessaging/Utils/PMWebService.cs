@@ -63,7 +63,9 @@ namespace PinMessaging.Utils
             [Description("Used to get user info")]
             User,
             [Description("Used to delete a pin")]
-            DeletePin
+            DeletePin,
+            [Description("Used to change a pin")]
+            ChangePin
         }
     }
 
@@ -110,6 +112,8 @@ namespace PinMessaging.Utils
                     return "user";
                 case RequestType.DeletePin:
                     return "delete-pin";
+                case RequestType.ChangePin:
+                    return "change-pin";
                 default:
                     return reqType.ToString();
             }
