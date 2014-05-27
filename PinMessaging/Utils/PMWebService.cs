@@ -232,6 +232,8 @@ namespace PinMessaging.Utils
 
             Logs.Output.ShowOutput(url);
 
+            if (PMData.AuthId != null)
+                _cookieColl.Add(new Cookie("Auth", PMData.AuthId));
             if (_firstRequest == true)
                 CookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
 

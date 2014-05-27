@@ -9,25 +9,27 @@ namespace PinMessaging.Other
     {
         public class ConnectionData
         {
-            public ConnectionData(string email, string pwd)
-            {
-                Email = email;
-                Password = pwd;
-            }
+            //public ConnectionData(string email, string pwd)
+            //{
+          //      Email = email;
+            //    Password = pwd;
+            //}
 
-            public string Email { get; set; }
-            public string Password { get; set; }
+            //public string Email { get; set; }
+            //public string Password { get; set; }
         }
 
         private const string ConnectionInfos = "pinmessagingConnectionInfos";
         private const string FirstConnection = "pinmessagingFirstConnection";
         private const string AccessLocation = "pinmessagingAccessLocation";
+        private const string AuthId = "pinmessagingAuthentificationId";
 
         public static void ResetAll()
         {
             IsolatedStorageSettings.ApplicationSettings.Remove(ConnectionInfos);
             IsolatedStorageSettings.ApplicationSettings.Remove(FirstConnection);
             IsolatedStorageSettings.ApplicationSettings.Remove(AccessLocation);
+            IsolatedStorageSettings.ApplicationSettings.Remove(AuthId);
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
@@ -49,10 +51,23 @@ namespace PinMessaging.Other
             IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
+        public static void SaveAuthId(string id)
+        {
+            IsolatedStorageSettings.ApplicationSettings[AuthId] = id;
+            IsolatedStorageSettings.ApplicationSettings.Save();
+        }
+
         public static void SaveLoginPwd(PMLogInModel model)
         {
             IsolatedStorageSettings.ApplicationSettings[ConnectionInfos] = model;
             IsolatedStorageSettings.ApplicationSettings.Save();
+        }
+
+        public static string GetAuthId()
+        {
+            return IsolatedStorageSettings.ApplicationSettings.Contains(AuthId) == true
+                ? (string)IsolatedStorageSettings.ApplicationSettings[AuthId]
+                : null;
         }
 
         public static PMLogInModel GetLoginPwd()

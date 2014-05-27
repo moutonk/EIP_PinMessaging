@@ -15,7 +15,8 @@ namespace PinMessaging.Other
 {
     public static class PMData
     {
-        //sign in / sign up
+        [DefaultValue(null)] public static string UserId { get; set; }
+        [DefaultValue(null)] public static string AuthId { get; set; }
         [DefaultValue(false)] public static bool IsSignInSuccess { get; set; }
         [DefaultValue(false)] public static bool IsSignUpSuccess { get; set; }
         [DefaultValue(false)] public static bool IsEmailDispo { get; set; }

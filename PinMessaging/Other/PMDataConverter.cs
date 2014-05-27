@@ -22,8 +22,7 @@ namespace PinMessaging.Other
                     switch (currentRequestType)
                     {
                         case RequestType.SignIn:
-                            var item1 = JsonConvert.DeserializeObject<JArray>(json);                 
-                            PMData.IsSignInSuccess = Boolean.Parse((string) item1[0]);
+                            ParseSignIn(json);
                             break;
 
                         case RequestType.CheckEmail:
@@ -84,6 +83,30 @@ namespace PinMessaging.Other
                 {
                     Logs.Error.ShowError(e, Logs.Error.ErrorsPriority.NotCritical);
                 }
+            }
+        }
+
+        private void ParseSignIn(string json)
+        {
+            try
+            {
+                var item = JsonConvert.DeserializeObject<JArray>(json);
+
+                PMData.IsSignInSuccess = Boolean.Parse(item[0].ToString());
+                if (PMData.IsSignInSuccess == true)
+                {
+                    PMData.UserId = item[1]["id"].ToString();
+                    PMData.AuthId = (string)item[1]["token"];
+                    RememberConnection.SaveAuthId(PMData.AuthId);
+                }
+                else
+                {
+                    Logs.Error.ShowError("ParseSignIn: could not connect", Logs.Error.ErrorsPriority.NotCritical);
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ParseGetPins: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Interop;
 using Newtonsoft.Json;
@@ -18,7 +19,7 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(null)] public string Email { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Login { get; set; }
         [JsonProperty] [DefaultValue(null)] public string SimId { get; set; }
-        [JsonProperty] [DefaultValue(null)] public string Grade { get; set; }
+        [JsonProperty] [DefaultValue(null)] public PMGradeModel Grade { get; set; }
 
         public PMUserModel Clone()
         {
@@ -54,6 +55,7 @@ namespace PinMessaging.Model
             {
                 Logs.Error.ShowError("User content is incorrectly formatted", Logs.Error.ErrorsPriority.NotCritical);
             }
+            Grade.ShowGradeContent();
         }
     }
 }

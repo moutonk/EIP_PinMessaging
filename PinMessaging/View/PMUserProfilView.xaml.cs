@@ -24,7 +24,7 @@ namespace PinMessaging.View
                 NbrMsgTextBlock.Text = _user.NbrMessage;
                 NbrPinTextBlock.Text = _user.NbrPin;
                 LoginTextBlock.Text = _user.Login;
-                GradeTextBlock.Text = _user.Grade;
+                GradeTextBlock.Text = _user.Grade.Name;
                 RemoveAsFavoriteButton.Tag = _user.Id;
                 AddAsFavoriteButton.Tag = _user.Id;
             }

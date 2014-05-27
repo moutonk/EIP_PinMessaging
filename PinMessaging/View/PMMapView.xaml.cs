@@ -438,7 +438,7 @@ namespace PinMessaging.View
 
         private void ButtonProfil_OnClick(object sender, RoutedEventArgs e)
         {
-            //ContactNameOnTapSub("FAKE ID");
+            ContactNameOnTapSub(PMData.UserId);
         }
 
         private void ButtonPins_OnClick(object sender, RoutedEventArgs e)
