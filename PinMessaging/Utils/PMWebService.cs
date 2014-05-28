@@ -1,15 +1,11 @@
 ﻿using System.ComponentModel;
-using System.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Runtime.Serialization;
 using System.Text;
-using Newtonsoft.Json;
 using PinMessaging.Other;
-using PinMessaging.Resources;
 using PinMessaging.Utils.WebService;
 
 namespace PinMessaging.Utils
@@ -65,16 +61,36 @@ namespace PinMessaging.Utils
             [Description("Used to delete a pin")]
             DeletePin,
             [Description("Used to change a pin")]
-            ChangePin
+            ChangePin,
+            [Description("Used to get all the pins created by the user")]
+            GetPinsUser
         }
     }
 
     public static class PMWebService
     {
+        private class RequestObject
+        {
+            public HttpRequestType HttpReqType;
+            public RequestType ReqType;
+            public SyncType SyncType;
+            public Dictionary<string, string> Args;
+            public Dictionary<string, string> Header;
+
+            public RequestObject(HttpRequestType httpReqType, RequestType reqType, SyncType syncType, Dictionary<string, string> args, Dictionary<string, string> header)
+            {
+                this.HttpReqType = httpReqType;
+                this.ReqType = reqType;
+                this.SyncType = syncType;
+                this.Args = args;
+                this.Header = header;
+            }
+        }
+
         private static readonly PMDataConverter DataConverter = new PMDataConverter();
         public static bool OnGoingRequest { get; private set; }
         private static bool _firstRequest = true;
-      
+        private static Queue<RequestObject> requestQueue = new Queue<RequestObject>();
         private static CookieCollection _cookieColl = new CookieCollection();
         private static readonly CookieContainer CookieContainer = new CookieContainer();
 
@@ -114,6 +130,8 @@ namespace PinMessaging.Utils
                     return "delete-pin";
                 case RequestType.ChangePin:
                     return "change-pin";
+                case RequestType.GetPinsUser:
+                    return "get-pins-user";
                 default:
                     return reqType.ToString();
             }
@@ -121,6 +139,12 @@ namespace PinMessaging.Utils
 
         public static void SendRequest(HttpRequestType httpReqType, RequestType reqType, SyncType syncType, Dictionary<string, string> args, Dictionary<string, string> header)
         {
+            if (OnGoingRequest == true)
+            {
+                requestQueue.Enqueue(new RequestObject(httpReqType, reqType, syncType, args, header));
+                return;
+            }
+
             OnGoingRequest = true;
             PMData.NetworkProblem = false;
 
@@ -207,7 +231,14 @@ namespace PinMessaging.Utils
 
             OnGoingRequest = false;
 
-            Logs.Output.ShowOutput("Waiting answer END...");         
+            Logs.Output.ShowOutput("Waiting answer END...");
+
+            //pop one request from the queue and executes it
+            if (requestQueue.Count >= 1)
+            {
+                var req = requestQueue.Dequeue();
+                SendRequest(req.HttpReqType, req.ReqType, req.SyncType, req.Args, req.Header);
+            }
         }
 
         private static void ManageResponseExplicitError(WebException e)

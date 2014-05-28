@@ -50,6 +50,10 @@ namespace PinMessaging.Other
                             ParseGetPinMessages(json);
                             break;
 
+                        case RequestType.GetPinsUser:
+                            ParseGetPinsUser(json);
+                            break;
+
                         case RequestType.DeletePin:
                             DeletePin(json);
                             break;
@@ -83,6 +87,36 @@ namespace PinMessaging.Other
                 {
                     Logs.Error.ShowError(e, Logs.Error.ErrorsPriority.NotCritical);
                 }
+            }
+        }
+
+        private void ParseGetPinsUser(string json)
+        {
+            try
+            {
+                var item = JsonConvert.DeserializeObject<JArray>(json);
+
+                if (Boolean.Parse(item[0].ToString()) == false)
+                {
+                    if (item.Count == 2)
+                        Logs.Error.ShowError("ParseGetPinsUser: error: " + item[1].ToString(), Logs.Error.ErrorsPriority.NotCritical);
+                    else
+                        Logs.Error.ShowError("ParseGetPinsUser: unknown error", Logs.Error.ErrorsPriority.NotCritical);
+                }
+                else
+                {
+                    var pinCollection = JsonConvert.DeserializeObject<List<PMPinModel>>(item[1].ToString());
+
+                    foreach (var pmMapPushpinModel in pinCollection)
+                    {
+                        pmMapPushpinModel.ShowPinContent();
+                    }
+                    PMData.AddToQueuePinsList(pinCollection);
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ParseGetPins: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 

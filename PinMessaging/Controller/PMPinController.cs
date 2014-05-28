@@ -44,6 +44,15 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
+        public void GetPinsUser()
+        {
+            var dictionary = new Dictionary<string, string>();
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPinsUser, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
         public void CreatePin(Geoposition geoPos, PMPinModel pin)
         {
             var dictionary = new Dictionary<string, string>
