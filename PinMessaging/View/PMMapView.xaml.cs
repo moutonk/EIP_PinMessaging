@@ -486,6 +486,48 @@ namespace PinMessaging.View
             }
         }
 
+        /////////////////////////////////////////////////   RIGHT MENU ///////////////////////////////////////////////
+        
+        private void MyPinsPivotItem_OnSelected()
+        {
+            var myPinsCollection = PMData.PinsList.Where(pin => pin.AuthorId == PMData.UserId);
+
+            foreach (var pinModel in myPinsCollection)
+            {
+                var item = new TextBox() { Text = pinModel.Content, Width = 300, Tag = pinModel};
+                item.Tap += MyPinOnDelete;
+                MyPinsGrid.Children.Add(item);
+            }
+        }
+
+        private void MyPinOnDelete_Post()
+        {
+            Logs.Output.ShowOutput("pins deleted UI");   
+        }
+
+        private void MyPinOnDelete(object sender, GestureEventArgs gestureEventArgs)
+        {
+            var pc = new PMPinController(RequestType.DeletePin, MyPinOnDelete_Post);
+
+            pc.DeletePin(((sender as TextBox).Tag as PMPinModel).Id);
+        }
+
+        private void PivotPins_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (PivotPins.SelectedIndex)
+            {
+                case 0:
+                    break;
+
+                case 1:
+                    break;
+
+                case 2:
+                    MyPinsPivotItem_OnSelected();
+                    break;
+            }
+        }
+
         ////////////////////////////////////////////////    Down Menu    /////////////////////////////////////////////
 
         private void CloseMenuDownButton_Click(object sender, RoutedEventArgs e)

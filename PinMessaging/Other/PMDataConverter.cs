@@ -166,7 +166,7 @@ namespace PinMessaging.Other
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("ParseGetPins: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("DeletePin: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
             }   
         }
 

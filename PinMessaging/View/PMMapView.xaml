@@ -218,9 +218,9 @@
                 </Grid.RowDefinitions>
 
                 <ProgressBar Grid.Row="0" x:Name="PostPinProgressBar" Foreground="{StaticResource PMOrange}" Visibility="Collapsed"/>
-                <phone:Pivot Grid.Row="1" Height="790" HorizontalAlignment="Left" Margin="-10,0,0,0" x:Name="pivot" Title="" VerticalAlignment="Top" Width="430" FontSize="20">
+                <phone:Pivot Grid.Row="1" Height="790" HorizontalAlignment="Left" SelectionChanged="PivotPins_OnSelectionChanged" Margin="-10,0,0,0" x:Name="PivotPins" Title="" VerticalAlignment="Top" Width="430" FontSize="20">
 
-                    <phone:Pivot.HeaderTemplate>
+                    <phone:Pivot.HeaderTemplate> 
                         <DataTemplate>
                             <TextBlock FontSize="35" Text="{Binding}"/>
                             <!--<Image Source="/Images/Flags/FR.png"/>-->
@@ -228,53 +228,6 @@
                     </phone:Pivot.HeaderTemplate>
 
                     <phone:PivotItem x:Name="NewPinPivotItem" Header="Nouveau Pin" Margin="0,24,-264,-445" Background="{StaticResource PMGrey}" RenderTransformOrigin="0.494,0.707">
-                   <!--     <Grid x:Name="GridNewPinPivotItem" VerticalAlignment="Stretch">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="100"></RowDefinition>
-                                <RowDefinition Height="0"></RowDefinition>
-                                <RowDefinition Height="0"></RowDefinition>
-                                <RowDefinition Height="70"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="210"></RowDefinition>
-                                <RowDefinition Height="110"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <toolkit:ListPicker Grid.Row="0" x:Name="ListPickerPinType" ExpansionMode="FullScreenOnly" ItemsSource="{Binding ListPickerPins, ElementName=this}" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top" Width="380" Height="115" RenderTransformOrigin="0.496,0.766" BorderThickness="0">
-                                <toolkit:ListPicker.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="{Binding ImgPath}" Width="70" Height="70"/>
-                                            <TextBlock Margin="20 15 0 0" Text="{Binding Name}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </toolkit:ListPicker.ItemTemplate>
-                                <toolkit:ListPicker.FullModeItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Image Source="{Binding ImgPath}" Margin="0 5 0 0" Width="100" Height="100"/>
-                                            <TextBlock Margin="20 35 0 0" Text="{Binding Name}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </toolkit:ListPicker.FullModeItemTemplate>
-                            </toolkit:ListPicker>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,0,0,-10">
-                                <toolkit:DatePicker x:Name="DateEvent" Height="70" Background="{StaticResource PhoneContrastBackgroundBrush}" BorderThickness="0" Foreground="Black" />
-                                <toolkit:TimePicker x:Name="TimeEvent" Height="70" Width="117"/>
-                            </StackPanel>
-                            <TextBox Grid.Row="2" x:Name="PinReceiver" KeyDown="PinReceiver_OnKeyDown" AcceptsReturn="False" MaxLength="20" TextWrapping="Wrap" Background="{StaticResource PhoneContrastBackgroundBrush}" Text="Receiver" BorderThickness="0" Foreground="Black" Margin="10,0,0,-10"/>
-                            <TextBox Grid.Row="3" x:Name="PinTitle" KeyDown="PinTitle_OnKeyDown" AcceptsReturn="False" MaxLength="20" TextWrapping="Wrap" Margin="10,0,0,-10" Background="{StaticResource PhoneContrastBackgroundBrush}" Text="Title" BorderThickness="0">
-                                <TextBox.Foreground>
-                                    <SolidColorBrush Color="Black"></SolidColorBrush>
-                                </TextBox.Foreground>
-                            </TextBox>
-                            <TextBox Grid.Row="4" x:Name="PinContent" MaxLength="100" MaxWidth="420" TextWrapping="Wrap" Text="TextBoxsdqsdqsdqsdqsdsqdqsd" Margin="10,0,0,0" Background="{StaticResource PhoneContrastBackgroundBrush}" AcceptsReturn="True" BorderThickness="0">
-                                <TextBox.Foreground>
-                                    <SolidColorBrush Color="Black"></SolidColorBrush>
-                                </TextBox.Foreground>
-                            </TextBox>
-                            <Image Grid.Row="5" x:Name="PinImage" Stretch="Fill" Width="395" Source="\Images\empty_gallery.png" Margin="10,0,0,0" HorizontalAlignment="Center"/>
-                            <Button Grid.Row="6" x:Name="PostPinButton" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="10,0,0,-10" Click="PostPinButton_Click"/>
-                        </Grid>-->
-
                     </phone:PivotItem>
 
                     <phone:PivotItem Header="Favoris" Margin="0,28,-137,0" Background="{StaticResource PMGreen}">
@@ -283,10 +236,9 @@
                         </Grid>
                     </phone:PivotItem>
 
-                    <phone:PivotItem Header="Mes Pins" Margin="0,28,-137,0" Background="{StaticResource PMYellow}">
-                        <Grid>
-                            <Image Height="150" HorizontalAlignment="Left" Margin="103,101,0,0" x:Name="image3" Stretch="Fill" VerticalAlignment="Top" Width="200" Source="Thumbnails/3.jpeg"/>
-                        </Grid>
+                    <phone:PivotItem x:Name="MyPinsPivotItem" Header="Mes Pins" Margin="0,28,-137,0">
+                        <StackPanel Orientation="Vertical" x:Name="MyPinsGrid" Margin="20,0,0,0">
+                        </StackPanel>
                     </phone:PivotItem>
                 </phone:Pivot>
             </Grid>
