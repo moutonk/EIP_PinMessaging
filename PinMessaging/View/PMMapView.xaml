@@ -569,7 +569,10 @@
                                     <TextBlock FontSize="35" Text="Event date" Foreground="DarkGray" Margin="-30,20,0,0"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
-                                    <toolkit:DatePicker x:Name="CreatePinDatePicker" Margin="-30,20,0,0"></toolkit:DatePicker>
+                                    <StackPanel Orientation="Horizontal">
+                                        <toolkit:DatePicker x:Name="CreatePinDatePicker" Margin="-30,20,0,0"></toolkit:DatePicker>
+                                        <toolkit:TimePicker x:Name="CreatePinTimePicker" Margin="0,20,0,0"></toolkit:TimePicker>
+                                    </StackPanel>
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
                             

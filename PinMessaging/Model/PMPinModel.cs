@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Phone.Controls;
 using Newtonsoft.Json;
 using PinMessaging.Controller;
 using PinMessaging.Utils;
@@ -58,10 +59,10 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(PinsContentType.Text)] public PinsContentType ContentType { get; set; }
       
                        [DefaultValue(null)] public Image PinImg { get; set; }
+                       [DefaultValue(null)] public string[] DateTime { get; set; }
         [JsonProperty] [DefaultValue(null)] public GeoCoordinate GeoCoord { get; set; }
         //[JsonProperty] public Dictionary<string, string> Location { get; set; }
 
-        
         private void ConvertTypeToEnum()
         {
             /*if (PinType != null)
@@ -103,12 +104,40 @@ namespace PinMessaging.Model
             PinImg.Tap += img_Tap;
         }
 
+        private void CompleteDateAndTime()
+        {
+            //if there is a date and a time, temporary
+            if (Content.IndexOf(';') != -1)
+            {
+                try
+                {
+                    //get the date and the time
+                    var dateTime = Content.Substring(0, Content.IndexOf(';'));
+                    //remove the date from the pin content
+                    Content = Content.Remove(0, Content.IndexOf(';') + 1);
+                    //split the date and time to isolate each element
+                    DateTime = dateTime.Split(new[] {'-', ' ', ':'});
+
+                    foreach (var s in DateTime)
+                    {
+                        Logs.Output.ShowOutput(s);
+                    }
+                }
+                catch (Exception exp)
+                {
+                    Logs.Error.ShowError("CompleteDateAndTime: problem during date extraction", exp, Logs.Error.ErrorsPriority.NotCritical);
+                }
+            }
+        }
+
         [OnDeserialized]
         private void CompleteDataMember(StreamingContext context)
         {
             ConvertGeoPosToInteger();
             ConvertTypeToEnum();
 
+            if (PinType == PinsType.Event)
+                CompleteDateAndTime();
            // if (Location.ContainsKey("name") == true)
             //   Title = Location["name"];
 

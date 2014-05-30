@@ -677,7 +677,9 @@ namespace PinMessaging.View
             pinC.GetPinMessage(pin);
 
             PinTitleDescriptionTextBlock.Text = pin.Title;
-            PinMessageDescriptionTextBlock.Text = pin.Content;
+            PinMessageDescriptionTextBlock.Text = pin.Content + (pin.PinType == PMPinModel.PinsType.Event ? Environment.NewLine +
+                                                                                                            "Time of the event: " +
+                                                                                                            pin.DateTime.Aggregate("", (current, keyValuePair) => current + (keyValuePair + " ")) : "");
             PinAuthorDescriptionTextBlock.Text = pin.Author;
             PinAuthorDescriptionTextBlock.Tag = pin;
             PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType];
@@ -991,12 +993,38 @@ namespace PinMessaging.View
             PostPinButton_ClickPreJob();
 
             PinCreateModel.Title = TitleExpandViewTextBox.Text;
-            PinCreateModel.Content = DescriptionExpandViewTextBox.Text;
+            PinCreateModel.Content = (PinCreateModel.PinType == PMPinModel.PinsType.Event ? FormatDateAndTimeForEvent() : "") + DescriptionExpandViewTextBox.Text;
             //PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
             PinCreateModel.ContentType = PMPinModel.PinsContentType.Text;
          //   PinCreateModel.Private = "0";
             PinCreateModel.AuthoriseUsersId = null;
+
             pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
+        }
+
+        private string FormatDateAndTimeForEvent()
+        {
+            var formattedTime = string.Empty;
+
+            if (CreatePinDatePicker.Value.HasValue != true || CreatePinTimePicker.Value.HasValue != true)
+                return formattedTime;
+
+            formattedTime += CreatePinDatePicker.Value.Value.Year;
+            formattedTime += "-";
+            formattedTime += CreatePinDatePicker.Value.Value.Month;
+            formattedTime += "-";
+            formattedTime += CreatePinDatePicker.Value.Value.Day;
+
+            formattedTime += " ";
+
+            formattedTime += CreatePinTimePicker.Value.Value.Hour;
+            formattedTime += ":";
+            formattedTime += CreatePinTimePicker.Value.Value.Minute;
+            formattedTime += ":";
+            formattedTime += CreatePinTimePicker.Value.Value.Second;
+            formattedTime += ";";
+
+            return formattedTime;
         }
 
         /// ////////////////////////////////////////      Commments     ////////////////////////////////////////
