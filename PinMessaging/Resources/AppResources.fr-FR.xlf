@@ -182,6 +182,10 @@
           <source>Create Pin</source>
           <target state="new">Create Pin</target>
         </trans-unit>
+        <trans-unit id="Resx/PinImage" translate="yes" xml:space="preserve">
+          <source>IMAGE</source>
+          <target state="new">IMAGE</target>
+        </trans-unit>
         <trans-unit id="Resx/PinMessage" translate="yes" xml:space="preserve">
           <source>MESSAGE</source>
           <target state="new">MESSAGE</target>

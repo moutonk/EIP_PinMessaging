@@ -391,6 +391,7 @@
                                 <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="150"></RowDefinition>
+                                <RowDefinition Height="300"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             
@@ -429,7 +430,12 @@
                                 </Grid>
                             </StackPanel>
 
-                            <StackPanel Grid.Row="3">
+                            <StackPanel Grid.Row="3" x:Name="PinImageStackPanel">
+                                <TextBlock x:Name="PinImageTextBlock" Text="{Binding LocalizedResources.PinImage, Source={StaticResource LocalizedStrings}}" FontSize="25" Margin="10,10,0,0" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                <Image x:Name="PinImage" Height="250" Margin="30,20,30,20" Stretch="Uniform"></Image>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Row="4">
                                 <TextBlock x:Name="PinCommentTextBlock"  Text="COMMENTS" FontSize="25"  Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
                                 <Grid x:Name="PinCommentCreateGrid">
                                     <Grid.ColumnDefinitions>

@@ -313,6 +313,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à IMAGE.
+        /// </summary>
+        public static string PinImage {
+            get {
+                return ResourceManager.GetString("PinImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Last step.
         /// </summary>
         public static string PinLastStep {

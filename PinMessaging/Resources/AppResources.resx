@@ -288,4 +288,7 @@
   <data name="CreatePinTitle" xml:space="preserve">
     <value>Create Pin</value>
   </data>
+  <data name="PinImage" xml:space="preserve">
+    <value>IMAGE</value>
+  </data>
 </root>

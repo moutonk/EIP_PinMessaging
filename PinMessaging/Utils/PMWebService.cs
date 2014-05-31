@@ -5,6 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Windows.Media.Imaging;
+using Microsoft.Phone.Logging;
 using PinMessaging.Other;
 using PinMessaging.Utils.WebService;
 
@@ -272,7 +274,7 @@ namespace PinMessaging.Utils
             request.Method = HttpRequestType.Post.ToString();
 
             //convert the dictionnary with the argument to an array of bytes
-            byte[] requestParams = Encoding.UTF8.GetBytes(parameters);
+            var requestParams = Encoding.UTF8.GetBytes(parameters);
 
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = requestParams.Length;
@@ -335,5 +337,32 @@ namespace PinMessaging.Utils
             Logs.Output.ShowOutput("-------------------------------------------");
             return builder.ToString();
         }
+
+        public static BitmapImage DownloadImageUrl(string url)
+        {
+            var uri = new Uri(url, UriKind.Absolute);
+            return new BitmapImage(uri);
+        }
+
+      /*  private static void DownloadCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            if (e.Error == null && !e.Cancelled)  
+            {  
+                try  
+                {  
+                    BitmapImage image = new BitmapImage();  
+                    image.SetSource(e.Result);  
+                    imgContent.Source = image;  
+                }  
+                catch (Exception ex)  
+                {  
+                //Exception handle appropriately for your app  
+                }  
+            }  
+            else  
+            {  
+                Logs.Error.ShowError("Download image failed or aborted", Logs.Error.ErrorsPriority.NotCritical);
+            }  
+        }*/
     }
 }

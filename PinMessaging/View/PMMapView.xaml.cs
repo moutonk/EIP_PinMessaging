@@ -507,9 +507,9 @@ namespace PinMessaging.View
 
         private void MyPinOnDelete(object sender, GestureEventArgs gestureEventArgs)
         {
-            var pc = new PMPinController(RequestType.DeletePin, MyPinOnDelete_Post);
+            //var pc = new PMPinController(RequestType.DeletePin, MyPinOnDelete_Post);
 
-            pc.DeletePin(((sender as TextBox).Tag as PMPinModel).Id);
+            //pc.DeletePin(((sender as TextBox).Tag as PMPinModel).Id);
         }
 
         private void PivotPins_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -725,6 +725,16 @@ namespace PinMessaging.View
             PinAuthorDescriptionTextBlock.Text = pin.Author;
             PinAuthorDescriptionTextBlock.Tag = pin;
             PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType];
+
+            if (pin.Url != null)
+            {
+                UnderMenuPinDescriptionGrid.RowDefinitions[3].Height = new GridLength(300);
+                PinImage.Source = PMWebService.DownloadImageUrl(pin.Url);
+            }
+            else
+            {
+                UnderMenuPinDescriptionGrid.RowDefinitions[3].Height = new GridLength(0);
+            }
 
             _currentPinFocused = pin;
 

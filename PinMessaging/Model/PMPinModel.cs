@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Runtime.Serialization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Newtonsoft.Json;
 using PinMessaging.Controller;
@@ -57,7 +58,8 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(null)] public string LocationName { get; set; }
         [JsonProperty] [DefaultValue(PinsType.PublicMessage)] public PinsType PinType { get; set; }
         [JsonProperty] [DefaultValue(PinsContentType.Text)] public PinsContentType ContentType { get; set; }
-      
+
+                       [DefaultValue(null)] public BitmapImage PinImgUser { get; set; }
                        [DefaultValue(null)] public Image PinImg { get; set; }
                        [DefaultValue(null)] public string[] DateTime { get; set; }
         [JsonProperty] [DefaultValue(null)] public GeoCoordinate GeoCoord { get; set; }
