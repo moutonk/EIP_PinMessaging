@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using Windows.Storage;
 using Microsoft.Phone.Maps.Controls;
 using Newtonsoft.Json;
@@ -15,6 +16,7 @@ namespace PinMessaging.Other
 {
     public static class PMData
     {
+        [DefaultValue(null)] public static Image UserProfilPicture { get; set; }
         [DefaultValue(null)] public static string UserId { get; set; }
         [DefaultValue(null)] public static string AuthId { get; set; }
         [DefaultValue(false)] public static bool IsSignInSuccess { get; set; }
@@ -61,6 +63,7 @@ namespace PinMessaging.Other
             PinsCommentsList = new List<PMPinCommentModel>();
             PinsCommentsListTmp = new List<PMPinCommentModel>();
             UserList = new List<PMUserModel>();
+            UserProfilPicture = new Image();
         }
 
         public static void AddToQueuePinsList(List<PMPinModel> list)

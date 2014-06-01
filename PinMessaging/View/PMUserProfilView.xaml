@@ -26,6 +26,7 @@
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
         </Grid.RowDefinitions>
         
         <TextBox Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" Text="Points" VerticalAlignment="Top" />
@@ -42,6 +43,9 @@
 
         <Button Grid.Column="0" Grid.Row="5" x:Name="AddAsFavoriteButton" Content="Add As Favorite"  Click="AddAsFavoriteButton_OnClick"></Button>
         <Button Grid.Column="1" Grid.Row="5" x:Name="RemoveAsFavoriteButton" Content="Remove As Favorite"  Click="RemoveAsFavoriteButton_OnClick"></Button>
+
+        <Button Grid.Column="0" Grid.Row="6" x:Name="ChangeProfilPictureButton" Content="Change profil pic"  Click="ChangeProfilPictureButton_OnClick"></Button>
+        <Image Grid.Column="1" Grid.Row="6" x:Name="ProfilPictureImage"></Image>
     </Grid>
 
 </phone:PhoneApplicationPage>

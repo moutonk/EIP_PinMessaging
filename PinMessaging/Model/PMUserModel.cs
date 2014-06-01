@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Controls;
 using System.Windows.Interop;
 using Newtonsoft.Json;
 using PinMessaging.Utils;
@@ -20,6 +21,7 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(null)] public string Login { get; set; }
         [JsonProperty] [DefaultValue(null)] public string SimId { get; set; }
         [JsonProperty] [DefaultValue(null)] public PMGradeModel Grade { get; set; }
+                       [DefaultValue(null)] public Image ProfilPicture { get; set; }
 
         public PMUserModel Clone()
         {
