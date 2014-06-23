@@ -14,38 +14,115 @@
     shell:SystemTray.IsVisible="True">
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    
+    <Grid x:Name="UseProfilMainGrid" Background="{StaticResource PMGrey}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
-            <RowDefinition Height="100"/>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="250"></RowDefinition>
+            <RowDefinition Height="275"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         
-        <TextBox Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" Text="Points" VerticalAlignment="Top" />
-        <TextBox Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" Text="Nbr comments" VerticalAlignment="Top" />
-        <TextBox Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" Text="Nbr pins" VerticalAlignment="Top" />
-        <TextBox Grid.Column="0" Grid.Row="3" HorizontalAlignment="Left" Height="72"  TextWrapping="Wrap" Text="login" VerticalAlignment="Top" />
-        <TextBox Grid.Column="0" Grid.Row="4" HorizontalAlignment="Left" Height="72" TextWrapping="Wrap" Text="grade" VerticalAlignment="Top" />
+        <StackPanel Orientation="Horizontal" Background="{StaticResource PMOrange}">
+            <TextBlock x:Name="UserNameTextBlock" FontSize="35" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0" Text="Keke"></TextBlock>
+        </StackPanel>
+        
+        <Grid Row="1" x:Name="UserInfoGrid">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image Grid.Column="0" x:Name="ProfilPictureImage" Stretch="Uniform" Source="/Images/6.jpg"></Image>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="75"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" x:Name="OnlineTextBlock" FontSize="25" Text="Not connected" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <TextBlock FontSize="35" Text="Grade" VerticalAlignment="Center" Margin="10,0,20,10"></TextBlock>
+                    <Line X1="0" X2="100" Y1="0" Y2="0" VerticalAlignment="Center" StrokeThickness="2" Stroke="{StaticResource PMOrange}"></Line>
+                </StackPanel>
+            </Grid>
+        </Grid>
 
-        <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PointsTextBlock" FontSize="30" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center"/>
-        <TextBlock Grid.Column="1" Grid.Row="1" x:Name="NbrMsgTextBlock" FontSize="30" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" x:Name="NbrPinTextBlock" FontSize="30" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" x:Name="LoginTextBlock" FontSize="30" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" x:Name="GradeTextBlock" FontSize="30" HorizontalAlignment="Left" TextWrapping="Wrap"  VerticalAlignment="Center"/>
+        <Grid Row="2" x:Name="UserActionsGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+                <TextBlock Text="Actions" FontSize="35" Margin="10,0,20,10" VerticalAlignment="Center"></TextBlock>
+                <Line X1="0" X2="325" Y1="0" Y2="0" VerticalAlignment="Center" StrokeThickness="2" Stroke="{StaticResource PMOrange}"></Line>
+            </StackPanel>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                </Grid.RowDefinitions>
 
-        <Button Grid.Column="0" Grid.Row="5" x:Name="AddAsFavoriteButton" Content="Add As Favorite"  Click="AddAsFavoriteButton_OnClick"></Button>
-        <Button Grid.Column="1" Grid.Row="5" x:Name="RemoveAsFavoriteButton" Content="Remove As Favorite"  Click="RemoveAsFavoriteButton_OnClick"></Button>
-
-        <Button Grid.Column="0" Grid.Row="6" x:Name="ChangeProfilPictureButton" Content="Change profil pic"  Click="ChangeProfilPictureButton_OnClick"></Button>
-        <Image Grid.Column="1" Grid.Row="6" x:Name="ProfilPictureImage"></Image>
+                <Button Grid.Column="0" Grid.Row="0" x:Name="LocalizeButton" BorderThickness="0" Background="{StaticResource PMLightGrey}">
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65"></ColumnDefinition>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="/Images/Menu/target.png" Margin="0,0,15,0"/>
+                        <TextBlock Grid.Column="1" Name="LocalizeTextBlock" Text="Localize" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Button>
+                <Button Grid.Column="1" Grid.Row="0" x:Name="PrivateMsgButton" BorderThickness="0" Background="{StaticResource PMLightGrey}">
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65"></ColumnDefinition>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="/Images/Pins/private_message_icon.png" Margin="0,0,15,0"/>
+                        <TextBlock Grid.Column="1" Name="PrivateMsgTextBlock" Text="Private message" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Button>
+                <Button Grid.Column="0" Grid.Row="1" x:Name="ShareButton" BorderThickness="0" Background="{StaticResource PMLightGrey}">
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65"></ColumnDefinition>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="/Images/Icons/share_orange_icon.png" Margin="0,0,15,0"/>
+                        <TextBlock Grid.Column="1" Name="ShareTextBlock" Text="Share a pin" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Button>
+                <Button Grid.Column="1" Grid.Row="1" x:Name="ContactButton" BorderThickness="0" Background="{StaticResource PMLightGrey}">
+                    <Grid VerticalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="65"></ColumnDefinition>
+                            <ColumnDefinition Width="130"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Source="/Images/Icons/contact_orange_icon.png" Margin="0,0,15,0"/>
+                        <TextBlock Grid.Column="1" Name="ContactTextBlock" Text="Add to contacts" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                    </Grid>
+                </Button>
+            </Grid>
+        </Grid>
+      
+        <Grid Row="3" x:Name="UserHistoryGrid">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="75"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Orientation="Horizontal">
+               <TextBlock Text="History" FontSize="35" Margin="10,0,20,10" VerticalAlignment="Center"></TextBlock>
+                <Line X1="0" X2="325" Y1="0" Y2="0" VerticalAlignment="Center" StrokeThickness="2" Stroke="{StaticResource PMOrange}"></Line>
+            </StackPanel>
+            <Grid Grid.Row="1" Background="{StaticResource PMLightGrey}">
+                
+            </Grid>
+        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>

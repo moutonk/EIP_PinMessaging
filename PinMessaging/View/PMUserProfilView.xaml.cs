@@ -22,7 +22,7 @@ namespace PinMessaging.View
 
             _photoChooserTask.Completed += photoChooserTask_Completed;
 
-            if (PMData.UserProfilPicture != null)
+            /*if (PMData.UserProfilPicture != null)
                 ProfilPictureImage.Source = PMData.UserProfilPicture.Source;
 
             if (PMData.User != null)
@@ -36,7 +36,7 @@ namespace PinMessaging.View
                 GradeTextBlock.Text = _user.Grade.Name;
                 RemoveAsFavoriteButton.Tag = _user.Id;
                 AddAsFavoriteButton.Tag = _user.Id;
-            }
+            }*/
         }
 
         private void AddAsFavoriteButton_Post()
@@ -56,7 +56,7 @@ namespace PinMessaging.View
             var favController = new PMFavoriteController(RequestType.AddFavoriteUser, AddAsFavoriteButton_Post);
 
             PMData.WasFavoriteAddedSuccess = false;
-            favController.AddFavoriteUser(AddAsFavoriteButton.Tag as string);
+            //favController.AddFavoriteUser(AddAsFavoriteButton.Tag as string);
         }
 
         private void RemoveAsFavoriteButton_OnClick(object sender, RoutedEventArgs e)
@@ -64,9 +64,10 @@ namespace PinMessaging.View
             var favController = new PMFavoriteController(RequestType.RemoveFavoriteUser, RemoveAsFavoriteButton_Post);
 
             PMData.WasFavoriteRemovedSuccess = false;
-            favController.RemoveFavoriteUser(RemoveAsFavoriteButton.Tag as string);
+           // favController.RemoveFavoriteUser(RemoveAsFavoriteButton.Tag as string);
         }
 
+        /*TO FINISH*/
         private void ChangeProfilPictureButton_OnClick(object sender, RoutedEventArgs e)
         {
             _photoChooserTask.Show();
@@ -80,7 +81,7 @@ namespace PinMessaging.View
 
                 bmp.SetSource(e.ChosenPhoto);
                 PMData.UserProfilPicture.Source = bmp;
-                ProfilPictureImage.Source = PMData.UserProfilPicture.Source;
+               // ProfilPictureImage.Source = PMData.UserProfilPicture.Source;
             }
         }
     }   

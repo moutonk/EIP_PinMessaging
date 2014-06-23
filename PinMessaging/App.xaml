@@ -20,6 +20,10 @@
             <Color>#252525</Color>
         </SolidColorBrush>
 
+        <SolidColorBrush x:Key="PMLightGrey">
+            <Color>#404040</Color>
+        </SolidColorBrush>
+
         <SolidColorBrush x:Key="PMGreen">
             <Color>#32CD32</Color>
         </SolidColorBrush>
