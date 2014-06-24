@@ -22,49 +22,93 @@ namespace PinMessaging.View
 
             _photoChooserTask.Completed += photoChooserTask_Completed;
 
-            /*if (PMData.UserProfilPicture != null)
+            if (PMData.UserProfilPicture != null)
                 ProfilPictureImage.Source = PMData.UserProfilPicture.Source;
 
             if (PMData.User != null)
             {
                 _user = PMData.User.Clone();
 
-                PointsTextBlock.Text = _user.Points;
+                UserNameTextBlock.Text = _user.Login;
+
+                //if the user is already in the contact list
+                if (PMData.UserList.Contains(_user) == true)
+                {
+                    RemoveFavoriteImg();
+                }
+
+               /* PointsTextBlock.Text = _user.Points;
                 NbrMsgTextBlock.Text = _user.NbrMessage;
                 NbrPinTextBlock.Text = _user.NbrPin;
                 LoginTextBlock.Text = _user.Login;
                 GradeTextBlock.Text = _user.Grade.Name;
                 RemoveAsFavoriteButton.Tag = _user.Id;
-                AddAsFavoriteButton.Tag = _user.Id;
-            }*/
+                AddAsFavoriteButton.Tag = _user.Id;*/
+            }
+        }
+
+        private void RemoveFavoriteImg()
+        {
+            ContactImage.Source = new BitmapImage(new Uri("/Images/Icons/flag_orange_icon@2x.png", UriKind.Relative));
+        }
+
+        private void AddFavoriteImg()
+        {
+            ContactImage.Source = new BitmapImage(new Uri("/Images/Icons/contact_orange_icon.png", UriKind.Relative));
         }
 
         private void AddAsFavoriteButton_Post()
         {
             if (PMData.WasFavoriteAddedSuccess == true)
+            {
                 PMMapContactController.AddNewFavoris(_user);
+                RemoveFavoriteImg();                
+            }
         }
 
         private void RemoveAsFavoriteButton_Post()
         {
             if (PMData.WasFavoriteRemovedSuccess == true)
+            {
                 PMMapContactController.RemoveFavoris(_user);
+                AddFavoriteImg();
+            }
         }
 
-        private void AddAsFavoriteButton_OnClick(object sender, RoutedEventArgs e)
+        private void AddRemoveFavoriteButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (_user != null)
+            {
+                //if the user is already in the contact list
+                if (PMData.UserList.Contains(_user) == true)
+                {
+                    RemoveFavoriteButton_OnClick(sender, e);
+                }
+                else
+                {
+                    AddFavoriteButton_OnClick(sender, e);
+                }      
+            }
+            else
+            {
+                Logs.Error.ShowError("User is null", Logs.Error.ErrorsPriority.NotCritical);
+            }
+        }
+
+        private void AddFavoriteButton_OnClick(object sender, RoutedEventArgs e)
         {
             var favController = new PMFavoriteController(RequestType.AddFavoriteUser, AddAsFavoriteButton_Post);
 
             PMData.WasFavoriteAddedSuccess = false;
-            //favController.AddFavoriteUser(AddAsFavoriteButton.Tag as string);
+            favController.AddFavoriteUser(_user.Id);
         }
 
-        private void RemoveAsFavoriteButton_OnClick(object sender, RoutedEventArgs e)
+        private void RemoveFavoriteButton_OnClick(object sender, RoutedEventArgs e)
         {
             var favController = new PMFavoriteController(RequestType.RemoveFavoriteUser, RemoveAsFavoriteButton_Post);
 
             PMData.WasFavoriteRemovedSuccess = false;
-           // favController.RemoveFavoriteUser(RemoveAsFavoriteButton.Tag as string);
+            favController.RemoveFavoriteUser(_user.Id);
         }
 
         /*TO FINISH*/

@@ -291,4 +291,31 @@
   <data name="PinImage" xml:space="preserve">
     <value>IMAGE</value>
   </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="AddContacts" xml:space="preserve">
+    <value>Add to contacts</value>
+  </data>
+  <data name="Grade" xml:space="preserve">
+    <value>Grade</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Localize" xml:space="preserve">
+    <value>Localize</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Not connected</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="PrivateMessage" xml:space="preserve">
+    <value>Private message</value>
+  </data>
+  <data name="SharePin" xml:space="preserve">
+    <value>Share a pin</value>
+  </data>
 </root>

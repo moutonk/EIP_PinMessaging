@@ -117,32 +117,40 @@ namespace PinMessaging.Other
 
             var serializer = new JsonSerializer();
 
-            if (File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + DataPinsFile) == true)
+            try
             {
-                // Get the app data folder and create or replace the file we are storing the JSON in.            
-                var textFile = await ApplicationData.Current.LocalFolder.GetFileAsync(DataPinsFile);
-
-                // read the JSON string!
-                using (var sw = new StreamReader(textFile.Path))
-                using (JsonReader reader = new JsonTextReader(sw))
+                if (File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + DataPinsFile) == true)
                 {
-                    var list = serializer.Deserialize<List<PMPinModel>>(reader);
-                    Logs.Output.ShowOutput("Deserialized " + list.Count.ToString() + " pins");                
+                    // Get the app data folder and create or replace the file we are storing the JSON in.            
+                    var textFile = await ApplicationData.Current.LocalFolder.GetFileAsync(DataPinsFile);
 
-                    var pc = new PMPinController();
-
-                    foreach (var pmPinModel in list.Where(pmPinModel => PMMapPinController.IsPinUnique(pmPinModel) == true))
+                    // read the JSON string!
+                    using (var sw = new StreamReader(textFile.Path))
+                    using (JsonReader reader = new JsonTextReader(sw))
                     {
-                        pmPinModel.ShowPinContent();
-                        PMMapPinController.AddPinToMap(pmPinModel);
-                        PinsList.Add(pmPinModel);
+                        var list = serializer.Deserialize<List<PMPinModel>>(reader);
+                        Logs.Output.ShowOutput("Deserialized " + list.Count.ToString() + " pins");
+
+                        var pc = new PMPinController();
+
+                        foreach (var pmPinModel in list.Where(pmPinModel => PMMapPinController.IsPinUnique(pmPinModel) == true))
+                        {
+                            pmPinModel.ShowPinContent();
+                            PMMapPinController.AddPinToMap(pmPinModel);
+                            PinsList.Add(pmPinModel);
+                        }
                     }
                 }
+                else
+                {
+                    Logs.Output.ShowOutput("Storage file does not exist");
+                }
             }
-            else
+            catch (Exception exp)
             {
-                Logs.Output.ShowOutput("Storage file does not exist");
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
             }
+            
             Logs.Output.ShowOutput("------------------------LOAD PINS END------------------");
         }
 

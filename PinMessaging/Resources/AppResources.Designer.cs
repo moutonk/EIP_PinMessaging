@@ -61,6 +61,24 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Actions.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Add to contacts.
+        /// </summary>
+        public static string AddContacts {
+            get {
+                return ResourceManager.GetString("AddContacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à allow.
         /// </summary>
         public static string Allow {
@@ -133,6 +151,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Grade.
+        /// </summary>
+        public static string Grade {
+            get {
+                return ResourceManager.GetString("Grade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Do you already have an account?.
         /// </summary>
         public static string HaveAccountOrNot {
@@ -142,11 +169,29 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à History.
+        /// </summary>
+        public static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Menu.
         /// </summary>
         public static string LeftMenuTitle {
             get {
                 return ResourceManager.GetString("LeftMenuTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Localize.
+        /// </summary>
+        public static string Localize {
+            get {
+                return ResourceManager.GetString("Localize", resourceCulture);
             }
         }
         
@@ -282,6 +327,24 @@ namespace PinMessaging.Resources {
         public static string Notifications {
             get {
                 return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Not connected.
+        /// </summary>
+        public static string Offline {
+            get {
+                return ResourceManager.GetString("Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Connected.
+        /// </summary>
+        public static string Online {
+            get {
+                return ResourceManager.GetString("Online", resourceCulture);
             }
         }
         
@@ -502,6 +565,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Private message.
+        /// </summary>
+        public static string PrivateMessage {
+            get {
+                return ResourceManager.GetString("PrivateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Are you sure to quit the application?.
         /// </summary>
         public static string QuitApp {
@@ -534,6 +606,15 @@ namespace PinMessaging.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Share a pin.
+        /// </summary>
+        public static string SharePin {
+            get {
+                return ResourceManager.GetString("SharePin", resourceCulture);
             }
         }
         

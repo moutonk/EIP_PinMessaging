@@ -721,7 +721,7 @@ namespace PinMessaging.View
             PinTitleDescriptionTextBlock.Text = pin.Title;
             PinMessageDescriptionTextBlock.Text = pin.Content + (pin.PinType == PMPinModel.PinsType.Event ? Environment.NewLine +
                                                                                                             "Time of the event: " +
-                                                                                                            pin.DateTime.Aggregate("", (current, keyValuePair) => current + (keyValuePair + " ")) : "");
+                                                                                                            (pin.DateTime != null ? pin.DateTime.Aggregate("", (current, keyValuePair) => current + (keyValuePair + " ")) : "null") : "");
             PinAuthorDescriptionTextBlock.Text = pin.Author;
             PinAuthorDescriptionTextBlock.Tag = pin;
             PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType];

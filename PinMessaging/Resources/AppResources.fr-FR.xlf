@@ -186,6 +186,42 @@
           <source>IMAGE</source>
           <target state="new">IMAGE</target>
         </trans-unit>
+        <trans-unit id="Resx/SharePin" translate="yes" xml:space="preserve">
+          <source>Share a pin</source>
+          <target state="new">Share a pin</target>
+        </trans-unit>
+        <trans-unit id="Resx/PrivateMessage" translate="yes" xml:space="preserve">
+          <source>Private message</source>
+          <target state="new">Private message</target>
+        </trans-unit>
+        <trans-unit id="Resx/Online" translate="yes" xml:space="preserve">
+          <source>Connected</source>
+          <target state="new">Connected</target>
+        </trans-unit>
+        <trans-unit id="Resx/Offline" translate="yes" xml:space="preserve">
+          <source>Not connected</source>
+          <target state="new">Not connected</target>
+        </trans-unit>
+        <trans-unit id="Resx/Localize" translate="yes" xml:space="preserve">
+          <source>Localize</source>
+          <target state="new">Localize</target>
+        </trans-unit>
+        <trans-unit id="Resx/History" translate="yes" xml:space="preserve">
+          <source>History</source>
+          <target state="new">History</target>
+        </trans-unit>
+        <trans-unit id="Resx/Grade" translate="yes" xml:space="preserve">
+          <source>Grade</source>
+          <target state="new">Grade</target>
+        </trans-unit>
+        <trans-unit id="Resx/AddContacts" translate="yes" xml:space="preserve">
+          <source>Add to contacts</source>
+          <target state="new">Add to contacts</target>
+        </trans-unit>
+        <trans-unit id="Resx/Actions" translate="yes" xml:space="preserve">
+          <source>Actions</source>
+          <target state="new">Actions</target>
+        </trans-unit>
         <trans-unit id="Resx/PinMessage" translate="yes" xml:space="preserve">
           <source>MESSAGE</source>
           <target state="new">MESSAGE</target>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Device.Location;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Windows;
 using System.Windows.Controls;
@@ -104,6 +105,35 @@ namespace PinMessaging.Model
             else
                 PinImg = new Image { Source = Paths.PinsMapImg[PinType + 6] };
             PinImg.Tap += img_Tap;
+        }
+
+        [OnSerializing]
+        private void CompleteDateAndTimeSerializing(StreamingContext context)
+        {
+            if (PinType == PinsType.Event || PinType == PinsType.PrivateEvent)
+            {
+                var stringDate = string.Empty;
+
+                if (DateTime != null && DateTime.Count() == 6)
+                {
+                    stringDate += DateTime[0] + "-";
+                    stringDate += DateTime[1] + "-";
+                    stringDate += DateTime[2] + " ";
+                    stringDate += DateTime[3] + ":";
+                    stringDate += DateTime[4] + ":";
+                    stringDate += DateTime[5] + ";";
+
+                    try
+                    {
+                        Content = Content.Insert(0, stringDate);
+                    }
+                    catch (Exception exp)
+                    {
+                        Logs.Error.ShowError("CompleteDateAndTimeSerializing: ", exp,
+                            Logs.Error.ErrorsPriority.NotCritical);
+                    }
+                }
+            }
         }
 
         private void CompleteDateAndTime()
