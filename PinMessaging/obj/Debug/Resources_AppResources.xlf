@@ -274,6 +274,10 @@
           <source>Share a pin</source>
           <target state="new">Share a pin</target>
         </trans-unit>
+        <trans-unit id="Resx/Unfriend" translate="yes" xml:space="preserve">
+          <source>Unfriend</source>
+          <target state="new">Unfriend</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -322,3 +322,4 @@ C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMe
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\XapCacheFile.xml
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.csprojResolveAssemblyReference.cache
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\View\PMUserProfilView.g.cs
+C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\View\PMCurrentUserProfilView.g.cs

@@ -19,7 +19,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="65"></RowDefinition>
             <RowDefinition Height="250"></RowDefinition>
-            <RowDefinition Height="275"></RowDefinition>
+            <RowDefinition Height="250"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         
@@ -32,6 +32,7 @@
                 <ColumnDefinition Width="250"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+            <Rectangle Grid.Column="0" Fill="{StaticResource PMLightGrey}"/>
             <Image Grid.Column="0" x:Name="ProfilPictureImage" Stretch="Uniform" Source="/Images/6.jpg"></Image>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -67,7 +68,7 @@
                     <RowDefinition Height="100"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <Button Grid.Column="0" Grid.Row="0" x:Name="LocalizeButton" BorderThickness="0" Background="{StaticResource PMLightGrey}">
+                <Button Grid.Column="0" Grid.Row="0" x:Name="LocalizeButton" Margin="0,-10,-5,0" BorderThickness="0" Background="{StaticResource PMLightGrey}">
                     <Grid VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="65"></ColumnDefinition>
@@ -77,7 +78,7 @@
                         <TextBlock Grid.Column="1" Name="LocalizeTextBlock" Text="{Binding LocalizedResources.Localize, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>
                 </Button>
-                <Button Grid.Column="1" Grid.Row="0" x:Name="PrivateMsgButton" BorderThickness="0" Background="{StaticResource PMLightGrey}">
+                <Button Grid.Column="1" Grid.Row="0" x:Name="PrivateMsgButton" Margin="-5,-10,0,0" BorderThickness="0" Background="{StaticResource PMLightGrey}">
                     <Grid VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="65"></ColumnDefinition>
@@ -87,7 +88,7 @@
                         <TextBlock Grid.Column="1" Name="PrivateMsgTextBlock" Text="{Binding LocalizedResources.PrivateMessage, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>
                 </Button>
-                <Button Grid.Column="0" Grid.Row="1" x:Name="ShareButton" BorderThickness="0" Background="{StaticResource PMLightGrey}">
+                <Button Grid.Column="0" Grid.Row="1" x:Name="ShareButton" Margin="0,-10,-5,0" BorderThickness="0" Background="{StaticResource PMLightGrey}">
                     <Grid VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="65"></ColumnDefinition>
@@ -97,7 +98,7 @@
                         <TextBlock Grid.Column="1" Name="ShareTextBlock" Text="{Binding LocalizedResources.SharePin, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>
                 </Button>
-                <Button Grid.Column="1" Grid.Row="1" x:Name="ContactButton" Click="AddRemoveFavoriteButton_OnClick" BorderThickness="0" Background="{StaticResource PMLightGrey}">
+                <Button Grid.Column="1" Grid.Row="1" x:Name="ContactButton" Margin="-5,-10,0,0" Click="AddRemoveFavoriteButton_OnClick" BorderThickness="0" Background="{StaticResource PMLightGrey}">
                     <Grid VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="65"></ColumnDefinition>
@@ -119,9 +120,9 @@
                 <TextBlock Text="{Binding LocalizedResources.History, Source={StaticResource LocalizedStrings}}" FontSize="35" Margin="10,0,20,10" VerticalAlignment="Center"></TextBlock>
                 <Line X1="0" X2="325" Y1="0" Y2="0" VerticalAlignment="Center" StrokeThickness="2" Stroke="{StaticResource PMOrange}"></Line>
             </StackPanel>
-            <Grid Grid.Row="1" Background="{StaticResource PMLightGrey}">
+            <StackPanel Grid.Row="1" Name="HistoryStackPanel" Orientation="Vertical" Background="{StaticResource PMLightGrey}">
                 
-            </Grid>
+            </StackPanel>
         </Grid>
     </Grid>
 

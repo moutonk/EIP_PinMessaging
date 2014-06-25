@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
@@ -6,6 +7,7 @@ using Microsoft.Phone.Tasks;
 using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Other;
+using PinMessaging.Resources;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
 
@@ -32,9 +34,9 @@ namespace PinMessaging.View
                 UserNameTextBlock.Text = _user.Login;
 
                 //if the user is already in the contact list
-                if (PMData.UserList.Contains(_user) == true)
+                if (PMData.UserList.Any(user => user.Id == _user.Id) == true)
                 {
-                    RemoveFavoriteImg();
+                    RemoveFavoriteUI();
                 }
 
                /* PointsTextBlock.Text = _user.Points;
@@ -47,14 +49,22 @@ namespace PinMessaging.View
             }
         }
 
-        private void RemoveFavoriteImg()
+        /*HISTORY*/
+
+
+
+        /*CONTACTS*/
+
+        private void RemoveFavoriteUI()
         {
             ContactImage.Source = new BitmapImage(new Uri("/Images/Icons/flag_orange_icon@2x.png", UriKind.Relative));
+            ContactTextBlock.Text = AppResources.Unfriend;
         }
 
-        private void AddFavoriteImg()
+        private void AddFavoriteUI()
         {
             ContactImage.Source = new BitmapImage(new Uri("/Images/Icons/contact_orange_icon.png", UriKind.Relative));
+            ContactTextBlock.Text = AppResources.AddContacts;
         }
 
         private void AddAsFavoriteButton_Post()
@@ -62,7 +72,7 @@ namespace PinMessaging.View
             if (PMData.WasFavoriteAddedSuccess == true)
             {
                 PMMapContactController.AddNewFavoris(_user);
-                RemoveFavoriteImg();                
+                RemoveFavoriteUI();                
             }
         }
 
@@ -71,7 +81,7 @@ namespace PinMessaging.View
             if (PMData.WasFavoriteRemovedSuccess == true)
             {
                 PMMapContactController.RemoveFavoris(_user);
-                AddFavoriteImg();
+                AddFavoriteUI();
             }
         }
 
@@ -80,7 +90,7 @@ namespace PinMessaging.View
             if (_user != null)
             {
                 //if the user is already in the contact list
-                if (PMData.UserList.Contains(_user) == true)
+                if (PMData.UserList.Any(user => user.Id == _user.Id) == true)
                 {
                     RemoveFavoriteButton_OnClick(sender, e);
                 }

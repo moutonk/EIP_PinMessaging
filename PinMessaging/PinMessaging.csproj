@@ -133,6 +133,9 @@
     <Compile Include="Utils\PMWebService.cs" />
     <Compile Include="Utils\PMWebServiceEndDetector.cs" />
     <Compile Include="Utils\Utils.cs" />
+    <Compile Include="View\PMCurrentUserProfilView.xaml.cs">
+      <DependentUpon>PMCurrentUserProfilView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PMFirstLaunchView.xaml.cs">
       <DependentUpon>PMFirstLaunchView.xaml</DependentUpon>
     </Compile>
@@ -159,6 +162,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="View\PMCurrentUserProfilView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\PMFirstLaunchView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -190,6 +190,10 @@
           <source>Share a pin</source>
           <target state="new">Share a pin</target>
         </trans-unit>
+        <trans-unit id="Resx/Unfriend" translate="yes" xml:space="preserve">
+          <source>Unfriend</source>
+          <target state="new">Unfriend</target>
+        </trans-unit>
         <trans-unit id="Resx/PrivateMessage" translate="yes" xml:space="preserve">
           <source>Private message</source>
           <target state="new">Private message</target>

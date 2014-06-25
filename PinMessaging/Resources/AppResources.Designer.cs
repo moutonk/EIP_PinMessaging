@@ -628,6 +628,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Unfriend.
+        /// </summary>
+        public static string Unfriend {
+            get {
+                return ResourceManager.GetString("Unfriend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Sharing this information helps us provide and improve the location-based services offered for this phone. We won&apos;t use the information to identify or contact you..
         /// </summary>
         public static string UseLocationContent {

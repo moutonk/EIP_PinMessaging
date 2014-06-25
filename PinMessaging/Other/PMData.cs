@@ -148,7 +148,7 @@ namespace PinMessaging.Other
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("LoadPins", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
             
             Logs.Output.ShowOutput("------------------------LOAD PINS END------------------");
@@ -196,31 +196,38 @@ namespace PinMessaging.Other
 
             var serializer = new JsonSerializer();
 
-            if (File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + DataContactsFile) == true)
+            try
             {
-                // Get the app data folder and create or replace the file we are storing the JSON in.            
-                var textFile = await ApplicationData.Current.LocalFolder.GetFileAsync(DataContactsFile);
-
-                // read the JSON string!
-                using (var sw = new StreamReader(textFile.Path))
-                using (JsonReader reader = new JsonTextReader(sw))
+                if (File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + DataContactsFile) == true)
                 {
-                    var list = serializer.Deserialize<List<PMUserModel>>(reader);
+                    // Get the app data folder and create or replace the file we are storing the JSON in.            
+                    var textFile = await ApplicationData.Current.LocalFolder.GetFileAsync(DataContactsFile);
 
-                    if (list != null)
+                    // read the JSON string!
+                    using (var sw = new StreamReader(textFile.Path))
+                    using (JsonReader reader = new JsonTextReader(sw))
                     {
-                        Logs.Output.ShowOutput("Deserialized " + list.Count.ToString() + " favorites");
+                        var list = serializer.Deserialize<List<PMUserModel>>(reader);
 
-                        foreach (var pmUserModel in list)
+                        if (list != null)
                         {
-                            PMMapContactController.AddNewFavoris(pmUserModel);
+                            Logs.Output.ShowOutput("Deserialized " + list.Count.ToString() + " favorites");
+
+                            foreach (var pmUserModel in list)
+                            {
+                                PMMapContactController.AddNewFavoris(pmUserModel);
+                            }
                         }
                     }
                 }
+                else
+                {
+                    Logs.Output.ShowOutput("Storage file does not exist");
+                }
             }
-            else
+            catch (Exception exp)
             {
-                Logs.Output.ShowOutput("Storage file does not exist");
+                Logs.Error.ShowError("LoadFavorites", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
             Logs.Output.ShowOutput("------------------------LOAD FAVORITES END------------------");
         }

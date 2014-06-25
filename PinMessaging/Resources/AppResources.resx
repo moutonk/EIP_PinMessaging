@@ -318,4 +318,7 @@
   <data name="SharePin" xml:space="preserve">
     <value>Share a pin</value>
   </data>
+  <data name="Unfriend" xml:space="preserve">
+    <value>Unfriend</value>
+  </data>
 </root>

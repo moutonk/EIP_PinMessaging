@@ -21,7 +21,7 @@
         </SolidColorBrush>
 
         <SolidColorBrush x:Key="PMLightGrey">
-            <Color>#404040</Color>
+            <Color>#151515</Color>
         </SolidColorBrush>
 
         <SolidColorBrush x:Key="PMGreen">

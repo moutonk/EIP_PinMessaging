@@ -523,6 +523,7 @@ namespace PinMessaging.View
                     break;
 
                 case 2:
+                    MyPinsGrid.Children.Clear();
                     MyPinsPivotItem_OnSelected();
                     break;
             }
@@ -751,7 +752,8 @@ namespace PinMessaging.View
         {
             try
             {
-                NavigationService.Navigate(Paths.UserProfilView);
+                if (PMData.User != null)
+                    NavigationService.Navigate(PMData.User.Id != PMData.UserId ? Paths.UserProfilView : Paths.CurrentUserProfilView);
             }
             catch (Exception exp)
             {
