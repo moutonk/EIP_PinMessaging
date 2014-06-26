@@ -20,14 +20,10 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contient le nom de l'application et le titre de la page-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="MON APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="nom de la page" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
         <!--ContentPanel - placez tout contenu supplémentaire ici-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <Image HorizontalAlignment="Left" Height="202" VerticalAlignment="Top" Width="228"/>
+            <Button Content="Change img" Click="ChangeProfilPictureButton_OnClick" HorizontalAlignment="Left" Margin="261,76,0,0" VerticalAlignment="Top"/>
 
         </Grid>
     </Grid>

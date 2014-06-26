@@ -16,13 +16,10 @@ namespace PinMessaging.View
     public partial class PMUserProfil : PhoneApplicationPage
     {
         private readonly PMUserModel _user = null;
-        private readonly PhotoChooserTask _photoChooserTask = new PhotoChooserTask();
 
         public PMUserProfil()
         {
             InitializeComponent();
-
-            _photoChooserTask.Completed += photoChooserTask_Completed;
 
             if (PMData.UserProfilPicture != null)
                 ProfilPictureImage.Source = PMData.UserProfilPicture.Source;
@@ -119,24 +116,6 @@ namespace PinMessaging.View
 
             PMData.WasFavoriteRemovedSuccess = false;
             favController.RemoveFavoriteUser(_user.Id);
-        }
-
-        /*TO FINISH*/
-        private void ChangeProfilPictureButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            _photoChooserTask.Show();
-        }
-
-        private void photoChooserTask_Completed(object sender, PhotoResult e)
-        {
-            if (e.TaskResult == TaskResult.OK)
-            {
-                var bmp = new BitmapImage();
-
-                bmp.SetSource(e.ChosenPhoto);
-                PMData.UserProfilPicture.Source = bmp;
-               // ProfilPictureImage.Source = PMData.UserProfilPicture.Source;
-            }
         }
     }   
 }

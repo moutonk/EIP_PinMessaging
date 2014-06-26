@@ -296,7 +296,7 @@
                                 <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill" ImageSource="/Images\Menu\target.png"/>
                             </Button.Background>
                         </Button>
-                        <Button Click="ButtonBase_OnClick" Content="-" HorizontalAlignment="Left" Margin="416,0,0,0" VerticalAlignment="Top"/>
+                        <Button Click="ButtonBase_OnClick" Content="-" HorizontalAlignment="Left" Margin="465,0,0,0" VerticalAlignment="Top" Height="5" Width="5"/>
                         <Button Name="RefreshPinButton" Click="RefreshPinButton_OnClick" HorizontalAlignment="Left" Margin="158,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73" RenderTransformOrigin="1.315,0.603">
                             <Button.Background>
                                 <ImageBrush Stretch="Fill" ImageSource="/Images\Menu\refresh.png"/>
