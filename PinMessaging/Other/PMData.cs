@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Utils;
+using PinMessaging.View;
 
 namespace PinMessaging.Other
 {
@@ -42,6 +43,9 @@ namespace PinMessaging.Other
         //contains all the favorites
         [DefaultValue(null)] public static List<PMUserModel> UserList { get; set; }
 
+        //contains all the users profil pictures
+        [DefaultValue(null)] public static List<PMCurrentUserProfilView.Tof> ProfilPicturesList { get; set; }
+
         //contain all the pins
         [DefaultValue(null)] public static MapLayer MapLayerContainer { get; set; }
 
@@ -56,6 +60,9 @@ namespace PinMessaging.Other
         //contains all the contacts (serialized)
         private const string DataContactsFile = "contactsStorage.dat";
 
+        //contains all the pictures (serialized)
+        private const string DataPicturesFile = "picturesStorage.dat";
+
         static PMData()
         {
             PinsList = new List<PMPinModel>();
@@ -64,6 +71,7 @@ namespace PinMessaging.Other
             PinsCommentsListTmp = new List<PMPinCommentModel>();
             UserList = new List<PMUserModel>();
             UserProfilPicture = new Image();
+            ProfilPicturesList = new List<PMCurrentUserProfilView.Tof>();
         }
 
         public static void AddToQueuePinsList(List<PMPinModel> list)
@@ -108,7 +116,8 @@ namespace PinMessaging.Other
         public enum StoredDataType
         {
             Pins,
-            Favorites
+            Favorites,
+            Pictures
         }
 
         public async static void LoadPins()
@@ -172,6 +181,11 @@ namespace PinMessaging.Other
                     dataFilePath = DataContactsFile;
                     list = UserList;
                     break;
+                case StoredDataType.Pictures:
+                    Logs.Output.ShowOutput("------------------------SAVE PICTURES BEGIN------------------");
+                    dataFilePath = DataPicturesFile;
+                    list = ProfilPicturesList;
+                    break;
             }
 
             var serializer = new JsonSerializer { NullValueHandling = NullValueHandling.Ignore };
@@ -183,7 +197,14 @@ namespace PinMessaging.Other
             using (var sw = new StreamWriter(textFile.Path))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
-                serializer.Serialize(writer, list);
+                try
+                {
+                    serializer.Serialize(writer, list);
+                }
+                catch (JsonException exp)
+                {
+                    Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+                }
             }
             Logs.Output.ShowOutput("------------------------SAVE END------------------");
 
@@ -230,6 +251,43 @@ namespace PinMessaging.Other
                 Logs.Error.ShowError("LoadFavorites", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
             Logs.Output.ShowOutput("------------------------LOAD FAVORITES END------------------");
+        }
+
+        public async static void LoadProfilPictures()
+        {
+            Logs.Output.ShowOutput("------------------------LOAD PICTURES BEGIN------------------");
+
+            var serializer = new JsonSerializer();
+
+            try
+            {
+                if (File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + DataPicturesFile) == true)
+                {
+                    // Get the app data folder and create or replace the file we are storing the JSON in.            
+                    var textFile = await ApplicationData.Current.LocalFolder.GetFileAsync(DataPicturesFile);
+
+                    // read the JSON string!
+                    using (var sw = new StreamReader(textFile.Path))
+                    using (JsonReader reader = new JsonTextReader(sw))
+                    {
+                        var list = serializer.Deserialize<List<PMCurrentUserProfilView.Tof>>(reader);
+
+                        if (list != null)
+                        {
+                            Logs.Output.ShowOutput("Deserialized " + list.Count.ToString() + " pictures");
+                        }
+                    }
+                }
+                else
+                {
+                    Logs.Output.ShowOutput("Storage file does not exist");
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("LoadProfilPictures", exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+            Logs.Output.ShowOutput("------------------------LOAD PICTURES END------------------");
         }
     }
 }
