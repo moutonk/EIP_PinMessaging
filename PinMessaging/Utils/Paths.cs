@@ -86,6 +86,8 @@ namespace PinMessaging.Utils
         public static readonly Uri CreatePinPublicIcon = new Uri("/Images/Icons/white_planet.png", UriKind.Relative);
         public static readonly Uri CreatePinPrivateIcon = new Uri("/Images/Icons/white_lock.png", UriKind.Relative);
 
+        public static readonly Uri NeutralProfilPicture = new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative);
+
         public static Dictionary<PMPinModel.PinsType, BitmapImage> PinsMapImg;
 
         static Paths()

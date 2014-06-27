@@ -250,6 +250,7 @@
     <Content Include="Images\Icons\heart_orange_icon.png" />
     <Content Include="Images\Icons\heart_white_icon%402x.png" />
     <Content Include="Images\Icons\heart_white_icon.png" />
+    <Content Include="Images\Icons\neutral_profil.jpg" />
     <Content Include="Images\Icons\white_lock%402x.png" />
     <Content Include="Images\Icons\white_lock.png" />
     <Content Include="Images\Icons\white_planet%402x.png" />

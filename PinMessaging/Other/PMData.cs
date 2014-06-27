@@ -217,6 +217,8 @@ namespace PinMessaging.Other
             return true;
         }
 
+        //REFACTORING + universal profil picture
+
         public async static void LoadFavorites()
         {
             Logs.Output.ShowOutput("------------------------LOAD FAVORITES BEGIN------------------");

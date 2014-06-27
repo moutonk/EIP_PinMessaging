@@ -730,6 +730,13 @@ namespace PinMessaging.View
             PinAuthorDescriptionTextBlock.Tag = pin;
             PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType];
 
+            var pic = PMData.GetUserProfilPicture(pin.AuthorId);
+
+            if (pic != null)
+                AuthorPicture.Source = pic.Img;
+            else
+                AuthorPicture.Source = new BitmapImage(Paths.NeutralProfilPicture);
+
             if (pin.Url != null)
             {
                 UnderMenuPinDescriptionGrid.RowDefinitions[3].Height = new GridLength(300);

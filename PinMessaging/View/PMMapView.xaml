@@ -425,7 +425,7 @@
                                         <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
 
-                                    <Image Grid.Column="0" Grid.Row="0" Source="/Images/4.jpg" Tap="PinAuthorDescriptionTextBlock_OnTap" Stretch="Uniform" Margin="30,20,0,20"/>
+                                    <Image Grid.Column="0" Grid.Row="0" Name="AuthorPicture" Source="/Images/Icons/neutral_profil.jpg" Tap="PinAuthorDescriptionTextBlock_OnTap" Stretch="Uniform" Margin="30,20,0,20"/>
                                     <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="25"></TextBlock>
                                 </Grid>
                             </StackPanel>

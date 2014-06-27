@@ -1,6 +1,6 @@
-﻿<xapCache source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\PinMessaging_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="6/27/2014 12:21:31 PM">
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="6/27/2014 12:21:28 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\fr-FR\PinMessaging.resources.dll" archivePath="fr-FR\PinMessaging.resources.dll" lastWriteTime="6/27/2014 12:21:29 PM" />
+﻿<xapCache source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\PinMessaging_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="6/27/2014 1:42:27 PM">
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="6/27/2014 1:42:24 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\fr-FR\PinMessaging.resources.dll" archivePath="fr-FR\PinMessaging.resources.dll" lastWriteTime="6/27/2014 1:42:25 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\packages\WPtoolkit.4.2013.08.16\lib\wp8\fr-FR\Microsoft.Phone.Controls.Toolkit.resources.dll" archivePath="fr-FR\Microsoft.Phone.Controls.Toolkit.resources.dll" lastWriteTime="1/25/2014 10:31:23 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\4.jpg" archivePath="Images\4.jpg" lastWriteTime="5/8/2014 4:09:58 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\5.jpg" archivePath="Images\5.jpg" lastWriteTime="5/8/2014 4:09:58 PM" />
@@ -52,6 +52,7 @@
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Icons\heart_orange_icon.png" archivePath="Images\Icons\heart_orange_icon.png" lastWriteTime="3/21/2014 6:09:53 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Icons\heart_white_icon@2x.png" archivePath="Images\Icons\heart_white_icon@2x.png" lastWriteTime="3/21/2014 6:09:53 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Icons\heart_white_icon.png" archivePath="Images\Icons\heart_white_icon.png" lastWriteTime="3/21/2014 6:09:53 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Icons\neutral_profil.jpg" archivePath="Images\Icons\neutral_profil.jpg" lastWriteTime="6/27/2014 1:28:27 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Icons\white_lock@2x.png" archivePath="Images\Icons\white_lock@2x.png" lastWriteTime="5/7/2014 6:13:09 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Icons\white_lock.png" archivePath="Images\Icons\white_lock.png" lastWriteTime="5/7/2014 6:13:09 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Icons\white_planet@2x.png" archivePath="Images\Icons\white_planet@2x.png" lastWriteTime="5/7/2014 6:13:09 PM" />
