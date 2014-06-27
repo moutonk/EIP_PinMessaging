@@ -75,6 +75,7 @@ namespace PinMessaging.View
 
             PMData.LoadPins();
             PMData.LoadFavorites();
+            PMData.LoadProfilPictures();
             ResetCreatePinModel();
         }
 
@@ -275,6 +276,8 @@ namespace PinMessaging.View
             {
                 bool retPins = await PMData.SaveData(PMData.StoredDataType.Pins);
                 bool retFav = await PMData.SaveData(PMData.StoredDataType.Favorites);
+                bool retPic = await PMData.SaveData(PMData.StoredDataType.Pictures);
+
                 Application.Current.Terminate();
             }
             else

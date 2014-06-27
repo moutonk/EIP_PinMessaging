@@ -21,9 +21,6 @@ namespace PinMessaging.View
         {
             InitializeComponent();
 
-            if (PMData.UserProfilPicture != null)
-                ProfilPictureImage.Source = PMData.UserProfilPicture.Source;
-
             if (PMData.User != null)
             {
                 _user = PMData.User.Clone();
@@ -36,7 +33,12 @@ namespace PinMessaging.View
                     RemoveFavoriteUI();
                 }
 
-               /* PointsTextBlock.Text = _user.Points;
+                var profilPic = PMData.GetUserProfilPicture(_user.Id);
+
+                if (profilPic != null)
+                    ProfilPictureImage.Source = profilPic.Img;
+
+                /* PointsTextBlock.Text = _user.Points;
                 NbrMsgTextBlock.Text = _user.NbrMessage;
                 NbrPinTextBlock.Text = _user.NbrPin;
                 LoginTextBlock.Text = _user.Login;

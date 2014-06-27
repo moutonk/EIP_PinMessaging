@@ -1,18 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
 using System.Runtime.Serialization;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using Windows.Storage;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
-using Newtonsoft.Json;
+using PinMessaging.Model;
 using PinMessaging.Other;
 using PinMessaging.Utils;
 
@@ -26,7 +18,16 @@ namespace PinMessaging.View
         {
             InitializeComponent();
 
+            SetProfilPictureUI();    
             _photoChooserTask.Completed += photoChooserTask_Completed;
+        }
+
+        private void SetProfilPictureUI()
+        {
+            var profilPic = PMData.GetUserProfilPicture(PMData.UserId);
+
+            if (profilPic != null)
+                UserProfilImage.Source = profilPic.Img;
         }
 
         /*TO FINISH*/
@@ -37,69 +38,35 @@ namespace PinMessaging.View
             _photoChooserTask.Show();
         }
 
-        [JsonObject(MemberSerialization.OptIn)]
-        public class Tof
-        {
-            [JsonProperty]
-            public int userId;
-
-            [JsonProperty]
-            public byte[] bfield;
-
-            public Stream pictureStream;
-
-            [OnSerialized]
-            private void CreateStream(StreamingContext context)
-            {
-                pictureStream = new MemoryStream(bfield);
-            }
-        }
-
         private async void photoChooserTask_Completed(object sender, PhotoResult e)
         {
             if (e.TaskResult == TaskResult.OK)
             {
-                var bmp = new BitmapImage();
-            
-                var t = new Tof();
-                t.userId = 2;
-                t.bfield = new byte[e.ChosenPhoto.Length];
-
+                var pic = new PMPhotoModel {UserId = PMData.UserId, FieldBytes = new byte[e.ChosenPhoto.Length]};
+                
                 try
                 {
-                    Logs.Output.ShowOutput("Can write: " + e.ChosenPhoto.CanRead.ToString());
-                    await e.ChosenPhoto.ReadAsync(t.bfield, 0, t.bfield.Length);
+                    await e.ChosenPhoto.ReadAsync(pic.FieldBytes, 0, pic.FieldBytes.Length);
+                    pic.CreateStream();
+
+                    //if the profil picture is already in the list
+                    if (PMData.ProfilPicturesList.Any(img => img.UserId.Equals(PMData.UserId) == true) == true)
+                    {
+                        //we remove it and we add it
+                        PMData.ProfilPicturesList.RemoveAll(img => img.UserId.Equals(PMData.UserId) == true);
+                        PMData.ProfilPicturesList.Add(pic);
+                    }
+                    else
+                    {
+                        //or we add it
+                        PMData.ProfilPicturesList.Add(pic);
+                    }
+                    SetProfilPictureUI();
                 }
                 catch (Exception exp)
                 {
-                    Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+                    Logs.Error.ShowError("photoChooserTask_Completed", exp, Logs.Error.ErrorsPriority.NotCritical);
                 }
-
-                PMData.ProfilPicturesList.Add(t);
-
-                await PMData.SaveData(PMData.StoredDataType.Pictures);
-                PMData.ProfilPicturesList.Clear();
-                PMData.LoadProfilPictures();
-                
-                //   Logs.Output.ShowOutput(e.ChosenPhoto.Length.ToString());
-                
-               // string fileName = Path.GetFileName(e.OriginalFileName);
-
-                // persist data into isolated storage
-                /*StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-                using (Stream current = await file.OpenStreamForWriteAsync())
-                {
-                    await photoStream.CopyToAsync(current);
-                }
-
-                WriteableBitmap d;
-                d.SaveJpeg;
-                */
-
-                bmp.SetSource(t.pictureStream);
-                PMData.UserProfilPicture.Source = bmp;
-                UserProfilImage.Source = PMData.UserProfilPicture.Source;
-              //  UserProfilImage.
             }
         }
     }

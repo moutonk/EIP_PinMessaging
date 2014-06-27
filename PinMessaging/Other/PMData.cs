@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Windows.Storage;
+using Microsoft.Phone.Controls;
 using Microsoft.Phone.Maps.Controls;
 using Newtonsoft.Json;
 using PinMessaging.Controller;
@@ -17,7 +18,7 @@ namespace PinMessaging.Other
 {
     public static class PMData
     {
-        [DefaultValue(null)] public static Image UserProfilPicture { get; set; }
+        //[DefaultValue(null)] public static Image UserProfilPicture { get; set; }
         [DefaultValue(null)] public static string UserId { get; set; }
         [DefaultValue(null)] public static string AuthId { get; set; }
         [DefaultValue(false)] public static bool IsSignInSuccess { get; set; }
@@ -44,7 +45,7 @@ namespace PinMessaging.Other
         [DefaultValue(null)] public static List<PMUserModel> UserList { get; set; }
 
         //contains all the users profil pictures
-        [DefaultValue(null)] public static List<PMCurrentUserProfilView.Tof> ProfilPicturesList { get; set; }
+        [DefaultValue(null)] public static List<PMPhotoModel> ProfilPicturesList { get; set; }
 
         //contain all the pins
         [DefaultValue(null)] public static MapLayer MapLayerContainer { get; set; }
@@ -70,8 +71,8 @@ namespace PinMessaging.Other
             PinsCommentsList = new List<PMPinCommentModel>();
             PinsCommentsListTmp = new List<PMPinCommentModel>();
             UserList = new List<PMUserModel>();
-            UserProfilPicture = new Image();
-            ProfilPicturesList = new List<PMCurrentUserProfilView.Tof>();
+            //UserProfilPicture = new Image();
+            ProfilPicturesList = new List<PMPhotoModel>();
         }
 
         public static void AddToQueuePinsList(List<PMPinModel> list)
@@ -112,7 +113,13 @@ namespace PinMessaging.Other
                 Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
-      
+        public static PMPhotoModel GetUserProfilPicture(string id)
+        {
+            return ProfilPicturesList.Any(pics => pics.UserId.Equals(id) == true) == true
+                ? ProfilPicturesList.Find(pics => pics.UserId.Equals(id) == true)
+                : null;
+        }
+
         public enum StoredDataType
         {
             Pins,
@@ -165,7 +172,6 @@ namespace PinMessaging.Other
 
         public async static Task<bool> SaveData(StoredDataType dataType)
         {
-
             string dataFilePath = null;
             Object list = null;
 
@@ -270,11 +276,12 @@ namespace PinMessaging.Other
                     using (var sw = new StreamReader(textFile.Path))
                     using (JsonReader reader = new JsonTextReader(sw))
                     {
-                        var list = serializer.Deserialize<List<PMCurrentUserProfilView.Tof>>(reader);
+                        var list = serializer.Deserialize<List<PMPhotoModel>>(reader);
 
                         if (list != null)
                         {
                             Logs.Output.ShowOutput("Deserialized " + list.Count.ToString() + " pictures");
+                            ProfilPicturesList = list;
                         }
                     }
                 }
