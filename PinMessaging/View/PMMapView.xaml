@@ -17,6 +17,7 @@
     x:Name="this"
     shell:SystemTray.IsVisible="True"
     Loaded="PMMapView_OnLoaded">
+    
 	<phone:PhoneApplicationPage.Resources>
 		<Style x:Key="ExpanderViewStyle1" TargetType="toolkit:ExpanderView">
 			<Setter Property="HorizontalAlignment" Value="Stretch"/>
@@ -130,6 +131,20 @@
 			</Setter>
 		</Style>
 	</phone:PhoneApplicationPage.Resources>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
+
+            <shell:ApplicationBarIconButton IconUri="/Images/Menu/menu_icon.png" Text="qsfdqs" Click="OpenClose_Left"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/flag_orange_icon@2x.png" Text="qsfdqs" Click="MenuDownNotification_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/contact_orange_icon@2x.png" Text="qsfdqs" Click="MenuDownContacts_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/logo_flat_orange@2x.png" Text="qsfdqs" Click="OpenClose_Right"/>
+
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="menu item 1" Click="ApplicationBarMenuItem_OnClick"/>
+            </shell:ApplicationBar.MenuItems>
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Canvas x:Name="CentralCanvas" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="Black" ManipulationStarted="canvas_ManipulationStarted" ManipulationDelta="canvas_ManipulationDelta" ManipulationCompleted="canvas_ManipulationCompleted">
@@ -313,10 +328,10 @@
                             </Button.Background>
                         </Button>
                     </Grid>
+                   
+                    <Grid Grid.Row="2" x:Name="GridMapMenu" VerticalAlignment="Stretch" Visibility="Collapsed" HorizontalAlignment="Stretch">
 
-                    <Grid Grid.Row="2" x:Name="GridMapMenu" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-
-                        <Grid.ColumnDefinitions>
+                        <!--<Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
@@ -353,7 +368,7 @@
                                 <ImageBrush x:Name="ImgPinsButton" Stretch="Uniform"/>
                             </Button.Background>
                         </Button>
-                        <TextBlock Grid.Column="3" Grid.Row="1" Tap="OpenClose_Right" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Pins, Source={StaticResource LocalizedStrings}}"/>
+                        <TextBlock Grid.Column="3" Grid.Row="1" Tap="OpenClose_Right" TextAlignment="Center" FontSize="15" Text="{Binding LocalizedResources.Pins, Source={StaticResource LocalizedStrings}}"/>-->
                     </Grid>
 
                 </Grid>
@@ -519,6 +534,17 @@
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
                                     <TextBox Name="DescriptionExpandViewTextBox" FontSize="25" Text="Fake description" Margin="-30,20,0,0" Height="100" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="200" MaxWidth="450" TextChanged="DescriptionExpandViewTextBox_OnTextChanged"/>
+                                </toolkit:ExpanderView.Items>
+                            </toolkit:ExpanderView>
+
+                            <toolkit:ExpanderView x:Name="TargetExpanderViewExpandView" Expanded="TargetExpanderViewExpandView_OnExpandedExpandView_OnExpanded" Style="{StaticResource ExpanderViewStyle1}">
+                                <toolkit:ExpanderView.Expander >
+                                    <TextBlock FontSize="35" Text="Target" Foreground="DarkGray" Margin="-30,20,0,0"/>
+                                </toolkit:ExpanderView.Expander>
+                                <toolkit:ExpanderView.Items>
+                                    <phone:LongListSelector Name="TargetLongListSelector" FontSize="25" Margin="-30,20,0,0" Height="100" MaxWidth="450">
+                                       
+                                    </phone:LongListSelector>
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
 

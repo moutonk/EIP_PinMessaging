@@ -10,6 +10,7 @@ using Microsoft.Phone.Controls;
 using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
 using Microsoft.Phone.Maps.Controls;
+using Microsoft.Phone.Shell;
 using PinMessaging.Model;
 using PinMessaging.Controller;
 using PinMessaging.Other;
@@ -40,10 +41,23 @@ namespace PinMessaging.View
 
             //central page
             ImgTarget.ImageSource = new BitmapImage(Paths.TargetButton);
-            ImgMenuButton.ImageSource = new BitmapImage(Paths.MenuButton);
+     /*      ImgMenuButton.ImageSource = new BitmapImage(Paths.MenuButton);
             ImgNotificationButton.ImageSource = new BitmapImage(Paths.NotificationsButton);
             ImgContactsButton.ImageSource = new BitmapImage(Paths.ContactsButton);
-            ImgPinsButton.ImageSource = new BitmapImage(Paths.PinsButton);
+            ImgPinsButton.ImageSource = new BitmapImage(Paths.PinsButton);*/
+
+            try
+            {
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Menu;
+                (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Notifications;
+                (ApplicationBar.Buttons[2] as ApplicationBarIconButton).Text = AppResources.Contacts;
+                (ApplicationBar.Buttons[3] as ApplicationBarIconButton).Text = AppResources.Pins;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("Loading ApplicationBar text error", exp, Logs.Error.ErrorsPriority.NotCritical);             
+            }
+     
 
             //left menu
             ImgMap.Source = new BitmapImage(Paths.LeftMenuMap);
@@ -209,7 +223,21 @@ namespace PinMessaging.View
             MoveAnimationUp.Begin();
         }
 
-        private void MenuDown_OnClick(object sender, RoutedEventArgs e)
+        private void MenuDownNotification_OnClick(object sender, EventArgs e)
+        {
+            MenuDown_CommonActionsBefore();
+            MenuDown_NotificationOnClick();
+            MenuDown_CommonActionsAfter();
+        }
+
+        private void MenuDownContacts_OnClick(object sender, EventArgs e)
+        {
+            MenuDown_CommonActionsBefore();
+            MenuDown_ContactOnClick();
+            MenuDown_CommonActionsAfter();
+        }
+
+        private void MenuDown_OnClick(object sender, EventArgs eventArgs)
         {
             if (sender.Equals(ButtonPins))
             {
@@ -217,7 +245,7 @@ namespace PinMessaging.View
                 MenuDown_PinOnClick();
                 MenuDown_CommonActionsAfter();
             }
-            else if (sender.Equals(NotificationButton) || sender.Equals(NotificationButtonTextBlock))
+           /* else if (sender.Equals(NotificationButton) || sender.Equals(NotificationButtonTextBlock))
             {
                 MenuDown_CommonActionsBefore();
                 MenuDown_NotificationOnClick();
@@ -228,7 +256,7 @@ namespace PinMessaging.View
                 MenuDown_CommonActionsBefore();
                 MenuDown_ContactOnClick();
                 MenuDown_CommonActionsAfter();
-            }
+            }*/
             else if (sender.Equals(CreatePinButton))
             {
                 MenuDown_CommonActionsBefore();
@@ -347,7 +375,7 @@ namespace PinMessaging.View
             }
         }
 
-        private void OpenClose_Left(object sender, RoutedEventArgs e)
+        private void OpenClose_Left(object sender, EventArgs eventArgs)
         {
             var left = Canvas.GetLeft(LayoutRoot);
 
@@ -363,7 +391,7 @@ namespace PinMessaging.View
             }  
         }
 
-        private void OpenClose_Right(object sender, RoutedEventArgs e)
+        private void OpenClose_Right(object sender, EventArgs e)
         {
             var left = Canvas.GetLeft(LayoutRoot);
 
@@ -384,9 +412,15 @@ namespace PinMessaging.View
             _viewMoved = true;
 
             if (left == 0 || left == -840)
+            {
+                ApplicationBar.Mode = ApplicationBarMode.Minimized;
                 Map.IsEnabled = false;
+            }
             else
+            {
+                ApplicationBar.Mode = ApplicationBarMode.Default;
                 Map.IsEnabled = true;
+            }
 
             moveAnimation.SkipToFill();
             ((DoubleAnimation)(moveAnimation).Children[0]).To = left;
@@ -943,6 +977,12 @@ namespace PinMessaging.View
             PinTypeScollStackPanel.Children.Add(img6);
         }
 
+
+        private void TargetExpanderViewExpandView_OnExpandedExpandView_OnExpanded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         private void PinTypeExpandView_OnExpanded(object sender, RoutedEventArgs e)
         {
             if (PinTypeScollStackPanel.Children.Count == 0)
@@ -1104,6 +1144,11 @@ namespace PinMessaging.View
         {
             PinCommentContentTextBox.Text = "";
             AddCommentsToUi();
+        }
+
+        private void ApplicationBarMenuItem_OnClick(object sender, EventArgs e)
+        {
+            ApplicationBar.IsVisible = false;
         }
     }
 }
