@@ -216,6 +216,7 @@
     <Content Include="Images\Icons\bubble_white_icon.png" />
     <Content Include="Images\Icons\contact_orange_icon%402x.png" />
     <Content Include="Images\Icons\contact_orange_icon.png" />
+    <Content Include="Images\Icons\contact_orange_icon_appbar.png" />
     <Content Include="Images\Icons\contact_white_icon%402x.png" />
     <Content Include="Images\Icons\contact_white_icon.png" />
     <Content Include="Images\Icons\cross_orange_icon%402x.png" />
@@ -244,12 +245,14 @@
     <Content Include="Images\Icons\filer_white_icon.png" />
     <Content Include="Images\Icons\flag_orange_icon%402x.png" />
     <Content Include="Images\Icons\flag_orange_icon.png" />
+    <Content Include="Images\Icons\flag_orange_icon_appbar.png" />
     <Content Include="Images\Icons\flag_white_icon%402x.png" />
     <Content Include="Images\Icons\flag_white_icon.png" />
     <Content Include="Images\Icons\heart_orange_icon%402x.png" />
     <Content Include="Images\Icons\heart_orange_icon.png" />
     <Content Include="Images\Icons\heart_white_icon%402x.png" />
     <Content Include="Images\Icons\heart_white_icon.png" />
+    <Content Include="Images\Icons\logo_flat_orange_appbar.png" />
     <Content Include="Images\Icons\neutral_profil.jpg" />
     <Content Include="Images\Icons\white_lock%402x.png" />
     <Content Include="Images\Icons\white_lock.png" />
@@ -277,6 +280,7 @@
     <Content Include="Images\Icons\menu_orange_icon.png" />
     <Content Include="Images\Icons\menu_white_icon%402x.png" />
     <Content Include="Images\Icons\menu_white_icon.png" />
+    <Content Include="Images\Menu\menu_icon_appbar.png" />
     <Content Include="Images\Menu\new_pin_btn%402x.png" />
     <Content Include="Images\Menu\new_pin_btn.png" />
     <Content Include="Images\Icons\profile_orange_icon%402x.png" />

@@ -278,6 +278,10 @@
           <source>Unfriend</source>
           <target state="new">Unfriend</target>
         </trans-unit>
+        <trans-unit id="Resx/RefreshPins" translate="yes" xml:space="preserve">
+          <source>refresh pins</source>
+          <target state="new">refresh pins</target>
+        </trans-unit>
       </group>
     </body>
   </file>

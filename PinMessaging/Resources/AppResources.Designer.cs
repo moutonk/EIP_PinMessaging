@@ -592,6 +592,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à refresh pins.
+        /// </summary>
+        public static string RefreshPins {
+            get {
+                return ResourceManager.GetString("RefreshPins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à LeftToRight.
         /// </summary>
         public static string ResourceFlowDirection {

@@ -321,4 +321,7 @@
   <data name="Unfriend" xml:space="preserve">
     <value>Unfriend</value>
   </data>
+  <data name="RefreshPins" xml:space="preserve">
+    <value>refresh pins</value>
+  </data>
 </root>

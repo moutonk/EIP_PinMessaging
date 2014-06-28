@@ -52,6 +52,8 @@ namespace PinMessaging.View
                 (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Notifications;
                 (ApplicationBar.Buttons[2] as ApplicationBarIconButton).Text = AppResources.Contacts;
                 (ApplicationBar.Buttons[3] as ApplicationBarIconButton).Text = AppResources.Pins;
+
+                (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.RefreshPins;
             }
             catch (Exception exp)
             {
@@ -181,6 +183,7 @@ namespace PinMessaging.View
                 _currentView = CurrentMapPageView.UnderMenuView;
                 _isUnderMenuOpen = true;
                 _enableSwipe = false;
+                ApplicationBar.IsVisible = false;
 
                 DownMenuTitle.Text = AppResources.Pin;
                 AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[3], true, false);
@@ -215,12 +218,28 @@ namespace PinMessaging.View
             _currentView = CurrentMapPageView.UnderMenuView;
             _isUnderMenuOpen = true;
             _enableSwipe = false;
+            ApplicationBar.IsVisible = false;
         }
 
         private void MenuDown_CommonActionsAfter()
         {
             MainGridMap.RowDefinitions[2].Height = new GridLength(0);
             MoveAnimationUp.Begin();
+        }
+
+        private void ApplicationBarMenuItemCreate_OnClick(object sender, EventArgs e)
+        {
+            MenuDown_CommonActionsBefore();
+            MenuDown_CreatePin();
+            MenuDown_CommonActionsAfter();
+        }
+
+        private void ApplicationBarMenuItemRefresh_OnClick(object sender, EventArgs e)
+        {
+            var pinController = new PMPinController(RequestType.GetPins, null);
+
+            pinController.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()),
+                                  Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));
         }
 
         private void MenuDownNotification_OnClick(object sender, EventArgs e)
@@ -337,6 +356,7 @@ namespace PinMessaging.View
                 _isUnderMenuOpen = false;
                 _enableSwipe = true;
                 MoveAnimationDown.Begin();
+                ApplicationBar.IsVisible = true;
             }
 
             if (_currentView == CurrentMapPageView.LeftMenuView)
@@ -1144,11 +1164,6 @@ namespace PinMessaging.View
         {
             PinCommentContentTextBox.Text = "";
             AddCommentsToUi();
-        }
-
-        private void ApplicationBarMenuItem_OnClick(object sender, EventArgs e)
-        {
-            ApplicationBar.IsVisible = false;
         }
     }
 }

@@ -134,13 +134,14 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
 
-            <shell:ApplicationBarIconButton IconUri="/Images/Menu/menu_icon.png" Text="qsfdqs" Click="OpenClose_Left"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/Icons/flag_orange_icon@2x.png" Text="qsfdqs" Click="MenuDownNotification_OnClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/Icons/contact_orange_icon@2x.png" Text="qsfdqs" Click="MenuDownContacts_OnClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/Icons/logo_flat_orange@2x.png" Text="qsfdqs" Click="OpenClose_Right"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Menu/menu_icon_appbar.png" Text="Menu" Click="OpenClose_Left"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/flag_orange_icon_appbar.png" Text="Notifications" Click="MenuDownNotification_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/contact_orange_icon_appbar.png" Text="Contacts" Click="MenuDownContacts_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/logo_flat_orange_appbar.png" Text="Pins" Click="OpenClose_Right"/>
 
             <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem Text="menu item 1" Click="ApplicationBarMenuItem_OnClick"/>
+                <shell:ApplicationBarMenuItem Text="refresh pins" Click="ApplicationBarMenuItemRefresh_OnClick"/>
+                <shell:ApplicationBarMenuItem Text="create pin" Click="ApplicationBarMenuItemCreate_OnClick"/>
             </shell:ApplicationBar.MenuItems>
 
         </shell:ApplicationBar>
@@ -305,7 +306,7 @@
                     <ProgressBar x:Name="ProgressBarMap" Visibility="Visible" IsIndeterminate="True" Foreground="{StaticResource PMOrange}"/>
 
                     <Grid Grid.Row="1" x:Name="GridMap" >
-                        <maps:Map x:Name="Map" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true"/>
+                        <maps:Map x:Name="Map" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true" Margin="0,0,0,-89"/>
                         <Button Click="Center_Click" HorizontalAlignment="Left" Margin="42,11,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
                             <Button.Background>
                                 <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill" ImageSource="/Images\Menu\target.png"/>

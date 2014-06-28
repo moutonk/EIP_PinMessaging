@@ -194,6 +194,10 @@
           <source>Unfriend</source>
           <target state="translated">Supprimer de vos contacts</target>
         </trans-unit>
+        <trans-unit id="Resx/RefreshPins" translate="yes" xml:space="preserve">
+          <source>refresh pins</source>
+          <target state="new">refresh pins</target>
+        </trans-unit>
         <trans-unit id="Resx/PrivateMessage" translate="yes" xml:space="preserve">
           <source>Private message</source>
           <target state="translated">Message privé</target>
