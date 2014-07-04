@@ -78,7 +78,8 @@ namespace PinMessagingTests
                StartTimer();
 
                Thread.Sleep(1000);
-               Assert.IsTrue(webServiceReponse);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
            }
 
            [TestMethod]
@@ -96,6 +97,9 @@ namespace PinMessagingTests
                StartTimer();
 
                Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
                Assert.IsFalse(PMData.IsEmailDispo);
            }
            [TestMethod]
@@ -113,6 +117,9 @@ namespace PinMessagingTests
                StartTimer();
 
                Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
                Assert.IsTrue(PMData.IsEmailDispo);
            }
 
@@ -151,6 +158,8 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
                Assert.IsFalse(PMData.IsSignInSuccess);
            }
 
@@ -173,6 +182,9 @@ namespace PinMessagingTests
                StartTimer();
 
                Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
                Assert.IsTrue(PMData.IsSignUpSuccess);
            }
 
@@ -195,6 +207,8 @@ namespace PinMessagingTests
                StartTimer();
 
                Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
 
                var numberPinsAfter = PMData.PinsListToAdd.Count;
 
@@ -221,6 +235,8 @@ namespace PinMessagingTests
                StartTimer();
 
                Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
 
                var numberPinsAfter = PMData.PinsListToAdd.Count;
 
@@ -292,6 +308,8 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
                Assert.IsTrue(PMData.IsChangePwdSuccess);
            }
            [TestMethod]
@@ -310,6 +328,8 @@ namespace PinMessagingTests
                StartTimer();
 
                Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
 
                Assert.IsFalse(PMData.IsChangePwdSuccess);
            }
@@ -331,8 +351,11 @@ namespace PinMessagingTests
 
            protected override void waitEnd_Tick(object sender, EventArgs e)
            {
-               StopTimer();
-               webServiceReponse = true;
+               if (PMWebService.OnGoingRequest == false)
+               {
+                   StopTimer();
+                   webServiceReponse = true;
+               }
            }
         }
     }
