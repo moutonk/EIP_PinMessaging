@@ -102,6 +102,7 @@ namespace PinMessagingTests
 
                Assert.IsFalse(PMData.IsEmailDispo);
            }
+
            [TestMethod]
            public void TestWebServiceCheckEmailNotExist()
            {
@@ -294,6 +295,8 @@ namespace PinMessagingTests
            [TestMethod]
            public void TestWebServiceChangePasswordCorrect()
            {
+               TestWebServiceSignInCorrect();
+
                webServiceReponse = false;
 
                var dictionary = new Dictionary<string, string>
@@ -312,9 +315,12 @@ namespace PinMessagingTests
 
                Assert.IsTrue(PMData.IsChangePwdSuccess);
            }
+
            [TestMethod]
            public void TestWebServiceChangePasswordIncorrect()
            {
+               TestWebServiceSignInCorrect();
+
                webServiceReponse = false;
 
                var dictionary = new Dictionary<string, string>
@@ -332,6 +338,164 @@ namespace PinMessagingTests
                Assert.IsTrue(webServiceReponse, "No webservice response");
 
                Assert.IsFalse(PMData.IsChangePwdSuccess);
+           }
+
+           [TestMethod]
+           public void TestWebServiceRemoveFavoriteIncorrect()
+           {
+               TestWebServiceSignInCorrect();
+
+               webServiceReponse = false;
+               var numberFavBefore = PMData.UserList.Count;
+
+               var dictionary = new Dictionary<string, string>
+               {
+                   {"favoriteId", "4"},
+               };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.RemoveFavoriteUser, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
+               var numberFavAfter = PMData.UserList.Count;
+
+               Assert.AreNotEqual(numberFavBefore, numberFavAfter);
+           }
+
+           [TestMethod]
+           public void TestWebServiceAddFavoriteIncorrect()
+           {
+               TestWebServiceSignInCorrect();
+
+               webServiceReponse = false;
+               var numberFavBefore = PMData.UserList.Count;
+
+               var dictionary = new Dictionary<string, string>
+               {
+                   {"favoriteId", "440808"},
+               };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.AddFavoriteUser, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
+               var numberFavAfter = PMData.UserList.Count;
+
+               Assert.IsTrue(numberFavBefore < numberFavAfter);
+           }
+
+           [TestMethod]
+           public void TestWebServiceCreatePinMsgCorrect()
+           {
+               TestWebServiceCreatePin();
+
+               webServiceReponse = false;
+               var numberComBefore = PMData.PinsCommentsList.Count;
+
+               var dictionary = new Dictionary<string, string>
+               {
+                    {"pinId", PMData.PinsList[PMData.PinsList.Count - 1].Id},
+                    {"type", "0"},
+                    {"content", "test msg"}
+               };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.CreatePinMessage, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
+               var numberComAfter = PMData.PinsCommentsList.Count;
+
+               Assert.IsTrue(numberComBefore < numberComAfter);
+           }
+
+           [TestMethod]
+           public void TestWebServiceCreatePinMsgIncorrect()
+           {
+               webServiceReponse = false;
+               var numberComBefore = PMData.PinsCommentsList.Count;
+
+               var dictionary = new Dictionary<string, string>
+               {
+                    {"pinId", "-1"},
+                    {"type", "0"},
+                    {"content", "test msg"}
+               };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.CreatePinMessage, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
+               var numberComAfter = PMData.PinsCommentsList.Count;
+
+               Assert.IsFalse(numberComBefore < numberComAfter);
+           }
+
+           [TestMethod]
+           public void TestWebServiceGetPinMessagesCorrect()
+           {
+               TestWebServiceCreatePinMsgCorrect();
+
+               webServiceReponse = false;
+               var numberMsgBefore = PMData.PinsCommentsList.Count;
+
+               var dictionary = new Dictionary<string, string>
+               {
+                    {"pinId", PMData.PinsList[PMData.PinsList.Count - 1].Id},
+               };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPinMessages, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
+               var numberMsgAfter = PMData.PinsCommentsList.Count;
+
+               Assert.IsTrue(numberMsgBefore < numberMsgAfter);
+           }
+
+           [TestMethod]
+           public void TestWebServiceGetPinMessagesIncorrect()
+           {
+               TestWebServiceCreatePinMsgCorrect();
+
+               webServiceReponse = false;
+               var numberMsgBefore = PMData.PinsCommentsList.Count;
+
+               var dictionary = new Dictionary<string, string>
+               {
+                    {"pinId", "-1"},
+               };
+
+               PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPinMessages, SyncType.Async, dictionary, null);
+
+               StartTimer();
+
+               Thread.Sleep(1000);
+
+               Assert.IsTrue(webServiceReponse, "No webservice response");
+
+               var numberMsgAfter = PMData.PinsCommentsList.Count;
+
+               Assert.IsTrue(numberMsgBefore == numberMsgAfter);
            }
 
            private string CreateRandomEmail()
