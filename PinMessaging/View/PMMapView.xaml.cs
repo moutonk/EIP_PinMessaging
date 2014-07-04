@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -934,19 +936,21 @@ namespace PinMessaging.View
                 PinCreateModel.Private = true;
                 ExpanderViewEventDate.Visibility = Visibility.Collapsed;
             }
+
             CloseAllExpanderExcept(TitleExpandView);
             CheckCanCreatePin();
         }
 
         private void CloseAllExpanderExcept(ExpanderView exp)
         {
-            var expTab = new ExpanderView[5]
+            var expTab = new ExpanderView[6]
             {
                 VisibilityExpandView,
                 PinTypeExpandView,
                 TitleExpandView,
                 DescriptionExpandView,
-                ExpanderViewEventDate
+                ExpanderViewEventDate,
+                TargetExpanderViewExpandView
             };
 
             foreach (var elem in expTab)
@@ -1003,6 +1007,11 @@ namespace PinMessaging.View
 
         }
 
+        private void CreateTargetLongList()
+        {
+            TargetLongListSelector.ItemsSource = PMData.UserList;
+        }
+
         private void PinTypeExpandView_OnExpanded(object sender, RoutedEventArgs e)
         {
             if (PinTypeScollStackPanel.Children.Count == 0)
@@ -1010,6 +1019,15 @@ namespace PinMessaging.View
                 LoadCreatePinsPublicPins();
                 LoadCreatePinsPrivatePins();
             }
+            CreateTargetLongList();
+        }
+
+        private void TargetExpanderAdaptView(bool priv)
+        {
+         if (priv == false)
+                TargetExpanderViewExpandView.Visibility = Visibility.Collapsed;
+            else
+                TargetExpanderViewExpandView.Visibility = Visibility.Visible;   
         }
 
         private void VisibilityExpandViewPublicGrid_OnTap(object sender, GestureEventArgs e)
@@ -1017,6 +1035,8 @@ namespace PinMessaging.View
             PinTypeScollStackPanel.Children.Clear();
             LoadCreatePinsPublicPins();
             CloseAllExpanderExcept(PinTypeExpandView);
+
+            TargetExpanderAdaptView(false);
         }
 
         private void VisibilityExpandViewPrivateGrid_OnTap(object sender, GestureEventArgs e)
@@ -1024,6 +1044,8 @@ namespace PinMessaging.View
             PinTypeScollStackPanel.Children.Clear();
             LoadCreatePinsPrivatePins();
             CloseAllExpanderExcept(PinTypeExpandView);
+
+            TargetExpanderAdaptView(true);
         }
 
         private void CheckCanCreatePin()
@@ -1106,6 +1128,11 @@ namespace PinMessaging.View
 
         private void PostPinButton_Click(object sender, RoutedEventArgs e)
         {
+            foreach (var item in TargetLongListSelector.SelectedItems)
+            {
+                Logs.Output.ShowOutput((item as PMUserModel).Login);
+            }
+
             if (_geoLocation == null)
                 if (AccessLocationMsgBox() != 1)
                     return;
@@ -1121,9 +1148,22 @@ namespace PinMessaging.View
             //PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
             PinCreateModel.ContentType = PMPinModel.PinsContentType.Text;
          //   PinCreateModel.Private = "0";
-            PinCreateModel.AuthoriseUsersId = null;
+            PinCreateModel.AuthoriseUsersId = FormatAuthoriseUsersId();
 
             pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
+        }
+
+        private string FormatAuthoriseUsersId()
+        {
+            var builder = new StringBuilder();
+
+            for (var pos = 0; pos < TargetLongListSelector.SelectedItems.Count; pos++)
+            {
+                builder.Append(((TargetLongListSelector.SelectedItems[pos]) as PMUserModel).Id);
+                if (pos + 1 < TargetLongListSelector.SelectedItems.Count)
+                    builder.Append(",");
+            }
+            return builder.ToString();
         }
 
         private string FormatDateAndTimeForEvent()

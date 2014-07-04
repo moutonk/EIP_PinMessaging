@@ -272,7 +272,7 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Notifications" xml:space="preserve">
           <source>Notifications</source>
-          <target state="translated">Notifications</target>
+          <target state="translated">Notification</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Menu" xml:space="preserve">
           <source>Menu</source>
