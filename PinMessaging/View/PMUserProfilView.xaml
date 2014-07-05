@@ -122,7 +122,52 @@
                 <Line X1="0" X2="325" Y1="0" Y2="0" VerticalAlignment="Center" StrokeThickness="2" Stroke="{StaticResource PMOrange}"></Line>
             </StackPanel>
             <StackPanel Grid.Row="1" Name="HistoryStackPanel" Orientation="Vertical" Background="{StaticResource PMLightGrey}">
-                
+                <ScrollViewer Height="140">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="100"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="75"></RowDefinition>
+                            <RowDefinition Height="2"></RowDefinition>
+                            <RowDefinition Height="75"></RowDefinition>
+                            <RowDefinition Height="2"></RowDefinition>
+                            <RowDefinition Height="75"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Image Grid.Column="0" Grid.Row="0" Height="60" Source="\Images\Icons\bubble_white_icon.png"/>
+                        <Grid Grid.Row="0" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="JsonStateHam commented the event 'Sunday at Barney's'"/>
+                            <TextBlock Grid.Row="1" TextWrapping="Wrap" FontSize="12" TextAlignment="Right" Text="05/21/14 at 5:01 PM"/>
+                        </Grid>
+                        <Canvas Grid.Column="0" Grid.Row="1" Background="{StaticResource PhoneProgressBarBackgroundBrush}"></Canvas>
+                        <Canvas Grid.Column="1" Grid.Row="1" Background="{StaticResource PhoneProgressBarBackgroundBrush}"></Canvas>
+                        <Image Grid.Column="0" Grid.Row="2" Height="60" Source="\Images\Icons\logo_flat_white.png"/>
+                        <Grid Grid.Row="2" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="BruceLee created a public message 'Fun facts about Kung Fu'"/>
+                            <TextBlock Grid.Row="1" TextWrapping="Wrap" FontSize="12" TextAlignment="Right" Text="10/26/14 at 3:12 AM"/>
+                        </Grid>
+                        <Canvas Grid.Column="0" Grid.Row="3" Background="{StaticResource PhoneProgressBarBackgroundBrush}"></Canvas>
+                        <Canvas Grid.Column="1" Grid.Row="3" Background="{StaticResource PhoneProgressBarBackgroundBrush}"></Canvas>
+                        <Image Grid.Column="0" Grid.Row="4" Height="60" Source="\Images\Icons\bubble_white_icon.png"/>
+                        <Grid Grid.Row="4" Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="60"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="ChuckNorris commented the event 'Yes I was there'"/>
+                            <TextBlock Grid.Row="1" TextWrapping="Wrap" FontSize="12" TextAlignment="Right" Text="70/56/1084 at 3:12 PM"/>
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
             </StackPanel>
         </Grid>
     </Grid>

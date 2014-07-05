@@ -133,5 +133,10 @@ namespace PinMessaging.View
                 Logs.Error.ShowError("PrivateMsgButton_OnClick: cannot go back in the map page", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
+
+        private void CreateHistoryEvents()
+        {
+            
+        }
     }   
 }

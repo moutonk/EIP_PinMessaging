@@ -207,7 +207,7 @@
                         <TextBlock x:Name="ButtonFilters" Grid.Column="1" Grid.Row="2" Tap="ButtonFilters_OnClick" Text="{Binding LocalizedResources.MenuFilters, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
                         <Canvas x:Name="MyAccountCanvasLeft" Grid.Column="0" Grid.Row="3" Background="{StaticResource PMOrange}"></Canvas>
                         <Canvas x:Name="MyAccountCanvasRight" Grid.Column="1" Grid.Row="3" Background="{StaticResource PMOrange}">
-                            <TextBlock x:Name="MyAccountTextBlock" FontSize="32" Text="{Binding LocalizedResources.MyAccount, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" FontWeight="Bold" Margin="-70,15,0,0"/>
+                        <TextBlock x:Name="MyAccountTextBlock" FontSize="32" Text="{Binding LocalizedResources.MyAccount, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" FontWeight="Bold" Margin="-70,15,0,0"/>
                         </Canvas>
                         <Image  x:Name="ImgProfil"  Grid.Column="0" Grid.Row="4" Tap="ButtonProfil_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
                         <TextBlock x:Name="ButtonProfil" Grid.Column="1" Grid.Row="4" Tap="ButtonProfil_OnClick" Text="{Binding LocalizedResources.MenuProfil, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
@@ -448,7 +448,7 @@
                                     </Grid.RowDefinitions>
 
                                     <Image Grid.Column="0" Grid.Row="0" Name="AuthorPicture" Source="/Images/Icons/neutral_profil.jpg" Tap="PinAuthorDescriptionTextBlock_OnTap" Stretch="Uniform" Margin="30,20,0,20"/>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="30,0,0,0" FontSize="25"></TextBlock>
+                                    <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="30,0,0,20" FontSize="25"></TextBlock>
                                 </Grid>
                             </StackPanel>
 
