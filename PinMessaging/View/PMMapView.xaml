@@ -131,9 +131,9 @@
 			</Setter>
 		</Style>
         <DataTemplate x:Key="TargetDataTemplate">
-            <StackPanel VerticalAlignment="Top">
-                <TextBlock Name="TargetIdTextBlock" />
-                <TextBlock Name="TargetNameTextBlock" />
+            <StackPanel VerticalAlignment="Top" Orientation="Horizontal">
+                <TextBlock Name="TargetIdTextBlock" Text="{Binding Id}"/>
+                <TextBlock Name="TargetNameTextBlock" Text="{Binding Login}"/>
             </StackPanel>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
@@ -274,6 +274,7 @@
 							Storyboard.TargetProperty="(Grid.Height)"
 							Storyboard.TargetName="MainVerticalGrid" 
 							d:IsOptimized="True"
+                            Completed="MoveAnimationUp_OnCompleted"
                                             />
                     </Storyboard>
                     <Storyboard x:Name="MoveAnimationDown">

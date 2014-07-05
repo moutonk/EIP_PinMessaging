@@ -212,7 +212,7 @@ namespace PinMessaging.View
             DownMenuTitle.Text = AppResources.CreatePinTitle;
             AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[4], false, false);
 
-            VisibilityExpandView.IsExpanded = true;
+           // VisibilityExpandView.IsExpanded = true;
         }
 
         private void MenuDown_CommonActionsBefore()
@@ -229,7 +229,18 @@ namespace PinMessaging.View
             MoveAnimationUp.Begin();
         }
 
-        private void ApplicationBarMenuItemCreate_OnClick(object sender, EventArgs e)
+        public void DropPrivatePin(PMUserModel user)
+        {
+            ApplicationBarMenuItemCreate_OnClick(null, null);
+            //VisibilityExpandViewPrivateGrid_OnTap(null, null);
+            TargetExpanderAdaptView(true);
+            CreateTargetLongList();
+            TargetLongListSelector.ItemsSource.Add(user);
+            //TargetLongListSelector.TabIndex = 0;
+            Logs.Output.ShowOutput(TargetLongListSelector.ItemsSource.Count.ToString());
+        }
+
+        void ApplicationBarMenuItemCreate_OnClick(object sender, EventArgs e)
         {
             MenuDown_CommonActionsBefore();
             MenuDown_CreatePin();
@@ -352,7 +363,7 @@ namespace PinMessaging.View
         {
             if (_isUnderMenuOpen == true)
             {
-                MainGridMap.RowDefinitions[2].Height = new GridLength(120);
+                //MainGridMap.RowDefinitions[2].Height = new GridLength(120);
            
                 _currentView = CurrentMapPageView.MapView;
                 _isUnderMenuOpen = false;
@@ -819,7 +830,7 @@ namespace PinMessaging.View
             try
             {
                 if (PMData.User != null)
-                    NavigationService.Navigate(PMData.User.Id != PMData.UserId ? Paths.UserProfilView : Paths.CurrentUserProfilView);
+                    NavigationService.Navigate(PMData.User.Id != PMData.UserId ? Paths.UserProfilView : Paths.UserProfilView);
             }
             catch (Exception exp)
             {
@@ -844,6 +855,11 @@ namespace PinMessaging.View
         }
 
         ////////////////////////////////////////////////    Create pin         //////////////////////////////////////////
+
+        private void MoveAnimationUp_OnCompleted(object sender, EventArgs e)
+        {
+            VisibilityExpandView.IsExpanded = true;
+        }
 
         private void CreatePinImgOnTap(object sender, GestureEventArgs gestureEventArgs)
         {

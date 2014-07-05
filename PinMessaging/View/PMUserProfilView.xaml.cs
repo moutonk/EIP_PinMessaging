@@ -3,7 +3,6 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Tasks;
 using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Other;
@@ -118,6 +117,21 @@ namespace PinMessaging.View
 
             PMData.WasFavoriteRemovedSuccess = false;
             favController.RemoveFavoriteUser(_user.Id);
+        }
+
+        private void PrivateMsgButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            PMMapPinController.DropPrivatePin(_user);
+
+            try
+            {
+                if (NavigationService.CanGoBack == true)
+                    NavigationService.GoBack();
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("PrivateMsgButton_OnClick: cannot go back in the map page", exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
     }   
 }

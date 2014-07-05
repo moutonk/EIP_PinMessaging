@@ -118,6 +118,11 @@ namespace PinMessaging.Controller
             return true;
         }
 
+        public static void DropPrivatePin(PMUserModel user)
+        {
+            _mapView.DropPrivatePin(user);
+        }
+
         public static void OnPinTapped(PMPinModel pin)
         {
             if (IsAroundMe(pin) == true)

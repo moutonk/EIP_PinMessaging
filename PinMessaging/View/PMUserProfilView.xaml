@@ -79,7 +79,7 @@
                         <TextBlock Grid.Column="1" Name="LocalizeTextBlock" Text="{Binding LocalizedResources.Localize, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>
                 </Button>
-                <Button Grid.Column="1" Grid.Row="0" x:Name="PrivateMsgButton" Margin="-5,-10,0,0" BorderThickness="0" Background="{StaticResource PMLightGrey}">
+                <Button Grid.Column="1" Grid.Row="0" x:Name="PrivateMsgButton" Click="PrivateMsgButton_OnClick" Margin="-5,-10,0,0" BorderThickness="0" Background="{StaticResource PMLightGrey}">
                     <Grid VerticalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="65"></ColumnDefinition>
