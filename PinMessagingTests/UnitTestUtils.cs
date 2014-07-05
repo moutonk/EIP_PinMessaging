@@ -61,12 +61,12 @@ namespace PinMessagingTests
         [TestClass]
         public class UnitTestUtilsWebservice : PMWebServiceEndDetector
         {
-           bool webServiceReponse;
+           bool _webServiceReponse;
 
            [TestMethod]
            public void TestWebServiceAnswer()
            {
-               webServiceReponse = false;
+               _webServiceReponse = false;
 
                var dictionary = new Dictionary<string, string>
                {
@@ -77,15 +77,16 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(1000);
+               Thread.Sleep(2000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
            }
 
            [TestMethod]
            public void TestWebServiceCheckEmailExist()
            {
-               webServiceReponse = false;
+               _webServiceReponse = false;
 
                var dictionary = new Dictionary<string, string>
                {
@@ -96,9 +97,10 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(1000);
+               Thread.Sleep(2000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
                Assert.IsFalse(PMData.IsEmailDispo);
            }
@@ -106,7 +108,7 @@ namespace PinMessagingTests
            [TestMethod]
            public void TestWebServiceCheckEmailNotExist()
            {
-               webServiceReponse = false;
+               _webServiceReponse = false;
 
                var dictionary = new Dictionary<string, string>
                {
@@ -117,9 +119,10 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(1000);
+               Thread.Sleep(2000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
                Assert.IsTrue(PMData.IsEmailDispo);
            }
@@ -127,7 +130,7 @@ namespace PinMessagingTests
            [TestMethod]
            public void TestWebServiceSignInCorrect()
            {
-               webServiceReponse = false;
+               _webServiceReponse = false;
 
                var dictionary = new Dictionary<string, string>
                {
@@ -139,13 +142,18 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(1000);
+               Thread.Sleep(2000);
+
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
+
                Assert.IsTrue(PMData.IsSignInSuccess);
            }
-           [TestMethod]
+
+            [TestMethod]
            public void TestWebServiceSignInIncorrect()
            {
-               webServiceReponse = false;
+               _webServiceReponse = false;
 
                var dictionary = new Dictionary<string, string>
                {
@@ -157,9 +165,10 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(1000);
+               Thread.Sleep(2000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
                Assert.IsFalse(PMData.IsSignInSuccess);
            }
@@ -167,7 +176,7 @@ namespace PinMessagingTests
            [TestMethod]
            public void TestWebServiceSignUpCorrect()
            {
-               webServiceReponse = false;
+               _webServiceReponse = false;
                string randomEmail = CreateRandomEmail();
 
                var dictionary = new Dictionary<string, string>
@@ -182,9 +191,10 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(1000);
+               Thread.Sleep(2000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
                Assert.IsTrue(PMData.IsSignUpSuccess);
            }
@@ -192,16 +202,18 @@ namespace PinMessagingTests
            [TestMethod]
            public void TestWebServiceGetPinsCorrect()
            {
+               // fail if 0 pin exists
                TestWebServiceSignInCorrect();
 
-               webServiceReponse = false;
+               _webServiceReponse = false;
                var numberPinsBefore = PMData.PinsListToAdd.Count;
 
                var dictionary = new Dictionary<string, string>
                {
-                {"longitude", "-118.0001"},
-                {"latitude", "33.98"},
-                {"radius", "1"} /*WILL CHANGE*/       };
+                    {"longitude", "-118.0001"},
+                    {"latitude", "33.98"},
+                    {"radius", "1"}
+               };
 
                PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPins, SyncType.Async, dictionary, null);
 
@@ -209,7 +221,8 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
                var numberPinsAfter = PMData.PinsListToAdd.Count;
 
@@ -221,7 +234,7 @@ namespace PinMessagingTests
            {
                TestWebServiceSignInCorrect();
 
-               webServiceReponse = false;
+               _webServiceReponse = false;
                var numberPinsBefore = PMData.PinsListToAdd.Count;
 
                var dictionary = new Dictionary<string, string>
@@ -237,7 +250,8 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
                var numberPinsAfter = PMData.PinsListToAdd.Count;
 
@@ -249,23 +263,29 @@ namespace PinMessagingTests
            {
                TestWebServiceSignInCorrect();
 
-               webServiceReponse = false;
+               _webServiceReponse = false;
                var numberPinsBefore = PMData.PinsListToAdd.Count;
 
                var dictionary = new Dictionary<string, string>
-            {
-                {"longitude", "25.0001"},
-                {"latitude", "28.000001"},
-                {"name", "YOLO"},
-                {"description", "You only live once"},
-                {"type", "1"}
-            };
+                {
+                    {"longitude", "25.0001"},
+                    {"latitude", "28.000001"},
+                    {"title", "LOL"},
+                    {"contentType", "0"},
+                    {"content", "YOLO"},
+                    {"pinType", "0"},
+                    {"private", "false"},
+                    {"authorisedUsersId", null}
+                };
 
                PMWebService.SendRequest(HttpRequestType.Post, RequestType.CreatePin, SyncType.Async, dictionary, null);
                 
                StartTimer();
     
-               Thread.Sleep(1000);
+               Thread.Sleep(3000);
+
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
                var numberPinsAfter = PMData.PinsListToAdd.Count;
 
@@ -297,7 +317,7 @@ namespace PinMessagingTests
            {
                TestWebServiceSignInCorrect();
 
-               webServiceReponse = false;
+               _webServiceReponse = false;
 
                var dictionary = new Dictionary<string, string>
             {
@@ -311,7 +331,8 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
                Assert.IsTrue(PMData.IsChangePwdSuccess);
            }
@@ -321,7 +342,7 @@ namespace PinMessagingTests
            {
                TestWebServiceSignInCorrect();
 
-               webServiceReponse = false;
+               _webServiceReponse = false;
 
                var dictionary = new Dictionary<string, string>
             {
@@ -335,7 +356,8 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
                Assert.IsFalse(PMData.IsChangePwdSuccess);
            }
@@ -345,12 +367,12 @@ namespace PinMessagingTests
            {
                TestWebServiceSignInCorrect();
 
-               webServiceReponse = false;
-               var numberFavBefore = PMData.UserList.Count;
-
+               _webServiceReponse = false;
+               PMData.WasFavoriteRemovedSuccess = false;
+               
                var dictionary = new Dictionary<string, string>
                {
-                   {"favoriteId", "4"},
+                   {"favoriteId", "-1"},
                };
 
                PMWebService.SendRequest(HttpRequestType.Post, RequestType.RemoveFavoriteUser, SyncType.Async, dictionary, null);
@@ -359,11 +381,10 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
-               var numberFavAfter = PMData.UserList.Count;
-
-               Assert.AreNotEqual(numberFavBefore, numberFavAfter);
+               Assert.IsTrue(PMData.WasFavoriteRemovedSuccess == false);
            }
 
            [TestMethod]
@@ -371,12 +392,12 @@ namespace PinMessagingTests
            {
                TestWebServiceSignInCorrect();
 
-               webServiceReponse = false;
-               var numberFavBefore = PMData.UserList.Count;
+               PMData.WasFavoriteAddedSuccess = false;
+               _webServiceReponse = false;
 
                var dictionary = new Dictionary<string, string>
                {
-                   {"favoriteId", "440808"},
+                   {"favoriteId", "-1"},
                };
 
                PMWebService.SendRequest(HttpRequestType.Post, RequestType.AddFavoriteUser, SyncType.Async, dictionary, null);
@@ -385,11 +406,10 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
-               var numberFavAfter = PMData.UserList.Count;
-
-               Assert.IsTrue(numberFavBefore < numberFavAfter);
+               Assert.IsTrue(PMData.WasFavoriteAddedSuccess == false);
            }
 
            [TestMethod]
@@ -397,12 +417,12 @@ namespace PinMessagingTests
            {
                TestWebServiceCreatePin();
 
-               webServiceReponse = false;
-               var numberComBefore = PMData.PinsCommentsList.Count;
+               _webServiceReponse = false;
+               var numberComBefore = PMData.PinsCommentsListTmp.Count;
 
                var dictionary = new Dictionary<string, string>
                {
-                    {"pinId", PMData.PinsList[PMData.PinsList.Count - 1].Id},
+                    {"pinId", PMData.PinsListToAdd[PMData.PinsListToAdd.Count - 1].Id},
                     {"type", "0"},
                     {"content", "test msg"}
                };
@@ -413,9 +433,10 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
-               var numberComAfter = PMData.PinsCommentsList.Count;
+               var numberComAfter = PMData.PinsCommentsListTmp.Count;
 
                Assert.IsTrue(numberComBefore < numberComAfter);
            }
@@ -423,8 +444,8 @@ namespace PinMessagingTests
            [TestMethod]
            public void TestWebServiceCreatePinMsgIncorrect()
            {
-               webServiceReponse = false;
-               var numberComBefore = PMData.PinsCommentsList.Count;
+               _webServiceReponse = false;
+               var numberComBefore = PMData.PinsCommentsListTmp.Count;
 
                var dictionary = new Dictionary<string, string>
                {
@@ -437,11 +458,12 @@ namespace PinMessagingTests
 
                StartTimer();
 
-               Thread.Sleep(1000);
+               Thread.Sleep(2000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
-               var numberComAfter = PMData.PinsCommentsList.Count;
+               var numberComAfter = PMData.PinsCommentsListTmp.Count;
 
                Assert.IsFalse(numberComBefore < numberComAfter);
            }
@@ -451,12 +473,12 @@ namespace PinMessagingTests
            {
                TestWebServiceCreatePinMsgCorrect();
 
-               webServiceReponse = false;
-               var numberMsgBefore = PMData.PinsCommentsList.Count;
+               _webServiceReponse = false;
+               var numberMsgBefore = PMData.PinsCommentsListTmp.Count;
 
                var dictionary = new Dictionary<string, string>
                {
-                    {"pinId", PMData.PinsList[PMData.PinsList.Count - 1].Id},
+                    {"pinId", PMData.PinsListToAdd[PMData.PinsListToAdd.Count - 1].Id},
                };
 
                PMWebService.SendRequest(HttpRequestType.Post, RequestType.GetPinMessages, SyncType.Async, dictionary, null);
@@ -465,9 +487,10 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
-               var numberMsgAfter = PMData.PinsCommentsList.Count;
+               var numberMsgAfter = PMData.PinsCommentsListTmp.Count;
 
                Assert.IsTrue(numberMsgBefore < numberMsgAfter);
            }
@@ -477,8 +500,8 @@ namespace PinMessagingTests
            {
                TestWebServiceCreatePinMsgCorrect();
 
-               webServiceReponse = false;
-               var numberMsgBefore = PMData.PinsCommentsList.Count;
+               _webServiceReponse = false;
+               var numberMsgBefore = PMData.PinsCommentsListTmp.Count;
 
                var dictionary = new Dictionary<string, string>
                {
@@ -491,9 +514,10 @@ namespace PinMessagingTests
 
                Thread.Sleep(1000);
 
-               Assert.IsTrue(webServiceReponse, "No webservice response");
+               Assert.IsTrue(_webServiceReponse, "No webservice response");
+               Assert.IsFalse(PMData.NetworkProblem, "No webservice response");
 
-               var numberMsgAfter = PMData.PinsCommentsList.Count;
+               var numberMsgAfter = PMData.PinsCommentsListTmp.Count;
 
                Assert.IsTrue(numberMsgBefore == numberMsgAfter);
            }
@@ -518,7 +542,7 @@ namespace PinMessagingTests
                if (PMWebService.OnGoingRequest == false)
                {
                    StopTimer();
-                   webServiceReponse = true;
+                   _webServiceReponse = true;
                }
            }
         }
