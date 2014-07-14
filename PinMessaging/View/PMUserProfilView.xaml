@@ -17,17 +17,20 @@
     
     <Grid x:Name="UseProfilMainGrid" Background="{StaticResource PMGrey}">
         <Grid.RowDefinitions>
+            <RowDefinition Height="5"></RowDefinition>
             <RowDefinition Height="65"></RowDefinition>
             <RowDefinition Height="260"></RowDefinition>
             <RowDefinition Height="250"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
-        <StackPanel Orientation="Horizontal" Background="{StaticResource PMOrange}">
+
+        <ProgressBar Grid.Row="0" Name="UserProfilProgressBar" Visibility="Collapsed" IsIndeterminate="False" Foreground="{StaticResource PMOrange}"></ProgressBar>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Background="{StaticResource PMOrange}">
             <TextBlock x:Name="UserNameTextBlock" FontSize="35" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
         </StackPanel>
         
-        <Grid Row="1" x:Name="UserInfoGrid">
+        <Grid Row="2" x:Name="UserInfoGrid">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="250"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -49,7 +52,7 @@
             </Grid>
         </Grid>
 
-        <Grid Row="2" x:Name="UserActionsGrid">
+        <Grid Row="3" x:Name="UserActionsGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="55"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -112,7 +115,7 @@
             </Grid>
         </Grid>
       
-        <Grid Row="3" x:Name="UserHistoryGrid">
+        <Grid Row="4" x:Name="UserHistoryGrid">
             <Grid.RowDefinitions>
                 <RowDefinition Height="55"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>

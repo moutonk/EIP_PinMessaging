@@ -385,6 +385,7 @@
                 <Grid Grid.Row="1" x:Name="UnderMenuGrid" Background="{StaticResource PMGrey}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                        <RowDefinition Height="5"/>
                         <RowDefinition Height="0"/>
                         <RowDefinition Height="0"/>
                         <RowDefinition Height="0"/>
@@ -401,15 +402,17 @@
                         <Button x:Name="CloseMenuDownButton" Content="X" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="64" Width="60" BorderThickness="0" Click="CloseMenuDownButton_Click"/>
                     </Grid>
 
-                    <ScrollViewer Grid.Row="1" x:Name="UnderMenuContactScrollViewer">
+                    <ProgressBar Grid.Row="1" Name="UnderMenuProgressBar" Visibility="Collapsed" IsIndeterminate="False" Foreground="{StaticResource PMOrange}"></ProgressBar>
+
+                    <ScrollViewer Grid.Row="2" x:Name="UnderMenuContactScrollViewer">
                         <StackPanel x:Name="UnderMenuContactPanel" Orientation="Vertical">
                         </StackPanel>
                     </ScrollViewer>
 
-                    <Grid x:Name="UnderMenuNotificationGrid" Grid.Row="2">
+                    <Grid Grid.Row="3" x:Name="UnderMenuNotificationGrid">
                     </Grid>
 
-                    <ScrollViewer Grid.Row="3" x:Name="UnderMenuPinDescriptionScrollView">
+                    <ScrollViewer Grid.Row="4" x:Name="UnderMenuPinDescriptionScrollView">
                         <Grid x:Name="UnderMenuPinDescriptionGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"></RowDefinition>
@@ -418,7 +421,7 @@
                                 <RowDefinition Height="300"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            
+
                             <Grid Grid.Row="0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="100"></ColumnDefinition>
@@ -476,7 +479,7 @@
                         </Grid>
                     </ScrollViewer>
                     
-                    <ScrollViewer Grid.Row="4" x:Name="UnderMenuCreatePinGrid">
+                    <ScrollViewer Grid.Row="5" x:Name="UnderMenuCreatePinGrid">
                         <StackPanel>
                             <ProgressBar x:Name="DropPinProgressBar" Foreground="{StaticResource PMOrange}" Visibility="Collapsed"/>
                             <toolkit:ExpanderView x:Name="VisibilityExpandView" Style="{StaticResource ExpanderViewStyle1}">

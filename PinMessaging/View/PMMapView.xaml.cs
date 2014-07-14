@@ -170,7 +170,7 @@ namespace PinMessaging.View
 
         private void AdaptUiUnderMenuClick(RowDefinition exept, bool pinDescFull, bool contactFull)
         {
-            for (var i = 1; i < UnderMenuGrid.RowDefinitions.Count; i++)
+            for (var i = 2; i < UnderMenuGrid.RowDefinitions.Count; i++)
             {
                 UnderMenuGrid.RowDefinitions[i].Height = UnderMenuGrid.RowDefinitions[i].Equals(exept) == false ? new GridLength(0) : new GridLength(1, GridUnitType.Star);
             }
@@ -188,7 +188,7 @@ namespace PinMessaging.View
                 ApplicationBar.IsVisible = false;
 
                 //DownMenuTitle.Text = AppResources.Pin;
-                AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[3], true, false);
+                AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[4], true, false);
       
                 MainGridMap.RowDefinitions[2].Height = new GridLength(0);
                 MoveAnimationUp.Begin();
@@ -198,19 +198,19 @@ namespace PinMessaging.View
         private void MenuDown_NotificationOnClick()
         {
             DownMenuTitle.Text = AppResources.Notifications;
-            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[2], false, false);
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[3], false, false);
         }
 
         private void MenuDown_ContactOnClick()
         {
             DownMenuTitle.Text = AppResources.Contacts;
-            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[1], false, true);
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[2], false, true);
         }
 
         private void MenuDown_CreatePin()
         {
             DownMenuTitle.Text = AppResources.CreatePinTitle;
-            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[4], false, false);
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[5], false, false);
 
            // VisibilityExpandView.IsExpanded = true;
         }
@@ -829,6 +829,8 @@ namespace PinMessaging.View
 
         private void PinAuthorDescriptionTextBlock_PostTap()
         {
+            PinAuthorDescriptionLock(false);
+
             try
             {
                 if (PMData.User != null)
@@ -840,12 +842,20 @@ namespace PinMessaging.View
             }
         }
 
+        private void PinAuthorDescriptionLock(bool lockStatus)
+        {
+            UnderMenuProgressBar.IsIndeterminate = lockStatus;
+            UnderMenuProgressBar.Visibility = (lockStatus ? Visibility.Visible : Visibility.Collapsed);
+        }
+
         private void PinAuthorDescriptionTextBlock_OnTap(object sender, GestureEventArgs e)
         {
             var pin = PinAuthorDescriptionTextBlock.Tag as PMPinModel;
 
             if (pin != null)
             {
+                PinAuthorDescriptionLock(true);
+
                 var userController = new PMUserController(RequestType.User, PinAuthorDescriptionTextBlock_PostTap);
 
                 userController.GetUserInfos(pin.AuthorId);

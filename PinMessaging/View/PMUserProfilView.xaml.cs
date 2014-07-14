@@ -107,6 +107,8 @@ namespace PinMessaging.View
                 PMMapContactController.AddNewFavoris(_user);
                 RemoveFavoriteUI();                
             }
+            AddRemoveFavoriteButtonLock(false);
+
         }
 
         private void RemoveAsFavoriteButton_Post()
@@ -116,12 +118,23 @@ namespace PinMessaging.View
                 PMMapContactController.RemoveFavoris(_user);
                 AddFavoriteUI();
             }
+            AddRemoveFavoriteButtonLock(false);
+
+        }
+
+        private void AddRemoveFavoriteButtonLock(bool lockStatus)
+        {
+            UserProfilProgressBar.IsIndeterminate = lockStatus;
+            UserProfilProgressBar.Visibility = (lockStatus ? Visibility.Visible : Visibility.Collapsed);
+            ContactButton.IsEnabled = !lockStatus;
         }
 
         private void AddRemoveFavoriteButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (_user != null)
             {
+                AddRemoveFavoriteButtonLock(true);
+
                 //if the user is already in the contact list
                 if (PMData.UserList.Any(user => user.Id == _user.Id) == true)
                 {
