@@ -15,19 +15,49 @@
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <phone:Pivot Height="768" HorizontalAlignment="Left" SelectionChanged="PivotPins_OnSelectionChanged" Margin="-10,0,0,0" x:Name="PivotPins" Title="" VerticalAlignment="Top" Width="490" FontSize="20">
 
-        <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <PasswordBox Name="OldPwdPasswordBox" Password="kkkkkk" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="136"/>
-            <PasswordBox Name="NewPwdPasswordBox" HorizontalAlignment="Left" Margin="146,10,0,0" VerticalAlignment="Top" Width="136"/>
-            <Button Name="ModifyPwdButton" Content="ChangePwd" HorizontalAlignment="Left" Margin="282,10,0,0" VerticalAlignment="Top" Width="174" Click="ModifyPwdButton_OnClick"/>
-            <TextBox Name="NewEmailTextBox" HorizontalAlignment="Left" Height="72" Margin="10,87,0,0" TextWrapping="Wrap" Text="test@t.tt" VerticalAlignment="Top" Width="272"/>
-            <Button Name="ModifyEmailButton" Content="Change @" HorizontalAlignment="Left" Margin="282,89,0,0" VerticalAlignment="Top" Width="174" Click="ModifyEmailButton_Click"/>
-        </Grid>
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock FontSize="35" Text="{Binding}"/>
+                    <!--<Image Source="/Images/Flags/FR.png"/>-->
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+
+            <phone:PivotItem x:Name="ApplicationPivotItem" Header="Application" Margin="0,0,0,0" Height="768" Width="490" Background="LightGray">
+                <Grid Margin="10,20,10,0">
+                    <TextBlock Name="ChangePwdTextBlock" Foreground="{StaticResource PMGrey}" FontSize="30" Margin="20,10,10,692" Text="Change Password"></TextBlock>
+                    <PasswordBox Name="OldPwdPasswordBox" Password="kkkkkk" HorizontalAlignment="Left" Margin="10,117,0,559" VerticalAlignment="Center" Width="460"/>
+                    <PasswordBox Name="NewPwdPasswordBox" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Width="460"/>
+                    <Button Name="ModifyPwdButton" Foreground="{StaticResource PMGrey}" Background="DarkGray" BorderThickness="0" Content="ChangePwd" HorizontalAlignment="Left" Margin="10,176,0,0" VerticalAlignment="Top" Width="460" Click="ModifyPwdButton_OnClick"/>
+
+                    <TextBlock Name="ChangeEmailTextBlock" Foreground="{StaticResource PMGrey}" FontSize="30" Margin="20,270,10,427" Text="Change email"></TextBlock>
+                    <TextBox Name="NewEmailTextBox" HorizontalAlignment="Left" Height="72" Margin="10,321,0,0" TextWrapping="Wrap" Text="test@t.tt" VerticalAlignment="Top" Width="460"/>
+                    <Button Name="ModifyEmailButton" BorderThickness="0" Foreground="{StaticResource PMGrey}" Background="DarkGray" Content="Change email" HorizontalAlignment="Left" Margin="10,379,0,0" VerticalAlignment="Top" Width="460" Click="ModifyEmailButton_Click"/>
+
+                    <CheckBox Name="LocationServicesCheckBox" Foreground="{StaticResource PMGrey}" Content="Location services" IsChecked="True" Margin="10,456,10,219"/>
+                </Grid>
+            </phone:PivotItem>
+
+            <phone:PivotItem x:Name="LegalPivotItem" Background="LightGray" Header="Legal" Margin="0,0,0,0" Height="768" Width="490">
+            </phone:PivotItem>
+
+            <phone:PivotItem x:Name="AboutPivotItem" Background="LightGray" Header="About" Margin="0,0,0,0" Height="768" Width="490">
+                <Grid Margin="10,0,10,0">
+                    <TextBlock Name="PinMessagingTextBlock" TextWrapping="Wrap" Foreground="{StaticResource PMGrey}" FontSize="30" Margin="20,10,0,666" Text="PinMessaging for Windows Phone"></TextBlock>
+                    <TextBlock Name="PinMessagingInfosTextBlock" TextWrapping="Wrap" Foreground="{StaticResource PMGrey}" FontSize="20" Margin="20,107,10,191" Text="L'application PinMessaging est une application Smartphone qui permet à ses utilisateurs de poster des messages à leur emplacement géographique. Les messages sont rattachés à un endroit, donc pour pouvoir les lire, l'utilisateur devra se trouver au même emplacement. Ces messages pourront être de simples commentaires sur un endroit, des remarques ou des astuces.
+Le même principe de messages géolocalisés est appliqué pour les évènements, comme par exemple pour un festival costumé ou un concert.
+PinMessaging permettra aux utilisateurs de découvrir de nouveaux lieux en ayant accès à des informations et des commentaires, le tout de manière ludique.
+Que vous soyez des touristes ou de simples internautes, PinMessaging est fait pour vous !
+"></TextBlock>
+
+                    <TextBlock Name="PinMessagingVersionTextBlock" Foreground="{StaticResource PMGrey}" Text="Version: 1.0.0" Margin="20,582,0,153"></TextBlock>
+                    <TextBlock Name="PinMessagingCopyrightTextBlock" TextWrapping="Wrap" Foreground="{StaticResource PMGrey}" Text="Copyright 2014, PinMessaging Corporation
+                               All right reserved." Margin="20,633,0,67"></TextBlock>
+                </Grid>
+            </phone:PivotItem>
+
+        </phone:Pivot>
     </Grid>
 
 </phone:PhoneApplicationPage>

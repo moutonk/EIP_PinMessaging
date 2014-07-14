@@ -29,5 +29,10 @@ namespace PinMessaging.View
                 sc.ChangeEmail(NewEmailTextBox.Text);
             }
         }
+
+        private void PivotPins_OnSelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }
