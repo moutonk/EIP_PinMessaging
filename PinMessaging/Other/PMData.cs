@@ -55,6 +55,9 @@ namespace PinMessaging.Other
 
         [DefaultValue(null)] public static PMUserModel User { get; set; }
 
+        //contains all the user history
+        [DefaultValue(null)] public static List<PMHistoryModel> UserHistoryList { get; set; }
+
         //contains all the pins known (serialized)
         private const string DataPinsFile = "pinsStorage.dat";
 
@@ -73,6 +76,7 @@ namespace PinMessaging.Other
             UserList = new List<PMUserModel>();
             //UserProfilPicture = new Image();
             ProfilPicturesList = new List<PMPhotoModel>();
+            //UserHistoryList = new List<PMHistoryModel>();
         }
 
         public static void AddToQueuePinsList(List<PMPinModel> list)

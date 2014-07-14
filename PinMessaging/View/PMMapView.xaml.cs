@@ -187,7 +187,7 @@ namespace PinMessaging.View
                 _enableSwipe = false;
                 ApplicationBar.IsVisible = false;
 
-                DownMenuTitle.Text = AppResources.Pin;
+                //DownMenuTitle.Text = AppResources.Pin;
                 AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[3], true, false);
       
                 MainGridMap.RowDefinitions[2].Height = new GridLength(0);
@@ -797,6 +797,8 @@ namespace PinMessaging.View
             PinAuthorDescriptionTextBlock.Tag = pin;
             PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType];
 
+            DownMenuTitle.Text = pin.Author;
+
             var pic = PMData.GetUserProfilPicture(pin.AuthorId);
 
             if (pic != null)
@@ -830,7 +832,7 @@ namespace PinMessaging.View
             try
             {
                 if (PMData.User != null)
-                    NavigationService.Navigate(PMData.User.Id != PMData.UserId ? Paths.UserProfilView : Paths.UserProfilView);
+                    NavigationService.Navigate(PMData.User.Id != PMData.UserId ? Paths.UserProfilView : Paths.CurrentUserProfilView);
             }
             catch (Exception exp)
             {

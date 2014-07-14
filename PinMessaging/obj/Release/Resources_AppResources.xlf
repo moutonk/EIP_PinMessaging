@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="en-US" original="AppResources.resx" tool-id="MultilingualAppToolkit" product-name="PinMessaging" product-version="1.0.0.0" build-num="0">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="3.0.1200.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="Resx">
+        <trans-unit id="Resx/ButtonConnection" translate="yes" xml:space="preserve">
+          <source>Connection</source>
+          <target state="new">Connection</target>
+        </trans-unit>
+        <trans-unit id="Resx/ButtonCreateAccount" translate="yes" xml:space="preserve">
+          <source>Create Account</source>
+          <target state="new">Create Account</target>
+        </trans-unit>
+        <trans-unit id="Resx/ButtonValidate" translate="yes" xml:space="preserve">
+          <source>Validate</source>
+          <target state="new">Validate</target>
+        </trans-unit>
+        <trans-unit id="Resx/CreateAccountPageTitle" translate="yes" xml:space="preserve">
+          <source>New Account</source>
+          <target state="new">New Account</target>
+        </trans-unit>
+        <trans-unit id="Resx/HaveAccountOrNot" translate="yes" xml:space="preserve">
+          <source>Do you already have an account?</source>
+          <target state="new">Do you already have an account?</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuAbout" translate="yes" xml:space="preserve">
+          <source>About</source>
+          <target state="new">About</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuFilters" translate="yes" xml:space="preserve">
+          <source>Filters</source>
+          <target state="new">Filters</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuLogout" translate="yes" xml:space="preserve">
+          <source>Log out</source>
+          <target state="new">Log out</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuMap" translate="yes" xml:space="preserve">
+          <source>Map</source>
+          <target state="new">Map</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuPins" translate="yes" xml:space="preserve">
+          <source>My pins</source>
+          <target state="new">My pins</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuProfil" translate="yes" xml:space="preserve">
+          <source>My profil</source>
+          <target state="new">My profil</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenurRewards" translate="yes" xml:space="preserve">
+          <source>Rewards</source>
+          <target state="new">Rewards</target>
+        </trans-unit>
+        <trans-unit id="Resx/MenuSettings" translate="yes" xml:space="preserve">
+          <source>Settings</source>
+          <target state="new">Settings</target>
+        </trans-unit>
+        <trans-unit id="Resx/NetworkProblem" translate="yes" xml:space="preserve">
+          <source>Please check your connection and try again</source>
+          <target state="new">Please check your connection and try again</target>
+        </trans-unit>
+        <trans-unit id="Resx/No" translate="yes" xml:space="preserve">
+          <source>No</source>
+          <target state="new">No</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMConnectionFailUser" translate="yes" xml:space="preserve">
+          <source>The password is incorrect</source>
+          <target state="new">The password is incorrect</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMCreatePassword" translate="yes" xml:space="preserve">
+          <source>Create your password</source>
+          <target state="new">Create your password</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMEmail" translate="yes" xml:space="preserve">
+          <source>Please enter your email</source>
+          <target state="new">Please enter your email</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMEmailAlreadyExists" translate="yes" xml:space="preserve">
+          <source>The email already exists</source>
+          <target state="new">The email already exists</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMEmailDoesNotExist" translate="yes" xml:space="preserve">
+          <source>The email does not exist</source>
+          <target state="new">The email does not exist</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMPassword" translate="yes" xml:space="preserve">
+          <source>Please enter your password</source>
+          <target state="new">Please enter your password</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMPasswordsNotSame" translate="yes" xml:space="preserve">
+          <source>The passwords are not the same</source>
+          <target state="new">The passwords are not the same</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMRetypePassword" translate="yes" xml:space="preserve">
+          <source>Retype password</source>
+          <target state="new">Retype password</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMSignUpError" translate="yes" xml:space="preserve">
+          <source>Something went wrong. Please try again later</source>
+          <target state="new">Something went wrong. Please try again later</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMWrongEmailSyntax" translate="yes" xml:space="preserve">
+          <source>The email address in incorrectly formated</source>
+          <target state="new">The email address in incorrectly formated</target>
+        </trans-unit>
+        <trans-unit id="Resx/PMWrongPasswordSyntax" translate="yes" xml:space="preserve">
+          <source>The password must contain between 6 and 20 characters </source>
+          <target state="new">The password must contain between 6 and 20 characters </target>
+        </trans-unit>
+        <trans-unit id="Resx/Previous" translate="yes" xml:space="preserve">
+          <source>Previous</source>
+          <target state="new">Previous</target>
+        </trans-unit>
+        <trans-unit id="Resx/QuitApp" translate="yes" xml:space="preserve">
+          <source>Are you sure to quit the application?</source>
+          <target state="new">Are you sure to quit the application?</target>
+        </trans-unit>
+        <trans-unit id="Resx/QuitAppTitle" translate="yes" xml:space="preserve">
+          <source>Quit</source>
+          <target state="new">Quit</target>
+        </trans-unit>
+        <trans-unit id="Resx/ResourceFlowDirection" translate="yes" xml:space="preserve">
+          <source>LeftToRight</source>
+          <target state="new">LeftToRight</target>
+        </trans-unit>
+        <trans-unit id="Resx/ResourceLanguage" translate="yes" xml:space="preserve">
+          <source>en-US</source>
+          <target state="new">en-US</target>
+        </trans-unit>
+        <trans-unit id="Resx/SignInPageTitle" translate="yes" xml:space="preserve">
+          <source>Sign in</source>
+          <target state="new">Sign in</target>
+        </trans-unit>
+        <trans-unit id="Resx/WelcomeSentence" translate="yes" xml:space="preserve">
+          <source>Welcome on PinMessaging, the new geolocated social application!</source>
+          <target state="new">Welcome on PinMessaging, the new geolocated social application!</target>
+        </trans-unit>
+        <trans-unit id="Resx/Yes" translate="yes" xml:space="preserve">
+          <source>Yes</source>
+          <target state="new">Yes</target>
+        </trans-unit>
+        <trans-unit id="Resx/LeftMenuTitle" translate="yes" xml:space="preserve">
+          <source>Menu</source>
+          <target state="new">Menu</target>
+        </trans-unit>
+        <trans-unit id="Resx/Contacts" translate="yes" xml:space="preserve">
+          <source>Contacts</source>
+          <target state="new">Contacts</target>
+        </trans-unit>
+        <trans-unit id="Resx/Menu" translate="yes" xml:space="preserve">
+          <source>Menu</source>
+          <target state="new">Menu</target>
+        </trans-unit>
+        <trans-unit id="Resx/Notifications" translate="yes" xml:space="preserve">
+          <source>Notifications</source>
+          <target state="new">Notifications</target>
+        </trans-unit>
+        <trans-unit id="Resx/Pins" translate="yes" xml:space="preserve">
+          <source>Pins</source>
+          <target state="new">Pins</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinEvent" translate="yes" xml:space="preserve">
+          <source>Event</source>
+          <target state="new">Event</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinLastStep" translate="yes" xml:space="preserve">
+          <source>Last step</source>
+          <target state="new">Last step</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPointOfInterest" translate="yes" xml:space="preserve">
+          <source>Point of Interest</source>
+          <target state="new">Point of Interest</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPointOfView" translate="yes" xml:space="preserve">
+          <source>Point of View</source>
+          <target state="new">Point of View</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivateMessage" translate="yes" xml:space="preserve">
+          <source>Private Message</source>
+          <target state="new">Private Message</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPublicMessage" translate="yes" xml:space="preserve">
+          <source>Public Message</source>
+          <target state="new">Public Message</target>
+        </trans-unit>
+        <trans-unit id="Resx/Allow" translate="yes" xml:space="preserve">
+          <source>allow</source>
+          <target state="new">allow</target>
+        </trans-unit>
+        <trans-unit id="Resx/Cancel" translate="yes" xml:space="preserve">
+          <source>cancel</source>
+          <target state="new">cancel</target>
+        </trans-unit>
+        <trans-unit id="Resx/UseLocationContent" translate="yes" xml:space="preserve">
+          <source>Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</source>
+          <target state="new">Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</target>
+        </trans-unit>
+        <trans-unit id="Resx/UseLocationTitle" translate="yes" xml:space="preserve">
+          <source>Allow this application to access and use your location?</source>
+          <target state="new">Allow this application to access and use your location?</target>
+        </trans-unit>
+        <trans-unit id="Resx/MyAccount" translate="yes" xml:space="preserve">
+          <source>My Account</source>
+          <target state="new">My Account</target>
+        </trans-unit>
+        <trans-unit id="Resx/LogoutSentence" translate="yes" xml:space="preserve">
+          <source>Are you sure to logout?</source>
+          <target state="new">Are you sure to logout?</target>
+        </trans-unit>
+        <trans-unit id="Resx/NetworkProblemServer" translate="yes" xml:space="preserve">
+          <source>We cannot connect you to our services. Would you like to use the application offline?</source>
+          <target state="new">We cannot connect you to our services. Would you like to use the application offline?</target>
+        </trans-unit>
+        <trans-unit id="Resx/Pin" translate="yes" xml:space="preserve">
+          <source>Pin</source>
+          <target state="new">Pin</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinAuthor" translate="yes" xml:space="preserve">
+          <source>PINS'S AUTHOR</source>
+          <target state="new">PINS'S AUTHOR</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinMessage" translate="yes" xml:space="preserve">
+          <source>MESSAGE</source>
+          <target state="new">MESSAGE</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinTitle" translate="yes" xml:space="preserve">
+          <source>TITLE</source>
+          <target state="new">TITLE</target>
+        </trans-unit>
+        <trans-unit id="Resx/CreatePinTitle" translate="yes" xml:space="preserve">
+          <source>Create Pin</source>
+          <target state="new">Create Pin</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinImage" translate="yes" xml:space="preserve">
+          <source>IMAGE</source>
+          <target state="new">IMAGE</target>
+        </trans-unit>
+        <trans-unit id="Resx/Actions" translate="yes" xml:space="preserve">
+          <source>Actions</source>
+          <target state="new">Actions</target>
+        </trans-unit>
+        <trans-unit id="Resx/AddContacts" translate="yes" xml:space="preserve">
+          <source>Add to contacts</source>
+          <target state="new">Add to contacts</target>
+        </trans-unit>
+        <trans-unit id="Resx/Grade" translate="yes" xml:space="preserve">
+          <source>Grade</source>
+          <target state="new">Grade</target>
+        </trans-unit>
+        <trans-unit id="Resx/History" translate="yes" xml:space="preserve">
+          <source>History</source>
+          <target state="new">History</target>
+        </trans-unit>
+        <trans-unit id="Resx/Localize" translate="yes" xml:space="preserve">
+          <source>Localize</source>
+          <target state="new">Localize</target>
+        </trans-unit>
+        <trans-unit id="Resx/Offline" translate="yes" xml:space="preserve">
+          <source>Not connected</source>
+          <target state="new">Not connected</target>
+        </trans-unit>
+        <trans-unit id="Resx/Online" translate="yes" xml:space="preserve">
+          <source>Connected</source>
+          <target state="new">Connected</target>
+        </trans-unit>
+        <trans-unit id="Resx/PrivateMessage" translate="yes" xml:space="preserve">
+          <source>Private message</source>
+          <target state="new">Private message</target>
+        </trans-unit>
+        <trans-unit id="Resx/SharePin" translate="yes" xml:space="preserve">
+          <source>Share a pin</source>
+          <target state="new">Share a pin</target>
+        </trans-unit>
+        <trans-unit id="Resx/Unfriend" translate="yes" xml:space="preserve">
+          <source>Unfriend</source>
+          <target state="new">Unfriend</target>
+        </trans-unit>
+        <trans-unit id="Resx/RefreshPins" translate="yes" xml:space="preserve">
+          <source>refresh pins</source>
+          <target state="new">refresh pins</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

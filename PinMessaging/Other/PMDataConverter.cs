@@ -81,12 +81,38 @@ namespace PinMessaging.Other
                             var item7 = JsonConvert.DeserializeObject<JArray>(json);
                             PMData.WasFavoriteRemovedSuccess = Boolean.Parse((string)item7[0]);
                             break;
+
+                        case RequestType.UserHistory:
+                            ParseUserHistory(json);
+                            break;
                     }
                 }
                 catch (Exception e)
                 {
                     Logs.Error.ShowError(e, Logs.Error.ErrorsPriority.NotCritical);
                 }
+            }
+        }
+
+        private void ParseUserHistory(string json)
+        {
+            PMData.UserHistoryList = null;
+            try
+            {
+                var item = JsonConvert.DeserializeObject<JArray>(json);
+
+                if (Boolean.Parse(item[0].ToString()) == false)
+                {
+                    Logs.Error.ShowError("ParseCreatePinMessage: unknown error", Logs.Error.ErrorsPriority.NotCritical);
+                }
+                else
+                {
+                    PMData.UserHistoryList = JsonConvert.DeserializeObject<List<PMHistoryModel>>(item[1].ToString());
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ParseCreatePinMessage: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 

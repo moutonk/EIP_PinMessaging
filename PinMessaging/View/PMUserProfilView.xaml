@@ -76,7 +76,7 @@
                             <ColumnDefinition Width="130"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Source="/Images/Menu/target.png" Margin="0,0,15,0"/>
-                        <TextBlock Grid.Column="1" Name="LocalizeTextBlock" Text="{Binding LocalizedResources.Localize, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="1" Name="LocalizeTextBlock" FontSize="20" Text="{Binding LocalizedResources.Localize, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>
                 </Button>
                 <Button Grid.Column="1" Grid.Row="0" x:Name="PrivateMsgButton" Click="PrivateMsgButton_OnClick" Margin="-5,-10,0,0" BorderThickness="0" Background="{StaticResource PMLightGrey}">
@@ -86,7 +86,7 @@
                             <ColumnDefinition Width="130"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Source="/Images/Pins/private_message_icon.png" Margin="0,0,15,0"/>
-                        <TextBlock Grid.Column="1" Name="PrivateMsgTextBlock" Text="{Binding LocalizedResources.PrivateMessage, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="1" Name="PrivateMsgTextBlock" FontSize="20" Text="{Binding LocalizedResources.PrivateMessage, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>
                 </Button>
                 <Button Grid.Column="0" Grid.Row="1" x:Name="ShareButton" Margin="0,-10,-5,0" BorderThickness="0" Background="{StaticResource PMLightGrey}">
@@ -96,7 +96,7 @@
                             <ColumnDefinition Width="130"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Source="/Images/Icons/share_orange_icon.png" Margin="0,0,15,0"/>
-                        <TextBlock Grid.Column="1" Name="ShareTextBlock" Text="{Binding LocalizedResources.SharePin, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="1" Name="ShareTextBlock" FontSize="20" Text="{Binding LocalizedResources.SharePin, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>
                 </Button>
                 <Button Grid.Column="1" Grid.Row="1" x:Name="ContactButton" Margin="-5,-10,0,0" Click="AddRemoveFavoriteButton_OnClick" BorderThickness="0" Background="{StaticResource PMLightGrey}">
@@ -106,7 +106,7 @@
                             <ColumnDefinition Width="130"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Name="ContactImage" Source="/Images/Icons/contact_orange_icon.png" Margin="0,0,15,0"/>
-                        <TextBlock Grid.Column="1" Name="ContactTextBlock" Text="{Binding LocalizedResources.AddContacts, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="1" Name="ContactTextBlock" FontSize="20" Text="{Binding LocalizedResources.AddContacts, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
                     </Grid>
                 </Button>
             </Grid>
@@ -123,50 +123,7 @@
             </StackPanel>
             <StackPanel Grid.Row="1" Name="HistoryStackPanel" Orientation="Vertical" Background="{StaticResource PMLightGrey}">
                 <ScrollViewer Height="140">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="75"></RowDefinition>
-                            <RowDefinition Height="2"></RowDefinition>
-                            <RowDefinition Height="75"></RowDefinition>
-                            <RowDefinition Height="2"></RowDefinition>
-                            <RowDefinition Height="75"></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <Image Grid.Column="0" Grid.Row="0" Height="60" Source="\Images\Icons\bubble_white_icon.png"/>
-                        <Grid Grid.Row="0" Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="60"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="JsonStateHam commented the event 'Sunday at Barney's'"/>
-                            <TextBlock Grid.Row="1" TextWrapping="Wrap" FontSize="12" TextAlignment="Right" Text="05/21/14 at 5:01 PM"/>
-                        </Grid>
-                        <Canvas Grid.Column="0" Grid.Row="1" Background="{StaticResource PhoneProgressBarBackgroundBrush}"></Canvas>
-                        <Canvas Grid.Column="1" Grid.Row="1" Background="{StaticResource PhoneProgressBarBackgroundBrush}"></Canvas>
-                        <Image Grid.Column="0" Grid.Row="2" Height="60" Source="\Images\Icons\logo_flat_white.png"/>
-                        <Grid Grid.Row="2" Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="60"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="BruceLee created a public message 'Fun facts about Kung Fu'"/>
-                            <TextBlock Grid.Row="1" TextWrapping="Wrap" FontSize="12" TextAlignment="Right" Text="10/26/14 at 3:12 AM"/>
-                        </Grid>
-                        <Canvas Grid.Column="0" Grid.Row="3" Background="{StaticResource PhoneProgressBarBackgroundBrush}"></Canvas>
-                        <Canvas Grid.Column="1" Grid.Row="3" Background="{StaticResource PhoneProgressBarBackgroundBrush}"></Canvas>
-                        <Image Grid.Column="0" Grid.Row="4" Height="60" Source="\Images\Icons\bubble_white_icon.png"/>
-                        <Grid Grid.Row="4" Grid.Column="1">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="60"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Center" Text="ChuckNorris commented the event 'Yes I was there'"/>
-                            <TextBlock Grid.Row="1" TextWrapping="Wrap" FontSize="12" TextAlignment="Right" Text="70/56/1084 at 3:12 PM"/>
-                        </Grid>
-                    </Grid>
+                    <StackPanel Name="HistoryItemsStackPanel"/>
                 </ScrollViewer>
             </StackPanel>
         </Grid>

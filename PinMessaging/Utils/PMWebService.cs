@@ -65,7 +65,9 @@ namespace PinMessaging.Utils
             [Description("Used to change a pin")]
             ChangePin,
             [Description("Used to get all the pins created by the user")]
-            GetPinsUser
+            GetPinsUser,
+            [Description("Used to get all the history of a user")]
+            UserHistory
         }
     }
 
@@ -134,6 +136,8 @@ namespace PinMessaging.Utils
                     return "change-pin";
                 case RequestType.GetPinsUser:
                     return "get-pins-user";
+                case RequestType.UserHistory:
+                    return "history/user"; 
                 default:
                     return reqType.ToString();
             }

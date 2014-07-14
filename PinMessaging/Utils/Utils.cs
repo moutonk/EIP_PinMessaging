@@ -32,6 +32,22 @@ namespace PinMessaging.Utils
             return num;
         }
 
+        public static int ConvertStringToInt(string d)
+        {
+            int num = 0;
+
+            try
+            {
+                num = int.Parse(d, CultureInfo.InvariantCulture);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+
+            return num;
+        }
+
         public static bool IsEmailValid(string email)
         {
             try

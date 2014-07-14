@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using PinMessaging.Controller;
@@ -37,19 +39,52 @@ namespace PinMessaging.View
                 if (profilPic != null)
                     ProfilPictureImage.Source = profilPic.Img;
 
-                /* PointsTextBlock.Text = _user.Points;
-                NbrMsgTextBlock.Text = _user.NbrMessage;
-                NbrPinTextBlock.Text = _user.NbrPin;
-                LoginTextBlock.Text = _user.Login;
-                GradeTextBlock.Text = _user.Grade.Name;
-                RemoveAsFavoriteButton.Tag = _user.Id;
-                AddAsFavoriteButton.Tag = _user.Id;*/
+                var userHistory = new PMHistoryController(RequestType.UserHistory, UpdateHistoryUI);
+
+                userHistory.GetUserHistory(_user.Id);
             }
         }
 
         /*HISTORY*/
 
+        private void UpdateHistoryUI()
+        {
+            /*foreach (var historyItem in PMData.UserHistoryList)
+            {
+                
+            }*/
 
+            var historyImage = new Image { Height = 60, Source = new BitmapImage(new Uri("/Images/Icons/bubble_white_icon.png", UriKind.Relative)) };
+            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, VerticalAlignment = System.Windows.VerticalAlignment.Center, Text = "LOL" };
+            var messageDateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12, TextAlignment = TextAlignment.Right, Text = "05/21/14 at 5:01 PM" };
+
+            var itemMainGrid = new Grid();
+            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(60) });
+            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            itemMainGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(60) });
+
+            HistoryItemsStackPanel.Children.Add(itemMainGrid);
+
+            itemMainGrid.Children.Add(historyImage);
+
+            var pinContentStackPanel = new StackPanel {Margin = new Thickness(20,0,0,0)};
+            pinContentStackPanel.Children.Add(messageTextBlock);
+            pinContentStackPanel.Children.Add(messageDateTextBlock);
+
+            itemMainGrid.Children.Add(pinContentStackPanel);
+
+            Grid.SetRow(historyImage, 0);
+            Grid.SetColumn(historyImage, 0);
+
+            Grid.SetRow(pinContentStackPanel, 0);
+            Grid.SetColumn(pinContentStackPanel, 1);
+
+            var line = new Canvas { Background = (Brush)Resources["PhoneProgressBarBackgroundBrush"], Height = 5 };
+
+            HistoryItemsStackPanel.Children.Add(line);
+                    
+            Logs.Output.ShowOutput("UPDATE UI");
+        }
 
         /*CONTACTS*/
 
