@@ -249,10 +249,11 @@ namespace PinMessaging.View
 
         private void ApplicationBarMenuItemRefresh_OnClick(object sender, EventArgs e)
         {
-            var pinController = new PMPinController(RequestType.GetPins, null);
+            RefreshPinButton_OnClick(null, null);
+            /* var pinController = new PMPinController(RequestType.GetPins, null);
 
             pinController.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()),
-                                  Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));
+                                  Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));*/
         }
 
         private void MenuDownNotification_OnClick(object sender, EventArgs e)
@@ -358,9 +359,16 @@ namespace PinMessaging.View
             UpdateMapCenter();
         }
 
+        private void RefreshPinButton_PostClick()
+        {
+            ProgressBarActive(false);
+        }
+
         private void RefreshPinButton_OnClick(object sender, RoutedEventArgs e)
         {
-            var pinController = new PMPinController(RequestType.GetPins, null);
+            ProgressBarActive(true);
+
+            var pinController = new PMPinController(RequestType.GetPins, RefreshPinButton_PostClick);
 
             pinController.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()), 
                                   Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));

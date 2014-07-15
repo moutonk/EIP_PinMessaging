@@ -146,6 +146,8 @@ namespace PinMessaging.Controller
                 {
                     case RequestType.GetPins:
                         AddPinUiAndCode();
+                        if (_updateUiMethod != null)
+                            _updateUiMethod();
                         break;
                     case RequestType.CreatePin:
                         AddPinUiAndCode();
