@@ -61,6 +61,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Actions.
         /// </summary>
         public static string Actions {
@@ -84,6 +93,15 @@ namespace PinMessaging.Resources {
         public static string Allow {
             get {
                 return ResourceManager.GetString("Allow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Application.
+        /// </summary>
+        public static string Application {
+            get {
+                return ResourceManager.GetString("Application", resourceCulture);
             }
         }
         
@@ -120,6 +138,24 @@ namespace PinMessaging.Resources {
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Change Email.
+        /// </summary>
+        public static string ChangeEmail {
+            get {
+                return ResourceManager.GetString("ChangeEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Change Password.
+        /// </summary>
+        public static string ChangePwd {
+            get {
+                return ResourceManager.GetString("ChangePwd", resourceCulture);
             }
         }
         
@@ -187,11 +223,29 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Legal.
+        /// </summary>
+        public static string Legal {
+            get {
+                return ResourceManager.GetString("Legal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Localize.
         /// </summary>
         public static string Localize {
             get {
                 return ResourceManager.GetString("Localize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Location services.
+        /// </summary>
+        public static string LocationServices {
+            get {
+                return ResourceManager.GetString("LocationServices", resourceCulture);
             }
         }
         
@@ -313,6 +367,24 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à New email address.
+        /// </summary>
+        public static string NewEmail {
+            get {
+                return ResourceManager.GetString("NewEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New password.
+        /// </summary>
+        public static string NewPwd {
+            get {
+                return ResourceManager.GetString("NewPwd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à No.
         /// </summary>
         public static string No {
@@ -336,6 +408,15 @@ namespace PinMessaging.Resources {
         public static string Offline {
             get {
                 return ResourceManager.GetString("Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Old password.
+        /// </summary>
+        public static string OldPwd {
+            get {
+                return ResourceManager.GetString("OldPwd", resourceCulture);
             }
         }
         

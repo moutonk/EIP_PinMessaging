@@ -34,5 +34,20 @@ namespace PinMessaging.View
         {
 
         }
+
+        private void OldPwdPasswordBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            OldPwdTextBlock.Visibility = (OldPwdPasswordBox.Password.Length != 0 ? Visibility.Collapsed : Visibility.Visible);
+        }
+
+        private void NewPwdPasswordBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            NewPwdTextBlock.Visibility = (NewPwdPasswordBox.Password.Length != 0 ? Visibility.Collapsed : Visibility.Visible);
+        }
+
+        private void NewEmailTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            NewEmailTextBlock.Visibility = (NewEmailTextBox.Text.Length != 0 ? Visibility.Collapsed : Visibility.Visible);
+        }
     }
 }
