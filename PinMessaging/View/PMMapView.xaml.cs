@@ -329,6 +329,13 @@ namespace PinMessaging.View
 
         protected override async void OnBackKeyPress(CancelEventArgs e)
         {
+            if (_isUnderMenuOpen == true)
+            {
+                CloseMenuDownButton_Click(null, null);
+                e.Cancel = true;
+                return;
+            }
+
             int retValue = Utils.Utils.CustomMessageBox(new[] {"Yes", "No"}, AppResources.QuitAppTitle, AppResources.QuitApp);
 
             //0 is Yes, 1 is No....

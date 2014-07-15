@@ -351,4 +351,19 @@
   <data name="OldPwd" xml:space="preserve">
     <value>Old password</value>
   </data>
+  <data name="PinMessagingCopyright" xml:space="preserve">
+    <value>Copyright 2014, PinMessaging Corporation. All right reserved.</value>
+  </data>
+  <data name="PinMessagingInfos" xml:space="preserve">
+    <value>L'application PinMessaging est une application Smartphone qui permet à ses utilisateurs de poster des messages à leur emplacement géographique. Les messages sont rattachés à un endroit, donc pour pouvoir les lire, l'utilisateur devra se trouver au même emplacement. Ces messages pourront être de simples commentaires sur un endroit, des remarques ou des astuces.
+Le même principe de messages géolocalisés est appliqué pour les évènements, comme par exemple pour un festival costumé ou un concert.
+PinMessaging permettra aux utilisateurs de découvrir de nouveaux lieux en ayant accès à des informations et des commentaires, le tout de manière ludique.
+Que vous soyez des touristes ou de simples internautes, PinMessaging est fait pour vous !</value>
+  </data>
+  <data name="PinMessagingVersion" xml:space="preserve">
+    <value>Version: 1.0.0</value>
+  </data>
+  <data name="PinMessagingWP" xml:space="preserve">
+    <value>PinMessaging for Windows Phone</value>
+  </data>
 </root>

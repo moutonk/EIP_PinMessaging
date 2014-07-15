@@ -24,7 +24,7 @@
                 </DataTemplate>
             </phone:Pivot.HeaderTemplate>
 
-            <phone:PivotItem x:Name="ApplicationPivotItem" Header="Application" Margin="0,0,0,0" Height="768" Width="490" Background="LightGray">
+            <phone:PivotItem x:Name="ApplicationPivotItem" Header="{Binding LocalizedResources.Application, Source={StaticResource LocalizedStrings}}" Margin="0,0,0,0" Height="768" Width="490" Background="LightGray">
                 <Grid Margin="10,20,10,0">
                     <TextBlock Name="ChangePwdTextBlock" Foreground="{StaticResource PMGrey}" FontSize="30" Margin="20,10,10,692" Text="{Binding LocalizedResources.ChangePwd, Source={StaticResource LocalizedStrings}}"></TextBlock>
                     <TextBlock Name="OldPwdTextBlock" Text="{Binding LocalizedResources.OldPwd, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="{StaticResource PMGrey}" Margin="30,61,10,631"></TextBlock>
@@ -42,21 +42,20 @@
                 </Grid>
             </phone:PivotItem>
 
-            <phone:PivotItem x:Name="LegalPivotItem" Background="LightGray" Header="Legal" Margin="0,0,0,0" Height="768" Width="490">
+            <phone:PivotItem x:Name="LegalPivotItem" Background="LightGray" Header="{Binding LocalizedResources.Legal, Source={StaticResource LocalizedStrings}}" Margin="0,0,0,0" Height="768" Width="490">
             </phone:PivotItem>
 
-            <phone:PivotItem x:Name="AboutPivotItem" Background="LightGray" Header="About" Margin="0,0,0,0" Height="768" Width="490">
+            <phone:PivotItem x:Name="AboutPivotItem" Background="LightGray" Header="{Binding LocalizedResources.About, Source={StaticResource LocalizedStrings}}" Margin="0,0,0,0" Height="768" Width="490">
                 <Grid Margin="10,0,10,0">
-                    <TextBlock Name="PinMessagingTextBlock" TextWrapping="Wrap" Foreground="{StaticResource PMGrey}" FontSize="30" Margin="20,10,0,666" Text="PinMessaging for Windows Phone"></TextBlock>
-                    <TextBlock Name="PinMessagingInfosTextBlock" TextWrapping="Wrap" Foreground="{StaticResource PMGrey}" FontSize="20" Margin="20,107,10,191" Text="L'application PinMessaging est une application Smartphone qui permet à ses utilisateurs de poster des messages à leur emplacement géographique. Les messages sont rattachés à un endroit, donc pour pouvoir les lire, l'utilisateur devra se trouver au même emplacement. Ces messages pourront être de simples commentaires sur un endroit, des remarques ou des astuces.
-Le même principe de messages géolocalisés est appliqué pour les évènements, comme par exemple pour un festival costumé ou un concert.
-PinMessaging permettra aux utilisateurs de découvrir de nouveaux lieux en ayant accès à des informations et des commentaires, le tout de manière ludique.
-Que vous soyez des touristes ou de simples internautes, PinMessaging est fait pour vous !
-"></TextBlock>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="17*"/>
+                        <RowDefinition Height="79*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Name="PinMessagingTextBlock" TextWrapping="Wrap" Foreground="{StaticResource PMGrey}" FontSize="30" Margin="20,10,0,34" Text="{Binding LocalizedResources.PinMessagingWP, Source={StaticResource LocalizedStrings}}"></TextBlock>
+                    <TextBlock Name="PinMessagingInfosTextBlock" TextWrapping="Wrap" Foreground="{StaticResource PMGrey}" FontSize="20" Margin="20,107,10,191" Text="{Binding LocalizedResources.PinMessagingInfos, Source={StaticResource LocalizedStrings}}" Grid.RowSpan="2"></TextBlock>
 
-                    <TextBlock Name="PinMessagingVersionTextBlock" Foreground="{StaticResource PMGrey}" Text="Version: 1.0.0" Margin="20,582,0,153"></TextBlock>
-                    <TextBlock Name="PinMessagingCopyrightTextBlock" TextWrapping="Wrap" Foreground="{StaticResource PMGrey}" Text="Copyright 2014, PinMessaging Corporation
-                               All right reserved." Margin="20,633,0,67"></TextBlock>
+                    <TextBlock Name="PinMessagingVersionTextBlock" Foreground="{StaticResource PMGrey}" Text="{Binding LocalizedResources.PinMessagingVersion, Source={StaticResource LocalizedStrings}}" Margin="20,446,0,153" Grid.Row="1"></TextBlock>
+                    <TextBlock Name="PinMessagingCopyrightTextBlock" TextWrapping="Wrap" Foreground="{StaticResource PMGrey}" Text="{Binding LocalizedResources.PinMessagingCopyright, Source={StaticResource LocalizedStrings}}" Margin="20,497,0,67" Grid.Row="1"></TextBlock>
                 </Grid>
             </phone:PivotItem>
 

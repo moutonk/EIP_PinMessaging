@@ -484,6 +484,44 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Copyright 2014, PinMessaging Corporation. All right reserved..
+        /// </summary>
+        public static string PinMessagingCopyright {
+            get {
+                return ResourceManager.GetString("PinMessagingCopyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à L&apos;application PinMessaging est une application Smartphone qui permet à ses utilisateurs de poster des messages à leur emplacement géographique. Les messages sont rattachés à un endroit, donc pour pouvoir les lire, l&apos;utilisateur devra se trouver au même emplacement. Ces messages pourront être de simples commentaires sur un endroit, des remarques ou des astuces.
+        ///Le même principe de messages géolocalisés est appliqué pour les évènements, comme par exemple pour un festival costumé ou un concert.
+        ///PinMessaging  [le reste de la chaîne a été tronqué]&quot;;.
+        /// </summary>
+        public static string PinMessagingInfos {
+            get {
+                return ResourceManager.GetString("PinMessagingInfos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Version: 1.0.0.
+        /// </summary>
+        public static string PinMessagingVersion {
+            get {
+                return ResourceManager.GetString("PinMessagingVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à PinMessaging for Windows Phone.
+        /// </summary>
+        public static string PinMessagingWP {
+            get {
+                return ResourceManager.GetString("PinMessagingWP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Point of Interest.
         /// </summary>
         public static string PinPointOfInterest {
