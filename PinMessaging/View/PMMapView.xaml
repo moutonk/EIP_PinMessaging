@@ -249,16 +249,12 @@
                         </DataTemplate>
                     </phone:Pivot.HeaderTemplate>
 
-                    <phone:PivotItem x:Name="NewPinPivotItem" Header="Nouveau Pin" Margin="0,24,-264,-445" Background="{StaticResource PMGrey}" RenderTransformOrigin="0.494,0.707">
-                    </phone:PivotItem>
-
-                    <phone:PivotItem Header="Favoris" Margin="0,28,-137,0" Background="{StaticResource PMGreen}">
+                    <phone:PivotItem Header="{Binding LocalizedResources.Favorites, Source={StaticResource LocalizedStrings}}" Width="420" Height="700">
                         <Grid>
-                            <Image Height="150" HorizontalAlignment="Left" Margin="103,101,0,0" x:Name="image2" Stretch="Fill" VerticalAlignment="Top" Width="200" Source="Thumbnails/2.jpeg" />
                         </Grid>
                     </phone:PivotItem>
 
-                    <phone:PivotItem x:Name="MyPinsPivotItem" Header="Mes Pins" Margin="0,28,-137,-347">
+                    <phone:PivotItem x:Name="MyPinsPivotItem" Header="{Binding LocalizedResources.MyPins, Source={StaticResource LocalizedStrings}}" Width="420" Height="700">
                         <ScrollViewer>
                             <StackPanel Orientation="Vertical" x:Name="MyPinsGrid" Margin="20,0,0,0">
                             </StackPanel>

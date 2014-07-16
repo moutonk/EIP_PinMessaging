@@ -528,6 +528,8 @@ namespace PinMessaging.View
 
         private void ButtonPins_OnClick(object sender, RoutedEventArgs e)
         {
+            OpenClose_Left(null, null);
+            OpenClose_Right(null, null);
         }
 
         private void ButtonFilters_OnClick(object sender, RoutedEventArgs e)
@@ -580,21 +582,8 @@ namespace PinMessaging.View
             foreach (var pinModel in myPinsCollection)
             {
                 var item = new TextBox() { Text = pinModel.Content, Width = 300, Tag = pinModel};
-                item.Tap += MyPinOnDelete;
                 MyPinsGrid.Children.Add(item);
             }
-        }
-
-        private void MyPinOnDelete_Post()
-        {
-            Logs.Output.ShowOutput("pins deleted UI");   
-        }
-
-        private void MyPinOnDelete(object sender, GestureEventArgs gestureEventArgs)
-        {
-            //var pc = new PMPinController(RequestType.DeletePin, MyPinOnDelete_Post);
-
-            //pc.DeletePin(((sender as TextBox).Tag as PMPinModel).Id);
         }
 
         private void PivotPins_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

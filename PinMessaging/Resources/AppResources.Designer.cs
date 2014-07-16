@@ -232,6 +232,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Favorites.
+        /// </summary>
+        public static string Favorites {
+            get {
+                return ResourceManager.GetString("Favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Grade.
         /// </summary>
         public static string Grade {
@@ -399,6 +408,15 @@ namespace PinMessaging.Resources {
         public static string MyAccount {
             get {
                 return ResourceManager.GetString("MyAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à My Pins.
+        /// </summary>
+        public static string MyPins {
+            get {
+                return ResourceManager.GetString("MyPins", resourceCulture);
             }
         }
         
