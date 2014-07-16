@@ -356,6 +356,18 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <source>Confirm your password</source>
           <target state="new">Confirm your password</target>
         </trans-unit>
+        <trans-unit id="Resx/ChangePwdError" translate="yes" xml:space="preserve">
+          <source>Your password could not be changed</source>
+          <target state="new">Your password could not be changed</target>
+        </trans-unit>
+        <trans-unit id="Resx/ChangePwdSuccess" translate="yes" xml:space="preserve">
+          <source>Your password was changed successfully!</source>
+          <target state="new">Your password was changed successfully!</target>
+        </trans-unit>
+        <trans-unit id="Resx/Ok" translate="yes" xml:space="preserve">
+          <source>Ok</source>
+          <target state="new">Ok</target>
+        </trans-unit>
       </group>
     </body>
   </file>

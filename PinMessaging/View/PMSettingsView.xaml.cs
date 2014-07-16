@@ -42,21 +42,58 @@ namespace PinMessaging.View
 
         private void ModifyPwdButton_OnClick(object sender, RoutedEventArgs e)
         {
-            //AppResources.pa
-            if (Utils.Utils.PasswordSyntaxCheck(NewPwdPasswordBox.Password) == true)
+            if (NewPwdPasswordBox.Password.Equals(NewPwdConfirmPasswordBox.Password) == false)
             {
-                var sc = new PMSettingsController(RequestType.ChangePassword);
-                sc.ChangePassword(OldPwdPasswordBox.Password, NewPwdPasswordBox.Password);       
+                Utils.Utils.CustomMessageBox(new[] { AppResources.Ok }, AppResources.ChangePwd, AppResources.PMPasswordsNotSame);
+            }   
+            else if (Utils.Utils.PasswordSyntaxCheck(NewPwdPasswordBox.Password) == false)
+            {
+                Utils.Utils.CustomMessageBox(new[] { AppResources.Ok }, AppResources.ChangePwd, AppResources.PMWrongPasswordSyntax);
             }
+            else
+            {
+                var sc = new PMSettingsController(RequestType.ChangePassword, UpdateUiModifyPwdError, UpdateUiModifyPwdSuccess);
+                sc.ChangePassword(OldPwdPasswordBox.Password, NewPwdPasswordBox.Password);
+            }
+        }
+
+        private void UpdateUiModifyPwdError()
+        {
+            Dispatcher.BeginInvoke(() => MessageBox.Show("ChangePwdStatus: " + PMData.IsChangePwdSuccess + " " + AppResources.ChangePwdError));
+        }
+
+        private void UpdateUiModifyPwdSuccess()
+        {
+            Dispatcher.BeginInvoke(() => MessageBox.Show(AppResources.ChangePwdSuccess));
+            OldPwdPasswordBox.Password = string.Empty;
+            NewPwdPasswordBox.Password = string.Empty;
+            NewPwdConfirmPasswordBox.Password = string.Empty;
+            ModifyPwdButton.IsEnabled = false;
         }
 
         private void ModifyEmailButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Utils.Utils.IsEmailValid(NewEmailTextBox.Text) == true)
+            if (Utils.Utils.IsEmailValid(NewEmailTextBox.Text) == false)
             {
-                var sc = new PMSettingsController(RequestType.ChangeEmail);
+                Utils.Utils.CustomMessageBox(new[] { AppResources.Ok }, AppResources.ChangeEmail, AppResources.PMWrongEmailSyntax);
+            }   
+            else
+            {
+                var sc = new PMSettingsController(RequestType.ChangeEmail, UpdateUiModifyEmailError, UpdateUiModifyEmailSuccess);
                 sc.ChangeEmail(NewEmailTextBox.Text);
             }
+        }
+
+        private void UpdateUiModifyEmailError()
+        {
+            Dispatcher.BeginInvoke(() => MessageBox.Show("ChangeEmailStatus: " + PMData.IsChangeEmailSuccess + " " + AppResources.ChangePwdError));
+        }
+
+        private void UpdateUiModifyEmailSuccess()
+        {
+            Dispatcher.BeginInvoke(() => MessageBox.Show(AppResources.ChangePwdSuccess));
+            NewEmailTextBox.Text = string.Empty;
+            ModifyEmailButton.IsEnabled = false;
         }
 
         private void PivotPins_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -178,6 +178,24 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Your password could not be changed.
+        /// </summary>
+        public static string ChangePwdError {
+            get {
+                return ResourceManager.GetString("ChangePwdError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Your password was changed successfully!.
+        /// </summary>
+        public static string ChangePwdSuccess {
+            get {
+                return ResourceManager.GetString("ChangePwdSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Confirm your password.
         /// </summary>
         public static string ConfirmPwd {
@@ -444,6 +462,15 @@ namespace PinMessaging.Resources {
         public static string Offline {
             get {
                 return ResourceManager.GetString("Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Ok.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
             }
         }
         

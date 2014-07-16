@@ -14,9 +14,14 @@ namespace PinMessaging.Controller
 {
     class PMSettingsController : PMWebServiceEndDetector
     {
-        public PMSettingsController(RequestType currentRequestType)
+        private readonly Action _updateUiMethodError;
+        private readonly Action _updateUiMethodSuccess;
+
+        public PMSettingsController(RequestType currentRequestType, Action updateUiError, Action updateUiSuccess)
         {
             CurrentRequestType = currentRequestType;
+            _updateUiMethodError = updateUiError;
+            _updateUiMethodSuccess = updateUiSuccess;
         }
 
         public void ChangePassword(string oldPwd, string newPwd)
@@ -44,6 +49,17 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
+        private void DispatchRegarding(bool dispatchingValue)
+        {
+            if (_updateUiMethodError != null && _updateUiMethodSuccess != null)
+            {
+                if (dispatchingValue)
+                    _updateUiMethodSuccess();
+                else
+                    _updateUiMethodError();
+            }
+        }
+
         protected override void waitEnd_Tick(object sender, EventArgs e)
         {
             if (PMWebService.OnGoingRequest == false)
@@ -54,10 +70,10 @@ namespace PinMessaging.Controller
                 switch (CurrentRequestType)
                 {
                     case RequestType.ChangePassword:
-                        MessageBox.Show("ChangePwdStatus: " + PMData.IsChangePwdSuccess);
+                        DispatchRegarding(PMData.IsChangePwdSuccess);
                         break;
                     case RequestType.ChangeEmail:
-                        MessageBox.Show("ChangePwdStatus: " + PMData.IsChangeEmailSuccess);
+                        DispatchRegarding(PMData.IsChangeEmailSuccess);
                         break;
                 }
             }

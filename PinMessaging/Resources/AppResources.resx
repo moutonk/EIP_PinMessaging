@@ -378,4 +378,13 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   <data name="ConfirmPwd" xml:space="preserve">
     <value>Confirm your password</value>
   </data>
+  <data name="ChangePwdError" xml:space="preserve">
+    <value>Your password could not be changed</value>
+  </data>
+  <data name="ChangePwdSuccess" xml:space="preserve">
+    <value>Your password was changed successfully!</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
 </root>
