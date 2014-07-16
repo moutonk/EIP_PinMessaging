@@ -206,6 +206,22 @@
           <source>PinMessaging for Windows Phone</source>
           <target state="new">PinMessaging for Windows Phone</target>
         </trans-unit>
+        <trans-unit id="Resx/ChangeLanguageWarning" translate="yes" xml:space="preserve">
+          <source>Changing the language will reload PinMessaging</source>
+          <target state="new">Changing the language will reload PinMessaging</target>
+        </trans-unit>
+        <trans-unit id="Resx/Language" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="new">Language</target>
+        </trans-unit>
+        <trans-unit id="Resx/ConfirmPwd" translate="yes" xml:space="preserve">
+          <source>Confirm your password</source>
+          <target state="new">Confirm your password</target>
+        </trans-unit>
+        <trans-unit id="Resx/ChangeLanguage" translate="yes" xml:space="preserve">
+          <source>Change language</source>
+          <target state="new">Change language</target>
+        </trans-unit>
         <trans-unit id="Resx/PinMessagingVersion" translate="yes" xml:space="preserve">
           <source>Version: 1.0.0</source>
           <target state="new">Version: 1.0.0</target>

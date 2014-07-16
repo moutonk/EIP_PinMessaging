@@ -366,4 +366,16 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   <data name="PinMessagingWP" xml:space="preserve">
     <value>PinMessaging for Windows Phone</value>
   </data>
+  <data name="ChangeLanguage" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="ChangeLanguageWarning" xml:space="preserve">
+    <value>Changing the language will reload PinMessaging</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="ConfirmPwd" xml:space="preserve">
+    <value>Confirm your password</value>
+  </data>
 </root>

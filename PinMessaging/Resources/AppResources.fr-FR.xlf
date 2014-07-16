@@ -196,7 +196,7 @@
         </trans-unit>
         <trans-unit id="Resx/RefreshPins" translate="yes" xml:space="preserve">
           <source>refresh pins</source>
-          <target state="new">refresh pins</target>
+          <target state="translated">rafraichir les pins</target>
         </trans-unit>
         <trans-unit id="Resx/OldPwd" translate="yes" xml:space="preserve">
           <source>Old password</source>
@@ -204,7 +204,22 @@
         </trans-unit>
         <trans-unit id="Resx/PinMessagingWP" translate="yes" xml:space="preserve">
           <source>PinMessaging for Windows Phone</source>
-          <target state="new">PinMessaging for Windows Phone</target>
+          <target state="translated">PinMessaging pour Windows Phone</target>
+        </trans-unit>
+        <trans-unit id="Resx/ChangeLanguageWarning" translate="yes" xml:space="preserve">
+          <source>Changing the language will reload PinMessaging</source>
+          <target state="translated">Changer la langue rechargera PinMessaging</target></trans-unit>
+        <trans-unit id="Resx/Language" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="translated">Langue</target>
+        </trans-unit>
+        <trans-unit id="Resx/ConfirmPwd" translate="yes" xml:space="preserve">
+          <source>Confirm your password</source>
+          <target state="new">Confirm your password</target>
+        </trans-unit>
+        <trans-unit id="Resx/ChangeLanguage" translate="yes" xml:space="preserve">
+          <source>Change language</source>
+          <target state="translated">Changer la langue</target>
         </trans-unit>
         <trans-unit id="Resx/PinMessagingVersion" translate="yes" xml:space="preserve">
           <source>Version: 1.0.0</source>
@@ -222,7 +237,7 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         </trans-unit>
         <trans-unit id="Resx/PinMessagingCopyright" translate="yes" xml:space="preserve">
           <source>Copyright 2014, PinMessaging Corporation. All right reserved.</source>
-          <target state="new">Copyright 2014, PinMessaging Corporation. All right reserved.</target>
+          <target state="translated">Copyright 2014, PinMessaging Corporation. Tous droits réservés.</target>
         </trans-unit>
         <trans-unit id="Resx/NewPwd" translate="yes" xml:space="preserve">
           <source>New password</source>

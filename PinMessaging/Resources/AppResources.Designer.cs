@@ -151,11 +151,38 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Change language.
+        /// </summary>
+        public static string ChangeLanguage {
+            get {
+                return ResourceManager.GetString("ChangeLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Changing the language will reload PinMessaging.
+        /// </summary>
+        public static string ChangeLanguageWarning {
+            get {
+                return ResourceManager.GetString("ChangeLanguageWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Change Password.
         /// </summary>
         public static string ChangePwd {
             get {
                 return ResourceManager.GetString("ChangePwd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Confirm your password.
+        /// </summary>
+        public static string ConfirmPwd {
+            get {
+                return ResourceManager.GetString("ConfirmPwd", resourceCulture);
             }
         }
         
@@ -210,6 +237,15 @@ namespace PinMessaging.Resources {
         public static string History {
             get {
                 return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         
