@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using Windows.Storage;
@@ -36,6 +37,8 @@ namespace PinMessaging.Other
  
         [DefaultValue(false)]
         public static bool NetworkProblem { get; set; }
+
+        public static string CurrentLanguge = Thread.CurrentThread.CurrentUICulture.Name;
 
         //pins to add to the MapLayerContainer
         [DefaultValue(null)] public static List<PMPinModel> PinsList { get; set; }

@@ -38,6 +38,7 @@ namespace PinMessaging.View
           
             //select the correct language regardings the telephone language
             LanguageListPicker.SelectedIndex = Thread.CurrentThread.CurrentUICulture.Name.Equals("fr-FR") ? 0 : 1;
+            LocationServicesCheckBox.IsChecked = RememberConnection.GetAccessLocation() ?? true;
         }
 
         private void ModifyPwdButton_OnClick(object sender, RoutedEventArgs e)
@@ -157,8 +158,13 @@ namespace PinMessaging.View
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            PMData.PinsList.Clear();
-            NavigationService.Navigate(Paths.MapView);
+            //if the language was changed
+            if (PMData.CurrentLanguge.Equals(Thread.CurrentThread.CurrentUICulture.Name) == false)
+            {
+                PMData.CurrentLanguge = Thread.CurrentThread.CurrentUICulture.Name;
+                PMData.PinsList.Clear();
+                NavigationService.Navigate(Paths.MapView);
+            }
             e.Cancel = false;
         }
 
@@ -181,6 +187,18 @@ namespace PinMessaging.View
                 ModifyEmailButton.IsEnabled = false;
             else
                 ModifyEmailButton.IsEnabled = true;
+        }
+
+        private void LocationServicesCheckBox_OnChecked(object sender, RoutedEventArgs e)
+        {
+            PMData.AppMode = PMData.ApplicationMode.Normal;
+            RememberConnection.SaveAccessLocation(true);
+        }
+
+        private void LocationServicesCheckBox_OnUnchecked(object sender, RoutedEventArgs e)
+        {
+            PMData.AppMode = PMData.ApplicationMode.Offline;
+            RememberConnection.SaveAccessLocation(false);
         }
     }
 }
