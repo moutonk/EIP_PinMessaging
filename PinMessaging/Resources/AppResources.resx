@@ -328,7 +328,7 @@
     <value>About</value>
   </data>
   <data name="Application" xml:space="preserve">
-    <value>Application</value>
+    <value>APPLICATION</value>
   </data>
   <data name="ChangeEmail" xml:space="preserve">
     <value>Change Email</value>
@@ -337,7 +337,7 @@
     <value>Change Password</value>
   </data>
   <data name="Legal" xml:space="preserve">
-    <value>Legal</value>
+    <value>LEGAL</value>
   </data>
   <data name="LocationServices" xml:space="preserve">
     <value>Location services</value>
@@ -464,5 +464,11 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   </data>
   <data name="StatsTitle" xml:space="preserve">
     <value>STATS</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>ABOUT</value>
+  </data>
+  <data name="SettingsTitle" xml:space="preserve">
+    <value>settings</value>
   </data>
 </root>

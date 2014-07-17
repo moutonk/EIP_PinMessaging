@@ -70,6 +70,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à ABOUT.
+        /// </summary>
+        public static string AboutTitle {
+            get {
+                return ResourceManager.GetString("AboutTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Actions.
         /// </summary>
         public static string Actions {
@@ -97,7 +106,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Application.
+        ///   Recherche une chaîne localisée semblable à APPLICATION.
         /// </summary>
         public static string Application {
             get {
@@ -439,7 +448,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Legal.
+        ///   Recherche une chaîne localisée semblable à LEGAL.
         /// </summary>
         public static string Legal {
             get {
@@ -1022,6 +1031,15 @@ namespace PinMessaging.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à settings.
+        /// </summary>
+        public static string SettingsTitle {
+            get {
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
             }
         }
         

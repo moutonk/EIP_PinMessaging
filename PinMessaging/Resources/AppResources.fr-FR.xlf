@@ -237,6 +237,14 @@
           <source>STATS</source>
           <target state="translated">STATS</target>
         </trans-unit>
+        <trans-unit id="Resx/SettingsTitle" translate="yes" xml:space="preserve">
+          <source>settings</source>
+          <target state="translated">paramètres</target>
+        </trans-unit>
+        <trans-unit id="Resx/AboutTitle" translate="yes" xml:space="preserve">
+          <source>ABOUT</source>
+          <target state="translated">A PROPOS</target>
+        </trans-unit>
         <trans-unit id="Resx/ProfilTitle" translate="yes" xml:space="preserve">
           <source>PROFIL</source>
           <target state="translated">PROFIL</target>
@@ -368,9 +376,8 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="translated">Services de localisation</target>
         </trans-unit>
         <trans-unit id="Resx/Legal" translate="yes" xml:space="preserve">
-          <source>Legal</source>
-          <target state="translated">Légal</target>
-        </trans-unit>
+          <source>LEGAL</source>
+          <target state="translated">LEGAL</target></trans-unit>
         <trans-unit id="Resx/ChangePwd" translate="yes" xml:space="preserve">
           <source>Change Password</source>
           <target state="translated">Modifier le mot de passe</target>
@@ -380,9 +387,8 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="translated">Modifier l'e-mail</target>
         </trans-unit>
         <trans-unit id="Resx/Application" translate="yes" xml:space="preserve">
-          <source>Application</source>
-          <target state="translated">Application</target>
-        </trans-unit>
+          <source>APPLICATION</source>
+          <target state="translated">APPLICATION</target></trans-unit>
         <trans-unit id="Resx/About" translate="yes" xml:space="preserve">
           <source>About</source>
           <target state="translated">A propos</target>
