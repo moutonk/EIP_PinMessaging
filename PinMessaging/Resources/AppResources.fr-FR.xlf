@@ -339,7 +339,7 @@
         </trans-unit>
         <trans-unit id="Resx/Favorites" translate="yes" xml:space="preserve">
           <source>Favorites</source>
-          <target state="translated">Favorites</target>
+          <target state="translated">Favoris</target>
         </trans-unit>
         <trans-unit id="Resx/ChangeLanguage" translate="yes" xml:space="preserve">
           <source>Change language</source>

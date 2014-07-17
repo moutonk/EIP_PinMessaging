@@ -8,15 +8,18 @@ namespace PinMessaging.Utils
 {
     class Paths
     {
+        public static readonly string SettingsPathString = "/View/PMSettingsView.xaml";
+        public static readonly string CurrentUserProfilPathString = "/View/PMCurrentUserProfilView.xaml";
+
         public static readonly Uri LogInView = new Uri("/View/Logos/PMLogInView.xaml", UriKind.Relative);
         public static readonly Uri LogoSplashOrange = new Uri("/Images/Logos/logo_orange.png", UriKind.Relative);
         public static readonly Uri LogoSplashBlack = new Uri("/Images/Logos/logo_black.png", UriKind.Relative);
         public static readonly Uri MapView = new Uri("/View/PMMapView.xaml", UriKind.Relative);   
         public static readonly Uri FirstLaunch = new Uri("/View/PMFirstLaunchView.xaml", UriKind.Relative);
         public static readonly Uri SignInCreate = new Uri("/View/PMLogInCreateView.xaml", UriKind.Relative);
-        public static readonly Uri SettingsView = new Uri("/View/PMSettingsView.xaml", UriKind.Relative);
+        public static readonly Uri SettingsView = new Uri(SettingsPathString, UriKind.Relative);
         public static readonly Uri UserProfilView = new Uri("/View/PMUserProfilView.xaml", UriKind.Relative);
-        public static readonly Uri CurrentUserProfilView = new Uri("/View/PMCurrentUserProfilView.xaml", UriKind.Relative);
+        public static readonly Uri CurrentUserProfilView = new Uri(CurrentUserProfilPathString, UriKind.Relative);
 
         public static readonly string ServerAddress = "http://163.5.84.244/Spring/"; //alexis: 192.168.1.6 serveur_lapbeip:163.5.84.244/Spring/ suivi:163.5.84.52
 

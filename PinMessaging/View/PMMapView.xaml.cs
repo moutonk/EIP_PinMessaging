@@ -550,12 +550,21 @@ namespace PinMessaging.View
 
         private void ButtonReward_OnClick(object sender, RoutedEventArgs e)
         {
+            var userController = new PMUserController(RequestType.User, ButtonReward_PostClick);
+
+            userController.GetUserInfos(PMData.UserId);
+         }
+
+        private void ButtonReward_PostClick()
+        {
+            //open the pivot "badges" in the currentUserProfil view
+            NavigationService.Navigate(new Uri(Paths.CurrentUserProfilPathString + "?open=2", UriKind.Relative));
         }
 
         private void ButtonAbout_OnClick(object sender, RoutedEventArgs e)
         {
             //open the pivot "about" in the setting view
-            NavigationService.Navigate(new Uri("/View/PMSettingsView.xaml?open=2", UriKind.Relative));
+            NavigationService.Navigate(new Uri(Paths.SettingsPathString + "?open=2", UriKind.Relative));
         }
 
         private void ButtonLogout_OnClick(object sender, RoutedEventArgs e)

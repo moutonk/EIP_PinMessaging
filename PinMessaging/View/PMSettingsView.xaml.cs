@@ -42,9 +42,7 @@ namespace PinMessaging.View
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-        //    base.OnNavigatedTo(e);
-
-            string pivot = "";
+            var pivot = "";
 
             if (NavigationContext.QueryString.TryGetValue("open", out pivot))
             {
@@ -67,7 +65,8 @@ namespace PinMessaging.View
 
         private void ShowPivotNumber(int num)
         {
-            SettingsPivot.SelectedIndex = num;
+            if (num >= 0 && num < SettingsPivot.Items.Count)
+                SettingsPivot.SelectedIndex = num;
         }
 
         private void ModifyPwdButton_OnClick(object sender, RoutedEventArgs e)
@@ -133,23 +132,22 @@ namespace PinMessaging.View
 
         private void OldPwdPasswordBox_OnLostFocus(object sender, RoutedEventArgs e)
         {
-            OldPwdTextBlock.Visibility = (OldPwdPasswordBox.Password.Length != 0 ? Visibility.Collapsed : Visibility.Visible);
+            OldPwdTextBlock.Opacity = (OldPwdPasswordBox.Password.Length != 0 ? 0 : 1);
         }
 
         private void NewPwdConfirmPasswordBox_OnLostFocus(object sender, RoutedEventArgs e)
         {
-            NewPwdConfirmTextBlock.Visibility = (NewPwdConfirmPasswordBox.Password.Length != 0 ? Visibility.Collapsed : Visibility.Visible);
-
+            NewPwdConfirmTextBlock.Opacity = (NewPwdConfirmPasswordBox.Password.Length != 0 ? 0 : 1);
         }
 
         private void NewPwdPasswordBox_OnLostFocus(object sender, RoutedEventArgs e)
         {
-            NewPwdTextBlock.Visibility = (NewPwdPasswordBox.Password.Length != 0 ? Visibility.Collapsed : Visibility.Visible);
+            NewPwdTextBlock.Opacity = (NewPwdPasswordBox.Password.Length != 0 ? 0 : 1);
         }
 
         private void NewEmailTextBox_OnLostFocus(object sender, RoutedEventArgs e)
         {
-            NewEmailTextBlock.Visibility = (NewEmailTextBox.Text.Length != 0 ? Visibility.Collapsed : Visibility.Visible);
+            NewEmailTextBlock.Opacity = (NewEmailTextBox.Text.Length != 0 ? 0 : 1);
         }
 
         private void ChangeLanguage(string lang)

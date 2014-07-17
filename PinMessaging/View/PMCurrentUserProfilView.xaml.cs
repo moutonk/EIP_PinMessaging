@@ -39,6 +39,37 @@ namespace PinMessaging.View
             }
         }
 
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            var pivot = "";
+
+            if (NavigationContext.QueryString.TryGetValue("open", out pivot))
+            {
+                switch (int.Parse(pivot))
+                {
+                    case 0:
+                        ShowPivotNumber(0);
+                        break;
+
+                    case 1:
+                        ShowPivotNumber(1);
+                        break;
+
+                    case 2:
+                        ShowPivotNumber(2);
+                        break;
+                }
+            }
+        }
+
+        private void ShowPivotNumber(int num)
+        {
+            if (num >= 0 && num < PivotProfil.Items.Count)
+                PivotProfil.SelectedIndex = num;
+        }
+
         private Tuple<string, string, Uri> GetGradeInfo(PMGradeModel.GradeType grade)
         {
             switch (grade)

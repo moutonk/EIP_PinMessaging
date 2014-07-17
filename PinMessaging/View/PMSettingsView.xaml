@@ -43,32 +43,55 @@
             </phone:Pivot.HeaderTemplate>
 
             <phone:PivotItem x:Name="ApplicationPivotItem" Header="{Binding LocalizedResources.Application, Source={StaticResource LocalizedStrings}}" Margin="0,10,0,0" Height="610" Width="490">
-                <ScrollViewer>
-                    <Grid Margin="-5,20,0,0">
-                        <TextBlock Name="ChangePwdTextBlock" FontSize="30" Margin="23,10,7,776" Text="{Binding LocalizedResources.ChangePwd, Source={StaticResource LocalizedStrings}}"></TextBlock>
-                        <TextBlock Name="OldPwdTextBlock" Text="{Binding LocalizedResources.OldPwd, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="32,78,8,749"></TextBlock>
-                        <PasswordBox Name="OldPwdPasswordBox" PasswordChanged="ModifyPasswordBox_OnTextInput" LostFocus="OldPwdPasswordBox_OnLostFocus" HorizontalAlignment="Left" Margin="10,56,0,0" VerticalAlignment="Top" Width="460"/>
-                        <TextBlock Name="NewPwdTextBlock" Text="{Binding LocalizedResources.NewPwd, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="33,140,7,687"></TextBlock>
-                        <PasswordBox Name="NewPwdPasswordBox" PasswordChanged="ModifyPasswordBox_OnTextInput" LostFocus="NewPwdPasswordBox_OnLostFocus" HorizontalAlignment="Left" Margin="10,113,0,663" VerticalAlignment="Center" Width="460" Height="73"/>
-                        <TextBlock Name="NewPwdConfirmTextBlock" Text="{Binding LocalizedResources.ConfirmPwd, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="33,200,7,627"></TextBlock>
-                        <PasswordBox Name="NewPwdConfirmPasswordBox" PasswordChanged="ModifyPasswordBox_OnTextInput" LostFocus="NewPwdConfirmPasswordBox_OnLostFocus" HorizontalAlignment="Left" Margin="10,176,0,605" VerticalAlignment="Center" Width="460" Height="73"/>
-                        <Button Name="ModifyPwdButton" IsEnabled="False" BorderThickness="0" Background="DimGray" Content="{Binding LocalizedResources.ChangePwd, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="10,236,0,0" VerticalAlignment="Top" Width="460" Click="ModifyPwdButton_OnClick"/>
+                <StackPanel>
+                    <toolkit:ExpanderView IsExpanded="False" Style="{StaticResource ExpanderViewStyle1}">
+                        <toolkit:ExpanderView.Expander>
+                            <TextBlock FontSize="35" Text="{Binding LocalizedResources.ChangePwd, Source={StaticResource LocalizedStrings}}" Margin="-30,20,0,0"/>
+                        </toolkit:ExpanderView.Expander>
+                        <toolkit:ExpanderView.Items>
+                            <StackPanel Margin="-30,20,0,0">
+                                <TextBlock Name="OldPwdTextBlock" Opacity="2" Text="{Binding LocalizedResources.OldPwd, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="12,10,8,0"></TextBlock>
+                                <PasswordBox Name="OldPwdPasswordBox" PasswordChanged="ModifyPasswordBox_OnTextInput" LostFocus="OldPwdPasswordBox_OnLostFocus" HorizontalAlignment="Left" Margin="-10,-50,0,0" VerticalAlignment="Top" Width="460"/>
+                                <TextBlock Name="NewPwdTextBlock" Text="{Binding LocalizedResources.NewPwd, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="12,10,7,0"></TextBlock>
+                                <PasswordBox Name="NewPwdPasswordBox" PasswordChanged="ModifyPasswordBox_OnTextInput" LostFocus="NewPwdPasswordBox_OnLostFocus" HorizontalAlignment="Left" Margin="-10,-50,0,0" VerticalAlignment="Center" Width="460" Height="73"/>
+                                <TextBlock Name="NewPwdConfirmTextBlock" Text="{Binding LocalizedResources.ConfirmPwd, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="12,10,7,0"></TextBlock>
+                                <PasswordBox Name="NewPwdConfirmPasswordBox" PasswordChanged="ModifyPasswordBox_OnTextInput" LostFocus="NewPwdConfirmPasswordBox_OnLostFocus" HorizontalAlignment="Left" Margin="-10,-50,0,0" VerticalAlignment="Center" Width="460" Height="73"/>
+                                <Button Name="ModifyPwdButton" IsEnabled="False" BorderThickness="0" Background="DimGray" Content="{Binding LocalizedResources.ChangePwd, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="438" Click="ModifyPwdButton_OnClick"/>
 
-                        <TextBlock Name="ChangeEmailTextBlock" FontSize="30" Margin="23,316,7,485" Text="{Binding LocalizedResources.ChangeEmail, Source={StaticResource LocalizedStrings}}"></TextBlock>
-                        <TextBlock Name="CurrentEmailTextBlock" Margin="24,364,19,447" VerticalAlignment="Center" Height="43"></TextBlock>
-                        <TextBlock Name="NewEmailTextBlock" Text="{Binding LocalizedResources.NewEmail, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="30,418,10,409"></TextBlock>
-                        <TextBox Name="NewEmailTextBox" TextChanged="NewEmailTextBox_OnTextChanged" LostFocus="NewEmailTextBox_OnLostFocus" HorizontalAlignment="Left" Height="72" Margin="10,396,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="460"/>
-                        <Button Name="ModifyEmailButton" IsEnabled="False" BorderThickness="0" Background="DimGray" Content="{Binding LocalizedResources.ChangeEmail, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="10,455,0,0" VerticalAlignment="Top" Width="460" Click="ModifyEmailButton_Click"/>
-
-                        <CheckBox Name="LocationServicesCheckBox" Unchecked="LocationServicesCheckBox_OnUnchecked" Checked="LocationServicesCheckBox_OnChecked" Content="{Binding LocalizedResources.LocationServices, Source={StaticResource LocalizedStrings}}" Margin="12,697,8,85"/>
-
-                        <TextBlock Name="LanguageTextBox" FontSize="30" HorizontalAlignment="Left" Text="{Binding LocalizedResources.Language, Source={StaticResource LocalizedStrings}}" Height="42" Margin="23,522,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
-                        <TextBlock Name="LanguageTextBoxWarning" HorizontalAlignment="Left" Text="{Binding LocalizedResources.ChangeLanguageWarning, Source={StaticResource LocalizedStrings}}" Height="41" Margin="23,567,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440"/>
-                        <toolkit:ListPicker Name="LanguageListPicker" Loaded="LanguageListPicker_OnLoaded" FullModeItemTemplate="{StaticResource ListPickerFullModeItemTemplate}" ItemTemplate="{StaticResource ListPickerItemTemplate}" ExpansionMode="FullScreenOnly"  Margin="23,601,7,177"/>
-                    </Grid>
-                </ScrollViewer>
+                           </StackPanel>
+                    </toolkit:ExpanderView.Items>
+                    </toolkit:ExpanderView>
+                    <toolkit:ExpanderView IsExpanded="False" Style="{StaticResource ExpanderViewStyle1}">
+                        <toolkit:ExpanderView.Expander>
+                            <TextBlock FontSize="35" Text="{Binding LocalizedResources.ChangeEmail, Source={StaticResource LocalizedStrings}}"  Margin="-30,20,0,0"/>
+                        </toolkit:ExpanderView.Expander>
+                        <toolkit:ExpanderView.Items>
+                            <StackPanel Margin="-30,20,0,0">
+                                <TextBlock Name="CurrentEmailTextBlock" Margin="3,0,0,10" VerticalAlignment="Center" Height="43"></TextBlock>
+                                <TextBlock Name="NewEmailTextBlock" Text="{Binding LocalizedResources.NewEmail, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="12,0,10,0"></TextBlock>
+                                <TextBox Name="NewEmailTextBox" TextChanged="NewEmailTextBox_OnTextChanged" LostFocus="NewEmailTextBox_OnLostFocus" HorizontalAlignment="Left" Height="72" Margin="-10,-50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="460"/>
+                                <Button Name="ModifyEmailButton" IsEnabled="False" BorderThickness="0" Background="DimGray" Content="{Binding LocalizedResources.ChangeEmail, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="460" Click="ModifyEmailButton_Click"/>
+                            </StackPanel>
+                        </toolkit:ExpanderView.Items>
+                    </toolkit:ExpanderView>
+                    <toolkit:ExpanderView Style="{StaticResource ExpanderViewStyle1}">
+                        <toolkit:ExpanderView.Expander>
+                            <TextBlock FontSize="35" Text="{Binding LocalizedResources.Language, Source={StaticResource LocalizedStrings}}" Margin="-30,20,0,0"/>
+                        </toolkit:ExpanderView.Expander>
+                        <toolkit:ExpanderView.Items>
+                            <StackPanel Margin="-30,20,0,0">
+                                <TextBlock Name="LanguageTextBoxWarning" HorizontalAlignment="Left" Text="{Binding LocalizedResources.ChangeLanguageWarning, Source={StaticResource LocalizedStrings}}" Height="41" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440"/>
+                                <toolkit:ListPicker Name="LanguageListPicker" Loaded="LanguageListPicker_OnLoaded" FullModeItemTemplate="{StaticResource ListPickerFullModeItemTemplate}" ItemTemplate="{StaticResource ListPickerItemTemplate}" ExpansionMode="FullScreenOnly"  Margin="0,0,7,0"/>
+                            </StackPanel>
+                        </toolkit:ExpanderView.Items>
+                    </toolkit:ExpanderView>
+                    
+                    <CheckBox Name="LocationServicesCheckBox" Unchecked="LocationServicesCheckBox_OnUnchecked" Checked="LocationServicesCheckBox_OnChecked" Content="{Binding LocalizedResources.LocationServices, Source={StaticResource LocalizedStrings}}" Margin="12,50,0,0"/>
+                
+                </StackPanel>
 
             </phone:PivotItem>
+
 
             <phone:PivotItem x:Name="LegalPivotItem" Header="{Binding LocalizedResources.Legal, Source={StaticResource LocalizedStrings}}" Margin="0,10,0,0" Height="768" Width="490">
             </phone:PivotItem>

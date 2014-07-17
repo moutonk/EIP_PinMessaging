@@ -19,7 +19,7 @@
             <Rectangle Fill="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="85" Stroke="Black" VerticalAlignment="Top" Width="480" Margin="0,0,0,0"/>
             <TextBlock Name="ProfilTitleTextBlock" HorizontalAlignment="Left" FontSize="60" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.ProfilDetailsTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="85" Width="454"/>
 
-            <phone:Pivot Height="770" HorizontalAlignment="Left" Margin="0,90,0,0" x:Name="PivotPins" Title="" VerticalAlignment="Top" Width="480" FontSize="20">
+            <phone:Pivot Height="770" HorizontalAlignment="Left" Margin="0,90,0,0" x:Name="PivotProfil" Title="" VerticalAlignment="Top" Width="480" FontSize="20">
 
                 <phone:Pivot.HeaderTemplate>
                     <DataTemplate>
