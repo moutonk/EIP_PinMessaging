@@ -6,6 +6,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using PinMessaging.Model;
 using PinMessaging.Other;
+using PinMessaging.Resources;
 using PinMessaging.Utils;
 
 namespace PinMessaging.View
@@ -20,6 +21,47 @@ namespace PinMessaging.View
 
             SetProfilPictureUI();    
             _photoChooserTask.Completed += photoChooserTask_Completed;
+
+            if (PMData.User != null)
+            {
+                LoginTextBlock.Text = PMData.User.Login;
+                PointsTextBlock.Text = PMData.User.Points;
+                PinsCreatedTextBlock.Text = PMData.User.NbrPin;
+                CommentsTextBlock.Text = PMData.User.NbrMessage;
+
+                var gradeInfos = GetGradeInfo(PMData.User.Grade.Type);
+                if (gradeInfos != null)
+                {
+                    GradeTextBlock.Text = gradeInfos.Item1;
+                    BestBadgeInfoTextBlock.Text = gradeInfos.Item2;
+                    //img
+                }
+            }
+        }
+
+        private Tuple<string, string, Uri> GetGradeInfo(PMGradeModel.GradeType grade)
+        {
+            switch (grade)
+            {
+                case PMGradeModel.GradeType.PointBronze:
+                    return new Tuple<string, string, Uri>(AppResources.GradePointCopper, AppResources.BadgePointCopper, null);
+
+                case PMGradeModel.GradeType.PointArgent:
+                    return new Tuple<string, string, Uri>(AppResources.GradePointSilver, AppResources.BadgePointCopper, null);
+
+                case PMGradeModel.GradeType.PointOr:
+                    return new Tuple<string, string, Uri>(AppResources.GradePointGold, AppResources.BadgePointCopper, null);
+
+                case PMGradeModel.GradeType.Pin50:
+                    return new Tuple<string, string, Uri>(AppResources.GradePin50, AppResources.BadgePointCopper, null);
+
+                case PMGradeModel.GradeType.Message50:
+                    return new Tuple<string, string, Uri>(AppResources.GradeMessage50, AppResources.BadgePointCopper, null);
+
+                case PMGradeModel.GradeType.Betatester:
+                    return new Tuple<string, string, Uri>(AppResources.GradeBetaTester, AppResources.BadgePointCopper, null);
+            }
+            return null;
         }
 
         private void SetProfilPictureUI()

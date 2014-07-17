@@ -32,12 +32,11 @@
         
         <Grid Row="2" x:Name="UserInfoGrid">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="250"></ColumnDefinition>
+                <ColumnDefinition Width="200"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Rectangle Grid.Column="0" Fill="{StaticResource PMLightGrey}" Margin="0,0,10,10"/>
-            <Image Grid.Column="0" x:Name="ProfilPictureImage" Stretch="Uniform" Source="/Images/Icons/neutral_profil.jpg" Margin="0,-13,0,0"></Image>
-            <Grid Grid.Column="1" Margin="10,0,0,0">
+            <Image Grid.Column="0" x:Name="ProfilPictureImage" Stretch="Uniform" Source="/Images/Icons/neutral_profil.jpg" Margin="16,-13,264,0" Grid.ColumnSpan="2"></Image>
+            <Grid Grid.Column="1" Margin="20,0,0,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="75"></RowDefinition>
                     <RowDefinition Height="75"></RowDefinition>
@@ -46,7 +45,7 @@
                 <TextBlock Grid.Row="0" x:Name="OnlineTextBlock" FontSize="25" Text="{Binding LocalizedResources.Offline, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <TextBlock FontSize="35" Text="{Binding LocalizedResources.Grade, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,20,10"></TextBlock>
-                    <Line X1="0" X2="100" Y1="0" Y2="0" VerticalAlignment="Center" StrokeThickness="2" Stroke="{StaticResource PMOrange}"></Line>
+                    <Line X1="0" X2="130" Y1="0" Y2="0" VerticalAlignment="Center" StrokeThickness="2" Stroke="{StaticResource PMOrange}"></Line>
                 </StackPanel>
                 <TextBlock Grid.Row="2" Text="3.7" FontSize="45" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Grid>

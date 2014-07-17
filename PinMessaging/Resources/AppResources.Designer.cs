@@ -106,6 +106,87 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à You acquire the Geek badge when you are testing PinMessaging for us!.
+        /// </summary>
+        public static string BadgeBetatester {
+            get {
+                return ResourceManager.GetString("BadgeBetatester", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You acquire the Diplomat badge when you comment 50 times. Keep going!.
+        /// </summary>
+        public static string BadgeComments50 {
+            get {
+                return ResourceManager.GetString("BadgeComments50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No badge yet. Badges can be acquired by creating and commenting pins.
+        /// </summary>
+        public static string BadgeNoBadge {
+            get {
+                return ResourceManager.GetString("BadgeNoBadge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You acquire the Conqueror badge when you create 50 pins. Keep going!.
+        /// </summary>
+        public static string BadgePin50 {
+            get {
+                return ResourceManager.GetString("BadgePin50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You acquire the Newbie badge when you get 10 points. Keep going!.
+        /// </summary>
+        public static string BadgePointCopper {
+            get {
+                return ResourceManager.GetString("BadgePointCopper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You acquire the Explorer badge when you get 50 points. Good job!.
+        /// </summary>
+        public static string BadgePointGold {
+            get {
+                return ResourceManager.GetString("BadgePointGold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You acquire Adventurer badge when you get 25 points. Keep going! The gold is not far!.
+        /// </summary>
+        public static string BadgePointSilver {
+            get {
+                return ResourceManager.GetString("BadgePointSilver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à BADGES.
+        /// </summary>
+        public static string BadgesTitle {
+            get {
+                return ResourceManager.GetString("BadgesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à best badge.
+        /// </summary>
+        public static string BestBadgeTitle {
+            get {
+                return ResourceManager.GetString("BestBadgeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Connection.
         /// </summary>
         public static string ButtonConnection {
@@ -250,6 +331,78 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Geek.
+        /// </summary>
+        public static string GradeBetaTester {
+            get {
+                return ResourceManager.GetString("GradeBetaTester", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Diplomat.
+        /// </summary>
+        public static string GradeMessage50 {
+            get {
+                return ResourceManager.GetString("GradeMessage50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à No grade yet.
+        /// </summary>
+        public static string GradeNoGrade {
+            get {
+                return ResourceManager.GetString("GradeNoGrade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Conqueror.
+        /// </summary>
+        public static string GradePin50 {
+            get {
+                return ResourceManager.GetString("GradePin50", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Newbie.
+        /// </summary>
+        public static string GradePointCopper {
+            get {
+                return ResourceManager.GetString("GradePointCopper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Explorer.
+        /// </summary>
+        public static string GradePointGold {
+            get {
+                return ResourceManager.GetString("GradePointGold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Adventurer.
+        /// </summary>
+        public static string GradePointSilver {
+            get {
+                return ResourceManager.GetString("GradePointSilver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à grade.
+        /// </summary>
+        public static string GradeTitle {
+            get {
+                return ResourceManager.GetString("GradeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Do you already have an account?.
         /// </summary>
         public static string HaveAccountOrNot {
@@ -309,6 +462,15 @@ namespace PinMessaging.Resources {
         public static string LocationServices {
             get {
                 return ResourceManager.GetString("LocationServices", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à login.
+        /// </summary>
+        public static string LoginTitle {
+            get {
+                return ResourceManager.GetString("LoginTitle", resourceCulture);
             }
         }
         
@@ -471,6 +633,24 @@ namespace PinMessaging.Resources {
         public static string Notifications {
             get {
                 return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à number of comments posted.
+        /// </summary>
+        public static string NumCommentsCreated {
+            get {
+                return ResourceManager.GetString("NumCommentsCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à number of pins created.
+        /// </summary>
+        public static string NumPinsCreated {
+            get {
+                return ResourceManager.GetString("NumPinsCreated", resourceCulture);
             }
         }
         
@@ -756,6 +936,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à points.
+        /// </summary>
+        public static string PointsTitle {
+            get {
+                return ResourceManager.GetString("PointsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Previous.
         /// </summary>
         public static string Previous {
@@ -770,6 +959,24 @@ namespace PinMessaging.Resources {
         public static string PrivateMessage {
             get {
                 return ResourceManager.GetString("PrivateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à profil details.
+        /// </summary>
+        public static string ProfilDetailsTitle {
+            get {
+                return ResourceManager.GetString("ProfilDetailsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à PROFIL.
+        /// </summary>
+        public static string ProfilTitle {
+            get {
+                return ResourceManager.GetString("ProfilTitle", resourceCulture);
             }
         }
         
@@ -833,6 +1040,15 @@ namespace PinMessaging.Resources {
         public static string SignInPageTitle {
             get {
                 return ResourceManager.GetString("SignInPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à STATS.
+        /// </summary>
+        public static string StatsTitle {
+            get {
+                return ResourceManager.GetString("StatsTitle", resourceCulture);
             }
         }
         

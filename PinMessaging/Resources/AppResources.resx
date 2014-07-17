@@ -393,4 +393,76 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   <data name="MyPins" xml:space="preserve">
     <value>My Pins</value>
   </data>
+  <data name="BadgeBetatester" xml:space="preserve">
+    <value>You acquire the Geek badge when you are testing PinMessaging for us!</value>
+  </data>
+  <data name="BadgeComments50" xml:space="preserve">
+    <value>You acquire the Diplomat badge when you comment 50 times. Keep going!</value>
+  </data>
+  <data name="BadgeNoBadge" xml:space="preserve">
+    <value>No badge yet. Badges can be acquired by creating and commenting pins</value>
+  </data>
+  <data name="BadgePin50" xml:space="preserve">
+    <value>You acquire the Conqueror badge when you create 50 pins. Keep going!</value>
+  </data>
+  <data name="BadgePointCopper" xml:space="preserve">
+    <value>You acquire the Newbie badge when you get 10 points. Keep going!</value>
+  </data>
+  <data name="BadgePointGold" xml:space="preserve">
+    <value>You acquire the Explorer badge when you get 50 points. Good job!</value>
+  </data>
+  <data name="BadgePointSilver" xml:space="preserve">
+    <value>You acquire Adventurer badge when you get 25 points. Keep going! The gold is not far!</value>
+  </data>
+  <data name="BadgesTitle" xml:space="preserve">
+    <value>BADGES</value>
+  </data>
+  <data name="BestBadgeTitle" xml:space="preserve">
+    <value>best badge</value>
+  </data>
+  <data name="GradeBetaTester" xml:space="preserve">
+    <value>Geek</value>
+  </data>
+  <data name="GradeMessage50" xml:space="preserve">
+    <value>Diplomat</value>
+  </data>
+  <data name="GradeNoGrade" xml:space="preserve">
+    <value>No grade yet</value>
+  </data>
+  <data name="GradePin50" xml:space="preserve">
+    <value>Conqueror</value>
+  </data>
+  <data name="GradePointCopper" xml:space="preserve">
+    <value>Newbie</value>
+  </data>
+  <data name="GradePointGold" xml:space="preserve">
+    <value>Explorer</value>
+  </data>
+  <data name="GradePointSilver" xml:space="preserve">
+    <value>Adventurer</value>
+  </data>
+  <data name="GradeTitle" xml:space="preserve">
+    <value>grade</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>login</value>
+  </data>
+  <data name="NumCommentsCreated" xml:space="preserve">
+    <value>number of comments posted</value>
+  </data>
+  <data name="NumPinsCreated" xml:space="preserve">
+    <value>number of pins created</value>
+  </data>
+  <data name="PointsTitle" xml:space="preserve">
+    <value>points</value>
+  </data>
+  <data name="ProfilDetailsTitle" xml:space="preserve">
+    <value>profil details</value>
+  </data>
+  <data name="ProfilTitle" xml:space="preserve">
+    <value>PROFIL</value>
+  </data>
+  <data name="StatsTitle" xml:space="preserve">
+    <value>STATS</value>
+  </data>
 </root>

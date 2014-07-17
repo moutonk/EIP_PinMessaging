@@ -215,19 +215,123 @@
         </trans-unit>
         <trans-unit id="Resx/ConfirmPwd" translate="yes" xml:space="preserve">
           <source>Confirm your password</source>
-          <target state="new">Confirm your password</target>
+          <target state="translated">Confirmer votre mot de passe</target>
         </trans-unit>
         <trans-unit id="Resx/ChangePwdSuccess" translate="yes" xml:space="preserve">
           <source>Your password was changed successfully!</source>
-          <target state="new">Your password was changed successfully!</target>
+          <target state="translated">Votre mot de passe a été changé avec succès</target>
         </trans-unit>
         <trans-unit id="Resx/ChangePwdError" translate="yes" xml:space="preserve">
           <source>Your password could not be changed</source>
-          <target state="new">Your password could not be changed</target>
+          <target state="translated">Le mot de passe n'a pas pu être changé</target>
         </trans-unit>
         <trans-unit id="Resx/Ok" translate="yes" xml:space="preserve">
           <source>Ok</source>
-          <target state="new">Ok</target>
+          <target state="translated">Ok</target>
+        </trans-unit>
+        <trans-unit id="Resx/MyPins" translate="yes" xml:space="preserve">
+          <source>My Pins</source>
+          <target state="translated">Mes Pins</target>
+        </trans-unit>
+        <trans-unit id="Resx/StatsTitle" translate="yes" xml:space="preserve">
+          <source>STATS</source>
+          <target state="translated">STATS</target>
+        </trans-unit>
+        <trans-unit id="Resx/ProfilTitle" translate="yes" xml:space="preserve">
+          <source>PROFIL</source>
+          <target state="translated">PROFIL</target>
+        </trans-unit>
+        <trans-unit id="Resx/ProfilDetailsTitle" translate="yes" xml:space="preserve">
+          <source>profil details</source>
+          <target state="translated">détails du profil</target>
+        </trans-unit>
+        <trans-unit id="Resx/PointsTitle" translate="yes" xml:space="preserve">
+          <source>points</source>
+          <target state="translated">points</target>
+        </trans-unit>
+        <trans-unit id="Resx/NumPinsCreated" translate="yes" xml:space="preserve">
+          <source>number of pins created</source>
+          <target state="translated">nombre de pins créés</target>
+        </trans-unit>
+        <trans-unit id="Resx/NumCommentsCreated" translate="yes" xml:space="preserve">
+          <source>number of comments posted</source>
+          <target state="translated">nombre de commentaire postés</target>
+        </trans-unit>
+        <trans-unit id="Resx/LoginTitle" translate="yes" xml:space="preserve">
+          <source>login</source>
+          <target state="translated">pseudo</target>
+        </trans-unit>
+        <trans-unit id="Resx/GradeTitle" translate="yes" xml:space="preserve">
+          <source>grade</source>
+          <target state="translated">grade</target>
+        </trans-unit>
+        <trans-unit id="Resx/GradePointSilver" translate="yes" xml:space="preserve">
+          <source>Adventurer</source>
+          <target state="translated">Aventurier</target>
+        </trans-unit>
+        <trans-unit id="Resx/GradePointGold" translate="yes" xml:space="preserve">
+          <source>Explorer</source>
+          <target state="translated">Exploreur</target>
+        </trans-unit>
+        <trans-unit id="Resx/GradePointCopper" translate="yes" xml:space="preserve">
+          <source>Newbie</source>
+          <target state="translated">Péon</target>
+        </trans-unit>
+        <trans-unit id="Resx/GradePin50" translate="yes" xml:space="preserve">
+          <source>Conqueror</source>
+          <target state="translated">Conquerant</target>
+        </trans-unit>
+        <trans-unit id="Resx/GradeMessage50" translate="yes" xml:space="preserve">
+          <source>Diplomat</source>
+          <target state="translated">Diplomate</target>
+        </trans-unit>
+        <trans-unit id="Resx/GradeNoGrade" translate="yes" xml:space="preserve">
+          <source>No grade yet</source>
+          <target state="translated">Pas de grade pour l'instant</target>
+        </trans-unit>
+        <trans-unit id="Resx/GradeBetaTester" translate="yes" xml:space="preserve">
+          <source>Geek</source>
+          <target state="translated">Geek</target>
+        </trans-unit>
+        <trans-unit id="Resx/BestBadgeTitle" translate="yes" xml:space="preserve">
+          <source>best badge</source>
+          <target state="translated">meilleur badge</target>
+        </trans-unit>
+        <trans-unit id="Resx/BadgesTitle" translate="yes" xml:space="preserve">
+          <source>BADGES</source>
+          <target state="translated">BADGES</target>
+        </trans-unit>
+        <trans-unit id="Resx/BadgePointSilver" translate="yes" xml:space="preserve">
+          <source>You acquire Adventurer badge when you get 25 points. Keep going! The gold is not far!</source>
+          <target state="translated">Vous obtenez le badge Aventurier quand vous collectez 25 points.</target>
+        </trans-unit>
+        <trans-unit id="Resx/BadgePointGold" translate="yes" xml:space="preserve">
+          <source>You acquire the Explorer badge when you get 50 points. Good job!</source>
+          <target state="translated">!Vous obtenez le badge Explorateur quand vous collectez 50 points.</target>
+        </trans-unit>
+        <trans-unit id="Resx/BadgePointCopper" translate="yes" xml:space="preserve">
+          <source>You acquire the Newbie badge when you get 10 points. Keep going!</source>
+          <target state="translated">Vous obtenez le badge Péon quand vous collectez 10 points.</target>
+        </trans-unit>
+        <trans-unit id="Resx/BadgePin50" translate="yes" xml:space="preserve">
+          <source>You acquire the Conqueror badge when you create 50 pins. Keep going!</source>
+          <target state="translated">Vous obtenez le badge Conquérant quand vous créez 50 pins.</target>
+        </trans-unit>
+        <trans-unit id="Resx/BadgeComments50" translate="yes" xml:space="preserve">
+          <source>You acquire the Diplomat badge when you comment 50 times. Keep going!</source>
+          <target state="translated">Vous obtenez le badge Diplomate quand vous commentez 50 pins.</target>
+        </trans-unit>
+        <trans-unit id="Resx/BadgeNoBadge" translate="yes" xml:space="preserve">
+          <source>No badge yet. Badges can be acquired by creating and commenting pins</source>
+          <target state="translated">Pas de bagde pour l'instant. Les badges sont obtenus en créant et commentant des pins.</target>
+        </trans-unit>
+        <trans-unit id="Resx/BadgeBetatester" translate="yes" xml:space="preserve">
+          <source>You acquire the Geek badge when you are testing PinMessaging for us!</source>
+          <target state="translated">Vous obtenez le badge Geek quand vous testez PinMessaging pour nous.</target>
+        </trans-unit>
+        <trans-unit id="Resx/Favorites" translate="yes" xml:space="preserve">
+          <source>Favorites</source>
+          <target state="translated">Favorites</target>
         </trans-unit>
         <trans-unit id="Resx/ChangeLanguage" translate="yes" xml:space="preserve">
           <source>Change language</source>
@@ -235,7 +339,7 @@
         </trans-unit>
         <trans-unit id="Resx/PinMessagingVersion" translate="yes" xml:space="preserve">
           <source>Version: 1.0.0</source>
-          <target state="new">Version: 1.0.0</target>
+          <target state="translated">Version: 1.0.0</target>
         </trans-unit>
         <trans-unit id="Resx/PinMessagingInfos" translate="yes" xml:space="preserve">
           <source>L'application PinMessaging est une application Smartphone qui permet à ses utilisateurs de poster des messages à leur emplacement géographique. Les messages sont rattachés à un endroit, donc pour pouvoir les lire, l'utilisateur devra se trouver au même emplacement. Ces messages pourront être de simples commentaires sur un endroit, des remarques ou des astuces.
@@ -277,7 +381,7 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         </trans-unit>
         <trans-unit id="Resx/Application" translate="yes" xml:space="preserve">
           <source>Application</source>
-          <target state="new">Application</target>
+          <target state="translated">Application</target>
         </trans-unit>
         <trans-unit id="Resx/About" translate="yes" xml:space="preserve">
           <source>About</source>

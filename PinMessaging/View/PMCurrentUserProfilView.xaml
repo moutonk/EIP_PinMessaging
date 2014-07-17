@@ -15,17 +15,105 @@
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
     <Grid x:Name="LayoutRoot" Background="{StaticResource PMGrey}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid x:Name="ContentPanel" Height="770">
+            <Rectangle Fill="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="85" Stroke="Black" VerticalAlignment="Top" Width="480" Margin="0,0,0,0"/>
+            <TextBlock Name="ProfilTitleTextBlock" HorizontalAlignment="Left" FontSize="60" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.ProfilDetailsTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="85" Width="454"/>
 
-        <!--ContentPanel - placez tout contenu supplémentaire ici-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Image Name="UserProfilImage" HorizontalAlignment="Left" Height="200" VerticalAlignment="Top" Width="200">
- 
-            </Image>    
-            <Button Content="Change img" Click="ChangeProfilPictureButton_OnClick" HorizontalAlignment="Left" Margin="261,76,0,0" VerticalAlignment="Top"/>
+            <phone:Pivot Height="770" HorizontalAlignment="Left" Margin="0,90,0,0" x:Name="PivotPins" Title="" VerticalAlignment="Top" Width="480" FontSize="20">
+
+                <phone:Pivot.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock FontSize="35" Text="{Binding}"/>
+                    </DataTemplate>
+                </phone:Pivot.HeaderTemplate>
+
+                <phone:PivotItem Name="ProfilPivotItem" Header="{Binding LocalizedResources.ProfilTitle, Source={StaticResource LocalizedStrings}}" Width="470" Height="700">
+                    <Grid>
+                        <Image Name="UserProfilImage" Tap="ChangeProfilPictureButton_OnClick" HorizontalAlignment="Left" Height="250" VerticalAlignment="Top" Width="250" Margin="10,0,0,0" Source="\Images\Icons\neutral_profil.jpg"/>
+                        <TextBlock Name="LoginTitleTextBlock" HorizontalAlignment="Left" FontSize="30" Margin="275,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.LoginTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="185"/>
+                        <TextBlock Name="LoginTextBlock" HorizontalAlignment="Left" Foreground="{StaticResource PMOrange}" Margin="275,50,0,0" TextWrapping="Wrap" Text="kevin.mouton" VerticalAlignment="Top" Height="52" Width="175"/>
+                        <TextBlock Name="GradeTitleTextBlock" HorizontalAlignment="Left" FontSize="30" Margin="10,278,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="203"/>
+                        <TextBlock Name="GradeTextBlock" HorizontalAlignment="Left" Foreground="{StaticResource PMOrange}" Margin="10,328,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeNoGrade, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="34" Width="250"/>
+                        <TextBlock Name="BestBadgeTitleTextBlock"  HorizontalAlignment="Left" FontSize="30" Margin="10,383,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.BestBadgeTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="203"/>
+                        <Ellipse Name="BestBadgeImage" Fill="Black" HorizontalAlignment="Left" Height="100" Margin="34,454,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.425,0.451"/>
+                        <Border Margin="175,454,0,146">
+                            <TextBlock Name="BestBadgeInfoTextBlock"  Foreground="LightGray" TextWrapping="Wrap" Text="{Binding LocalizedResources.BadgeNoBadge, Source={StaticResource LocalizedStrings}}" Width="275" VerticalAlignment="Center"/>
+                        </Border>
+                        </Grid>
+                </phone:PivotItem>
+
+                <phone:PivotItem Name="StatsPivotItem" Header="{Binding LocalizedResources.StatsTitle, Source={StaticResource LocalizedStrings}}" Width="470" Height="700">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100"></RowDefinition>
+                            <RowDefinition Height="100"></RowDefinition>
+                            <RowDefinition Height="100"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <StackPanel Grid.Row="0">
+                            <TextBlock Name="PointsTitleTextBlock" HorizontalAlignment="Left" FontSize="30"  Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.PointsTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="48" Width="151"/>
+                            <TextBlock Name="PointsTextBlock" HorizontalAlignment="Left" FontSize="25" Margin="10,0,0,0" TextWrapping="Wrap" Foreground="{StaticResource PMOrange}" Text="0" VerticalAlignment="Top" Height="34" Width="72"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="1">
+                            <TextBlock Name="PinsCreatedTitleTextBlock" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.NumPinsCreated, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="51" Width="330"/>
+                            <TextBlock Name="PinsCreatedTextBlock" HorizontalAlignment="Left" FontSize="25" Margin="10,0,0,0" Foreground="{StaticResource PMOrange}" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="36" Width="63"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Row="2">
+                            <TextBlock Name="CommentsTitleTextBlock"  HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.NumCommentsCreated, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="57" Width="410"/>
+                            <TextBlock Name="CommentsTextBlock" HorizontalAlignment="Left" FontSize="25" Margin="10,0,0,0" Foreground="{StaticResource PMOrange}" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="32" Width="41"/>
+                        </StackPanel>
+                    </Grid>
+                </phone:PivotItem>
+
+                <phone:PivotItem Name="BadgesPivotItem"  Header="{Binding LocalizedResources.BadgesTitle, Source={StaticResource LocalizedStrings}}" Width="470" Height="700">
+                    <Grid Margin="-20,0,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="160"></RowDefinition>
+                            <RowDefinition Height="160"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <StackPanel Grid.Column="0" Grid.Row="0">
+                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <TextBlock Name="PointBronzeTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePointCopper, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        
+                        <StackPanel Grid.Column="1" Grid.Row="0">
+                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <TextBlock Name="PointArgenTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePointSilver, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Grid.Row="0">
+                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <TextBlock Name="PointOrTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePointGold, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="0" Grid.Row="1">
+                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <TextBlock Name="Pin50TextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePin50, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1" Grid.Row="1">
+                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <TextBlock Name="Message50TextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeMessage50, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2" Grid.Row="1">
+                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <TextBlock Name="BetaTesterTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeBetaTester, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
+                        </StackPanel>
+
+                    </Grid>
+                </phone:PivotItem>
+
+            </phone:Pivot>
+
 
         </Grid>
     </Grid>
