@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
@@ -39,6 +38,36 @@ namespace PinMessaging.View
             //select the correct language regardings the telephone language
             LanguageListPicker.SelectedIndex = Thread.CurrentThread.CurrentUICulture.Name.Equals("fr-FR") ? 0 : 1;
             LocationServicesCheckBox.IsChecked = RememberConnection.GetAccessLocation() ?? true;
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+        //    base.OnNavigatedTo(e);
+
+            string pivot = "";
+
+            if (NavigationContext.QueryString.TryGetValue("open", out pivot))
+            {
+                switch (int.Parse(pivot))
+                {
+                    case 0:
+                        ShowPivotNumber(0);
+                        break;
+
+                    case 1:
+                        ShowPivotNumber(1);
+                        break;
+
+                    case 2:
+                        ShowPivotNumber(2);
+                        break;
+                }
+            }
+        }
+
+        private void ShowPivotNumber(int num)
+        {
+            SettingsPivot.SelectedIndex = num;
         }
 
         private void ModifyPwdButton_OnClick(object sender, RoutedEventArgs e)

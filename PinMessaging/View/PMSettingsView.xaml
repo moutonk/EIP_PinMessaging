@@ -33,7 +33,7 @@
         <Rectangle Fill="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="85" Stroke="Black" VerticalAlignment="Top" Width="480" Margin="0,0,0,0"/>
         <TextBlock Name="ProfilTitleTextBlock" HorizontalAlignment="Left" FontSize="60" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.SettingsTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="85" Width="454"/>
 
-        <phone:Pivot Height="680" HorizontalAlignment="Left" Background="{StaticResource PMGrey}" SelectionChanged="PivotPins_OnSelectionChanged" Margin="0,85,0,0" x:Name="PivotPins" Title="" VerticalAlignment="Top" Width="490" FontSize="20">
+        <phone:Pivot Name="SettingsPivot" Height="680" HorizontalAlignment="Left" Background="{StaticResource PMGrey}" SelectionChanged="PivotPins_OnSelectionChanged" Margin="0,85,0,0" Title="" VerticalAlignment="Top" Width="490" FontSize="20">
 
             <phone:Pivot.HeaderTemplate>
                 <DataTemplate>

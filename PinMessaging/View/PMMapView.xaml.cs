@@ -554,6 +554,8 @@ namespace PinMessaging.View
 
         private void ButtonAbout_OnClick(object sender, RoutedEventArgs e)
         {
+            //open the pivot "about" in the setting view
+            NavigationService.Navigate(new Uri("/View/PMSettingsView.xaml?open=2", UriKind.Relative));
         }
 
         private void ButtonLogout_OnClick(object sender, RoutedEventArgs e)

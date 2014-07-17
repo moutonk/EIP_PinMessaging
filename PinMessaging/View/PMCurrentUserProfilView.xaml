@@ -30,13 +30,13 @@
                 <phone:PivotItem Name="ProfilPivotItem" Header="{Binding LocalizedResources.ProfilTitle, Source={StaticResource LocalizedStrings}}" Width="470" Height="700">
                     <Grid>
                         <Image Name="UserProfilImage" Tap="ChangeProfilPictureButton_OnClick" HorizontalAlignment="Left" Height="250" VerticalAlignment="Top" Width="250" Margin="10,0,0,0" Source="\Images\Icons\neutral_profil.jpg"/>
-                        <TextBlock Name="LoginTitleTextBlock" HorizontalAlignment="Left" FontSize="30" Margin="275,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.LoginTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="185"/>
-                        <TextBlock Name="LoginTextBlock" HorizontalAlignment="Left" Foreground="{StaticResource PMOrange}" Margin="275,50,0,0" TextWrapping="Wrap" Text="kevin.mouton" VerticalAlignment="Top" Height="52" Width="175"/>
-                        <TextBlock Name="GradeTitleTextBlock" HorizontalAlignment="Left" FontSize="30" Margin="10,278,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="203"/>
-                        <TextBlock Name="GradeTextBlock" HorizontalAlignment="Left" Foreground="{StaticResource PMOrange}" Margin="10,328,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeNoGrade, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="34" Width="250"/>
-                        <TextBlock Name="BestBadgeTitleTextBlock"  HorizontalAlignment="Left" FontSize="30" Margin="10,383,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.BestBadgeTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="203"/>
-                        <Ellipse Name="BestBadgeImage" Fill="Black" HorizontalAlignment="Left" Height="100" Margin="34,454,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" RenderTransformOrigin="0.425,0.451"/>
-                        <Border Margin="175,454,0,146">
+                        <TextBlock Name="LoginTitleTextBlock" HorizontalAlignment="Left" FontSize="30" Margin="285,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.LoginTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="185"/>
+                        <TextBlock Name="LoginTextBlock" HorizontalAlignment="Left" Foreground="{StaticResource PMOrange}" Margin="285,50,0,0" TextWrapping="Wrap" Text="kevin.mouton" VerticalAlignment="Top" Height="52" Width="175"/>
+                        <TextBlock Name="GradeTitleTextBlock" HorizontalAlignment="Left" FontSize="30" Margin="10,272,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="203"/>
+                        <TextBlock Name="GradeTextBlock" HorizontalAlignment="Left" Foreground="{StaticResource PMOrange}" Margin="10,322,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeNoGrade, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="34" Width="250"/>
+                        <TextBlock Name="BestBadgeTitleTextBlock"  HorizontalAlignment="Left" FontSize="30" Margin="10,377,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.BestBadgeTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="203"/>
+                        <Image Name="BestBadgeImage" Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Left" Height="100" Margin="34,448,0,0" VerticalAlignment="Top" Width="100"/>
+                        <Border Margin="175,448,0,152">
                             <TextBlock Name="BestBadgeInfoTextBlock"  Foreground="LightGray" TextWrapping="Wrap" Text="{Binding LocalizedResources.BadgeNoBadge, Source={StaticResource LocalizedStrings}}" Width="275" VerticalAlignment="Center"/>
                         </Border>
                         </Grid>
@@ -80,32 +80,32 @@
                         </Grid.RowDefinitions>
                         
                         <StackPanel Grid.Column="0" Grid.Row="0">
-                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Margin="0,0,0,0" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="PointBronzeImage" Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" Margin="0,0,0,0" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="PointBronzeTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePointCopper, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
                         
                         <StackPanel Grid.Column="1" Grid.Row="0">
-                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="PointArgentImage" Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="PointArgenTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePointSilver, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2" Grid.Row="0">
-                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="PointOrImage" Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="PointOrTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePointGold, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="0" Grid.Row="1">
-                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="Pin50Image"  Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="Pin50TextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePin50, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" Grid.Row="1">
-                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="Message50Image"  Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="Message50TextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeMessage50, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2" Grid.Row="1">
-                            <Ellipse Fill="Black" HorizontalAlignment="Center" Height="100" Stroke="Black" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="BetaTesterImage"  Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="BetaTesterTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeBetaTester, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
 
