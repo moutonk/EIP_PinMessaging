@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -37,10 +38,16 @@ namespace PinMessaging.View
         readonly MapOverlay _userSpotLayer = new MapOverlay();
         readonly UserLocationMarker _userSpot = new UserLocationMarker();
         public PMGeoLocation _geoLocation = null;
+        BackgroundWorker bkw = new BackgroundWorker();
 
         public PMMapView()
         {
             InitializeComponent();
+
+
+            bkw.WorkerReportsProgress = true;
+            bkw.DoWork += BkwOnDoWork;
+            bkw.ProgressChanged += BkwOnProgressChanged;
 
             //central page
             ImgTarget.ImageSource = new BitmapImage(Paths.TargetButton);
@@ -314,6 +321,48 @@ namespace PinMessaging.View
             }
         }
 
+        private void ZoomTo(double zoomLevel)
+        {
+            if (zoomLevel < 1 || zoomLevel > 20 || Map.ZoomLevel > zoomLevel)
+                return;
+
+            bkw.RunWorkerAsync(new Tuple<double, double>(Map.ZoomLevel, zoomLevel));
+        }
+
+        private void BkwOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
+        {
+            var tuple = (Tuple<double, double>)doWorkEventArgs.Argument;
+            var fromMapZoomLevel = tuple.Item1;
+            var toZoomLevel = tuple.Item2;
+
+            while (fromMapZoomLevel < toZoomLevel)
+            {
+                fromMapZoomLevel += 0.10d;
+                
+                Thread.Sleep(10);
+                bkw.ReportProgress(2);
+            }
+            bkw.ReportProgress(100);
+        }
+
+        private void BkwOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
+        {
+            if (Map.ZoomLevel + 0.10d < 20 && Map.ZoomLevel -0.10d > 1)
+                Map.ZoomLevel += 0.10d;
+        }
+
+        private void MapCenterOn(GeoCoordinate pos)
+        {
+            if (pos == null)
+                return;
+
+            Dispatcher.BeginInvoke(() =>
+            {
+                Map.Center = pos;
+            });
+            ZoomTo(17);
+        }
+
         public void UpdateMapCenter()
         {
             Dispatcher.BeginInvoke(() =>
@@ -326,16 +375,27 @@ namespace PinMessaging.View
                 {
                     Map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
                 }
-            });  
+            });
         }
 
         protected override async void OnBackKeyPress(CancelEventArgs e)
         {
-            if (_isUnderMenuOpen == true)
+            switch (_currentView)
             {
-                CloseMenuDownButton_Click(null, null);
-                e.Cancel = true;
-                return;
+                case CurrentMapPageView.LeftMenuView:
+                    OpenClose_Left(null, null);
+                    e.Cancel = true;
+                    return;
+
+                case CurrentMapPageView.RightMenuView:
+                    OpenClose_Right(null, null);
+                    e.Cancel = true;
+                    return;
+
+                case CurrentMapPageView.UnderMenuView:
+                    CloseMenuDownButton_Click(null, null);
+                    e.Cancel = true;
+                    return;
             }
 
             int retValue = Utils.Utils.CustomMessageBox(new[] {"Yes", "No"}, AppResources.QuitAppTitle, AppResources.QuitApp);
@@ -642,9 +702,10 @@ namespace PinMessaging.View
                 var itemButton = sender as Button;
                 var itemGrid = itemButton.Content as Grid;
                 var pin = (PMPinModel) itemGrid.Tag;
-
+                
                 OpenClose_Right(null, null);
                 PinTapped(pin);
+                MapCenterOn(pin.GeoCoord);
             }
             catch (Exception exp)
             {
