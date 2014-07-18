@@ -322,7 +322,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Favorites.
+        ///   Recherche une chaîne localisée semblable à FAVORITE PINS.
         /// </summary>
         public static string Favorites {
             get {
@@ -588,6 +588,15 @@ namespace PinMessaging.Resources {
         public static string MyPins {
             get {
                 return ResourceManager.GetString("MyPins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à MY PINS.
+        /// </summary>
+        public static string MyPinsPivot {
+            get {
+                return ResourceManager.GetString("MyPinsPivot", resourceCulture);
             }
         }
         

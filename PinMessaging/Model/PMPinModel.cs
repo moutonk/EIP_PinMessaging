@@ -152,7 +152,7 @@ namespace PinMessaging.Model
 
                     foreach (var s in DateTime)
                     {
-                        Logs.Output.ShowOutput(s);
+                        //Logs.Output.ShowOutput(s);
                     }
                 }
                 catch (Exception exp)

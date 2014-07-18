@@ -242,6 +242,10 @@
           <source>settings</source>
           <target state="new">settings</target>
         </trans-unit>
+        <trans-unit id="Resx/MyPinsPivot" translate="yes" xml:space="preserve">
+          <source>MY PINS</source>
+          <target state="new">MY PINS</target>
+        </trans-unit>
         <trans-unit id="Resx/AboutTitle" translate="yes" xml:space="preserve">
           <source>ABOUT</source>
           <target state="new">ABOUT</target>
@@ -339,8 +343,8 @@
           <target state="new">You acquire the Geek badge when you are testing PinMessaging for us!</target>
         </trans-unit>
         <trans-unit id="Resx/Favorites" translate="yes" xml:space="preserve">
-          <source>Favorites</source>
-          <target state="new">Favorites</target>
+          <source>FAVORITE PINS</source>
+          <target state="new">FAVORITE PINS</target>
         </trans-unit>
         <trans-unit id="Resx/ChangeLanguage" translate="yes" xml:space="preserve">
           <source>Change language</source>

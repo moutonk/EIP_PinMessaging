@@ -595,34 +595,32 @@ namespace PinMessaging.View
         }
 
         /////////////////////////////////////////////////   RIGHT MENU ///////////////////////////////////////////////
-
-        private void LoadMyPinsFromUserList()
-        {
-            foreach (var pin in PMData.PinsList)
-            {
-                AddPinToMyPinsUi(pin);
-            }
-        }
-
+        /// 
         private void MyPinItemUi(PMPinModel pin)
         {
-            var historyImage = new Image { Height = 50, Width = 50, Source = Paths.PinsMapImg[pin.PinType] };
-            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center, Text = pin.Title };
-            var messageDateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12, TextAlignment = TextAlignment.Right, Text = "05/21/14 at 5:01 PM" };
+            var historyImage = new Image { Height = 70, Width = 70, Source = Paths.PinsMapImg[pin.PinType + (pin.Private == true ? 6 : 0)] };
+            var titleTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 30, VerticalAlignment = VerticalAlignment.Center, Text = pin.Title, Height = 40};
+            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 18, TextAlignment = TextAlignment.Left, Text = pin.Content, Height = 25};
 
-            var itemMainGrid = new Grid();
-            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(60) });
+            var itemMyPin = new Button() {Margin = new Thickness(-20,0,0,0) , BorderThickness = new Thickness(0)};
+            itemMyPin.HorizontalContentAlignment = HorizontalAlignment.Left;
+            itemMyPin.Click += ItemMyPinOnClick;
+
+            var itemMainGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Left};
+            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(70) });
             itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            itemMainGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(60) });
+            itemMainGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(70) });
             itemMainGrid.Tag = pin;
 
-            MyPinsStackPanel.Children.Add(itemMainGrid);
+            itemMyPin.Content = itemMainGrid;
+
+            MyPinsStackPanel.Children.Add(itemMyPin);
 
             itemMainGrid.Children.Add(historyImage);
 
-            var pinContentStackPanel = new StackPanel { Margin = new Thickness(20, 0, 0, 0) };
+            var pinContentStackPanel = new StackPanel { Margin = new Thickness(20, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center};
+            pinContentStackPanel.Children.Add(titleTextBlock);
             pinContentStackPanel.Children.Add(messageTextBlock);
-            pinContentStackPanel.Children.Add(messageDateTextBlock);
 
             itemMainGrid.Children.Add(pinContentStackPanel);
 
@@ -637,16 +635,42 @@ namespace PinMessaging.View
             //MyPinsStackPanel.Children.Add(line);
         }
 
+        private void ItemMyPinOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            try
+            {
+                var itemButton = sender as Button;
+                var itemGrid = itemButton.Content as Grid;
+                var pin = (PMPinModel) itemGrid.Tag;
+
+                OpenClose_Right(null, null);
+                PinTapped(pin);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ItemMyPinOnClick: error when getting the pin info: ", exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+
+        }
+
+        private void LoadMyPinsFromUserList()
+        {
+            foreach (var pin in PMData.PinsList)
+            {
+                AddPinToMyPinsUi(pin);
+            }
+        }
+
         private void AddPinToMyPinsUi(PMPinModel pin)
         {
             //Make sure each element in the stackpanel is a Grid with a pin in Tag otherwise exception
-            if (pin.AuthorId == PMData.UserId && MyPinsStackPanel.Children.Any(elem => ((((elem as Grid).Tag) as PMPinModel).Id) == pin.Id) == false)
+            if (pin.AuthorId == PMData.UserId && MyPinsStackPanel.Children.Any(elem => (((((elem as Button).Content as Grid).Tag) as PMPinModel).Id) == pin.Id) == false)
                 MyPinItemUi(pin);
         }
 
         private void LoadMyPins()
         {
-            if (MyPinsStackPanel.Children.Count == 0)
+            //if (MyPinsStackPanel.Children.Count == 0)
                 LoadMyPinsFromUserList();
         }
 
@@ -860,7 +884,7 @@ namespace PinMessaging.View
                                                                                                             (pin.DateTime != null ? pin.DateTime.Aggregate("", (current, keyValuePair) => current + (keyValuePair + " ")) : "null") : "");
             PinAuthorDescriptionTextBlock.Text = pin.Author;
             PinAuthorDescriptionTextBlock.Tag = pin;
-            PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType];
+            PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType + (pin.Private == true ? 6 : 0)];
 
             DownMenuTitle.Text = pin.Author;
 

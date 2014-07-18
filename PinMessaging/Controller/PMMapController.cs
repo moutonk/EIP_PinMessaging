@@ -72,7 +72,7 @@ namespace PinMessaging.Controller
         {
             bool val = !PMData.PinsList.Any(listPin => listPin.Id == pin.Id);
 
-            Logs.Output.ShowOutput(val == false ? "Pin is not unique" : "Pin is unique");
+            //Logs.Output.ShowOutput(val == false ? "Pin is not unique" : "Pin is unique");
 
             return val;
         }

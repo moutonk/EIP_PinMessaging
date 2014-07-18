@@ -128,7 +128,7 @@
                 </Grid.RowDefinitions>
 
                 <ProgressBar Grid.Row="0" x:Name="PostPinProgressBar" Foreground="{StaticResource PMOrange}" Visibility="Collapsed"/>
-                <phone:Pivot Grid.Row="1" Height="790" HorizontalAlignment="Left" SelectionChanged="PivotPins_OnSelectionChanged" Margin="-10,0,0,0" x:Name="PivotPins" Title="" VerticalAlignment="Top" Width="430" FontSize="20">
+                <phone:Pivot Grid.Row="1" Height="760" HorizontalAlignment="Left" SelectionChanged="PivotPins_OnSelectionChanged" Margin="-10,0,0,0" x:Name="PivotPins" Title="" VerticalAlignment="Top" Width="430" FontSize="20">
 
                     <phone:Pivot.HeaderTemplate> 
                         <DataTemplate>
@@ -137,14 +137,14 @@
                         </DataTemplate>
                     </phone:Pivot.HeaderTemplate>
 
-                    <phone:PivotItem x:Name="MyPinsPivotItem" Header="{Binding LocalizedResources.MyPins, Source={StaticResource LocalizedStrings}}" Width="420" Height="700">
+                    <phone:PivotItem x:Name="MyPinsPivotItem" Header="{Binding LocalizedResources.MyPins, Source={StaticResource LocalizedStrings}}" Width="420" Height="650">
                         <ScrollViewer>
                             <StackPanel Orientation="Vertical" x:Name="MyPinsStackPanel" Margin="20,0,0,0">
                             </StackPanel>
                         </ScrollViewer>
                     </phone:PivotItem>
 
-                    <phone:PivotItem Header="{Binding LocalizedResources.Favorites, Source={StaticResource LocalizedStrings}}" Width="420" Height="700">
+                    <phone:PivotItem Header="{Binding LocalizedResources.Favorites, Source={StaticResource LocalizedStrings}}" Width="420" Height="650">
                         <Grid>
                         </Grid>
                     </phone:PivotItem>

@@ -135,7 +135,7 @@ namespace PinMessaging.Other
 
                     foreach (var pmMapPushpinModel in pinCollection)
                     {
-                        pmMapPushpinModel.ShowPinContent();
+                        //pmMapPushpinModel.ShowPinContent();
                     }
                     PMData.AddToQueuePinsList(pinCollection);
                 }
@@ -355,7 +355,7 @@ namespace PinMessaging.Other
 
                     foreach (var pmMapPushpinModel in pinCollection)
                     {
-                        pmMapPushpinModel.ShowPinContent();
+                        //pmMapPushpinModel.ShowPinContent();
                     }
                     PMData.AddToQueuePinsList(pinCollection);
                 }

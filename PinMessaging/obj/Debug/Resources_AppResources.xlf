@@ -369,8 +369,8 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="new">Ok</target>
         </trans-unit>
         <trans-unit id="Resx/Favorites" translate="yes" xml:space="preserve">
-          <source>Favorites</source>
-          <target state="new">Favorites</target>
+          <source>FAVORITE PINS</source>
+          <target state="new">FAVORITE PINS</target>
         </trans-unit>
         <trans-unit id="Resx/MyPins" translate="yes" xml:space="preserve">
           <source>My Pins</source>
@@ -479,6 +479,10 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         <trans-unit id="Resx/SettingsTitle" translate="yes" xml:space="preserve">
           <source>settings</source>
           <target state="new">settings</target>
+        </trans-unit>
+        <trans-unit id="Resx/MyPinsPivot" translate="yes" xml:space="preserve">
+          <source>MY PINS</source>
+          <target state="new">MY PINS</target>
         </trans-unit>
       </group>
     </body>

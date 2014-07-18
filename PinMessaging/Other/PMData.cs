@@ -158,7 +158,7 @@ namespace PinMessaging.Other
 
                         foreach (var pmPinModel in list.Where(pmPinModel => PMMapPinController.IsPinUnique(pmPinModel) == true))
                         {
-                            pmPinModel.ShowPinContent();
+                            //pmPinModel.ShowPinContent();
                             PMMapPinController.AddPinToMap(pmPinModel);
                             PinsList.Add(pmPinModel);
                         }

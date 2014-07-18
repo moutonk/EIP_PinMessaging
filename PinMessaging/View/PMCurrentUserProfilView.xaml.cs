@@ -78,19 +78,19 @@ namespace PinMessaging.View
                     return new Tuple<string, string, Uri>(AppResources.GradePointCopper, AppResources.BadgePointCopper, null);
 
                 case PMGradeModel.GradeType.PointArgent:
-                    return new Tuple<string, string, Uri>(AppResources.GradePointSilver, AppResources.BadgePointCopper, null);
+                    return new Tuple<string, string, Uri>(AppResources.GradePointSilver, AppResources.BadgePointSilver, null);
 
                 case PMGradeModel.GradeType.PointOr:
-                    return new Tuple<string, string, Uri>(AppResources.GradePointGold, AppResources.BadgePointCopper, null);
+                    return new Tuple<string, string, Uri>(AppResources.GradePointGold, AppResources.BadgePointGold, null);
 
                 case PMGradeModel.GradeType.Pin50:
-                    return new Tuple<string, string, Uri>(AppResources.GradePin50, AppResources.BadgePointCopper, null);
+                    return new Tuple<string, string, Uri>(AppResources.GradePin50, AppResources.BadgePin50, null);
 
                 case PMGradeModel.GradeType.Message50:
-                    return new Tuple<string, string, Uri>(AppResources.GradeMessage50, AppResources.BadgePointCopper, null);
+                    return new Tuple<string, string, Uri>(AppResources.GradeMessage50, AppResources.BadgeComments50, null);
 
                 case PMGradeModel.GradeType.Betatester:
-                    return new Tuple<string, string, Uri>(AppResources.GradeBetaTester, AppResources.BadgePointCopper, null);
+                    return new Tuple<string, string, Uri>(AppResources.GradeBetaTester, AppResources.BadgeBetatester, null);
             }
             return null;
         }

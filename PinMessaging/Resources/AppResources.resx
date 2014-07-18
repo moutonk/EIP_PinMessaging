@@ -388,7 +388,7 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
     <value>Ok</value>
   </data>
   <data name="Favorites" xml:space="preserve">
-    <value>Favorites</value>
+    <value>FAVORITE PINS</value>
   </data>
   <data name="MyPins" xml:space="preserve">
     <value>My Pins</value>
@@ -470,5 +470,8 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>settings</value>
+  </data>
+  <data name="MyPinsPivot" xml:space="preserve">
+    <value>MY PINS</value>
   </data>
 </root>

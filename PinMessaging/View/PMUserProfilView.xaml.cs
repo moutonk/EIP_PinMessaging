@@ -97,7 +97,7 @@ namespace PinMessaging.View
             Grid.SetRow(pinContentStackPanel, 0);
             Grid.SetColumn(pinContentStackPanel, 1);
 
-            var line = new Canvas { Background = (Brush)Resources["PhoneProgressBarBackgroundBrush"], Height = 5 };
+            var line = new Canvas { Background = (Brush)Resources["PhoneProgressBarBackgroundBrush"], Height = 2 };
 
             HistoryItemsStackPanel.Children.Add(line);
         }
