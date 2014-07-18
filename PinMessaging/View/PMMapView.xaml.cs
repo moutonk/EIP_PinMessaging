@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
@@ -362,6 +363,9 @@ namespace PinMessaging.View
         private void RefreshPinButton_PostClick()
         {
             ProgressBarActive(false);
+
+            //!/ MAYBE REMOVE THAT
+            LoadMyPinsFromUserList();
         }
 
         private void RefreshPinButton_OnClick(object sender, RoutedEventArgs e)
@@ -437,6 +441,12 @@ namespace PinMessaging.View
                 _currentView = CurrentMapPageView.LeftMenuView;
                 MoveViewWindow(MiddlePage);
             }  
+        }
+
+        private void Open_Right(object sender, EventArgs e)
+        {
+            OpenClose_Right(sender, e);
+            LoadMyPins();
         }
 
         private void OpenClose_Right(object sender, EventArgs e)
@@ -529,7 +539,7 @@ namespace PinMessaging.View
         private void ButtonPins_OnClick(object sender, RoutedEventArgs e)
         {
             OpenClose_Left(null, null);
-            OpenClose_Right(null, null);
+            Open_Right(null, null);
         }
 
         private void ButtonFilters_OnClick(object sender, RoutedEventArgs e)
@@ -585,16 +595,59 @@ namespace PinMessaging.View
         }
 
         /////////////////////////////////////////////////   RIGHT MENU ///////////////////////////////////////////////
-        
-        private void MyPinsPivotItem_OnSelected()
-        {
-            var myPinsCollection = PMData.PinsList.Where(pin => pin.AuthorId == PMData.UserId);
 
-            foreach (var pinModel in myPinsCollection)
+        private void LoadMyPinsFromUserList()
+        {
+            foreach (var pin in PMData.PinsList)
             {
-                var item = new TextBox() { Text = pinModel.Content, Width = 300, Tag = pinModel};
-                MyPinsGrid.Children.Add(item);
+                AddPinToMyPinsUi(pin);
             }
+        }
+
+        private void MyPinItemUi(PMPinModel pin)
+        {
+            var historyImage = new Image { Height = 50, Width = 50, Source = Paths.PinsMapImg[pin.PinType] };
+            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center, Text = pin.Title };
+            var messageDateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12, TextAlignment = TextAlignment.Right, Text = "05/21/14 at 5:01 PM" };
+
+            var itemMainGrid = new Grid();
+            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(60) });
+            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            itemMainGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(60) });
+            itemMainGrid.Tag = pin;
+
+            MyPinsStackPanel.Children.Add(itemMainGrid);
+
+            itemMainGrid.Children.Add(historyImage);
+
+            var pinContentStackPanel = new StackPanel { Margin = new Thickness(20, 0, 0, 0) };
+            pinContentStackPanel.Children.Add(messageTextBlock);
+            pinContentStackPanel.Children.Add(messageDateTextBlock);
+
+            itemMainGrid.Children.Add(pinContentStackPanel);
+
+            Grid.SetRow(historyImage, 0);
+            Grid.SetColumn(historyImage, 0);
+
+            Grid.SetRow(pinContentStackPanel, 0);
+            Grid.SetColumn(pinContentStackPanel, 1);
+
+            //var line = new Canvas { Background = (Brush)Resources["PhoneProgressBarBackgroundBrush"], Height = 2 };
+
+            //MyPinsStackPanel.Children.Add(line);
+        }
+
+        private void AddPinToMyPinsUi(PMPinModel pin)
+        {
+            //Make sure each element in the stackpanel is a Grid with a pin in Tag otherwise exception
+            if (pin.AuthorId == PMData.UserId && MyPinsStackPanel.Children.Any(elem => ((((elem as Grid).Tag) as PMPinModel).Id) == pin.Id) == false)
+                MyPinItemUi(pin);
+        }
+
+        private void LoadMyPins()
+        {
+            if (MyPinsStackPanel.Children.Count == 0)
+                LoadMyPinsFromUserList();
         }
 
         private void PivotPins_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -602,14 +655,11 @@ namespace PinMessaging.View
             switch (PivotPins.SelectedIndex)
             {
                 case 0:
-                    break;
+                    //MyPinsGrid.Children.Clear();
+                    //MyPinsPivotItem_OnSelected();
+                  break;
 
                 case 1:
-                    break;
-
-                case 2:
-                    MyPinsGrid.Children.Clear();
-                    MyPinsPivotItem_OnSelected();
                     break;
             }
         }
@@ -1166,6 +1216,8 @@ namespace PinMessaging.View
             DropPinProgressBar.IsIndeterminate = false;
             DropPinButton.IsEnabled = true;
             CloseMenuDownButton_Click(null, null);
+            AddPinToMyPinsUi(PinCreateModel);
+            //AddLastPinToMyPins();
             //NewPinPivotItem.IsEnabled = true;
         }
 
@@ -1190,6 +1242,7 @@ namespace PinMessaging.View
             PinCreateModel.Content = (PinCreateModel.PinType == PMPinModel.PinsType.Event ? FormatDateAndTimeForEvent() : "") + DescriptionExpandViewTextBox.Text;
             //PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
             PinCreateModel.ContentType = PMPinModel.PinsContentType.Text;
+            PinCreateModel.AuthorId = PMData.UserId;
          //   PinCreateModel.Private = "0";
             PinCreateModel.AuthoriseUsersId = FormatAuthoriseUsersId();
 

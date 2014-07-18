@@ -31,7 +31,7 @@
             <shell:ApplicationBarIconButton IconUri="/Images/Menu/menu_icon_appbar.png" Text="Menu" Click="OpenClose_Left"/>
             <shell:ApplicationBarIconButton IconUri="/Images/Icons/flag_orange_icon_appbar.png" Text="Notifications" Click="MenuDownNotification_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Images/Icons/contact_orange_icon_appbar.png" Text="Contacts" Click="MenuDownContacts_OnClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/Icons/logo_flat_orange_appbar.png" Text="Pins" Click="OpenClose_Right"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/logo_flat_orange_appbar.png" Text="Pins" Click="Open_Right"/>
 
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="refresh pins" Click="ApplicationBarMenuItemRefresh_OnClick"/>
@@ -139,7 +139,7 @@
 
                     <phone:PivotItem x:Name="MyPinsPivotItem" Header="{Binding LocalizedResources.MyPins, Source={StaticResource LocalizedStrings}}" Width="420" Height="700">
                         <ScrollViewer>
-                            <StackPanel Orientation="Vertical" x:Name="MyPinsGrid" Margin="20,0,0,0">
+                            <StackPanel Orientation="Vertical" x:Name="MyPinsStackPanel" Margin="20,0,0,0">
                             </StackPanel>
                         </ScrollViewer>
                     </phone:PivotItem>

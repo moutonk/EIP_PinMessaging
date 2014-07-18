@@ -6,6 +6,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using PinMessaging.Utils;
 
 namespace PinMessaging.Model
 {
@@ -23,11 +24,11 @@ namespace PinMessaging.Model
   	        AddFavoriteLocation
         }
 
-        [JsonProperty] [DefaultValue(null)] Dictionary<string, string> Location { get; set; }
+        [JsonProperty] [DefaultValue(null)] public Dictionary<string, string> Location { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Content { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Date { get; set; }
-        [JsonProperty] [DefaultValue(PMPinModel.PinsType.PublicMessage)] public PMPinModel.PinsType PinType { get; set; }
-        [JsonProperty] [DefaultValue(HistoryType.CreatePin)] public HistoryType  historyType { get; set; }
+        [JsonProperty] [DefaultValue(null)] public PMPinModel.PinsType? PinType { get; set; }
+        [JsonProperty] [DefaultValue(null)] public HistoryType?  historyType { get; set; }
 
         [DefaultValue(null)] public string Id { get; set; }
         [DefaultValue(null)] public double? Latitude { get; set; }
@@ -35,8 +36,11 @@ namespace PinMessaging.Model
         [DefaultValue(null)] public string Name { get; set; }
 
         [OnDeserialized]
-        private void CompleteDataMembers()
+        private void CompleteDataMembers(StreamingContext context)
         {
+            if (Location == null)
+                return;
+
             if (Location.ContainsKey("id"))
                 Id = Location["id"];
             if (Location.ContainsKey("latitude"))

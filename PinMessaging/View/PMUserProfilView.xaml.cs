@@ -31,7 +31,7 @@ namespace PinMessaging.View
                 //if the user is already in the contact list
                 if (PMData.UserList.Any(user => user.Id == _user.Id) == true)
                 {
-                    RemoveFavoriteUI();
+                    RemoveFavoriteUi();
                 }
 
                 var profilPic = PMData.GetUserProfilPicture(_user.Id);
@@ -39,7 +39,7 @@ namespace PinMessaging.View
                 if (profilPic != null)
                     ProfilPictureImage.Source = profilPic.Img;
 
-                var userHistory = new PMHistoryController(RequestType.UserHistory, UpdateHistoryUI);
+                var userHistory = new PMHistoryController(RequestType.UserHistory, UpdateHistoryUi);
 
                 userHistory.GetUserHistory(_user.Id);
             }
@@ -47,15 +47,33 @@ namespace PinMessaging.View
 
         /*HISTORY*/
 
-        private void UpdateHistoryUI()
+        private static BitmapImage DefaultHistoryTypeImg()
         {
-            /*foreach (var historyItem in PMData.UserHistoryList)
-            {
-                
-            }*/
+            return new BitmapImage(new Uri("/Images/Pins/event_icon.png", UriKind.Relative));
+        }
 
-            var historyImage = new Image { Height = 60, Source = new BitmapImage(new Uri("/Images/Icons/bubble_white_icon.png", UriKind.Relative)) };
-            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, VerticalAlignment = System.Windows.VerticalAlignment.Center, Text = "LOL" };
+        private static BitmapImage GetHistoryTypeImg(PMHistoryModel.HistoryType? type)
+        {
+            if (type == null)
+                return DefaultHistoryTypeImg();
+
+            switch (type)
+            {
+                case PMHistoryModel.HistoryType.CreatePin:
+                    return new BitmapImage(new Uri("/Images/Pins/message_icon.png", UriKind.Relative));
+
+                case PMHistoryModel.HistoryType.CreatePinMessage:
+                    return new BitmapImage(new Uri("/Images/Icons/bubble_white_icon.png", UriKind.Relative));
+
+                default:
+                   return DefaultHistoryTypeImg();
+            }
+        }
+
+        private void CreateHistoryItemUi(PMHistoryModel item)
+        {
+            var historyImage = new Image { Height = 50, Width = 50, Source = GetHistoryTypeImg(item.historyType) };
+            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center, Text = item.Content };
             var messageDateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12, TextAlignment = TextAlignment.Right, Text = "05/21/14 at 5:01 PM" };
 
             var itemMainGrid = new Grid();
@@ -67,7 +85,7 @@ namespace PinMessaging.View
 
             itemMainGrid.Children.Add(historyImage);
 
-            var pinContentStackPanel = new StackPanel {Margin = new Thickness(20,0,0,0)};
+            var pinContentStackPanel = new StackPanel { Margin = new Thickness(20, 0, 0, 0) };
             pinContentStackPanel.Children.Add(messageTextBlock);
             pinContentStackPanel.Children.Add(messageDateTextBlock);
 
@@ -82,13 +100,19 @@ namespace PinMessaging.View
             var line = new Canvas { Background = (Brush)Resources["PhoneProgressBarBackgroundBrush"], Height = 5 };
 
             HistoryItemsStackPanel.Children.Add(line);
-                    
-            Logs.Output.ShowOutput("UPDATE UI");
+        }
+
+        private void UpdateHistoryUi()
+        {
+            foreach (var historyItem in PMData.UserHistoryList)
+            {
+                CreateHistoryItemUi(historyItem);
+            }
         }
 
         /*CONTACTS*/
 
-        private void RemoveFavoriteUI()
+        private void RemoveFavoriteUi()
         {
             ContactImage.Source = new BitmapImage(new Uri("/Images/Icons/flag_orange_icon@2x.png", UriKind.Relative));
             ContactTextBlock.Text = AppResources.Unfriend;
@@ -105,7 +129,7 @@ namespace PinMessaging.View
             if (PMData.WasFavoriteAddedSuccess == true)
             {
                 PMMapContactController.AddNewFavoris(_user);
-                RemoveFavoriteUI();                
+                RemoveFavoriteUi();                
             }
             AddRemoveFavoriteButtonLock(false);
 

@@ -103,7 +103,7 @@ namespace PinMessaging.Other
 
                 if (Boolean.Parse(item[0].ToString()) == false)
                 {
-                    Logs.Error.ShowError("ParseCreatePinMessage: unknown error", Logs.Error.ErrorsPriority.NotCritical);
+                    Logs.Error.ShowError("ParseUserHistory: unknown error", Logs.Error.ErrorsPriority.NotCritical);
                 }
                 else
                 {
@@ -112,7 +112,7 @@ namespace PinMessaging.Other
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("ParseCreatePinMessage: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("ParseUserHistory: could not deserialize the JSON object." + exp.Message, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 
