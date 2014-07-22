@@ -24,7 +24,7 @@ namespace PinMessaging.View
 
             if (PMData.User != null)
             {
-                LoginTextBlock.Text = PMData.User.Login;
+                LoginTextBlock.Text = PMData.User.Pseudo;
                 PointsTextBlock.Text = PMData.User.Points;
                 PinsCreatedTextBlock.Text = PMData.User.NbrPin;
                 CommentsTextBlock.Text = PMData.User.NbrMessage;

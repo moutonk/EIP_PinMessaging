@@ -26,7 +26,7 @@ namespace PinMessaging.View
             {
                 _user = PMData.User.Clone();
 
-                UserNameTextBlock.Text = _user.Login;
+                UserNameTextBlock.Text = _user.Pseudo;
 
                 //if the user is already in the contact list
                 if (PMData.UserList.Any(user => user.Id == _user.Id) == true)

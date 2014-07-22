@@ -347,8 +347,11 @@ namespace PinMessaging.View
 
         private void BkwOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
         {
-            if (Map.ZoomLevel + 0.10d < 20 && Map.ZoomLevel -0.10d > 1)
+            if (Map.ZoomLevel + 0.10d < 20 && Map.ZoomLevel - 0.10d > 1)
+            {
                 Map.ZoomLevel += 0.10d;
+                UpdateMapCenter();
+            }
         }
 
         private void MapCenterOn(GeoCoordinate pos)
@@ -770,7 +773,7 @@ namespace PinMessaging.View
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
 
             var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/8.jpg", UriKind.Relative)) };
-            var contactName = new TextBlock() { Text = PMData.User.Login, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
+            var contactName = new TextBlock() { Text = PMData.User.Pseudo, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
             var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0)};
             /*var privateMsg = new TextBlock() { Text = "Private message", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
             var userProfil = new TextBlock() { Text = "User profil", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
@@ -853,7 +856,7 @@ namespace PinMessaging.View
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
 
             var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/8.jpg", UriKind.Relative)), Tag = user };
-            var contactName = new TextBlock() { Text = user.Login, Tag = user, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0) };
+            var contactName = new TextBlock() { Text = user.Pseudo, Tag = user, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0) };
             var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0) };
 
             contactImg.Tap += ContactNameOnTap;
@@ -1301,8 +1304,17 @@ namespace PinMessaging.View
             DropPinProgressBar.IsIndeterminate = false;
             DropPinButton.IsEnabled = true;
             CloseMenuDownButton_Click(null, null);
-            AddPinToMyPinsUi(PinCreateModel);
-            //AddLastPinToMyPins();
+
+            try
+            {
+                AddPinToMyPinsUi(PMData.PinsList.Last());
+      
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("PostPinButton_ClickPostJob: could not get the last pin:", exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+                  //AddLastPinToMyPins();
             //NewPinPivotItem.IsEnabled = true;
         }
 
@@ -1310,7 +1322,7 @@ namespace PinMessaging.View
         {
             foreach (var item in TargetLongListSelector.SelectedItems)
             {
-                Logs.Output.ShowOutput((item as PMUserModel).Login);
+                Logs.Output.ShowOutput((item as PMUserModel).Pseudo);
             }
 
             if (_geoLocation == null)

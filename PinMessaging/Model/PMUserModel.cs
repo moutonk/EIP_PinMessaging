@@ -18,7 +18,7 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(null)] public string Points { get; set; }
         [JsonProperty] [DefaultValue(null)] public string NbrPin { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Email { get; set; }
-        [JsonProperty] [DefaultValue(null)] public string Login { get; set; }
+        [JsonProperty] [DefaultValue(null)] public string Pseudo { get; set; }
         [JsonProperty] [DefaultValue(null)] public string SimId { get; set; }
         [JsonProperty] [DefaultValue(null)] public PMGradeModel Grade { get; set; }
                        [DefaultValue(null)] public Image ProfilPicture { get; set; }
@@ -33,7 +33,7 @@ namespace PinMessaging.Model
                 Points = Points,
                 NbrPin = NbrPin,
                 Email = Email,
-                Login = Login,
+                Pseudo = Pseudo,
                 SimId = SimId,
                 Grade = Grade
             };
@@ -49,7 +49,7 @@ namespace PinMessaging.Model
                                         (Points == null ? "" : " points:" + Points) +
                                         (NbrPin == null ? "" : " nbrpin:" + NbrPin) +
                                         (Email == null ? "" : " email:" + Email) +
-                                        (Login == null ? "" : " login:" + Login) +
+                                        (Pseudo == null ? "" : " login:" + Pseudo) +
                                         (CreatedTime == null ? "" : " createdtime:" + CreatedTime) +
                                         (Grade == null ? "" : " grade:" + Grade));
             }

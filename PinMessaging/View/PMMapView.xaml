@@ -137,7 +137,7 @@
                         </DataTemplate>
                     </phone:Pivot.HeaderTemplate>
 
-                    <phone:PivotItem x:Name="MyPinsPivotItem" Header="{Binding LocalizedResources.MyPins, Source={StaticResource LocalizedStrings}}" Width="420" Height="650">
+                    <phone:PivotItem x:Name="MyPinsPivotItem" Header="{Binding LocalizedResources.MyPinsPivot, Source={StaticResource LocalizedStrings}}" Width="420" Height="650">
                         <ScrollViewer>
                             <StackPanel Orientation="Vertical" x:Name="MyPinsStackPanel" Margin="20,0,0,0">
                             </StackPanel>
