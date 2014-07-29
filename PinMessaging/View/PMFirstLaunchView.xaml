@@ -16,14 +16,16 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock FontSize="{StaticResource PMNormalFontSize}" Text="{Binding Path=LocalizedResources.HaveAccountOrNot, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="29,350,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="85" Width="420" TextAlignment="Center"/>
+        <TextBlock FontSize="{StaticResource PMNormalFontSize}" Text="{Binding Path=LocalizedResources.HaveAccountOrNot, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="30,452,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Height="66" Width="420" TextAlignment="Center"/>
         <Button x:Name="ButtonYes" FontSize="{StaticResource PMNormalFontSize}" Background="{StaticResource PMOrange}" Content="{Binding Path=LocalizedResources.Yes, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="92,523,0,0" Grid.Row="1" VerticalAlignment="Top" Height="87" Width="146" Click="ButtonYesClick"/>
         <Button x:Name="ButtonNo" FontSize="{StaticResource PMNormalFontSize}" Background="{StaticResource PMOrange}" Content="{Binding Path=LocalizedResources.No, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="243,523,0,0" Grid.Row="1" VerticalAlignment="Top" Height="87" Width="146" Click="ButtonNoClick"/>
-        <Grid x:Name="GridLogo" HorizontalAlignment="Left" Height="212" Margin="89,63,0,0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" Width="312">
+        <Grid x:Name="GridLogo" HorizontalAlignment="Center" Height="250" Margin="0,30,0,0" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" Width="220">
             <Grid.Background>
-                <ImageBrush x:Name="Img" ImageSource="/Images\Logos\logo_orange.png"></ImageBrush>
+                <ImageBrush x:Name="Img" ImageSource="/Images\Logos\3_new_logo_little@2x.png"></ImageBrush>
             </Grid.Background>
         </Grid>
+        <TextBlock Grid.Row="1" Text="PinMessaging" Foreground="{StaticResource PMOrange}" Margin="0,-150,0,0" FontFamily="/PinMessaging;component/Fonts/Fonts.zip#Copperplate Gothic Bold" FontSize="33.333" Height="50" HorizontalAlignment="Center"></TextBlock>
+
     </Grid>
 
 </phone:PhoneApplicationPage>

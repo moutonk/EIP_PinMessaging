@@ -11,7 +11,7 @@
     <!--Ressources d'applications-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:PinMessaging" x:Key="LocalizedStrings"/>
-
+        
         <SolidColorBrush x:Key="PMOrange">
             <Color>#FE953B</Color>
         </SolidColorBrush>

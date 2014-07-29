@@ -40,7 +40,7 @@ namespace PinMessaging.View
         public void AttachAd(Image ad)
         {
             if (GridLogo != null)
-                GridLogo.Children.Add(ad);
+                ; //GridLogo.Children.Add(ad);
             else
                 Logs.Error.ShowError("attachAd: GridLogo is null", Logs.Error.ErrorsPriority.NotCritical);
         }

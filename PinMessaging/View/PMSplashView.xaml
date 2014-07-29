@@ -13,8 +13,9 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True">
 
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PMGrey}">
-        <Grid x:Name="GridLogo" HorizontalAlignment="Left" Height="212" Margin="89,248,0,0" VerticalAlignment="Top" Width="312">
+    <Grid x:Name="LayoutRoot">
+        <Image Source="/Images/Default-568h@2x.png" Stretch="Fill"></Image>
+        <Grid x:Name="GridLogo" HorizontalAlignment="Left" Height="250" Margin="129,175,0,0" VerticalAlignment="Top" Width="220">
             <Grid.RenderTransform>
                 <TranslateTransform Y="0" X="0"/>
             </Grid.RenderTransform>

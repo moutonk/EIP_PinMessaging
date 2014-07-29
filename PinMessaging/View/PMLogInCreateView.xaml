@@ -52,10 +52,8 @@
 				</Grid>
 				<PasswordBox x:Name="TextBoxPassword" KeyDown="TextBoxPassword_OnKeyDown" FontSize="{StaticResource PMNormalFontSize}" HorizontalAlignment="Center" Margin="-10,119,-16,0" VerticalAlignment="Top" Width="443" Password="kkkkkk"/>
 			</Grid>
-			<Grid x:Name="GridLogo" HorizontalAlignment="Left" Height="212" Margin="89,63,0,0" VerticalAlignment="Top" Width="312">
-				<Grid.Background>
-					<ImageBrush ImageSource="/Images\Logos\logo_black.png"/>
-				</Grid.Background>
+			<Grid x:Name="GridLogo" Height="250" HorizontalAlignment="Center" Margin="0,65,0,453" Width="220">
+			
 			</Grid>
 			<Grid x:Name="GridPageTitle" Opacity="0.7" HorizontalAlignment="Left" Height="238" Margin="0,-238,0,0" VerticalAlignment="Top" Width="480">
 				<Grid.Resources>

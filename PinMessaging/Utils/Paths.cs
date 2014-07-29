@@ -12,8 +12,8 @@ namespace PinMessaging.Utils
         public static readonly string CurrentUserProfilPathString = "/View/PMCurrentUserProfilView.xaml";
 
         public static readonly Uri LogInView = new Uri("/View/Logos/PMLogInView.xaml", UriKind.Relative);
-        public static readonly Uri LogoSplashOrange = new Uri("/Images/Logos/logo_orange.png", UriKind.Relative);
-        public static readonly Uri LogoSplashBlack = new Uri("/Images/Logos/logo_black.png", UriKind.Relative);
+        public static readonly Uri LogoSplashOrange = new Uri("/Images/Logos/3_new_logo_little@2x.png", UriKind.Relative);
+        public static readonly Uri LogoSplashBlack = new Uri("/Images/Logos/3_new_logo_little@2x.png", UriKind.Relative);
         public static readonly Uri MapView = new Uri("/View/PMMapView.xaml", UriKind.Relative);   
         public static readonly Uri FirstLaunch = new Uri("/View/PMFirstLaunchView.xaml", UriKind.Relative);
         public static readonly Uri SignInCreate = new Uri("/View/PMLogInCreateView.xaml", UriKind.Relative);
