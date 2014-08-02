@@ -109,11 +109,8 @@ namespace PinMessaging.Utils
 
         public static DateTime ConvertFromUnixTimestamp(double? timestamp)
         {
-            Logs.Output.ShowOutput("Max: " + double.MaxValue.ToString());
-            Logs.Output.ShowOutput("Min: " + double.MinValue.ToString());
-            Logs.Output.ShowOutput(timestamp.ToString());
             var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            return timestamp == null ? origin : origin.AddSeconds((double)timestamp);
+            return timestamp == null ? origin : origin.AddMilliseconds((double)timestamp);
         }
     }
 }

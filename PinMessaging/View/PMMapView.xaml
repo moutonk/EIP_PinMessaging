@@ -318,7 +318,7 @@
                                 
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                     <TextBlock x:Name="PinTitleTextBlock" TextWrapping="Wrap" Text="message public" FontSize="35" Margin="10,0,0,5"></TextBlock>
-                                    <TextBlock x:Name="PinCreationTimeDescriptionTextBlock" Foreground="{StaticResource PMOrange}" TextWrapping="Wrap" FontSize="20" Margin="10,0,0,0" Text="07/08/2014"/>
+                                    <TextBlock x:Name="PinCreationTimeDescriptionTextBlock" Foreground="{StaticResource PMOrange}" TextWrapping="Wrap" FontSize="20" Margin="10,0,0,0"/>
                                 </StackPanel>
                             </Grid>
 
@@ -353,7 +353,7 @@
 
                             <StackPanel Grid.Row="4" Margin="20,10,20,0">
                                 <TextBlock x:Name="CommentTitleDescriptionTextBlock" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="35" Text="commentaires"></TextBlock>
-                                <controls:ChatBubbleTextBox Name="CommentChatBubble" TextWrapping="Wrap" ChatBubbleDirection="LowerRight" LostFocus="PinCommentContentTextBox_OnLostFocus" GotFocus="PinCommentContentTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></controls:ChatBubbleTextBox>
+                                <controls:ChatBubbleTextBox Name="CommentChatBubble" TextChanged="CommentChatBubble_OnTextInput" TextWrapping="Wrap" ChatBubbleDirection="LowerRight" LostFocus="PinCommentContentTextBox_OnLostFocus" GotFocus="PinCommentContentTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></controls:ChatBubbleTextBox>
                                 <TextBlock x:Name="PinCommentTipContentTextBox" Tap="PinCommentTipContentTextBox_OnTap" TextWrapping="Wrap" Text="Ajouter un commentaire" VerticalAlignment="Center" Foreground="Black" FontSize="20" Margin="10,-75,29,0" ></TextBlock>
                                 <TextBlock Name="MeTextBlock" Text="vous" TextAlignment="Right" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
                                 <StackPanel Name="CommentStackPanel"/>

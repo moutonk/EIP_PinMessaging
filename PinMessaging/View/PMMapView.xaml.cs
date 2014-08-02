@@ -946,12 +946,9 @@ namespace PinMessaging.View
                     TextAlignment = TextAlignment.Left
                 };
 
-                
-
                 var creationDate = new TextBlock()
                 {
-                    Text = tb.CreatedTime,
-                    FontSize = 25,
+                    FontSize = 20,
                     Foreground = new SolidColorBrush(Colors.DarkGray),
                     TextAlignment = TextAlignment.Right
                 };
@@ -961,7 +958,7 @@ namespace PinMessaging.View
                 if (res != null)
                 {
                     var d = Utils.Utils.ConvertFromUnixTimestamp(res);
-                    creationDate.Text = d.ToShortDateString();
+                    creationDate.Text = d.ToLongDateString();
                 }
                  
                 var grid = new Grid();
@@ -1007,6 +1004,14 @@ namespace PinMessaging.View
             PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType + (pin.Private == true ? 6 : 0)];
 
             DownMenuTitle.Text = pin.Title;
+
+            var res = Utils.Utils.ConvertStringToDouble(pin.CreationTime);
+
+            if (res != null)
+            {
+                var d = Utils.Utils.ConvertFromUnixTimestamp(res);
+                PinCreationTimeDescriptionTextBlock.Text = d.ToLongDateString();
+            }
 
             var pic = PMData.GetUserProfilPicture(pin.AuthorId);
 
@@ -1545,8 +1550,31 @@ namespace PinMessaging.View
         private void PinCommentContentTextBox_OnGotFocus(object sender, RoutedEventArgs e)
         {
             CreateAppBarComment();
+
+            LockUnlockCommentCheck(false);
+
             ApplicationBar.IsVisible = true;
             PinCommentTipContentTextBox.Visibility = Visibility.Collapsed;
+        }
+
+        private void LockUnlockCommentCheck(bool enable)
+        {
+            try
+            {
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = enable;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("PinCommentContentTextBox_OnGotFocus: cannot enable appbar check button", exp, Logs.Error.ErrorsPriority.NotCritical);
+            }   
+        }
+
+        private void CommentChatBubble_OnTextInput(object sender, TextChangedEventArgs textChangedEventArgs)
+        {
+            if (CommentChatBubble.Text.Length == 0)
+                LockUnlockCommentCheck(false);
+            else
+                LockUnlockCommentCheck(true);
         }
     }
 }
