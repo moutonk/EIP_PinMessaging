@@ -7,6 +7,7 @@
     xmlns:maps="clr-namespace:Microsoft.Phone.Maps.Controls;assembly=Microsoft.Phone.Maps"
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Coding4Fun.Toolkit.Controls;assembly=Coding4Fun.Toolkit.Controls"
     x:Class="PinMessaging.View.PMMapView"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -152,7 +153,7 @@
                 </phone:Pivot>
             </Grid>
 
-            <Grid x:Name="MainVerticalGrid" >
+            <Grid x:Name="MainVerticalGrid">
 
                 <Grid.Resources>
                     <Storyboard x:Name="MoveAnimationUp">
@@ -199,7 +200,7 @@
 
                     <ProgressBar x:Name="ProgressBarMap" Visibility="Visible" IsIndeterminate="True" Foreground="{StaticResource PMOrange}"/>
 
-                    <Grid Grid.Row="1" x:Name="GridMap" >
+                    <Grid Grid.Row="1" x:Name="GridMap">
                         <maps:Map x:Name="Map" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true" Margin="0,0,0,-89"/>
                         <Button Click="Center_Click" HorizontalAlignment="Left" Margin="42,11,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
                             <Button.Background>
@@ -273,7 +274,7 @@
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="0"/>
                         <RowDefinition Height="0"/>
-                        <RowDefinition Height="0"/>
+                        <RowDefinition Height="484"/>
                         <RowDefinition Height="0"/>
                     </Grid.RowDefinitions>
 
@@ -302,9 +303,9 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="150"></RowDefinition>
-                                <RowDefinition Height="300"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="0"></RowDefinition>
+                                <RowDefinition Height="100"></RowDefinition>
+                                <RowDefinition Height="225"></RowDefinition>
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
@@ -315,47 +316,52 @@
                                 
                                 <Image Name="PinDescriptionImage" Grid.Column="0" Margin="10,10,10,10"/>
                                 
-                                <StackPanel Grid.Column="1">
-                                    <TextBlock x:Name="PinTitleTextBlock" TextWrapping="Wrap" Text="{Binding LocalizedResources.PinTitle, Source={StaticResource LocalizedStrings}}" FontSize="25"  Margin="10,10,0,5" Foreground="{StaticResource PMOrange}"></TextBlock>
-                                    <TextBlock x:Name="PinTitleDescriptionTextBlock" TextWrapping="Wrap" FontWeight="Bold" FontSize="20" Text="Omg j'adore!!!!!!" Height="53"/>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock x:Name="PinTitleTextBlock" TextWrapping="Wrap" Text="message public" FontSize="35" Margin="10,0,0,5"></TextBlock>
+                                    <TextBlock x:Name="PinCreationTimeDescriptionTextBlock" TextWrapping="Wrap" FontSize="20" Margin="10,0,0,0" Text="07/08/2014" Foreground="{StaticResource PMOrange}"/>
                                 </StackPanel>
                             </Grid>
 
-                            <StackPanel Grid.Row="1">
-                                <TextBlock x:Name="PinMessageTextBlock"  Text="{Binding LocalizedResources.PinMessage, Source={StaticResource LocalizedStrings}}" FontSize="25" Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
-                                <TextBlock x:Name="PinMessageDescriptionTextBlock" TextWrapping="Wrap" FontSize="20" Margin="30,0,30,0" Text="Ceci est juste un text ecrit en brut pour faire un test sur l'ecran. Je sais que j'aurai pu faire un copier coller mais mes talents d'écrivains sont bien plus rénomé que ceux des journalistes écrivant au Monde. Blabla bla juste piur gagner quelque ligne et voir si tout est bon."></TextBlock>
+                            <StackPanel Grid.Row="1" Margin="20,0,20,0">
+                                <controls:ChatBubble ChatBubbleDirection="LowerLeft" Background="DarkGray" BorderBrush="DarkGray">
+                                    <controls:ChatBubble.Content>
+                                        <TextBlock x:Name="PinMessageDescriptionTextBlock" Margin="0,0,0,5" Foreground="Black" TextWrapping="Wrap" FontSize="20" Text="Ceci est juste un text ecrit en brut pour faire un test sur l'ecran. Je saiue ligne et voir si tout est bon.">
+                                        </TextBlock>
+                                    </controls:ChatBubble.Content>
+                                </controls:ChatBubble>
                             </StackPanel>
 
-                            <StackPanel Grid.Row="2">
-                                <TextBlock x:Name="PinAuthorTextBlock" Text="{Binding LocalizedResources.PinAuthor, Source={StaticResource LocalizedStrings}}" FontSize="25" Margin="10,10,0,0" Foreground="{StaticResource PMOrange}"></TextBlock>
-                                <Grid>
+                            <StackPanel Grid.Row="2" x:Name="PinImageStackPanel" Margin="20,20,20,20">
+                                <Image x:Name="PinImage"  Stretch="Uniform"></Image>
+                            </StackPanel>
+
+                            <Grid Grid.Row="3" Margin="20,10,20,0">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="150"></ColumnDefinition>
+                                        <ColumnDefinition Width="75"></ColumnDefinition>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*"></RowDefinition>
                                     </Grid.RowDefinitions>
 
-                                    <Image Grid.Column="0" Grid.Row="0" Name="AuthorPicture" Source="/Images/Icons/neutral_profil.jpg" Tap="PinAuthorDescriptionTextBlock_OnTap" Stretch="Uniform" Margin="30,20,0,20"/>
-                                    <TextBlock Grid.Column="1" Grid.Row="0" x:Name="PinAuthorDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="30,0,0,20" FontSize="25"></TextBlock>
-                                </Grid>
-                            </StackPanel>
+                                    <Image Grid.Column="0" Grid.Row="0" Name="AuthorPicture" Source="/Images/Icons/neutral_profil.jpg" Tap="PinAuthorDescriptionTextBlock_OnTap" Stretch="Uniform" Margin="0,0,0,0"/>
+                                    <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Center">
+                                        <TextBlock x:Name="PinAuthortitleDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="35" Text="auteur"></TextBlock>
+                                        <TextBlock x:Name="PinAuthorDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="15,0,0,10" FontSize="25" Text="keke" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                    </StackPanel>
+                            </Grid>
 
-                            <StackPanel Grid.Row="3" x:Name="PinImageStackPanel">
-                                <TextBlock x:Name="PinImageTextBlock" Text="{Binding LocalizedResources.PinImage, Source={StaticResource LocalizedStrings}}" FontSize="25" Margin="10,10,0,0" Foreground="{StaticResource PMOrange}"></TextBlock>
-                                <Image x:Name="PinImage" Height="250" Margin="30,20,30,20" Stretch="Uniform"></Image>
-                            </StackPanel>
-                            
-                            <StackPanel Grid.Row="4">
-                                <TextBlock x:Name="PinCommentTextBlock"  Text="COMMENTS" FontSize="25"  Margin="10,10,0,10" Foreground="{StaticResource PMOrange}"></TextBlock>
-                                <Grid x:Name="PinCommentCreateGrid">
+                            <StackPanel Grid.Row="4" Margin="10,10,0,0">
+                                <Grid x:Name="PinCommentCreateGrid" >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*"></ColumnDefinition>
                                         <ColumnDefinition Width="75"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0" x:Name="PinCommentContentTextBox" TextWrapping="Wrap" BorderThickness="0" FontSize="25" Margin="20,0,0,0"></TextBox>
-                                    <Button Grid.Column="1" x:Name="PinCommentPostButton" Click="PinCommentPostButton_OnClick" BorderThickness="0" Background="{StaticResource PMOrange}" Margin="-10,0,10,0" Content="GO"></Button>
+                                    <StackPanel Grid.Column="0">
+                                        <TextBox x:Name="PinCommentContentTextBox" LostFocus="PinCommentContentTextBox_OnLostFocus" TextWrapping="Wrap" BorderThickness="0" FontSize="25" Margin="0,0,0,0"></TextBox>
+                                        <TextBlock x:Name="PinCommentTipContentTextBox" Tap="PinCommentTipContentTextBox_OnTap" TextWrapping="Wrap" Text="Add a comment" VerticalAlignment="Center" Foreground="Black" FontSize="20" Margin="20,-50,29,19" ></TextBlock>
+                                    </StackPanel>
+                                    <Button Grid.Column="1" x:Name="PinCommentPostButton" Click="PinCommentPostButton_OnClick" BorderThickness="0" Background="{StaticResource PMOrange}" Margin="-10,0,0,0" Content="GO"></Button>
                                 </Grid>
                                 <StackPanel Name="CommentStackPanel">
                                 </StackPanel>

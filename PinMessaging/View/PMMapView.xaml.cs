@@ -942,15 +942,13 @@ namespace PinMessaging.View
 
             pinC.GetPinMessage(pin);
 
-            PinTitleDescriptionTextBlock.Text = pin.Title;
-            PinMessageDescriptionTextBlock.Text = pin.Content + (pin.PinType == PMPinModel.PinsType.Event ? Environment.NewLine +
-                                                                                                            "Time of the event: " +
+            PinMessageDescriptionTextBlock.Text = pin.Content + (pin.PinType == PMPinModel.PinsType.Event ? Environment.NewLine + "L'évènement se déroule le " +
                                                                                                             (pin.DateTime != null ? pin.DateTime.Aggregate("", (current, keyValuePair) => current + (keyValuePair + " ")) : "null") : "");
             PinAuthorDescriptionTextBlock.Text = pin.Author;
             PinAuthorDescriptionTextBlock.Tag = pin;
             PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType + (pin.Private == true ? 6 : 0)];
 
-            DownMenuTitle.Text = pin.Author;
+            DownMenuTitle.Text = pin.Title;
 
             var pic = PMData.GetUserProfilPicture(pin.AuthorId);
 
@@ -961,12 +959,12 @@ namespace PinMessaging.View
 
             if (pin.Url != null)
             {
-                UnderMenuPinDescriptionGrid.RowDefinitions[3].Height = new GridLength(300);
+                UnderMenuPinDescriptionGrid.RowDefinitions[2].Height = new GridLength(300);
                 PinImage.Source = PMWebService.DownloadImageUrl(pin.Url);
             }
             else
             {
-                UnderMenuPinDescriptionGrid.RowDefinitions[3].Height = new GridLength(0);
+                UnderMenuPinDescriptionGrid.RowDefinitions[2].Height = new GridLength(0);
             }
 
             _currentPinFocused = pin;
@@ -1397,6 +1395,18 @@ namespace PinMessaging.View
         {
             PinCommentContentTextBox.Text = "";
             AddCommentsToUi();
+        }
+
+        private void PinCommentContentTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PinCommentContentTextBox.Text.Length == 0)  
+                PinCommentTipContentTextBox.Visibility = Visibility.Visible;
+        }
+
+        private void PinCommentTipContentTextBox_OnTap(object sender, GestureEventArgs e)
+        {
+            Logs.Output.ShowOutput(PinCommentContentTextBox.Focus().ToString());
+            PinCommentTipContentTextBox.Visibility = Visibility.Collapsed;
         }
     }
 }
