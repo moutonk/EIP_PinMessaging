@@ -217,6 +217,8 @@
     <Content Include="Images\Icons\bubble_orange_icon.png" />
     <Content Include="Images\Icons\bubble_white_icon%402x.png" />
     <Content Include="Images\Icons\bubble_white_icon.png" />
+    <Content Include="Images\Icons\cancel.png" />
+    <Content Include="Images\Icons\check.png" />
     <Content Include="Images\Icons\contact_orange_icon%402x.png" />
     <Content Include="Images\Icons\contact_orange_icon.png" />
     <Content Include="Images\Icons\contact_orange_icon_appbar.png" />

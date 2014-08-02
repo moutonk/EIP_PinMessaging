@@ -32,13 +32,29 @@ namespace PinMessaging.Utils
             return num;
         }
 
-        public static int ConvertStringToInt(string d)
+        public static int? ConvertStringToInt(string d)
         {
-            int num = 0;
+            int? num = 0;
 
             try
             {
                 num = int.Parse(d, CultureInfo.InvariantCulture);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+
+            return num;
+        }
+
+        public static double? ConvertStringToDouble(string d)
+        {
+            double? num = 0;
+
+            try
+            {
+                num = double.Parse(d, CultureInfo.InvariantCulture);
             }
             catch (Exception exp)
             {
@@ -89,6 +105,15 @@ namespace PinMessaging.Utils
                 return false;
             }
             return true;
+        }
+
+        public static DateTime ConvertFromUnixTimestamp(double? timestamp)
+        {
+            Logs.Output.ShowOutput("Max: " + double.MaxValue.ToString());
+            Logs.Output.ShowOutput("Min: " + double.MinValue.ToString());
+            Logs.Output.ShowOutput(timestamp.ToString());
+            var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return timestamp == null ? origin : origin.AddSeconds((double)timestamp);
         }
     }
 }

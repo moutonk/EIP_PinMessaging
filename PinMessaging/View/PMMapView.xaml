@@ -29,11 +29,11 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
 
-            <shell:ApplicationBarIconButton IconUri="/Images/Menu/menu_icon_appbar.png" Text="Menu" Click="OpenClose_Left"/>
+            <!--<shell:ApplicationBarIconButton IconUri="/Images/Menu/menu_icon_appbar.png" Text="Menu" Click="OpenClose_Left"/>
             <shell:ApplicationBarIconButton IconUri="/Images/Icons/flag_orange_icon_appbar.png" Text="Notifications" Click="MenuDownNotification_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Images/Icons/contact_orange_icon_appbar.png" Text="Contacts" Click="MenuDownContacts_OnClick"/>
             <shell:ApplicationBarIconButton IconUri="/Images/Icons/logo_flat_orange_appbar.png" Text="Pins" Click="Open_Right"/>
-
+-->
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="refresh pins" Click="ApplicationBarMenuItemRefresh_OnClick"/>
                 <shell:ApplicationBarMenuItem Text="create pin" Click="ApplicationBarMenuItemCreate_OnClick"/>
@@ -305,7 +305,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                                 <RowDefinition Height="0"></RowDefinition>
                                 <RowDefinition Height="100"></RowDefinition>
-                                <RowDefinition Height="225"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
 
                             <Grid Grid.Row="0">
@@ -318,15 +318,15 @@
                                 
                                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
                                     <TextBlock x:Name="PinTitleTextBlock" TextWrapping="Wrap" Text="message public" FontSize="35" Margin="10,0,0,5"></TextBlock>
-                                    <TextBlock x:Name="PinCreationTimeDescriptionTextBlock" TextWrapping="Wrap" FontSize="20" Margin="10,0,0,0" Text="07/08/2014" Foreground="{StaticResource PMOrange}"/>
+                                    <TextBlock x:Name="PinCreationTimeDescriptionTextBlock" Foreground="{StaticResource PMOrange}" TextWrapping="Wrap" FontSize="20" Margin="10,0,0,0" Text="07/08/2014"/>
                                 </StackPanel>
                             </Grid>
 
                             <StackPanel Grid.Row="1" Margin="20,0,20,0">
                                 <controls:ChatBubble ChatBubbleDirection="LowerLeft" Background="DarkGray" BorderBrush="DarkGray">
                                     <controls:ChatBubble.Content>
-                                        <TextBlock x:Name="PinMessageDescriptionTextBlock" Margin="0,0,0,5" Foreground="Black" TextWrapping="Wrap" FontSize="20" Text="Ceci est juste un text ecrit en brut pour faire un test sur l'ecran. Je saiue ligne et voir si tout est bon.">
-                                        </TextBlock>
+                                            <TextBlock x:Name="PinMessageDescriptionTextBlock" Margin="0,0,0,5" Foreground="Black" TextWrapping="Wrap" FontSize="20" Text="Ceci est juste un text ecrit en brut pour faire un test sur l'ecran. Je saiue ligne et voir si tout est bon.">
+                                            </TextBlock>
                                     </controls:ChatBubble.Content>
                                 </controls:ChatBubble>
                             </StackPanel>
@@ -346,25 +346,17 @@
 
                                     <Image Grid.Column="0" Grid.Row="0" Name="AuthorPicture" Source="/Images/Icons/neutral_profil.jpg" Tap="PinAuthorDescriptionTextBlock_OnTap" Stretch="Uniform" Margin="0,0,0,0"/>
                                     <StackPanel Grid.Column="1" Grid.Row="0" VerticalAlignment="Center">
-                                        <TextBlock x:Name="PinAuthortitleDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="35" Text="auteur"></TextBlock>
-                                        <TextBlock x:Name="PinAuthorDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="15,0,0,10" FontSize="25" Text="keke" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                    <TextBlock x:Name="PinAuthortitleDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="15,0,0,0" FontSize="35" Text="auteur"></TextBlock>
+                                    <TextBlock x:Name="PinAuthorDescriptionTextBlock" Tap="PinAuthorDescriptionTextBlock_OnTap" VerticalAlignment="Center" Margin="15,0,0,10" FontSize="25" Text="keke" Foreground="{StaticResource PMOrange}"></TextBlock>
                                     </StackPanel>
                             </Grid>
 
-                            <StackPanel Grid.Row="4" Margin="10,10,0,0">
-                                <Grid x:Name="PinCommentCreateGrid" >
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                        <ColumnDefinition Width="75"></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="0">
-                                        <TextBox x:Name="PinCommentContentTextBox" LostFocus="PinCommentContentTextBox_OnLostFocus" TextWrapping="Wrap" BorderThickness="0" FontSize="25" Margin="0,0,0,0"></TextBox>
-                                        <TextBlock x:Name="PinCommentTipContentTextBox" Tap="PinCommentTipContentTextBox_OnTap" TextWrapping="Wrap" Text="Add a comment" VerticalAlignment="Center" Foreground="Black" FontSize="20" Margin="20,-50,29,19" ></TextBlock>
-                                    </StackPanel>
-                                    <Button Grid.Column="1" x:Name="PinCommentPostButton" Click="PinCommentPostButton_OnClick" BorderThickness="0" Background="{StaticResource PMOrange}" Margin="-10,0,0,0" Content="GO"></Button>
-                                </Grid>
-                                <StackPanel Name="CommentStackPanel">
-                                </StackPanel>
+                            <StackPanel Grid.Row="4" Margin="20,10,20,0">
+                                <TextBlock x:Name="CommentTitleDescriptionTextBlock" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="35" Text="commentaires"></TextBlock>
+                                <controls:ChatBubbleTextBox Name="CommentChatBubble" TextWrapping="Wrap" ChatBubbleDirection="LowerRight" LostFocus="PinCommentContentTextBox_OnLostFocus" GotFocus="PinCommentContentTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></controls:ChatBubbleTextBox>
+                                <TextBlock x:Name="PinCommentTipContentTextBox" Tap="PinCommentTipContentTextBox_OnTap" TextWrapping="Wrap" Text="Ajouter un commentaire" VerticalAlignment="Center" Foreground="Black" FontSize="20" Margin="10,-75,29,0" ></TextBlock>
+                                <TextBlock Name="MeTextBlock" Text="vous" TextAlignment="Right" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                <StackPanel Name="CommentStackPanel"/>
                             </StackPanel>
 
                         </Grid>

@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Controls;
 using System.Device.Location;
 using Microsoft.Phone.Maps.Toolkit;
@@ -44,6 +45,7 @@ namespace PinMessaging.View
         {
             InitializeComponent();
 
+            CreateAppBarMap();
 
             bkw.WorkerReportsProgress = true;
             bkw.DoWork += BkwOnDoWork;
@@ -58,16 +60,11 @@ namespace PinMessaging.View
 
             try
             {
-                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Menu;
-                (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Notifications;
-                (ApplicationBar.Buttons[2] as ApplicationBarIconButton).Text = AppResources.Contacts;
-                (ApplicationBar.Buttons[3] as ApplicationBarIconButton).Text = AppResources.Pins;
-
                 (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.RefreshPins;
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("Loading ApplicationBar text error", exp, Logs.Error.ErrorsPriority.NotCritical);             
+                Logs.Error.ShowError("Loading ApplicationBar text error", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
      
 
@@ -928,16 +925,77 @@ namespace PinMessaging.View
 
         private void AddCommentsToUi()
         {
-            foreach (var tb in PMData.PinsCommentsListTmp.Select(comment => new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30, 0, 30, 0), Text = comment.Content }))
+            foreach (var tb in PMData.PinsCommentsListTmp)
+            {
+                var chatBubble = new ChatBubbleTextBox()
+                {
+                    Text = tb.Content,
+                    Background = new SolidColorBrush(Colors.DarkGray),
+                    BorderBrush = new SolidColorBrush(Colors.DarkGray),
+                    ChatBubbleDirection = ChatBubbleDirection.LowerLeft,
+                    IsReadOnly = true,
+                    TextWrapping = TextWrapping.Wrap
+                };
+                CommentStackPanel.Children.Add(chatBubble);
+
+                var authorName = new TextBlock()
+                {
+                    Text = tb.Author,
+                    FontSize = 25,
+                    Foreground = (Brush) App.Current.Resources["PMOrange"],
+                    TextAlignment = TextAlignment.Left
+                };
+
+                
+
+                var creationDate = new TextBlock()
+                {
+                    Text = tb.CreatedTime,
+                    FontSize = 25,
+                    Foreground = new SolidColorBrush(Colors.DarkGray),
+                    TextAlignment = TextAlignment.Right
+                };
+
+                var res = Utils.Utils.ConvertStringToDouble(tb.CreatedTime);
+
+                if (res != null)
+                {
+                    var d = Utils.Utils.ConvertFromUnixTimestamp(res);
+                    creationDate.Text = d.ToShortDateString();
+                }
+                 
+                var grid = new Grid();
+
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+                grid.ColumnDefinitions.Add(new ColumnDefinition());
+             
+                grid.Children.Add(authorName);
+                grid.Children.Add(creationDate);
+
+                Grid.SetColumn(authorName, 0);
+                Grid.SetColumn(creationDate, 1);
+
+                CommentStackPanel.Children.Add(grid);
+            }
+            
+            PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
+            PMData.PinsCommentsListTmp.Clear();
+
+            //   <controls:ChatBubbleTextBox Name="CommentChatBubble" ChatBubbleDirection="LowerRight" LostFocus="PinCommentContentTextBox_OnLostFocus" GotFocus="PinCommentContentTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray">
+
+
+            /*  foreach (var tb in PMData.PinsCommentsListTmp.Select(comment => new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30, 0, 30, 0), Text = comment.Content }))
             {
                 CommentStackPanel.Children.Add(tb);
             }
             PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
-            PMData.PinsCommentsListTmp.Clear();
+            PMData.PinsCommentsListTmp.Clear*/
         }
 
         public void PinTapped(PMPinModel pin)
         {
+            CommentStackPanel.Children.Clear();
+
             var pinC = new PMPinController(RequestType.GetPinMessages, GetPinMessages_Post);
 
             pinC.GetPinMessage(pin);
@@ -1384,28 +1442,110 @@ namespace PinMessaging.View
 
         /// ////////////////////////////////////////      Commments     ////////////////////////////////////////
 
-        private void PinCommentPostButton_OnClick(object sender, RoutedEventArgs e)
+        private void PinCommentPostButton_OnClick(object sender, EventArgs eventArgs)
         {
             var pinController = new PMPinController(RequestType.CreatePinMessage, PinCommentPostButton_PostResponse);
 
-            pinController.CreatePinMessage(_currentPinFocused.Id, PMPinModel.PinsContentType.Text, PinCommentContentTextBox.Text);
+            pinController.CreatePinMessage(_currentPinFocused.Id, PMPinModel.PinsContentType.Text, CommentChatBubble.Text);
+
+            CommentChatBubble.IsEnabled = false;
+            CommentChatBubble.IsEnabled = true;
         }
 
         private void PinCommentPostButton_PostResponse()
         {
-            PinCommentContentTextBox.Text = "";
+            CommentChatBubble.Text = "";
             AddCommentsToUi();
+        }
+
+        private void CreateAppBarMap()
+        {
+            ApplicationBar.Buttons.Clear();
+
+            var button1 = new ApplicationBarIconButton
+            {
+                IconUri = new Uri("/Images/Menu/menu_icon_appbar.png", UriKind.Relative),
+                Text = AppResources.Menu
+            };
+            button1.Click += OpenClose_Left;
+
+            var button2 = new ApplicationBarIconButton
+            {
+                IconUri = new Uri("/Images/Icons/flag_orange_icon_appbar.png", UriKind.Relative),
+                Text = AppResources.Notifications
+            };
+            button2.Click += MenuDownNotification_OnClick;
+
+            var button3 = new ApplicationBarIconButton
+            {
+                IconUri = new Uri("/Images/Icons/contact_orange_icon_appbar.png", UriKind.Relative),
+                Text = AppResources.Contacts
+            };
+            button3.Click += MenuDownContacts_OnClick;
+
+            var button4 = new ApplicationBarIconButton
+            {
+                IconUri = new Uri("/Images/Icons/logo_flat_orange_appbar.png", UriKind.Relative),
+                Text = AppResources.Pins
+            };
+            button4.Click += Open_Right;
+
+            ApplicationBar.Buttons.Add(button1);
+            ApplicationBar.Buttons.Add(button2);
+            ApplicationBar.Buttons.Add(button3);
+            ApplicationBar.Buttons.Add(button4);
+        }
+
+        private void CreateAppBarComment()
+        {
+            ApplicationBar.Buttons.Clear();
+
+            var button1 = new ApplicationBarIconButton
+            {
+                IconUri = new Uri("/Images/Icons/check.png", UriKind.Relative),
+                Text = "Valider"
+            };
+            button1.Click += PinCommentPostButton_OnClick;
+
+            var button2 = new ApplicationBarIconButton
+            {
+                IconUri = new Uri("/Images/Icons/cancel.png", UriKind.Relative),
+                Text = "Annuler"
+            };
+            button2.Click += PinCommentCancelButton_OnClick;
+
+            ApplicationBar.Buttons.Add(button1);
+            ApplicationBar.Buttons.Add(button2);
+        }
+
+        private void PinCommentCancelButton_OnClick(object sender, EventArgs e)
+        {
+            CreateAppBarMap();
+            CommentChatBubble.Text = "";
+            ApplicationBar.IsVisible = false;
+            CommentChatBubble.IsEnabled = false;
+            CommentChatBubble.IsEnabled = true;
         }
 
         private void PinCommentContentTextBox_OnLostFocus(object sender, RoutedEventArgs e)
         {
-            if (PinCommentContentTextBox.Text.Length == 0)  
+            if (CommentChatBubble.Text.Length == 0)
                 PinCommentTipContentTextBox.Visibility = Visibility.Visible;
+            else
+            {
+                ApplicationBar.IsVisible = false;                
+            }
         }
 
         private void PinCommentTipContentTextBox_OnTap(object sender, GestureEventArgs e)
         {
-            Logs.Output.ShowOutput(PinCommentContentTextBox.Focus().ToString());
+            CommentChatBubble.Focus();
+        }
+
+        private void PinCommentContentTextBox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            CreateAppBarComment();
+            ApplicationBar.IsVisible = true;
             PinCommentTipContentTextBox.Visibility = Visibility.Collapsed;
         }
     }
