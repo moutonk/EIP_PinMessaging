@@ -3,6 +3,8 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using Microsoft.Phone.Info;
 using Microsoft.Xna.Framework.GamerServices;
+using PinMessaging.Model;
+using PinMessaging.Resources;
 
 namespace PinMessaging.Utils
 {
@@ -112,5 +114,31 @@ namespace PinMessaging.Utils
             var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return timestamp == null ? origin : origin.AddMilliseconds((double)timestamp);
         }
+
+        public static Tuple<string, string, Uri> GetGradeInfo(PMGradeModel.GradeType grade)
+        {
+            switch (grade)
+            {
+                case PMGradeModel.GradeType.PointBronze:
+                    return new Tuple<string, string, Uri>(AppResources.GradePointCopper, AppResources.BadgePointCopper, null);
+
+                case PMGradeModel.GradeType.PointArgent:
+                    return new Tuple<string, string, Uri>(AppResources.GradePointSilver, AppResources.BadgePointSilver, null);
+
+                case PMGradeModel.GradeType.PointOr:
+                    return new Tuple<string, string, Uri>(AppResources.GradePointGold, AppResources.BadgePointGold, null);
+
+                case PMGradeModel.GradeType.Pin50:
+                    return new Tuple<string, string, Uri>(AppResources.GradePin50, AppResources.BadgePin50, null);
+
+                case PMGradeModel.GradeType.Message50:
+                    return new Tuple<string, string, Uri>(AppResources.GradeMessage50, AppResources.BadgeComments50, null);
+
+                case PMGradeModel.GradeType.Betatester:
+                    return new Tuple<string, string, Uri>(AppResources.GradeBetaTester, AppResources.BadgeBetatester, null);
+            }
+            return null;
+        }
+
     }
 }

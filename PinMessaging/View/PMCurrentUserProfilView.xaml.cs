@@ -29,7 +29,7 @@ namespace PinMessaging.View
                 PinsCreatedTextBlock.Text = PMData.User.NbrPin;
                 CommentsTextBlock.Text = PMData.User.NbrMessage;
 
-                var gradeInfos = GetGradeInfo(PMData.User.Grade.Type);
+                var gradeInfos = Utils.Utils.GetGradeInfo(PMData.User.Grade.Type);
                 if (gradeInfos != null)
                 {
                     GradeTextBlock.Text = gradeInfos.Item1;
@@ -68,31 +68,6 @@ namespace PinMessaging.View
         {
             if (num >= 0 && num < PivotProfil.Items.Count)
                 PivotProfil.SelectedIndex = num;
-        }
-
-        private Tuple<string, string, Uri> GetGradeInfo(PMGradeModel.GradeType grade)
-        {
-            switch (grade)
-            {
-                case PMGradeModel.GradeType.PointBronze:
-                    return new Tuple<string, string, Uri>(AppResources.GradePointCopper, AppResources.BadgePointCopper, null);
-
-                case PMGradeModel.GradeType.PointArgent:
-                    return new Tuple<string, string, Uri>(AppResources.GradePointSilver, AppResources.BadgePointSilver, null);
-
-                case PMGradeModel.GradeType.PointOr:
-                    return new Tuple<string, string, Uri>(AppResources.GradePointGold, AppResources.BadgePointGold, null);
-
-                case PMGradeModel.GradeType.Pin50:
-                    return new Tuple<string, string, Uri>(AppResources.GradePin50, AppResources.BadgePin50, null);
-
-                case PMGradeModel.GradeType.Message50:
-                    return new Tuple<string, string, Uri>(AppResources.GradeMessage50, AppResources.BadgeComments50, null);
-
-                case PMGradeModel.GradeType.Betatester:
-                    return new Tuple<string, string, Uri>(AppResources.GradeBetaTester, AppResources.BadgeBetatester, null);
-            }
-            return null;
         }
 
         private void SetProfilPictureUI()

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Device.Location;
+using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -43,6 +45,7 @@ namespace PinMessaging.View
                 PointsTextBlock.Text = _user.Points;
                 PinsCreatedTextBlock.Text = _user.NbrPin;
                 CommentsTextBlock.Text = _user.NbrMessage;
+                GradeTextBlock.Text = Utils.Utils.GetGradeInfo(_user.Grade.Type).Item1;
 
                 //if the user is already in the contact list
                 if (PMData.UserList.Any(user => user.Id == _user.Id) == true)
@@ -86,25 +89,51 @@ namespace PinMessaging.View
             }
         }
 
+        private string AdaptContentForMsgPrivacy(string content)
+        {
+            return content.Substring(0, content.Length > 10 ? 10 : content.Length) + "...";
+        }
+
         private void CreateHistoryItemUi(PMHistoryModel item)
         {
-            var historyImage = new Image { Height = 50, Width = 50, Source = GetHistoryTypeImg(item.historyType) };
-            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center, Text = item.Content };
-            var messageDateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 12, TextAlignment = TextAlignment.Right, Text = "05/21/14 at 5:01 PM" };
+            var historyImage = new Image { Height = 70, Width = 70, Source = GetHistoryTypeImg(item.historyType) };
+            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, TextAlignment = TextAlignment.Left, Text = AdaptContentForMsgPrivacy(item.Content), Height = 35 };
+            var dateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 13, TextAlignment = TextAlignment.Left, Height = 25 };
+            var goToMapTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 13, VerticalAlignment = VerticalAlignment.Center, Text = "Voir sur la carte", Foreground = (Brush)Application.Current.Resources["PMOrange"], Height = 25 };
 
-            var itemMainGrid = new Grid();
-            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(60) });
+            var res = Utils.Utils.ConvertStringToDouble(item.Date);
+
+            if (res != null)
+            {
+                var d = Utils.Utils.ConvertFromUnixTimestamp(res);
+                dateTextBlock.Text = d.ToShortDateString() + " " + d.ToShortTimeString();
+            }
+
+            var itemMyPin = new Button
+            {
+                Margin = new Thickness(-20, 0, 0, 0),
+                BorderThickness = new Thickness(0),
+                HorizontalContentAlignment = HorizontalAlignment.Left,
+                Tag = item
+            };
+            itemMyPin.Click += ItemMyPinOnClick;
+
+            var itemMainGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Left };
+            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(70) });
             itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            itemMainGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(60) });
+            itemMainGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(70) });
 
-            HistoryItemsStackPanel.Children.Add(itemMainGrid);
+            itemMyPin.Content = itemMainGrid;
+
+            HistoryItemsStackPanel.Children.Add(itemMyPin);
 
             itemMainGrid.Children.Add(historyImage);
 
-            var pinContentStackPanel = new StackPanel { Margin = new Thickness(20, 0, 0, 0) };
+            var pinContentStackPanel = new StackPanel { Margin = new Thickness(20, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
             pinContentStackPanel.Children.Add(messageTextBlock);
-            pinContentStackPanel.Children.Add(messageDateTextBlock);
-
+            pinContentStackPanel.Children.Add(dateTextBlock);
+            pinContentStackPanel.Children.Add(goToMapTextBlock);
+            
             itemMainGrid.Children.Add(pinContentStackPanel);
 
             Grid.SetRow(historyImage, 0);
@@ -112,10 +141,27 @@ namespace PinMessaging.View
 
             Grid.SetRow(pinContentStackPanel, 0);
             Grid.SetColumn(pinContentStackPanel, 1);
+        }
 
-            var line = new Canvas { Background = (Brush)Resources["PhoneProgressBarBackgroundBrush"], Height = 2 };
+        private void ItemMyPinOnClick(object sender, RoutedEventArgs e)
+        {
+            var historyPin = (sender as Button).Tag as PMHistoryModel;
 
-            HistoryItemsStackPanel.Children.Add(line);
+            try
+            {
+                if (historyPin.Latitude != null && historyPin.Longitude != null)
+                {
+                    var geoPos = new GeoCoordinate((double)historyPin.Latitude, (double)historyPin.Longitude);
+                    PMMapContactController.MapCenterOn(geoPos);
+                    if (NavigationService.CanGoBack == true)
+                        NavigationService.GoBack();
+                    PMMapContactController.CloseDownMenu();
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
 
         private void UpdateHistoryUi()

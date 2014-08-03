@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Device.Location;
+using System.Linq;
+using Windows.Devices.Geolocation;
 using Microsoft.Phone.Maps.Controls;
 using PinMessaging.Model;
 using PinMessaging.Other;
@@ -33,6 +35,16 @@ namespace PinMessaging.Controller
     {
         private static PMMapView _mapView = null;
 
+        public static void CloseDownMenu()
+        {
+            _mapView.CloseMenuDownButton_Click(null, null);
+        }
+
+        public static void MapCenterOn(GeoCoordinate coord)
+        {
+            _mapView.MapCenterOn(coord);
+        }
+        
         public static void Init(PMMapView mapview)
         {
             _mapView = mapview;

@@ -351,7 +351,7 @@ namespace PinMessaging.View
             }
         }
 
-        private void MapCenterOn(GeoCoordinate pos)
+        public void MapCenterOn(GeoCoordinate pos)
         {
             if (pos == null)
                 return;
@@ -761,7 +761,7 @@ namespace PinMessaging.View
 
         ////////////////////////////////////////////////    Down Menu    /////////////////////////////////////////////
 
-        private void CloseMenuDownButton_Click(object sender, RoutedEventArgs e)
+        public void CloseMenuDownButton_Click(object sender, RoutedEventArgs e)
         {
             if (ApplicationBar.IsVisible == false)
                 ApplicationBar.IsVisible = true;
