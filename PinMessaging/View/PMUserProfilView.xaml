@@ -16,10 +16,10 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
 
-            <shell:ApplicationBarIconButton IconUri="/Images/Icons/add.png" Text="Contact" Click="AddRemoveFavoriteButton_OnClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/Icons/targetMenu.png" Text="Localiser"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/Icons/privateMsgMenu.png" Text="Message" Click="PrivateMsgButton_OnClick"/>
-            <shell:ApplicationBarIconButton IconUri="/Images/Icons/shareMenu.png" Text="Partager"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/add.png" Text="contact" Click="AddRemoveFavoriteButton_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/targetMenu.png" Text="localize"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/privateMsgMenu.png" Text="message" Click="PrivateMsgButton_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/shareMenu.png" Text="share"/>
 
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

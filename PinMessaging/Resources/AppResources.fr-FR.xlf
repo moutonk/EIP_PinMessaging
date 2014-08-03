@@ -191,11 +191,11 @@
         </trans-unit>
         <trans-unit id="Resx/SharePin" translate="yes" xml:space="preserve">
           <source>Share a pin</source>
-          <target state="translated">Partager un pin</target>
+          <target state="translated">partager un pin</target>
         </trans-unit>
         <trans-unit id="Resx/Unfriend" translate="yes" xml:space="preserve">
           <source>Unfriend</source>
-          <target state="translated">Supprimer de vos contacts</target>
+          <target state="translated">supprimer contact</target>
         </trans-unit>
         <trans-unit id="Resx/RefreshPins" translate="yes" xml:space="preserve">
           <source>refresh pins</source>
@@ -445,19 +445,20 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         </trans-unit>
         <trans-unit id="Resx/Localize" translate="yes" xml:space="preserve">
           <source>Localize</source>
-          <target state="translated">Localiser</target>
+          <target state="translated">localiser</target>
         </trans-unit>
         <trans-unit id="Resx/History" translate="yes" xml:space="preserve">
           <source>HISTORY</source>
-          <target state="needs-review-translation">HISTORIQUE</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="needs-review-translation">HISTORIQUE</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          </trans-unit>
         <trans-unit id="Resx/Grade" translate="yes" xml:space="preserve">
           <source>Grade</source>
           <target state="translated">Grade</target>
         </trans-unit>
         <trans-unit id="Resx/AddContacts" translate="yes" xml:space="preserve">
           <source>Add to contacts</source>
-          <target state="translated">Ajouter aux contacts</target>
+          <target state="translated">ajouter contact</target>
         </trans-unit>
         <trans-unit id="Resx/Actions" translate="yes" xml:space="preserve">
           <source>Actions</source>

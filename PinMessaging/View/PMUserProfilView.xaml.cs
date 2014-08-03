@@ -23,6 +23,18 @@ namespace PinMessaging.View
         {
             InitializeComponent();
 
+            try
+            {
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.AddContacts;
+                (ApplicationBar.Buttons[1] as ApplicationBarIconButton).Text = AppResources.Localize;
+                (ApplicationBar.Buttons[2] as ApplicationBarIconButton).Text = AppResources.PrivateMessage;
+                (ApplicationBar.Buttons[3] as ApplicationBarIconButton).Text = AppResources.SharePin;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("Loading ApplicationBar text error", exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+
             if (PMData.User != null)
             {
                 _user = PMData.User.Clone();
@@ -118,14 +130,14 @@ namespace PinMessaging.View
 
         private void RemoveFavoriteUi()
         {
-            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IconUri = new Uri("/Images/Icons/add.png", UriKind.Relative);
-            (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.Unfriend;
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IconUri = new Uri("/Images/Icons/minus.png", UriKind.Relative);
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Unfriend;
         }
 
         private void AddFavoriteUI()
         {
-            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IconUri = new Uri("/Images/Icons/minus.png", UriKind.Relative);
-            (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.AddContacts;
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IconUri = new Uri("/Images/Icons/add.png", UriKind.Relative);
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.AddContacts;
         }
 
         private void AddAsFavoriteButton_Post()
@@ -135,6 +147,11 @@ namespace PinMessaging.View
                 PMMapContactController.AddNewFavoris(_user);
                 RemoveFavoriteUi();                
             }
+            else
+            {
+                PMData.UserList.RemoveAt(PMData.UserList.FindIndex(elem => elem.Id == _user.Id));
+                PMMapContactController.RemoveFavoris(_user);
+            }
             AddRemoveFavoriteButtonLock(false);
 
         }
@@ -143,6 +160,12 @@ namespace PinMessaging.View
         {
             if (PMData.WasFavoriteRemovedSuccess == true)
             {
+                PMMapContactController.RemoveFavoris(_user);
+                AddFavoriteUI();
+            }
+            else
+            {
+                PMData.UserList.RemoveAt(PMData.UserList.FindIndex(elem => elem.Id == _user.Id));
                 PMMapContactController.RemoveFavoris(_user);
                 AddFavoriteUI();
             }
@@ -170,6 +193,7 @@ namespace PinMessaging.View
                 }
                 else
                 {
+                    //RemoveFavoriteButton_OnClick(sender, eventArgs);
                     AddFavoriteButton_OnClick(sender, eventArgs);
                 }      
             }
