@@ -258,6 +258,10 @@
           <source>comments</source>
           <target state="new">comments</target>
         </trans-unit>
+        <trans-unit id="Resx/You" translate="yes" xml:space="preserve">
+          <source>you</source>
+          <target state="new">you</target>
+        </trans-unit>
         <trans-unit id="Resx/PinPrivatePointOfInterest" translate="yes" xml:space="preserve">
           <source>private point of interest</source>
           <target state="new">private point of interest</target>

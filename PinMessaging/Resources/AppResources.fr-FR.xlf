@@ -256,6 +256,10 @@
           <source>comments</source>
           <target state="translated">commentaires</target>
         </trans-unit>
+        <trans-unit id="Resx/You" translate="yes" xml:space="preserve">
+          <source>you</source>
+          <target state="translated">vous</target>
+        </trans-unit>
         <trans-unit id="Resx/PinPrivatePointOfInterest" translate="yes" xml:space="preserve">
           <source>private point of interest</source>
           <target state="translated">point d'interêt privé</target>

@@ -355,7 +355,7 @@
                                 <TextBlock x:Name="CommentTitleDescriptionTextBlock" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="35" Text="{Binding LocalizedResources.Comments, Source={StaticResource LocalizedStrings}}"></TextBlock>
                                 <controls:ChatBubbleTextBox Name="CommentChatBubble" TextChanged="CommentChatBubble_OnTextInput" TextWrapping="Wrap" ChatBubbleDirection="LowerRight" LostFocus="PinCommentContentTextBox_OnLostFocus" GotFocus="PinCommentContentTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></controls:ChatBubbleTextBox>
                                 <TextBlock x:Name="PinCommentTipContentTextBox" Tap="PinCommentTipContentTextBox_OnTap" TextWrapping="Wrap" Text="Ajouter un commentaire" VerticalAlignment="Center" Foreground="Black" FontSize="20" Margin="10,-75,29,0" ></TextBlock>
-                                <TextBlock Name="MeTextBlock" Text="vous" TextAlignment="Right" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
+                                <TextBlock Name="MeTextBlock" Text="{Binding LocalizedResources.You, Source={StaticResource LocalizedStrings}}" TextAlignment="Right" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
                                 <StackPanel Name="CommentStackPanel"/>
                             </StackPanel>
 

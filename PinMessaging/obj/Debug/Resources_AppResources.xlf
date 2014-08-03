@@ -496,6 +496,10 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <source>comments</source>
           <target state="new">comments</target>
         </trans-unit>
+        <trans-unit id="Resx/You" translate="yes" xml:space="preserve">
+          <source>you</source>
+          <target state="new">you</target>
+        </trans-unit>
       </group>
     </body>
   </file>

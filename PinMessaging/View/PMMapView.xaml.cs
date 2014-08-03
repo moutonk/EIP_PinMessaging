@@ -1010,7 +1010,7 @@ namespace PinMessaging.View
         public void PinTapped(PMPinModel pin)
         {
             CommentStackPanel.Children.Clear();
-
+        
             var pinC = new PMPinController(RequestType.GetPinMessages, GetPinMessages_Post);
 
             pinC.GetPinMessage(pin);

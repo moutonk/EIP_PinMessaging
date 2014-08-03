@@ -162,29 +162,29 @@
           <source>Pins</source>
           <target state="new">Pins</target>
         </trans-unit>
-        <trans-unit id="Resx/PinEvent" translate="yes" xml:space="preserve">
-          <source>Event</source>
-          <target state="new">Event</target>
+        <trans-unit id="Resx/PinPublicEvent" translate="yes" xml:space="preserve">
+          <source>public event</source>
+          <target state="new">public event</target>
         </trans-unit>
         <trans-unit id="Resx/PinLastStep" translate="yes" xml:space="preserve">
           <source>Last step</source>
           <target state="new">Last step</target>
         </trans-unit>
-        <trans-unit id="Resx/PinPointOfInterest" translate="yes" xml:space="preserve">
-          <source>Point of Interest</source>
-          <target state="new">Point of Interest</target>
+        <trans-unit id="Resx/PinPublicPointOfInterest" translate="yes" xml:space="preserve">
+          <source>public point of interest</source>
+          <target state="new">public point of interest</target>
         </trans-unit>
-        <trans-unit id="Resx/PinPointOfView" translate="yes" xml:space="preserve">
-          <source>Point of View</source>
-          <target state="new">Point of View</target>
+        <trans-unit id="Resx/PinPublicPointOfView" translate="yes" xml:space="preserve">
+          <source>public point of view</source>
+          <target state="new">public point of view</target>
         </trans-unit>
         <trans-unit id="Resx/PinPrivateMessage" translate="yes" xml:space="preserve">
-          <source>Private Message</source>
-          <target state="new">Private Message</target>
+          <source>private message</source>
+          <target state="new">private message</target>
         </trans-unit>
         <trans-unit id="Resx/PinPublicMessage" translate="yes" xml:space="preserve">
-          <source>Public Message</source>
-          <target state="new">Public Message</target>
+          <source>public message</source>
+          <target state="new">public message</target>
         </trans-unit>
         <trans-unit id="Resx/Allow" translate="yes" xml:space="preserve">
           <source>allow</source>
@@ -219,12 +219,8 @@
           <target state="new">Pin</target>
         </trans-unit>
         <trans-unit id="Resx/PinAuthor" translate="yes" xml:space="preserve">
-          <source>PINS'S AUTHOR</source>
-          <target state="new">PINS'S AUTHOR</target>
-        </trans-unit>
-        <trans-unit id="Resx/PinMessage" translate="yes" xml:space="preserve">
-          <source>MESSAGE</source>
-          <target state="new">MESSAGE</target>
+          <source>author</source>
+          <target state="new">author</target>
         </trans-unit>
         <trans-unit id="Resx/PinTitle" translate="yes" xml:space="preserve">
           <source>TITLE</source>
@@ -483,6 +479,26 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         <trans-unit id="Resx/MyPinsPivot" translate="yes" xml:space="preserve">
           <source>MY PINS</source>
           <target state="new">MY PINS</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivateEvent" translate="yes" xml:space="preserve">
+          <source>private event</source>
+          <target state="new">private event</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivatePointOfInterest" translate="yes" xml:space="preserve">
+          <source>private point of interest</source>
+          <target state="new">private point of interest</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivatePointOfView" translate="yes" xml:space="preserve">
+          <source>private point of vue</source>
+          <target state="new">private point of vue</target>
+        </trans-unit>
+        <trans-unit id="Resx/Comments" translate="yes" xml:space="preserve">
+          <source>comments</source>
+          <target state="new">comments</target>
+        </trans-unit>
+        <trans-unit id="Resx/You" translate="yes" xml:space="preserve">
+          <source>you</source>
+          <target state="new">you</target>
         </trans-unit>
       </group>
     </body>
