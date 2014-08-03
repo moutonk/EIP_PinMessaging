@@ -63,8 +63,8 @@ namespace PinMessaging.Model
                        [DefaultValue(null)] public BitmapImage PinImgUser { get; set; }
                        [DefaultValue(null)] public Image PinImg { get; set; }
                        [DefaultValue(null)] public string[] DateTime { get; set; }
+                       [DefaultValue(null)] public DateTime Date { get; set; }
         [JsonProperty] [DefaultValue(null)] public GeoCoordinate GeoCoord { get; set; }
-        //[JsonProperty] public Dictionary<string, string> Location { get; set; }
 
         private void ConvertTypeToEnum()
         {
@@ -150,10 +150,10 @@ namespace PinMessaging.Model
                     //split the date and time to isolate each element
                     DateTime = dateTime.Split(new[] {'-', ' ', ':'});
 
-                    foreach (var s in DateTime)
-                    {
-                        //Logs.Output.ShowOutput(s);
-                    }
+                    var intList = (from item in DateTime select Utils.Utils.ConvertStringToInt(item) into res where res != null select (int) res).ToList();
+
+                    if (intList.Count == 6)
+                        Date = new DateTime(intList[0], intList[1], intList[2], intList[3], intList[4], intList[5]);
                 }
                 catch (Exception exp)
                 {

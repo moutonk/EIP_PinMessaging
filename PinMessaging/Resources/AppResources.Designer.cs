@@ -286,6 +286,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à comments.
+        /// </summary>
+        public static string Comments {
+            get {
+                return ResourceManager.GetString("Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Confirm your password.
         /// </summary>
         public static string ConfirmPwd {
@@ -718,20 +727,11 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à PINS&apos;S AUTHOR.
+        ///   Recherche une chaîne localisée semblable à author.
         /// </summary>
         public static string PinAuthor {
             get {
                 return ResourceManager.GetString("PinAuthor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Event.
-        /// </summary>
-        public static string PinEvent {
-            get {
-                return ResourceManager.GetString("PinEvent", resourceCulture);
             }
         }
         
@@ -750,15 +750,6 @@ namespace PinMessaging.Resources {
         public static string PinLastStep {
             get {
                 return ResourceManager.GetString("PinLastStep", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à MESSAGE.
-        /// </summary>
-        public static string PinMessage {
-            get {
-                return ResourceManager.GetString("PinMessage", resourceCulture);
             }
         }
         
@@ -801,25 +792,16 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Point of Interest.
+        ///   Recherche une chaîne localisée semblable à private event.
         /// </summary>
-        public static string PinPointOfInterest {
+        public static string PinPrivateEvent {
             get {
-                return ResourceManager.GetString("PinPointOfInterest", resourceCulture);
+                return ResourceManager.GetString("PinPrivateEvent", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Point of View.
-        /// </summary>
-        public static string PinPointOfView {
-            get {
-                return ResourceManager.GetString("PinPointOfView", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Private Message.
+        ///   Recherche une chaîne localisée semblable à private message.
         /// </summary>
         public static string PinPrivateMessage {
             get {
@@ -828,11 +810,56 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Public Message.
+        ///   Recherche une chaîne localisée semblable à private point of interest.
+        /// </summary>
+        public static string PinPrivatePointOfInterest {
+            get {
+                return ResourceManager.GetString("PinPrivatePointOfInterest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à private point of vue.
+        /// </summary>
+        public static string PinPrivatePointOfView {
+            get {
+                return ResourceManager.GetString("PinPrivatePointOfView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à public event.
+        /// </summary>
+        public static string PinPublicEvent {
+            get {
+                return ResourceManager.GetString("PinPublicEvent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à public message.
         /// </summary>
         public static string PinPublicMessage {
             get {
                 return ResourceManager.GetString("PinPublicMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à public point of interest.
+        /// </summary>
+        public static string PinPublicPointOfInterest {
+            get {
+                return ResourceManager.GetString("PinPublicPointOfInterest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à public point of view.
+        /// </summary>
+        public static string PinPublicPointOfView {
+            get {
+                return ResourceManager.GetString("PinPublicPointOfView", resourceCulture);
             }
         }
         

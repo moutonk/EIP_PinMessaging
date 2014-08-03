@@ -150,9 +150,13 @@
           <source>Pins</source>
           <target state="signed-off">Pins</target>
         </trans-unit>
+        <trans-unit id="Resx/PinPublicEvent" translate="yes" xml:space="preserve">
+          <source>public event</source>
+          <target state="new">public event</target>
+        </trans-unit>
         <trans-unit translate="yes" id="Resx/PinPublicMessage" xml:space="preserve">
-          <source>Public Message</source>
-          <target state="signed-off">Public Message</target>
+          <source>public message</source>
+          <target state="needs-review-translation">Public Message</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/UseLocationTitle" xml:space="preserve">
           <source>Allow this application to access and use your location?</source>
@@ -245,6 +249,22 @@
         <trans-unit id="Resx/MyPinsPivot" translate="yes" xml:space="preserve">
           <source>MY PINS</source>
           <target state="new">MY PINS</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivatePointOfView" translate="yes" xml:space="preserve">
+          <source>private point of vue</source>
+          <target state="new">private point of vue</target>
+        </trans-unit>
+        <trans-unit id="Resx/Comments" translate="yes" xml:space="preserve">
+          <source>comments</source>
+          <target state="new">comments</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivatePointOfInterest" translate="yes" xml:space="preserve">
+          <source>private point of interest</source>
+          <target state="new">private point of interest</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivateEvent" translate="yes" xml:space="preserve">
+          <source>private event</source>
+          <target state="new">private event</target>
         </trans-unit>
         <trans-unit id="Resx/AboutTitle" translate="yes" xml:space="preserve">
           <source>ABOUT</source>
@@ -432,13 +452,9 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <source>Actions</source>
           <target state="new">Actions</target>
         </trans-unit>
-        <trans-unit id="Resx/PinMessage" translate="yes" xml:space="preserve">
-          <source>MESSAGE</source>
-          <target state="signed-off">MESSAGE</target>
-        </trans-unit>
         <trans-unit id="Resx/PinAuthor" translate="yes" xml:space="preserve">
-          <source>PINS'S AUTHOR</source>
-          <target state="signed-off">PINS'S AUTHOR</target>
+          <source>author</source>
+          <target state="needs-review-translation">PINS'S AUTHOR</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/UseLocationContent" xml:space="preserve">
           <source>Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</source>
@@ -453,24 +469,20 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="signed-off">allow</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/PinPrivateMessage" xml:space="preserve">
-          <source>Private Message</source>
-          <target state="signed-off">Private Message</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/PinPointOfView" xml:space="preserve">
-          <source>Point of View</source>
-          <target state="signed-off">Point of View</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/PinPointOfInterest" xml:space="preserve">
-          <source>Point of Interest</source>
-          <target state="signed-off">Point of Interest</target>
+          <source>private message</source>
+          <target state="needs-review-translation">Private Message</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/PinLastStep" xml:space="preserve">
           <source>Last step</source>
           <target state="signed-off">Last step</target>
         </trans-unit>
-        <trans-unit translate="yes" id="Resx/PinEvent" xml:space="preserve">
-          <source>Event</source>
-          <target state="signed-off">Event</target>
+        <trans-unit id="Resx/PinPublicPointOfView" translate="yes" xml:space="preserve">
+          <source>public point of view</source>
+          <target state="new">public point of view</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPublicPointOfInterest" translate="yes" xml:space="preserve">
+          <source>public point of interest</source>
+          <target state="new">public point of interest</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Notifications" xml:space="preserve">
           <source>Notifications</source>

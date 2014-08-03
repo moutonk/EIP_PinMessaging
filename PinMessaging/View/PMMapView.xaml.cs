@@ -753,6 +753,9 @@ namespace PinMessaging.View
 
         private void CloseMenuDownButton_Click(object sender, RoutedEventArgs e)
         {
+            if (ApplicationBar.IsVisible == false)
+                ApplicationBar.IsVisible = true;
+
             Map_OnTouch(sender, e);
         }
 
@@ -925,24 +928,31 @@ namespace PinMessaging.View
 
         private void AddCommentsToUi()
         {
+            //the first comment displayed is the most recent
+            PMData.PinsCommentsListTmp = (from elem in PMData.PinsCommentsListTmp orderby elem.CreatedTime ascending select elem).ToList();
+
             foreach (var tb in PMData.PinsCommentsListTmp)
             {
-                var chatBubble = new ChatBubbleTextBox()
+                var chatBubble = new ChatBubble
                 {
-                    Text = tb.Content,
                     Background = new SolidColorBrush(Colors.DarkGray),
                     BorderBrush = new SolidColorBrush(Colors.DarkGray),
                     ChatBubbleDirection = ChatBubbleDirection.LowerLeft,
-                    IsReadOnly = true,
-                    TextWrapping = TextWrapping.Wrap
+                    Content = new TextBlock()
+                             {
+                                Text = tb.Content,
+                                TextWrapping = TextWrapping.Wrap,
+                                Foreground = new SolidColorBrush(Colors.Black)
+                            },
                 };
-                CommentStackPanel.Children.Add(chatBubble);
 
+                CommentStackPanel.Children.Insert(0, chatBubble);
+                
                 var authorName = new TextBlock()
                 {
                     Text = tb.Author,
                     FontSize = 25,
-                    Foreground = (Brush) App.Current.Resources["PMOrange"],
+                    Foreground = (Brush) Application.Current.Resources["PMOrange"],
                     TextAlignment = TextAlignment.Left
                 };
 
@@ -972,21 +982,29 @@ namespace PinMessaging.View
                 Grid.SetColumn(authorName, 0);
                 Grid.SetColumn(creationDate, 1);
 
-                CommentStackPanel.Children.Add(grid);
+                CommentStackPanel.Children.Insert(1, grid);
             }
             
             PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
             PMData.PinsCommentsListTmp.Clear();
+        }
 
-            //   <controls:ChatBubbleTextBox Name="CommentChatBubble" ChatBubbleDirection="LowerRight" LostFocus="PinCommentContentTextBox_OnLostFocus" GotFocus="PinCommentContentTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray">
-
-
-            /*  foreach (var tb in PMData.PinsCommentsListTmp.Select(comment => new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, Margin = new Thickness(30, 0, 30, 0), Text = comment.Content }))
+        private static string GetPinTypeName(PMPinModel.PinsType type, bool isPrivate)
+        {
+            switch (type)
             {
-                CommentStackPanel.Children.Add(tb);
+                case PMPinModel.PinsType.PublicMessage:
+                    return isPrivate ? AppResources.PinPrivateMessage : AppResources.PinPublicMessage;
+
+                case PMPinModel.PinsType.Event:
+                    return isPrivate ? AppResources.PinPrivateEvent : AppResources.PinPublicEvent;
+
+                case PMPinModel.PinsType.View:
+                    return isPrivate ? AppResources.PinPrivatePointOfView : AppResources.PinPublicPointOfView;
+
+                default:
+                    return AppResources.PinPublicMessage;
             }
-            PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
-            PMData.PinsCommentsListTmp.Clear*/
         }
 
         public void PinTapped(PMPinModel pin)
@@ -996,11 +1014,17 @@ namespace PinMessaging.View
             var pinC = new PMPinController(RequestType.GetPinMessages, GetPinMessages_Post);
 
             pinC.GetPinMessage(pin);
+            
+            var dateStr = ((pin.PinType == PMPinModel.PinsType.Event) && (pin.Date != null) ? Environment.NewLine + "L'évènement se déroule le " +
+                pin.Date.ToLongDateString() + " à " +
+                pin.Date.ToLongTimeString() : "");
 
-            PinMessageDescriptionTextBlock.Text = pin.Content + (pin.PinType == PMPinModel.PinsType.Event ? Environment.NewLine + "L'évènement se déroule le " +
-                                                                                                            (pin.DateTime != null ? pin.DateTime.Aggregate("", (current, keyValuePair) => current + (keyValuePair + " ")) : "null") : "");
+            PinMessageDescriptionTextBlock.Text = pin.Content + dateStr;
             PinAuthorDescriptionTextBlock.Text = pin.Author;
             PinAuthorDescriptionTextBlock.Tag = pin;
+
+            PinTitleTextBlock.Text = GetPinTypeName(pin.PinType, pin.Private);
+
             PinDescriptionImage.Source = Paths.PinsMapImg[pin.PinType + (pin.Private == true ? 6 : 0)];
 
             DownMenuTitle.Text = pin.Title;
@@ -1453,15 +1477,22 @@ namespace PinMessaging.View
 
             pinController.CreatePinMessage(_currentPinFocused.Id, PMPinModel.PinsContentType.Text, CommentChatBubble.Text);
 
-            CommentChatBubble.IsEnabled = false;
-            CommentChatBubble.IsEnabled = true;
+            CreateAppBarMap();
+
+            if (_isUnderMenuOpen == false)
+                ApplicationBar.IsVisible = true;
+
+            Focus();
         }
 
         private void PinCommentPostButton_PostResponse()
         {
-            CommentChatBubble.Text = "";
-            AddCommentsToUi();
-        }
+            Dispatcher.BeginInvoke(() =>
+            {           
+                CommentChatBubble.Text = "";
+                AddCommentsToUi();
+            });
+       }
 
         private void CreateAppBarMap()
         {
@@ -1525,11 +1556,13 @@ namespace PinMessaging.View
 
         private void PinCommentCancelButton_OnClick(object sender, EventArgs e)
         {
-            CreateAppBarMap();
             CommentChatBubble.Text = "";
-            ApplicationBar.IsVisible = false;
-            CommentChatBubble.IsEnabled = false;
-            CommentChatBubble.IsEnabled = true;
+
+            CreateAppBarMap();
+
+            ApplicationBar.IsVisible = _isUnderMenuOpen == false;
+
+            Focus();
         }
 
         private void PinCommentContentTextBox_OnLostFocus(object sender, RoutedEventArgs e)
@@ -1571,10 +1604,7 @@ namespace PinMessaging.View
 
         private void CommentChatBubble_OnTextInput(object sender, TextChangedEventArgs textChangedEventArgs)
         {
-            if (CommentChatBubble.Text.Length == 0)
-                LockUnlockCommentCheck(false);
-            else
-                LockUnlockCommentCheck(true);
+            LockUnlockCommentCheck(CommentChatBubble.Text.Length != 0);
         }
     }
 }

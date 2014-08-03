@@ -150,10 +150,13 @@
           <source>Pins</source>
           <target state="translated">Pins</target>
         </trans-unit>
-        <trans-unit translate="yes" id="Resx/PinPublicMessage" xml:space="preserve">
-          <source>Public Message</source>
-          <target state="translated">Message public</target>
+        <trans-unit id="Resx/PinPublicEvent" translate="yes" xml:space="preserve">
+          <source>public event</source>
+          <target state="translated">évènement public</target>
         </trans-unit>
+        <trans-unit translate="yes" id="Resx/PinPublicMessage" xml:space="preserve">
+          <source>public message</source>
+          <target state="translated">message public</target></trans-unit>
         <trans-unit translate="yes" id="Resx/UseLocationTitle" xml:space="preserve">
           <source>Allow this application to access and use your location?</source>
           <target state="translated">Autorisez-vous PinMessaging à accéder à votre position?</target>
@@ -243,7 +246,23 @@
         </trans-unit>
         <trans-unit id="Resx/MyPinsPivot" translate="yes" xml:space="preserve">
           <source>MY PINS</source>
-          <target state="new">MY PINS</target>
+          <target state="translated">MES PINS</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivatePointOfView" translate="yes" xml:space="preserve">
+          <source>private point of vue</source>
+          <target state="translated">point de vue privé</target>
+        </trans-unit>
+        <trans-unit id="Resx/Comments" translate="yes" xml:space="preserve">
+          <source>comments</source>
+          <target state="translated">commentaires</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivatePointOfInterest" translate="yes" xml:space="preserve">
+          <source>private point of interest</source>
+          <target state="translated">point d'interêt privé</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPrivateEvent" translate="yes" xml:space="preserve">
+          <source>private event</source>
+          <target state="translated">évènement privé</target>
         </trans-unit>
         <trans-unit id="Resx/AboutTitle" translate="yes" xml:space="preserve">
           <source>ABOUT</source>
@@ -343,8 +362,7 @@
         </trans-unit>
         <trans-unit id="Resx/Favorites" translate="yes" xml:space="preserve">
           <source>FAVORITE PINS</source>
-          <target state="needs-review-translation">PINS FAVORIS</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="translated">PINS FAVORIS</target></trans-unit>
         <trans-unit id="Resx/ChangeLanguage" translate="yes" xml:space="preserve">
           <source>Change language</source>
           <target state="translated">Changer la langue</target>
@@ -429,14 +447,9 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <source>Actions</source>
           <target state="translated">Actions</target>
         </trans-unit>
-        <trans-unit id="Resx/PinMessage" translate="yes" xml:space="preserve">
-          <source>MESSAGE</source>
-          <target state="translated">MESSAGE</target>
-        </trans-unit>
         <trans-unit id="Resx/PinAuthor" translate="yes" xml:space="preserve">
-          <source>PINS'S AUTHOR</source>
-          <target state="translated">Auteur</target>
-        </trans-unit>
+          <source>author</source>
+          <target state="translated">auteur</target></trans-unit>
         <trans-unit translate="yes" id="Resx/UseLocationContent" xml:space="preserve">
           <source>Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</source>
           <target state="translated">Partager cette information nous aide a améliorer les services basés sur la géo localisation de ce téléphone. Ces informations ne seront en aucun cas utilisées pour vous identifier ou vous contacter.</target>
@@ -450,24 +463,19 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="translated">Autoriser</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/PinPrivateMessage" xml:space="preserve">
-          <source>Private Message</source>
-          <target state="translated">Message privé</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/PinPointOfView" xml:space="preserve">
-          <source>Point of View</source>
-          <target state="translated">Point de vue</target>
-        </trans-unit>
-        <trans-unit translate="yes" id="Resx/PinPointOfInterest" xml:space="preserve">
-          <source>Point of Interest</source>
-          <target state="translated">Point d'interêt</target>
-        </trans-unit>
+          <source>private message</source>
+          <target state="translated">message privé</target></trans-unit>
         <trans-unit translate="yes" id="Resx/PinLastStep" xml:space="preserve">
           <source>Last step</source>
           <target state="translated">Dernière étape</target>
         </trans-unit>
-        <trans-unit translate="yes" id="Resx/PinEvent" xml:space="preserve">
-          <source>Event</source>
-          <target state="translated">Evènement</target>
+        <trans-unit id="Resx/PinPublicPointOfView" translate="yes" xml:space="preserve">
+          <source>public point of view</source>
+          <target state="translated">point de vue public</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinPublicPointOfInterest" translate="yes" xml:space="preserve">
+          <source>public point of interest</source>
+          <target state="translated">point d'interêt public</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Notifications" xml:space="preserve">
           <source>Notifications</source>

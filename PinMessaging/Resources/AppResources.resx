@@ -234,23 +234,23 @@
   <data name="Pins" xml:space="preserve">
     <value>Pins</value>
   </data>
-  <data name="PinEvent" xml:space="preserve">
-    <value>Event</value>
+  <data name="PinPublicEvent" xml:space="preserve">
+    <value>public event</value>
   </data>
   <data name="PinLastStep" xml:space="preserve">
     <value>Last step</value>
   </data>
-  <data name="PinPointOfInterest" xml:space="preserve">
-    <value>Point of Interest</value>
+  <data name="PinPublicPointOfInterest" xml:space="preserve">
+    <value>public point of interest</value>
   </data>
-  <data name="PinPointOfView" xml:space="preserve">
-    <value>Point of View</value>
+  <data name="PinPublicPointOfView" xml:space="preserve">
+    <value>public point of view</value>
   </data>
   <data name="PinPrivateMessage" xml:space="preserve">
-    <value>Private Message</value>
+    <value>private message</value>
   </data>
   <data name="PinPublicMessage" xml:space="preserve">
-    <value>Public Message</value>
+    <value>public message</value>
   </data>
   <data name="Allow" xml:space="preserve">
     <value>allow</value>
@@ -277,10 +277,7 @@
     <value>Pin</value>
   </data>
   <data name="PinAuthor" xml:space="preserve">
-    <value>PINS'S AUTHOR</value>
-  </data>
-  <data name="PinMessage" xml:space="preserve">
-    <value>MESSAGE</value>
+    <value>author</value>
   </data>
   <data name="PinTitle" xml:space="preserve">
     <value>TITLE</value>
@@ -473,5 +470,17 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   </data>
   <data name="MyPinsPivot" xml:space="preserve">
     <value>MY PINS</value>
+  </data>
+  <data name="PinPrivateEvent" xml:space="preserve">
+    <value>private event</value>
+  </data>
+  <data name="PinPrivatePointOfInterest" xml:space="preserve">
+    <value>private point of interest</value>
+  </data>
+  <data name="PinPrivatePointOfView" xml:space="preserve">
+    <value>private point of vue</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>comments</value>
   </data>
 </root>

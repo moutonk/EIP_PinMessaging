@@ -58,7 +58,7 @@ namespace PinMessaging.Utils
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("ConvertStringToDouble: " + d, exp, Logs.Error.ErrorsPriority.NotCritical);
             }
 
             return num;
