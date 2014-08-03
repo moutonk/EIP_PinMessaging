@@ -448,7 +448,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à History.
+        ///   Recherche une chaîne localisée semblable à HISTORY.
         /// </summary>
         public static string History {
             get {

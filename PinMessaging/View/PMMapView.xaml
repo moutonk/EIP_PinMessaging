@@ -302,7 +302,7 @@
                         <Grid x:Name="UnderMenuPinDescriptionGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="0"></RowDefinition>
                                 <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>

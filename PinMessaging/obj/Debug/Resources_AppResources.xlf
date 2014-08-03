@@ -247,8 +247,8 @@
           <target state="new">Grade</target>
         </trans-unit>
         <trans-unit id="Resx/History" translate="yes" xml:space="preserve">
-          <source>History</source>
-          <target state="new">History</target>
+          <source>HISTORY</source>
+          <target state="new">HISTORY</target>
         </trans-unit>
         <trans-unit id="Resx/Localize" translate="yes" xml:space="preserve">
           <source>Localize</source>

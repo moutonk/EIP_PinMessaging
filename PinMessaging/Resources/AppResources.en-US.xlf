@@ -453,8 +453,8 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="signed-off">Localize</target>
         </trans-unit>
         <trans-unit id="Resx/History" translate="yes" xml:space="preserve">
-          <source>History</source>
-          <target state="signed-off">History</target>
+          <source>HISTORY</source>
+          <target state="needs-review-translation">History</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Resx/Grade" translate="yes" xml:space="preserve">
           <source>Grade</source>

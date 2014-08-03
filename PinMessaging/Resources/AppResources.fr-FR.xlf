@@ -262,15 +262,15 @@
         </trans-unit>
         <trans-unit id="Resx/FeedbackTip" translate="yes" xml:space="preserve">
           <source>You found a bug, have a suggestion or a question? That's here!</source>
-          <target state="new">You found a bug, have a suggestion or a question? That's here!</target>
+          <target state="translated">Vous avez trouvé un bug, avez une idée ou une question? Ca se passe ici :)</target>
         </trans-unit>
         <trans-unit id="Resx/ThanksFeedback" translate="yes" xml:space="preserve">
           <source>Thanks for your participation :)</source>
-          <target state="new">Thanks for your participation :)</target>
+          <target state="translated">Merci de votre participation :)</target>
         </trans-unit>
         <trans-unit id="Resx/Feedback" translate="yes" xml:space="preserve">
           <source>Feedback</source>
-          <target state="new">Feedback</target>
+          <target state="translated">Feedback</target>
         </trans-unit>
         <trans-unit id="Resx/PinPrivatePointOfInterest" translate="yes" xml:space="preserve">
           <source>private point of interest</source>
@@ -448,8 +448,8 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="translated">Localiser</target>
         </trans-unit>
         <trans-unit id="Resx/History" translate="yes" xml:space="preserve">
-          <source>History</source>
-          <target state="translated">Historique</target>
+          <source>HISTORY</source>
+          <target state="needs-review-translation">HISTORIQUE</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Resx/Grade" translate="yes" xml:space="preserve">
           <source>Grade</source>

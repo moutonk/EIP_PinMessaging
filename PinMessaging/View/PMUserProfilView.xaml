@@ -13,122 +13,76 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar Mode="Default" Opacity="1.0" IsMenuEnabled="True" IsVisible="True">
+
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/add.png" Text="Contact" Click="AddRemoveFavoriteButton_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/targetMenu.png" Text="Localiser"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/privateMsgMenu.png" Text="Message" Click="PrivateMsgButton_OnClick"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/Icons/shareMenu.png" Text="Partager"/>
+
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
-    
+
     <Grid x:Name="UseProfilMainGrid" Background="{StaticResource PMGrey}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="5"></RowDefinition>
-            <RowDefinition Height="65"></RowDefinition>
-            <RowDefinition Height="260"></RowDefinition>
-            <RowDefinition Height="250"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
 
-        <ProgressBar Grid.Row="0" Name="UserProfilProgressBar" Visibility="Collapsed" IsIndeterminate="False" Foreground="{StaticResource PMOrange}"></ProgressBar>
+        <Rectangle Fill="{StaticResource PMOrange}" HorizontalAlignment="Left" Height="85" Stroke="Black" VerticalAlignment="Top" Width="480" Margin="0,0,0,0"/>
+        <TextBlock Name="ProfilTitleTextBlock" HorizontalAlignment="Left" FontSize="60" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.ProfilDetailsTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="85" Width="454"/>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Background="{StaticResource PMOrange}">
-            <TextBlock x:Name="UserNameTextBlock" FontSize="35" FontWeight="Bold" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
-        </StackPanel>
-        
-        <Grid Row="2" x:Name="UserInfoGrid">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" x:Name="ProfilPictureImage" Stretch="Uniform" Source="/Images/Icons/neutral_profil.jpg" Margin="16,-13,264,0" Grid.ColumnSpan="2"></Image>
-            <Grid Grid.Column="1" Margin="20,0,0,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="75"></RowDefinition>
-                    <RowDefinition Height="75"></RowDefinition>
-                    <RowDefinition Height="100"></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" x:Name="OnlineTextBlock" FontSize="25" Text="{Binding LocalizedResources.Offline, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0"></TextBlock>
-                <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <TextBlock FontSize="35" Text="{Binding LocalizedResources.Grade, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,20,10"></TextBlock>
-                    <Line X1="0" X2="130" Y1="0" Y2="0" VerticalAlignment="Center" StrokeThickness="2" Stroke="{StaticResource PMOrange}"></Line>
-                </StackPanel>
-                <TextBlock Grid.Row="2" Text="3.7" FontSize="45" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Grid>
-        </Grid>
+        <ProgressBar Name="UserProfilProgressBar" Visibility="Visible" IsIndeterminate="False" Foreground="{StaticResource PMOrange}" VerticalAlignment="Top" Height="5" Margin="0,85,-10,0"></ProgressBar>
 
-        <Grid Row="3" x:Name="UserActionsGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="55"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="{Binding LocalizedResources.Actions, Source={StaticResource LocalizedStrings}}" FontSize="35" Margin="10,0,20,10" VerticalAlignment="Center"></TextBlock>
-                <Line X1="0" X2="325" Y1="0" Y2="0" VerticalAlignment="Center" StrokeThickness="2" Stroke="{StaticResource PMOrange}"></Line>
-            </StackPanel>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"></RowDefinition>
-                    <RowDefinition Height="100"></RowDefinition>
-                </Grid.RowDefinitions>
+        <phone:Pivot Height="770" HorizontalAlignment="Left" Margin="0,90,0,0" x:Name="PivotProfil" Title="" VerticalAlignment="Top" Width="480" FontSize="20">
 
-                <Button Grid.Column="0" Grid.Row="0" x:Name="LocalizeButton" Margin="0,-10,-5,0" BorderThickness="0" Background="{StaticResource PMLightGrey}">
-                    <Grid VerticalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="65"></ColumnDefinition>
-                            <ColumnDefinition Width="130"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="/Images/Menu/target.png" Margin="0,0,15,0"/>
-                        <TextBlock Grid.Column="1" Name="LocalizeTextBlock" FontSize="20" Text="{Binding LocalizedResources.Localize, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    </Grid>
-                </Button>
-                <Button Grid.Column="1" Grid.Row="0" x:Name="PrivateMsgButton" Click="PrivateMsgButton_OnClick" Margin="-5,-10,0,0" BorderThickness="0" Background="{StaticResource PMLightGrey}">
-                    <Grid VerticalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="65"></ColumnDefinition>
-                            <ColumnDefinition Width="130"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="/Images/Pins/private_message_icon.png" Margin="0,0,15,0"/>
-                        <TextBlock Grid.Column="1" Name="PrivateMsgTextBlock" FontSize="20" Text="{Binding LocalizedResources.PrivateMessage, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    </Grid>
-                </Button>
-                <Button Grid.Column="0" Grid.Row="1" x:Name="ShareButton" Margin="0,-10,-5,0" BorderThickness="0" Background="{StaticResource PMLightGrey}">
-                    <Grid VerticalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="65"></ColumnDefinition>
-                            <ColumnDefinition Width="130"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="/Images/Icons/share_orange_icon.png" Margin="0,0,15,0"/>
-                        <TextBlock Grid.Column="1" Name="ShareTextBlock" FontSize="20" Text="{Binding LocalizedResources.SharePin, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    </Grid>
-                </Button>
-                <Button Grid.Column="1" Grid.Row="1" x:Name="ContactButton" Margin="-5,-10,0,0" Click="AddRemoveFavoriteButton_OnClick" BorderThickness="0" Background="{StaticResource PMLightGrey}">
-                    <Grid VerticalAlignment="Stretch">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="65"></ColumnDefinition>
-                            <ColumnDefinition Width="130"></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Name="ContactImage" Source="/Images/Icons/contact_orange_icon.png" Margin="0,0,15,0"/>
-                        <TextBlock Grid.Column="1" Name="ContactTextBlock" FontSize="20" Text="{Binding LocalizedResources.AddContacts, Source={StaticResource LocalizedStrings}}" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Left"/>
-                    </Grid>
-                </Button>
-            </Grid>
-        </Grid>
-      
-        <Grid Row="4" x:Name="UserHistoryGrid">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="55"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                <TextBlock Text="{Binding LocalizedResources.History, Source={StaticResource LocalizedStrings}}" FontSize="35" Margin="10,0,20,10" VerticalAlignment="Center"></TextBlock>
-                <Line X1="0" X2="325" Y1="0" Y2="0" VerticalAlignment="Center" StrokeThickness="2" Stroke="{StaticResource PMOrange}"></Line>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Name="HistoryStackPanel" Orientation="Vertical" Background="{StaticResource PMLightGrey}">
-                <ScrollViewer Height="140">
-                    <StackPanel Name="HistoryItemsStackPanel"/>
+            <phone:Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock FontSize="35" Text="{Binding}"/>
+                </DataTemplate>
+            </phone:Pivot.HeaderTemplate>
+
+            <phone:PivotItem Name="ProfilPivotItem" Header="{Binding LocalizedResources.ProfilTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Width="470" Height="600">
+                <ScrollViewer Margin="10,0,10,0" VerticalAlignment="Top" Height="518">
+                    <StackPanel  Orientation="Vertical" Height="552">
+                        <Grid>
+                            <Image Name="ProfilPictureImage" HorizontalAlignment="Left" Height="250" VerticalAlignment="Top" Width="250" Margin="0,0,0,0" Source="\Images\Icons\neutral_profil.jpg"/>
+                            <TextBlock Name="LoginTitleTextBlock" HorizontalAlignment="Left" FontSize="30" Margin="275,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.LoginTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="185"/>
+                            <TextBlock Name="LoginTextBlock" HorizontalAlignment="Left" Foreground="{StaticResource PMOrange}" Margin="275,50,0,0" TextWrapping="Wrap" Text="kevin.mouton" VerticalAlignment="Top" Height="52" Width="175"/>
+                            <TextBlock Name="GradeTitleTextBlock" HorizontalAlignment="Left" FontSize="30" Margin="275,102,-28,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="52" Width="203"/>
+                            <TextBlock Name="GradeTextBlock" HorizontalAlignment="Left" Foreground="{StaticResource PMOrange}" Margin="275,152,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeNoGrade, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="91" Width="165"/>
+                        </Grid>
+
+                        <Grid Margin="-10,10,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="85"></RowDefinition>
+                                <RowDefinition Height="85"></RowDefinition>
+                                <RowDefinition Height="85"></RowDefinition>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Name="PointsTitleTextBlock" HorizontalAlignment="Left" FontSize="30"  Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.PointsTitle, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="48" Width="151"/>
+                                <TextBlock Name="PointsTextBlock" HorizontalAlignment="Left" FontSize="25" Margin="10,0,0,0" TextWrapping="Wrap" Foreground="{StaticResource PMOrange}" Text="0" VerticalAlignment="Top" Height="34" Width="72"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="1">
+                                <TextBlock Name="PinsCreatedTitleTextBlock" HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.NumPinsCreated, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="51" Width="460"/>
+                                <TextBlock Name="PinsCreatedTextBlock" HorizontalAlignment="Left" FontSize="25" Margin="10,0,0,0" Foreground="{StaticResource PMOrange}" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="34" Width="63"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="2">
+                                <TextBlock Name="CommentsTitleTextBlock"  HorizontalAlignment="Left" FontSize="30" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.NumCommentsCreated, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top" Height="57" Width="460"/>
+                                <TextBlock Name="CommentsTextBlock" HorizontalAlignment="Left" FontSize="25" Margin="10,0,0,0" Foreground="{StaticResource PMOrange}" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Height="34" Width="41"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
                 </ScrollViewer>
-            </StackPanel>
-        </Grid>
+            </phone:PivotItem>
+
+            <phone:PivotItem Name="StatsPivotItem" Header="{Binding LocalizedResources.History, Source={StaticResource LocalizedStrings}}" Width="470" Height="700">
+                <Grid x:Name="UserHistoryGrid" >
+                    <StackPanel Name="HistoryItemsStackPanel" Orientation="Vertical"/>
+                </Grid>
+            </phone:PivotItem>
+        </phone:Pivot>
     </Grid>
 
 </phone:PhoneApplicationPage>

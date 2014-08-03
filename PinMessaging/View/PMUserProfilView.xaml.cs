@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Other;
@@ -26,7 +27,10 @@ namespace PinMessaging.View
             {
                 _user = PMData.User.Clone();
 
-                UserNameTextBlock.Text = _user.Pseudo;
+                LoginTextBlock.Text = _user.Pseudo;
+                PointsTextBlock.Text = _user.Points;
+                PinsCreatedTextBlock.Text = _user.NbrPin;
+                CommentsTextBlock.Text = _user.NbrMessage;
 
                 //if the user is already in the contact list
                 if (PMData.UserList.Any(user => user.Id == _user.Id) == true)
@@ -114,14 +118,14 @@ namespace PinMessaging.View
 
         private void RemoveFavoriteUi()
         {
-            ContactImage.Source = new BitmapImage(new Uri("/Images/Icons/flag_orange_icon@2x.png", UriKind.Relative));
-            ContactTextBlock.Text = AppResources.Unfriend;
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IconUri = new Uri("/Images/Icons/add.png", UriKind.Relative);
+            (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.Unfriend;
         }
 
         private void AddFavoriteUI()
         {
-            ContactImage.Source = new BitmapImage(new Uri("/Images/Icons/contact_orange_icon.png", UriKind.Relative));
-            ContactTextBlock.Text = AppResources.AddContacts;
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IconUri = new Uri("/Images/Icons/minus.png", UriKind.Relative);
+            (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.AddContacts;
         }
 
         private void AddAsFavoriteButton_Post()
@@ -150,10 +154,10 @@ namespace PinMessaging.View
         {
             UserProfilProgressBar.IsIndeterminate = lockStatus;
             UserProfilProgressBar.Visibility = (lockStatus ? Visibility.Visible : Visibility.Collapsed);
-            ContactButton.IsEnabled = !lockStatus;
+            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = !lockStatus;
         }
 
-        private void AddRemoveFavoriteButton_OnClick(object sender, RoutedEventArgs e)
+        private void AddRemoveFavoriteButton_OnClick(object sender, EventArgs eventArgs)
         {
             if (_user != null)
             {
@@ -162,11 +166,11 @@ namespace PinMessaging.View
                 //if the user is already in the contact list
                 if (PMData.UserList.Any(user => user.Id == _user.Id) == true)
                 {
-                    RemoveFavoriteButton_OnClick(sender, e);
+                    RemoveFavoriteButton_OnClick(sender, eventArgs);
                 }
                 else
                 {
-                    AddFavoriteButton_OnClick(sender, e);
+                    AddFavoriteButton_OnClick(sender, eventArgs);
                 }      
             }
             else
@@ -175,7 +179,7 @@ namespace PinMessaging.View
             }
         }
 
-        private void AddFavoriteButton_OnClick(object sender, RoutedEventArgs e)
+        private void AddFavoriteButton_OnClick(object sender, EventArgs e)
         {
             var favController = new PMFavoriteController(RequestType.AddFavoriteUser, AddAsFavoriteButton_Post);
 
@@ -183,7 +187,7 @@ namespace PinMessaging.View
             favController.AddFavoriteUser(_user.Id);
         }
 
-        private void RemoveFavoriteButton_OnClick(object sender, RoutedEventArgs e)
+        private void RemoveFavoriteButton_OnClick(object sender, EventArgs e)
         {
             var favController = new PMFavoriteController(RequestType.RemoveFavoriteUser, RemoveAsFavoriteButton_Post);
 
@@ -191,7 +195,7 @@ namespace PinMessaging.View
             favController.RemoveFavoriteUser(_user.Id);
         }
 
-        private void PrivateMsgButton_OnClick(object sender, RoutedEventArgs e)
+        private void PrivateMsgButton_OnClick(object sender, EventArgs eventArgs)
         {
             PMMapPinController.DropPrivatePin(_user);
 
