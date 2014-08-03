@@ -486,4 +486,13 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   <data name="You" xml:space="preserve">
     <value>you</value>
   </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="FeedbackTip" xml:space="preserve">
+    <value>You found a bug, have a suggestion or a question? That's here!</value>
+  </data>
+  <data name="ThanksFeedback" xml:space="preserve">
+    <value>Thanks for your participation :)</value>
+  </data>
 </root>

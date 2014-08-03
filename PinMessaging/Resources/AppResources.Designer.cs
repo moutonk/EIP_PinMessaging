@@ -340,6 +340,24 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Feedback.
+        /// </summary>
+        public static string Feedback {
+            get {
+                return ResourceManager.GetString("Feedback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à You found a bug, have a suggestion or a question? That&apos;s here!.
+        /// </summary>
+        public static string FeedbackTip {
+            get {
+                return ResourceManager.GetString("FeedbackTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Grade.
         /// </summary>
         public static string Grade {
@@ -1103,6 +1121,15 @@ namespace PinMessaging.Resources {
         public static string StatsTitle {
             get {
                 return ResourceManager.GetString("StatsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Thanks for your participation :).
+        /// </summary>
+        public static string ThanksFeedback {
+            get {
+                return ResourceManager.GetString("ThanksFeedback", resourceCulture);
             }
         }
         

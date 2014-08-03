@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Other;
@@ -25,6 +26,35 @@ namespace PinMessaging.View
             public PMFlagModel.FlagsType Type { get; set; }
         }
 
+        private class FeedBack
+        {
+            public string Name { get; set; }
+            public BitmapImage Image { get; set; }
+            public FeedbackType Type { get; set; }
+        }
+
+        public enum FeedbackType
+        {
+            Bug,
+            Idea,
+            Question,
+        }
+
+        public string FromFeedbackTypeToString(FeedbackType type)
+        {
+            switch (type)
+            {
+                case FeedbackType.Bug:
+                    return "B";
+                case FeedbackType.Idea:
+                    return "I";
+                case FeedbackType.Question:
+                    return "Q";
+                default:
+                    return "B";
+            }
+        }
+
         public PMSettings()
         {
             InitializeComponent();
@@ -34,7 +64,11 @@ namespace PinMessaging.View
 
             LanguageListPicker.Items.Add(new  Language { Name = "Français", Image = new BitmapImage(Paths.FlagFR), Type = PMFlagModel.FlagsType.FR });
             LanguageListPicker.Items.Add(new Language { Name = "English", Image = new BitmapImage(Paths.FlagEN), Type = PMFlagModel.FlagsType.EN });
-          
+
+            FeedbackTypeListPicker.Items.Add(new FeedBack {Name = "Bug", Type = FeedbackType.Bug});
+            FeedbackTypeListPicker.Items.Add(new FeedBack { Name = "Idea", Type = FeedbackType.Idea });
+            FeedbackTypeListPicker.Items.Add(new FeedBack { Name = "Question", Type = FeedbackType.Question });
+
             //select the correct language regardings the telephone language
             LanguageListPicker.SelectedIndex = Thread.CurrentThread.CurrentUICulture.Name.Equals("fr-FR") ? 0 : 1;
             LocationServicesCheckBox.IsChecked = RememberConnection.GetAccessLocation() ?? true;
@@ -226,6 +260,36 @@ namespace PinMessaging.View
         {
             PMData.AppMode = PMData.ApplicationMode.Offline;
             RememberConnection.SaveAccessLocation(false);
+        }
+
+        private void UpdateUiFeedBack()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                MessageBox.Show(AppResources.ThanksFeedback);
+                FeedbackSendButton.IsEnabled = true;
+            });
+        }
+
+        private void FeedbackSendButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var sc = new PMSettingsController(RequestType.Feedback, UpdateUiFeedBack, UpdateUiFeedBack);
+
+            try
+            {
+                sc.PostFeedback(FromFeedbackTypeToString((((FeedbackTypeListPicker).SelectedItem) as FeedBack).Type), FeedbackTipTextBox.Text);
+                FeedbackSendButton.IsEnabled = false;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("FeedbackSendButton_OnClick: could not get the Feedbacktype", exp, Logs.Error.ErrorsPriority.NotCritical);
+                FeedbackSendButton.IsEnabled = true;
+            }
+        }
+
+        private void FeedbackTipTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            FeedbackSendButton.IsEnabled = FeedbackTipTextBox.Text.Length != 0;
         }
     }
 }

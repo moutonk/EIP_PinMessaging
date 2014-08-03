@@ -260,6 +260,18 @@
           <source>you</source>
           <target state="translated">vous</target>
         </trans-unit>
+        <trans-unit id="Resx/FeedbackTip" translate="yes" xml:space="preserve">
+          <source>You found a bug, have a suggestion or a question? That's here!</source>
+          <target state="new">You found a bug, have a suggestion or a question? That's here!</target>
+        </trans-unit>
+        <trans-unit id="Resx/ThanksFeedback" translate="yes" xml:space="preserve">
+          <source>Thanks for your participation :)</source>
+          <target state="new">Thanks for your participation :)</target>
+        </trans-unit>
+        <trans-unit id="Resx/Feedback" translate="yes" xml:space="preserve">
+          <source>Feedback</source>
+          <target state="new">Feedback</target>
+        </trans-unit>
         <trans-unit id="Resx/PinPrivatePointOfInterest" translate="yes" xml:space="preserve">
           <source>private point of interest</source>
           <target state="translated">point d'interêt privé</target>

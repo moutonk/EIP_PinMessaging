@@ -660,7 +660,16 @@ namespace PinMessaging.View
         {
             var historyImage = new Image { Height = 70, Width = 70, Source = Paths.PinsMapImg[pin.PinType + (pin.Private == true ? 6 : 0)] };
             var titleTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 30, VerticalAlignment = VerticalAlignment.Center, Text = pin.Title, Height = 40};
-            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 18, TextAlignment = TextAlignment.Left, Text = pin.Content, Height = 25};
+            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 18, TextAlignment = TextAlignment.Left, Text = pin.Content, Height = 25 };
+            var dateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 13, TextAlignment = TextAlignment.Left, Height = 25 };
+
+            /*var res = Utils.Utils.ConvertStringToDouble(pin.CreationTime);
+
+            if (res != null)
+            {
+                var d = Utils.Utils.ConvertFromUnixTimestamp(res);
+                dateTextBlock.Text = d.ToShortDateString() + " " + d.ToShortTimeString();
+            }*/
 
             var itemMyPin = new Button() {Margin = new Thickness(-20,0,0,0) , BorderThickness = new Thickness(0)};
             itemMyPin.HorizontalContentAlignment = HorizontalAlignment.Left;
@@ -681,6 +690,7 @@ namespace PinMessaging.View
             var pinContentStackPanel = new StackPanel { Margin = new Thickness(20, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center};
             pinContentStackPanel.Children.Add(titleTextBlock);
             pinContentStackPanel.Children.Add(messageTextBlock);
+            pinContentStackPanel.Children.Add(dateTextBlock);
 
             itemMainGrid.Children.Add(pinContentStackPanel);
 
@@ -953,8 +963,10 @@ namespace PinMessaging.View
                     Text = tb.Author,
                     FontSize = 25,
                     Foreground = (Brush) Application.Current.Resources["PMOrange"],
-                    TextAlignment = TextAlignment.Left
+                    TextAlignment = TextAlignment.Left,
+                    Tag = tb.AuthorId
                 };
+                authorName.Tap += AuthorNameOnTap;
 
                 var creationDate = new TextBlock()
                 {
@@ -987,6 +999,11 @@ namespace PinMessaging.View
             
             PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
             PMData.PinsCommentsListTmp.Clear();
+        }
+
+        private void AuthorNameOnTap(object sender, GestureEventArgs gestureEventArgs)
+        {
+            ContactNameOnTapSub(((sender as TextBlock).Tag as int?).ToString());
         }
 
         private static string GetPinTypeName(PMPinModel.PinsType type, bool isPrivate)

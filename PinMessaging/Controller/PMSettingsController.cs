@@ -9,6 +9,7 @@ using System.Windows.Ink;
 using PinMessaging.Other;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
+using PinMessaging.View;
 
 namespace PinMessaging.Controller
 {
@@ -46,7 +47,23 @@ namespace PinMessaging.Controller
 
             PMWebService.SendRequest(HttpRequestType.Post, RequestType.ChangeEmail, SyncType.Async, dictionary, null);
 
+            StartTimer();   
+        }
+
+        public void PostFeedback(string feedbackType, string comment)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"id", PMData.UserId},
+                {"plateforme", "W"},
+                {"type", feedbackType},
+                {"comment", comment}
+            };
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.Feedback, SyncType.Async, dictionary, null);
+
             StartTimer();
+            
         }
 
         private void DispatchRegarding(bool dispatchingValue)
@@ -74,6 +91,9 @@ namespace PinMessaging.Controller
                         break;
                     case RequestType.ChangeEmail:
                         DispatchRegarding(PMData.IsChangeEmailSuccess);
+                        break;
+                    case RequestType.Feedback:
+                        DispatchRegarding(true);
                         break;
                 }
             }

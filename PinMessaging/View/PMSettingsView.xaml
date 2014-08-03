@@ -26,6 +26,11 @@
                 <TextBlock Text="{Binding Name}" Margin="12,0,0,0" TextWrapping="Wrap"/>
             </StackPanel>
         </DataTemplate>
+        <DataTemplate x:Name="ListPickerItemTemplateFeedback">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" FontSize="45" Margin="12,0,0,10" TextWrapping="Wrap"/>
+            </StackPanel>
+        </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot est la grille racine où tout le contenu de la page est placé-->
@@ -57,7 +62,7 @@
                                     <PasswordBox Name="NewPwdPasswordBox" PasswordChanged="ModifyPasswordBox_OnTextInput" LostFocus="NewPwdPasswordBox_OnLostFocus" HorizontalAlignment="Left" Margin="-10,-50,0,0" VerticalAlignment="Center" Width="460" Height="73"/>
                                     <TextBlock Name="NewPwdConfirmTextBlock" Text="{Binding LocalizedResources.ConfirmPwd, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="12,10,7,0"></TextBlock>
                                     <PasswordBox Name="NewPwdConfirmPasswordBox" PasswordChanged="ModifyPasswordBox_OnTextInput" LostFocus="NewPwdConfirmPasswordBox_OnLostFocus" HorizontalAlignment="Left" Margin="-10,-50,0,0" VerticalAlignment="Center" Width="460" Height="73"/>
-                                    <Button Name="ModifyPwdButton" IsEnabled="False" BorderThickness="0" Background="DimGray" Content="{Binding LocalizedResources.ChangePwd, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="438" Click="ModifyPwdButton_OnClick"/>
+                                    <Button Name="ModifyPwdButton" IsEnabled="False" BorderThickness="0" Background="DimGray" Content="{Binding LocalizedResources.ChangePwd, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="-10,-10,0,0" VerticalAlignment="Top" Width="460" Click="ModifyPwdButton_OnClick"/>
 
                                 </StackPanel>
                             </toolkit:ExpanderView.Items>
@@ -71,7 +76,7 @@
                                     <TextBlock Name="CurrentEmailTextBlock" Margin="3,0,0,10" VerticalAlignment="Center" Height="43"></TextBlock>
                                     <TextBlock Name="NewEmailTextBlock" Text="{Binding LocalizedResources.NewEmail, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="WhiteSmoke" Margin="12,0,10,0"></TextBlock>
                                     <TextBox Name="NewEmailTextBox" TextChanged="NewEmailTextBox_OnTextChanged" LostFocus="NewEmailTextBox_OnLostFocus" HorizontalAlignment="Left" Height="72" Margin="-10,-50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="460"/>
-                                    <Button Name="ModifyEmailButton" IsEnabled="False" BorderThickness="0" Background="DimGray" Content="{Binding LocalizedResources.ChangeEmail, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="460" Click="ModifyEmailButton_Click"/>
+                                    <Button Name="ModifyEmailButton" IsEnabled="False" BorderThickness="0" Background="DimGray" Content="{Binding LocalizedResources.ChangeEmail, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="-10,-10,0,0" VerticalAlignment="Top" Width="460" Click="ModifyEmailButton_Click"/>
                                 </StackPanel>
                             </toolkit:ExpanderView.Items>
                         </toolkit:ExpanderView>
@@ -89,6 +94,19 @@
 
                         <CheckBox Name="LocationServicesCheckBox" Unchecked="LocationServicesCheckBox_OnUnchecked" Checked="LocationServicesCheckBox_OnChecked" Content="{Binding LocalizedResources.LocationServices, Source={StaticResource LocalizedStrings}}" Margin="12,50,25,0"/>
 
+                        <toolkit:ExpanderView Style="{StaticResource ExpanderViewStyle1}" Margin="0,30,25,0">
+                            <toolkit:ExpanderView.Expander>
+                                <TextBlock FontSize="30" Text="{Binding LocalizedResources.Feedback, Source={StaticResource LocalizedStrings}}" Margin="-30,20,0,0"/>
+                            </toolkit:ExpanderView.Expander>
+                            <toolkit:ExpanderView.Items>
+                                <StackPanel Margin="-30,20,0,0">
+                                    <TextBlock Name="FeedbackTipTextBlock" HorizontalAlignment="Left" Text="{Binding LocalizedResources.FeedbackTip, Source={StaticResource LocalizedStrings}}" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440"/>
+                                    <toolkit:ListPicker Name="FeedbackTypeListPicker" FullModeItemTemplate="{StaticResource ListPickerItemTemplateFeedback}" ItemTemplate="{StaticResource ListPickerItemTemplate}" ExpansionMode="FullScreenOnly"  Margin="0,10,7,0"/>
+                                    <TextBox Name="FeedbackTipTextBox" TextChanged="FeedbackTipTextBox_OnTextChanged" HorizontalAlignment="Left" Margin="-10,0,-10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="200" Width="460" MaxLength="500"/>
+                                    <Button Name="FeedbackSendButton" IsEnabled="False" BorderThickness="0" Background="DimGray" Content="{Binding LocalizedResources.ButtonValidate, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="-10,-10,0,0" VerticalAlignment="Top" Width="460" Click="FeedbackSendButton_OnClick"/>
+                                </StackPanel>
+                            </toolkit:ExpanderView.Items>
+                        </toolkit:ExpanderView>
                     </StackPanel>
                 </ScrollViewer>
           

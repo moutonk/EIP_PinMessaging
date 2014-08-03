@@ -67,7 +67,9 @@ namespace PinMessaging.Utils
             [Description("Used to get all the pins created by the user")]
             GetPinsUser,
             [Description("Used to get all the history of a user")]
-            UserHistory
+            UserHistory,
+            [Description("Used to send feedbacks")]
+            Feedback
         }
     }
 
@@ -137,7 +139,9 @@ namespace PinMessaging.Utils
                 case RequestType.GetPinsUser:
                     return "get-pins-user";
                 case RequestType.UserHistory:
-                    return "history/user"; 
+                    return "history/user";
+                case RequestType.Feedback:
+                    return "customer/feedBackBeta"; 
                 default:
                     return reqType.ToString();
             }

@@ -500,6 +500,18 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <source>you</source>
           <target state="new">you</target>
         </trans-unit>
+        <trans-unit id="Resx/Feedback" translate="yes" xml:space="preserve">
+          <source>Feedback</source>
+          <target state="new">Feedback</target>
+        </trans-unit>
+        <trans-unit id="Resx/FeedbackTip" translate="yes" xml:space="preserve">
+          <source>You found a bug, have a suggestion or a question? That's here!</source>
+          <target state="new">You found a bug, have a suggestion or a question? That's here!</target>
+        </trans-unit>
+        <trans-unit id="Resx/ThanksFeedback" translate="yes" xml:space="preserve">
+          <source>Thanks for your participation :)</source>
+          <target state="new">Thanks for your participation :)</target>
+        </trans-unit>
       </group>
     </body>
   </file>
