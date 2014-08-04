@@ -155,8 +155,8 @@
           <target state="new">Menu</target>
         </trans-unit>
         <trans-unit id="Resx/Notifications" translate="yes" xml:space="preserve">
-          <source>notifications</source>
-          <target state="new">notifications</target>
+          <source>notification</source>
+          <target state="new">notification</target>
         </trans-unit>
         <trans-unit id="Resx/Pins" translate="yes" xml:space="preserve">
           <source>Pins</source>

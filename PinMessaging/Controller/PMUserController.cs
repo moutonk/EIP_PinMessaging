@@ -27,6 +27,18 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
+        public void SearchUser(string name)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"name", name},
+            };
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.SearchUser, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
         protected override void waitEnd_Tick(object sender, EventArgs e)
         {
             if (PMWebService.OnGoingRequest == false)
@@ -37,6 +49,10 @@ namespace PinMessaging.Controller
                 switch (CurrentRequestType)
                 {
                     case RequestType.User:
+                        if (_updateUiMethod != null)
+                            _updateUiMethod();
+                        break;
+                    case RequestType.SearchUser:
                         if (_updateUiMethod != null)
                             _updateUiMethod();
                         break;

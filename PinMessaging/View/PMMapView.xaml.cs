@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Controls;
 using System.Device.Location;
@@ -39,7 +40,9 @@ namespace PinMessaging.View
         readonly MapOverlay _userSpotLayer = new MapOverlay();
         readonly UserLocationMarker _userSpot = new UserLocationMarker();
         public PMGeoLocation _geoLocation = null;
-        BackgroundWorker bkw = new BackgroundWorker();
+        readonly BackgroundWorker _bkw = new BackgroundWorker();
+        readonly DispatcherTimer _searchContactTimer = new DispatcherTimer();
+           
 
         public PMMapView()
         {
@@ -47,9 +50,12 @@ namespace PinMessaging.View
 
             CreateAppBarMap();
 
-            bkw.WorkerReportsProgress = true;
-            bkw.DoWork += BkwOnDoWork;
-            bkw.ProgressChanged += BkwOnProgressChanged;
+            _searchContactTimer.Tick += dispatcherTimer_Tick;
+            _searchContactTimer.Interval = new TimeSpan(0, 0, 1);
+
+            _bkw.WorkerReportsProgress = true;
+            _bkw.DoWork += BkwOnDoWork;
+            _bkw.ProgressChanged += BkwOnProgressChanged;
 
             //central page
             ImgTarget.ImageSource = new BitmapImage(Paths.TargetButton);
@@ -323,7 +329,7 @@ namespace PinMessaging.View
             if (zoomLevel < 1 || zoomLevel > 20 || Map.ZoomLevel > zoomLevel)
                 return;
 
-            bkw.RunWorkerAsync(new Tuple<double, double>(Map.ZoomLevel, zoomLevel));
+            _bkw.RunWorkerAsync(new Tuple<double, double>(Map.ZoomLevel, zoomLevel));
         }
 
         private void BkwOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
@@ -337,9 +343,9 @@ namespace PinMessaging.View
                 fromMapZoomLevel += 0.10d;
                 
                 Thread.Sleep(10);
-                bkw.ReportProgress(2);
+                _bkw.ReportProgress(2);
             }
-            bkw.ReportProgress(100);
+            _bkw.ReportProgress(100);
         }
 
         private void BkwOnProgressChanged(object sender, ProgressChangedEventArgs progressChangedEventArgs)
@@ -817,6 +823,60 @@ namespace PinMessaging.View
             return contactGrid;
         }
 
+        private void SearchContactsTextBox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            //SearchContactsTextBox.Text = "";
+        }
+
+
+        private void SearchContactsTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            //SearchContactsTextBox.Text = "ex: john";
+        }
+
+        private void SearchContactsTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (_searchContactTimer.IsEnabled == true)
+                _searchContactTimer.Stop();
+            _searchContactTimer.Start();
+        }
+
+        private void SearchContactUpdateUi()
+        {
+            UnderMenuProgressBar.IsIndeterminate = false;
+            UnderMenuProgressBar.Visibility = Visibility.Collapsed;
+            SearchContactsTextBox.IsEnabled = true;
+            SearchContactStackPanel.Children.Clear();
+
+            if (PMData.SearchUserList.Count == 0)
+            {
+                SearchContactStackPanel.Children.Add(new TextBlock { Height = 80, Width = 300, HorizontalAlignment = HorizontalAlignment.Left, Text = "No results", Margin = new Thickness(0, 0, 0, 0), FontSize = 25 });
+            }
+            else
+            {
+                foreach (var user in PMData.SearchUserList)
+                {
+                    AddContactUI(user, SearchContactStackPanel);
+                }
+            }
+        }
+
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            if (SearchContactsTextBox.Text.Equals("") == false)
+            {
+                (sender as DispatcherTimer).Stop();
+
+                SearchContactsTextBox.IsEnabled = false;
+                UnderMenuProgressBar.IsIndeterminate = true;
+                UnderMenuProgressBar.Visibility = Visibility.Visible;
+
+
+                var uc = new PMUserController(RequestType.SearchUser, SearchContactUpdateUi);
+                uc.SearchUser(SearchContactsTextBox.Text);    
+            }
+        }
+
         private void ContactNameOnTapSub(string userId)
         {
             if (userId != null)
@@ -855,7 +915,7 @@ namespace PinMessaging.View
             }
         }
 
-        private void AddContactUI(PMUserModel user)
+        private void AddContactUI(PMUserModel user, StackPanel where)
         {
             var contactGrid = new Grid();
 
@@ -884,7 +944,7 @@ namespace PinMessaging.View
             //Grid.SetRow(onlineImg, 0);
             //Grid.SetColumn(onlineImg, 2);
 
-            UnderMenuContactPanel.Children.Add(contactGrid);
+            where.Children.Add(contactGrid);
         }
 
         private static void AddContactCode(PMUserModel user)
@@ -896,7 +956,7 @@ namespace PinMessaging.View
         {
             if (PMMapContactController.IsFavoriteUnique(user) == true)
             {
-                AddContactUI(user);
+                AddContactUI(user, UnderMenuContactPanel);
                 AddContactCode(user);
             }
         }

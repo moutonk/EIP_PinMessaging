@@ -69,7 +69,9 @@ namespace PinMessaging.Utils
             [Description("Used to get all the history of a user")]
             UserHistory,
             [Description("Used to send feedbacks")]
-            Feedback
+            Feedback,
+            [Description("Used to search users")]
+            SearchUser
         }
     }
 
@@ -132,6 +134,8 @@ namespace PinMessaging.Utils
                     return "Spring/create-pin.json";
                 case RequestType.User:
                     return "Spring/user.json";
+                case RequestType.SearchUser:
+                    return "Spring/searchUser.json";
                 case RequestType.DeletePin:
                     return "Spring/delete-pin.json";
                 case RequestType.ChangePin:

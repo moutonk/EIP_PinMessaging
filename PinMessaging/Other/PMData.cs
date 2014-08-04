@@ -47,6 +47,9 @@ namespace PinMessaging.Other
         //contains all the favorites
         [DefaultValue(null)] public static List<PMUserModel> UserList { get; set; }
 
+        //contains all the searched users
+        [DefaultValue(null)] public static List<PMUserModel> SearchUserList { get; set; }
+
         //contains all the users profil pictures
         [DefaultValue(null)] public static List<PMPhotoModel> ProfilPicturesList { get; set; }
 

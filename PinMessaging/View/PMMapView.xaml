@@ -308,12 +308,14 @@
                         <phone:PivotItem Margin="0,0,0,20" Header="{Binding LocalizedResources.ContactSearch, Source={StaticResource LocalizedStrings}}" Width="480" Height="420">
                             <Grid Margin="10,0,0,0">
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="75"></RowDefinition>
+                                    <RowDefinition Height="85"></RowDefinition>
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
-                                <TextBox Grid.Row="0" Name="SearchContactsTextBox" Text="Search here" />
-                                <StackPanel Grid.Row="1" Name="SearchContactStackPanel">
-                                </StackPanel>
+                                <TextBox Grid.Row="0" Margin="0,10,0,0" Name="SearchContactsTextBox" LostFocus="SearchContactsTextBox_OnLostFocus"  GotFocus="SearchContactsTextBox_OnGotFocus" TextChanged="SearchContactsTextBox_OnTextChanged"/>
+                                <ScrollViewer Grid.Row="1" Margin="12,10,0,0">
+                                    <StackPanel Name="SearchContactStackPanel">
+                                    </StackPanel>
+                                </ScrollViewer>
                             </Grid>
                         </phone:PivotItem>
 

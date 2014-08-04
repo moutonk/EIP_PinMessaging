@@ -72,6 +72,10 @@ namespace PinMessaging.Other
                             ParseUser(json);
                             break;
 
+                        case RequestType.SearchUser:
+                            SearchUser(json);
+                            break;
+
                         case RequestType.AddFavoriteUser:
                             var item6 = JsonConvert.DeserializeObject<JArray>(json);
                             PMData.WasFavoriteAddedSuccess = Boolean.Parse((string)item6[0]);
@@ -218,6 +222,35 @@ namespace PinMessaging.Other
                 else
                 {
                     Logs.Error.ShowError("ParseUser: could not get the info about the user", Logs.Error.ErrorsPriority.NotCritical);
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ParseGetPinMessages: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
+            }
+        }
+
+        private void SearchUser(string json)
+        {
+            try
+            {
+                var item = JsonConvert.DeserializeObject<JArray>(json);
+
+                if (Boolean.Parse(item[0].ToString()) == true)
+                {
+                    switch (item.Count)
+                    {
+                        case 1:
+                            Logs.Error.ShowError("SearchUser: 2 tokens are expected, got 1", Logs.Error.ErrorsPriority.NotCritical);
+                            break;
+                        case 2:
+                            PMData.SearchUserList = JsonConvert.DeserializeObject<List<PMUserModel>>(item[1].ToString());
+                            break;
+                    }
+                }
+                else
+                {
+                    Logs.Error.ShowError("SearchUser: could not get the info about the users", Logs.Error.ErrorsPriority.NotCritical);
                 }
             }
             catch (Exception exp)

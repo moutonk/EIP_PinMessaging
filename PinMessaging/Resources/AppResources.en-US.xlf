@@ -509,7 +509,7 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="new">public point of interest</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Notifications" xml:space="preserve">
-          <source>notifications</source>
+          <source>notification</source>
           <target state="needs-review-translation">Notifications</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Menu" xml:space="preserve">
