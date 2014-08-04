@@ -874,7 +874,6 @@ namespace PinMessaging.View
 
             contactGrid.Children.Add(contactImg);
             contactGrid.Children.Add(contactName);
-            //contactGrid.Children.Add(onlineImg);
 
             Grid.SetRow(contactImg, 0);
             Grid.SetColumn(contactImg, 0);

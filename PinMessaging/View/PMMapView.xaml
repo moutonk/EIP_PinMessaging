@@ -284,16 +284,41 @@
                             <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
                         
-                        <TextBlock x:Name="DownMenuTitle" FontSize="32" Grid.Row="0" Grid.Column="0" FontWeight="Bold" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="405" Height="41" Margin="10,0,0,0"/>
+                        <TextBlock x:Name="DownMenuTitle" FontSize="60" Grid.Row="0" Grid.Column="0" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Width="405" Margin="20,-10,0,0"/>
                         <Button x:Name="CloseMenuDownButton" Content="X" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="64" Width="60" BorderThickness="0" Click="CloseMenuDownButton_Click"/>
                     </Grid>
 
                     <ProgressBar Grid.Row="1" Name="UnderMenuProgressBar" Visibility="Collapsed" IsIndeterminate="False" Foreground="{StaticResource PMOrange}"></ProgressBar>
 
-                    <ScrollViewer Grid.Row="2" x:Name="UnderMenuContactScrollViewer" Margin="0,-5,0,0">
-                        <StackPanel x:Name="UnderMenuContactPanel"  Orientation="Vertical">
-                        </StackPanel>
-                    </ScrollViewer>
+                    <phone:Pivot Grid.Row="2" Height="480" HorizontalAlignment="Left" x:Name="PivotContacts" VerticalAlignment="Top" Width="480" FontSize="20">
+
+                        <phone:Pivot.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock FontSize="35" Text="{Binding}"/>
+                            </DataTemplate>
+                        </phone:Pivot.HeaderTemplate>
+
+                        <phone:PivotItem x:Name="MyContactsPivotItem" Margin="-5,0,0,0" Header="{Binding LocalizedResources.ContactsTitle, Source={StaticResource LocalizedStrings}}" Width="480" Height="420">
+                            <ScrollViewer x:Name="UnderMenuContactScrollViewer" Margin="25,20,0,0">
+                                <StackPanel x:Name="UnderMenuContactPanel"  Orientation="Vertical">
+                                </StackPanel>
+                            </ScrollViewer>
+                        </phone:PivotItem>
+
+                        <phone:PivotItem Margin="0,0,0,20" Header="{Binding LocalizedResources.ContactSearch, Source={StaticResource LocalizedStrings}}" Width="480" Height="420">
+                            <Grid Margin="10,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="75"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBox Grid.Row="0" Name="SearchContactsTextBox" Text="Search here" />
+                                <StackPanel Grid.Row="1" Name="SearchContactStackPanel">
+                                </StackPanel>
+                            </Grid>
+                        </phone:PivotItem>
+
+                    </phone:Pivot>
+                    
 
                     <Grid Grid.Row="3" x:Name="UnderMenuNotificationGrid">
                     </Grid>

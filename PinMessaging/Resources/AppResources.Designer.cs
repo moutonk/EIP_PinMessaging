@@ -304,11 +304,29 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Contacts.
+        ///   Recherche une chaîne localisée semblable à contacts.
         /// </summary>
         public static string Contacts {
             get {
                 return ResourceManager.GetString("Contacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à SEARCH.
+        /// </summary>
+        public static string ContactSearch {
+            get {
+                return ResourceManager.GetString("ContactSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à MY CONTACTS.
+        /// </summary>
+        public static string ContactsTitle {
+            get {
+                return ResourceManager.GetString("ContactsTitle", resourceCulture);
             }
         }
         
@@ -322,7 +340,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Create Pin.
+        ///   Recherche une chaîne localisée semblable à create pin.
         /// </summary>
         public static string CreatePinTitle {
             get {
@@ -673,7 +691,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Notifications.
+        ///   Recherche une chaîne localisée semblable à notification.
         /// </summary>
         public static string Notifications {
             get {

@@ -223,13 +223,13 @@
     <value>Menu</value>
   </data>
   <data name="Contacts" xml:space="preserve">
-    <value>Contacts</value>
+    <value>contacts</value>
   </data>
   <data name="Menu" xml:space="preserve">
     <value>Menu</value>
   </data>
   <data name="Notifications" xml:space="preserve">
-    <value>Notifications</value>
+    <value>notification</value>
   </data>
   <data name="Pins" xml:space="preserve">
     <value>Pins</value>
@@ -283,7 +283,7 @@
     <value>TITLE</value>
   </data>
   <data name="CreatePinTitle" xml:space="preserve">
-    <value>Create Pin</value>
+    <value>create pin</value>
   </data>
   <data name="PinImage" xml:space="preserve">
     <value>IMAGE</value>
@@ -494,5 +494,11 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   </data>
   <data name="ThanksFeedback" xml:space="preserve">
     <value>Thanks for your participation :)</value>
+  </data>
+  <data name="ContactSearch" xml:space="preserve">
+    <value>SEARCH</value>
+  </data>
+  <data name="ContactsTitle" xml:space="preserve">
+    <value>MY CONTACTS</value>
   </data>
 </root>

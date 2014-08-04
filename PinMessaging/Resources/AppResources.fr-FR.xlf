@@ -182,9 +182,8 @@
           <target state="translated">TITRE</target>
         </trans-unit>
         <trans-unit id="Resx/CreatePinTitle" translate="yes" xml:space="preserve">
-          <source>Create Pin</source>
-          <target state="translated">Créér un pin</target>
-        </trans-unit>
+          <source>create pin</source>
+          <target state="translated">créér un pin</target></trans-unit>
         <trans-unit id="Resx/PinImage" translate="yes" xml:space="preserve">
           <source>IMAGE</source>
           <target state="translated">IMAGE</target>
@@ -267,6 +266,14 @@
         <trans-unit id="Resx/ThanksFeedback" translate="yes" xml:space="preserve">
           <source>Thanks for your participation :)</source>
           <target state="translated">Merci de votre participation :)</target>
+        </trans-unit>
+        <trans-unit id="Resx/ContactsTitle" translate="yes" xml:space="preserve">
+          <source>MY CONTACTS</source>
+          <target state="translated">MES CONTACTS</target>
+        </trans-unit>
+        <trans-unit id="Resx/ContactSearch" translate="yes" xml:space="preserve">
+          <source>SEARCH</source>
+          <target state="translated">CHERCHER</target>
         </trans-unit>
         <trans-unit id="Resx/Feedback" translate="yes" xml:space="preserve">
           <source>Feedback</source>
@@ -449,8 +456,7 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         </trans-unit>
         <trans-unit id="Resx/History" translate="yes" xml:space="preserve">
           <source>HISTORY</source>
-          <target state="needs-review-translation">HISTORIQUE</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="translated">HISTORIQUE</target>
           </trans-unit>
         <trans-unit id="Resx/Grade" translate="yes" xml:space="preserve">
           <source>Grade</source>
@@ -495,17 +501,15 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="translated">point d'interêt public</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Notifications" xml:space="preserve">
-          <source>Notifications</source>
-          <target state="translated">Notification</target>
-        </trans-unit>
+          <source>notifications</source>
+          <target state="translated">notification</target></trans-unit>
         <trans-unit translate="yes" id="Resx/Menu" xml:space="preserve">
           <source>Menu</source>
           <target state="translated">Menu</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Contacts" xml:space="preserve">
-          <source>Contacts</source>
-          <target state="translated">Contacts</target>
-        </trans-unit>
+          <source>contacts</source>
+          <target state="translated">contacts</target></trans-unit>
       </group>
     </body>
   </file>

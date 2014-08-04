@@ -183,8 +183,8 @@
           <target state="signed-off">TITLE</target>
         </trans-unit>
         <trans-unit id="Resx/CreatePinTitle" translate="yes" xml:space="preserve">
-          <source>Create Pin</source>
-          <target state="signed-off">Create Pin</target>
+          <source>create pin</source>
+          <target state="needs-review-translation">Create Pin</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Resx/PinImage" translate="yes" xml:space="preserve">
           <source>IMAGE</source>
@@ -269,6 +269,14 @@
         <trans-unit id="Resx/ThanksFeedback" translate="yes" xml:space="preserve">
           <source>Thanks for your participation :)</source>
           <target state="new">Thanks for your participation :)</target>
+        </trans-unit>
+        <trans-unit id="Resx/ContactsTitle" translate="yes" xml:space="preserve">
+          <source>MY CONTACTS</source>
+          <target state="new">MY CONTACTS</target>
+        </trans-unit>
+        <trans-unit id="Resx/ContactSearch" translate="yes" xml:space="preserve">
+          <source>SEARCH</source>
+          <target state="new">SEARCH</target>
         </trans-unit>
         <trans-unit id="Resx/Feedback" translate="yes" xml:space="preserve">
           <source>Feedback</source>
@@ -501,16 +509,16 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="new">public point of interest</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Notifications" xml:space="preserve">
-          <source>Notifications</source>
-          <target state="signed-off">Notifications</target>
+          <source>notifications</source>
+          <target state="needs-review-translation">Notifications</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Menu" xml:space="preserve">
           <source>Menu</source>
           <target state="signed-off">Menu</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Contacts" xml:space="preserve">
-          <source>Contacts</source>
-          <target state="signed-off">Contacts</target>
+          <source>contacts</source>
+          <target state="needs-review-translation">Contacts</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
       </group>
     </body>
