@@ -290,8 +290,8 @@
 
                     <ProgressBar Grid.Row="1" Name="UnderMenuProgressBar" Visibility="Collapsed" IsIndeterminate="False" Foreground="{StaticResource PMOrange}"></ProgressBar>
 
-                    <ScrollViewer Grid.Row="2" x:Name="UnderMenuContactScrollViewer">
-                        <StackPanel x:Name="UnderMenuContactPanel" Orientation="Vertical">
+                    <ScrollViewer Grid.Row="2" x:Name="UnderMenuContactScrollViewer" Margin="0,-5,0,0">
+                        <StackPanel x:Name="UnderMenuContactPanel"  Orientation="Vertical">
                         </StackPanel>
                     </ScrollViewer>
 
@@ -322,7 +322,7 @@
                                 </StackPanel>
                             </Grid>
 
-                            <StackPanel Grid.Row="1" Margin="20,0,20,0">
+                            <StackPanel Grid.Row="1" Margin="20,10,20,0">
                                 <controls:ChatBubble ChatBubbleDirection="LowerLeft" Background="DarkGray" BorderBrush="DarkGray">
                                     <controls:ChatBubble.Content>
                                             <TextBlock x:Name="PinMessageDescriptionTextBlock" Margin="0,0,0,5" Foreground="Black" TextWrapping="Wrap" FontSize="20" Text="Ceci est juste un text ecrit en brut pour faire un test sur l'ecran. Je saiue ligne et voir si tout est bon.">

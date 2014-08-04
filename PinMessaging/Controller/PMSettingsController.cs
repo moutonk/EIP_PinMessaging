@@ -50,14 +50,15 @@ namespace PinMessaging.Controller
             StartTimer();   
         }
 
-        public void PostFeedback(string feedbackType, string comment)
+        public void PostFeedback(string feedbackType, string comment, string extra)
         {
             var dictionary = new Dictionary<string, string>
             {
                 {"id", PMData.UserId},
                 {"plateforme", "W"},
                 {"type", feedbackType},
-                {"comment", comment}
+                {"comment", comment},
+                {"extra", extra}
             };
 
             PMWebService.SendRequest(HttpRequestType.Post, RequestType.Feedback, SyncType.Async, dictionary, null);

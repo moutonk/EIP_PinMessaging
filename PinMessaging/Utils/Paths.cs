@@ -21,7 +21,7 @@ namespace PinMessaging.Utils
         public static readonly Uri UserProfilView = new Uri("/View/PMUserProfilView.xaml", UriKind.Relative);
         public static readonly Uri CurrentUserProfilView = new Uri(CurrentUserProfilPathString, UriKind.Relative);
 
-        public static readonly string ServerAddress = "http://163.5.84.244/Spring/"; //alexis: 192.168.1.6 serveur_lapbeip:163.5.84.244/Spring/ suivi:163.5.84.52
+        public static readonly string ServerAddress = "http://163.5.84.244/"; //alexis: 192.168.1.6 serveur_lapbeip:163.5.84.244/Spring/ suivi:163.5.84.52
 
         public static readonly Uri PinEventIcon = new Uri("/Images/Pins/event_icon.png", UriKind.Relative);
         public static readonly Uri PinEventIconIntermediate = new Uri("/Images/Pins/event_icon@2x.png", UriKind.Relative);

@@ -778,20 +778,20 @@ namespace PinMessaging.View
             contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(110) });
             //     contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(70) });
 
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(170) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(110) });
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
+            //contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
 
-            var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/8.jpg", UriKind.Relative)) };
+            var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative)) };
             var contactName = new TextBlock() { Text = PMData.User.Pseudo, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
-            var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0)};
+            //var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0)};
             /*var privateMsg = new TextBlock() { Text = "Private message", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
             var userProfil = new TextBlock() { Text = "User profil", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
             var localise = new TextBlock() { Text = "Localize", FontSize = 20, Margin = new Thickness(10, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
 */
             contactGrid.Children.Add(contactImg);
             contactGrid.Children.Add(contactName);
-            contactGrid.Children.Add(onlineImg);
+            //contactGrid.Children.Add(onlineImg);
            /* contactGrid.Children.Add(privateMsg);
             contactGrid.Children.Add(userProfil);
             contactGrid.Children.Add(localise*/
@@ -802,8 +802,8 @@ namespace PinMessaging.View
             Grid.SetRow(contactName, 0);
             Grid.SetColumn(contactName, 1);
 
-            Grid.SetRow(onlineImg, 0);
-            Grid.SetColumn(onlineImg, 2);
+            //Grid.SetRow(onlineImg, 0);
+            //Grid.SetColumn(onlineImg, 2);
 
 /*            Grid.SetRow(privateMsg, 1);
             Grid.SetColumn(privateMsg, 0);
@@ -857,24 +857,24 @@ namespace PinMessaging.View
 
         private void AddContactUI(PMUserModel user)
         {
-            var contactGrid = new Grid { Margin = new Thickness(-5, 0, 0, 0) };
+            var contactGrid = new Grid();
 
             contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(110) });
 
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(170) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(110) });
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
+            //contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
 
-            var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/8.jpg", UriKind.Relative)), Tag = user };
-            var contactName = new TextBlock() { Text = user.Pseudo, Tag = user, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0) };
-            var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0) };
+            var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative)), Tag = user };
+            var contactName = new TextBlock() { Text = user.Pseudo, Tag = user, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(20, 0, 0, 0) };
+            //var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0) };
 
             contactImg.Tap += ContactNameOnTap;
             contactName.Tap += ContactNameOnTap;
 
             contactGrid.Children.Add(contactImg);
             contactGrid.Children.Add(contactName);
-            contactGrid.Children.Add(onlineImg);
+            //contactGrid.Children.Add(onlineImg);
 
             Grid.SetRow(contactImg, 0);
             Grid.SetColumn(contactImg, 0);
@@ -882,8 +882,8 @@ namespace PinMessaging.View
             Grid.SetRow(contactName, 0);
             Grid.SetColumn(contactName, 1);
 
-            Grid.SetRow(onlineImg, 0);
-            Grid.SetColumn(onlineImg, 2);
+            //Grid.SetRow(onlineImg, 0);
+            //Grid.SetColumn(onlineImg, 2);
 
             UnderMenuContactPanel.Children.Add(contactGrid);
         }
@@ -951,6 +951,7 @@ namespace PinMessaging.View
                     Content = new TextBlock()
                              {
                                 Text = tb.Content,
+                                FontSize = 20,
                                 TextWrapping = TextWrapping.Wrap,
                                 Foreground = new SolidColorBrush(Colors.Black)
                             },
@@ -980,7 +981,7 @@ namespace PinMessaging.View
                 if (res != null)
                 {
                     var d = Utils.Utils.ConvertFromUnixTimestamp(res);
-                    creationDate.Text = d.ToLongDateString();
+                    creationDate.Text = d.ToShortDateString() + " " + d.ToShortTimeString();
                 }
                  
                 var grid = new Grid();

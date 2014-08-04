@@ -277,7 +277,7 @@ namespace PinMessaging.View
 
             try
             {
-                sc.PostFeedback(FromFeedbackTypeToString((((FeedbackTypeListPicker).SelectedItem) as FeedBack).Type), FeedbackTipTextBox.Text);
+                sc.PostFeedback(FromFeedbackTypeToString((((FeedbackTypeListPicker).SelectedItem) as FeedBack).Type), FeedbackTipTextBox.Text, "");
                 FeedbackSendButton.IsEnabled = false;
             }
             catch (Exception exp)

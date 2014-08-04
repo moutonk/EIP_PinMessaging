@@ -102,7 +102,7 @@
                                 <StackPanel Margin="-30,20,0,0">
                                     <TextBlock Name="FeedbackTipTextBlock" HorizontalAlignment="Left" Text="{Binding LocalizedResources.FeedbackTip, Source={StaticResource LocalizedStrings}}" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="440"/>
                                     <toolkit:ListPicker Name="FeedbackTypeListPicker" FullModeItemTemplate="{StaticResource ListPickerItemTemplateFeedback}" ItemTemplate="{StaticResource ListPickerItemTemplate}" ExpansionMode="FullScreenOnly"  Margin="0,10,7,0"/>
-                                    <TextBox Name="FeedbackTipTextBox" TextChanged="FeedbackTipTextBox_OnTextChanged" HorizontalAlignment="Left" Margin="-10,0,-10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="200" Width="460" MaxLength="500"/>
+                                    <TextBox Name="FeedbackTipTextBox" TextChanged="FeedbackTipTextBox_OnTextChanged" HorizontalAlignment="Left" Margin="-11,0,-10,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="200" Width="460" MaxLength="500"/>
                                     <Button Name="FeedbackSendButton" IsEnabled="False" BorderThickness="0" Background="DimGray" Content="{Binding LocalizedResources.ButtonValidate, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="-10,-10,0,0" VerticalAlignment="Top" Width="460" Click="FeedbackSendButton_OnClick"/>
                                 </StackPanel>
                             </toolkit:ExpanderView.Items>

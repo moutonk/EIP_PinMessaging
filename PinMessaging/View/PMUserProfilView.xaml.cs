@@ -98,7 +98,7 @@ namespace PinMessaging.View
         {
             var historyImage = new Image { Height = 70, Width = 70, Source = GetHistoryTypeImg(item.historyType) };
             var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, TextAlignment = TextAlignment.Left, Text = AdaptContentForMsgPrivacy(item.Content), Height = 35 };
-            var dateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 13, TextAlignment = TextAlignment.Left, Height = 25 };
+            var dateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 16, TextAlignment = TextAlignment.Left, Height = 27 };
             var goToMapTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 13, VerticalAlignment = VerticalAlignment.Center, Text = "Voir sur la carte", Foreground = (Brush)Application.Current.Resources["PMOrange"], Height = 25 };
 
             var res = Utils.Utils.ConvertStringToDouble(item.Date);
@@ -188,15 +188,27 @@ namespace PinMessaging.View
 
         private void AddAsFavoriteButton_Post()
         {
-            if (PMData.WasFavoriteAddedSuccess == true)
+            if (PMData.WasFavoriteAddedSuccess == true || PMData.WasFavoriteAddedSuccess == false)
             {
                 PMMapContactController.AddNewFavoris(_user);
                 RemoveFavoriteUi();                
             }
             else
             {
-                PMData.UserList.RemoveAt(PMData.UserList.FindIndex(elem => elem.Id == _user.Id));
-                PMMapContactController.RemoveFavoris(_user);
+                /*foreach (var item in PMData.UserList)
+                {
+                    Logs.Output.ShowOutput(item.Pseudo);
+                }
+                try
+                {
+                    PMData.UserList.RemoveAt(PMData.UserList.FindIndex(elem => elem.Id == _user.Id));
+                }
+                catch (Exception exp)
+                {
+                    Logs.Error.ShowError("AddAsFavoriteButton_Post: not important", exp, Logs.Error.ErrorsPriority.NotCritical);
+                }
+                RemoveFavoriteButton_OnClick(null, null);
+                PMMapContactController.RemoveFavoris(_user);*/
             }
             AddRemoveFavoriteButtonLock(false);
 
@@ -204,17 +216,17 @@ namespace PinMessaging.View
 
         private void RemoveAsFavoriteButton_Post()
         {
-            if (PMData.WasFavoriteRemovedSuccess == true)
+            if (PMData.WasFavoriteRemovedSuccess == true || PMData.WasFavoriteRemovedSuccess == false)
             {
                 PMMapContactController.RemoveFavoris(_user);
                 AddFavoriteUI();
             }
-            else
+            /*else
             {
                 PMData.UserList.RemoveAt(PMData.UserList.FindIndex(elem => elem.Id == _user.Id));
                 PMMapContactController.RemoveFavoris(_user);
                 AddFavoriteUI();
-            }
+            }*/
             AddRemoveFavoriteButtonLock(false);
 
         }

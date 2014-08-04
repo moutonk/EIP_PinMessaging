@@ -105,43 +105,43 @@ namespace PinMessaging.Utils
             switch (reqType)
             {
                 case RequestType.CheckEmail:
-                    return "check-email";
+                    return "Spring/check-email.json";
                 case RequestType.SignUp:
-                    return "create-user";
+                    return "Spring/create-user.json";
                 case RequestType.SignIn:
-                    return "connect";
+                    return "Spring/connect.json";
                 case RequestType.AddFavoriteLocation:
-                    return "addFavoriteLocation";
+                    return "Spring/addFavoriteLocation.json";
                 case RequestType.AddFavoriteUser:
-                    return "addFavoriteUser";
+                    return "Spring/addFavoriteUser.json";
                 case RequestType.RemoveFavoriteLocation:
-                    return "removeFavoriteLocation";
+                    return "Spring/removeFavoriteLocation.json";
                 case RequestType.RemoveFavoriteUser:
-                    return "removeFavoriteUser";
+                    return "Spring/removeFavoriteUser.json";
                 case RequestType.ChangeEmail:
-                    return "changeEmail";
+                    return "Spring/changeEmail.json";
                 case RequestType.ChangePassword:
-                    return "changePass";
+                    return "Spring/changePass.json";
                 case RequestType.GetPins:
-                    return "get-pins";
+                    return "Spring/get-pins.json";
                 case RequestType.GetPinMessages:
-                    return "get-pin-messages";
+                    return "Spring/get-pin-messages.json";
                 case RequestType.CreatePinMessage:
-                    return "create-pin-message";
+                    return "Spring/create-pin-message.json";
                 case RequestType.CreatePin:
-                    return "create-pin";
+                    return "Spring/create-pin.json";
                 case RequestType.User:
-                    return "user";
+                    return "Spring/user.json";
                 case RequestType.DeletePin:
-                    return "delete-pin";
+                    return "Spring/delete-pin.json";
                 case RequestType.ChangePin:
-                    return "change-pin";
+                    return "Spring/change-pin.json";
                 case RequestType.GetPinsUser:
-                    return "get-pins-user";
+                    return "Spring/get-pins-user.json";
                 case RequestType.UserHistory:
-                    return "history/user";
+                    return "Spring/history/user.json";
                 case RequestType.Feedback:
-                    return "customer/feedBackBeta"; 
+                    return "customer/feedBackBeta/?"; 
                 default:
                     return reqType.ToString();
             }
@@ -163,10 +163,10 @@ namespace PinMessaging.Utils
 
             //convert the dictionnary to a string
             var dicoToString = FormateDictionnaryToString(args);
-            Logs.Output.ShowOutput("DicoToString request: " + dicoToString);
+            //Logs.Output.ShowOutput("DicoToStr: " + dicoToString);
 
             //create the request with the correct URL
-            var url = Paths.ServerAddress + RequestTypeToUrlString(reqType) + ".json";
+            var url = Paths.ServerAddress + RequestTypeToUrlString(reqType);
 
             switch (httpReqType)
             {
@@ -271,7 +271,7 @@ namespace PinMessaging.Utils
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
 
-            Logs.Output.ShowOutput(url);
+            Logs.Output.ShowOutput(url + " " + parameters);
 
             if (PMData.AuthId != null)
                 _cookieColl.Add(new Cookie("Auth", PMData.AuthId));
