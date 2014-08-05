@@ -777,63 +777,6 @@ namespace PinMessaging.View
 
         /// ///////////////////////////////////////////    Contact    //////////////////////////////////////////////////
 
-        private Grid CreateContactItem()
-        {
-            var contactGrid = new Grid {Margin = new Thickness(-5,0,0,0)};
-
-            contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(110) });
-            //     contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(70) });
-
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(110) });
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            //contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
-
-            var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative)) };
-            var contactName = new TextBlock() { Text = PMData.User.Pseudo, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(10, 0, 0, 0)};
-            //var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0)};
-            /*var privateMsg = new TextBlock() { Text = "Private message", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            var userProfil = new TextBlock() { Text = "User profil", FontSize = 20, Margin = new Thickness(10, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center };
-            var localise = new TextBlock() { Text = "Localize", FontSize = 20, Margin = new Thickness(10, 0, 10, 0), VerticalAlignment = VerticalAlignment.Center };
-*/
-            contactGrid.Children.Add(contactImg);
-            contactGrid.Children.Add(contactName);
-            //contactGrid.Children.Add(onlineImg);
-           /* contactGrid.Children.Add(privateMsg);
-            contactGrid.Children.Add(userProfil);
-            contactGrid.Children.Add(localise*/
-
-            Grid.SetRow(contactImg, 0);
-            Grid.SetColumn(contactImg, 0);
-
-            Grid.SetRow(contactName, 0);
-            Grid.SetColumn(contactName, 1);
-
-            //Grid.SetRow(onlineImg, 0);
-            //Grid.SetColumn(onlineImg, 2);
-
-/*            Grid.SetRow(privateMsg, 1);
-            Grid.SetColumn(privateMsg, 0);
-
-            Grid.SetRow(userProfil, 1);
-            Grid.SetColumn(userProfil, 1);
-
-            Grid.SetRow(localise, 1);
-            Grid.SetColumn(localise, 2);*/
-
-            return contactGrid;
-        }
-
-        private void SearchContactsTextBox_OnGotFocus(object sender, RoutedEventArgs e)
-        {
-            //SearchContactsTextBox.Text = "";
-        }
-
-
-        private void SearchContactsTextBox_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            //SearchContactsTextBox.Text = "ex: john";
-        }
-
         private void SearchContactsTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             if (_searchContactTimer.IsEnabled == true)

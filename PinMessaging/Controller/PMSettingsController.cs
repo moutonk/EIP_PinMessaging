@@ -1,15 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Ink;
 using PinMessaging.Other;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
-using PinMessaging.View;
 
 namespace PinMessaging.Controller
 {
@@ -61,7 +54,7 @@ namespace PinMessaging.Controller
                 {"extra", extra}
             };
 
-            PMWebService.SendRequest(HttpRequestType.Post, RequestType.Feedback, SyncType.Async, dictionary, null);
+            PMWebService.SendRequest(HttpRequestType.Get, RequestType.Feedback, SyncType.Async, dictionary, null);
 
             StartTimer();
             

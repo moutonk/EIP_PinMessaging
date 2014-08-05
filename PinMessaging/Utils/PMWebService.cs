@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Media.Imaging;
-using Microsoft.Phone.Logging;
 using PinMessaging.Other;
 using PinMessaging.Utils.WebService;
 
@@ -145,7 +144,7 @@ namespace PinMessaging.Utils
                 case RequestType.UserHistory:
                     return "Spring/history/user.json";
                 case RequestType.Feedback:
-                    return "customer/feedBackBeta/?"; 
+                    return "customer/feedBackBeta/"; 
                 default:
                     return reqType.ToString();
             }
@@ -320,6 +319,8 @@ namespace PinMessaging.Utils
         {
             var request = (HttpWebRequest)WebRequest.Create(url + "?" + parameters);
 
+            if (PMData.AuthId != null)
+                _cookieColl.Add(new Cookie("Auth", PMData.AuthId));
             if (_firstRequest == true)
                 CookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
 
