@@ -53,7 +53,7 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(null)] public string Url { get; set; }
         [JsonProperty] [DefaultValue(null)] public string AuthoriseUsersId { get; set; } 
         [JsonProperty] [DefaultValue(null)] public string Lang { get; set; }
-        [JsonProperty] [DefaultValue(null)] public string CreationTime { get; set; }
+        [JsonProperty] [DefaultValue(null)] public string CreatedTime { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Latitude { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Longitude { get; set; }
         [JsonProperty] [DefaultValue(null)] public string LocationName { get; set; }
@@ -195,7 +195,7 @@ namespace PinMessaging.Model
                                        " description:" + Content +
                                        (Url == null ? "" : " url:" + Url) +
                                        (Lang == null ? "" : " lang:" + Lang) +
-                                       (CreationTime == null ? "" : " creationTime:" + CreationTime) + 
+                                       (CreatedTime == null ? "" : " creationTime:" + CreatedTime) + 
                                        " author:" + Author +
                                        " authorId: " + AuthorId +
                                        (LocationName == null ? "" : " locationName: " + LocationName));

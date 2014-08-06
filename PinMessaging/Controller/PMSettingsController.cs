@@ -47,7 +47,7 @@ namespace PinMessaging.Controller
         {
             var dictionary = new Dictionary<string, string>
             {
-                {"id", PMData.UserId},
+                {"id", PMData.CurrentUserId},
                 {"plateforme", "W"},
                 {"type", feedbackType},
                 {"comment", comment},

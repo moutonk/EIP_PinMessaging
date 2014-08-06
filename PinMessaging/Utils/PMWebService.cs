@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Windows.Media.Imaging;
 using PinMessaging.Other;
 using PinMessaging.Utils.WebService;
@@ -70,7 +71,9 @@ namespace PinMessaging.Utils
             [Description("Used to send feedbacks")]
             Feedback,
             [Description("Used to search users")]
-            SearchUser
+            SearchUser,
+            [Description("Used to get / receive profil pictures")]
+            ProfilPicture
         }
     }
 
@@ -133,6 +136,8 @@ namespace PinMessaging.Utils
                     return "Spring/create-pin.json";
                 case RequestType.User:
                     return "Spring/user.json";
+                case RequestType.ProfilPicture:
+                    return "Spring/photoProfile.json";
                 case RequestType.SearchUser:
                     return "Spring/searchUser.json";
                 case RequestType.DeletePin:
@@ -284,11 +289,42 @@ namespace PinMessaging.Utils
             request.CookieContainer = CookieContainer;
             request.Method = HttpRequestType.Post.ToString();
 
-            //convert the dictionnary with the argument to an array of bytes
-            var requestParams = Encoding.UTF8.GetBytes(parameters);
+            byte[] requestParams;
 
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = requestParams.Length;
+            //convert the dictionnary with the argument to an array of bytes
+            if (reqType != RequestType.ProfilPicture)
+            {
+                requestParams = Encoding.UTF8.GetBytes(parameters);
+                request.ContentType = "application/x-www-form-urlencoded";
+                request.ContentLength = requestParams.Length;
+            }
+            else
+            {
+                const string boundary = "---keke---";
+
+                var head = Encoding.UTF8.GetBytes(String.Format("--{0}\r\n" + "Content-Disposition: form-data; name=\"file\"; filename=\"test.jpg\"\r\n" + "\r\n", boundary));
+                //var tmp = Convert.FromBase64String(parameters.Remove(0, 1));
+                var content = Encoding.UTF8.GetBytes(parameters.Remove(0, 1));
+                var tail = Encoding.UTF8.GetBytes(String.Format("\r\n" + "--{0}--\r\n", boundary));
+
+                requestParams = new byte[head.Length + tail.Length + content.Length];
+
+                Array.Copy(head, 0, requestParams, 0, head.Length);
+                Array.Copy(content, 0, requestParams, head.Length, content.Length);
+                Array.Copy(tail, 0, requestParams, head.Length + content.Length, tail.Length);
+
+                Logs.Output.ShowOutput(Environment.NewLine + "+++++++++++++++++++++");
+                Logs.Output.ShowOutput(Encoding.UTF8.GetString(requestParams, 0, requestParams.Length));
+                Logs.Output.ShowOutput(Environment.NewLine + "+++++++++++++++++++++");
+ 
+                request.ContentType = "multipart/form-data; boundary=" + boundary;
+                //request.ContentLength = content.Length;
+
+                Logs.Output.ShowOutput("Taille: " + requestParams.Length);
+                Logs.Output.ShowOutput("content: " + content.Length);
+                Logs.Output.ShowOutput("Head: " + head.Length);
+                Logs.Output.ShowOutput("Tail: " + tail.Length);
+            }
 
             // start the asynchronous operation
             request.BeginGetRequestStream(new AsyncCallback(WriteParamsInStreamCallBack), Tuple.Create(request, requestParams, reqType));

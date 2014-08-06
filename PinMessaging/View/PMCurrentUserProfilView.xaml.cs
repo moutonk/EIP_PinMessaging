@@ -4,10 +4,12 @@ using System.Runtime.Serialization;
 using System.Windows;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Other;
 using PinMessaging.Resources;
 using PinMessaging.Utils;
+using PinMessaging.Utils.WebService;
 
 namespace PinMessaging.View
 {
@@ -72,7 +74,7 @@ namespace PinMessaging.View
 
         private void SetProfilPictureUI()
         {
-            var profilPic = PMData.GetUserProfilPicture(PMData.UserId);
+            var profilPic = PMData.GetUserProfilPicture(PMData.CurrentUserId);
 
             if (profilPic != null)
                 UserProfilImage.Source = profilPic.Img;
@@ -90,7 +92,7 @@ namespace PinMessaging.View
         {
             if (e.TaskResult == TaskResult.OK)
             {
-                var pic = new PMPhotoModel {UserId = PMData.UserId, FieldBytes = new byte[e.ChosenPhoto.Length]};
+                var pic = new PMPhotoModel { UserId = PMData.CurrentUserId, FieldBytes = new byte[e.ChosenPhoto.Length] };
                 
                 try
                 {
@@ -98,10 +100,10 @@ namespace PinMessaging.View
                     pic.CreateStream();
 
                     //if the profil picture is already in the list
-                    if (PMData.ProfilPicturesList.Any(img => img.UserId.Equals(PMData.UserId) == true) == true)
+                    if (PMData.ProfilPicturesList.Any(img => img.UserId.Equals(PMData.CurrentUserId) == true) == true)
                     {
                         //we remove it and we add it
-                        PMData.ProfilPicturesList.RemoveAll(img => img.UserId.Equals(PMData.UserId) == true);
+                        PMData.ProfilPicturesList.RemoveAll(img => img.UserId.Equals(PMData.CurrentUserId) == true);
                         PMData.ProfilPicturesList.Add(pic);
                     }
                     else
@@ -109,6 +111,10 @@ namespace PinMessaging.View
                         //or we add it
                         PMData.ProfilPicturesList.Add(pic);
                     }
+
+                    var userController = new PMUserController(RequestType.ProfilPicture, UploadProfilPictureUpdateUi);
+                    userController.UploadProfilPicture(System.Text.Encoding.UTF8.GetString(pic.FieldBytes, 0, pic.FieldBytes.Length));
+
                     SetProfilPictureUI();
                 }
                 catch (Exception exp)
@@ -116,6 +122,11 @@ namespace PinMessaging.View
                     Logs.Error.ShowError("photoChooserTask_Completed", exp, Logs.Error.ErrorsPriority.NotCritical);
                 }
             }
+        }
+
+        private void UploadProfilPictureUpdateUi()
+        {
+            Logs.Output.ShowOutput("upload done");
         }
     }
 }

@@ -27,6 +27,30 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
+        public void DownloadProfilPicture(string userId)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"userId", userId},
+            };
+
+            PMWebService.SendRequest(HttpRequestType.Get, RequestType.ProfilPicture, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
+        public void UploadProfilPicture(string file)
+        {
+            var dictionary = new Dictionary<string, string>
+            {
+                {"", file},
+            };
+
+            PMWebService.SendRequest(HttpRequestType.Post, RequestType.ProfilPicture, SyncType.Async, dictionary, null);
+
+            StartTimer();
+        }
+
         public void SearchUser(string name)
         {
             var dictionary = new Dictionary<string, string>

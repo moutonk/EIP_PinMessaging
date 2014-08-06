@@ -599,7 +599,7 @@ namespace PinMessaging.View
 
         private void ButtonProfil_OnClick(object sender, RoutedEventArgs e)
         {
-            ContactNameOnTapSub(PMData.UserId);
+            ContactNameOnTapSub(PMData.CurrentUserId);
         }
 
         private void ButtonPins_OnClick(object sender, RoutedEventArgs e)
@@ -628,7 +628,7 @@ namespace PinMessaging.View
         {
             var userController = new PMUserController(RequestType.User, ButtonReward_PostClick);
 
-            userController.GetUserInfos(PMData.UserId);
+            userController.GetUserInfos(PMData.CurrentUserId);
          }
 
         private void ButtonReward_PostClick()
@@ -669,16 +669,20 @@ namespace PinMessaging.View
             var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 18, TextAlignment = TextAlignment.Left, Text = pin.Content, Height = 25 };
             var dateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 13, TextAlignment = TextAlignment.Left, Height = 25 };
 
-            /*var res = Utils.Utils.ConvertStringToDouble(pin.CreationTime);
+            var res = Utils.Utils.ConvertStringToDouble(pin.CreatedTime);
 
             if (res != null)
             {
                 var d = Utils.Utils.ConvertFromUnixTimestamp(res);
                 dateTextBlock.Text = d.ToShortDateString() + " " + d.ToShortTimeString();
-            }*/
+            }
 
-            var itemMyPin = new Button() {Margin = new Thickness(-20,0,0,0) , BorderThickness = new Thickness(0)};
-            itemMyPin.HorizontalContentAlignment = HorizontalAlignment.Left;
+            var itemMyPin = new Button
+            {
+                Margin = new Thickness(-20, 0, 0, 0),
+                BorderThickness = new Thickness(0),
+                HorizontalContentAlignment = HorizontalAlignment.Left
+            };
             itemMyPin.Click += ItemMyPinOnClick;
 
             var itemMainGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Left};
@@ -741,7 +745,7 @@ namespace PinMessaging.View
         private void AddPinToMyPinsUi(PMPinModel pin)
         {
             //Make sure each element in the stackpanel is a Grid with a pin in Tag otherwise exception
-            if (pin.AuthorId == PMData.UserId && MyPinsStackPanel.Children.Any(elem => (((((elem as Button).Content as Grid).Tag) as PMPinModel).Id) == pin.Id) == false)
+            if (pin.AuthorId == PMData.CurrentUserId && MyPinsStackPanel.Children.Any(elem => (((((elem as Button).Content as Grid).Tag) as PMPinModel).Id) == pin.Id) == false)
                 MyPinItemUi(pin);
         }
 
@@ -1049,7 +1053,7 @@ namespace PinMessaging.View
 
             DownMenuTitle.Text = pin.Title;
 
-            var res = Utils.Utils.ConvertStringToDouble(pin.CreationTime);
+            var res = Utils.Utils.ConvertStringToDouble(pin.CreatedTime);
 
             if (res != null)
             {
@@ -1062,7 +1066,12 @@ namespace PinMessaging.View
             if (pic != null)
                 AuthorPicture.Source = pic.Img;
             else
+            {
                 AuthorPicture.Source = new BitmapImage(Paths.NeutralProfilPicture);
+                PMData.UserId = pin.AuthorId;
+                var userController = new PMUserController(RequestType.ProfilPicture, ProfilPictureUpdateUi);
+                userController.DownloadProfilPicture(pin.AuthorId);
+            }
 
             if (pin.Url != null)
             {
@@ -1079,6 +1088,14 @@ namespace PinMessaging.View
             MenuDown_OnClick(ButtonPins, new RoutedEventArgs());
         }
 
+        private void ProfilPictureUpdateUi()
+        {
+            var pic = PMData.GetUserProfilPicture(PMData.UserId);
+
+            if (pic != null)
+                AuthorPicture.Source = pic.Img;
+        }
+
         public void GetPinMessages_Post()
         {
             CommentStackPanel.Children.Clear();
@@ -1092,7 +1109,7 @@ namespace PinMessaging.View
             try
             {
                 if (PMData.User != null)
-                    NavigationService.Navigate(PMData.User.Id != PMData.UserId ? Paths.UserProfilView : Paths.CurrentUserProfilView);
+                    NavigationService.Navigate(PMData.User.Id != PMData.CurrentUserId ? Paths.UserProfilView : Paths.CurrentUserProfilView);
             }
             catch (Exception exp)
             {
@@ -1344,7 +1361,7 @@ namespace PinMessaging.View
                 {
                     if (PinCreateModel.PinType == PMPinModel.PinsType.Event)
                     {
-                        if (PinCreateModel.CreationTime.Length != 0)
+                        if (PinCreateModel.CreatedTime.Length != 0)
                         {
                             canCreate = true;
                         }
@@ -1392,7 +1409,7 @@ namespace PinMessaging.View
             PinCreateModel.Private = false;
             PinCreateModel.Title = string.Empty;
             PinCreateModel.Content = string.Empty;
-            PinCreateModel.CreationTime = string.Empty;
+            PinCreateModel.CreatedTime = string.Empty;
         }
 
         private void PostPinButton_ClickPreJob()
@@ -1444,7 +1461,7 @@ namespace PinMessaging.View
             PinCreateModel.Content = (PinCreateModel.PinType == PMPinModel.PinsType.Event ? FormatDateAndTimeForEvent() : "") + DescriptionExpandViewTextBox.Text;
             //PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
             PinCreateModel.ContentType = PMPinModel.PinsContentType.Text;
-            PinCreateModel.AuthorId = PMData.UserId;
+            PinCreateModel.AuthorId = PMData.CurrentUserId;
          //   PinCreateModel.Private = "0";
             PinCreateModel.AuthoriseUsersId = FormatAuthoriseUsersId();
 

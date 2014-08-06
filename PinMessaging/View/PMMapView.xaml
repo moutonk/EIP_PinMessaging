@@ -326,7 +326,7 @@
                     </Grid>
 
                     <ScrollViewer Grid.Row="4" x:Name="UnderMenuPinDescriptionScrollView">
-                        <Grid x:Name="UnderMenuPinDescriptionGrid">
+                        <Grid x:Name="UnderMenuPinDescriptionGrid" Height="484">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="100"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>

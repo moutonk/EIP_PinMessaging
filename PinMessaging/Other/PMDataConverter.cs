@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using Newtonsoft.Json;
@@ -72,6 +73,10 @@ namespace PinMessaging.Other
                             ParseUser(json);
                             break;
 
+                        case RequestType.ProfilPicture:
+                            ParseProfilPicture(json);
+                            break;
+
                         case RequestType.SearchUser:
                             SearchUser(json);
                             break;
@@ -95,6 +100,32 @@ namespace PinMessaging.Other
                 {
                     Logs.Error.ShowError(e, Logs.Error.ErrorsPriority.NotCritical);
                 }
+            }
+        }
+
+        private void ParseProfilPicture(string json)
+        {
+            try
+            {
+                var item = JsonConvert.DeserializeObject<JArray>(json);
+
+                if (Boolean.Parse(item[0].ToString()) == false)
+                {
+                    Logs.Error.ShowError("ParseProfilPicture: no picture / incorrect id", Logs.Error.ErrorsPriority.NotCritical);
+                }
+                else
+                {
+                    PMData.UserProfilPicture = System.Text.Encoding.UTF8.GetBytes(item[1].ToString());
+
+                    var pic = new PMPhotoModel { UserId = PMData.UserId, FieldBytes = new byte[PMData.UserProfilPicture.Length] };
+                    pic.FieldBytes = PMData.UserProfilPicture;
+
+                    PMData.ProfilPicturesList.Add(pic);
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ParseProfilPicture: could not deserialize the JSON object." + exp.Message, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 
@@ -159,7 +190,7 @@ namespace PinMessaging.Other
                 PMData.IsSignInSuccess = Boolean.Parse(item[0].ToString());
                 if (PMData.IsSignInSuccess == true)
                 {
-                    PMData.UserId = item[1]["id"].ToString();
+                    PMData.CurrentUserId = item[1]["id"].ToString();
                     PMData.AuthId = (string)item[1]["token"];
                     RememberConnection.SaveAuthId(PMData.AuthId);
                 }

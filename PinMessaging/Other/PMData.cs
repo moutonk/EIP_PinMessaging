@@ -5,15 +5,12 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using Windows.Storage;
-using Microsoft.Phone.Controls;
 using Microsoft.Phone.Maps.Controls;
 using Newtonsoft.Json;
 using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Utils;
-using PinMessaging.View;
 
 namespace PinMessaging.Other
 {
@@ -21,6 +18,7 @@ namespace PinMessaging.Other
     {
         //[DefaultValue(null)] public static Image UserProfilPicture { get; set; }
         [DefaultValue(null)] public static string UserId { get; set; }
+        [DefaultValue(null)] public static string CurrentUserId { get; set; }
         [DefaultValue(null)] public static string AuthId { get; set; }
         [DefaultValue(false)] public static bool IsSignInSuccess { get; set; }
         [DefaultValue(false)] public static bool IsSignUpSuccess { get; set; }
@@ -63,6 +61,9 @@ namespace PinMessaging.Other
 
         //contains all the user history
         [DefaultValue(null)] public static List<PMHistoryModel> UserHistoryList { get; set; }
+
+        //contains the users profil picture
+        [DefaultValue(null)] public static byte[] UserProfilPicture { get; set; }
 
         //contains all the pins known (serialized)
         private const string DataPinsFile = "pinsStorage.dat";
