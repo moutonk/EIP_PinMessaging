@@ -80,6 +80,10 @@ namespace PinMessaging.Controller
                         if (_updateUiMethod != null)
                             _updateUiMethod();
                         break;
+                    case RequestType.ProfilPicture:
+                        if (_updateUiMethod != null)
+                            _updateUiMethod();
+                        break;
                 }
             }
         }

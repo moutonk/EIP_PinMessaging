@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Globalization;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using PinMessaging.Other;
 using PinMessaging.Utils;
 
 namespace PinMessaging.Utils
@@ -71,6 +74,20 @@ namespace PinMessaging.Utils
             wbmp.Invalidate();
 
             return wbmp;
+        }
+
+        public static bool ProfilPictureUpdateUi(Image imgUI, string userId)
+        {
+            var pic = PMData.GetUserProfilPicture(userId);
+
+            if (pic != null)
+            {
+                pic.CreateStream();
+                if (pic.Img != null)
+                    imgUI.Source = pic.Img;
+                return true;
+            }
+            return false;
         }
     }
 }

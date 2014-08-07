@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using Windows.Storage.Streams;
 using Newtonsoft.Json;
+using PinMessaging.Utils;
 
 namespace PinMessaging.Model
 {
@@ -19,12 +22,24 @@ namespace PinMessaging.Model
 
         public PMPhotoModel()
         {
-            Img = new BitmapImage();
+            Img = null;
         }
 
         public void CreateStream()
         {
-            Img.SetSource(new MemoryStream(FieldBytes));
+            try
+            {
+                if (Img == null)
+                {
+                    Img = new BitmapImage();
+                    Img.SetSource(new MemoryStream(FieldBytes));
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("CreateStream: " + exp.StackTrace + Environment.NewLine, exp, Logs.Error.ErrorsPriority.NotCritical);
+                Img = null;
+            }
         }
 
         [OnDeserialized]

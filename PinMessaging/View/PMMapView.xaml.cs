@@ -1061,11 +1061,7 @@ namespace PinMessaging.View
                 PinCreationTimeDescriptionTextBlock.Text = d.ToLongDateString();
             }
 
-            var pic = PMData.GetUserProfilPicture(pin.AuthorId);
-
-            if (pic != null)
-                AuthorPicture.Source = pic.Img;
-            else
+            if (Design.ProfilPictureUpdateUi(AuthorPicture, pin.AuthorId) == false)
             {
                 AuthorPicture.Source = new BitmapImage(Paths.NeutralProfilPicture);
                 PMData.UserId = pin.AuthorId;
@@ -1090,10 +1086,7 @@ namespace PinMessaging.View
 
         private void ProfilPictureUpdateUi()
         {
-            var pic = PMData.GetUserProfilPicture(PMData.UserId);
-
-            if (pic != null)
-                AuthorPicture.Source = pic.Img;
+            Design.ProfilPictureUpdateUi(AuthorPicture, PMData.UserId);
         }
 
         public void GetPinMessages_Post()

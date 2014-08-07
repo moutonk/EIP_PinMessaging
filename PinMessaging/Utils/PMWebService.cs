@@ -291,20 +291,18 @@ namespace PinMessaging.Utils
 
             byte[] requestParams;
 
-            //convert the dictionnary with the argument to an array of bytes
-            if (reqType != RequestType.ProfilPicture)
+            if (reqType != RequestType.ProfilPicture) // for application/x-www-form-urlencoded
             {
                 requestParams = Encoding.UTF8.GetBytes(parameters);
                 request.ContentType = "application/x-www-form-urlencoded";
                 request.ContentLength = requestParams.Length;
             }
-            else
+            else //for multipart/form-data
             {
-                const string boundary = "---keke---";
+                const string boundary = "---MultiPartHeader---";
 
-                var head = Encoding.UTF8.GetBytes(String.Format("--{0}\r\n" + "Content-Disposition: form-data; name=\"file\"; filename=\"test.jpg\"\r\n" + "\r\n", boundary));
-                //var tmp = Convert.FromBase64String(parameters.Remove(0, 1));
-                var content = Encoding.UTF8.GetBytes(parameters.Remove(0, 1));
+                var head = Encoding.UTF8.GetBytes(String.Format("--{0}\r\n" + "Content-Disposition: form-data; name=\"file\"; filename=\"profilpic.jpg\"\r\n" + "\r\n", boundary));
+                var content = Convert.FromBase64String(parameters);
                 var tail = Encoding.UTF8.GetBytes(String.Format("\r\n" + "--{0}--\r\n", boundary));
 
                 requestParams = new byte[head.Length + tail.Length + content.Length];
@@ -313,17 +311,8 @@ namespace PinMessaging.Utils
                 Array.Copy(content, 0, requestParams, head.Length, content.Length);
                 Array.Copy(tail, 0, requestParams, head.Length + content.Length, tail.Length);
 
-                Logs.Output.ShowOutput(Environment.NewLine + "+++++++++++++++++++++");
-                Logs.Output.ShowOutput(Encoding.UTF8.GetString(requestParams, 0, requestParams.Length));
-                Logs.Output.ShowOutput(Environment.NewLine + "+++++++++++++++++++++");
- 
                 request.ContentType = "multipart/form-data; boundary=" + boundary;
                 //request.ContentLength = content.Length;
-
-                Logs.Output.ShowOutput("Taille: " + requestParams.Length);
-                Logs.Output.ShowOutput("content: " + content.Length);
-                Logs.Output.ShowOutput("Head: " + head.Length);
-                Logs.Output.ShowOutput("Tail: " + tail.Length);
             }
 
             // start the asynchronous operation
@@ -378,9 +367,9 @@ namespace PinMessaging.Utils
 
             for (var dicoLine = 0; dicoLine < dict.Count; dicoLine++)
             {
-                builder.Append(dict.ElementAt(dicoLine).Key + "=" + dict.ElementAt(dicoLine).Value);
+                builder.Append(dict.ElementAt(dicoLine).Key.Equals("") == false ? dict.ElementAt(dicoLine).Key + "=" + dict.ElementAt(dicoLine).Value : dict.ElementAt(dicoLine).Value);
                 if (dicoLine + 1 < dict.Count)
-                    builder.Append("&");
+                    builder.Append("&");    
             }
             
             Logs.Output.ShowOutput("-------------------------------------------");

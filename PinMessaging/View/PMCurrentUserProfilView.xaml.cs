@@ -21,7 +21,7 @@ namespace PinMessaging.View
         {
             InitializeComponent();
 
-            SetProfilPictureUI();    
+            Design.ProfilPictureUpdateUi(UserProfilImage, PMData.CurrentUserId);
             _photoChooserTask.Completed += photoChooserTask_Completed;
 
             if (PMData.User != null)
@@ -72,14 +72,6 @@ namespace PinMessaging.View
                 PivotProfil.SelectedIndex = num;
         }
 
-        private void SetProfilPictureUI()
-        {
-            var profilPic = PMData.GetUserProfilPicture(PMData.CurrentUserId);
-
-            if (profilPic != null)
-                UserProfilImage.Source = profilPic.Img;
-        }
-
         /*TO FINISH*/
         private void ChangeProfilPictureButton_OnClick(object sender, RoutedEventArgs e)
         {
@@ -97,7 +89,7 @@ namespace PinMessaging.View
                 try
                 {
                     await e.ChosenPhoto.ReadAsync(pic.FieldBytes, 0, pic.FieldBytes.Length);
-                    pic.CreateStream();
+                    Logs.Output.ShowOutput("####################################: " + pic.FieldBytes.Length);
 
                     //if the profil picture is already in the list
                     if (PMData.ProfilPicturesList.Any(img => img.UserId.Equals(PMData.CurrentUserId) == true) == true)
@@ -113,9 +105,10 @@ namespace PinMessaging.View
                     }
 
                     var userController = new PMUserController(RequestType.ProfilPicture, UploadProfilPictureUpdateUi);
-                    userController.UploadProfilPicture(System.Text.Encoding.UTF8.GetString(pic.FieldBytes, 0, pic.FieldBytes.Length));
+                    
+                    userController.UploadProfilPicture(Convert.ToBase64String(pic.FieldBytes)/* System.Text.Encoding.UTF8.GetString(pic.FieldBytes, 0, pic.FieldBytes.Length)*/);
 
-                    SetProfilPictureUI();
+                    Design.ProfilPictureUpdateUi(UserProfilImage, PMData.CurrentUserId);
                 }
                 catch (Exception exp)
                 {

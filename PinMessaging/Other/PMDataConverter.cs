@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PinMessaging.Controller;
@@ -103,29 +105,47 @@ namespace PinMessaging.Other
             }
         }
 
+        private string[] MyParseProfilPicture(string json)
+        {
+            try
+            {
+                json = json.Replace('[', ' ');
+                json = json.Replace(']', ' ');
+                json = json.Trim();
+
+                return json.Split(new[] {", "}, StringSplitOptions.RemoveEmptyEntries);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("MyParseProfilPicture: could not parse result", exp, Logs.Error.ErrorsPriority.NotCritical);                
+            }
+            return null;
+        }
+
         private void ParseProfilPicture(string json)
         {
             try
             {
-                var item = JsonConvert.DeserializeObject<JArray>(json);
+                var item = MyParseProfilPicture(json);
 
-                if (Boolean.Parse(item[0].ToString()) == false)
+                if (item.Length == 1)
                 {
-                    Logs.Error.ShowError("ParseProfilPicture: no picture / incorrect id", Logs.Error.ErrorsPriority.NotCritical);
+                    if (Boolean.Parse(item[0]) == false)
+                        Logs.Error.ShowError("ParseProfilPicture: no picture / incorrect id", Logs.Error.ErrorsPriority.NotCritical);
                 }
                 else
                 {
-                    PMData.UserProfilPicture = System.Text.Encoding.UTF8.GetBytes(item[1].ToString());
+                    PMData.UserProfilPicture = Convert.FromBase64String(item[1]);
 
-                    var pic = new PMPhotoModel { UserId = PMData.UserId, FieldBytes = new byte[PMData.UserProfilPicture.Length] };
-                    pic.FieldBytes = PMData.UserProfilPicture;
+                    var pic = new PMPhotoModel { UserId = PMData.UserId, FieldBytes = new byte[PMData.UserProfilPicture.Length]};
+                    PMData.UserProfilPicture.CopyTo(pic.FieldBytes, 0);
 
                     PMData.ProfilPicturesList.Add(pic);
                 }
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("ParseProfilPicture: could not deserialize the JSON object." + exp.Message, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("ParseProfilPicture: error" + exp.Message + exp.StackTrace, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 
