@@ -502,7 +502,7 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Notifications" xml:space="preserve">
           <source>notification</source>
-          <target state="needs-review-translation">notification</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
+          <target state="translated">notification</target></trans-unit>
         <trans-unit translate="yes" id="Resx/Menu" xml:space="preserve">
           <source>Menu</source>
           <target state="translated">Menu</target>

@@ -691,6 +691,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à No results.
+        /// </summary>
+        public static string NoResults {
+            get {
+                return ResourceManager.GetString("NoResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à notification.
         /// </summary>
         public static string Notifications {

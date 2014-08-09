@@ -124,7 +124,10 @@ namespace PinMessaging.Controller
                 var userLongitude = _mapView._geoLocation.GeopositionUser.Coordinate.Longitude;
                 var userLatitude = _mapView._geoLocation.GeopositionUser.Coordinate.Latitude;
 
-                Logs.Output.ShowOutput("Distance:" + (Math.Sqrt(Math.Pow(pinLongitude - userLongitude, 2) + Math.Pow(pinLatitude - userLatitude, 2))).ToString());
+                Logs.Output.ShowOutput("Distance:" + (Math.Sqrt(Math.Pow(pinLongitude - userLongitude, 2) + Math.Pow(pinLatitude - userLatitude, 2))));
+
+                //if (Math.Sqrt(Math.Pow(pinLongitude - userLongitude, 2) + Math.Pow(pinLatitude - userLatitude, 2)) > 0.004d)
+                 //   return false;
             }
 
             return true;
@@ -141,6 +144,10 @@ namespace PinMessaging.Controller
             {
                 pin.ShowPinContent();
                 _mapView.PinTapped(pin);
+            }
+            else
+            {
+                Logs.Output.ShowOutput("Too far!");
             }
         }
     }

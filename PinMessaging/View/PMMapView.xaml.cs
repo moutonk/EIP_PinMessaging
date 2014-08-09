@@ -60,14 +60,11 @@ namespace PinMessaging.View
 
             //central page
             ImgTarget.ImageSource = new BitmapImage(Paths.TargetButton);
-     /*      ImgMenuButton.ImageSource = new BitmapImage(Paths.MenuButton);
-            ImgNotificationButton.ImageSource = new BitmapImage(Paths.NotificationsButton);
-            ImgContactsButton.ImageSource = new BitmapImage(Paths.ContactsButton);
-            ImgPinsButton.ImageSource = new BitmapImage(Paths.PinsButton);*/
 
             try
             {
                 (ApplicationBar.MenuItems[0] as ApplicationBarMenuItem).Text = AppResources.RefreshPins;
+                (ApplicationBar.MenuItems[1] as ApplicationBarMenuItem).Text = AppResources.CreatePinTitle;
             }
             catch (Exception exp)
             {
@@ -119,12 +116,11 @@ namespace PinMessaging.View
             {
                 _mapLayer.Add(_userSpotLayer);
                 Map.Layers.Add(_mapLayer);
-                
             }
-            catch (Exception)
+            catch (Exception exp)
             {
+                Logs.Error.ShowError("LaunchLocalization", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
-
 
             PMData.MapLayerContainer = _mapLayer;
 
@@ -801,7 +797,7 @@ namespace PinMessaging.View
 
                 if (PMData.SearchUserList.Count == 0)
                 {
-                    SearchContactStackPanel.Children.Add(new TextBlock { Height = 80, Width = 300, HorizontalAlignment = HorizontalAlignment.Left, Text = "No results", Margin = new Thickness(0, 0, 0, 0), FontSize = 25 });
+                    SearchContactStackPanel.Children.Add(new TextBlock { Height = 80, Width = 300, HorizontalAlignment = HorizontalAlignment.Left, Text = AppResources.NoResults, Margin = new Thickness(0, 0, 0, 0), FontSize = 25 });
                 }
                 else
                 {
@@ -965,7 +961,7 @@ namespace PinMessaging.View
             }
         }
 
-        private void RemoveContactUI(PMUserModel user)
+        private void RemoveContactUi(PMUserModel user)
         {
             if (UnderMenuContactPanel.Children.Count == 0)
                 return;
@@ -993,7 +989,7 @@ namespace PinMessaging.View
 
         public void RemoveContact(PMUserModel user)
         {
-            RemoveContactUI(user);
+            RemoveContactUi(user);
             RemoveContactCode(user);
         }
 
@@ -1090,9 +1086,6 @@ namespace PinMessaging.View
 
         public void PinTapped(PMPinModel pin)
         {
-            //if (_isUnderMenuOpen == true)
-            //    CloseMenuDownButton_Click(null, null);
-
             CommentStackPanel.Children.Clear();
         
             var pinC = new PMPinController(RequestType.GetPinMessages, GetPinMessages_Post);
@@ -1380,10 +1373,7 @@ namespace PinMessaging.View
 
         private void TargetExpanderAdaptView(bool priv)
         {
-         if (priv == false)
-                TargetExpanderViewExpandView.Visibility = Visibility.Collapsed;
-            else
-                TargetExpanderViewExpandView.Visibility = Visibility.Visible;   
+            TargetExpanderViewExpandView.Visibility = priv == false ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void VisibilityExpandViewPublicGrid_OnTap(object sender, GestureEventArgs e)

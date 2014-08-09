@@ -501,4 +501,7 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   <data name="ContactsTitle" xml:space="preserve">
     <value>MY CONTACTS</value>
   </data>
+  <data name="NoResults" xml:space="preserve">
+    <value>No results</value>
+  </data>
 </root>
