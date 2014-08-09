@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using PinMessaging.Controller;
@@ -21,7 +22,13 @@ namespace PinMessaging.View
         {
             InitializeComponent();
 
-            Design.ProfilPictureUpdateUi(UserProfilImage, PMData.CurrentUserId);
+            if (Design.ProfilPictureUpdateUi(UserProfilImage, PMData.CurrentUserId) == false)
+            {
+                PMData.UserId = PMData.CurrentUserId;
+                var userController = new PMUserController(RequestType.ProfilPicture, ProfilPictureUpdateUi);
+                userController.DownloadProfilPicture(PMData.CurrentUserId);
+            }
+
             _photoChooserTask.Completed += photoChooserTask_Completed;
 
             if (PMData.User != null)
@@ -39,6 +46,11 @@ namespace PinMessaging.View
                     //img
                 }
             }
+        }
+
+        private void ProfilPictureUpdateUi()
+        {
+            Design.ProfilPictureUpdateUi(UserProfilImage, PMData.CurrentUserId);
         }
 
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)

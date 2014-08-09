@@ -23,6 +23,7 @@ namespace PinMessaging.Model
         public PMPhotoModel()
         {
             Img = null;
+            UserId = "-1";
         }
 
         public void CreateStream()
