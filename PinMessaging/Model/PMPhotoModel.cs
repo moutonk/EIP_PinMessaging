@@ -45,7 +45,11 @@ namespace PinMessaging.Model
         [OnDeserialized]
         public void CreateStream(StreamingContext context)
         {
-            Img.SetSource(new MemoryStream(FieldBytes));
+            if (Img == null)
+            {
+                Img = new BitmapImage();
+                Img.SetSource(new MemoryStream(FieldBytes));
+            }
         }
     }
 }

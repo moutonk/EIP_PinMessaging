@@ -128,6 +128,9 @@ namespace PinMessaging.Other
             {
                 var item = MyParseProfilPicture(json);
 
+                if (item == null)
+                    return;
+
                 if (item.Length == 1)
                 {
                     if (Boolean.Parse(item[0]) == false)
@@ -295,7 +298,11 @@ namespace PinMessaging.Other
                             Logs.Error.ShowError("SearchUser: 2 tokens are expected, got 1", Logs.Error.ErrorsPriority.NotCritical);
                             break;
                         case 2:
-                            PMData.SearchUserList = JsonConvert.DeserializeObject<List<PMUserModel>>(item[1].ToString());
+                            var res = JsonConvert.DeserializeObject<List<PMUserModel>>(item[1].ToString());
+                            if (res != null)
+                                PMData.SearchUserList = res;
+                            else
+                                PMData.SearchUserList.Clear();
                             break;
                     }
                 }

@@ -68,7 +68,7 @@ namespace PinMessaging.View
 
         private static BitmapImage DefaultHistoryTypeImg()
         {
-            return new BitmapImage(new Uri("/Images/Pins/event_icon.png", UriKind.Relative));
+            return new BitmapImage(new Uri("/Images/Icons/about_white_icon@2x.png", UriKind.Relative));
         }
 
         private static BitmapImage GetHistoryTypeImg(PMHistoryModel.HistoryType? type)
@@ -79,10 +79,16 @@ namespace PinMessaging.View
             switch (type)
             {
                 case PMHistoryModel.HistoryType.CreatePin:
-                    return new BitmapImage(new Uri("/Images/Pins/message_icon.png", UriKind.Relative));
+                    return new BitmapImage(new Uri("/Images/Logos/3_new_logo_little@2x.png", UriKind.Relative));
 
+                case PMHistoryModel.HistoryType.DeletePin:
+                    return new BitmapImage(new Uri("/Images/Icons/cross_white_icon@2x.png", UriKind.Relative));
+                
+                case PMHistoryModel.HistoryType.AddFavoriteUser:
+                    return new BitmapImage(new Uri("/Images/Icons/add.png", UriKind.Relative));
+             
                 case PMHistoryModel.HistoryType.CreatePinMessage:
-                    return new BitmapImage(new Uri("/Images/Icons/bubble_white_icon.png", UriKind.Relative));
+                    return new BitmapImage(new Uri("/Images/Icons/bubble_white_icon@2x.png", UriKind.Relative));
 
                 default:
                    return DefaultHistoryTypeImg();

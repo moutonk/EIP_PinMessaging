@@ -81,6 +81,7 @@ namespace PinMessaging.Other
             PinsCommentsList = new List<PMPinCommentModel>();
             PinsCommentsListTmp = new List<PMPinCommentModel>();
             UserList = new List<PMUserModel>();
+            SearchUserList = new List<PMUserModel>();
             //UserProfilPicture = new Image();
             ProfilPicturesList = new List<PMPhotoModel>();
             //UserHistoryList = new List<PMHistoryModel>();

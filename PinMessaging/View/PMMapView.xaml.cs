@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Windows.Foundation.Metadata;
 using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Controls;
 using System.Device.Location;
@@ -790,22 +791,25 @@ namespace PinMessaging.View
 
         private void SearchContactUpdateUi()
         {
-            UnderMenuProgressBar.IsIndeterminate = false;
-            UnderMenuProgressBar.Visibility = Visibility.Collapsed;
-            SearchContactsTextBox.IsEnabled = true;
-            SearchContactStackPanel.Children.Clear();
+            Dispatcher.BeginInvoke(() =>
+            {
+                UnderMenuProgressBar.IsIndeterminate = false;
+                UnderMenuProgressBar.Visibility = Visibility.Collapsed;
+                SearchContactsTextBox.IsEnabled = true;
+                SearchContactStackPanel.Children.Clear();
 
-            if (PMData.SearchUserList.Count == 0)
-            {
-                SearchContactStackPanel.Children.Add(new TextBlock { Height = 80, Width = 300, HorizontalAlignment = HorizontalAlignment.Left, Text = "No results", Margin = new Thickness(0, 0, 0, 0), FontSize = 25 });
-            }
-            else
-            {
-                foreach (var user in PMData.SearchUserList)
+                if (PMData.SearchUserList.Count == 0)
                 {
-                    AddContactUI(user, SearchContactStackPanel);
+                    SearchContactStackPanel.Children.Add(new TextBlock { Height = 80, Width = 300, HorizontalAlignment = HorizontalAlignment.Left, Text = "No results", Margin = new Thickness(0, 0, 0, 0), FontSize = 25 });
                 }
-            }
+                else
+                {
+                    foreach (var user in PMData.SearchUserList)
+                    {
+                        AddContactUi(user, SearchContactStackPanel);
+                    }
+                }
+            });
         }
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
@@ -862,19 +866,22 @@ namespace PinMessaging.View
             }
         }
 
-        private void AddContactUI(PMUserModel user, StackPanel where)
+        private void AddContactUi(PMUserModel user, StackPanel where)
         {
-            var contactGrid = new Grid();
+            if (user == null)
+                return;
+
+            var contactGrid = new Grid {Tag = user};
 
             contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(110) });
 
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(110) });
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
-            //contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(100) });
 
-            var contactImg = new Image() { Source = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative)), Tag = user };
+            var contactImg = new Image() { Name = where.Name + "contactImg" + user.Id, Source = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative)), Tag = user };
             var contactName = new TextBlock() { Text = user.Pseudo, Tag = user, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(20, 0, 0, 0) };
-            //var onlineImg = new Image() { Source = new BitmapImage(Paths.TargetButton), Height = 50, Width = 50, HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(0, 0, 10, 0) };
+
+            Logs.Output.ShowOutput(where.Name + "contactImg" + user.Id);
 
             contactImg.Tap += ContactNameOnTap;
             contactName.Tap += ContactNameOnTap;
@@ -888,10 +895,59 @@ namespace PinMessaging.View
             Grid.SetRow(contactName, 0);
             Grid.SetColumn(contactName, 1);
 
-            //Grid.SetRow(onlineImg, 0);
-            //Grid.SetColumn(onlineImg, 2);
-
             where.Children.Add(contactGrid);
+
+            PMData.UserId = user.Id;
+
+            var userController = new PMUserController(RequestType.ProfilPicture, where.Equals(SearchContactStackPanel) ? (Action)SearchContactPictureUpdateUi : (Action)ContactPictureUpdateUi);
+            userController.DownloadProfilPicture(user.Id);
+        }
+
+        private void ContactPictureUpdateUi()
+        {
+            Design.ProfilPictureUpdateUi(AuthorPicture, PMData.UserId);
+        }
+
+        private static int gridNbr = 0;
+
+        private void SearchContactPictureUpdateUi()
+        {
+
+            try
+            {
+
+
+                var grid = (SearchContactStackPanel.Children[gridNbr] as Grid);
+
+                gridNbr++;
+                if (gridNbr > SearchContactStackPanel.Children.Count - 1)
+                    gridNbr = 0;
+
+                if (grid != null)
+                {
+                    var img = grid.FindName(SearchContactStackPanel.Name + "contactImg" + (grid.Tag as PMUserModel).Id);
+                    Logs.Output.ShowOutput(SearchContactStackPanel.Name + "contactImg" + (grid.Tag as PMUserModel).Id);
+
+                    if (img == null)
+                    {
+                        Logs.Output.ShowOutput("NOOOOOOOOOOOOOOO");
+                    }
+                    else
+                    {
+                        Design.ProfilPictureUpdateUi((Image)img, PMData.UserId);
+                        Logs.Output.ShowOutput("YESSSSSSSSSS");
+                    }
+                }
+                else
+                {
+                    Logs.Output.ShowOutput("No grid found");
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("SearchContactPictureUpdateUi", exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+
         }
 
         private static void AddContactCode(PMUserModel user)
@@ -903,7 +959,7 @@ namespace PinMessaging.View
         {
             if (PMMapContactController.IsFavoriteUnique(user) == true)
             {
-                AddContactUI(user, UnderMenuContactPanel);
+                AddContactUi(user, UnderMenuContactPanel);
                 AddContactCode(user);
             }
         }
