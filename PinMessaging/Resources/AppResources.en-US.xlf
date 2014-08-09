@@ -274,6 +274,10 @@
           <source>MY CONTACTS</source>
           <target state="new">MY CONTACTS</target>
         </trans-unit>
+        <trans-unit id="Resx/NoResults" translate="yes" xml:space="preserve">
+          <source>No results</source>
+          <target state="new">No results</target>
+        </trans-unit>
         <trans-unit id="Resx/ContactSearch" translate="yes" xml:space="preserve">
           <source>SEARCH</source>
           <target state="new">SEARCH</target>

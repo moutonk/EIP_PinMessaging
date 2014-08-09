@@ -14,7 +14,7 @@
     shell:SystemTray.IsVisible="True">
 
     <Grid x:Name="LayoutRoot">
-        <Image Source="/Images/Default-568h@2x.png" Stretch="Fill"></Image>
+        <Image Source="/Images/Default-568h@2x.png" Stretch="UniformToFill"></Image>
         <Grid x:Name="GridLogo" HorizontalAlignment="Left" Height="250" Margin="129,175,0,0" VerticalAlignment="Top" Width="220">
             <Grid.RenderTransform>
                 <TranslateTransform Y="0" X="0"/>

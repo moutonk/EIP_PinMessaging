@@ -520,6 +520,10 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <source>MY CONTACTS</source>
           <target state="new">MY CONTACTS</target>
         </trans-unit>
+        <trans-unit id="Resx/NoResults" translate="yes" xml:space="preserve">
+          <source>No results</source>
+          <target state="new">No results</target>
+        </trans-unit>
       </group>
     </body>
   </file>
