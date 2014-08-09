@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Other;
-using PinMessaging.Resources;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
 
@@ -43,8 +42,25 @@ namespace PinMessaging.View
                 {
                     GradeTextBlock.Text = gradeInfos.Item1;
                     BestBadgeInfoTextBlock.Text = gradeInfos.Item2;
-                    //img
+                    BadgeImgUpdateUi(PMData.User.Grade.Type);
                 }
+            }
+        }
+
+        private void BadgeImgUpdateUi(PMGradeModel.GradeType type)
+        {
+            var i = 0;
+            var tmpType = PMGradeModel.GradeType.PointBronze;
+            var imgs = new []
+            {
+                PointBronzeImage, PointArgentImage, PointOrImage,
+                Pin50Image, Message50Image, BetaTesterImage
+            };
+
+            while (tmpType <= type)
+            {
+                imgs[(int)tmpType].Source = new BitmapImage(new Uri("/Images/Icons/cup_orange_icon@2x.png", UriKind.Relative));
+                tmpType++;
             }
         }
 

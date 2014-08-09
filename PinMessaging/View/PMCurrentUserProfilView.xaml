@@ -80,32 +80,32 @@
                         </Grid.RowDefinitions>
                         
                         <StackPanel Grid.Column="0" Grid.Row="0">
-                            <Image Name="PointBronzeImage" Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" Margin="0,0,0,0" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="PointBronzeImage" Source="\Images\Icons/cup_white_icon@2x.png" HorizontalAlignment="Center" Height="100" Margin="0,0,0,0" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="PointBronzeTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePointCopper, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
                         
                         <StackPanel Grid.Column="1" Grid.Row="0">
-                            <Image Name="PointArgentImage" Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="PointArgentImage" Source="\Images\Icons/cup_white_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="PointArgenTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePointSilver, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2" Grid.Row="0">
-                            <Image Name="PointOrImage" Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="PointOrImage" Source="\Images\Icons/cup_white_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="PointOrTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePointGold, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="0" Grid.Row="1">
-                            <Image Name="Pin50Image"  Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="Pin50Image"  Source="\Images\Icons/cup_white_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="Pin50TextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradePin50, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" Grid.Row="1">
-                            <Image Name="Message50Image"  Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="Message50Image"  Source="\Images\Icons/cup_white_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="Message50TextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeMessage50, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2" Grid.Row="1">
-                            <Image Name="BetaTesterImage"  Source="\Images\Icons/cup_orange_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
+                            <Image Name="BetaTesterImage"  Source="\Images\Icons/cup_white_icon@2x.png" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100"/>
                             <TextBlock Name="BetaTesterTextBlock" HorizontalAlignment="Center" Margin="0,5,0,0" TextWrapping="Wrap" Text="{Binding LocalizedResources.GradeBetaTester, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Top"/>
                         </StackPanel>
 

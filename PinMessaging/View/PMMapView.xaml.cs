@@ -776,6 +776,7 @@ namespace PinMessaging.View
         {
             if (ApplicationBar.IsVisible == false)
                 ApplicationBar.IsVisible = true;
+            LockUnlockCommentCheck(true);
 
             Map_OnTouch(sender, e);
         }
@@ -1089,6 +1090,9 @@ namespace PinMessaging.View
 
         public void PinTapped(PMPinModel pin)
         {
+            //if (_isUnderMenuOpen == true)
+            //    CloseMenuDownButton_Click(null, null);
+
             CommentStackPanel.Children.Clear();
         
             var pinC = new PMPinController(RequestType.GetPinMessages, GetPinMessages_Post);
