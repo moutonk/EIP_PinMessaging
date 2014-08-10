@@ -390,12 +390,22 @@
                     </ScrollViewer>
                     
                     <ScrollViewer Grid.Row="5" x:Name="UnderMenuCreatePinGrid">
-                        <StackPanel Margin="20,0,20,0">
-                            <ProgressBar x:Name="DropPinProgressBar" Foreground="{StaticResource PMOrange}" Visibility="Collapsed"/>
+                        <Grid Margin="20,0,20,0" ShowGridLines="True">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5"></RowDefinition>
+                                <RowDefinition Height="100"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="100"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            
+                            <ProgressBar Grid.Row="0" x:Name="DropPinProgressBar" Foreground="{StaticResource PMOrange}" Visibility="Collapsed"/>
 
-                            <toolkit:ListPicker Name="PinListPicker" BorderThickness="0" SelectionChanged="PinListPicker_OnSelectionChanged" FullModeItemTemplate="{StaticResource ListPickerPinsFullModeItemTemplate}" ItemTemplate="{StaticResource ListPickerPinsFullModeItemTemplate}" ExpansionMode="FullScreenOnly"  Margin="0,0,0,0"/>
+                            <toolkit:ListPicker Grid.Row="1" Name="PinListPicker" BorderThickness="0" SelectionChanged="PinListPicker_OnSelectionChanged" FullModeItemTemplate="{StaticResource ListPickerPinsFullModeItemTemplate}" ItemTemplate="{StaticResource ListPickerPinsFullModeItemTemplate}" ExpansionMode="FullScreenOnly"  Margin="0,0,0,0"/>
 
-                            <controls:ChatBubble ChatBubbleDirection="LowerLeft" Background="DarkGray" BorderBrush="DarkGray">
+                            <controls:ChatBubble Grid.Row="2" ChatBubbleDirection="LowerLeft" Background="DarkGray" BorderBrush="DarkGray">
                                 <controls:ChatBubble.Content>
                                     <StackPanel Orientation="Vertical">
                                         <TextBox Name="PinCreateTitleTextBox" Margin="-10,0,0,0" TextWrapping="Wrap" FontSize="20" Text="You can add a title to your pin (optional)"  Background="DarkGray" BorderBrush="DarkGray" Width="429"></TextBox>
@@ -405,26 +415,21 @@
                                 </controls:ChatBubble.Content>
                             </controls:ChatBubble>
 
-                            <StackPanel Name="EventStackPanel" Orientation="Vertical" Visibility="Visible" Margin="0,10,0,0">
+                            <StackPanel Grid.Row="3" Name="EventStackPanel" Orientation="Vertical" Visibility="Visible" Margin="0,10,0,0">
                                 <TextBlock Text="event date and time" FontSize="30" Foreground="White"></TextBlock>
                                 <StackPanel Orientation="Horizontal" Margin="-20,-10,0,0" VerticalAlignment="Center">
                                     <toolkit:DatePicker Name="EventDate" Margin="0,0,0,0" Foreground="{StaticResource PMOrange}" BorderThickness="0"></toolkit:DatePicker>
                                     <toolkit:TimePicker Name="EventTime" Margin="0,0,0,0" Foreground="{StaticResource PMOrange}" BorderThickness="0" ></toolkit:TimePicker>
                                 </StackPanel>
-                              </StackPanel>
-                            <toolkit:ExpanderView x:Name="PinTargetExpandView" Margin="-50,0,0,0" Expanded="PinTargetExpandView_OnExpanded" Visibility="Collapsed" Style="{StaticResource ExpanderViewStyle1}">
-                                <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="35" Text="destinataire(s) du pins" Foreground="White" Margin="0,20,0,20"/>
-                                </toolkit:ExpanderView.Expander>
-                                <toolkit:ExpanderView.Items>
-                                    <ScrollViewer Name="TargetLongListSelectorScrollViewer">
-                                        <toolkit:LongListMultiSelector Name="TargetLongListSelector" ItemTemplate="{StaticResource TargetDataTemplate}" FontSize="25" HorizontalAlignment="Left" Height="100" Width="438"/>
-                                    </ScrollViewer>
-                                </toolkit:ExpanderView.Items>
-                            </toolkit:ExpanderView>
+                            </StackPanel>
 
-                            <Button x:Name="DropPinButton" Height="100" Visibility="Visible" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="-13,10,-13,0" Click="PostPinButton_Click"/>
-                        </StackPanel>
+                            <StackPanel Grid.Row="4" Name="TargetStackPanel">
+                                <TextBlock Text="destinataire" Margin="0,0,0,10" FontSize="30" Foreground="White"></TextBlock>
+                                <toolkit:LongListMultiSelector HideEmptyGroups="True" Name="TargetLongListSelector" ItemTemplate="{StaticResource TargetDataTemplate}" FontSize="25" HorizontalAlignment="Left" Width="440"/>
+                            </StackPanel>
+
+                            <Button Grid.Row="6" x:Name="DropPinButton" Height="100" Visibility="Visible" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="-13,10,-13,0" Click="PostPinButton_Click"/>
+                        </Grid>
                     </ScrollViewer>
                 </Grid>
             </Grid>

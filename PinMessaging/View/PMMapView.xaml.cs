@@ -1312,6 +1312,14 @@ namespace PinMessaging.View
 
         private void MoveAnimationUp_OnCompleted(object sender, EventArgs e)
         {
+            PMPinModel.PinsType tmpType = (PinListPicker.SelectedItem as PinItem).PinType;
+
+            if (tmpType == PMPinModel.PinsType.PrivateMessage ||
+                tmpType == PMPinModel.PinsType.PrivateEvent ||
+                tmpType == PMPinModel.PinsType.PrivateView)
+            {
+                TargetLongListSelector.ItemsSource = PMData.UserList;
+            }
             //VisibilityExpandView.IsExpanded = true;
         }
 
@@ -1821,15 +1829,18 @@ namespace PinMessaging.View
             {
                 PinCreateModel.PinType = tmpType - 6;
                 PinCreateModel.Private = true;
+                TargetLongListSelector.ItemsSource = PMData.UserList;
             }
             else
             {
                 PinCreateModel.PinType = tmpType;
                 PinCreateModel.Private = false;
+                TargetLongListSelector.ItemsSource = new List<bool>();
             }
 
             EventStackPanel.Visibility = PinCreateModel.PinType == PMPinModel.PinsType.Event ? Visibility.Visible : Visibility.Collapsed;
-            PinTargetExpandView.Visibility = PinCreateModel.Private == true ? Visibility.Visible : Visibility.Collapsed;
+            TargetStackPanel.Visibility = PinCreateModel.Private == true ? Visibility.Visible : Visibility.Collapsed;
+            TargetStackPanel.Visibility = TargetLongListSelector.ItemsSource.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void PinTargetExpandView_OnExpanded(object sender, RoutedEventArgs e)

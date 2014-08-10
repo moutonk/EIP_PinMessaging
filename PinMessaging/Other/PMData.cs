@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 using Windows.Storage;
 using Microsoft.Phone.Maps.Controls;
 using Newtonsoft.Json;
@@ -37,6 +38,9 @@ namespace PinMessaging.Other
         public static bool NetworkProblem { get; set; }
 
         public static string CurrentLanguge = Thread.CurrentThread.CurrentUICulture.Name;
+
+        //neutral profil pic
+        [DefaultValue(null)] public static BitmapImage NeutralProfilPic { get; set; }
 
         //pins to add to the MapLayerContainer
         [DefaultValue(null)] public static List<PMPinModel> PinsList { get; set; }
@@ -85,6 +89,8 @@ namespace PinMessaging.Other
             //UserProfilPicture = new Image();
             ProfilPicturesList = new List<PMPhotoModel>();
             //UserHistoryList = new List<PMHistoryModel>();
+            NeutralProfilPic = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative));
+
         }
 
         public static void AddToQueuePinsList(List<PMPinModel> list)

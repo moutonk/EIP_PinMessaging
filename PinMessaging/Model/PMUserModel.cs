@@ -8,6 +8,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Newtonsoft.Json;
+using PinMessaging.Other;
 using PinMessaging.Utils;
 
 namespace PinMessaging.Model
@@ -43,10 +44,10 @@ namespace PinMessaging.Model
             return model;
         }
 
-        public void CompleteInit()
+        public PMUserModel()
         {
             if (ProfilPicture == null)
-                ProfilPicture = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative));
+                ProfilPicture = PMData.NeutralProfilPic;
         }
 
         public void ShowUserContent()
