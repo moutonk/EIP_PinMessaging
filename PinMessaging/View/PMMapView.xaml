@@ -20,9 +20,9 @@
     
 	<phone:PhoneApplicationPage.Resources>
         <DataTemplate x:Key="TargetDataTemplate">
-            <StackPanel VerticalAlignment="Top" Orientation="Horizontal">
-                <TextBlock Name="TargetIdTextBlock" Text="{Binding Id}"/>
-                <TextBlock Name="TargetNameTextBlock" Text="{Binding Login}"/>
+            <StackPanel VerticalAlignment="Top" Orientation="Horizontal" Margin="-20,0,0,10">
+                <Image Name="TargetImg" Source="{Binding ProfilPicture}" Width="75" Height="75"/>
+                <TextBlock Name="TargetNameTextBlock" Text="{Binding Pseudo}" VerticalAlignment="Center" Margin="20,0,0,0"/>
             </StackPanel>
         </DataTemplate>
     </phone:PhoneApplicationPage.Resources>
@@ -274,8 +274,8 @@
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="0"/>
                         <RowDefinition Height="0"/>
-                        <RowDefinition Height="484"/>
                         <RowDefinition Height="0"/>
+                        <RowDefinition Height="484"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Background="{StaticResource PMOrange}">
@@ -390,97 +390,40 @@
                     </ScrollViewer>
                     
                     <ScrollViewer Grid.Row="5" x:Name="UnderMenuCreatePinGrid">
-                        <StackPanel>
+                        <StackPanel Margin="20,0,20,0">
                             <ProgressBar x:Name="DropPinProgressBar" Foreground="{StaticResource PMOrange}" Visibility="Collapsed"/>
-                            <toolkit:ExpanderView x:Name="VisibilityExpandView" Style="{StaticResource ExpanderViewStyle1}">
-                                <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="35" Text="Visibility" Foreground="DarkGray" Margin="-30,20,0,0"/>
-                                </toolkit:ExpanderView.Expander>
-                                <toolkit:ExpanderView.Items>
-                                    <Grid Name="VisibilityExpandViewGrid" Margin="-30,20,30,0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                            <ColumnDefinition Width="30"></ColumnDefinition>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Name="VisibilityExpandViewPublicGrid" Grid.Column="0" Tap="VisibilityExpandViewPublicGrid_OnTap">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"></RowDefinition>
-                                                <RowDefinition Height="100"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                                <Image Name="VisibilityExpandViewPublicImage" Height="64" Width="64" Stretch="Uniform" Source="\Images\Icons\white_planet.png"/>
-                                                <TextBlock Name="VisibilityExpandViewPublicTitle" Text="Public" FontSize="35" VerticalAlignment="Center" Margin="20,0,0,0"/>
-                                            </StackPanel>
-                                            <TextBlock Grid.Row="1" Name="VisibilityExpandViewPublicDescription" Margin="0,10,0,0" Foreground="DarkGray" TextAlignment="Center" TextWrapping="Wrap" Text="Anyone can see, comment and grade your pin"/>
-                                        </Grid>
-                                        <Grid Name="VisibilityExpandViewPrivateGrid" Grid.Column="2" Tap="VisibilityExpandViewPrivateGrid_OnTap">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="*"></RowDefinition>
-                                                <RowDefinition Height="100"></RowDefinition>
-                                            </Grid.RowDefinitions>
-                                            <StackPanel Grid.Row="0" Orientation="Horizontal">
-                                                <Image Name="VisibilityExpandViewPrivateImage" Height="64" Width="64" Stretch="Uniform" Source="\Images\Icons\white_lock.png"/>
-                                                <TextBlock Name="VisibilityExpandViewPrivateTitle" Text="Private" FontSize="35" VerticalAlignment="Center" Margin="10,0,0,0"/>
-                                            </StackPanel>
-                                            <TextBlock Grid.Row="1" Name="VisibilityExpandViewPrivateDescription" Margin="0,10,0,0" Foreground="DarkGray" TextAlignment="Center" TextWrapping="Wrap" Text="This pin will be visible only by the people you share it with"/>
-                                        </Grid>
-                                    </Grid>
-                                    </toolkit:ExpanderView.Items>
-                            </toolkit:ExpanderView>
 
-                            <toolkit:ExpanderView x:Name="PinTypeExpandView" Expanded="PinTypeExpandView_OnExpanded" Style="{StaticResource ExpanderViewStyle1}">
+                            <toolkit:ListPicker Name="PinListPicker" BorderThickness="0" SelectionChanged="PinListPicker_OnSelectionChanged" FullModeItemTemplate="{StaticResource ListPickerPinsFullModeItemTemplate}" ItemTemplate="{StaticResource ListPickerPinsFullModeItemTemplate}" ExpansionMode="FullScreenOnly"  Margin="0,0,0,0"/>
+
+                            <controls:ChatBubble ChatBubbleDirection="LowerLeft" Background="DarkGray" BorderBrush="DarkGray">
+                                <controls:ChatBubble.Content>
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBox Name="PinCreateTitleTextBox" Margin="-10,0,0,0" TextWrapping="Wrap" FontSize="20" Text="You can add a title to your pin (optional)"  Background="DarkGray" BorderBrush="DarkGray" Width="429"></TextBox>
+                                        <toolkit:Separator Margin="10,0,10,0"></toolkit:Separator>
+                                        <TextBox Name="PinCreateMessageTextBox" Margin="-10,0,0,0" TextWrapping="Wrap" FontSize="20" Text="Please enter a description of your pin"  Background="DarkGray" BorderBrush="DarkGray"></TextBox>
+                                    </StackPanel>
+                                </controls:ChatBubble.Content>
+                            </controls:ChatBubble>
+
+                            <StackPanel Name="EventStackPanel" Orientation="Vertical" Visibility="Visible" Margin="0,10,0,0">
+                                <TextBlock Text="event date and time" FontSize="30" Foreground="White"></TextBlock>
+                                <StackPanel Orientation="Horizontal" Margin="-20,-10,0,0" VerticalAlignment="Center">
+                                    <toolkit:DatePicker Name="EventDate" Margin="0,0,0,0" Foreground="{StaticResource PMOrange}" BorderThickness="0"></toolkit:DatePicker>
+                                    <toolkit:TimePicker Name="EventTime" Margin="0,0,0,0" Foreground="{StaticResource PMOrange}" BorderThickness="0" ></toolkit:TimePicker>
+                                </StackPanel>
+                              </StackPanel>
+                            <toolkit:ExpanderView x:Name="PinTargetExpandView" Margin="-50,0,0,0" Expanded="PinTargetExpandView_OnExpanded" Visibility="Collapsed" Style="{StaticResource ExpanderViewStyle1}">
                                 <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="35" Text="Pin type" Foreground="DarkGray" Margin="-30,20,0,0"/>
+                                    <TextBlock FontSize="35" Text="destinataire(s) du pins" Foreground="White" Margin="0,20,0,20"/>
                                 </toolkit:ExpanderView.Expander>
                                 <toolkit:ExpanderView.Items>
-                                    <ScrollViewer Name="PinCreateScrollViewer" HorizontalScrollBarVisibility="Hidden" Margin="-30,20,0,0">
-                                        <StackPanel Name="PinTypeScollStackPanel" Orientation="Horizontal" Height="75"></StackPanel>
+                                    <ScrollViewer Name="TargetLongListSelectorScrollViewer">
+                                        <toolkit:LongListMultiSelector Name="TargetLongListSelector" ItemTemplate="{StaticResource TargetDataTemplate}" FontSize="25" HorizontalAlignment="Left" Height="100" Width="438"/>
                                     </ScrollViewer>
                                 </toolkit:ExpanderView.Items>
                             </toolkit:ExpanderView>
 
-                            <toolkit:ExpanderView x:Name="TitleExpandView" Expanded="TitleExpandView_OnExpanded" Style="{StaticResource ExpanderViewStyle1}">
-                                <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="35" Text="Title"  Foreground="DarkGray" Margin="-30,20,0,0"/>
-                                </toolkit:ExpanderView.Expander>
-                                <toolkit:ExpanderView.Items>
-                                    <TextBox Name="TitleExpandViewTextBox" FontSize="25" MaxLength="50" Margin="-30,20,0,0" Text="Fake title" TextChanged="TitleExpandViewTextBox_OnTextChanged"/>
-                                </toolkit:ExpanderView.Items>
-                            </toolkit:ExpanderView>
-
-                            <toolkit:ExpanderView x:Name="DescriptionExpandView" Expanded="DescriptionExpandView_OnExpanded" Style="{StaticResource ExpanderViewStyle1}">
-                                <toolkit:ExpanderView.Expander >
-                                    <TextBlock FontSize="35" Text="Description" Foreground="DarkGray" Margin="-30,20,0,0"/>
-                                </toolkit:ExpanderView.Expander>
-                                <toolkit:ExpanderView.Items>
-                                    <TextBox Name="DescriptionExpandViewTextBox" FontSize="25" Text="Fake description" Margin="-30,20,0,0" Height="100" AcceptsReturn="True" TextWrapping="Wrap" MaxLength="200" MaxWidth="450" TextChanged="DescriptionExpandViewTextBox_OnTextChanged"/>
-                                </toolkit:ExpanderView.Items>
-                            </toolkit:ExpanderView>
-
-                            <toolkit:ExpanderView x:Name="TargetExpanderViewExpandView" Visibility="Collapsed" Expanded="TargetExpanderViewExpandView_OnExpandedExpandView_OnExpanded" Style="{StaticResource ExpanderViewStyle1}">
-                                <toolkit:ExpanderView.Expander >
-                                    <TextBlock FontSize="35" Text="Target" Foreground="DarkGray" Margin="-30,20,0,0"/>
-                                </toolkit:ExpanderView.Expander>
-                                <toolkit:ExpanderView.Items>
-                                    <toolkit:LongListMultiSelector Name="TargetLongListSelector" ItemTemplate="{StaticResource TargetDataTemplate}" FontSize="25" Margin="-30,20,0,0" Height="100" MaxWidth="450">
-                                    </toolkit:LongListMultiSelector>
-                                </toolkit:ExpanderView.Items>
-                            </toolkit:ExpanderView>
-
-                            <toolkit:ExpanderView Name="ExpanderViewEventDate" Style="{StaticResource ExpanderViewStyle1}" Visibility="Collapsed">
-                                <toolkit:ExpanderView.Expander>
-                                    <TextBlock FontSize="35" Text="Event date" Foreground="DarkGray" Margin="-30,20,0,0"/>
-                                </toolkit:ExpanderView.Expander>
-                                <toolkit:ExpanderView.Items>
-                                    <StackPanel Orientation="Horizontal">
-                                        <toolkit:DatePicker x:Name="CreatePinDatePicker" Margin="-30,20,0,0"></toolkit:DatePicker>
-                                        <toolkit:TimePicker x:Name="CreatePinTimePicker" Margin="0,20,0,0"></toolkit:TimePicker>
-                                    </StackPanel>
-                                </toolkit:ExpanderView.Items>
-                            </toolkit:ExpanderView>
-                            
-                            <Button x:Name="DropPinButton" Height="100" Visibility="Visible" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="10,0,0,-10" Click="PostPinButton_Click"/>
+                            <Button x:Name="DropPinButton" Height="100" Visibility="Visible" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="-13,10,-13,0" Click="PostPinButton_Click"/>
                         </StackPanel>
                     </ScrollViewer>
                 </Grid>

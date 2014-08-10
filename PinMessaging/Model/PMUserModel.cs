@@ -2,8 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 using System.Windows.Controls;
 using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using Newtonsoft.Json;
 using PinMessaging.Utils;
 
@@ -21,7 +24,7 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(null)] public string Pseudo { get; set; }
         [JsonProperty] [DefaultValue(null)] public string SimId { get; set; }
         [JsonProperty] [DefaultValue(null)] public PMGradeModel Grade { get; set; }
-                       [DefaultValue(null)] public Image ProfilPicture { get; set; }
+                       [DefaultValue(null)] public BitmapImage ProfilPicture { get; set; }
 
         public PMUserModel Clone()
         {
@@ -38,6 +41,12 @@ namespace PinMessaging.Model
                 Grade = Grade
             };
             return model;
+        }
+
+        public void CompleteInit()
+        {
+            if (ProfilPicture == null)
+                ProfilPicture = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative));
         }
 
         public void ShowUserContent()

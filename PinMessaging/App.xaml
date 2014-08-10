@@ -164,7 +164,30 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
+        <DataTemplate x:Name="ListPickerPinsFullModeItemTemplate">
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Image Source="{Binding Image}" Width="75" Height="75"/>
+                <TextBlock Text="{Binding Name}" FontSize="30" VerticalAlignment="Center" Margin="12,0,0,0" TextWrapping="Wrap"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Name="ListPickerFullModeItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="{Binding Image}" Width="100" Height="75"/>
+                <TextBlock Text="{Binding Name}" FontSize="30" VerticalAlignment="Center" Margin="12,10,0,0" TextWrapping="Wrap"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Name="ListPickerItemTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" Margin="12,0,0,0" TextWrapping="Wrap"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Name="ListPickerItemTemplateFeedback">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Name}" FontSize="45" Margin="12,0,0,10" TextWrapping="Wrap"/>
+            </StackPanel>
+        </DataTemplate>
+
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

@@ -147,16 +147,16 @@
           <target state="new">Menu</target>
         </trans-unit>
         <trans-unit id="Resx/Contacts" translate="yes" xml:space="preserve">
-          <source>Contacts</source>
-          <target state="new">Contacts</target>
+          <source>contacts</source>
+          <target state="new">contacts</target>
         </trans-unit>
         <trans-unit id="Resx/Menu" translate="yes" xml:space="preserve">
           <source>Menu</source>
           <target state="new">Menu</target>
         </trans-unit>
         <trans-unit id="Resx/Notifications" translate="yes" xml:space="preserve">
-          <source>Notifications</source>
-          <target state="new">Notifications</target>
+          <source>notification</source>
+          <target state="new">notification</target>
         </trans-unit>
         <trans-unit id="Resx/Pins" translate="yes" xml:space="preserve">
           <source>Pins</source>
@@ -227,8 +227,8 @@
           <target state="new">TITLE</target>
         </trans-unit>
         <trans-unit id="Resx/CreatePinTitle" translate="yes" xml:space="preserve">
-          <source>Create Pin</source>
-          <target state="new">Create Pin</target>
+          <source>create pin</source>
+          <target state="new">create pin</target>
         </trans-unit>
         <trans-unit id="Resx/PinImage" translate="yes" xml:space="preserve">
           <source>IMAGE</source>
@@ -247,8 +247,8 @@
           <target state="new">Grade</target>
         </trans-unit>
         <trans-unit id="Resx/History" translate="yes" xml:space="preserve">
-          <source>History</source>
-          <target state="new">History</target>
+          <source>HISTORY</source>
+          <target state="new">HISTORY</target>
         </trans-unit>
         <trans-unit id="Resx/Localize" translate="yes" xml:space="preserve">
           <source>Localize</source>
@@ -499,6 +499,30 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         <trans-unit id="Resx/You" translate="yes" xml:space="preserve">
           <source>you</source>
           <target state="new">you</target>
+        </trans-unit>
+        <trans-unit id="Resx/Feedback" translate="yes" xml:space="preserve">
+          <source>Feedback</source>
+          <target state="new">Feedback</target>
+        </trans-unit>
+        <trans-unit id="Resx/FeedbackTip" translate="yes" xml:space="preserve">
+          <source>You found a bug, have a suggestion or a question? That's here!</source>
+          <target state="new">You found a bug, have a suggestion or a question? That's here!</target>
+        </trans-unit>
+        <trans-unit id="Resx/ThanksFeedback" translate="yes" xml:space="preserve">
+          <source>Thanks for your participation :)</source>
+          <target state="new">Thanks for your participation :)</target>
+        </trans-unit>
+        <trans-unit id="Resx/ContactSearch" translate="yes" xml:space="preserve">
+          <source>SEARCH</source>
+          <target state="new">SEARCH</target>
+        </trans-unit>
+        <trans-unit id="Resx/ContactsTitle" translate="yes" xml:space="preserve">
+          <source>MY CONTACTS</source>
+          <target state="new">MY CONTACTS</target>
+        </trans-unit>
+        <trans-unit id="Resx/NoResults" translate="yes" xml:space="preserve">
+          <source>No results</source>
+          <target state="new">No results</target>
         </trans-unit>
       </group>
     </body>

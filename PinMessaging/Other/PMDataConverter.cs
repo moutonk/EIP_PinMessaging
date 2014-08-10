@@ -269,7 +269,7 @@ namespace PinMessaging.Other
                             break;
                         case 2:
                             PMData.User = JsonConvert.DeserializeObject<PMUserModel>(item[1].ToString());
-                            PMData.User.ShowUserContent();
+                            //PMData.User.ShowUserContent();
                             break;
                     }
                 }
@@ -280,7 +280,7 @@ namespace PinMessaging.Other
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("ParseGetPinMessages: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("ParseUser: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 
@@ -289,7 +289,6 @@ namespace PinMessaging.Other
             try
             {
                 var item = JsonConvert.DeserializeObject<JArray>(json);
-
                 if (Boolean.Parse(item[0].ToString()) == true)
                 {
                     switch (item.Count)
@@ -298,7 +297,12 @@ namespace PinMessaging.Other
                             Logs.Error.ShowError("SearchUser: 2 tokens are expected, got 1", Logs.Error.ErrorsPriority.NotCritical);
                             break;
                         case 2:
+                            Logs.Output.ShowOutput("ici");
+
                             var res = JsonConvert.DeserializeObject<List<PMUserModel>>(item[1].ToString());
+
+                            Logs.Output.ShowOutput("ici");
+
                             if (res != null)
                                 PMData.SearchUserList = res;
                             else
@@ -313,7 +317,7 @@ namespace PinMessaging.Other
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("ParseGetPinMessages: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("SearchUser: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 

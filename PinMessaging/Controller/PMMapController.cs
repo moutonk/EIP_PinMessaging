@@ -119,7 +119,7 @@ namespace PinMessaging.Controller
             var pinLongitude = Utils.Utils.ConvertDoubleCommaToPoint(pin.Longitude);
             var pinLatitude = Utils.Utils.ConvertDoubleCommaToPoint(pin.Latitude);
 
-            if (_mapView != null && _mapView._geoLocation != null)
+            if (_mapView != null && _mapView._geoLocation != null && _mapView._geoLocation.GeopositionUser != null)
             {
                 var userLongitude = _mapView._geoLocation.GeopositionUser.Coordinate.Longitude;
                 var userLatitude = _mapView._geoLocation.GeopositionUser.Coordinate.Latitude;

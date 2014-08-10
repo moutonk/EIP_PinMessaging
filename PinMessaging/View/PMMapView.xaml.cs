@@ -30,20 +30,26 @@ namespace PinMessaging.View
 {
     public partial class PMMapView : PhoneApplicationPage
     {
-        private enum CurrentMapPageView { MapView, LeftMenuView, RightMenuView, UnderMenuView}
+        private enum CurrentMapPageView
+        {
+            MapView,
+            LeftMenuView,
+            RightMenuView,
+            UnderMenuView
+        }
 
         private static CurrentMapPageView _currentView = CurrentMapPageView.MapView;
         private static bool _isUnderMenuOpen = false;
         private static readonly PMPinModel PinCreateModel = new PMPinModel();
         private PMPinModel _currentPinFocused;
-     
-        readonly MapLayer _mapLayer = new MapLayer();
-        readonly MapOverlay _userSpotLayer = new MapOverlay();
-        readonly UserLocationMarker _userSpot = new UserLocationMarker();
+
+        private readonly MapLayer _mapLayer = new MapLayer();
+        private readonly MapOverlay _userSpotLayer = new MapOverlay();
+        private readonly UserLocationMarker _userSpot = new UserLocationMarker();
         public PMGeoLocation _geoLocation = null;
-        readonly BackgroundWorker _bkw = new BackgroundWorker();
-        readonly DispatcherTimer _searchContactTimer = new DispatcherTimer();
-           
+        private readonly BackgroundWorker _bkw = new BackgroundWorker();
+        private readonly DispatcherTimer _searchContactTimer = new DispatcherTimer();
+
 
         public PMMapView()
         {
@@ -70,7 +76,7 @@ namespace PinMessaging.View
             {
                 Logs.Error.ShowError("Loading ApplicationBar text error", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
-     
+
 
             //left menu
             ImgMap.Source = new BitmapImage(Paths.LeftMenuMap);
@@ -81,14 +87,14 @@ namespace PinMessaging.View
             ImgAbout.Source = new BitmapImage(Paths.LeftMenuAbout);
             ImgReward.Source = new BitmapImage(Paths.LeftMenuRewards);
             ImgLogout.Source = new BitmapImage(Paths.LeftMenuLogout);
-      
-            bool? accessLoc =  RememberConnection.GetAccessLocation();
+
+            bool? accessLoc = RememberConnection.GetAccessLocation();
             Logs.Output.ShowOutput(accessLoc.ToString());
 
             if (accessLoc == true)
             {
                 Logs.Output.ShowOutput("accesloc true");
-                LaunchLocalization();      
+                LaunchLocalization();
             }
 
             PMMapPinController.Init(this);
@@ -104,6 +110,50 @@ namespace PinMessaging.View
             PMData.LoadFavorites();
             PMData.LoadProfilPictures();
             ResetCreatePinModel();
+
+            PinListPicker.Items.Add(new PinItem
+            {
+                Name = AppResources.PinPublicMessage,
+                Image = new BitmapImage(Paths.PinPublicMessageIconIntermediate),
+                PinType = PMPinModel.PinsType.PublicMessage
+            });
+            PinListPicker.Items.Add(new PinItem
+            {
+                Name = AppResources.PinPublicEvent,
+                Image = new BitmapImage(Paths.PinEventIconIntermediate),
+                PinType = PMPinModel.PinsType.Event
+            });
+            PinListPicker.Items.Add(new PinItem
+            {
+                Name = AppResources.PinPublicPointOfView,
+                Image = new BitmapImage(Paths.PinViewIconIntermediate),
+                PinType = PMPinModel.PinsType.View
+            });
+            PinListPicker.Items.Add(new PinItem
+            {
+                Name = AppResources.PinPrivateMessage,
+                Image = new BitmapImage(Paths.PinPrivateMessageIconIntermediate),
+                PinType = PMPinModel.PinsType.PrivateMessage
+            });
+            PinListPicker.Items.Add(new PinItem
+            {
+                Name = AppResources.PinPrivateEvent,
+                Image = new BitmapImage(Paths.PinPrivateEventIconIntermediate),
+                PinType = PMPinModel.PinsType.PrivateEvent
+            });
+            PinListPicker.Items.Add(new PinItem
+            {
+                Name = AppResources.PinPrivatePointOfView,
+                Image = new BitmapImage(Paths.PinPrivateViewIconIntermediate),
+                PinType = PMPinModel.PinsType.PrivateView
+            });
+        }
+
+        private class PinItem
+        {
+            public string Name { get; set; }
+            public BitmapImage Image { get; set; }
+            public PMPinModel.PinsType PinType { get; set; }
         }
 
         private void LaunchLocalization()
@@ -124,14 +174,14 @@ namespace PinMessaging.View
 
             PMData.MapLayerContainer = _mapLayer;
 
-            UpdateLocationUI();    
+            UpdateLocationUI();
         }
 
         private int AccessLocationMsgBox()
         {
-            int choice = Utils.Utils.CustomMessageBox(new[] { AppResources.Allow, AppResources.Cancel },
-                    AppResources.UseLocationTitle,
-                    AppResources.UseLocationContent);
+            int choice = Utils.Utils.CustomMessageBox(new[] {AppResources.Allow, AppResources.Cancel},
+                AppResources.UseLocationTitle,
+                AppResources.UseLocationContent);
 
             if (choice == 0)
             {
@@ -180,7 +230,9 @@ namespace PinMessaging.View
         {
             for (var i = 2; i < UnderMenuGrid.RowDefinitions.Count; i++)
             {
-                UnderMenuGrid.RowDefinitions[i].Height = UnderMenuGrid.RowDefinitions[i].Equals(exept) == false ? new GridLength(0) : new GridLength(1, GridUnitType.Star);
+                UnderMenuGrid.RowDefinitions[i].Height = UnderMenuGrid.RowDefinitions[i].Equals(exept) == false
+                    ? new GridLength(0)
+                    : new GridLength(1, GridUnitType.Star);
             }
             UnderMenuPinDescriptionGrid.Height = (pinDescFull == true ? UnderMenuPinDescriptionScrollView.Height : 0);
             UnderMenuContactPanel.Height = (contactFull == true ? UnderMenuContactScrollViewer.Height : 0);
@@ -197,7 +249,7 @@ namespace PinMessaging.View
 
                 //DownMenuTitle.Text = AppResources.Pin;
                 AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[4], true, false);
-      
+
                 MainGridMap.RowDefinitions[2].Height = new GridLength(0);
                 MoveAnimationUp.Begin();
             });
@@ -220,7 +272,7 @@ namespace PinMessaging.View
             DownMenuTitle.Text = AppResources.CreatePinTitle;
             AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[5], false, false);
 
-           // VisibilityExpandView.IsExpanded = true;
+            // VisibilityExpandView.IsExpanded = true;
         }
 
         private void MenuDown_CommonActionsBefore()
@@ -242,13 +294,13 @@ namespace PinMessaging.View
             ApplicationBarMenuItemCreate_OnClick(null, null);
             //VisibilityExpandViewPrivateGrid_OnTap(null, null);
             TargetExpanderAdaptView(true);
-            CreateTargetLongList();
+            //CreateTargetLongList();
             TargetLongListSelector.ItemsSource.Add(user);
             //TargetLongListSelector.TabIndex = 0;
             Logs.Output.ShowOutput(TargetLongListSelector.ItemsSource.Count.ToString());
         }
 
-        void ApplicationBarMenuItemCreate_OnClick(object sender, EventArgs e)
+        private void ApplicationBarMenuItemCreate_OnClick(object sender, EventArgs e)
         {
             MenuDown_CommonActionsBefore();
             MenuDown_CreatePin();
@@ -286,7 +338,7 @@ namespace PinMessaging.View
                 MenuDown_PinOnClick();
                 MenuDown_CommonActionsAfter();
             }
-           /* else if (sender.Equals(NotificationButton) || sender.Equals(NotificationButtonTextBlock))
+                /* else if (sender.Equals(NotificationButton) || sender.Equals(NotificationButtonTextBlock))
             {
                 MenuDown_CommonActionsBefore();
                 MenuDown_NotificationOnClick();
@@ -309,14 +361,15 @@ namespace PinMessaging.View
         public void UpdateLocationUI()
         {
             _geoLocation.UpdateLocation();
-            
+
             if (_geoLocation.GeopositionUser != null)
             {
                 Dispatcher.BeginInvoke(() =>
                 {
                     if (_userSpot.Visibility == Visibility.Collapsed)
                         _userSpot.Visibility = Visibility.Visible;
-                    _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
+                    _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude,
+                        _geoLocation.GeopositionUser.Coordinate.Longitude);
                 });
             }
         }
@@ -331,14 +384,14 @@ namespace PinMessaging.View
 
         private void BkwOnDoWork(object sender, DoWorkEventArgs doWorkEventArgs)
         {
-            var tuple = (Tuple<double, double>)doWorkEventArgs.Argument;
+            var tuple = (Tuple<double, double>) doWorkEventArgs.Argument;
             var fromMapZoomLevel = tuple.Item1;
             var toZoomLevel = tuple.Item2;
 
             while (fromMapZoomLevel < toZoomLevel)
             {
                 fromMapZoomLevel += 0.10d;
-                
+
                 Thread.Sleep(10);
                 _bkw.ReportProgress(2);
             }
@@ -376,7 +429,8 @@ namespace PinMessaging.View
                 }
                 else if (_geoLocation.GeopositionUser != null)
                 {
-                    Map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
+                    Map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude,
+                        _geoLocation.GeopositionUser.Coordinate.Longitude);
                 }
             });
         }
@@ -401,7 +455,8 @@ namespace PinMessaging.View
                     return;
             }
 
-            int retValue = Utils.Utils.CustomMessageBox(new[] {"Yes", "No"}, AppResources.QuitAppTitle, AppResources.QuitApp);
+            int retValue = Utils.Utils.CustomMessageBox(new[] {"Yes", "No"}, AppResources.QuitAppTitle,
+                AppResources.QuitApp);
 
             //0 is Yes, 1 is No....
             if (retValue == 0)
@@ -437,8 +492,9 @@ namespace PinMessaging.View
 
             var pinController = new PMPinController(RequestType.GetPins, RefreshPinButton_PostClick);
 
-            pinController.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()), 
-                                  Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));
+            pinController.GetPins(
+                Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()),
+                Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));
         }
 
         private void Map_OnTouch(object sender, RoutedEventArgs e)
@@ -446,7 +502,7 @@ namespace PinMessaging.View
             if (_isUnderMenuOpen == true)
             {
                 //MainGridMap.RowDefinitions[2].Height = new GridLength(120);
-           
+
                 _currentView = CurrentMapPageView.MapView;
                 _isUnderMenuOpen = false;
                 _enableSwipe = true;
@@ -479,12 +535,13 @@ namespace PinMessaging.View
         {
             try
             {
-                _leftPage = -(double)Application.Current.Resources["AdditionalMapMenuWidth"];
-                _rightPage = -2 * (double)Application.Current.Resources["AdditionalMapMenuWidth"];
+                _leftPage = -(double) Application.Current.Resources["AdditionalMapMenuWidth"];
+                _rightPage = -2*(double) Application.Current.Resources["AdditionalMapMenuWidth"];
             }
             catch (Exception)
             {
-                Logs.Error.ShowError("Could not load AdditionalMapMenuWidth from App.xaml", Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("Could not load AdditionalMapMenuWidth from App.xaml",
+                    Logs.Error.ErrorsPriority.NotCritical);
                 _leftPage = -420;
                 _rightPage = -840;
             }
@@ -503,7 +560,7 @@ namespace PinMessaging.View
             {
                 _currentView = CurrentMapPageView.LeftMenuView;
                 MoveViewWindow(MiddlePage);
-            }  
+            }
         }
 
         private void Open_Right(object sender, EventArgs e)
@@ -525,10 +582,10 @@ namespace PinMessaging.View
             {
                 _currentView = CurrentMapPageView.MapView;
                 MoveViewWindow(_leftPage);
-            }      
+            }
         }
 
-        void MoveViewWindow(double left)
+        private void MoveViewWindow(double left)
         {
             _viewMoved = true;
 
@@ -544,15 +601,16 @@ namespace PinMessaging.View
             }
 
             moveAnimation.SkipToFill();
-            ((DoubleAnimation)(moveAnimation).Children[0]).To = left;
-            moveAnimation.Begin();            
+            ((DoubleAnimation) (moveAnimation).Children[0]).To = left;
+            moveAnimation.Begin();
         }
 
         private void canvas_ManipulationDelta(object sender, ManipulationDeltaEventArgs e)
         {
-            if (_enableSwipe == true)     
+            if (_enableSwipe == true)
                 if (e.DeltaManipulation.Translation.X != 0)
-                    Canvas.SetLeft(LayoutRoot, Math.Min(Math.Max(_rightPage, Canvas.GetLeft(LayoutRoot) + e.DeltaManipulation.Translation.X), 0));
+                    Canvas.SetLeft(LayoutRoot,
+                        Math.Min(Math.Max(_rightPage, Canvas.GetLeft(LayoutRoot) + e.DeltaManipulation.Translation.X), 0));
         }
 
         private void canvas_ManipulationStarted(object sender, ManipulationStartedEventArgs e)
@@ -626,7 +684,7 @@ namespace PinMessaging.View
             var userController = new PMUserController(RequestType.User, ButtonReward_PostClick);
 
             userController.GetUserInfos(PMData.CurrentUserId);
-         }
+        }
 
         private void ButtonReward_PostClick()
         {
@@ -642,7 +700,8 @@ namespace PinMessaging.View
 
         private void ButtonLogout_OnClick(object sender, RoutedEventArgs e)
         {
-            int choice = Utils.Utils.CustomMessageBox(new[] {AppResources.Yes, AppResources.No}, AppResources.MenuLogout, AppResources.LogoutSentence);
+            int choice = Utils.Utils.CustomMessageBox(new[] {AppResources.Yes, AppResources.No}, AppResources.MenuLogout,
+                AppResources.LogoutSentence);
 
             if (choice == 0)
             {
@@ -661,10 +720,35 @@ namespace PinMessaging.View
         /// 
         private void MyPinItemUi(PMPinModel pin)
         {
-            var historyImage = new Image { Height = 70, Width = 70, Source = Paths.PinsMapImg[pin.PinType + (pin.Private == true ? 6 : 0)] };
-            var titleTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 30, VerticalAlignment = VerticalAlignment.Center, Text = pin.Title, Height = 40};
-            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 18, TextAlignment = TextAlignment.Left, Text = pin.Content, Height = 25 };
-            var dateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 13, TextAlignment = TextAlignment.Left, Height = 25 };
+            var historyImage = new Image
+            {
+                Height = 70,
+                Width = 70,
+                Source = Paths.PinsMapImg[pin.PinType + (pin.Private == true ? 6 : 0)]
+            };
+            var titleTextBlock = new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap,
+                FontSize = 30,
+                VerticalAlignment = VerticalAlignment.Center,
+                Text = pin.Title,
+                Height = 40
+            };
+            var messageTextBlock = new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap,
+                FontSize = 18,
+                TextAlignment = TextAlignment.Left,
+                Text = pin.Content,
+                Height = 25
+            };
+            var dateTextBlock = new TextBlock
+            {
+                TextWrapping = TextWrapping.Wrap,
+                FontSize = 13,
+                TextAlignment = TextAlignment.Left,
+                Height = 25
+            };
 
             var res = Utils.Utils.ConvertStringToDouble(pin.CreatedTime);
 
@@ -682,10 +766,10 @@ namespace PinMessaging.View
             };
             itemMyPin.Click += ItemMyPinOnClick;
 
-            var itemMainGrid = new Grid() { HorizontalAlignment = HorizontalAlignment.Left};
-            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(70) });
-            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            itemMainGrid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(70) });
+            var itemMainGrid = new Grid() {HorizontalAlignment = HorizontalAlignment.Left};
+            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(70)});
+            itemMainGrid.ColumnDefinitions.Add(new ColumnDefinition {Width = new GridLength(1, GridUnitType.Star)});
+            itemMainGrid.RowDefinitions.Add(new RowDefinition {Height = new GridLength(70)});
             itemMainGrid.Tag = pin;
 
             itemMyPin.Content = itemMainGrid;
@@ -694,7 +778,11 @@ namespace PinMessaging.View
 
             itemMainGrid.Children.Add(historyImage);
 
-            var pinContentStackPanel = new StackPanel { Margin = new Thickness(20, 0, 0, 0), VerticalAlignment = VerticalAlignment.Center};
+            var pinContentStackPanel = new StackPanel
+            {
+                Margin = new Thickness(20, 0, 0, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
             pinContentStackPanel.Children.Add(titleTextBlock);
             pinContentStackPanel.Children.Add(messageTextBlock);
             pinContentStackPanel.Children.Add(dateTextBlock);
@@ -719,14 +807,15 @@ namespace PinMessaging.View
                 var itemButton = sender as Button;
                 var itemGrid = itemButton.Content as Grid;
                 var pin = (PMPinModel) itemGrid.Tag;
-                
+
                 OpenClose_Right(null, null);
                 PinTapped(pin);
                 MapCenterOn(pin.GeoCoord);
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("ItemMyPinOnClick: error when getting the pin info: ", exp, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("ItemMyPinOnClick: error when getting the pin info: ", exp,
+                    Logs.Error.ErrorsPriority.NotCritical);
             }
 
         }
@@ -742,14 +831,16 @@ namespace PinMessaging.View
         private void AddPinToMyPinsUi(PMPinModel pin)
         {
             //Make sure each element in the stackpanel is a Grid with a pin in Tag otherwise exception
-            if (pin.AuthorId == PMData.CurrentUserId && MyPinsStackPanel.Children.Any(elem => (((((elem as Button).Content as Grid).Tag) as PMPinModel).Id) == pin.Id) == false)
+            if (pin.AuthorId == PMData.CurrentUserId &&
+                MyPinsStackPanel.Children.Any(
+                    elem => (((((elem as Button).Content as Grid).Tag) as PMPinModel).Id) == pin.Id) == false)
                 MyPinItemUi(pin);
         }
 
         private void LoadMyPins()
         {
             //if (MyPinsStackPanel.Children.Count == 0)
-                LoadMyPinsFromUserList();
+            LoadMyPinsFromUserList();
         }
 
         private void PivotPins_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -759,7 +850,7 @@ namespace PinMessaging.View
                 case 0:
                     //MyPinsGrid.Children.Clear();
                     //MyPinsPivotItem_OnSelected();
-                  break;
+                    break;
 
                 case 1:
                     break;
@@ -797,7 +888,15 @@ namespace PinMessaging.View
 
                 if (PMData.SearchUserList.Count == 0)
                 {
-                    SearchContactStackPanel.Children.Add(new TextBlock { Height = 80, Width = 300, HorizontalAlignment = HorizontalAlignment.Left, Text = AppResources.NoResults, Margin = new Thickness(0, 0, 0, 0), FontSize = 25 });
+                    SearchContactStackPanel.Children.Add(new TextBlock
+                    {
+                        Height = 80,
+                        Width = 300,
+                        HorizontalAlignment = HorizontalAlignment.Left,
+                        Text = AppResources.NoResults,
+                        Margin = new Thickness(0, 0, 0, 0),
+                        FontSize = 25
+                    });
                 }
                 else
                 {
@@ -821,7 +920,7 @@ namespace PinMessaging.View
 
 
                 var uc = new PMUserController(RequestType.SearchUser, SearchContactUpdateUi);
-                uc.SearchUser(SearchContactsTextBox.Text);    
+                uc.SearchUser(SearchContactsTextBox.Text);
             }
         }
 
@@ -870,13 +969,25 @@ namespace PinMessaging.View
 
             var contactGrid = new Grid {Tag = user};
 
-            contactGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(110) });
+            contactGrid.RowDefinitions.Add(new RowDefinition() {Height = new GridLength(110)});
 
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(110) });
-            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() {Width = new GridLength(110)});
+            contactGrid.ColumnDefinitions.Add(new ColumnDefinition() {Width = new GridLength(1, GridUnitType.Star)});
 
-            var contactImg = new Image() { Name = where.Name + "contactImg" + user.Id, Source = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative)), Tag = user };
-            var contactName = new TextBlock() { Text = user.Pseudo, Tag = user, FontSize = 25, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(20, 0, 0, 0) };
+            var contactImg = new Image()
+            {
+                Name = where.Name + "contactImg" + user.Id,
+                Source = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative)),
+                Tag = user
+            };
+            var contactName = new TextBlock()
+            {
+                Text = user.Pseudo,
+                Tag = user,
+                FontSize = 25,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(20, 0, 0, 0)
+            };
 
             Logs.Output.ShowOutput(where.Name + "contactImg" + user.Id);
 
@@ -896,7 +1007,10 @@ namespace PinMessaging.View
 
             PMData.UserId = user.Id;
 
-            var userController = new PMUserController(RequestType.ProfilPicture, where.Equals(SearchContactStackPanel) ? (Action)SearchContactPictureUpdateUi : (Action)ContactPictureUpdateUi);
+            var userController = new PMUserController(RequestType.ProfilPicture,
+                where.Equals(SearchContactStackPanel)
+                    ? (Action) SearchContactPictureUpdateUi
+                    : (Action) ContactPictureUpdateUi);
             userController.DownloadProfilPicture(user.Id);
         }
 
@@ -931,7 +1045,7 @@ namespace PinMessaging.View
                     }
                     else
                     {
-                        Design.ProfilPictureUpdateUi((Image)img, PMData.UserId);
+                        Design.ProfilPictureUpdateUi((Image) img, PMData.UserId);
                         Logs.Output.ShowOutput("YESSSSSSSSSS");
                     }
                 }
@@ -968,7 +1082,9 @@ namespace PinMessaging.View
 
             try
             {
-                var rep = UnderMenuContactPanel.Children.First(contact => ((((contact as Grid).Children[0]) as Image).Tag as PMUserModel).Id == user.Id);
+                var rep =
+                    UnderMenuContactPanel.Children.First(
+                        contact => ((((contact as Grid).Children[0]) as Image).Tag as PMUserModel).Id == user.Id);
 
                 if (rep != null)
                 {
@@ -998,7 +1114,8 @@ namespace PinMessaging.View
         private void AddCommentsToUi()
         {
             //the first comment displayed is the most recent
-            PMData.PinsCommentsListTmp = (from elem in PMData.PinsCommentsListTmp orderby elem.CreatedTime ascending select elem).ToList();
+            PMData.PinsCommentsListTmp =
+                (from elem in PMData.PinsCommentsListTmp orderby elem.CreatedTime ascending select elem).ToList();
 
             foreach (var tb in PMData.PinsCommentsListTmp)
             {
@@ -1008,16 +1125,16 @@ namespace PinMessaging.View
                     BorderBrush = new SolidColorBrush(Colors.DarkGray),
                     ChatBubbleDirection = ChatBubbleDirection.LowerLeft,
                     Content = new TextBlock()
-                             {
-                                Text = tb.Content,
-                                FontSize = 20,
-                                TextWrapping = TextWrapping.Wrap,
-                                Foreground = new SolidColorBrush(Colors.Black)
-                            },
+                    {
+                        Text = tb.Content,
+                        FontSize = 20,
+                        TextWrapping = TextWrapping.Wrap,
+                        Foreground = new SolidColorBrush(Colors.Black)
+                    },
                 };
 
                 CommentStackPanel.Children.Insert(0, chatBubble);
-                
+
                 var authorName = new TextBlock()
                 {
                     Text = tb.Author,
@@ -1042,12 +1159,12 @@ namespace PinMessaging.View
                     var d = Utils.Utils.ConvertFromUnixTimestamp(res);
                     creationDate.Text = d.ToShortDateString() + " " + d.ToShortTimeString();
                 }
-                 
+
                 var grid = new Grid();
 
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
-             
+
                 grid.Children.Add(authorName);
                 grid.Children.Add(creationDate);
 
@@ -1056,7 +1173,7 @@ namespace PinMessaging.View
 
                 CommentStackPanel.Children.Insert(1, grid);
             }
-            
+
             PMData.AddToQueuePinComments(PMData.PinsCommentsListTmp);
             PMData.PinsCommentsListTmp.Clear();
         }
@@ -1087,14 +1204,16 @@ namespace PinMessaging.View
         public void PinTapped(PMPinModel pin)
         {
             CommentStackPanel.Children.Clear();
-        
+
             var pinC = new PMPinController(RequestType.GetPinMessages, GetPinMessages_Post);
 
             pinC.GetPinMessage(pin);
-            
-            var dateStr = ((pin.PinType == PMPinModel.PinsType.Event) && (pin.Date != null) ? Environment.NewLine + "L'évènement se déroule le " +
-                pin.Date.ToLongDateString() + " à " +
-                pin.Date.ToLongTimeString() : "");
+
+            var dateStr = ((pin.PinType == PMPinModel.PinsType.Event) && (pin.Date != null)
+                ? Environment.NewLine + "L'évènement se déroule le " +
+                  pin.Date.ToLongDateString() + " à " +
+                  pin.Date.ToLongTimeString()
+                : "");
 
             PinMessageDescriptionTextBlock.Text = pin.Content + dateStr;
             PinAuthorDescriptionTextBlock.Text = pin.Author;
@@ -1155,7 +1274,9 @@ namespace PinMessaging.View
             try
             {
                 if (PMData.User != null)
-                    NavigationService.Navigate(PMData.User.Id != PMData.CurrentUserId ? Paths.UserProfilView : Paths.CurrentUserProfilView);
+                    NavigationService.Navigate(PMData.User.Id != PMData.CurrentUserId
+                        ? Paths.UserProfilView
+                        : Paths.CurrentUserProfilView);
             }
             catch (Exception exp)
             {
@@ -1191,10 +1312,10 @@ namespace PinMessaging.View
 
         private void MoveAnimationUp_OnCompleted(object sender, EventArgs e)
         {
-            VisibilityExpandView.IsExpanded = true;
+            //VisibilityExpandView.IsExpanded = true;
         }
 
-        private void CreatePinImgOnTap(object sender, GestureEventArgs gestureEventArgs)
+        /*private void CreatePinImgOnTap(object sender, GestureEventArgs gestureEventArgs)
         {
             var img = sender as Image;
 
@@ -1209,92 +1330,92 @@ namespace PinMessaging.View
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
                 PinCreateModel.Private = false;
-                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+                //ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PublicEvent"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.Event;
                 PinCreateModel.Private = false;
-                ExpanderViewEventDate.Visibility = Visibility.Visible;
+                //ExpanderViewEventDate.Visibility = Visibility.Visible;
             }
             else if (img.Name.Equals("PublicView"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.View;
                 PinCreateModel.Private = false;
-                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+              //  ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PublicCourseStart"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.CourseStart;
                 PinCreateModel.Private = false;
-                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+                //ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PublicCourseNext"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.CourseNextStep;
                 PinCreateModel.Private = false;
-                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+                //ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PublicCourseLast"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.CourseLastStep;
                 PinCreateModel.Private = false;
-                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+              //  ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PrivateMsg"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
                 PinCreateModel.Private = true;
-                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+               // ExpanderViewEventDate.Visibility = Visibility.Collapsed;
             }
             else if (img.Name.Equals("PrivateEvent"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.Event;
                 PinCreateModel.Private = true;
-                ExpanderViewEventDate.Visibility = Visibility.Visible;
+              //  ExpanderViewEventDate.Visibility = Visibility.Visible;
             }
             else if (img.Name.Equals("PrivateView"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.View;
                 PinCreateModel.Private = true;
-                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+              //  ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PrivateCourseStart"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.CourseStart;
                 PinCreateModel.Private = true;
-                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+           //     ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PrivateCourseNext"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.CourseNextStep;
                 PinCreateModel.Private = true;
-                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+             //   ExpanderViewEventDate.Visibility = Visibility.Collapsed;
 
             }
             else if (img.Name.Equals("PrivateCourseLast"))
             {
                 PinCreateModel.PinType = PMPinModel.PinsType.CourseLastStep;
                 PinCreateModel.Private = true;
-                ExpanderViewEventDate.Visibility = Visibility.Collapsed;
+            //    ExpanderViewEventDate.Visibility = Visibility.Collapsed;
             }
 
-            CloseAllExpanderExcept(TitleExpandView);
+            //CloseAllExpanderExcept(TitleExpandView);
             CheckCanCreatePin();
-        }
+        }*/
 
         private void CloseAllExpanderExcept(ExpanderView exp)
         {
-            var expTab = new ExpanderView[6]
+            /* var expTab = new ExpanderView[6]
             {
-                VisibilityExpandView,
+               VisibilityExpandView,
                 PinTypeExpandView,
                 TitleExpandView,
                 DescriptionExpandView,
@@ -1305,12 +1426,12 @@ namespace PinMessaging.View
             foreach (var elem in expTab)
             {
                 elem.IsExpanded = (elem == exp);
-            }
+            }*/
         }
 
         private void LoadCreatePinsPublicPins()
         {
-            var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PublicMessage], Name = "PublicMsg" }; img1.Tap += CreatePinImgOnTap;
+            /* var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PublicMessage], Name = "PublicMsg" }; img1.Tap += CreatePinImgOnTap;
             PinTypeScollStackPanel.Children.Add(img1);
 
             var img2 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.Event], Name = "PublicEvent" }; img2.Tap += CreatePinImgOnTap;
@@ -1326,12 +1447,12 @@ namespace PinMessaging.View
             PinTypeScollStackPanel.Children.Add(img5);
 
             var img6 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseLastStep], Name = "PublicCourseLast" }; img6.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img6);
+            PinTypeScollStackPanel.Children.Add(img6);*/
         }
 
         private void LoadCreatePinsPrivatePins()
         {
-            var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateMessage], Name = "PrivateMsg" }; img1.Tap += CreatePinImgOnTap;
+            /*var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateMessage], Name = "PrivateMsg" }; img1.Tap += CreatePinImgOnTap;
             PinTypeScollStackPanel.Children.Add(img1);
 
             var img2 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateEvent], Name = "PrivateEvent" }; img2.Tap += CreatePinImgOnTap;
@@ -1347,7 +1468,7 @@ namespace PinMessaging.View
             PinTypeScollStackPanel.Children.Add(img5);
 
             var img6 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateCourseLastStep], Name = "PrivateCourseLast" }; img6.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img6);
+            PinTypeScollStackPanel.Children.Add(img6);*/
         }
 
 
@@ -1356,42 +1477,34 @@ namespace PinMessaging.View
 
         }
 
-        private void CreateTargetLongList()
+        /* private void CreateTargetLongList()
         {
             TargetLongListSelector.ItemsSource = PMData.UserList;
-        }
+        }*/
 
-        private void PinTypeExpandView_OnExpanded(object sender, RoutedEventArgs e)
-        {
-            if (PinTypeScollStackPanel.Children.Count == 0)
-            {
-                LoadCreatePinsPublicPins();
-                LoadCreatePinsPrivatePins();
-            }
-            CreateTargetLongList();
-        }
+
 
         private void TargetExpanderAdaptView(bool priv)
         {
-            TargetExpanderViewExpandView.Visibility = priv == false ? Visibility.Collapsed : Visibility.Visible;
+            //TargetExpanderViewExpandView.Visibility = priv == false ? Visibility.Collapsed : Visibility.Visible;
         }
 
         private void VisibilityExpandViewPublicGrid_OnTap(object sender, GestureEventArgs e)
         {
-            PinTypeScollStackPanel.Children.Clear();
-            LoadCreatePinsPublicPins();
-            CloseAllExpanderExcept(PinTypeExpandView);
+            // PinTypeScollStackPanel.Children.Clear();
+            // LoadCreatePinsPublicPins();
+            //CloseAllExpanderExcept(PinTypeExpandView);
 
-            TargetExpanderAdaptView(false);
+            //TargetExpanderAdaptView(false);
         }
 
         private void VisibilityExpandViewPrivateGrid_OnTap(object sender, GestureEventArgs e)
         {
-            PinTypeScollStackPanel.Children.Clear();
-            LoadCreatePinsPrivatePins();
-            CloseAllExpanderExcept(PinTypeExpandView);
+            //PinTypeScollStackPanel.Children.Clear();
+            // LoadCreatePinsPrivatePins();
+            //CloseAllExpanderExcept(PinTypeExpandView);
 
-            TargetExpanderAdaptView(true);
+            //TargetExpanderAdaptView(true);
         }
 
         private void CheckCanCreatePin()
@@ -1426,19 +1539,19 @@ namespace PinMessaging.View
 
         private void DescriptionExpandView_OnExpanded(object sender, RoutedEventArgs e)
         {
-            TitleExpandView.IsExpanded = false;
+            //TitleExpandView.IsExpanded = false;
         }
 
         private void TitleExpandViewTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            PinCreateModel.Title = TitleExpandViewTextBox.Text;
+            //   PinCreateModel.Title = TitleExpandViewTextBox.Text;
             CheckCanCreatePin();
         }
 
         private void DescriptionExpandViewTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            PinCreateModel.Content = DescriptionExpandViewTextBox.Text;
-            CheckCanCreatePin();
+            //PinCreateModel.Content = DescriptionExpandViewTextBox.Text;
+            //CheckCanCreatePin();
         }
 
         private void ResetCreatePinModel()
@@ -1473,13 +1586,14 @@ namespace PinMessaging.View
             try
             {
                 AddPinToMyPinsUi(PMData.PinsList.Last());
-      
+
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("PostPinButton_ClickPostJob: could not get the last pin:", exp, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("PostPinButton_ClickPostJob: could not get the last pin:", exp,
+                    Logs.Error.ErrorsPriority.NotCritical);
             }
-                  //AddLastPinToMyPins();
+            //AddLastPinToMyPins();
             //NewPinPivotItem.IsEnabled = true;
         }
 
@@ -1495,17 +1609,18 @@ namespace PinMessaging.View
                     return;
             if (_geoLocation != null && _geoLocation.GeopositionUser == null)
                 return;
-           
+
             var pc = new PMPinController(RequestType.CreatePin, PostPinButton_ClickPostJob);
 
             PostPinButton_ClickPreJob();
 
-            PinCreateModel.Title = TitleExpandViewTextBox.Text;
-            PinCreateModel.Content = (PinCreateModel.PinType == PMPinModel.PinsType.Event ? FormatDateAndTimeForEvent() : "") + DescriptionExpandViewTextBox.Text;
-            //PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
+            PinCreateModel.Title = PinCreateTitleTextBox.Text;
+            PinCreateModel.Content = (PinCreateModel.PinType == PMPinModel.PinsType.Event
+                ? FormatDateAndTimeForEvent()
+                : "") + PinCreateMessageTextBox.Text;
             PinCreateModel.ContentType = PMPinModel.PinsContentType.Text;
             PinCreateModel.AuthorId = PMData.CurrentUserId;
-         //   PinCreateModel.Private = "0";
+            //   PinCreateModel.Private = "0";
             PinCreateModel.AuthoriseUsersId = FormatAuthoriseUsersId();
 
             pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
@@ -1528,22 +1643,22 @@ namespace PinMessaging.View
         {
             var formattedTime = string.Empty;
 
-            if (CreatePinDatePicker.Value.HasValue != true || CreatePinTimePicker.Value.HasValue != true)
+            if ( EventDate.Value.HasValue != true && EventTime.Value.HasValue != true)
                 return formattedTime;
 
-            formattedTime += CreatePinDatePicker.Value.Value.Year;
+            formattedTime += EventDate.Value.Value.Year;
             formattedTime += "-";
-            formattedTime += CreatePinDatePicker.Value.Value.Month;
+            formattedTime += EventDate.Value.Value.Month;
             formattedTime += "-";
-            formattedTime += CreatePinDatePicker.Value.Value.Day;
+            formattedTime += EventDate.Value.Value.Day;
 
             formattedTime += " ";
 
-            formattedTime += CreatePinTimePicker.Value.Value.Hour;
+            formattedTime += EventTime.Value.Value.Hour;
             formattedTime += ":";
-            formattedTime += CreatePinTimePicker.Value.Value.Minute;
+            formattedTime += EventTime.Value.Value.Minute;
             formattedTime += ":";
-            formattedTime += CreatePinTimePicker.Value.Value.Second;
+            formattedTime += EventTime.Value.Value.Second;
             formattedTime += ";";
 
             return formattedTime;
@@ -1555,7 +1670,8 @@ namespace PinMessaging.View
         {
             var pinController = new PMPinController(RequestType.CreatePinMessage, PinCommentPostButton_PostResponse);
 
-            pinController.CreatePinMessage(_currentPinFocused.Id, PMPinModel.PinsContentType.Text, CommentChatBubble.Text);
+            pinController.CreatePinMessage(_currentPinFocused.Id, PMPinModel.PinsContentType.Text,
+                CommentChatBubble.Text);
 
             CreateAppBarMap();
 
@@ -1568,11 +1684,11 @@ namespace PinMessaging.View
         private void PinCommentPostButton_PostResponse()
         {
             Dispatcher.BeginInvoke(() =>
-            {           
+            {
                 CommentChatBubble.Text = "";
                 AddCommentsToUi();
             });
-       }
+        }
 
         private void CreateAppBarMap()
         {
@@ -1651,7 +1767,7 @@ namespace PinMessaging.View
                 PinCommentTipContentTextBox.Visibility = Visibility.Visible;
             else
             {
-                ApplicationBar.IsVisible = false;                
+                ApplicationBar.IsVisible = false;
             }
         }
 
@@ -1678,13 +1794,51 @@ namespace PinMessaging.View
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError("PinCommentContentTextBox_OnGotFocus: cannot enable appbar check button", exp, Logs.Error.ErrorsPriority.NotCritical);
-            }   
+                Logs.Error.ShowError("PinCommentContentTextBox_OnGotFocus: cannot enable appbar check button", exp,
+                    Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
 
         private void CommentChatBubble_OnTextInput(object sender, TextChangedEventArgs textChangedEventArgs)
         {
             LockUnlockCommentCheck(CommentChatBubble.Text.Length != 0);
+        }
+
+        /// <summary>
+        /// ///////////////////////////////
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// 
+        /// 
+        private void PinListPicker_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PMPinModel.PinsType tmpType = (PinListPicker.SelectedItem as PinItem).PinType;
+
+            if (tmpType == PMPinModel.PinsType.PrivateMessage ||
+                tmpType == PMPinModel.PinsType.PrivateEvent ||
+                tmpType == PMPinModel.PinsType.PrivateView)
+            {
+                PinCreateModel.PinType = tmpType - 6;
+                PinCreateModel.Private = true;
+            }
+            else
+            {
+                PinCreateModel.PinType = tmpType;
+                PinCreateModel.Private = false;
+            }
+
+            EventStackPanel.Visibility = PinCreateModel.PinType == PMPinModel.PinsType.Event ? Visibility.Visible : Visibility.Collapsed;
+            PinTargetExpandView.Visibility = PinCreateModel.Private == true ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void PinTargetExpandView_OnExpanded(object sender, RoutedEventArgs e)
+        {
+            /*foreach (var user in PMData.UserList)
+            {
+                user.CompleteInit();
+            } */      
+            TargetLongListSelector.ItemsSource = PMData.UserList;
         }
     }
 }
