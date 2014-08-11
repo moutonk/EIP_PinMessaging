@@ -151,7 +151,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à You acquire the Newbie badge when you get 10 points. Keep going!.
+        ///   Recherche une chaîne localisée semblable à You acquire the Newbie badge when you get between 0 and 50 points. Keep going!.
         /// </summary>
         public static string BadgePointCopper {
             get {
@@ -160,7 +160,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à You acquire the Explorer badge when you get 50 points. Good job!.
+        ///   Recherche une chaîne localisée semblable à You acquire the Explorer badge when you get more than 500 points. Good job!.
         /// </summary>
         public static string BadgePointGold {
             get {
@@ -169,7 +169,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à You acquire Adventurer badge when you get 25 points. Keep going! The gold is not far!.
+        ///   Recherche une chaîne localisée semblable à You acquire Adventurer badge when you get between 50 and 500 points. Keep going! The gold is not far!.
         /// </summary>
         public static string BadgePointSilver {
             get {
@@ -336,6 +336,24 @@ namespace PinMessaging.Resources {
         public static string CreateAccountPageTitle {
             get {
                 return ResourceManager.GetString("CreateAccountPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Please enter a description for your Pin.
+        /// </summary>
+        public static string CreatePinDescription {
+            get {
+                return ResourceManager.GetString("CreatePinDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Title of your Pin.
+        /// </summary>
+        public static string CreatePinDescriptionTitle {
+            get {
+                return ResourceManager.GetString("CreatePinDescriptionTitle", resourceCulture);
             }
         }
         

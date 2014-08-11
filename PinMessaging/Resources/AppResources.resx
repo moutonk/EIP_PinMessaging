@@ -403,13 +403,13 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
     <value>You acquire the Conqueror badge when you create 50 pins. Keep going!</value>
   </data>
   <data name="BadgePointCopper" xml:space="preserve">
-    <value>You acquire the Newbie badge when you get 10 points. Keep going!</value>
+    <value>You acquire the Newbie badge when you get between 0 and 50 points. Keep going!</value>
   </data>
   <data name="BadgePointGold" xml:space="preserve">
-    <value>You acquire the Explorer badge when you get 50 points. Good job!</value>
+    <value>You acquire the Explorer badge when you get more than 500 points. Good job!</value>
   </data>
   <data name="BadgePointSilver" xml:space="preserve">
-    <value>You acquire Adventurer badge when you get 25 points. Keep going! The gold is not far!</value>
+    <value>You acquire Adventurer badge when you get between 50 and 500 points. Keep going! The gold is not far!</value>
   </data>
   <data name="BadgesTitle" xml:space="preserve">
     <value>BADGES</value>
@@ -503,5 +503,11 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   </data>
   <data name="NoResults" xml:space="preserve">
     <value>No results</value>
+  </data>
+  <data name="CreatePinDescription" xml:space="preserve">
+    <value>Please enter a description for your Pin</value>
+  </data>
+  <data name="CreatePinDescriptionTitle" xml:space="preserve">
+    <value>Title of your Pin</value>
   </data>
 </root>

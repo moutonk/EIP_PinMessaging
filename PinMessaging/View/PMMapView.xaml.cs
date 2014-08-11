@@ -147,6 +147,8 @@ namespace PinMessaging.View
                 Image = new BitmapImage(Paths.PinPrivateViewIconIntermediate),
                 PinType = PMPinModel.PinsType.PrivateView
             });
+
+            
         }
 
         private class PinItem
@@ -292,12 +294,8 @@ namespace PinMessaging.View
         public void DropPrivatePin(PMUserModel user)
         {
             ApplicationBarMenuItemCreate_OnClick(null, null);
-            //VisibilityExpandViewPrivateGrid_OnTap(null, null);
-            TargetExpanderAdaptView(true);
-            //CreateTargetLongList();
-            TargetLongListSelector.ItemsSource.Add(user);
-            //TargetLongListSelector.TabIndex = 0;
-            Logs.Output.ShowOutput(TargetLongListSelector.ItemsSource.Count.ToString());
+            //TargetLongListSelector.ItemsSource.Add(user);
+            //Logs.Output.ShowOutput(TargetLongListSelector.ItemsSource.Count.ToString());
         }
 
         private void ApplicationBarMenuItemCreate_OnClick(object sender, EventArgs e)
@@ -1312,264 +1310,42 @@ namespace PinMessaging.View
 
         private void MoveAnimationUp_OnCompleted(object sender, EventArgs e)
         {
-            PMPinModel.PinsType tmpType = (PinListPicker.SelectedItem as PinItem).PinType;
-
-            if (tmpType == PMPinModel.PinsType.PrivateMessage ||
-                tmpType == PMPinModel.PinsType.PrivateEvent ||
-                tmpType == PMPinModel.PinsType.PrivateView)
-            {
-                TargetLongListSelector.ItemsSource = PMData.UserList;
-            }
-            //VisibilityExpandView.IsExpanded = true;
-        }
-
-        /*private void CreatePinImgOnTap(object sender, GestureEventArgs gestureEventArgs)
-        {
-            var img = sender as Image;
-
-            if (img == null)
-            {
-                Logs.Output.ShowOutput("NULL");
-                return;
-            }
-            Logs.Output.ShowOutput(img.Name);
-
-            if (img.Name.Equals("PublicMsg"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
-                PinCreateModel.Private = false;
-                //ExpanderViewEventDate.Visibility = Visibility.Collapsed;
-
-            }
-            else if (img.Name.Equals("PublicEvent"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.Event;
-                PinCreateModel.Private = false;
-                //ExpanderViewEventDate.Visibility = Visibility.Visible;
-            }
-            else if (img.Name.Equals("PublicView"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.View;
-                PinCreateModel.Private = false;
-              //  ExpanderViewEventDate.Visibility = Visibility.Collapsed;
-
-            }
-            else if (img.Name.Equals("PublicCourseStart"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.CourseStart;
-                PinCreateModel.Private = false;
-                //ExpanderViewEventDate.Visibility = Visibility.Collapsed;
-
-            }
-            else if (img.Name.Equals("PublicCourseNext"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.CourseNextStep;
-                PinCreateModel.Private = false;
-                //ExpanderViewEventDate.Visibility = Visibility.Collapsed;
-
-            }
-            else if (img.Name.Equals("PublicCourseLast"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.CourseLastStep;
-                PinCreateModel.Private = false;
-              //  ExpanderViewEventDate.Visibility = Visibility.Collapsed;
-
-            }
-            else if (img.Name.Equals("PrivateMsg"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
-                PinCreateModel.Private = true;
-               // ExpanderViewEventDate.Visibility = Visibility.Collapsed;
-            }
-            else if (img.Name.Equals("PrivateEvent"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.Event;
-                PinCreateModel.Private = true;
-              //  ExpanderViewEventDate.Visibility = Visibility.Visible;
-            }
-            else if (img.Name.Equals("PrivateView"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.View;
-                PinCreateModel.Private = true;
-              //  ExpanderViewEventDate.Visibility = Visibility.Collapsed;
-
-            }
-            else if (img.Name.Equals("PrivateCourseStart"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.CourseStart;
-                PinCreateModel.Private = true;
-           //     ExpanderViewEventDate.Visibility = Visibility.Collapsed;
-
-            }
-            else if (img.Name.Equals("PrivateCourseNext"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.CourseNextStep;
-                PinCreateModel.Private = true;
-             //   ExpanderViewEventDate.Visibility = Visibility.Collapsed;
-
-            }
-            else if (img.Name.Equals("PrivateCourseLast"))
-            {
-                PinCreateModel.PinType = PMPinModel.PinsType.CourseLastStep;
-                PinCreateModel.Private = true;
-            //    ExpanderViewEventDate.Visibility = Visibility.Collapsed;
-            }
-
-            //CloseAllExpanderExcept(TitleExpandView);
             CheckCanCreatePin();
-        }*/
-
-        private void CloseAllExpanderExcept(ExpanderView exp)
-        {
-            /* var expTab = new ExpanderView[6]
-            {
-               VisibilityExpandView,
-                PinTypeExpandView,
-                TitleExpandView,
-                DescriptionExpandView,
-                ExpanderViewEventDate,
-                TargetExpanderViewExpandView
-            };
-
-            foreach (var elem in expTab)
-            {
-                elem.IsExpanded = (elem == exp);
-            }*/
-        }
-
-        private void LoadCreatePinsPublicPins()
-        {
-            /* var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PublicMessage], Name = "PublicMsg" }; img1.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img1);
-
-            var img2 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.Event], Name = "PublicEvent" }; img2.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img2);
-
-            var img3 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.View], Name = "PublicView" }; img3.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img3);
-
-            var img4 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseStart], Name = "PublicCourseStart" }; img4.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img4);
-
-            var img5 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseNextStep], Name = "PublicCourseNext" }; img5.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img5);
-
-            var img6 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.CourseLastStep], Name = "PublicCourseLast" }; img6.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img6);*/
-        }
-
-        private void LoadCreatePinsPrivatePins()
-        {
-            /*var img1 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateMessage], Name = "PrivateMsg" }; img1.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img1);
-
-            var img2 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateEvent], Name = "PrivateEvent" }; img2.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img2);
-
-            var img3 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateView], Name = "PrivateView" }; img3.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img3);
-
-            var img4 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateCourseStart], Name = "PrivateCourseStart" }; img4.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img4);
-
-            var img5 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateCourseNextStep], Name = "PrivateCourseNext" }; img5.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img5);
-
-            var img6 = new Image { Source = Paths.PinsMapImg[PMPinModel.PinsType.PrivateCourseLastStep], Name = "PrivateCourseLast" }; img6.Tap += CreatePinImgOnTap;
-            PinTypeScollStackPanel.Children.Add(img6);*/
-        }
-
-
-        private void TargetExpanderViewExpandView_OnExpandedExpandView_OnExpanded(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        /* private void CreateTargetLongList()
-        {
-            TargetLongListSelector.ItemsSource = PMData.UserList;
-        }*/
-
-
-
-        private void TargetExpanderAdaptView(bool priv)
-        {
-            //TargetExpanderViewExpandView.Visibility = priv == false ? Visibility.Collapsed : Visibility.Visible;
-        }
-
-        private void VisibilityExpandViewPublicGrid_OnTap(object sender, GestureEventArgs e)
-        {
-            // PinTypeScollStackPanel.Children.Clear();
-            // LoadCreatePinsPublicPins();
-            //CloseAllExpanderExcept(PinTypeExpandView);
-
-            //TargetExpanderAdaptView(false);
-        }
-
-        private void VisibilityExpandViewPrivateGrid_OnTap(object sender, GestureEventArgs e)
-        {
-            //PinTypeScollStackPanel.Children.Clear();
-            // LoadCreatePinsPrivatePins();
-            //CloseAllExpanderExcept(PinTypeExpandView);
-
-            //TargetExpanderAdaptView(true);
         }
 
         private void CheckCanCreatePin()
         {
             bool canCreate = false;
 
-            if (PinCreateModel.Content.Length != 0 && PinCreateModel.Title.Length != 0)
+            if (PinCreateModel.Content.Length > 0 && PinCreateModel.Title.Length > 0)
             {
-                if (PinCreateModel.PinType != PMPinModel.PinsType.Default)
+                if (PinCreateModel.Private == true)
                 {
-                    if (PinCreateModel.PinType == PMPinModel.PinsType.Event)
-                    {
-                        if (PinCreateModel.CreatedTime.Length != 0)
-                        {
-                            canCreate = true;
-                        }
-                    }
-                    else
+                    if (PinCreateModel.AuthoriseUsersId.Equals("") == false)
                     {
                         canCreate = true;
                     }
                 }
+                else
+                {
+                    canCreate = true;
+                }
             }
 
-            //if (canCreate == true)
-            DropPinButton.Visibility = Visibility.Visible;
-        }
-
-        private void TitleExpandView_OnExpanded(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void DescriptionExpandView_OnExpanded(object sender, RoutedEventArgs e)
-        {
-            //TitleExpandView.IsExpanded = false;
-        }
-
-        private void TitleExpandViewTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            //   PinCreateModel.Title = TitleExpandViewTextBox.Text;
-            CheckCanCreatePin();
-        }
-
-        private void DescriptionExpandViewTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            //PinCreateModel.Content = DescriptionExpandViewTextBox.Text;
-            //CheckCanCreatePin();
+            if (canCreate == true)
+                DropPinButton.Visibility = Visibility.Visible;
+            else
+                DropPinButton.Visibility = Visibility.Collapsed;
         }
 
         private void ResetCreatePinModel()
         {
             PinCreateModel.Id = string.Empty;
             PinCreateModel.Lang = string.Empty;
-            PinCreateModel.PinType = PMPinModel.PinsType.Default;
+            PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
             PinCreateModel.Author = string.Empty;
             PinCreateModel.AuthorId = string.Empty;
-            PinCreateModel.AuthoriseUsersId = null;
+            PinCreateModel.AuthoriseUsersId = string.Empty;
             PinCreateModel.Private = false;
             PinCreateModel.Title = string.Empty;
             PinCreateModel.Content = string.Empty;
@@ -1620,18 +1396,15 @@ namespace PinMessaging.View
 
             var pc = new PMPinController(RequestType.CreatePin, PostPinButton_ClickPostJob);
 
-            PostPinButton_ClickPreJob();
+            //PostPinButton_ClickPreJob();
 
             PinCreateModel.Title = PinCreateTitleTextBox.Text;
-            PinCreateModel.Content = (PinCreateModel.PinType == PMPinModel.PinsType.Event
-                ? FormatDateAndTimeForEvent()
-                : "") + PinCreateMessageTextBox.Text;
+            PinCreateModel.Content = (PinCreateModel.PinType == PMPinModel.PinsType.Event ? FormatDateAndTimeForEvent() : "") + PinCreateMessageTextBox.Text;
             PinCreateModel.ContentType = PMPinModel.PinsContentType.Text;
             PinCreateModel.AuthorId = PMData.CurrentUserId;
-            //   PinCreateModel.Private = "0";
             PinCreateModel.AuthoriseUsersId = FormatAuthoriseUsersId();
 
-            pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
+            //pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
         }
 
         private string FormatAuthoriseUsersId()
@@ -1821,35 +1594,99 @@ namespace PinMessaging.View
         /// 
         private void PinListPicker_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            PMPinModel.PinsType tmpType = (PinListPicker.SelectedItem as PinItem).PinType;
+            try
+            {
+                PMPinModel.PinsType tmpType = (PinListPicker.SelectedItem as PinItem).PinType;
 
-            if (tmpType == PMPinModel.PinsType.PrivateMessage ||
-                tmpType == PMPinModel.PinsType.PrivateEvent ||
-                tmpType == PMPinModel.PinsType.PrivateView)
-            {
-                PinCreateModel.PinType = tmpType - 6;
-                PinCreateModel.Private = true;
-                TargetLongListSelector.ItemsSource = PMData.UserList;
+                if (tmpType == PMPinModel.PinsType.PrivateMessage ||
+                    tmpType == PMPinModel.PinsType.PrivateEvent ||
+                    tmpType == PMPinModel.PinsType.PrivateView)
+                {
+                    PinCreateModel.PinType = tmpType - 6;
+                    PinCreateModel.Private = true;
+                    TargetLongListSelector.ItemsSource = PMData.UserList;
+                }
+                else
+                {
+                    PinCreateModel.PinType = tmpType;
+                    PinCreateModel.Private = false;
+                }
             }
-            else
+            catch (Exception exp)
             {
-                PinCreateModel.PinType = tmpType;
-                PinCreateModel.Private = false;
-                TargetLongListSelector.ItemsSource = new List<bool>();
+                Logs.Error.ShowError(exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
             }
+            
 
             EventStackPanel.Visibility = PinCreateModel.PinType == PMPinModel.PinsType.Event ? Visibility.Visible : Visibility.Collapsed;
             TargetStackPanel.Visibility = PinCreateModel.Private == true ? Visibility.Visible : Visibility.Collapsed;
-            TargetStackPanel.Visibility = TargetLongListSelector.ItemsSource.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+            CheckCanCreatePin();
         }
 
-        private void PinTargetExpandView_OnExpanded(object sender, RoutedEventArgs e)
+        private void PinCreateTitleTextBox_OnGotFocus(object sender, RoutedEventArgs e)
         {
-            /*foreach (var user in PMData.UserList)
+            PinCreateTitleTextBox.Background = new SolidColorBrush(Colors.DarkGray); ;
+            PinCreateTitleTextBox.BorderThickness = new Thickness(0);
+            if (PinCreateTitleTextBox.Text.Equals(AppResources.CreatePinDescriptionTitle) == true)
+                PinCreateTitleTextBox.Text = "";
+        }
+
+        private void PinCreateTitleTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PinCreateTitleTextBox.Text.Trim().Length == 0)
+                PinCreateTitleTextBox.Text = AppResources.CreatePinDescriptionTitle;
+        }
+
+        private void PinCreateMessageTextBox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            PinCreateMessageTextBox.Background = new SolidColorBrush(Colors.DarkGray); ;
+            PinCreateMessageTextBox.BorderThickness = new Thickness(0);
+            if (PinCreateMessageTextBox.Text.Equals(AppResources.CreatePinDescription) == true)
+                PinCreateMessageTextBox.Text = "";
+        }
+
+        private void PinCreateMessageTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PinCreateMessageTextBox.Text.Trim().Length == 0)
+                PinCreateMessageTextBox.Text = AppResources.CreatePinDescription;
+        }
+
+
+
+        private void PinCreateTitleTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (PinCreateTitleTextBox.Text.Equals(AppResources.CreatePinDescriptionTitle) == false &&
+                PinCreateTitleTextBox.Text.Length > 0)
             {
-                user.CompleteInit();
-            } */      
-            TargetLongListSelector.ItemsSource = PMData.UserList;
+                PinCreateModel.Title = PinCreateTitleTextBox.Text;
+            }
+            else
+            {
+                PinCreateModel.Title = "";
+            }
+            CheckCanCreatePin();
+        }
+
+        private void PinCreateMessageTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (PinCreateMessageTextBox.Text.Equals(AppResources.CreatePinDescription) == false &&
+                PinCreateMessageTextBox.Text.Length > 0)
+            {
+                PinCreateModel.Content = PinCreateMessageTextBox.Text;
+            }
+            else
+            {
+                PinCreateModel.Content = "";
+            }
+            CheckCanCreatePin();
+        }
+
+
+        private void TargetLongListSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PinCreateModel.AuthoriseUsersId = FormatAuthoriseUsersId();
+            CheckCanCreatePin();
         }
     }
 }

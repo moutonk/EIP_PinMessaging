@@ -273,7 +273,15 @@
         </trans-unit>
         <trans-unit id="Resx/NoResults" translate="yes" xml:space="preserve">
           <source>No results</source>
-          <target state="new">No results</target>
+          <target state="translated">Pas de résultats</target>
+        </trans-unit>
+        <trans-unit id="Resx/CreatePinDescriptionTitle" translate="yes" xml:space="preserve">
+          <source>Title of your Pin</source>
+          <target state="new">Title of your Pin</target>
+        </trans-unit>
+        <trans-unit id="Resx/CreatePinDescription" translate="yes" xml:space="preserve">
+          <source>Please enter a description for your Pin</source>
+          <target state="new">Please enter a description for your Pin</target>
         </trans-unit>
         <trans-unit id="Resx/ContactSearch" translate="yes" xml:space="preserve">
           <source>SEARCH</source>
@@ -360,16 +368,16 @@
           <target state="translated">BADGES</target>
         </trans-unit>
         <trans-unit id="Resx/BadgePointSilver" translate="yes" xml:space="preserve">
-          <source>You acquire Adventurer badge when you get 25 points. Keep going! The gold is not far!</source>
-          <target state="translated">Vous obtenez le badge Aventurier quand vous collectez 25 points.</target>
+          <source>You acquire Adventurer badge when you get between 50 and 500 points. Keep going! The gold is not far!</source>
+          <target state="needs-review-translation">Vous obtenez le badge Aventurier quand vous collectez entre 0 et 50 points.</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Resx/BadgePointGold" translate="yes" xml:space="preserve">
-          <source>You acquire the Explorer badge when you get 50 points. Good job!</source>
-          <target state="translated">!Vous obtenez le badge Explorateur quand vous collectez 50 points.</target>
+          <source>You acquire the Explorer badge when you get more than 500 points. Good job!</source>
+          <target state="needs-review-translation">!Vous obtenez le badge Explorateur quand vous collectez entre 50 et 500 points.</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Resx/BadgePointCopper" translate="yes" xml:space="preserve">
-          <source>You acquire the Newbie badge when you get 10 points. Keep going!</source>
-          <target state="translated">Vous obtenez le badge Péon quand vous collectez 10 points.</target>
+          <source>You acquire the Newbie badge when you get between 0 and 50 points. Keep going!</source>
+          <target state="needs-review-translation">Vous obtenez le badge Péon quand vous collectez plus de 500 points.</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Resx/BadgePin50" translate="yes" xml:space="preserve">
           <source>You acquire the Conqueror badge when you create 50 pins. Keep going!</source>
