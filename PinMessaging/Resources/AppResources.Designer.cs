@@ -367,6 +367,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à event date and time.
+        /// </summary>
+        public static string EventDateTimeTitle {
+            get {
+                return ResourceManager.GetString("EventDateTimeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à FAVORITE PINS.
         /// </summary>
         public static string Favorites {
@@ -489,6 +498,69 @@ namespace PinMessaging.Resources {
         public static string History {
             get {
                 return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New favorite.
+        /// </summary>
+        public static string HistoryAddFavoriteLocation {
+            get {
+                return ResourceManager.GetString("HistoryAddFavoriteLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New favorite.
+        /// </summary>
+        public static string HistoryAddFavoriteUser {
+            get {
+                return ResourceManager.GetString("HistoryAddFavoriteUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pin modified.
+        /// </summary>
+        public static string HistoryChangePin {
+            get {
+                return ResourceManager.GetString("HistoryChangePin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à New comment.
+        /// </summary>
+        public static string HistoryCommentPin {
+            get {
+                return ResourceManager.GetString("HistoryCommentPin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pin created.
+        /// </summary>
+        public static string HistoryCreatePin {
+            get {
+                return ResourceManager.GetString("HistoryCreatePin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Pin deleted.
+        /// </summary>
+        public static string HistoryDeletePin {
+            get {
+                return ResourceManager.GetString("HistoryDeletePin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à Welcome on PinMessaging!.
+        /// </summary>
+        public static string HistoryNewUser {
+            get {
+                return ResourceManager.GetString("HistoryNewUser", resourceCulture);
             }
         }
         
@@ -795,6 +867,15 @@ namespace PinMessaging.Resources {
         public static string PinAuthor {
             get {
                 return ResourceManager.GetString("PinAuthor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à chose receipients.
+        /// </summary>
+        public static string PinCreateReceiver {
+            get {
+                return ResourceManager.GetString("PinCreateReceiver", resourceCulture);
             }
         }
         
@@ -1130,6 +1211,15 @@ namespace PinMessaging.Resources {
         public static string ResourceLanguage {
             get {
                 return ResourceManager.GetString("ResourceLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à See on map.
+        /// </summary>
+        public static string SeeOnMap {
+            get {
+                return ResourceManager.GetString("SeeOnMap", resourceCulture);
             }
         }
         

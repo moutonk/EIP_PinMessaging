@@ -510,4 +510,34 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   <data name="CreatePinDescriptionTitle" xml:space="preserve">
     <value>Title of your Pin</value>
   </data>
+  <data name="EventDateTimeTitle" xml:space="preserve">
+    <value>event date and time</value>
+  </data>
+  <data name="PinCreateReceiver" xml:space="preserve">
+    <value>chose receipients</value>
+  </data>
+  <data name="HistoryAddFavoriteLocation" xml:space="preserve">
+    <value>New favorite</value>
+  </data>
+  <data name="HistoryAddFavoriteUser" xml:space="preserve">
+    <value>New favorite</value>
+  </data>
+  <data name="HistoryChangePin" xml:space="preserve">
+    <value>Pin modified</value>
+  </data>
+  <data name="HistoryCommentPin" xml:space="preserve">
+    <value>New comment</value>
+  </data>
+  <data name="HistoryCreatePin" xml:space="preserve">
+    <value>Pin created</value>
+  </data>
+  <data name="HistoryDeletePin" xml:space="preserve">
+    <value>Pin deleted</value>
+  </data>
+  <data name="HistoryNewUser" xml:space="preserve">
+    <value>Welcome on PinMessaging!</value>
+  </data>
+  <data name="SeeOnMap" xml:space="preserve">
+    <value>See on map</value>
+  </data>
 </root>

@@ -282,6 +282,46 @@
           <source>Title of your Pin</source>
           <target state="new">Title of your Pin</target>
         </trans-unit>
+        <trans-unit id="Resx/PinCreateReceiver" translate="yes" xml:space="preserve">
+          <source>chose receipients</source>
+          <target state="new">chose receipients</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryNewUser" translate="yes" xml:space="preserve">
+          <source>Welcome on PinMessaging!</source>
+          <target state="new">Welcome on PinMessaging!</target>
+        </trans-unit>
+        <trans-unit id="Resx/SeeOnMap" translate="yes" xml:space="preserve">
+          <source>See on map</source>
+          <target state="new">See on map</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryDeletePin" translate="yes" xml:space="preserve">
+          <source>Pin deleted</source>
+          <target state="new">Pin deleted</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryCreatePin" translate="yes" xml:space="preserve">
+          <source>Pin created</source>
+          <target state="new">Pin created</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryCommentPin" translate="yes" xml:space="preserve">
+          <source>New comment</source>
+          <target state="new">New comment</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryChangePin" translate="yes" xml:space="preserve">
+          <source>Pin modified</source>
+          <target state="new">Pin modified</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryAddFavoriteUser" translate="yes" xml:space="preserve">
+          <source>New favorite</source>
+          <target state="new">New favorite</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryAddFavoriteLocation" translate="yes" xml:space="preserve">
+          <source>New favorite</source>
+          <target state="new">New favorite</target>
+        </trans-unit>
+        <trans-unit id="Resx/EventDateTimeTitle" translate="yes" xml:space="preserve">
+          <source>event date and time</source>
+          <target state="new">event date and time</target>
+        </trans-unit>
         <trans-unit id="Resx/CreatePinDescription" translate="yes" xml:space="preserve">
           <source>Please enter a description for your Pin</source>
           <target state="new">Please enter a description for your Pin</target>

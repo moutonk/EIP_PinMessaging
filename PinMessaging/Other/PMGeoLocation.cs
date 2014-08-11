@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Windows;
-using System.Windows.Threading;
 using Windows.Devices.Geolocation;
 using PinMessaging.Controller;
 using PinMessaging.Utils;
@@ -84,7 +81,7 @@ namespace PinMessaging.Other
         {
             //Logs.Output.ShowOutput("New pos dispo: latitude:" + args.Position.Coordinate.Latitude + " longitude:" + args.Position.Coordinate.Longitude);
 
-            _mapView.UpdateLocationUI();
+            _mapView.UpdateLocationUi();
 
             if (_firstPositionChanged == false)
             {

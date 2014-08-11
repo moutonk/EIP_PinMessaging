@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
-using Windows.Foundation.Metadata;
 using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Controls;
 using System.Device.Location;
@@ -176,7 +175,7 @@ namespace PinMessaging.View
 
             PMData.MapLayerContainer = _mapLayer;
 
-            UpdateLocationUI();
+            UpdateLocationUi();
         }
 
         private int AccessLocationMsgBox()
@@ -341,7 +340,7 @@ namespace PinMessaging.View
             }
         }
 
-        public void UpdateLocationUI()
+        public void UpdateLocationUi()
         {
             _geoLocation.UpdateLocation();
 
@@ -1003,14 +1002,10 @@ namespace PinMessaging.View
         }
 
         private static int gridNbr = 0;
-
         private void SearchContactPictureUpdateUi()
         {
-
             try
             {
-
-
                 var grid = (SearchContactStackPanel.Children[gridNbr] as Grid);
 
                 gridNbr++;
@@ -1428,7 +1423,7 @@ namespace PinMessaging.View
         {
             try
             {
-                PMPinModel.PinsType tmpType = (PinListPicker.SelectedItem as PinItem).PinType;
+                var tmpType = (PinListPicker.SelectedItem as PinItem).PinType;
 
                 if (tmpType == PMPinModel.PinsType.PrivateMessage ||
                     tmpType == PMPinModel.PinsType.PrivateEvent ||
@@ -1448,7 +1443,6 @@ namespace PinMessaging.View
             {
                 Logs.Error.ShowError(exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
             }
-
 
             EventStackPanel.Visibility = PinCreateModel.PinType == PMPinModel.PinsType.Event ? Visibility.Visible : Visibility.Collapsed;
             TargetStackPanel.Visibility = PinCreateModel.Private == true ? Visibility.Visible : Visibility.Collapsed;

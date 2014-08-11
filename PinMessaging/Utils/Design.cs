@@ -76,7 +76,7 @@ namespace PinMessaging.Utils
             return wbmp;
         }
 
-        public static bool ProfilPictureUpdateUi(Image imgUI, string userId)
+        public static bool ProfilPictureUpdateUi(Image imgUi, string userId)
         {
             var pic = PMData.GetUserProfilPicture(userId);
 
@@ -84,10 +84,23 @@ namespace PinMessaging.Utils
             {
                 pic.CreateStream();
                 if (pic.Img != null)
-                    imgUI.Source = pic.Img;
+                    imgUi.Source = pic.Img;
                 return true;
             }
             return false;
+        }
+
+        public static BitmapImage ProfilPictureUpdateUi(BitmapImage imgUi, string userId)
+        {
+            var pic = PMData.GetUserProfilPicture(userId);
+
+            if (pic != null)
+            {
+                pic.CreateStream();
+                if (pic.Img != null)
+                    return imgUi;
+            }
+            return null;
         }
     }
 }

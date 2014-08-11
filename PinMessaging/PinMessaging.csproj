@@ -269,6 +269,7 @@
     <Content Include="Images\Icons\white_planet%402x.png" />
     <Content Include="Images\Icons\white_planet.png" />
     <Content Include="Images\Logos\3_new_logo_little%402x.png" />
+    <Content Include="Images\Logos\3_new_logo_white.png" />
     <Content Include="Images\Menu\help_btn%402x.png" />
     <Content Include="Images\Menu\help_btn.png" />
     <Content Include="Images\Icons\home_orange_icon%402x.png" />

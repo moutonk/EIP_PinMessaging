@@ -47,7 +47,8 @@ namespace PinMessaging.Model
         public PMUserModel()
         {
             if (ProfilPicture == null)
-                ProfilPicture = PMData.NeutralProfilPic;
+                if (Design.ProfilPictureUpdateUi(ProfilPicture, Id) == null)
+                    ProfilPicture = PMData.NeutralProfilPic;
         }
 
         public void ShowUserContent()

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Device.Location;
-using System.Globalization;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,31 +36,31 @@ namespace PinMessaging.View
                 Logs.Error.ShowError("Loading ApplicationBar text error", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
 
-            if (PMData.User != null)
+            if (PMData.User == null)
+                return;
+
+            _user = PMData.User.Clone();
+
+            LoginTextBlock.Text = _user.Pseudo;
+            PointsTextBlock.Text = _user.Points;
+            PinsCreatedTextBlock.Text = _user.NbrPin;
+            CommentsTextBlock.Text = _user.NbrMessage;
+            GradeTextBlock.Text = Utils.Utils.GetGradeInfo(_user.Grade.Type).Item1;
+
+            //if the user is already in the contact list
+            if (PMData.UserList.Any(user => user.Id == _user.Id) == true)
             {
-                _user = PMData.User.Clone();
-
-                LoginTextBlock.Text = _user.Pseudo;
-                PointsTextBlock.Text = _user.Points;
-                PinsCreatedTextBlock.Text = _user.NbrPin;
-                CommentsTextBlock.Text = _user.NbrMessage;
-                GradeTextBlock.Text = Utils.Utils.GetGradeInfo(_user.Grade.Type).Item1;
-
-                //if the user is already in the contact list
-                if (PMData.UserList.Any(user => user.Id == _user.Id) == true)
-                {
-                    RemoveFavoriteUi();
-                }
-
-                var profilPic = PMData.GetUserProfilPicture(_user.Id);
-
-                if (profilPic != null)
-                    ProfilPictureImage.Source = profilPic.Img;
-
-                var userHistory = new PMHistoryController(RequestType.UserHistory, UpdateHistoryUi);
-
-                userHistory.GetUserHistory(_user.Id);
+                RemoveFavoriteUi();
             }
+
+            var profilPic = PMData.GetUserProfilPicture(_user.Id);
+
+            if (profilPic != null)
+                ProfilPictureImage.Source = profilPic.Img;
+
+            var userHistory = new PMHistoryController(RequestType.UserHistory, UpdateHistoryUi);
+
+            userHistory.GetUserHistory(_user.Id);
         }
 
         /*HISTORY*/
@@ -71,15 +70,57 @@ namespace PinMessaging.View
             return new BitmapImage(new Uri("/Images/Icons/about_white_icon@2x.png", UriKind.Relative));
         }
 
+        private static string DefaultHistoryTypeString()
+        {
+            return "Unknown";
+        }
+
+        private static string GetHistoryTypeString(PMHistoryModel.HistoryType? type)
+        {
+            if (type == null)
+                return DefaultHistoryTypeString();
+
+            Logs.Output.ShowOutput(type.ToString());
+
+            switch (type)
+            {
+                case PMHistoryModel.HistoryType.CreatePin:
+                    return AppResources.HistoryCreatePin;
+
+                case PMHistoryModel.HistoryType.ChangePin:
+                    return AppResources.HistoryChangePin;
+
+                case PMHistoryModel.HistoryType.DeletePin:
+                    return AppResources.HistoryDeletePin;
+
+                case PMHistoryModel.HistoryType.AddFavoriteUser:
+                    return AppResources.HistoryAddFavoriteUser;
+
+                case PMHistoryModel.HistoryType.AddFavoriteLocation:
+                    return AppResources.HistoryAddFavoriteLocation;
+
+                case PMHistoryModel.HistoryType.CreatePinMessage:
+                    return AppResources.HistoryCommentPin;
+
+                case PMHistoryModel.HistoryType.NewUser:
+                    return AppResources.HistoryNewUser;
+
+                default:
+                    return DefaultHistoryTypeString();
+            }
+        }
+
         private static BitmapImage GetHistoryTypeImg(PMHistoryModel.HistoryType? type)
         {
             if (type == null)
                 return DefaultHistoryTypeImg();
 
+            Logs.Output.ShowOutput(type.ToString());
+            
             switch (type)
             {
                 case PMHistoryModel.HistoryType.CreatePin:
-                    return new BitmapImage(new Uri("/Images/Logos/3_new_logo_little@2x.png", UriKind.Relative));
+                    return new BitmapImage(new Uri("/Images/Logos/3_new_logo_white.png", UriKind.Relative));
 
                 case PMHistoryModel.HistoryType.DeletePin:
                     return new BitmapImage(new Uri("/Images/Icons/cross_white_icon@2x.png", UriKind.Relative));
@@ -103,9 +144,9 @@ namespace PinMessaging.View
         private void CreateHistoryItemUi(PMHistoryModel item)
         {
             var historyImage = new Image { Height = 70, Width = 70, Source = GetHistoryTypeImg(item.historyType) };
-            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, TextAlignment = TextAlignment.Left, Text = AdaptContentForMsgPrivacy(item.Content), Height = 35 };
+            var messageTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 25, TextAlignment = TextAlignment.Left, Text = GetHistoryTypeString(item.historyType), Height = 35 };
             var dateTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 16, TextAlignment = TextAlignment.Left, Height = 27 };
-            var goToMapTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 13, VerticalAlignment = VerticalAlignment.Center, Text = "Voir sur la carte", Foreground = (Brush)Application.Current.Resources["PMOrange"], Height = 25 };
+            var goToMapTextBlock = new TextBlock { TextWrapping = TextWrapping.Wrap, FontSize = 13, VerticalAlignment = VerticalAlignment.Center, Text = AppResources.SeeOnMap, Foreground = (Brush)Application.Current.Resources["PMOrange"], Height = 25 };
 
             var res = Utils.Utils.ConvertStringToDouble(item.Date);
 
