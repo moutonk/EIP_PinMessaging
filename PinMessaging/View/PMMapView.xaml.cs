@@ -228,7 +228,7 @@ namespace PinMessaging.View
 
         }
 
-        private void AdaptUiUnderMenuClick(RowDefinition exept, bool pinDescFull, bool contactFull)
+        private void AdaptUiUnderMenuClick(RowDefinition exept, bool pinDescFull, bool contactFull, bool pinCreateFull)
         {
             for (var i = 2; i < UnderMenuGrid.RowDefinitions.Count; i++)
             {
@@ -238,6 +238,7 @@ namespace PinMessaging.View
             }
             UnderMenuPinDescriptionGrid.Height = (pinDescFull == true ? UnderMenuPinDescriptionScrollView.Height : 0);
             UnderMenuContactPanel.Height = (contactFull == true ? UnderMenuContactScrollViewer.Height : 0);
+            UnderMenuCreatePinGrid.Height = (pinCreateFull == true ? UnderMenuCreatePinScrollViewer.Height : 0);
         }
 
         private void MenuDown_PinOnClick()
@@ -250,7 +251,7 @@ namespace PinMessaging.View
                 ApplicationBar.IsVisible = false;
 
                 //DownMenuTitle.Text = AppResources.Pin;
-                AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[4], true, false);
+                AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[4], true, false, false);
 
                 MainGridMap.RowDefinitions[2].Height = new GridLength(0);
                 MoveAnimationUp.Begin();
@@ -260,19 +261,19 @@ namespace PinMessaging.View
         private void MenuDown_NotificationOnClick()
         {
             DownMenuTitle.Text = AppResources.Notifications;
-            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[3], false, false);
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[3], false, false, false);
         }
 
         private void MenuDown_ContactOnClick()
         {
             DownMenuTitle.Text = AppResources.Contacts;
-            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[2], false, true);
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[2], false, true, false);
         }
 
         private void MenuDown_CreatePin()
         {
             DownMenuTitle.Text = AppResources.CreatePinTitle;
-            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[5], false, false);
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[5], false, false, true);
 
             // VisibilityExpandView.IsExpanded = true;
         }
@@ -308,10 +309,6 @@ namespace PinMessaging.View
         private void ApplicationBarMenuItemRefresh_OnClick(object sender, EventArgs e)
         {
             RefreshPinButton_OnClick(null, null);
-            /* var pinController = new PMPinController(RequestType.GetPins, null);
-
-            pinController.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()),
-                                  Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));*/
         }
 
         private void MenuDownNotification_OnClick(object sender, EventArgs e)
@@ -336,18 +333,6 @@ namespace PinMessaging.View
                 MenuDown_PinOnClick();
                 MenuDown_CommonActionsAfter();
             }
-                /* else if (sender.Equals(NotificationButton) || sender.Equals(NotificationButtonTextBlock))
-            {
-                MenuDown_CommonActionsBefore();
-                MenuDown_NotificationOnClick();
-                MenuDown_CommonActionsAfter();
-            }
-            else if (sender.Equals(ContactsButton) || sender.Equals(ContactsButtonTextBlock))
-            {
-                MenuDown_CommonActionsBefore();
-                MenuDown_ContactOnClick();
-                MenuDown_CommonActionsAfter();
-            }*/
             else if (sender.Equals(CreatePinButton))
             {
                 MenuDown_CommonActionsBefore();
@@ -1332,13 +1317,10 @@ namespace PinMessaging.View
                 }
             }
 
-            if (canCreate == true)
-                DropPinButton.Visibility = Visibility.Visible;
-            else
-                DropPinButton.Visibility = Visibility.Collapsed;
+            DropPinButton.IsEnabled = canCreate == true;
         }
 
-        private void ResetCreatePinModel()
+        private static void ResetCreatePinModel()
         {
             PinCreateModel.Id = string.Empty;
             PinCreateModel.Lang = string.Empty;
@@ -1357,7 +1339,6 @@ namespace PinMessaging.View
             DropPinProgressBar.Visibility = Visibility.Visible;
             DropPinProgressBar.IsIndeterminate = true;
             DropPinButton.IsEnabled = false;
-            //NewPinPivotItem.IsEnabled = false;
         }
 
         private void PostPinButton_ClickPostJob()
@@ -1377,8 +1358,6 @@ namespace PinMessaging.View
                 Logs.Error.ShowError("PostPinButton_ClickPostJob: could not get the last pin:", exp,
                     Logs.Error.ErrorsPriority.NotCritical);
             }
-            //AddLastPinToMyPins();
-            //NewPinPivotItem.IsEnabled = true;
         }
 
         private void PostPinButton_Click(object sender, RoutedEventArgs e)
@@ -1396,7 +1375,7 @@ namespace PinMessaging.View
 
             var pc = new PMPinController(RequestType.CreatePin, PostPinButton_ClickPostJob);
 
-            //PostPinButton_ClickPreJob();
+            PostPinButton_ClickPreJob();
 
             PinCreateModel.Title = PinCreateTitleTextBox.Text;
             PinCreateModel.Content = (PinCreateModel.PinType == PMPinModel.PinsType.Event ? FormatDateAndTimeForEvent() : "") + PinCreateMessageTextBox.Text;
@@ -1404,7 +1383,7 @@ namespace PinMessaging.View
             PinCreateModel.AuthorId = PMData.CurrentUserId;
             PinCreateModel.AuthoriseUsersId = FormatAuthoriseUsersId();
 
-            //pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
+            pc.CreatePin(_geoLocation.GeopositionUser, PinCreateModel);
         }
 
         private string FormatAuthoriseUsersId()
@@ -1443,6 +1422,94 @@ namespace PinMessaging.View
             formattedTime += ";";
 
             return formattedTime;
+        }
+
+        private void PinListPicker_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                PMPinModel.PinsType tmpType = (PinListPicker.SelectedItem as PinItem).PinType;
+
+                if (tmpType == PMPinModel.PinsType.PrivateMessage ||
+                    tmpType == PMPinModel.PinsType.PrivateEvent ||
+                    tmpType == PMPinModel.PinsType.PrivateView)
+                {
+                    PinCreateModel.PinType = tmpType - 6;
+                    PinCreateModel.Private = true;
+                    TargetLongListSelector.ItemsSource = PMData.UserList;
+                }
+                else
+                {
+                    PinCreateModel.PinType = tmpType;
+                    PinCreateModel.Private = false;
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError(exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+
+
+            EventStackPanel.Visibility = PinCreateModel.PinType == PMPinModel.PinsType.Event ? Visibility.Visible : Visibility.Collapsed;
+            TargetStackPanel.Visibility = PinCreateModel.Private == true ? Visibility.Visible : Visibility.Collapsed;
+
+            CheckCanCreatePin();
+        }
+
+        private void PinCreateTitleTextBox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            PinCreateTitleTextBox.Background = new SolidColorBrush(Colors.DarkGray); ;
+            PinCreateTitleTextBox.BorderThickness = new Thickness(0);
+            if (PinCreateTitleTextBox.Text.Equals(AppResources.CreatePinDescriptionTitle) == true)
+                PinCreateTitleTextBox.Text = "";
+        }
+
+        private void PinCreateTitleTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PinCreateTitleTextBox.Text.Trim().Length == 0)
+                PinCreateTitleTextBox.Text = AppResources.CreatePinDescriptionTitle;
+        }
+
+        private void PinCreateMessageTextBox_OnGotFocus(object sender, RoutedEventArgs e)
+        {
+            PinCreateMessageTextBox.Background = new SolidColorBrush(Colors.DarkGray); ;
+            PinCreateMessageTextBox.BorderThickness = new Thickness(0);
+            if (PinCreateMessageTextBox.Text.Equals(AppResources.CreatePinDescription) == true)
+                PinCreateMessageTextBox.Text = "";
+        }
+
+        private void PinCreateMessageTextBox_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (PinCreateMessageTextBox.Text.Trim().Length == 0)
+                PinCreateMessageTextBox.Text = AppResources.CreatePinDescription;
+        }
+
+        private void PinCreateTitleTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (PinCreateTitleTextBox.Text.Equals(AppResources.CreatePinDescriptionTitle) == false &&
+                PinCreateTitleTextBox.Text.Length > 0)
+            {
+                PinCreateModel.Title = PinCreateTitleTextBox.Text;
+            }
+         
+            CheckCanCreatePin();
+        }
+
+        private void PinCreateMessageTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (PinCreateMessageTextBox.Text.Equals(AppResources.CreatePinDescription) == false &&
+                PinCreateMessageTextBox.Text.Length > 0)
+            {
+                PinCreateModel.Content = PinCreateMessageTextBox.Text;
+            }
+            
+            CheckCanCreatePin();
+        }
+
+        private void TargetLongListSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PinCreateModel.AuthoriseUsersId = FormatAuthoriseUsersId();
+            CheckCanCreatePin();
         }
 
         /// ////////////////////////////////////////      Commments     ////////////////////////////////////////
@@ -1583,110 +1650,6 @@ namespace PinMessaging.View
         private void CommentChatBubble_OnTextInput(object sender, TextChangedEventArgs textChangedEventArgs)
         {
             LockUnlockCommentCheck(CommentChatBubble.Text.Length != 0);
-        }
-
-        /// <summary>
-        /// ///////////////////////////////
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        /// 
-        /// 
-        private void PinListPicker_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                PMPinModel.PinsType tmpType = (PinListPicker.SelectedItem as PinItem).PinType;
-
-                if (tmpType == PMPinModel.PinsType.PrivateMessage ||
-                    tmpType == PMPinModel.PinsType.PrivateEvent ||
-                    tmpType == PMPinModel.PinsType.PrivateView)
-                {
-                    PinCreateModel.PinType = tmpType - 6;
-                    PinCreateModel.Private = true;
-                    TargetLongListSelector.ItemsSource = PMData.UserList;
-                }
-                else
-                {
-                    PinCreateModel.PinType = tmpType;
-                    PinCreateModel.Private = false;
-                }
-            }
-            catch (Exception exp)
-            {
-                Logs.Error.ShowError(exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
-            }
-            
-
-            EventStackPanel.Visibility = PinCreateModel.PinType == PMPinModel.PinsType.Event ? Visibility.Visible : Visibility.Collapsed;
-            TargetStackPanel.Visibility = PinCreateModel.Private == true ? Visibility.Visible : Visibility.Collapsed;
-
-            CheckCanCreatePin();
-        }
-
-        private void PinCreateTitleTextBox_OnGotFocus(object sender, RoutedEventArgs e)
-        {
-            PinCreateTitleTextBox.Background = new SolidColorBrush(Colors.DarkGray); ;
-            PinCreateTitleTextBox.BorderThickness = new Thickness(0);
-            if (PinCreateTitleTextBox.Text.Equals(AppResources.CreatePinDescriptionTitle) == true)
-                PinCreateTitleTextBox.Text = "";
-        }
-
-        private void PinCreateTitleTextBox_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            if (PinCreateTitleTextBox.Text.Trim().Length == 0)
-                PinCreateTitleTextBox.Text = AppResources.CreatePinDescriptionTitle;
-        }
-
-        private void PinCreateMessageTextBox_OnGotFocus(object sender, RoutedEventArgs e)
-        {
-            PinCreateMessageTextBox.Background = new SolidColorBrush(Colors.DarkGray); ;
-            PinCreateMessageTextBox.BorderThickness = new Thickness(0);
-            if (PinCreateMessageTextBox.Text.Equals(AppResources.CreatePinDescription) == true)
-                PinCreateMessageTextBox.Text = "";
-        }
-
-        private void PinCreateMessageTextBox_OnLostFocus(object sender, RoutedEventArgs e)
-        {
-            if (PinCreateMessageTextBox.Text.Trim().Length == 0)
-                PinCreateMessageTextBox.Text = AppResources.CreatePinDescription;
-        }
-
-
-
-        private void PinCreateTitleTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (PinCreateTitleTextBox.Text.Equals(AppResources.CreatePinDescriptionTitle) == false &&
-                PinCreateTitleTextBox.Text.Length > 0)
-            {
-                PinCreateModel.Title = PinCreateTitleTextBox.Text;
-            }
-            else
-            {
-                PinCreateModel.Title = "";
-            }
-            CheckCanCreatePin();
-        }
-
-        private void PinCreateMessageTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (PinCreateMessageTextBox.Text.Equals(AppResources.CreatePinDescription) == false &&
-                PinCreateMessageTextBox.Text.Length > 0)
-            {
-                PinCreateModel.Content = PinCreateMessageTextBox.Text;
-            }
-            else
-            {
-                PinCreateModel.Content = "";
-            }
-            CheckCanCreatePin();
-        }
-
-
-        private void TargetLongListSelector_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            PinCreateModel.AuthoriseUsersId = FormatAuthoriseUsersId();
-            CheckCanCreatePin();
         }
     }
 }

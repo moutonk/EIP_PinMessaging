@@ -321,7 +321,6 @@
 
                     </phone:Pivot>
                     
-
                     <Grid Grid.Row="3" x:Name="UnderMenuNotificationGrid">
                     </Grid>
 
@@ -389,8 +388,8 @@
                         </Grid>
                     </ScrollViewer>
                     
-                    <ScrollViewer Grid.Row="5" x:Name="UnderMenuCreatePinGrid">
-                        <Grid Margin="20,0,20,0">
+                    <ScrollViewer Grid.Row="5" x:Name="UnderMenuCreatePinScrollViewer">
+                        <Grid Margin="20,0,20,10" Name="UnderMenuCreatePinGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="5"></RowDefinition>
                                 <RowDefinition Height="100"></RowDefinition>
@@ -428,7 +427,7 @@
                                 <toolkit:LongListMultiSelector GridCellSize="10,10" SelectionChanged="TargetLongListSelector_OnSelectionChanged" Name="TargetLongListSelector" ItemTemplate="{StaticResource TargetDataTemplate}" FontSize="25" HorizontalAlignment="Left" Width="440"/>
                             </StackPanel>
 
-                            <Button Grid.Row="6" x:Name="DropPinButton" Height="100" Visibility="Visible" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderThickness="0" Margin="-13,10,-13,0" Click="PostPinButton_Click"/>
+                            <Button Grid.Row="6" x:Name="DropPinButton" Height="100" Visibility="Visible" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderBrush="{StaticResource PMOrange}" Margin="-13,10,-13,0" Click="PostPinButton_Click"/>
                         </Grid>
                     </ScrollViewer>
                 </Grid>
