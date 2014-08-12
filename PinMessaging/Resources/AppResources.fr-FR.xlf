@@ -291,6 +291,22 @@
           <source>See on map</source>
           <target state="translated">Voir sur la carte</target>
         </trans-unit>
+        <trans-unit id="Resx/None" translate="yes" xml:space="preserve">
+          <source>None</source>
+          <target state="translated">Aucun</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinsNotDisplayed" translate="yes" xml:space="preserve">
+          <source>pins hidden on the map</source>
+          <target state="translated">pins n'apparaissant pas sur la carte</target>
+        </trans-unit>
+        <trans-unit id="Resx/FilterPageTitle" translate="yes" xml:space="preserve">
+          <source>filter</source>
+          <target state="new">filter</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinsDisplayed" translate="yes" xml:space="preserve">
+          <source>pins displayed on the map</source>
+          <target state="translated">pins affichés sur la carte</target>
+        </trans-unit>
         <trans-unit id="Resx/HistoryDeletePin" translate="yes" xml:space="preserve">
           <source>Pin deleted</source>
           <target state="translated">Pin supprimé</target>

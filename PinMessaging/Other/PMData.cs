@@ -58,6 +58,9 @@ namespace PinMessaging.Other
         //contain all the pins
         [DefaultValue(null)] public static MapLayer MapLayerContainer { get; set; }
 
+        //contain all the extra pins
+        [DefaultValue(null)] public static List<MapOverlay> FilterMapOverlayExcessItemList { get; set; }
+
         [DefaultValue(null)] public static List<PMPinCommentModel> PinsCommentsList { get; set; }
         [DefaultValue(null)] public static List<PMPinCommentModel> PinsCommentsListTmp { get; set; }
 
@@ -88,6 +91,7 @@ namespace PinMessaging.Other
             SearchUserList = new List<PMUserModel>();
             //UserProfilPicture = new Image();
             ProfilPicturesList = new List<PMPhotoModel>();
+            FilterMapOverlayExcessItemList = new List<MapOverlay>();
             //UserHistoryList = new List<PMHistoryModel>();
             NeutralProfilPic = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative));
 

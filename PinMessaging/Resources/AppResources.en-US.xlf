@@ -294,6 +294,22 @@
           <source>See on map</source>
           <target state="new">See on map</target>
         </trans-unit>
+        <trans-unit id="Resx/None" translate="yes" xml:space="preserve">
+          <source>None</source>
+          <target state="new">None</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinsNotDisplayed" translate="yes" xml:space="preserve">
+          <source>pins hidden on the map</source>
+          <target state="new">pins hidden on the map</target>
+        </trans-unit>
+        <trans-unit id="Resx/FilterPageTitle" translate="yes" xml:space="preserve">
+          <source>filter</source>
+          <target state="new">filter</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinsDisplayed" translate="yes" xml:space="preserve">
+          <source>pins displayed on the map</source>
+          <target state="new">pins displayed on the map</target>
+        </trans-unit>
         <trans-unit id="Resx/HistoryDeletePin" translate="yes" xml:space="preserve">
           <source>Pin deleted</source>
           <target state="new">Pin deleted</target>

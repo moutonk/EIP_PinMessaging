@@ -139,6 +139,9 @@
     <Compile Include="View\PMCurrentUserProfilView.xaml.cs">
       <DependentUpon>PMCurrentUserProfilView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PMFilterView.xaml.cs">
+      <DependentUpon>PMFilterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PMFirstLaunchView.xaml.cs">
       <DependentUpon>PMFirstLaunchView.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="View\PMCurrentUserProfilView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PMFilterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

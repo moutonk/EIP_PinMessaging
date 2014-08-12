@@ -20,7 +20,7 @@ namespace PinMessaging.Model
     {
         public enum PinsType
         {
-            PublicMessage = 0,
+            Message = 0,
             Event,
             View,
             CourseStart,
@@ -57,7 +57,7 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(null)] public string Latitude { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Longitude { get; set; }
         [JsonProperty] [DefaultValue(null)] public string LocationName { get; set; }
-        [JsonProperty] [DefaultValue(PinsType.PublicMessage)] public PinsType PinType { get; set; }
+        [JsonProperty] [DefaultValue(PinsType.Message)] public PinsType PinType { get; set; }
         [JsonProperty] [DefaultValue(PinsContentType.Text)] public PinsContentType ContentType { get; set; }
 
                        [DefaultValue(null)] public BitmapImage PinImgUser { get; set; }

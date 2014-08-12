@@ -403,6 +403,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à filter.
+        /// </summary>
+        public static string FilterPageTitle {
+            get {
+                return ResourceManager.GetString("FilterPageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Grade.
         /// </summary>
         public static string Grade {
@@ -781,6 +790,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à None.
+        /// </summary>
+        public static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à No results.
         /// </summary>
         public static string NoResults {
@@ -1013,6 +1031,24 @@ namespace PinMessaging.Resources {
         public static string Pins {
             get {
                 return ResourceManager.GetString("Pins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à pins displayed on the map.
+        /// </summary>
+        public static string PinsDisplayed {
+            get {
+                return ResourceManager.GetString("PinsDisplayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une chaîne localisée semblable à pins hidden on the map.
+        /// </summary>
+        public static string PinsNotDisplayed {
+            get {
+                return ResourceManager.GetString("PinsNotDisplayed", resourceCulture);
             }
         }
         

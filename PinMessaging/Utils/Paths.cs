@@ -19,6 +19,7 @@ namespace PinMessaging.Utils
         public static readonly Uri SignInCreate = new Uri("/View/PMLogInCreateView.xaml", UriKind.Relative);
         public static readonly Uri SettingsView = new Uri(SettingsPathString, UriKind.Relative);
         public static readonly Uri UserProfilView = new Uri("/View/PMUserProfilView.xaml", UriKind.Relative);
+        public static readonly Uri FilterView = new Uri("/View/PMFilterView.xaml", UriKind.Relative);
         public static readonly Uri CurrentUserProfilView = new Uri(CurrentUserProfilPathString, UriKind.Relative);
 
         public static readonly string ServerAddress = "http://163.5.84.244/"; //alexis: 192.168.1.6 serveur_lapbeip:163.5.84.244/Spring/ suivi:163.5.84.52
@@ -99,7 +100,7 @@ namespace PinMessaging.Utils
             {
                 PinsMapImg = new Dictionary<PMPinModel.PinsType, BitmapImage>()
                 {
-                    {PMPinModel.PinsType.PublicMessage, Design.CreateImage(new Uri(PinPublicMessageIconIntermediate.ToString(), UriKind.Relative))},
+                    {PMPinModel.PinsType.Message, Design.CreateImage(new Uri(PinPublicMessageIconIntermediate.ToString(), UriKind.Relative))},
                     {PMPinModel.PinsType.PrivateMessage, Design.CreateImage(new Uri(PinPrivateMessageIconIntermediate.ToString(), UriKind.Relative))},
                     
                     {PMPinModel.PinsType.View, Design.CreateImage(new Uri(PinViewIconIntermediate.ToString(), UriKind.Relative))},

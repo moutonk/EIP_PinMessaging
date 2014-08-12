@@ -1,7 +1,10 @@
 ﻿using System.Device.Location;
 using System.Linq;
+using System.Windows.Controls;
 using Windows.Devices.Geolocation;
+using Coding4Fun.Toolkit.Controls;
 using Microsoft.Phone.Maps.Controls;
+using Microsoft.Phone.Maps.Toolkit;
 using PinMessaging.Model;
 using PinMessaging.Other;
 using PinMessaging.Utils;
@@ -91,6 +94,11 @@ namespace PinMessaging.Controller
 
         public static void AddPinToMap(PMPinModel pin)
         {
+            pin.PinImg.Tag = pin.PinType;
+
+            if (pin.Private == true)
+                pin.PinImg.Tag = pin.PinType + 6;
+
             var overlay = new MapOverlay
             {
                 PositionOrigin = new Point(0.3, 0.8),
@@ -111,6 +119,51 @@ namespace PinMessaging.Controller
             //    var res = from mapLayerElem in MapLayerContainer
             //              where pin == mapLayerElem.Content
             //              select mapLayerElem;
+            }
+        }
+
+        public static void HideOrNotPinType(PMPinModel.PinsType type, bool hidden)
+        {
+            if (PMData.MapLayerContainer != null)
+            {
+                if (hidden == true)
+                {
+                    PMPinModel.PinsType typeToMove;
+                    var uselessVar = new UserLocationMarker();
+
+                    foreach (var pinOverlay in PMData.MapLayerContainer)
+                    {
+                        if (pinOverlay.Content.IsTypeOf(uselessVar) == false && Enum.TryParse((pinOverlay.Content as Image).Tag.ToString(), true, out typeToMove) == true)
+                        {
+                            if (type == typeToMove)
+                            {
+                                PMData.FilterMapOverlayExcessItemList.Add(pinOverlay);
+                            }
+                        }
+                    }
+
+                    Logs.Output.ShowOutput(PMData.FilterMapOverlayExcessItemList.Count.ToString());
+                }
+                else
+                {
+                    PMPinModel.PinsType typeToMove = PMPinModel.PinsType.Message;
+                    var uselessVar = new UserLocationMarker();
+
+                    var toAdd = PMData.FilterMapOverlayExcessItemList.FindAll(pinOverlay => Enum.TryParse((pinOverlay.Content as Image).Tag.ToString(), true, out typeToMove) == true).Where(pinOverlay => type == typeToMove);
+                    PMData.MapLayerContainer. += toAdd;
+
+                    foreach (var pinOverlay in PMData.FilterMapOverlayExcessItemList)
+                    {
+                        if (Enum.TryParse((pinOverlay.Content as Image).Tag.ToString(), true, out typeToMove) == true)
+                        {
+                            if (type == typeToMove)
+                            {
+                                PMData.FilterMapOverlayExcessItemList.Remove(pinOverlay);
+                            }
+                        }
+                    }
+                }
+                
             }
         }
 

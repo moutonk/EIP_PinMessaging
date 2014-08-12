@@ -114,7 +114,7 @@ namespace PinMessaging.View
             {
                 Name = AppResources.PinPublicMessage,
                 Image = new BitmapImage(Paths.PinPublicMessageIconIntermediate),
-                PinType = PMPinModel.PinsType.PublicMessage
+                PinType = PMPinModel.PinsType.Message
             });
             PinListPicker.Items.Add(new PinItem
             {
@@ -647,6 +647,14 @@ namespace PinMessaging.View
 
         private void ButtonFilters_OnClick(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                NavigationService.Navigate(Paths.FilterView);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
+            }
         }
 
         private void ButtonSettings_OnClick(object sender, RoutedEventArgs e)
@@ -1165,7 +1173,7 @@ namespace PinMessaging.View
         {
             switch (type)
             {
-                case PMPinModel.PinsType.PublicMessage:
+                case PMPinModel.PinsType.Message:
                     return isPrivate ? AppResources.PinPrivateMessage : AppResources.PinPublicMessage;
 
                 case PMPinModel.PinsType.Event:
@@ -1319,7 +1327,7 @@ namespace PinMessaging.View
         {
             PinCreateModel.Id = string.Empty;
             PinCreateModel.Lang = string.Empty;
-            PinCreateModel.PinType = PMPinModel.PinsType.PublicMessage;
+            PinCreateModel.PinType = PMPinModel.PinsType.Message;
             PinCreateModel.Author = string.Empty;
             PinCreateModel.AuthorId = string.Empty;
             PinCreateModel.AuthoriseUsersId = string.Empty;

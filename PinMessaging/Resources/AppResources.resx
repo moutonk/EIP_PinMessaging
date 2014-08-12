@@ -540,4 +540,16 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   <data name="SeeOnMap" xml:space="preserve">
     <value>See on map</value>
   </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="PinsDisplayed" xml:space="preserve">
+    <value>pins displayed on the map</value>
+  </data>
+  <data name="PinsNotDisplayed" xml:space="preserve">
+    <value>pins hidden on the map</value>
+  </data>
+  <data name="FilterPageTitle" xml:space="preserve">
+    <value>filter</value>
+  </data>
 </root>
