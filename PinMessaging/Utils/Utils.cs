@@ -14,6 +14,8 @@ namespace PinMessaging.Utils
         {
             if (pin.Private == true)
                 return pin.PinType + 6;
+            if (pin.Private == false)
+                return pin.PinType - 6;
             return pin.PinType;
         }
 
@@ -119,7 +121,7 @@ namespace PinMessaging.Utils
         public static DateTime ConvertFromUnixTimestamp(double? timestamp)
         {
             var origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-            return timestamp == null ? origin : origin.AddMilliseconds((double)timestamp);
+            return timestamp == null ?  origin : origin.AddMilliseconds((double)timestamp);
         }
 
         public static Tuple<string, string, Uri> GetGradeInfo(PMGradeModel.GradeType grade)
