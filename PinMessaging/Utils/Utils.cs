@@ -10,6 +10,13 @@ namespace PinMessaging.Utils
 {
     public static class Utils
     {
+        public static PMPinModel.PinsType PinToPinType(PMPinModel pin)
+        {
+            if (pin.Private == true)
+                return pin.PinType + 6;
+            return pin.PinType;
+        }
+
         public static string GetPhoneUniqueId()
         {
             object uniqueId;
@@ -40,7 +47,7 @@ namespace PinMessaging.Utils
 
             try
             {
-                num = int.Parse(d, CultureInfo.InvariantCulture);
+                num = Int32.Parse(d, CultureInfo.InvariantCulture);
             }
             catch (Exception exp)
             {
@@ -56,7 +63,7 @@ namespace PinMessaging.Utils
 
             try
             {
-                num = double.Parse(d, CultureInfo.InvariantCulture);
+                num = Double.Parse(d, CultureInfo.InvariantCulture);
             }
             catch (Exception exp)
             {
@@ -139,6 +146,5 @@ namespace PinMessaging.Utils
             }
             return null;
         }
-
     }
 }

@@ -61,7 +61,10 @@ namespace PinMessaging.Other
         //contain all the extra pins
         [DefaultValue(null)] public static List<MapOverlay> FilterMapOverlayExcessItemList { get; set; }
 
+        [DefaultValue(null)] public static HashSet<PMPinModel.PinsType> HiddenTypesList { get; set; }
+
         [DefaultValue(null)] public static List<PMPinCommentModel> PinsCommentsList { get; set; }
+        
         [DefaultValue(null)] public static List<PMPinCommentModel> PinsCommentsListTmp { get; set; }
 
         [DefaultValue(null)] public static PMUserModel User { get; set; }
@@ -94,7 +97,7 @@ namespace PinMessaging.Other
             FilterMapOverlayExcessItemList = new List<MapOverlay>();
             //UserHistoryList = new List<PMHistoryModel>();
             NeutralProfilPic = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative));
-
+            HiddenTypesList = new HashSet<PMPinModel.PinsType>();
         }
 
         public static void AddToQueuePinsList(List<PMPinModel> list)

@@ -413,7 +413,7 @@
     </XliffResource>
     <XliffResource Include="Resources\AppResources.en-US.xlf">
       <Generator>XliffResxGenerator</Generator>
-      <LastGenOutput>AppResources.en-US1.resx</LastGenOutput>
+      <LastGenOutput>AppResources.en-US.resx</LastGenOutput>
     </XliffResource>
   </ItemGroup>
   <ItemGroup>

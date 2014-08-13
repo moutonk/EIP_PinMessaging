@@ -156,8 +156,8 @@
         </trans-unit>
         <trans-unit translate="yes" id="Resx/PinPublicMessage" xml:space="preserve">
           <source>public message</source>
-          <target state="needs-review-translation">Public Message</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="needs-review-translation">Public Message</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit translate="yes" id="Resx/UseLocationTitle" xml:space="preserve">
           <source>Allow this application to access and use your location?</source>
           <target state="signed-off">Allow this application to access and use your location?</target>
@@ -184,8 +184,8 @@
         </trans-unit>
         <trans-unit id="Resx/CreatePinTitle" translate="yes" xml:space="preserve">
           <source>create pin</source>
-          <target state="needs-review-translation">Create Pin</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="needs-review-translation">Create Pin</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit id="Resx/PinImage" translate="yes" xml:space="preserve">
           <source>IMAGE</source>
           <target state="signed-off">IMAGE</target>
@@ -530,8 +530,8 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         </trans-unit>
         <trans-unit id="Resx/History" translate="yes" xml:space="preserve">
           <source>HISTORY</source>
-          <target state="needs-review-translation">History</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="needs-review-translation">History</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit id="Resx/Grade" translate="yes" xml:space="preserve">
           <source>Grade</source>
           <target state="signed-off">Grade</target>
@@ -546,8 +546,8 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         </trans-unit>
         <trans-unit id="Resx/PinAuthor" translate="yes" xml:space="preserve">
           <source>author</source>
-          <target state="needs-review-translation">PINS'S AUTHOR</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="needs-review-translation">PINS'S AUTHOR</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit translate="yes" id="Resx/UseLocationContent" xml:space="preserve">
           <source>Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</source>
           <target state="signed-off">Sharing this information helps us provide and improve the location-based services offered for this phone. We won't use the information to identify or contact you.</target>
@@ -562,8 +562,8 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         </trans-unit>
         <trans-unit translate="yes" id="Resx/PinPrivateMessage" xml:space="preserve">
           <source>private message</source>
-          <target state="needs-review-translation">Private Message</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="needs-review-translation">Private Message</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit translate="yes" id="Resx/PinLastStep" xml:space="preserve">
           <source>Last step</source>
           <target state="signed-off">Last step</target>
@@ -578,16 +578,16 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Notifications" xml:space="preserve">
           <source>notification</source>
-          <target state="needs-review-translation">Notifications</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="needs-review-translation">Notifications</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
         <trans-unit translate="yes" id="Resx/Menu" xml:space="preserve">
           <source>Menu</source>
           <target state="signed-off">Menu</target>
         </trans-unit>
         <trans-unit translate="yes" id="Resx/Contacts" xml:space="preserve">
           <source>contacts</source>
-          <target state="needs-review-translation">Contacts</target><note from="MultilingualUpdate" priority="2" annotates="source">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
-        </trans-unit>
+          <target state="needs-review-translation">Contacts</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note></trans-unit>
       </group>
     </body>
   </file>
