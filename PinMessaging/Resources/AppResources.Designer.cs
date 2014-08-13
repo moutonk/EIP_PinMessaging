@@ -898,6 +898,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à Click on the Pins underneath to display or hide them on the map.
+        /// </summary>
+        public static string PinDisplayedInfos {
+            get {
+                return ResourceManager.GetString("PinDisplayedInfos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à IMAGE.
         /// </summary>
         public static string PinImage {

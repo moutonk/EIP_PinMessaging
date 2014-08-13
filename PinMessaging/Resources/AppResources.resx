@@ -552,4 +552,7 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   <data name="FilterPageTitle" xml:space="preserve">
     <value>filter</value>
   </data>
+  <data name="PinDisplayedInfos" xml:space="preserve">
+    <value>Click on the Pins underneath to display or hide them on the map</value>
+  </data>
 </root>

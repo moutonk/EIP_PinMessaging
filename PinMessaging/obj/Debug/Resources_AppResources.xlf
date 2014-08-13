@@ -588,6 +588,10 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <source>filter</source>
           <target state="new">filter</target>
         </trans-unit>
+        <trans-unit id="Resx/PinDisplayedInfos" translate="yes" xml:space="preserve">
+          <source>Click on the Pins underneath to display or hide them on the map</source>
+          <target state="new">Click on the Pins underneath to display or hide them on the map</target>
+        </trans-unit>
       </group>
     </body>
   </file>

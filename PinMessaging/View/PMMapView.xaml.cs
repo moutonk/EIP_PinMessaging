@@ -578,6 +578,7 @@ namespace PinMessaging.View
             }
             else
             {
+                _currentView = CurrentMapPageView.MapView;
                 ApplicationBar.Mode = ApplicationBarMode.Default;
                 Map.IsEnabled = true;
             }

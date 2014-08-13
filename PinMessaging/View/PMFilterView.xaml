@@ -20,32 +20,32 @@
         </Grid>
     
         <StackPanel Name="ContentStackPanel">
-
+            <TextBlock Name="PinDisplayedInfoTextBlock" TextWrapping="Wrap" Text="{Binding LocalizedResources.PinDisplayedInfos, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="20,20,20,0" FontSize="25"></TextBlock>
             <TextBlock Name="PinDisplayedTextBlock" TextWrapping="Wrap" Text="{Binding LocalizedResources.PinsDisplayed, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="20,20,20,10" FontSize="35"></TextBlock>
             <StackPanel Name="PinDisplayedStackPanel" Margin="30,0,0,0">
                 <StackPanel Margin="10,10,0,0" Name="PublicMsgStackPanel" Tag="Message" Orientation="Horizontal" Tap="ItemOnTap">
                     <Image Source="\Images/Pins/message_icon.png"></Image>
-                    <TextBlock Text="{Binding LocalizedResources.PinPublicMessage, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
+                    <TextBlock Text="{Binding LocalizedResources.PinPublicMessage, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" ></TextBlock>
                 </StackPanel>
                 <StackPanel Margin="10,10,0,0" Name="PublicEventStackPanel" Tag="Event" Orientation="Horizontal" Tap="ItemOnTap">
                     <Image  Source="\Images/Pins/event_icon.png"></Image>
-                    <TextBlock Text="{Binding LocalizedResources.PinPublicEvent, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
+                    <TextBlock Text="{Binding LocalizedResources.PinPublicEvent, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" ></TextBlock>
                 </StackPanel>
                 <StackPanel Margin="10,10,0,0" Name="PublicViewStackPanel" Tag="View" Orientation="Horizontal" Tap="ItemOnTap">
                     <Image  Source="\Images/Pins/view_icon.png"></Image>
-                    <TextBlock Text="{Binding LocalizedResources.PinPublicPointOfView, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
+                    <TextBlock Text="{Binding LocalizedResources.PinPublicPointOfView, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" ></TextBlock>
                 </StackPanel>
                 <StackPanel Margin="10,10,0,0" Name="PrivateMsgStackPanel" Tag="PrivateMessage" Orientation="Horizontal" Tap="ItemOnTap">
                     <Image  Source="\Images/Pins/private_message_icon.png"></Image>
-                    <TextBlock Text="{Binding LocalizedResources.PinPrivateMessage, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
+                    <TextBlock Text="{Binding LocalizedResources.PinPrivateMessage, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" ></TextBlock>
                 </StackPanel>
                 <StackPanel Margin="10,10,0,0" Name="PrivateEventStackPanel" Tag="PrivateEvent" Orientation="Horizontal" Tap="ItemOnTap">
                     <Image Source="\Images/Pins/private_event_icon.png"></Image>
-                    <TextBlock Text="{Binding LocalizedResources.PinPrivateEvent, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
+                    <TextBlock Text="{Binding LocalizedResources.PinPrivateEvent, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" ></TextBlock>
                 </StackPanel>
                 <StackPanel Margin="10,10,0,0" Name="PrivateViewStackPanel" Tag="PrivateView"  Orientation="Horizontal" Tap="ItemOnTap">
                     <Image Source="\Images/Pins/private_view_icon.png"></Image>
-                    <TextBlock Text="{Binding LocalizedResources.PinPrivatePointOfView, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
+                    <TextBlock Text="{Binding LocalizedResources.PinPrivatePointOfView, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="10,0,0,0" FontSize="25"></TextBlock>
                 </StackPanel>
                 <TextBlock Name="EmptyPinsTextBlock1" Visibility="Collapsed" Text="{Binding LocalizedResources.None, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="-10,0,0,0" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
             </StackPanel >

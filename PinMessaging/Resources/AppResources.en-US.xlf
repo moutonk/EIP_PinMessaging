@@ -306,6 +306,10 @@
           <source>filter</source>
           <target state="new">filter</target>
         </trans-unit>
+        <trans-unit id="Resx/PinDisplayedInfos" translate="yes" xml:space="preserve">
+          <source>Click on the Pins underneath to display or hide them on the map</source>
+          <target state="new">Click on the Pins underneath to display or hide them on the map</target>
+        </trans-unit>
         <trans-unit id="Resx/PinsDisplayed" translate="yes" xml:space="preserve">
           <source>pins displayed on the map</source>
           <target state="new">pins displayed on the map</target>

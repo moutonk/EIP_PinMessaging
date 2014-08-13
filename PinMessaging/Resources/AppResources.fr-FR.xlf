@@ -301,7 +301,11 @@
         </trans-unit>
         <trans-unit id="Resx/FilterPageTitle" translate="yes" xml:space="preserve">
           <source>filter</source>
-          <target state="new">filter</target>
+          <target state="translated">filtres</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinDisplayedInfos" translate="yes" xml:space="preserve">
+          <source>Click on the Pins underneath to display or hide them on the map</source>
+          <target state="translated">Cliquez sur les Pins ci-dessous pour les afficher ou pas sur la carte</target>
         </trans-unit>
         <trans-unit id="Resx/PinsDisplayed" translate="yes" xml:space="preserve">
           <source>pins displayed on the map</source>
