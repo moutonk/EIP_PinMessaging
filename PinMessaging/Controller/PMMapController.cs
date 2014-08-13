@@ -96,8 +96,6 @@ namespace PinMessaging.Controller
         public static void AddPinToMap(PMPinModel pin)
         {
             pin.PinImg.Tag = pin;
-            if (pin.Id.Equals("20") == true)
-                Logs.Output.ShowOutput(PMData.MapLayerContainer.Count.ToString());
 
             var overlay = new MapOverlay
             {
@@ -106,14 +104,16 @@ namespace PinMessaging.Controller
                 GeoCoordinate = pin.GeoCoord
             };
 
-            //center the mapoverlay, will change later
-
-            if (PMData.MapLayerContainer != null)
-                PMData.MapLayerContainer.Add(overlay);
-
-            if (pin.Id.Equals("20") == true)
-                Logs.Output.ShowOutput(PMData.MapLayerContainer.Count.ToString());
-
+            //hidden
+            if (PMData.HiddenTypesList.Contains(Utils.Utils.PinToPinType(pin)))
+            {
+                PMData.FilterMapOverlayExcessItemList.Add(overlay);
+            }
+            else // normal
+            {
+                if (PMData.MapLayerContainer != null)
+                    PMData.MapLayerContainer.Add(overlay);
+            }
         }
 
         public static void RemovePinFromMap(PMPinModel pin)
@@ -130,18 +130,16 @@ namespace PinMessaging.Controller
         {
             if (PMData.MapLayerContainer != null)
             {
+                var uselessVar = new Image();
+
                 if (hidden == true)
                 {
-                    var uselessVar = new Image();
-
                     for (var pos = 0; pos < PMData.MapLayerContainer.Count; pos++)
                     {
                         //if the object is not a MapOverlay we loop again
                         if (PMData.MapLayerContainer[pos].Content.IsTypeOf(uselessVar) == false || (PMData.MapLayerContainer[pos].Content as Image).Tag == null)
                             continue;
 
-                        Logs.Output.ShowOutput(type.ToString() + " " + Utils.Utils.PinToPinType((PMData.MapLayerContainer[pos].Content as Image).Tag as PMPinModel).ToString() + " " + ((PMData.MapLayerContainer[pos].Content as Image).Tag as PMPinModel).Id);
-                        
                         if (type == Utils.Utils.PinToPinType((PMData.MapLayerContainer[pos].Content as Image).Tag as PMPinModel))
                         {
                             var tmpItem = PMData.MapLayerContainer[pos];
@@ -150,21 +148,14 @@ namespace PinMessaging.Controller
                             pos--;
                         }
                     }
-
-                    Logs.Output.ShowOutput("FilterList: " + PMData.FilterMapOverlayExcessItemList.Count.ToString());
-                    Logs.Output.ShowOutput("MapList: " + PMData.MapLayerContainer.Count.ToString());
                 }
                 else
                 {
-                    var uselessVar = new Image();
-
                     for (var pos = 0; pos < PMData.FilterMapOverlayExcessItemList.Count; pos++)
                     {
                         //if the object is not a MapOverlay we loop again
                         if (PMData.FilterMapOverlayExcessItemList[pos].Content.IsTypeOf(uselessVar) == false || (PMData.FilterMapOverlayExcessItemList[pos].Content as Image).Tag == null)
                             continue;
-
-                        Logs.Output.ShowOutput(type.ToString() + " " + Utils.Utils.PinToPinType((PMData.FilterMapOverlayExcessItemList[pos].Content as Image).Tag as PMPinModel).ToString() + " " + ((PMData.FilterMapOverlayExcessItemList[pos].Content as Image).Tag as PMPinModel).Id);
 
                         if (type == Utils.Utils.PinToPinType((PMData.FilterMapOverlayExcessItemList[pos].Content as Image).Tag as PMPinModel))
                         {
@@ -174,11 +165,7 @@ namespace PinMessaging.Controller
                             pos--;
                         }
                     }
-
-                    Logs.Output.ShowOutput("FilterList: " + PMData.FilterMapOverlayExcessItemList.Count.ToString());
-                    Logs.Output.ShowOutput("MapList: " + PMData.MapLayerContainer.Count.ToString());
                 }
-                
             }
         }
 
