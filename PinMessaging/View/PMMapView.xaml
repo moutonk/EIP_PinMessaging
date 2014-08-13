@@ -388,12 +388,11 @@
                         </Grid>
                     </ScrollViewer>
                     
-                    <ScrollViewer Grid.Row="5" x:Name="UnderMenuCreatePinScrollViewer">
+                    <ScrollViewer Grid.Row="5" x:Name="UnderMenuCreatePinScrollViewer" VerticalScrollBarVisibility="Visible">
                         <Grid Margin="20,0,20,10" Name="UnderMenuCreatePinGrid">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="5"></RowDefinition>
                                 <RowDefinition Height="100"></RowDefinition>
-                                <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="Auto"></RowDefinition>
@@ -424,10 +423,11 @@
 
                             <StackPanel Grid.Row="4" Name="TargetStackPanel">
                                 <TextBlock Text="{Binding LocalizedResources.PinCreateReceiver, Source={StaticResource LocalizedStrings}}" Margin="0,10,0,20" FontSize="30" Foreground="White"></TextBlock>
-                                <toolkit:LongListMultiSelector GridCellSize="10,10" SelectionChanged="TargetLongListSelector_OnSelectionChanged" Name="TargetLongListSelector" ItemTemplate="{StaticResource TargetDataTemplate}" FontSize="25" HorizontalAlignment="Left" Width="440"/>
+                                <TextBlock Name="NoContactsTextBlock" TextWrapping="Wrap" Text="{Binding LocalizedResources.NoContacts, Source={StaticResource LocalizedStrings}}" Visibility="Collapsed" Margin="0,10,0,20" FontSize="25" Foreground="White"></TextBlock>
+                                <toolkit:LongListMultiSelector MaxHeight="200" HideEmptyGroups="True" SelectionChanged="TargetLongListSelector_OnSelectionChanged" Name="TargetLongListSelector" ItemsSource="{Binding}" ItemTemplate="{StaticResource TargetDataTemplate}" FontSize="25" HorizontalAlignment="Left" Width="440"/>
                             </StackPanel>
 
-                            <Button Grid.Row="6" x:Name="DropPinButton" Height="100" Visibility="Visible" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderBrush="{StaticResource PMOrange}" Margin="-13,10,-13,0" Click="PostPinButton_Click"/>
+                            <Button Grid.Row="5" x:Name="DropPinButton" Height="100" Visibility="Visible" Content="Déposer le Pin" Background="{StaticResource PMOrange}" BorderBrush="{StaticResource PMOrange}" Margin="-13,10,-13,0" Click="PostPinButton_Click"/>
                         </Grid>
                     </ScrollViewer>
                 </Grid>

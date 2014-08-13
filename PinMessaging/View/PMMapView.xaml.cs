@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -146,8 +145,6 @@ namespace PinMessaging.View
                 Image = new BitmapImage(Paths.PinPrivateViewIconIntermediate),
                 PinType = PMPinModel.PinsType.PrivateView
             });
-
-            
         }
 
         private class PinItem
@@ -273,8 +270,6 @@ namespace PinMessaging.View
         {
             DownMenuTitle.Text = AppResources.CreatePinTitle;
             AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[5], false, false, true);
-
-            // VisibilityExpandView.IsExpanded = true;
         }
 
         private void MenuDown_CommonActionsBefore()
@@ -326,6 +321,9 @@ namespace PinMessaging.View
 
         private void MenuDown_OnClick(object sender, EventArgs eventArgs)
         {
+            if (sender == null)
+                return;
+
             if (sender.Equals(ButtonPins))
             {
                 MenuDown_CommonActionsBefore();
@@ -342,18 +340,20 @@ namespace PinMessaging.View
 
         public void UpdateLocationUi()
         {
+            if (_geoLocation == null)
+                return;
+
             _geoLocation.UpdateLocation();
 
-            if (_geoLocation.GeopositionUser != null)
+            if (_geoLocation.GeopositionUser == null)
+                return;
+
+            Dispatcher.BeginInvoke(() =>
             {
-                Dispatcher.BeginInvoke(() =>
-                {
-                    if (_userSpot.Visibility == Visibility.Collapsed)
-                        _userSpot.Visibility = Visibility.Visible;
-                    _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude,
-                        _geoLocation.GeopositionUser.Coordinate.Longitude);
-                });
-            }
+                if (_userSpot.Visibility == Visibility.Collapsed)
+                    _userSpot.Visibility = Visibility.Visible;
+                _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
+            });
         }
 
         private void ZoomTo(double zoomLevel)
@@ -411,8 +411,7 @@ namespace PinMessaging.View
                 }
                 else if (_geoLocation.GeopositionUser != null)
                 {
-                    Map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude,
-                        _geoLocation.GeopositionUser.Coordinate.Longitude);
+                    Map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
                 }
             });
         }
@@ -470,6 +469,9 @@ namespace PinMessaging.View
 
         private void RefreshPinButton_OnClick(object sender, RoutedEventArgs e)
         {
+            if (_geoLocation == null || _geoLocation.GeopositionUser == null)
+                return;
+
             ProgressBarActive(true);
 
             var pinController = new PMPinController(RequestType.GetPins, RefreshPinButton_PostClick);
@@ -483,8 +485,6 @@ namespace PinMessaging.View
         {
             if (_isUnderMenuOpen == true)
             {
-                //MainGridMap.RowDefinitions[2].Height = new GridLength(120);
-
                 _currentView = CurrentMapPageView.MapView;
                 _isUnderMenuOpen = false;
                 _enableSwipe = true;
@@ -522,8 +522,7 @@ namespace PinMessaging.View
             }
             catch (Exception)
             {
-                Logs.Error.ShowError("Could not load AdditionalMapMenuWidth from App.xaml",
-                    Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("Could not load AdditionalMapMenuWidth from App.xaml", Logs.Error.ErrorsPriority.NotCritical);
                 _leftPage = -420;
                 _rightPage = -840;
             }
@@ -1299,6 +1298,12 @@ namespace PinMessaging.View
 
         private void MoveAnimationUp_OnCompleted(object sender, EventArgs e)
         {
+            if (PMData.UserList.Count > 0)
+                TargetLongListSelector.ItemsSource = PMData.UserList;
+
+            NoContactsTextBlock.Visibility = PMData.UserList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+            TargetLongListSelector.Height = TargetLongListSelector.ItemsSource == null ? TargetLongListSelector.Height = 0 : new GridLength(100).Value;
+           
             CheckCanCreatePin();
         }
 
@@ -1440,7 +1445,8 @@ namespace PinMessaging.View
                 {
                     PinCreateModel.PinType = tmpType - 6;
                     PinCreateModel.Private = true;
-                    TargetLongListSelector.ItemsSource = PMData.UserList;
+                    if (PMData.UserList.Count > 0)
+                        TargetLongListSelector.ItemsSource = PMData.UserList;
                 }
                 else
                 {
@@ -1455,6 +1461,9 @@ namespace PinMessaging.View
 
             EventStackPanel.Visibility = PinCreateModel.PinType == PMPinModel.PinsType.Event ? Visibility.Visible : Visibility.Collapsed;
             TargetStackPanel.Visibility = PinCreateModel.Private == true ? Visibility.Visible : Visibility.Collapsed;
+            NoContactsTextBlock.Visibility = PMData.UserList.Count > 0 ? Visibility.Collapsed : Visibility.Visible;
+
+            TargetLongListSelector.Height = TargetLongListSelector.ItemsSource == null ? TargetLongListSelector.Height = 0 : new GridLength(100).Value;
 
             CheckCanCreatePin();
         }

@@ -592,6 +592,10 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <source>Click on the Pins underneath to display or hide them on the map</source>
           <target state="new">Click on the Pins underneath to display or hide them on the map</target>
         </trans-unit>
+        <trans-unit id="Resx/NoContacts" translate="yes" xml:space="preserve">
+          <source>You don't have any contacts. You cannot create private Pins. Start by adding people to your contacts</source>
+          <target state="new">You don't have any contacts. You cannot create private Pins. Start by adding people to your contacts</target>
+        </trans-unit>
       </group>
     </body>
   </file>

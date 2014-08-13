@@ -790,6 +790,15 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à You don&apos;t have any contacts. You cannot create private Pins. Start by adding people to your contacts.
+        /// </summary>
+        public static string NoContacts {
+            get {
+                return ResourceManager.GetString("NoContacts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à None.
         /// </summary>
         public static string None {
