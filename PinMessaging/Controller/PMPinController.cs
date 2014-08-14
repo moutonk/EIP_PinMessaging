@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Device.Location;
 using System.Globalization;
 using System.Linq;
-using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
 using Windows.Devices.Geolocation;
 using PinMessaging.Model;
 using PinMessaging.Other;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
-using PinMessaging.View;
 
 namespace PinMessaging.Controller
 {
     class PMPinController : PMWebServiceEndDetector
     {
-        private readonly Action _updateUiMethod;
+        private Action _updateUiMethod;
 
         public PMPinController()
         {
@@ -125,14 +120,21 @@ namespace PinMessaging.Controller
             StartTimer();
         }
 
-        private void AddPinUiAndCode()
+        private static void AddPinUiAndCode()
         {
-            foreach (var pin in PMData.PinsListToAdd.Where(pin => PMMapPinController.IsPinUnique(pin) == true))
+            try
             {
-                PMMapPinController.AddPinToMap(pin);
-                PMData.PinsList.Add(pin);
+                foreach (var pin in PMData.PinsListToAdd.Where(pin => PMMapPinController.IsPinUnique(pin) == true))
+                {
+                    PMMapPinController.AddPinToMap(pin);
+                    PMData.PinsList.Add(pin);
+                }
+                PMData.PinsListToAdd.Clear();
             }
-            PMData.PinsListToAdd.Clear();
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("AddPinUiAndCode: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
 
         protected override void waitEnd_Tick(object sender, EventArgs e)
@@ -141,6 +143,8 @@ namespace PinMessaging.Controller
             {
                 //when we are here it means that the webservice call is over and the data are parsed and stocked in PMData
                 StopTimer();
+
+                Logs.Output.ShowOutput(CurrentRequestType.ToString());
 
                 switch (CurrentRequestType)
                 {
@@ -172,6 +176,7 @@ namespace PinMessaging.Controller
                         break;
 
                 }
+                _updateUiMethod = null;
                 Logs.Output.ShowOutput("PinListSize: " + PMData.PinsList.Count);
             }
         }

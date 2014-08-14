@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.Phone.Controls;
@@ -21,7 +20,7 @@ namespace PinMessaging.View
             {
                 foreach (var item in PMData.HiddenTypesList)
                 {
-                    Logs.Output.ShowOutput("Forbidden:" + item.ToString());
+                    Logs.Output.ShowOutput("Hidden:" + item);
                     switch (item)
                     {
                         case PMPinModel.PinsType.Message:
@@ -85,15 +84,11 @@ namespace PinMessaging.View
 
         private void ItemOnTap(object sender, GestureEventArgs gestureEventArgs)
         {
-            StackPanel sp;
-    
-            try
+            var sp = sender as StackPanel;
+
+            if (sp == null)
             {
-                sp = sender as StackPanel;
-            }
-            catch (Exception exp)
-            {
-                Logs.Error.ShowError("ItemOnTap:" + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("ItemOnTap: sp is null", Logs.Error.ErrorsPriority.NotCritical);
                 return;
             }
 

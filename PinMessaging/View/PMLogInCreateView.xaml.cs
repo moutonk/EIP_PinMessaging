@@ -39,13 +39,16 @@ namespace PinMessaging.View
 
             var model = PhoneApplicationService.Current.State[Paths.ApplicationDico.SignInUpParams] as PMLogInCreateStructureModel;
 
-            if (model != null)
+            if (model == null)
             {
-                PageTitle.Text = model.PageTitle;
-                PageSubTitle.Text = model.PageSubTitle;
-                ButtonValidate.Content = model.ButtonTitle;
-                _currentActionType = model.ActionTypeVar;
+                Logs.Error.ShowError("PMSignInCreateStructure: model is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
             }
+
+            PageTitle.Text = model.PageTitle;
+            PageSubTitle.Text = model.PageSubTitle;
+            ButtonValidate.Content = model.ButtonTitle;
+            _currentActionType = model.ActionTypeVar;
         }
 
         private void ChangeVisibility(Visibility visibility)
@@ -143,26 +146,26 @@ namespace PinMessaging.View
 
         private void EmailCheckControllerWrapper(PMLogInCreateStructureModel.ActionType actiontype)
         {
-            var pmLogInController = new PMSignInController(AdaptUI, null, RequestType.CheckEmail, actiontype);
+            var pmLogInController = new PMSignInController(AdaptUi, null, RequestType.CheckEmail, actiontype);
 
-            IsUIEnabled(false);
+            IsUiEnabled(false);
             ResetError();
             pmLogInController.CheckEmailExists(_pmLogInModel);
         }
 
         private void LogInControllerWrapper()
         {
-            var pmLogInController = new PMSignInController(AdaptUI, null, RequestType.SignIn, _currentActionType);
+            var pmLogInController = new PMSignInController(AdaptUi, null, RequestType.SignIn, _currentActionType);
 
-            IsUIEnabled(false);
+            IsUiEnabled(false);
             pmLogInController.LogIn(_pmLogInModel);
         }
 
         private void SignUpControllerWrapper()
         {
-            var pmSignontroller = new PMSignUpController(AdaptUI, RequestType.SignUp, _currentActionType);
+            var pmSignontroller = new PMSignUpController(AdaptUi, RequestType.SignUp, _currentActionType);
 
-            IsUIEnabled(false);
+            IsUiEnabled(false);
             pmSignontroller.SignUp(_pmLogInModel);
         }
 
@@ -226,7 +229,7 @@ namespace PinMessaging.View
             }
         }
 
-        private void IsUIEnabled(bool lockStatus)
+        private void IsUiEnabled(bool lockStatus)
         {
             ProgressBarLoading.IsIndeterminate = !lockStatus;
 
@@ -303,11 +306,11 @@ namespace PinMessaging.View
             }
         }
 
-        public bool AdaptUI(RequestType currentType, PMLogInCreateStructureModel.ActionType parentRequestType, bool isOperationSuccessful)
+        public bool AdaptUi(RequestType currentType, PMLogInCreateStructureModel.ActionType parentRequestType, bool isOperationSuccessful)
         {
             if (PMData.NetworkProblem == true)
             {
-                int choice = Utils.Utils.CustomMessageBox(new[] {AppResources.Yes, AppResources.No}, "Oops !",
+                var choice = Utils.Utils.CustomMessageBox(new[] {AppResources.Yes, AppResources.No}, "Oops !",
                     AppResources.NetworkProblemServer);
 
                 if (choice == 0)
@@ -374,7 +377,7 @@ namespace PinMessaging.View
                         if (isOperationSuccessful)
                         {
                             RememberConnection.SaveLoginPwd(_pmLogInModel);
-                            PMSignInController p = new PMSignInController(RequestType.SignIn);
+                            var p = new PMSignInController(RequestType.SignIn);
                             p.LogIn(_pmLogInModel);
                             MoveProgressBarSignUpPart3.Begin();
                         }
@@ -389,12 +392,12 @@ namespace PinMessaging.View
                         }
                         break;
                 }
-                IsUIEnabled(true);
+                IsUiEnabled(true);
             }
             else
             {
                 _currentStep = StepNumber.StepDefault;
-                IsUIEnabled(true);
+                IsUiEnabled(true);
             }
             return true;
         }
@@ -412,7 +415,7 @@ namespace PinMessaging.View
             TextBoxEmail.IsReadOnly = false;
         }
 
-        private void TextBoxEmail_OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void TextBoxEmail_OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {

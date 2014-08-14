@@ -12,6 +12,9 @@ namespace PinMessaging.Utils
     {
         public static PMPinModel.PinsType PinPrivateToPinType(PMPinModel pin)
         {
+            if (pin == null)
+                return PMPinModel.PinsType.Message;
+
             if (pin.Private == true)
                 return pin.PinType + 6;
             return pin.PinType;

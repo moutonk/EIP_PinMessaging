@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -284,13 +285,6 @@ namespace PinMessaging.View
         {
             MainGridMap.RowDefinitions[2].Height = new GridLength(0);
             MoveAnimationUp.Begin();
-        }
-
-        public void DropPrivatePin(PMUserModel user)
-        {
-            ApplicationBarMenuItemCreate_OnClick(null, null);
-            //TargetLongListSelector.ItemsSource.Add(user);
-            //Logs.Output.ShowOutput(TargetLongListSelector.ItemsSource.Count.ToString());
         }
 
         private void ApplicationBarMenuItemCreate_OnClick(object sender, EventArgs e)
@@ -1391,8 +1385,22 @@ namespace PinMessaging.View
 
         ////////////////////////////////////////////////    Create pin         //////////////////////////////////////////
 
+        public void DropPrivatePin(PMUserModel user)
+        {
+            PinListPicker.SelectedIndex = 3;
+            TargetLongListSelector.Height = new GridLength(100).Value;
+            NoContactsTextBlock.Visibility = Visibility.Collapsed;
+            TargetLongListSelector.ItemsSource = new List<PMUserModel> {user};
+
+            ApplicationBarMenuItemCreate_OnClick(null, null);
+        }
+
         private void MoveAnimationUp_OnCompleted(object sender, EventArgs e)
         {
+            //from DropPrivatePin
+            if (TargetLongListSelector.ItemsSource != null && TargetLongListSelector.ItemsSource.Count > 0)
+                return;
+
             if (PMData.UserList.Count > 0)
                 TargetLongListSelector.ItemsSource = PMData.UserList;
 

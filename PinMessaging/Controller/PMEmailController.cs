@@ -1,12 +1,9 @@
-﻿using System.Windows.Navigation;
-using PinMessaging.Model;
+﻿using PinMessaging.Model;
 using PinMessaging.Other;
-using PinMessaging.Resources;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
 using System;
 using System.Collections.Generic;
-using PinMessaging.View;
 
 namespace PinMessaging.Controller
 {

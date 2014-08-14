@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
@@ -30,26 +29,32 @@ namespace PinMessaging.View
 
             _photoChooserTask.Completed += photoChooserTask_Completed;
 
-            if (PMData.User != null)
+            if (PMData.User == null)
             {
-                LoginTextBlock.Text = PMData.User.Pseudo;
-                PointsTextBlock.Text = PMData.User.Points;
-                PinsCreatedTextBlock.Text = PMData.User.NbrPin;
-                CommentsTextBlock.Text = PMData.User.NbrMessage;
-
-                var gradeInfos = Utils.Utils.GetGradeInfo(PMData.User.Grade.Type);
-                if (gradeInfos != null)
-                {
-                    GradeTextBlock.Text = gradeInfos.Item1;
-                    BestBadgeInfoTextBlock.Text = gradeInfos.Item2;
-                    BadgeImgUpdateUi(PMData.User.Grade.Type);
-                }
+                Logs.Error.ShowError("PMCurrentUserProfilView: user is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
             }
+
+            LoginTextBlock.Text = PMData.User.Pseudo;
+            PointsTextBlock.Text = PMData.User.Points;
+            PinsCreatedTextBlock.Text = PMData.User.NbrPin;
+            CommentsTextBlock.Text = PMData.User.NbrMessage;
+
+            var gradeInfos = Utils.Utils.GetGradeInfo(PMData.User.Grade.Type);
+            
+            if (gradeInfos == null)
+            {
+                Logs.Error.ShowError("PMCurrentUserProfilView: gradeInfos is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
+            }
+         
+            GradeTextBlock.Text = gradeInfos.Item1;
+            BestBadgeInfoTextBlock.Text = gradeInfos.Item2;
+            BadgeImgUpdateUi(PMData.User.Grade.Type);
         }
 
         private void BadgeImgUpdateUi(PMGradeModel.GradeType type)
         {
-            var i = 0;
             var tmpType = PMGradeModel.GradeType.PointBronze;
             var imgs = new []
             {
@@ -57,7 +62,7 @@ namespace PinMessaging.View
                 Pin50Image, Message50Image, BetaTesterImage
             };
 
-            while (tmpType <= type)
+            while (tmpType <= type && (int)tmpType < imgs.Length)
             {
                 imgs[(int)tmpType].Source = new BitmapImage(new Uri("/Images/Icons/cup_orange_icon@2x.png", UriKind.Relative));
                 tmpType++;
@@ -110,38 +115,36 @@ namespace PinMessaging.View
 
         private async void photoChooserTask_Completed(object sender, PhotoResult e)
         {
-            if (e.TaskResult == TaskResult.OK)
+            if (e.TaskResult != TaskResult.OK)
             {
-                var pic = new PMPhotoModel { UserId = PMData.CurrentUserId, FieldBytes = new byte[e.ChosenPhoto.Length] };
+                Logs.Error.ShowError("photoChooserTask_Completed: TaskResult is not OK", Logs.Error.ErrorsPriority.NotCritical);
+                return;
+            }
+
+            var pic = new PMPhotoModel { UserId = PMData.CurrentUserId, FieldBytes = new byte[e.ChosenPhoto.Length] };
                 
-                try
+            try
+            {
+                await e.ChosenPhoto.ReadAsync(pic.FieldBytes, 0, pic.FieldBytes.Length);
+                Logs.Output.ShowOutput("####################################: " + pic.FieldBytes.Length);
+
+                //if the profil picture is already in the list
+                if (PMData.ProfilPicturesList.Any(img => img.UserId.Equals(PMData.CurrentUserId) == true) == true)
                 {
-                    await e.ChosenPhoto.ReadAsync(pic.FieldBytes, 0, pic.FieldBytes.Length);
-                    Logs.Output.ShowOutput("####################################: " + pic.FieldBytes.Length);
+                    //we remove it
+                    PMData.ProfilPicturesList.RemoveAll(img => img.UserId.Equals(PMData.CurrentUserId) == true);
+                }
+                PMData.ProfilPicturesList.Add(pic);
 
-                    //if the profil picture is already in the list
-                    if (PMData.ProfilPicturesList.Any(img => img.UserId.Equals(PMData.CurrentUserId) == true) == true)
-                    {
-                        //we remove it and we add it
-                        PMData.ProfilPicturesList.RemoveAll(img => img.UserId.Equals(PMData.CurrentUserId) == true);
-                        PMData.ProfilPicturesList.Add(pic);
-                    }
-                    else
-                    {
-                        //or we add it
-                        PMData.ProfilPicturesList.Add(pic);
-                    }
-
-                    var userController = new PMUserController(RequestType.ProfilPicture, UploadProfilPictureUpdateUi);
+                var userController = new PMUserController(RequestType.ProfilPicture, UploadProfilPictureUpdateUi);
                     
-                    userController.UploadProfilPicture(Convert.ToBase64String(pic.FieldBytes)/* System.Text.Encoding.UTF8.GetString(pic.FieldBytes, 0, pic.FieldBytes.Length)*/);
+                userController.UploadProfilPicture(Convert.ToBase64String(pic.FieldBytes)/* System.Text.Encoding.UTF8.GetString(pic.FieldBytes, 0, pic.FieldBytes.Length)*/);
 
-                    Design.ProfilPictureUpdateUi(UserProfilImage, PMData.CurrentUserId);
-                }
-                catch (Exception exp)
-                {
-                    Logs.Error.ShowError("photoChooserTask_Completed", exp, Logs.Error.ErrorsPriority.NotCritical);
-                }
+                Design.ProfilPictureUpdateUi(UserProfilImage, PMData.CurrentUserId);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("photoChooserTask_Completed", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 

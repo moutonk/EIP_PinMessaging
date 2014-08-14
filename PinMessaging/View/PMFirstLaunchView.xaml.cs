@@ -3,12 +3,9 @@ using System.Windows;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using PinMessaging.Controller;
 using PinMessaging.Model;
-using PinMessaging.Other;
 using PinMessaging.Resources;
 using PinMessaging.Utils;
-using PinMessaging.Utils.WebService;
 
 namespace PinMessaging.View
 {

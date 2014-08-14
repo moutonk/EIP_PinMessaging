@@ -7,7 +7,6 @@ using System.Windows.Controls;
 using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Other;
@@ -29,7 +28,6 @@ namespace PinMessaging.View
         private class FeedBack
         {
             public string Name { get; set; }
-            public BitmapImage Image { get; set; }
             public FeedbackType Type { get; set; }
         }
 
@@ -69,8 +67,17 @@ namespace PinMessaging.View
             FeedbackTypeListPicker.Items.Add(new FeedBack { Name = "Idea", Type = FeedbackType.Idea });
             FeedbackTypeListPicker.Items.Add(new FeedBack { Name = "Question", Type = FeedbackType.Question });
 
-            //select the correct language regardings the telephone language
-            LanguageListPicker.SelectedIndex = Thread.CurrentThread.CurrentUICulture.Name.Equals("fr-FR") ? 0 : 1;
+            try
+            {
+                //select the correct language regardings the telephone language
+                LanguageListPicker.SelectedIndex = Thread.CurrentThread.CurrentUICulture.Name.Equals("fr-FR") ? 0 : 1;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("PMSettings:" + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+                LanguageListPicker.SelectedIndex = 0;
+            }
+
             LocationServicesCheckBox.IsChecked = RememberConnection.GetAccessLocation() ?? true;
         }
 
@@ -186,26 +193,41 @@ namespace PinMessaging.View
 
         private void ChangeLanguage(string lang)
         {
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
+            try
+            {
+                Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+                Thread.CurrentThread.CurrentCulture = new CultureInfo(lang);
 
-            App.RootFrame.Language = XmlLanguage.GetLanguage(lang);
-            App.RootFrame.FlowDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection);
-            App.Current.RootVisual.UpdateLayout();
-            App.RootFrame.UpdateLayout();
+                App.RootFrame.Language = XmlLanguage.GetLanguage(lang);
+                App.RootFrame.FlowDirection = (FlowDirection)Enum.Parse(typeof(FlowDirection), AppResources.ResourceFlowDirection);
+                App.Current.RootVisual.UpdateLayout();
+                App.RootFrame.UpdateLayout();
 
-            //reload UI
-            var reloadUri = (App.RootFrame.Content as PhoneApplicationPage).NavigationService.CurrentSource;
-            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri(reloadUri + "?no-cache=" + Guid.NewGuid(), UriKind.Relative));
+                //reload UI
+                var reloadUri = (App.RootFrame.Content as PhoneApplicationPage).NavigationService.CurrentSource;
+                (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri(reloadUri + "?no-cache=" + Guid.NewGuid(), UriKind.Relative));
 
-            //remove settings and map
-            NavigationService.RemoveBackEntry();
-            NavigationService.RemoveBackEntry();
+                //remove settings and map
+                NavigationService.RemoveBackEntry();
+                NavigationService.RemoveBackEntry();
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ChangeLanguage:" + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
 
         private void LanguageListPicker_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            switch ((((LanguageListPicker).SelectedItem) as Language).Type)
+            var lang = (LanguageListPicker).SelectedItem as Language;
+
+            if (lang == null)
+            {
+                Logs.Error.ShowError("LanguageListPicker_OnSelectionChanged: lang is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
+            }
+
+            switch (lang.Type)
             {
                 case PMFlagModel.FlagsType.EN:
                     ChangeLanguage("en-US");
@@ -219,14 +241,21 @@ namespace PinMessaging.View
 
         protected override void OnBackKeyPress(CancelEventArgs e)
         {
-            //if the language was changed
-            if (PMData.CurrentLanguge.Equals(Thread.CurrentThread.CurrentUICulture.Name) == false)
+            try
             {
-                PMData.CurrentLanguge = Thread.CurrentThread.CurrentUICulture.Name;
-                PMData.PinsList.Clear();
-                NavigationService.Navigate(Paths.MapView);
+                //if the language was changed
+                if (PMData.CurrentLanguge.Equals(Thread.CurrentThread.CurrentUICulture.Name) == false)
+                {
+                    PMData.CurrentLanguge = Thread.CurrentThread.CurrentUICulture.Name;
+                    PMData.PinsList.Clear();
+                    NavigationService.Navigate(Paths.MapView);
+                }
+                e.Cancel = false;
             }
-            e.Cancel = false;
+            catch (Exception exp) 
+            {
+                Logs.Error.ShowError("OnBackKeyPress: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
 
         private void LanguageListPicker_OnLoaded(object sender, RoutedEventArgs e)
@@ -244,10 +273,7 @@ namespace PinMessaging.View
 
         private void NewEmailTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (NewEmailTextBox.Text.Length == 0)
-                ModifyEmailButton.IsEnabled = false;
-            else
-                ModifyEmailButton.IsEnabled = true;
+            ModifyEmailButton.IsEnabled = NewEmailTextBox.Text.Length != 0;
         }
 
         private void LocationServicesCheckBox_OnChecked(object sender, RoutedEventArgs e)
@@ -273,18 +299,18 @@ namespace PinMessaging.View
 
         private void FeedbackSendButton_OnClick(object sender, RoutedEventArgs e)
         {
+            var feed = (FeedbackTypeListPicker).SelectedItem as FeedBack;
+
+            if (feed == null)
+            {
+                Logs.Error.ShowError("FeedbackSendButton_OnClick: feeed is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
+            }
+
             var sc = new PMSettingsController(RequestType.Feedback, UpdateUiFeedBack, UpdateUiFeedBack);
 
-            try
-            {
-                sc.PostFeedback(FromFeedbackTypeToString((((FeedbackTypeListPicker).SelectedItem) as FeedBack).Type), FeedbackTipTextBox.Text, "");
-                FeedbackSendButton.IsEnabled = false;
-            }
-            catch (Exception exp)
-            {
-                Logs.Error.ShowError("FeedbackSendButton_OnClick: could not get the Feedbacktype", exp, Logs.Error.ErrorsPriority.NotCritical);
-                FeedbackSendButton.IsEnabled = true;
-            }
+            sc.PostFeedback(FromFeedbackTypeToString(feed.Type), FeedbackTipTextBox.Text, "");
+            FeedbackSendButton.IsEnabled = false;
         }
 
         private void FeedbackTipTextBox_OnTextChanged(object sender, TextChangedEventArgs e)

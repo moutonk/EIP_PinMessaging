@@ -37,7 +37,10 @@ namespace PinMessaging.View
             }
 
             if (PMData.User == null)
+            {
+                Logs.Error.ShowError("PMUserProfil: user is null", Logs.Error.ErrorsPriority.NotCritical);
                 return;
+            }
 
             _user = PMData.User.Clone();
 
@@ -192,23 +195,34 @@ namespace PinMessaging.View
 
         private void ItemMyPinOnClick(object sender, RoutedEventArgs e)
         {
-            var historyPin = (sender as Button).Tag as PMHistoryModel;
+            var butt = sender as Button;
 
-            try
+            if (butt == null)
             {
-                if (historyPin.Latitude != null && historyPin.Longitude != null)
-                {
-                    var geoPos = new GeoCoordinate((double)historyPin.Latitude, (double)historyPin.Longitude);
-                    PMMapContactController.MapCenterOn(geoPos);
-                    if (NavigationService.CanGoBack == true)
-                        NavigationService.GoBack();
-                    PMMapContactController.CloseDownMenu();
-                }
+                Logs.Error.ShowError("ItemMyPinOnClick: butt is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
             }
-            catch (Exception exp)
+
+            var historyPin = butt.Tag as PMHistoryModel;
+
+            if (historyPin == null)
             {
-                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("ItemMyPinOnClick: historyPin is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
             }
+
+            if (historyPin.Latitude == null || historyPin.Longitude == null)
+            {
+                Logs.Error.ShowError("ItemMyPinOnClick: historyPin.Latitude or historyPin.Longitude is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
+            }
+
+            PMMapContactController.MapCenterOn(new GeoCoordinate((double)historyPin.Latitude, (double)historyPin.Longitude));
+
+            if (NavigationService.CanGoBack == true)
+                NavigationService.GoBack();
+
+            PMMapContactController.CloseDownMenu();
         }
 
         private void UpdateHistoryUi()
@@ -223,15 +237,29 @@ namespace PinMessaging.View
 
         private void RemoveFavoriteUi()
         {
-            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IconUri = new Uri("/Images/Icons/minus.png", UriKind.Relative);
-            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Unfriend;
-        }
+            try
+            {
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IconUri = new Uri("/Images/Icons/minus.png", UriKind.Relative);
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.Unfriend;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("RemoveFavoriteUi: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+         }
 
         private void AddFavoriteUI()
         {
-            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IconUri = new Uri("/Images/Icons/add.png", UriKind.Relative);
-            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.AddContacts;
-        }
+            try
+            {
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IconUri = new Uri("/Images/Icons/add.png", UriKind.Relative);
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).Text = AppResources.AddContacts;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("AddFavoriteUI: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+          }
 
         private void AddAsFavoriteButton_Post()
         {
@@ -282,7 +310,15 @@ namespace PinMessaging.View
         {
             UserProfilProgressBar.IsIndeterminate = lockStatus;
             UserProfilProgressBar.Visibility = (lockStatus ? Visibility.Visible : Visibility.Collapsed);
-            (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = !lockStatus;
+
+            try
+            {
+                (ApplicationBar.Buttons[0] as ApplicationBarIconButton).IsEnabled = !lockStatus;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("AddRemoveFavoriteButtonLock: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
 
         private void AddRemoveFavoriteButton_OnClick(object sender, EventArgs eventArgs)
@@ -304,7 +340,7 @@ namespace PinMessaging.View
             }
             else
             {
-                Logs.Error.ShowError("User is null", Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("AddRemoveFavoriteButton_OnClick: User is null", Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 
@@ -337,11 +373,6 @@ namespace PinMessaging.View
             {
                 Logs.Error.ShowError("PrivateMsgButton_OnClick: cannot go back in the map page", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
-        }
-
-        private void CreateHistoryEvents()
-        {
-            
         }
     }   
 }
