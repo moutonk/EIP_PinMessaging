@@ -107,8 +107,6 @@
     <Compile Include="Controller\PMMapController.cs" />
     <Compile Include="Controller\PMSignUpController.cs" />
     <Compile Include="Controller\PMUserController.cs" />
-    <Compile Include="Model\PMContactModel.cs" />
-    <Compile Include="Model\PMFavoriteModel.cs" />
     <Compile Include="Model\PMFlagModel.cs" />
     <Compile Include="Model\PMGradeModel.cs" />
     <Compile Include="Model\PMHistoryModel.cs" />

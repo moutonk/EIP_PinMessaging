@@ -1,13 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using PinMessaging.Controller;
 using PinMessaging.Model;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
@@ -18,94 +12,97 @@ namespace PinMessaging.Other
     {
         public void ParseJson(string json, RequestType currentRequestType)
         {
-            if (json != null)
+            if (json == null)
             {
-                try
+                Logs.Error.ShowError("ParseJson: json is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
+            }
+            
+            try
+            {
+                switch (currentRequestType)
                 {
-                    switch (currentRequestType)
-                    {
-                        case RequestType.SignIn:
-                            ParseSignIn(json);
-                            break;
+                    case RequestType.SignIn:
+                        ParseSignIn(json);
+                        break;
 
-                        case RequestType.CheckEmail:
-                            var item2 = JsonConvert.DeserializeObject<JArray>(json);
-                            PMData.IsEmailDispo = Boolean.Parse((string) item2[0]);
-                            break;
+                    case RequestType.CheckEmail:
+                        var item2 = JsonConvert.DeserializeObject<JArray>(json);
+                        PMData.IsEmailDispo = Boolean.Parse((string) item2[0]);
+                        break;
 
-                        case RequestType.SignUp:
-                            SignUp(json);
-                            break;
+                    case RequestType.SignUp:
+                        SignUp(json);
+                        break;
 
-                        case RequestType.GetPins:
-                            ParseGetPins(json);
-                            break;
+                    case RequestType.GetPins:
+                        ParseGetPins(json);
+                        break;
 
-                        case RequestType.CreatePin:
-                            ParseCreatePin(json);
-                            break;
+                    case RequestType.CreatePin:
+                        ParseCreatePin(json);
+                        break;
 
-                        case RequestType.CreatePinMessage:
-                            ParseCreatePinMessage(json);
-                            break;
+                    case RequestType.CreatePinMessage:
+                        ParseCreatePinMessage(json);
+                        break;
 
-                        case RequestType.GetPinMessages:
-                            ParseGetPinMessages(json);
-                            break;
+                    case RequestType.GetPinMessages:
+                        ParseGetPinMessages(json);
+                        break;
 
-                        case RequestType.GetPinsUser:
-                            ParseGetPinsUser(json);
-                            break;
+                    case RequestType.GetPinsUser:
+                        ParseGetPinsUser(json);
+                        break;
 
-                        case RequestType.DeletePin:
-                            DeletePin(json);
-                            break;
+                    case RequestType.DeletePin:
+                        DeletePin(json);
+                        break;
 
-                        case RequestType.ChangePassword:
-                            var item4 = JsonConvert.DeserializeObject<JArray>(json);
-                            PMData.IsChangePwdSuccess = Boolean.Parse((string) item4[0]);
-                            break;
+                    case RequestType.ChangePassword:
+                        var item4 = JsonConvert.DeserializeObject<JArray>(json);
+                        PMData.IsChangePwdSuccess = Boolean.Parse((string) item4[0]);
+                        break;
 
-                        case RequestType.ChangeEmail:
-                            var item5 = JsonConvert.DeserializeObject<JArray>(json);
-                            PMData.IsChangeEmailSuccess = Boolean.Parse((string)item5[0]);
-                            break;
+                    case RequestType.ChangeEmail:
+                        var item5 = JsonConvert.DeserializeObject<JArray>(json);
+                        PMData.IsChangeEmailSuccess = Boolean.Parse((string)item5[0]);
+                        break;
 
-                        case RequestType.User:
-                            ParseUser(json);
-                            break;
+                    case RequestType.User:
+                        ParseUser(json);
+                        break;
 
-                        case RequestType.ProfilPicture:
-                            ParseProfilPicture(json);
-                            break;
+                    case RequestType.ProfilPicture:
+                        ParseProfilPicture(json);
+                        break;
 
-                        case RequestType.SearchUser:
-                            SearchUser(json);
-                            break;
+                    case RequestType.SearchUser:
+                        SearchUser(json);
+                        break;
 
-                        case RequestType.AddFavoriteUser:
-                            var item6 = JsonConvert.DeserializeObject<JArray>(json);
-                            PMData.WasFavoriteAddedSuccess = Boolean.Parse((string)item6[0]);
-                            break;
+                    case RequestType.AddFavoriteUser:
+                        var item6 = JsonConvert.DeserializeObject<JArray>(json);
+                        PMData.WasFavoriteAddedSuccess = Boolean.Parse((string)item6[0]);
+                        break;
 
-                        case RequestType.RemoveFavoriteUser:
-                            var item7 = JsonConvert.DeserializeObject<JArray>(json);
-                            PMData.WasFavoriteRemovedSuccess = Boolean.Parse((string)item7[0]);
-                            break;
+                    case RequestType.RemoveFavoriteUser:
+                        var item7 = JsonConvert.DeserializeObject<JArray>(json);
+                        PMData.WasFavoriteRemovedSuccess = Boolean.Parse((string)item7[0]);
+                        break;
 
-                        case RequestType.UserHistory:
-                            ParseUserHistory(json);
-                            break;
-                    }
+                    case RequestType.UserHistory:
+                        ParseUserHistory(json);
+                        break;
                 }
-                catch (Exception e)
-                {
-                    Logs.Error.ShowError(e, Logs.Error.ErrorsPriority.NotCritical);
-                }
+            }
+            catch (Exception e)
+            {
+                Logs.Error.ShowError(e, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
 
-        private string[] MyParseProfilPicture(string json)
+        private static string[] MyParseProfilPicture(string json)
         {
             try
             {
@@ -122,7 +119,7 @@ namespace PinMessaging.Other
             return null;
         }
 
-        private void ParseProfilPicture(string json)
+        private static void ParseProfilPicture(string json)
         {
             try
             {
@@ -152,7 +149,7 @@ namespace PinMessaging.Other
             }
         }
 
-        private void ParseUserHistory(string json)
+        private static void ParseUserHistory(string json)
         {
             PMData.UserHistoryList = null;
             try
@@ -174,7 +171,7 @@ namespace PinMessaging.Other
             }
         }
 
-        private void ParseGetPinsUser(string json)
+        private static void ParseGetPinsUser(string json)
         {
             try
             {
@@ -204,7 +201,7 @@ namespace PinMessaging.Other
             }
         }
 
-        private void ParseSignIn(string json)
+        private static void ParseSignIn(string json)
         {
             try
             {
@@ -228,7 +225,7 @@ namespace PinMessaging.Other
             }
         }
 
-        private void DeletePin(string json)
+        private static void DeletePin(string json)
         {
             try
             {
@@ -254,7 +251,7 @@ namespace PinMessaging.Other
             }   
         }
 
-        private void ParseUser(string json)
+        private static void ParseUser(string json)
         {
             try
             {
@@ -284,7 +281,7 @@ namespace PinMessaging.Other
             }
         }
 
-        private void SearchUser(string json)
+        private static void SearchUser(string json)
         {
             try
             {
@@ -321,7 +318,7 @@ namespace PinMessaging.Other
             }
         }
 
-        private void ParseGetPinMessages(string json)
+        private static void ParseGetPinMessages(string json)
         {
             try
             {
@@ -337,7 +334,7 @@ namespace PinMessaging.Other
                         case 2:
                             var pinCollection = JsonConvert.DeserializeObject<List<PMPinCommentModel>>(item[1].ToString());
                             foreach (var pmMapPushpinModel in pinCollection)
-                                pmMapPushpinModel.ShowPinContent();
+                                pmMapPushpinModel.ShowPinCommentContent();
                             PMData.AddToQueuePinCommentsTmp(pinCollection);
                             break;
                     }
@@ -349,7 +346,7 @@ namespace PinMessaging.Other
             }
         }
 
-        private void ParseCreatePinMessage(string json)
+        private static void ParseCreatePinMessage(string json)
         {
             try
             {
@@ -379,7 +376,7 @@ namespace PinMessaging.Other
             }
         }
 
-        private void SignUp(string json)
+        private static void SignUp(string json)
         {
             try
             {
@@ -396,7 +393,7 @@ namespace PinMessaging.Other
             }
         }
 
-        private void ParseCreatePin(string json)
+        private static void ParseCreatePin(string json)
         {
             try
             {
@@ -431,7 +428,7 @@ namespace PinMessaging.Other
             }
         }
 
-        public  void ParseGetPins(string json)
+        public void ParseGetPins(string json)
         {
             try
             {

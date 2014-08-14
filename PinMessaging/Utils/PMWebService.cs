@@ -5,7 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading;
 using System.Windows.Media.Imaging;
 using PinMessaging.Other;
 using PinMessaging.Utils.WebService;
@@ -81,11 +80,11 @@ namespace PinMessaging.Utils
     {
         private class RequestObject
         {
-            public HttpRequestType HttpReqType;
-            public RequestType ReqType;
-            public SyncType SyncType;
-            public Dictionary<string, string> Args;
-            public Dictionary<string, string> Header;
+            public readonly HttpRequestType HttpReqType;
+            public readonly RequestType ReqType;
+            public readonly SyncType SyncType;
+            public readonly Dictionary<string, string> Args;
+            public readonly Dictionary<string, string> Header;
 
             public RequestObject(HttpRequestType httpReqType, RequestType reqType, SyncType syncType, Dictionary<string, string> args, Dictionary<string, string> header)
             {
@@ -167,7 +166,7 @@ namespace PinMessaging.Utils
             PMData.NetworkProblem = false;
 
             //Debug output
-            Logs.Output.ShowOutput(Environment.NewLine + "SendRequest: " + httpReqType.ToString() + " " + reqType.ToString() + " " + syncType.ToString() + " " + args.Aggregate("",(current, keyValuePair) =>current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
+            Logs.Output.ShowOutput(Environment.NewLine + "SendRequest: " + httpReqType + " " + reqType + " " + syncType + " " + args.Aggregate("",(current, keyValuePair) =>current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
 
             //convert the dictionnary to a string
             var dicoToString = FormateDictionnaryToString(args);

@@ -30,6 +30,12 @@ namespace PinMessaging.Other
 
         private void geolocator_StatusChanged(Geolocator sender, StatusChangedEventArgs args)
         {
+            if (args == null)
+            {
+                Logs.Error.ShowError("geolocator_StatusChanged: args is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
+            }
+
             switch (args.Status)
             {
                 case PositionStatus.Ready:
@@ -81,23 +87,29 @@ namespace PinMessaging.Other
         {
             //Logs.Output.ShowOutput("New pos dispo: latitude:" + args.Position.Coordinate.Latitude + " longitude:" + args.Position.Coordinate.Longitude);
 
+            if (args == null || args.Position == null || args.Position.Coordinate == null)
+            {
+                Logs.Error.ShowError("geolocator_PositionChanged: args is null", Logs.Error.ErrorsPriority.NotCritical);
+                return;
+            }
+
             _mapView.UpdateLocationUi();
 
-            if (_firstPositionChanged == false)
-            {
-                _mapView.UpdateMapCenter();
-                _firstPositionChanged = true;
+            if (_firstPositionChanged == true)
+                return;
 
-                if (PMData.AppMode == PMData.ApplicationMode.Normal)
-                {
-                    var pc = new PMPinController(RequestType.GetPins, null);
-                    pc.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Latitude.ToString()),
-                               Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Longitude.ToString()));
+            _mapView.UpdateMapCenter();
+            _firstPositionChanged = true;
 
-                    var pc2 = new PMPinController(RequestType.GetPinsUser, null);
-                    pc2.GetPinsUser();
-                }
-            }
+            if (PMData.AppMode != PMData.ApplicationMode.Normal)
+                return;
+
+            var pc = new PMPinController(RequestType.GetPins, null);
+            pc.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Latitude.ToString()),
+                Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Longitude.ToString()));
+
+            var pc2 = new PMPinController(RequestType.GetPinsUser, null);
+            pc2.GetPinsUser();
         }
 
         public async void UpdateLocation()

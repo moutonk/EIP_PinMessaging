@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using Newtonsoft.Json;
 using PinMessaging.Utils;
 
@@ -17,11 +18,18 @@ namespace PinMessaging.Model
         [JsonProperty] [DefaultValue(null)] public string Up { get; set; }
         [JsonProperty] [DefaultValue(null)] public string Down { get; set; }
 
-        public void ShowPinContent()
+        public void ShowPinCommentContent()
         {
-            Logs.Output.ShowOutput("id:" + Id + " content:" + Content + " contentType:" + ContentType.ToString() +
-                                   " CreatedTime:" + CreatedTime + " author:" + Author + " modifiedTime:" + ModifiedTime +
-                                   " authorId:" + AuthorId + " up:" + Up + " down:" + Down);
+            try
+            {
+                Logs.Output.ShowOutput("id:" + Id + " content:" + Content + " contentType:" + ContentType +
+                               " CreatedTime:" + CreatedTime + " author:" + Author + " modifiedTime:" + ModifiedTime +
+                               " authorId:" + AuthorId + " up:" + Up + " down:" + Down);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ShowPinCommentContent: invalid content: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
     }
 }

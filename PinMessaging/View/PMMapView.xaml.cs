@@ -1249,7 +1249,7 @@ namespace PinMessaging.View
                 return;
             }
 
-            var userId = tb.Tag as int?;
+            var userId = tb.Tag as string;
 
             if (userId == null)
             {
@@ -1257,7 +1257,7 @@ namespace PinMessaging.View
                 return;
             }
 
-            ContactNameOnTapSub(userId.ToString());
+            ContactNameOnTapSub(userId);
         }
 
         private static string GetPinTypeName(PMPinModel.PinsType type, bool isPrivate)

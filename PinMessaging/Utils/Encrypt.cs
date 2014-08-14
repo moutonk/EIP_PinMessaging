@@ -10,12 +10,26 @@ namespace PinMessaging.Utils
         public class SHA1Core
         {
             public static string ConvertToSHA1(string toConvert)
-            {               
-                SHA1 sha1 = new SHA1Managed();
-        
-                sha1.ComputeHash(Encoding.UTF8.GetBytes(toConvert));
- 
-                return BitConverter.ToString(sha1.Hash).Replace("-", "").ToLowerInvariant();
+            {
+                if (toConvert == null)
+                {
+                    Logs.Error.ShowError("ConvertToSHA1: toConvert is null", Logs.Error.ErrorsPriority.NotCritical);
+                    return null;
+                }
+
+                try
+                {
+                    SHA1 sha1 = new SHA1Managed();
+
+                    sha1.ComputeHash(Encoding.UTF8.GetBytes(toConvert));
+
+                    return BitConverter.ToString(sha1.Hash).Replace("-", "").ToLowerInvariant();
+                }
+                catch (Exception exp)
+                {
+                    Logs.Error.ShowError("ConvertToSHA1: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+                }
+                return null;
             }
         }
 

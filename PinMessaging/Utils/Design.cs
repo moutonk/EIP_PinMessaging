@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Globalization;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using PinMessaging.Other;
-using PinMessaging.Utils;
 
 namespace PinMessaging.Utils
 {
@@ -80,26 +78,26 @@ namespace PinMessaging.Utils
         {
             var pic = PMData.GetUserProfilPicture(userId);
 
-            if (pic != null)
-            {
-                pic.CreateStream();
-                if (pic.Img != null)
-                    imgUi.Source = pic.Img;
-                return true;
-            }
-            return false;
+            if (pic == null)
+                return false;
+
+            pic.CreateStream();
+            if (pic.Img != null)
+                imgUi.Source = pic.Img;
+            return true;
         }
 
         public static BitmapImage ProfilPictureUpdateUi(BitmapImage imgUi, string userId)
         {
             var pic = PMData.GetUserProfilPicture(userId);
 
-            if (pic != null)
-            {
-                pic.CreateStream();
-                if (pic.Img != null)
-                    return imgUi;
-            }
+            if (pic == null)
+                return null;
+
+            pic.CreateStream();
+            
+            if (pic.Img != null)
+                return imgUi;
             return null;
         }
     }

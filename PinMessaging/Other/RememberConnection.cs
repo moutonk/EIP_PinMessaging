@@ -7,18 +7,6 @@ namespace PinMessaging.Other
 {
     class RememberConnection
     {
-        public class ConnectionData
-        {
-            //public ConnectionData(string email, string pwd)
-            //{
-          //      Email = email;
-            //    Password = pwd;
-            //}
-
-            //public string Email { get; set; }
-            //public string Password { get; set; }
-        }
-
         private const string ConnectionInfos = "pinmessagingConnectionInfos";
         private const string FirstConnection = "pinmessagingFirstConnection";
         private const string AccessLocation = "pinmessagingAccessLocation";
@@ -26,68 +14,132 @@ namespace PinMessaging.Other
 
         public static void ResetAll()
         {
-            IsolatedStorageSettings.ApplicationSettings.Remove(ConnectionInfos);
-            IsolatedStorageSettings.ApplicationSettings.Remove(FirstConnection);
-            IsolatedStorageSettings.ApplicationSettings.Remove(AccessLocation);
-            IsolatedStorageSettings.ApplicationSettings.Remove(AuthId);
-            IsolatedStorageSettings.ApplicationSettings.Save();
+            try
+            {
+                IsolatedStorageSettings.ApplicationSettings.Remove(ConnectionInfos);
+                IsolatedStorageSettings.ApplicationSettings.Remove(FirstConnection);
+                IsolatedStorageSettings.ApplicationSettings.Remove(AccessLocation);
+                IsolatedStorageSettings.ApplicationSettings.Remove(AuthId);
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ResetAll: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
 
         public static bool IsFirstConnection()
         {
-            return (IsolatedStorageSettings.ApplicationSettings.Contains(FirstConnection) == false);
+            try
+            {
+                return (IsolatedStorageSettings.ApplicationSettings.Contains(FirstConnection) == false);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("IsFirstConnection: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+            return true;
         }
 
         public static void SetFirstConnection()
         {
-            if (IsolatedStorageSettings.ApplicationSettings.Contains(FirstConnection) == true)
+            try
             {
-                IsolatedStorageSettings.ApplicationSettings[FirstConnection] = false;
+                if (IsolatedStorageSettings.ApplicationSettings.Contains(FirstConnection) == true)
+                    IsolatedStorageSettings.ApplicationSettings[FirstConnection] = false;
+                else
+                    IsolatedStorageSettings.ApplicationSettings[FirstConnection] = true;
+
+                IsolatedStorageSettings.ApplicationSettings.Save();
             }
-            else
+            catch (Exception exp)
             {
-                IsolatedStorageSettings.ApplicationSettings[FirstConnection] = true;
+                Logs.Error.ShowError("SetFirstConnection: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
             }
-            IsolatedStorageSettings.ApplicationSettings.Save();
         }
 
         public static void SaveAuthId(string id)
         {
-            IsolatedStorageSettings.ApplicationSettings[AuthId] = id;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+            try
+            {
+                IsolatedStorageSettings.ApplicationSettings[AuthId] = id;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("SaveAuthId: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
 
         public static void SaveLoginPwd(PMLogInModel model)
         {
-            IsolatedStorageSettings.ApplicationSettings[ConnectionInfos] = model;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+            try
+            {
+                IsolatedStorageSettings.ApplicationSettings[ConnectionInfos] = model;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("SaveLoginPwd: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
 
         public static string GetAuthId()
         {
-            return IsolatedStorageSettings.ApplicationSettings.Contains(AuthId) == true
-                ? (string)IsolatedStorageSettings.ApplicationSettings[AuthId]
-                : null;
+            try
+            {
+                return IsolatedStorageSettings.ApplicationSettings.Contains(AuthId) == true
+               ? (string)IsolatedStorageSettings.ApplicationSettings[AuthId]
+               : null;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("GetAuthId: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+            return null;
         }
 
         public static PMLogInModel GetLoginPwd()
         {
-            return IsolatedStorageSettings.ApplicationSettings.Contains(ConnectionInfos) == true
-                ? (PMLogInModel)IsolatedStorageSettings.ApplicationSettings[ConnectionInfos]
-                : null;
+            try
+            {
+                return IsolatedStorageSettings.ApplicationSettings.Contains(ConnectionInfos) == true
+                    ? (PMLogInModel)IsolatedStorageSettings.ApplicationSettings[ConnectionInfos]
+                    : null;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("GetLoginPwd: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+            return null;
         }
 
         public static void SaveAccessLocation(bool status)
         {
-            IsolatedStorageSettings.ApplicationSettings[AccessLocation] = status;
-            IsolatedStorageSettings.ApplicationSettings.Save();
+            try
+            {
+                IsolatedStorageSettings.ApplicationSettings[AccessLocation] = status;
+                IsolatedStorageSettings.ApplicationSettings.Save();
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("SaveAccessLocation: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
         }
 
         public static bool? GetAccessLocation()
         {
-            return IsolatedStorageSettings.ApplicationSettings.Contains(AccessLocation) == true
-                ? (bool)IsolatedStorageSettings.ApplicationSettings[AccessLocation]
-                : (bool?)null;
+            try
+            {
+                return IsolatedStorageSettings.ApplicationSettings.Contains(AccessLocation) == true
+                     ? (bool)IsolatedStorageSettings.ApplicationSettings[AccessLocation]
+                     : (bool?)null;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("GetAccessLocation: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+            return null;
         }
     }
 }

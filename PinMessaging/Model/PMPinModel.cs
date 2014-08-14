@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Device.Location;
 using System.Globalization;
@@ -8,7 +7,6 @@ using System.Runtime.Serialization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using Microsoft.Phone.Controls;
 using Newtonsoft.Json;
 using PinMessaging.Controller;
 using PinMessaging.Utils;
@@ -66,44 +64,30 @@ namespace PinMessaging.Model
                        [DefaultValue(null)] public DateTime Date { get; set; }
         [JsonProperty] [DefaultValue(null)] public GeoCoordinate GeoCoord { get; set; }
 
-        private void ConvertTypeToEnum()
-        {
-            /*if (PinType != null)
-            {
-                if (PinType.Equals("Public_msg"))
-                    PinTypeEnum = PinsType.PublicMessage;
-                else if (PinType.Equals("Private_msg"))
-                    PinTypeEnum = PinsType.PrivateMessage;
-                else if (PinType.Equals("Event"))
-                    PinTypeEnum = PinsType.Event;
-                else if (PinType.Equals("View_point"))
-                    PinTypeEnum = PinsType.View;
-                else
-                    PinTypeEnum = PinsType.PrivateMessage;
-            }*/
-        }
-
         private void ConvertGeoPosToInteger()
         {
             try
             {
                 if (Latitude != null && Longitude != null)
-                    GeoCoord = new GeoCoordinate(Double.Parse(Latitude, CultureInfo.InvariantCulture),
-                                                 Double.Parse(Longitude, CultureInfo.InvariantCulture));
+                    GeoCoord = new GeoCoordinate(Double.Parse(Latitude, CultureInfo.InvariantCulture), Double.Parse(Longitude, CultureInfo.InvariantCulture));
             }
             catch (Exception exp)
             {
-                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Error.ShowError("ConvertGeoPosToInteger:", exp, Logs.Error.ErrorsPriority.NotCritical);
                 GeoCoord = new GeoCoordinate(0, 0);
             }
         }
 
         private void ConnectImg()
         {
-            if (Private == false)
-                PinImg = new Image { Source = Paths.PinsMapImg[PinType] };
-            else
-                PinImg = new Image { Source = Paths.PinsMapImg[PinType + 6] };
+            try
+            {
+                PinImg = Private == false ? new Image { Source = Paths.PinsMapImg[PinType] } : new Image { Source = Paths.PinsMapImg[Utils.Utils.PinPrivateToPinType(this)] };
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ConnectImg: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
             PinImg.Tap += img_Tap;
         }
 
@@ -166,12 +150,9 @@ namespace PinMessaging.Model
         private void CompleteDataMember(StreamingContext context)
         {
             ConvertGeoPosToInteger();
-            ConvertTypeToEnum();
 
             if (PinType == PinsType.Event)
                 CompleteDateAndTime();
-           // if (Location.ContainsKey("name") == true)
-            //   Title = Location["name"];
 
             //if it's the main thread
             if (Deployment.Current.Dispatcher.CheckAccess() == false)

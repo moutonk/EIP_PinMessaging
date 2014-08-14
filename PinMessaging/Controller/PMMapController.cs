@@ -105,7 +105,7 @@ namespace PinMessaging.Controller
             };
 
             //hidden
-            if (PMData.HiddenTypesList.Contains(Utils.Utils.PinToPinType(pin)))
+            if (PMData.HiddenTypesList.Contains(Utils.Utils.PinPrivateToPinType(pin)))
             {
                 PMData.FilterMapOverlayExcessItemList.Add(overlay);
             }
@@ -140,7 +140,7 @@ namespace PinMessaging.Controller
                         if (PMData.MapLayerContainer[pos].Content.IsTypeOf(uselessVar) == false || (PMData.MapLayerContainer[pos].Content as Image).Tag == null)
                             continue;
 
-                        if (type == Utils.Utils.PinToPinType((PMData.MapLayerContainer[pos].Content as Image).Tag as PMPinModel))
+                        if (type == Utils.Utils.PinPrivateToPinType((PMData.MapLayerContainer[pos].Content as Image).Tag as PMPinModel))
                         {
                             var tmpItem = PMData.MapLayerContainer[pos];
                             PMData.MapLayerContainer.RemoveAt(pos);
@@ -157,7 +157,7 @@ namespace PinMessaging.Controller
                         if (PMData.FilterMapOverlayExcessItemList[pos].Content.IsTypeOf(uselessVar) == false || (PMData.FilterMapOverlayExcessItemList[pos].Content as Image).Tag == null)
                             continue;
 
-                        if (type == Utils.Utils.PinToPinType((PMData.FilterMapOverlayExcessItemList[pos].Content as Image).Tag as PMPinModel))
+                        if (type == Utils.Utils.PinPrivateToPinType((PMData.FilterMapOverlayExcessItemList[pos].Content as Image).Tag as PMPinModel))
                         {
                             var tmpItem = PMData.FilterMapOverlayExcessItemList[pos];
                             PMData.FilterMapOverlayExcessItemList.RemoveAt(pos);

@@ -10,12 +10,10 @@ namespace PinMessaging.Utils
 {
     public static class Utils
     {
-        public static PMPinModel.PinsType PinToPinType(PMPinModel pin)
+        public static PMPinModel.PinsType PinPrivateToPinType(PMPinModel pin)
         {
             if (pin.Private == true)
                 return pin.PinType + 6;
-            if (pin.Private == false)
-                return pin.PinType - 6;
             return pin.PinType;
         }
 
@@ -28,7 +26,7 @@ namespace PinMessaging.Utils
 
         public static double ConvertDoubleCommaToPoint(string d)
         {
-            string s = d.Replace(',', '.');
+            var s = d.Replace(',', '.');
             double num = 0;
 
             try
@@ -111,11 +109,7 @@ namespace PinMessaging.Utils
 
         public static bool PasswordSyntaxCheck(string pwd)
         {
-            if (pwd.Length < 6 || pwd.Length > 20)
-            {
-                return false;
-            }
-            return true;
+            return pwd.Length >= 6 && pwd.Length <= 20;
         }
 
         public static DateTime ConvertFromUnixTimestamp(double? timestamp)

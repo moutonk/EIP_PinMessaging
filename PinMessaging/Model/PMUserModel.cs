@@ -1,12 +1,6 @@
-﻿
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
-using System.Runtime.Serialization;
-using System.Windows.Controls;
-using System.Windows.Interop;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using Newtonsoft.Json;
 using PinMessaging.Other;
 using PinMessaging.Utils;
