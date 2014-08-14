@@ -242,6 +242,7 @@
     <Content Include="Images\Icons\dislike_orange_icon.png" />
     <Content Include="Images\Icons\dislike_white_icon%402x.png" />
     <Content Include="Images\Icons\dislike_white_icon.png" />
+    <Content Include="Images\Icons\edit.png" />
     <Content Include="Images\Icons\envelop_orange_icon%402x.png" />
     <Content Include="Images\Icons\envelop_orange_icon.png" />
     <Content Include="Images\Icons\envelop_white_icon%402x.png" />

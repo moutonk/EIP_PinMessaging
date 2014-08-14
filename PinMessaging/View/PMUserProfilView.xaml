@@ -78,9 +78,11 @@
             </phone:PivotItem>
 
             <phone:PivotItem Name="StatsPivotItem" Header="{Binding LocalizedResources.History, Source={StaticResource LocalizedStrings}}" Width="470" Height="700">
-                <Grid x:Name="UserHistoryGrid" >
-                    <StackPanel Name="HistoryItemsStackPanel" Orientation="Vertical"/>
-                </Grid>
+                <ScrollViewer>
+                    <Grid x:Name="UserHistoryGrid" >
+                        <StackPanel Name="HistoryItemsStackPanel" Orientation="Vertical"/>
+                    </Grid>
+                </ScrollViewer>
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

@@ -125,6 +125,9 @@ namespace PinMessaging.View
                 case PMHistoryModel.HistoryType.CreatePin:
                     return new BitmapImage(new Uri("/Images/Logos/3_new_logo_white.png", UriKind.Relative));
 
+                case PMHistoryModel.HistoryType.ChangePin:
+                    return new BitmapImage(new Uri("/Images/Icons/edit.png", UriKind.Relative));
+
                 case PMHistoryModel.HistoryType.DeletePin:
                     return new BitmapImage(new Uri("/Images/Icons/cross_white_icon@2x.png", UriKind.Relative));
                 
@@ -217,6 +220,7 @@ namespace PinMessaging.View
                 return;
             }
 
+            Logs.Output.ShowOutput("Center on: lat" + (double)historyPin.Latitude + " long: " + (double)historyPin.Longitude);
             PMMapContactController.MapCenterOn(new GeoCoordinate((double)historyPin.Latitude, (double)historyPin.Longitude));
 
             if (NavigationService.CanGoBack == true)
