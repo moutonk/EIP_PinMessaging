@@ -314,6 +314,10 @@
           <source>You don't have any contacts. You cannot create private Pins. Start by adding people to your contacts</source>
           <target state="new">You don't have any contacts. You cannot create private Pins. Start by adding people to your contacts</target>
         </trans-unit>
+        <trans-unit id="Resx/AddComment" translate="yes" xml:space="preserve">
+          <source>Add a comment</source>
+          <target state="new">Add a comment</target>
+        </trans-unit>
         <trans-unit id="Resx/PinsDisplayed" translate="yes" xml:space="preserve">
           <source>pins displayed on the map</source>
           <target state="new">pins displayed on the map</target>

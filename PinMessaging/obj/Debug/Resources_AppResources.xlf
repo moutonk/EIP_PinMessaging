@@ -596,6 +596,10 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <source>You don't have any contacts. You cannot create private Pins. Start by adding people to your contacts</source>
           <target state="new">You don't have any contacts. You cannot create private Pins. Start by adding people to your contacts</target>
         </trans-unit>
+        <trans-unit id="Resx/AddComment" translate="yes" xml:space="preserve">
+          <source>Add a comment</source>
+          <target state="new">Add a comment</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -1730,7 +1730,7 @@ namespace PinMessaging.View
             ApplicationBar.Buttons.Add(button1);
             ApplicationBar.Buttons.Add(button2);
         }
-
+    
         private void PinCommentCancelButton_OnClick(object sender, EventArgs e)
         {
             CommentChatBubble.Text = "";
@@ -1738,16 +1738,14 @@ namespace PinMessaging.View
             CreateAppBarMap();
 
             ApplicationBar.IsVisible = _isUnderMenuOpen == false;
-
             Focus();
         }
 
         private void PinCommentContentTextBox_OnLostFocus(object sender, RoutedEventArgs e)
         {
-            if (CommentChatBubble.Text.Length == 0)
+            if (CommentChatBubble.Text.Trim().Length == 0)
                 PinCommentTipContentTextBox.Visibility = Visibility.Visible;
-            else
-                ApplicationBar.IsVisible = false;
+            ApplicationBar.IsVisible = false;
         }
 
         private void PinCommentTipContentTextBox_OnTap(object sender, GestureEventArgs e)
@@ -1759,10 +1757,10 @@ namespace PinMessaging.View
         {
             CreateAppBarComment();
 
-            LockUnlockCommentCheck(false);
+            LockUnlockCommentCheck(CommentChatBubble.Text.Trim().Length != 0);
 
-            ApplicationBar.IsVisible = true;
             PinCommentTipContentTextBox.Visibility = Visibility.Collapsed;
+            ApplicationBar.IsVisible = true;
         }
 
         private void LockUnlockCommentCheck(bool enable)
@@ -1781,6 +1779,8 @@ namespace PinMessaging.View
         private void CommentChatBubble_OnTextInput(object sender, TextChangedEventArgs textChangedEventArgs)
         {
             LockUnlockCommentCheck(CommentChatBubble.Text.Length != 0);
+            //if (ApplicationBar.IsVisible == false)
+            //    ApplicationBar.IsVisible = true;
         }
     }
 }

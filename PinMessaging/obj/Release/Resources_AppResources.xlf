@@ -389,16 +389,16 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <target state="new">You acquire the Conqueror badge when you create 50 pins. Keep going!</target>
         </trans-unit>
         <trans-unit id="Resx/BadgePointCopper" translate="yes" xml:space="preserve">
-          <source>You acquire the Newbie badge when you get 10 points. Keep going!</source>
-          <target state="new">You acquire the Newbie badge when you get 10 points. Keep going!</target>
+          <source>You acquire the Newbie badge when you get between 0 and 50 points. Keep going!</source>
+          <target state="new">You acquire the Newbie badge when you get between 0 and 50 points. Keep going!</target>
         </trans-unit>
         <trans-unit id="Resx/BadgePointGold" translate="yes" xml:space="preserve">
-          <source>You acquire the Explorer badge when you get 50 points. Good job!</source>
-          <target state="new">You acquire the Explorer badge when you get 50 points. Good job!</target>
+          <source>You acquire the Explorer badge when you get more than 500 points. Good job!</source>
+          <target state="new">You acquire the Explorer badge when you get more than 500 points. Good job!</target>
         </trans-unit>
         <trans-unit id="Resx/BadgePointSilver" translate="yes" xml:space="preserve">
-          <source>You acquire Adventurer badge when you get 25 points. Keep going! The gold is not far!</source>
-          <target state="new">You acquire Adventurer badge when you get 25 points. Keep going! The gold is not far!</target>
+          <source>You acquire Adventurer badge when you get between 50 and 500 points. Keep going! The gold is not far!</source>
+          <target state="new">You acquire Adventurer badge when you get between 50 and 500 points. Keep going! The gold is not far!</target>
         </trans-unit>
         <trans-unit id="Resx/BadgesTitle" translate="yes" xml:space="preserve">
           <source>BADGES</source>
@@ -523,6 +523,82 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
         <trans-unit id="Resx/NoResults" translate="yes" xml:space="preserve">
           <source>No results</source>
           <target state="new">No results</target>
+        </trans-unit>
+        <trans-unit id="Resx/CreatePinDescription" translate="yes" xml:space="preserve">
+          <source>Please enter a description for your Pin</source>
+          <target state="new">Please enter a description for your Pin</target>
+        </trans-unit>
+        <trans-unit id="Resx/CreatePinDescriptionTitle" translate="yes" xml:space="preserve">
+          <source>Title of your Pin</source>
+          <target state="new">Title of your Pin</target>
+        </trans-unit>
+        <trans-unit id="Resx/EventDateTimeTitle" translate="yes" xml:space="preserve">
+          <source>event date and time</source>
+          <target state="new">event date and time</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinCreateReceiver" translate="yes" xml:space="preserve">
+          <source>chose receipients</source>
+          <target state="new">chose receipients</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryAddFavoriteLocation" translate="yes" xml:space="preserve">
+          <source>New favorite</source>
+          <target state="new">New favorite</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryAddFavoriteUser" translate="yes" xml:space="preserve">
+          <source>New favorite</source>
+          <target state="new">New favorite</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryChangePin" translate="yes" xml:space="preserve">
+          <source>Pin modified</source>
+          <target state="new">Pin modified</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryCommentPin" translate="yes" xml:space="preserve">
+          <source>New comment</source>
+          <target state="new">New comment</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryCreatePin" translate="yes" xml:space="preserve">
+          <source>Pin created</source>
+          <target state="new">Pin created</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryDeletePin" translate="yes" xml:space="preserve">
+          <source>Pin deleted</source>
+          <target state="new">Pin deleted</target>
+        </trans-unit>
+        <trans-unit id="Resx/HistoryNewUser" translate="yes" xml:space="preserve">
+          <source>Welcome on PinMessaging!</source>
+          <target state="new">Welcome on PinMessaging!</target>
+        </trans-unit>
+        <trans-unit id="Resx/SeeOnMap" translate="yes" xml:space="preserve">
+          <source>See on map</source>
+          <target state="new">See on map</target>
+        </trans-unit>
+        <trans-unit id="Resx/None" translate="yes" xml:space="preserve">
+          <source>None</source>
+          <target state="new">None</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinsDisplayed" translate="yes" xml:space="preserve">
+          <source>pins displayed on the map</source>
+          <target state="new">pins displayed on the map</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinsNotDisplayed" translate="yes" xml:space="preserve">
+          <source>pins hidden on the map</source>
+          <target state="new">pins hidden on the map</target>
+        </trans-unit>
+        <trans-unit id="Resx/FilterPageTitle" translate="yes" xml:space="preserve">
+          <source>filter</source>
+          <target state="new">filter</target>
+        </trans-unit>
+        <trans-unit id="Resx/PinDisplayedInfos" translate="yes" xml:space="preserve">
+          <source>Click on the Pins underneath to display or hide them on the map</source>
+          <target state="new">Click on the Pins underneath to display or hide them on the map</target>
+        </trans-unit>
+        <trans-unit id="Resx/NoContacts" translate="yes" xml:space="preserve">
+          <source>You don't have any contacts. You cannot create private Pins. Start by adding people to your contacts</source>
+          <target state="new">You don't have any contacts. You cannot create private Pins. Start by adding people to your contacts</target>
+        </trans-unit>
+        <trans-unit id="Resx/AddComment" translate="yes" xml:space="preserve">
+          <source>Add a comment</source>
+          <target state="new">Add a comment</target>
         </trans-unit>
       </group>
     </body>

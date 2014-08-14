@@ -283,8 +283,10 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
-                        
-                        <TextBlock x:Name="DownMenuTitle" FontSize="60" Grid.Column="0" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="" VerticalAlignment="Center" Height="80" Width="405" Margin="20,-10,0,0"/>
+
+                        <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Auto">
+                            <TextBlock x:Name="DownMenuTitle" FontSize="60"  Foreground="White" HorizontalAlignment="Left" Text="" VerticalAlignment="Center" Height="80"  Margin="20,-10,0,0"/>
+                        </ScrollViewer>
                         <Button x:Name="CloseMenuDownButton" Content="X" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="64" Width="60" BorderThickness="0" Click="CloseMenuDownButton_Click"/>
                     </Grid>
 
@@ -351,7 +353,7 @@
                             <StackPanel Grid.Row="1" Margin="20,10,20,0">
                                 <controls:ChatBubble ChatBubbleDirection="LowerLeft" Background="DarkGray" BorderBrush="DarkGray">
                                     <controls:ChatBubble.Content>
-                                            <TextBlock x:Name="PinMessageDescriptionTextBlock" Margin="0,0,0,5" Foreground="Black" TextWrapping="Wrap" FontSize="20" Text="Ceci est juste un text ecrit en brut pour faire un test sur l'ecran. Je saiue ligne et voir si tout est bon.">
+                                            <TextBlock x:Name="PinMessageDescriptionTextBlock" Margin="0,0,0,5" Foreground="Black" TextWrapping="Wrap" FontSize="20">
                                             </TextBlock>
                                     </controls:ChatBubble.Content>
                                 </controls:ChatBubble>
@@ -379,8 +381,8 @@
 
                             <StackPanel Grid.Row="4" Margin="20,10,20,0">
                                 <TextBlock x:Name="CommentTitleDescriptionTextBlock" VerticalAlignment="Center" Margin="0,0,0,0" FontSize="35" Text="{Binding LocalizedResources.Comments, Source={StaticResource LocalizedStrings}}"></TextBlock>
-                                <controls:ChatBubbleTextBox Name="CommentChatBubble" TextChanged="CommentChatBubble_OnTextInput" TextWrapping="Wrap" ChatBubbleDirection="LowerRight" LostFocus="PinCommentContentTextBox_OnLostFocus" GotFocus="PinCommentContentTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></controls:ChatBubbleTextBox>
-                                <TextBlock x:Name="PinCommentTipContentTextBox" Tap="PinCommentTipContentTextBox_OnTap" TextWrapping="Wrap" Text="Ajouter un commentaire" VerticalAlignment="Center" Foreground="Black" FontSize="20" Margin="10,-75,29,0" ></TextBlock>
+                                <controls:ChatBubbleTextBox Name="CommentChatBubble" InputScope="Text" TextChanged="CommentChatBubble_OnTextInput"  TextWrapping="Wrap" ChatBubbleDirection="LowerRight" LostFocus="PinCommentContentTextBox_OnLostFocus" GotFocus="PinCommentContentTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></controls:ChatBubbleTextBox>
+                                <TextBlock x:Name="PinCommentTipContentTextBox" Tap="PinCommentTipContentTextBox_OnTap" TextWrapping="Wrap" Text="{Binding LocalizedResources.AddComment, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="Black" FontSize="20" Margin="10,-75,29,0" ></TextBlock>
                                 <TextBlock Name="MeTextBlock" Text="{Binding LocalizedResources.You, Source={StaticResource LocalizedStrings}}" TextAlignment="Right" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
                                 <StackPanel Name="CommentStackPanel"/>
                             </StackPanel>
@@ -406,9 +408,9 @@
                             <controls:ChatBubble Grid.Row="2" ChatBubbleDirection="LowerLeft" Background="DarkGray" BorderBrush="DarkGray">
                                 <controls:ChatBubble.Content>
                                     <StackPanel Orientation="Vertical">
-                                        <TextBox Name="PinCreateTitleTextBox" MaxLength="15" Margin="-10,0,0,0" TextWrapping="Wrap" FontSize="20" TextChanged="PinCreateTitleTextBox_OnTextChanged" Text="{Binding LocalizedResources.CreatePinDescriptionTitle, Source={StaticResource LocalizedStrings}}" LostFocus="PinCreateTitleTextBox_OnLostFocus" GotFocus="PinCreateTitleTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray" Width="429"></TextBox>
+                                        <TextBox Name="PinCreateTitleTextBox" InputScope="Text" MaxLength="25" Margin="-10,0,0,0" TextWrapping="Wrap" FontSize="20" TextChanged="PinCreateTitleTextBox_OnTextChanged" Text="{Binding LocalizedResources.CreatePinDescriptionTitle, Source={StaticResource LocalizedStrings}}" LostFocus="PinCreateTitleTextBox_OnLostFocus" GotFocus="PinCreateTitleTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray" Width="429"></TextBox>
                                         <toolkit:Separator Margin="10,0,10,0"></toolkit:Separator>
-                                        <TextBox Name="PinCreateMessageTextBox" MaxLength="200" Margin="-10,0,0,0" TextWrapping="Wrap" FontSize="20" TextChanged="PinCreateMessageTextBox_OnTextChanged" Text="{Binding LocalizedResources.CreatePinDescription, Source={StaticResource LocalizedStrings}}" LostFocus="PinCreateMessageTextBox_OnLostFocus" GotFocus="PinCreateMessageTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></TextBox>
+                                        <TextBox Name="PinCreateMessageTextBox" InputScope="Text" MaxLength="200" Margin="-10,0,0,0" TextWrapping="Wrap" FontSize="20" TextChanged="PinCreateMessageTextBox_OnTextChanged" Text="{Binding LocalizedResources.CreatePinDescription, Source={StaticResource LocalizedStrings}}" LostFocus="PinCreateMessageTextBox_OnLostFocus" GotFocus="PinCreateMessageTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></TextBox>
                                     </StackPanel>
                                 </controls:ChatBubble.Content>
                             </controls:ChatBubble>
