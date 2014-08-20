@@ -48,6 +48,7 @@ namespace PinMessaging.View
         public PMGeoLocation _geoLocation = null;
         private readonly BackgroundWorker _bkw = new BackgroundWorker();
         private readonly DispatcherTimer _searchContactTimer = new DispatcherTimer();
+        private NotificationCenter _notificationCenter = new NotificationCenter();
 
 
         public PMMapView()
@@ -96,6 +97,7 @@ namespace PinMessaging.View
                 LaunchLocalization();
             }
 
+            _notificationCenter.Init();
             PMMapPinController.Init(this);
             PMMapContactController.Init(this);
             LoadRessources();

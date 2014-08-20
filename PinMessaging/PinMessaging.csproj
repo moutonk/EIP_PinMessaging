@@ -115,6 +115,7 @@
     <Compile Include="Model\PMPinCommentModel.cs" />
     <Compile Include="Model\PMPinModel.cs" />
     <Compile Include="Model\PMUserModel.cs" />
+    <Compile Include="Other\NotificationCenter.cs" />
     <Compile Include="Other\PMData.cs" />
     <Compile Include="Other\PMDataConverter.cs" />
     <Compile Include="Other\PMGeoLocation.cs" />
@@ -276,6 +277,8 @@
     <Content Include="Images\Icons\white_planet.png" />
     <Content Include="Images\Logos\3_new_logo_little%402x.png" />
     <Content Include="Images\Logos\3_new_logo_white.png" />
+    <Content Include="Images\Logos\mediumTile.png" />
+    <Content Include="Images\Logos\smallTile.png" />
     <Content Include="Images\Menu\help_btn%402x.png" />
     <Content Include="Images\Menu\help_btn.png" />
     <Content Include="Images\Icons\home_orange_icon%402x.png" />

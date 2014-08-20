@@ -38,7 +38,7 @@ namespace PinMessaging.Model
         }
 
         [OnDeserialized]
-        public void CreateStream(StreamingContext context)
+        private void CreateStream(StreamingContext context)
         {
             if (Img == null)
             {

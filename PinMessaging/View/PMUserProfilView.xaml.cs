@@ -220,7 +220,7 @@ namespace PinMessaging.View
                 return;
             }
 
-            Logs.Output.ShowOutput("Center on: lat" + (double)historyPin.Latitude + " long: " + (double)historyPin.Longitude);
+            Logs.Output.ShowOutput("Center on: " + (double)historyPin.Latitude + "  " + (double)historyPin.Longitude);
             PMMapContactController.MapCenterOn(new GeoCoordinate((double)historyPin.Latitude, (double)historyPin.Longitude));
 
             if (NavigationService.CanGoBack == true)
