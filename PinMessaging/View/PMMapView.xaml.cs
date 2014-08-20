@@ -97,7 +97,7 @@ namespace PinMessaging.View
                 LaunchLocalization();
             }
 
-            _notificationCenter.Init();
+            _notificationCenter.Init(this);
             PMMapPinController.Init(this);
             PMMapContactController.Init(this);
             LoadRessources();
@@ -1783,6 +1783,33 @@ namespace PinMessaging.View
             LockUnlockCommentCheck(CommentChatBubble.Text.Length != 0);
             //if (ApplicationBar.IsVisible == false)
             //    ApplicationBar.IsVisible = true;
+        }
+
+        /////////////////////////// NOTIFICATIONS ///////////////////////////////
+        /// 
+        /// 
+        private void NotificationGrid_OnTap(object sender, GestureEventArgs e)
+        {
+            NotificationGrid.Visibility = Visibility.Collapsed;
+            MenuDownNotification_OnClick(null, null);
+        }
+
+        public void NotificationUpdateUi()
+        {
+            Dispatcher.BeginInvoke(() =>
+            {
+                NotificationGrid.Visibility = Visibility.Visible;
+                NotificationAddItem();
+            });
+        }
+
+        private void NotificationAddItem()
+        {
+            NotificationStackPanel.Children.Add(new TextBox
+            {
+                Text = "dsqdfjpqjdfqjfmqs",
+                FontSize = 35
+            });
         }
     }
 }

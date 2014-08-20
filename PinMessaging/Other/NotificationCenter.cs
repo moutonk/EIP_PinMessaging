@@ -2,17 +2,29 @@
 using System.Text;
 using Microsoft.Phone.Notification;
 using PinMessaging.Utils;
+using PinMessaging.View;
 
 namespace PinMessaging.Other
 {
     class NotificationCenter
     {
+        enum NotificationType
+        {
+            NewComment = 0,
+            PinModified,
+            NewGrade,
+            NewFavorite
+        }
+
         /// Holds the push channel that is created or found.
         private HttpNotificationChannel _pushChannel;
         private const string ChannelName = "ToastChannel";
+        private PMMapView _map = null;
 
-        public void Init()
+        public void Init(PMMapView map)
         {
+            _map = map;
+
             // Try to find the push channel.
             _pushChannel = HttpNotificationChannel.Find(ChannelName);
 
@@ -58,8 +70,7 @@ namespace PinMessaging.Other
         void PushChannel_ErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
         {
             // Error handling logic for your particular application would be here.
-            Logs.Output.ShowOutput(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}",
-                    e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData));
+            Logs.Output.ShowOutput(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}", e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData));
         }
 
         void PushChannel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
@@ -87,7 +98,8 @@ namespace PinMessaging.Other
             // Display a dialog of all the fields in the toast.
             Logs.Output.ShowOutput(message.ToString());
 
+            //if (_map != null)
+            //_map.NotificationUpdateUi();
         }
-
     }
 }
