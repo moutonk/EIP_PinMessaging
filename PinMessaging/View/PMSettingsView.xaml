@@ -92,6 +92,8 @@
                                 </StackPanel>
                             </toolkit:ExpanderView.Items>
                         </toolkit:ExpanderView>
+
+                        <Button Name="ClearPinsButton" Margin="10,10,0,0" Width="300" HorizontalAlignment="Left" Click="ClearPinsButton_OnClick" Content="{Binding LocalizedResources.ClearPins, Source={StaticResource LocalizedStrings}}"></Button>
                     </StackPanel>
                 </ScrollViewer>
           

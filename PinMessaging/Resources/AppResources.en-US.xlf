@@ -318,6 +318,10 @@
           <source>Add a comment</source>
           <target state="new">Add a comment</target>
         </trans-unit>
+        <trans-unit id="Resx/ClearPins" translate="yes" xml:space="preserve">
+          <source>Clear pins</source>
+          <target state="new">Clear pins</target>
+        </trans-unit>
         <trans-unit id="Resx/PinsDisplayed" translate="yes" xml:space="preserve">
           <source>pins displayed on the map</source>
           <target state="new">pins displayed on the map</target>

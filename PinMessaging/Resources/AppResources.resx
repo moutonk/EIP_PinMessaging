@@ -561,4 +561,7 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   <data name="AddComment" xml:space="preserve">
     <value>Add a comment</value>
   </data>
+  <data name="ClearPins" xml:space="preserve">
+    <value>Clear pins</value>
+  </data>
 </root>

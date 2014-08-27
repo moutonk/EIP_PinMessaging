@@ -1668,6 +1668,7 @@ namespace PinMessaging.View
             Dispatcher.BeginInvoke(() =>
             {
                 CommentChatBubble.Text = "";
+                PinCommentTipContentTextBox.Visibility = Visibility.Visible;
                 AddCommentsToUi();
             });
         }
@@ -1744,7 +1745,7 @@ namespace PinMessaging.View
 
         private void PinCommentContentTextBox_OnLostFocus(object sender, RoutedEventArgs e)
         {
-            if (CommentChatBubble.Text.Trim().Length == 0)
+            if (CommentChatBubble.Text.Length == 0)
                 PinCommentTipContentTextBox.Visibility = Visibility.Visible;
             ApplicationBar.IsVisible = false;
         }

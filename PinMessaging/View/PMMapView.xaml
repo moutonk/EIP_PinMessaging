@@ -277,8 +277,8 @@
                         <RowDefinition Height="{StaticResource MapMenuHeight}"/>
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="0"/>
-                        <RowDefinition Height="484"/>
                         <RowDefinition Height="0"/>
+                        <RowDefinition Height="484"/>
                         <RowDefinition Height="0"/>
                     </Grid.RowDefinitions>
 
@@ -391,7 +391,7 @@
                                 <controls:ChatBubbleTextBox Name="CommentChatBubble" InputScope="Text" TextChanged="CommentChatBubble_OnTextInput"  TextWrapping="Wrap" ChatBubbleDirection="LowerRight" LostFocus="PinCommentContentTextBox_OnLostFocus" GotFocus="PinCommentContentTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></controls:ChatBubbleTextBox>
                                 <TextBlock x:Name="PinCommentTipContentTextBox" Tap="PinCommentTipContentTextBox_OnTap" TextWrapping="Wrap" Text="{Binding LocalizedResources.AddComment, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Foreground="Black" FontSize="20" Margin="10,-75,29,0" ></TextBlock>
                                 <TextBlock Name="MeTextBlock" Text="{Binding LocalizedResources.You, Source={StaticResource LocalizedStrings}}" TextAlignment="Right" FontSize="25" Foreground="{StaticResource PMOrange}"></TextBlock>
-                                <StackPanel Name="CommentStackPanel"/>
+                                <StackPanel Name="CommentStackPanel" Margin="0,0,0,10"/>
                             </StackPanel>
 
                         </Grid>

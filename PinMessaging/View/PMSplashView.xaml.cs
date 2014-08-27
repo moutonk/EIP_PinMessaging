@@ -26,7 +26,8 @@ namespace PinMessaging.View
             ManageIntersticialAd(Paths.LogoSplashOrange.ToString(), 1);
             _adsManager.DisplayAd();
 
-
+            NotificationCenter.Start();
+            
             //_adsManager.hideAd();
         }
 

@@ -317,5 +317,12 @@ namespace PinMessaging.View
         {
             FeedbackSendButton.IsEnabled = FeedbackTipTextBox.Text.Length != 0;
         }
+
+        private void ClearPinsButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            PMData.PinsList.Clear();
+            PMData.PinsListToAdd.Clear();
+            PMData.MapLayerContainer.Clear();
+        }
     }
 }

@@ -600,6 +600,10 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
           <source>Add a comment</source>
           <target state="new">Add a comment</target>
         </trans-unit>
+        <trans-unit id="Resx/ClearPins" translate="yes" xml:space="preserve">
+          <source>Clear pins</source>
+          <target state="new">Clear pins</target>
+        </trans-unit>
       </group>
     </body>
   </file>
