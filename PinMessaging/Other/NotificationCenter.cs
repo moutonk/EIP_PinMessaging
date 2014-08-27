@@ -6,7 +6,7 @@ using PinMessaging.View;
 
 namespace PinMessaging.Other
 {
-    class NotificationCenter
+    static class NotificationCenter
     {
         enum NotificationType
         {
@@ -17,14 +17,19 @@ namespace PinMessaging.Other
         }
 
         /// Holds the push channel that is created or found.
-        private HttpNotificationChannel _pushChannel;
-        private const string ChannelName = "ToastChannel";
-        private PMMapView _map = null;
+        private static HttpNotificationChannel _pushChannel;
 
-        public void Init(PMMapView map)
+        public static string PushChannelUri { get; set; }
+        private const string ChannelName = "ToastChannel";
+        private static PMMapView _map = null;
+
+        public static void Init(PMMapView map)
         {
             _map = map;
+        }
 
+        static  NotificationCenter()
+        {
             // Try to find the push channel.
             _pushChannel = HttpNotificationChannel.Find(ChannelName);
 
@@ -57,23 +62,23 @@ namespace PinMessaging.Other
 
                 // Display the URI for testing purposes. Normally, the URI would be passed back to your web service at this point.
                 Logs.Output.ShowOutput(String.Format("Channel Uri is {0}", _pushChannel.ChannelUri.ToString()));
-
             }
+            PushChannelUri = _pushChannel.ChannelUri.ToString();
         }
 
-        void PushChannel_ChannelUriUpdated(object sender, NotificationChannelUriEventArgs e)
+        static void PushChannel_ChannelUriUpdated(object sender, NotificationChannelUriEventArgs e)
         {
             // Display the new URI for testing purposes.   Normally, the URI would be passed back to your web service at this point.
             Logs.Output.ShowOutput(e.ChannelUri.ToString());
         }
 
-        void PushChannel_ErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
+        static void PushChannel_ErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
         {
             // Error handling logic for your particular application would be here.
             Logs.Output.ShowOutput(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}", e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData));
         }
 
-        void PushChannel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
+        static void PushChannel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
         {
             var message = new StringBuilder();
             string relativeUri = string.Empty;

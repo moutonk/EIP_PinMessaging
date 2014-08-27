@@ -27,8 +27,7 @@
           <SmallImageURI IsRelative="true" IsResource="false">Images\Logos\smallTile.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Images\Logos\mediumTile.png</BackgroundImageURI>
-          <Title>
-          </Title>
+          <Title>PinMessaging</Title>
           <BackContent>
           </BackContent>
           <BackBackgroundImageURI IsRelative="true" IsResource="false">

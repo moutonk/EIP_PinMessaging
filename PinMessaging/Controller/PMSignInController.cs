@@ -30,7 +30,8 @@ namespace PinMessaging.Controller
             {
                 {"email", logInModel.Email},
                 {"password", Encrypt.MD5Core.ConvertToMD5(Encrypt.SHA1Core.ConvertToSHA1(logInModel.Password))},
-                {"deviceType", "3"} // windows phone
+                {"deviceType", "3"},// windows phone
+                {"notificationId", Other.NotificationCenter.PushChannelUri}
             };
 
             PMWebService.SendRequest(HttpRequestType.Post, RequestType.SignIn, SyncType.Async, dictionary, null);
