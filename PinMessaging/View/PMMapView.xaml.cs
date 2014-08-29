@@ -1867,6 +1867,7 @@ namespace PinMessaging.View
                 Text = GetNotificationText(notif),
                 FontSize = 25,
                 VerticalAlignment = VerticalAlignment.Center,
+                TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(20, 0, 0, 0)
             };
 
