@@ -260,5 +260,18 @@ namespace PinMessaging.Controller
                 Logs.Output.ShowOutput("Too far!");
             }
         }
+
+        public static string GetPinTitle(string pinId)
+        {
+            try
+            {
+                return PMData.PinsList.Find(pin => pin.Id.Equals(pinId) == true).Title;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("GetPinTitle: " + exp.Message, exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+            return "unknown pin";
+        }
     }
 }

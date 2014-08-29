@@ -53,7 +53,12 @@ namespace PinMessaging.Other
         [DefaultValue(null)] public static List<PMUserModel> SearchUserList { get; set; }
 
         //contains all the users profil pictures
-        [DefaultValue(null)] public static List<PMPhotoModel> ProfilPicturesList { get; set; }
+        [DefaultValue(null)]
+        public static List<PMPhotoModel> ProfilPicturesList { get; set; }
+
+        //contains all the notifs
+        [DefaultValue(null)] public static List<PMNotificationModel> NotificationList { get; set; }
+        [DefaultValue(null)] public static List<PMNotificationModel> NotificationListToAdd { get; set; }
 
         //contain all the pins
         [DefaultValue(null)] public static MapLayer MapLayerContainer { get; set; }
@@ -64,7 +69,6 @@ namespace PinMessaging.Other
         [DefaultValue(null)] public static HashSet<PMPinModel.PinsType> HiddenTypesList { get; set; }
 
         [DefaultValue(null)] public static List<PMPinCommentModel> PinsCommentsList { get; set; }
-        
         [DefaultValue(null)] public static List<PMPinCommentModel> PinsCommentsListTmp { get; set; }
 
         [DefaultValue(null)] public static PMUserModel User { get; set; }
@@ -98,6 +102,8 @@ namespace PinMessaging.Other
             //UserHistoryList = new List<PMHistoryModel>();
             NeutralProfilPic = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative));
             HiddenTypesList = new HashSet<PMPinModel.PinsType>();
+            NotificationList = new List<PMNotificationModel>();
+            NotificationListToAdd = new List<PMNotificationModel>();
         }
 
         public static void AddToQueuePinsList(List<PMPinModel> list)

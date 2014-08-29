@@ -209,7 +209,7 @@
                         </Button>
                         <Grid Name="NotificationGrid" Tap="NotificationGrid_OnTap" Visibility="Collapsed">
                             <Border Height="45" Width="45" CornerRadius="50,50,50,50" Margin="395,24,35,601" Background="{StaticResource PMOrange}"/>
-                            <TextBlock Text="1" FontWeight="Bold" Margin="415,35,35,601"/>
+                            <TextBlock Name="NotificationNumberTextBlock" Tag="0" Text="0" FontWeight="Bold" Margin="415,35,35,601"/>
                          </Grid>
                     <Button Click="ButtonBase_OnClick" Content="-" HorizontalAlignment="Left" Margin="465,0,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
                         <Button Name="RefreshPinButton" Visibility="Collapsed" Click="RefreshPinButton_OnClick" HorizontalAlignment="Left" Margin="158,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73" RenderTransformOrigin="1.315,0.603">

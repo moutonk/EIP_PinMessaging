@@ -111,6 +111,7 @@
     <Compile Include="Model\PMGradeModel.cs" />
     <Compile Include="Model\PMHistoryModel.cs" />
     <Compile Include="Model\PMLogInCreateStructureModel.cs" />
+    <Compile Include="Model\PMNotificationModel.cs" />
     <Compile Include="Model\PMPhotoModel.cs" />
     <Compile Include="Model\PMPinCommentModel.cs" />
     <Compile Include="Model\PMPinModel.cs" />

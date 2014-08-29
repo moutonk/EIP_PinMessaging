@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using System.Windows.Interop;
 using Windows.UI.Core;
 using Microsoft.Phone.Notification;
 using Microsoft.Phone.Tasks;
+using PinMessaging.Model;
 using PinMessaging.Utils;
 using PinMessaging.View;
 
@@ -10,7 +13,7 @@ namespace PinMessaging.Other
 {
     public static class NotificationCenter
     {
-        enum NotificationType
+        public enum NotificationType
         {
             NewComment = 0,
             PinModified,
@@ -66,6 +69,8 @@ namespace PinMessaging.Other
                 // Register for this notification only if you need to receive the notifications while your application is running.
                 PushChannel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(PushChannel_ShellToastNotificationReceived);
 
+                PushChannelUri = PushChannel.ChannelUri.ToString();
+             
                 // Display the URI for testing purposes. Normally, the URI would be passed back to your web service at this point.
                 Logs.Output.ShowOutput(String.Format("Channel Uri is {0}", PushChannel.ChannelUri.ToString()));
             }
@@ -74,8 +79,6 @@ namespace PinMessaging.Other
 
         static void PushChannel_ChannelUriUpdated(object sender, NotificationChannelUriEventArgs e)
         {
-            // Display the new URI for testing purposes.   Normally, the URI would be passed back to your web service at this point.
-            Logs.Output.ShowOutput(e.ChannelUri.ToString());
             try
             {
                 PushChannelUri = PushChannel.ChannelUri.ToString();
@@ -84,6 +87,10 @@ namespace PinMessaging.Other
             {
                 Logs.Output.ShowOutput(exp.Message + " " + exp.InnerException);
             }
+            // Display the new URI for testing purposes.   Normally, the URI would be passed back to your web service at this point.
+            Logs.Output.ShowOutput("ChannelUri: " + e.ChannelUri.ToString());
+            Logs.Output.ShowOutput("PushChannelUri: " + PushChannelUri);
+         
         }
 
         static void PushChannel_ErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
@@ -92,33 +99,86 @@ namespace PinMessaging.Other
             Logs.Output.ShowOutput(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}", e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData));
         }
 
+        static bool CheckNotifSyntax(NotificationEventArgs e)
+        {
+            if (e.Collection.Count != 3)
+            {
+                Logs.Error.ShowError("Notification has an invalid format. 3 parameters are excepted but " + e.Collection.Count + " are received", Logs.Error.ErrorsPriority.NotCritical);
+                foreach (string key in e.Collection.Keys)
+                    Logs.Output.ShowOutput(String.Format("{0}: {1}\n", key, e.Collection[key]));
+                return false;
+            }
+
+            if (e.Collection.ContainsKey("type") == false)
+            {
+                Logs.Error.ShowError("Notification does not contain type", Logs.Error.ErrorsPriority.NotCritical);
+                return false;
+            }
+
+            if (e.Collection.ContainsKey("content") == false)
+            {
+                Logs.Error.ShowError("Notification does not contain content", Logs.Error.ErrorsPriority.NotCritical);
+                return false;
+            }
+
+            if (e.Collection.ContainsKey("contentId") == false)
+            {
+                Logs.Error.ShowError("Notification does not contain contentId", Logs.Error.ErrorsPriority.NotCritical);
+                return false;
+            }
+
+            NotificationType type;
+            if (Enum.TryParse(e.Collection["type"], true, out type) == false)
+            {
+                Logs.Error.ShowError("Notification type is incorrect", Logs.Error.ErrorsPriority.NotCritical);
+                return false;
+            }
+
+            long contentId;
+            if (long.TryParse(e.Collection["contentId"], out contentId) == false)
+            {
+                Logs.Error.ShowError("Notification contentId is not a long", Logs.Error.ErrorsPriority.NotCritical);
+                return false;
+            }
+
+            return true;
+        }
+
         static void PushChannel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
         {
-            var message = new StringBuilder();
-            string relativeUri = string.Empty;
+            Logs.Output.ShowOutput("Notification received: " + DateTime.Now.TimeOfDay.ToString());
 
-            message.AppendFormat("Received Toast {0}:\n", DateTime.Now.ToShortTimeString());
-
-            // Parse out the information that was part of the message.
             foreach (string key in e.Collection.Keys)
+                Logs.Output.ShowOutput(String.Format("{0}: {1}\n", key, e.Collection[key]));
+             
+            if (CheckNotifSyntax(e) == true)
             {
-                message.AppendFormat("{0}: {1}\n", key, e.Collection[key]);
+                var notifModel = new PMNotificationModel();
 
-                if (string.Compare(
-                    key,
-                    "wp:Param",
-                    System.Globalization.CultureInfo.InvariantCulture,
-                    System.Globalization.CompareOptions.IgnoreCase) == 0)
+                try
                 {
-                    relativeUri = e.Collection[key];
+                    NotificationType type;
+                    Enum.TryParse(e.Collection["type"], true, out type);
+                    notifModel.Type = type;
+
+                    long contentId;
+                    long.TryParse(e.Collection["contentId"], out contentId);
+                    notifModel.ContentId = contentId;
+
+                    notifModel.Content = e.Collection["content"];
+
+                    PMData.NotificationListToAdd.Add(notifModel);
+
+                    if (_map != null)
+                        _map.NotificationUpdateUi(notifModel);
+                }
+                catch (Exception exp)
+                {
+                    Logs.Error.ShowError("PushChannel_ShellToastNotificationReceived:", exp, Logs.Error.ErrorsPriority.NotCritical);
                 }
             }
 
-            // Display a dialog of all the fields in the toast.
-            Logs.Output.ShowOutput(message.ToString());
-
-            //if (_map != null)
-            //_map.NotificationUpdateUi();
+          
         }
     }
 }

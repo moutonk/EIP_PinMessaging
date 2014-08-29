@@ -1791,25 +1791,95 @@ namespace PinMessaging.View
         private void NotificationGrid_OnTap(object sender, GestureEventArgs e)
         {
             NotificationGrid.Visibility = Visibility.Collapsed;
+            NotificationNumberTextBlock.Tag = 0;
+            NotificationNumberTextBlock.Text = "0";
             MenuDownNotification_OnClick(null, null);
         }
 
-        public void NotificationUpdateUi()
+        public void NotificationUpdateUi(PMNotificationModel notif)
         {
             Dispatcher.BeginInvoke(() =>
             {
                 NotificationGrid.Visibility = Visibility.Visible;
-                NotificationAddItem();
+                var notifNum = (int)(NotificationNumberTextBlock.Tag);
+                notifNum += 1;
+
+                NotificationNumberTextBlock.Text = notifNum.ToString();
+
+                NotificationAddItem(notif);
             });
         }
 
-        private void NotificationAddItem()
+        private static string GetNotificationIconType(PMNotificationModel notif)
         {
-            NotificationStackPanel.Children.Add(new TextBox
+            switch (notif.Type)
             {
-                Text = "dsqdfjpqjdfqjfmqs",
-                FontSize = 35
-            });
+                case NotificationCenter.NotificationType.NewComment:
+                    return "/Images/Icons/bubble_white_icon.png";
+
+                case NotificationCenter.NotificationType.NewFavorite:
+                    return "/Images/Icons/contact_white_icon.png";
+
+                case NotificationCenter.NotificationType.NewGrade:
+                    return "/Images/Icons/cup_white_icon.png";
+
+                case NotificationCenter.NotificationType.PinModified:
+                    return "/Images/Icons/edit.png";
+            }
+            return "/Images/Icons/bubble_white_icon.png";
+        }
+
+        private static string GetNotificationText(PMNotificationModel notif)
+        {
+            switch (notif.Type)
+            {
+                case NotificationCenter.NotificationType.NewComment:
+                    return "New comment from " + notif.Content + " on your pin \"" + PMMapPinController.GetPinTitle(notif.ContentId.ToString() + "\"");
+
+                case NotificationCenter.NotificationType.NewFavorite:
+                    return notif.Content + " added you as his contact!";
+
+                case NotificationCenter.NotificationType.NewGrade:
+                    return "You earned a new grade!: " + notif.ContentId.ToString();
+
+                case NotificationCenter.NotificationType.PinModified:
+                    return "The pin \"" + notif.Content + " \" that you commented was modified";
+            }
+            return "";
+        }
+
+        private void NotificationAddItem(PMNotificationModel notif)
+        {
+            var notifGrid = new Grid();
+
+            notifGrid.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(80) });
+
+            notifGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(80) });
+            notifGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
+
+            var img = new Image()
+            {
+                Source = new BitmapImage(new Uri(GetNotificationIconType(notif), UriKind.Relative)),
+            };
+
+            var notifText = new TextBlock()
+            {
+                Text = GetNotificationText(notif),
+                FontSize = 25,
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin = new Thickness(20, 0, 0, 0)
+            };
+
+            notifGrid.Children.Add(img);
+            notifGrid.Children.Add(notifText);
+
+            Grid.SetRow(img, 0);
+            Grid.SetColumn(img, 0);
+
+            Grid.SetRow(notifText, 0);
+            Grid.SetColumn(notifText, 1);
+
+            NotificationStackPanel.Children.Add(notifGrid);
         }
     }
 }
