@@ -457,5 +457,22 @@ namespace PinMessaging.Other
                 Logs.Error.ShowError("ParseGetPins: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
             }
         }
+
+        public static PMNotificationModel ParseNotification(string json)
+        {
+            try
+            {
+                var item = JsonConvert.DeserializeObject<PMNotificationModel>(json);
+
+                PMData.NotificationListToAdd.Add(item);
+
+                return item;
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("ParseNotification: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
+            }
+            return null;;
+        }
     }   
 }

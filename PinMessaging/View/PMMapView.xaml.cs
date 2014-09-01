@@ -1808,6 +1808,8 @@ namespace PinMessaging.View
 
                 NotificationAddItem(notif);
             });
+            PMData.NotificationList.Add(notif);
+            PMData.NotificationListToAdd.Remove(notif);
         }
 
         private static string GetNotificationIconType(PMNotificationModel notif)

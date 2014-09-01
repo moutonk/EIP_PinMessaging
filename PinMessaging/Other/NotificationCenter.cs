@@ -99,86 +99,25 @@ namespace PinMessaging.Other
             Logs.Output.ShowOutput(String.Format("A push notification {0} error occurred.  {1} ({2}) {3}", e.ErrorType, e.Message, e.ErrorCode, e.ErrorAdditionalData));
         }
 
-        static bool CheckNotifSyntax(NotificationEventArgs e)
+        static PMNotificationModel CheckNotifSyntax(NotificationEventArgs e)
         {
-            if (e.Collection.Count != 3)
+            foreach (string key in e.Collection.Keys)
             {
-                Logs.Error.ShowError("Notification has an invalid format. 3 parameters are excepted but " + e.Collection.Count + " are received", Logs.Error.ErrorsPriority.NotCritical);
-                foreach (string key in e.Collection.Keys)
-                    Logs.Output.ShowOutput(String.Format("{0}: {1}\n", key, e.Collection[key]));
-                return false;
+                Logs.Output.ShowOutput(String.Format("{0}: {1}\n", key, e.Collection[key]));
+                return PMDataConverter.ParseNotification(e.Collection[key]);
             }
-
-            if (e.Collection.ContainsKey("type") == false)
-            {
-                Logs.Error.ShowError("Notification does not contain type", Logs.Error.ErrorsPriority.NotCritical);
-                return false;
-            }
-
-            if (e.Collection.ContainsKey("content") == false)
-            {
-                Logs.Error.ShowError("Notification does not contain content", Logs.Error.ErrorsPriority.NotCritical);
-                return false;
-            }
-
-            if (e.Collection.ContainsKey("contentId") == false)
-            {
-                Logs.Error.ShowError("Notification does not contain contentId", Logs.Error.ErrorsPriority.NotCritical);
-                return false;
-            }
-
-            NotificationType type;
-            if (Enum.TryParse(e.Collection["type"], true, out type) == false)
-            {
-                Logs.Error.ShowError("Notification type is incorrect", Logs.Error.ErrorsPriority.NotCritical);
-                return false;
-            }
-
-            long contentId;
-            if (long.TryParse(e.Collection["contentId"], out contentId) == false)
-            {
-                Logs.Error.ShowError("Notification contentId is not a long", Logs.Error.ErrorsPriority.NotCritical);
-                return false;
-            }
-
-            return true;
+            Logs.Error.ShowError("CheckNotifSyntax: notif with incorrect value", Logs.Error.ErrorsPriority.NotCritical);
+            return null;
         }
 
         static void PushChannel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
         {
             Logs.Output.ShowOutput("Notification received: " + DateTime.Now.TimeOfDay.ToString());
 
-            foreach (string key in e.Collection.Keys)
-                Logs.Output.ShowOutput(String.Format("{0}: {1}\n", key, e.Collection[key]));
-             
-            if (CheckNotifSyntax(e) == true)
-            {
-                var notifModel = new PMNotificationModel();
+            var item = CheckNotifSyntax(e);
 
-                try
-                {
-                    NotificationType type;
-                    Enum.TryParse(e.Collection["type"], true, out type);
-                    notifModel.Type = type;
-
-                    long contentId;
-                    long.TryParse(e.Collection["contentId"], out contentId);
-                    notifModel.ContentId = contentId;
-
-                    notifModel.Content = e.Collection["content"];
-
-                    PMData.NotificationListToAdd.Add(notifModel);
-
-                    if (_map != null)
-                        _map.NotificationUpdateUi(notifModel);
-                }
-                catch (Exception exp)
-                {
-                    Logs.Error.ShowError("PushChannel_ShellToastNotificationReceived:", exp, Logs.Error.ErrorsPriority.NotCritical);
-                }
-            }
-
-          
+            if (_map != null && item != null)
+                _map.NotificationUpdateUi(item);
         }
     }
 }
