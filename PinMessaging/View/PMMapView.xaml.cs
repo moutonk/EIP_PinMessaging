@@ -1884,5 +1884,13 @@ namespace PinMessaging.View
 
             NotificationStackPanel.Children.Add(notifGrid);
         }
+
+        private void PinCreateMessageTextBox_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                PostPinButton_Click(null, null);
+            }
+        }
     }
 }

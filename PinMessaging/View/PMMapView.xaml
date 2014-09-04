@@ -278,8 +278,8 @@
                         <RowDefinition Height="5"/>
                         <RowDefinition Height="0"/>
                         <RowDefinition Height="0"/>
-                        <RowDefinition Height="484"/>
                         <RowDefinition Height="0"/>
+                        <RowDefinition Height="484"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0" Background="{StaticResource PMOrange}">
@@ -417,7 +417,7 @@
                                     <StackPanel Orientation="Vertical">
                                         <TextBox Name="PinCreateTitleTextBox" InputScope="Text" MaxLength="25" Margin="-10,0,0,0" TextWrapping="Wrap" FontSize="20" TextChanged="PinCreateTitleTextBox_OnTextChanged" Text="{Binding LocalizedResources.CreatePinDescriptionTitle, Source={StaticResource LocalizedStrings}}" LostFocus="PinCreateTitleTextBox_OnLostFocus" GotFocus="PinCreateTitleTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray" Width="429"></TextBox>
                                         <toolkit:Separator Margin="10,0,10,0"></toolkit:Separator>
-                                        <TextBox Name="PinCreateMessageTextBox" InputScope="Text" MaxLength="200" Margin="-10,0,0,0" TextWrapping="Wrap" FontSize="20" TextChanged="PinCreateMessageTextBox_OnTextChanged" Text="{Binding LocalizedResources.CreatePinDescription, Source={StaticResource LocalizedStrings}}" LostFocus="PinCreateMessageTextBox_OnLostFocus" GotFocus="PinCreateMessageTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></TextBox>
+                                        <TextBox Name="PinCreateMessageTextBox" InputScope="Text" MaxLength="200" Margin="-10,0,0,0" TextWrapping="Wrap" FontSize="20" TextChanged="PinCreateMessageTextBox_OnTextChanged" KeyDown="PinCreateMessageTextBox_OnKeyDown" Text="{Binding LocalizedResources.CreatePinDescription, Source={StaticResource LocalizedStrings}}" LostFocus="PinCreateMessageTextBox_OnLostFocus" GotFocus="PinCreateMessageTextBox_OnGotFocus" Background="DarkGray" BorderBrush="DarkGray"></TextBox>
                                     </StackPanel>
                                 </controls:ChatBubble.Content>
                             </controls:ChatBubble>

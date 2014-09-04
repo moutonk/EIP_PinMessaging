@@ -322,7 +322,17 @@ namespace PinMessaging.View
         {
             PMData.PinsList.Clear();
             PMData.PinsListToAdd.Clear();
-            PMData.MapLayerContainer.Clear();
+
+            if (PMData.MapLayerContainer.Count >= 1)
+            {
+                var user = PMData.MapLayerContainer[0];
+                PMData.MapLayerContainer.Clear();
+                PMData.MapLayerContainer.Add(user);
+            }
+            else
+            {
+                PMData.MapLayerContainer.Clear();
+            }
         }
     }
 }

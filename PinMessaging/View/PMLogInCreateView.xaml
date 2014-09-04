@@ -75,8 +75,8 @@
 				<TextBlock x:Name="PageTitle" FontSize="{StaticResource PMTitleFontSize}" FontWeight="Bold" HorizontalAlignment="Left" Margin="0,67,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="99" Width="480" TextAlignment="Center" Style="{StaticResource PhoneTextTitle1Style}"/>
 			</Grid>
 			<Grid HorizontalAlignment="Left" Height="91" Margin="32,613,0,0" VerticalAlignment="Top" Width="417">
-				<Button x:Name="ButtonPrevious" FontSize="{StaticResource PMNormalFontSize}" Content="{Binding LocalizedResources.Previous, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="-11,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,-0.562" Width="201" Height="76" Click="ButtonPreviousClick" Background="{StaticResource PMOrange}"/>
-				<Button x:Name="ButtonValidate" Background="{StaticResource PMOrange}" FontSize="{StaticResource PMNormalFontSize}" Content="" Margin="0,10,-11,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="76" Width="201" RenderTransformOrigin="0.138,0.416"/>
+				<Button x:Name="ButtonPrevious" FontSize="{StaticResource PMNormalFontSize}" Content="{Binding LocalizedResources.Previous, Source={StaticResource LocalizedStrings}}" HorizontalAlignment="Left" Margin="-11,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.485,-0.562" Width="221" Height="76" Click="ButtonPreviousClick" Background="{StaticResource PMOrange}"/>
+				<Button x:Name="ButtonValidate" Background="{StaticResource PMOrange}" FontSize="{StaticResource PMNormalFontSize}" Content="" Margin="0,10,-11,0" VerticalAlignment="Top" HorizontalAlignment="Right" Height="76" Width="221" RenderTransformOrigin="0.138,0.416"/>
 			</Grid>
             <Grid x:Name="GridProgress" HorizontalAlignment="Left" Height="7" Margin="-481,740,0,0" VerticalAlignment="Top" Width="480" Background="{StaticResource PMOrange}">
                 <Grid.Resources>
