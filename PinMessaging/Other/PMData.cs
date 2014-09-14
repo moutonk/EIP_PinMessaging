@@ -146,6 +146,11 @@ namespace PinMessaging.Other
         }
         public static PMPhotoModel GetUserProfilPicture(string id)
         {
+            /*foreach (var pic in ProfilPicturesList)
+            {
+                Logs.Output.ShowOutput("GetUserProfilPicture: " + pic.UserId + " " + pic.FieldBytes.Length);
+            }*/
+
             return ProfilPicturesList.Any(pics => pics.UserId.Equals(id) == true) == true
                 ? ProfilPicturesList.Find(pics => pics.UserId.Equals(id) == true)
                 : null;
@@ -158,7 +163,7 @@ namespace PinMessaging.Other
             Pictures
         }
 
-        public async static void LoadPins()
+        public async static Task<bool> LoadPins()
         {
             Logs.Output.ShowOutput("------------------------LOAD PINS BEGIN------------------");
 
@@ -199,6 +204,7 @@ namespace PinMessaging.Other
             }
             
             Logs.Output.ShowOutput("------------------------LOAD PINS END------------------");
+            return true;
         }
 
         public async static Task<bool> SaveData(StoredDataType dataType)
@@ -212,16 +218,31 @@ namespace PinMessaging.Other
                     Logs.Output.ShowOutput("------------------------SAVE PINS BEGIN------------------");
                     dataFilePath = DataPinsFile;
                     list = PinsList;
+                    Logs.Output.ShowOutput("Serialize " + PinsList.Count + " elements");
+                    foreach (var pin in PinsList)
+                    {
+                        Logs.Output.ShowOutput("PinId: " + pin.Id + " pinTitle:" + pin.Title);
+                    }
                     break;
                 case StoredDataType.Favorites:
                     Logs.Output.ShowOutput("------------------------SAVE FAVORITES BEGIN------------------");
                     dataFilePath = DataContactsFile;
                     list = UserList;
+                    Logs.Output.ShowOutput("Serialize " + UserList.Count + " elements");
+                    foreach (var contact in UserList)
+                    {
+                        Logs.Output.ShowOutput("UserId: " + contact.Id + " username:" + contact.Pseudo);
+                    }
                     break;
                 case StoredDataType.Pictures:
                     Logs.Output.ShowOutput("------------------------SAVE PICTURES BEGIN------------------");
                     dataFilePath = DataPicturesFile;
                     list = ProfilPicturesList;
+                    Logs.Output.ShowOutput("Serialize " + ProfilPicturesList.Count + " elements");
+                    foreach (var pic in ProfilPicturesList)
+                    {
+                        Logs.Output.ShowOutput("UserId: " + pic.UserId + " length:" + pic.FieldBytes.Length);
+                    }
                     break;
             }
 
@@ -250,7 +271,7 @@ namespace PinMessaging.Other
 
         //REFACTORING + universal profil picture
 
-        public async static void LoadFavorites()
+        public async static Task<bool> LoadFavorites()
         {
             Logs.Output.ShowOutput("------------------------LOAD FAVORITES BEGIN------------------");
 
@@ -272,7 +293,10 @@ namespace PinMessaging.Other
                         if (list != null)
                         {
                             Logs.Output.ShowOutput("Deserialized " + list.Count.ToString() + " favorites");
-
+                            foreach (var contact in list)
+                            {
+                                Logs.Output.ShowOutput("UserId: " + contact.Id + " username:" + contact.Pseudo);
+                            }
                             foreach (var pmUserModel in list)
                             {
                                 PMMapContactController.AddNewFavoris(pmUserModel);
@@ -290,9 +314,10 @@ namespace PinMessaging.Other
                 Logs.Error.ShowError("LoadFavorites", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
             Logs.Output.ShowOutput("------------------------LOAD FAVORITES END------------------");
+            return true;
         }
 
-        public async static void LoadProfilPictures()
+        public async static Task<bool> LoadProfilPictures()
         {
             Logs.Output.ShowOutput("------------------------LOAD PICTURES BEGIN------------------");
 
@@ -316,6 +341,11 @@ namespace PinMessaging.Other
                             Logs.Output.ShowOutput("Deserialized " + list.Count.ToString() + " pictures");
                             ProfilPicturesList = list;
                         }
+
+                        foreach (var pic in ProfilPicturesList)
+                        {
+                            Logs.Output.ShowOutput(pic.UserId + " " + pic.FieldBytes.Length);
+                        }
                     }
                 }
                 else
@@ -328,6 +358,7 @@ namespace PinMessaging.Other
                 Logs.Error.ShowError("LoadProfilPictures", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
             Logs.Output.ShowOutput("------------------------LOAD PICTURES END------------------");
+            return true;
         }
     }
 }

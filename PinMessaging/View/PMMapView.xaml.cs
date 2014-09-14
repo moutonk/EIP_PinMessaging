@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -39,6 +40,7 @@ namespace PinMessaging.View
 
         private static CurrentMapPageView _currentView = CurrentMapPageView.MapView;
         private static bool _isUnderMenuOpen = false;
+        private static bool _isSettingsLoaded = false;
         private static readonly PMPinModel PinCreateModel = new PMPinModel();
         private PMPinModel _currentPinFocused;
 
@@ -49,6 +51,12 @@ namespace PinMessaging.View
         private readonly BackgroundWorker _bkw = new BackgroundWorker();
         private readonly DispatcherTimer _searchContactTimer = new DispatcherTimer();
 
+        private async void Load()
+        {
+            await PMData.LoadPins();
+            //await PMData.LoadFavorites();
+            //await PMData.LoadProfilPictures();
+        }
 
         public PMMapView()
         {
@@ -106,9 +114,8 @@ namespace PinMessaging.View
                 //PostPinButton.IsEnabled = false;
             }
 
-            PMData.LoadPins();
-            PMData.LoadFavorites();
-            PMData.LoadProfilPictures();
+            Load();
+
             ResetCreatePinModel();
 
             PinListPicker.Items.Add(new PinItem
@@ -280,6 +287,8 @@ namespace PinMessaging.View
             _isUnderMenuOpen = true;
             _enableSwipe = false;
             ApplicationBar.IsVisible = false;
+
+            LoadSettings();
         }
 
         private void MenuDown_CommonActionsAfter()
@@ -307,8 +316,22 @@ namespace PinMessaging.View
             MenuDown_CommonActionsAfter();
         }
 
+        private async Task<bool> LoadSettings()
+        {
+            if (_isSettingsLoaded == false)
+            {
+                await PMData.LoadProfilPictures();
+                await PMData.LoadFavorites();
+
+                _isSettingsLoaded = true;
+            }
+
+            return true;
+        }
+
         private void MenuDownContacts_OnClick(object sender, EventArgs e)
         {
+            LoadSettings();
             MenuDown_CommonActionsBefore();
             MenuDown_ContactOnClick();
             MenuDown_CommonActionsAfter();
@@ -584,6 +607,8 @@ namespace PinMessaging.View
 
         private void MoveViewWindow(double left)
         {
+            LoadSettings();
+
             _viewMoved = true;
 
             if (left == 0 || left == -840)
@@ -657,7 +682,8 @@ namespace PinMessaging.View
 
         private void ButtonProfil_OnClick(object sender, RoutedEventArgs e)
         {
-            ContactNameOnTapSub(PMData.CurrentUserId);
+            PinAuthorDescriptionLeftMenuLock(true);
+            ContactNameOnTapSub(PMData.CurrentUserId, CurrentMapPageView.LeftMenuView);
         }
 
         private void ButtonPins_OnClick(object sender, RoutedEventArgs e)
@@ -943,7 +969,7 @@ namespace PinMessaging.View
 
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
-            if (SearchContactsTextBox.Text.Equals(""))
+            if (SearchContactsTextBox.Text.Length < 3)
                 return;
 
             if (sender == null)
@@ -970,11 +996,14 @@ namespace PinMessaging.View
             uc.SearchUser(SearchContactsTextBox.Text);
         }
 
-        private void ContactNameOnTapSub(string userId)
+        private void ContactNameOnTapSub(string userId, CurrentMapPageView view)
         {
             if (userId != null)
             {
-                var userController = new PMUserController(RequestType.User, PinAuthorDescriptionTextBlock_PostTap);
+                Action action1 = PinAuthorDescriptionTextBlockLeftMenu_PostTap;
+                Action action2 = PinAuthorDescriptionTextBlock_PostTap;
+
+                var userController = new PMUserController(RequestType.User, (view == CurrentMapPageView.LeftMenuView ? action1 : action2));
 
                 userController.GetUserInfos(userId);
             }
@@ -997,7 +1026,7 @@ namespace PinMessaging.View
                     var user = tb.Tag as PMUserModel;
 
                     if (user != null)
-                        ContactNameOnTapSub(user.Id);
+                        ContactNameOnTapSub(user.Id, CurrentMapPageView.MapView);
                 }
             }
             else
@@ -1005,7 +1034,7 @@ namespace PinMessaging.View
                 var user = img.Tag as PMUserModel;
 
                 if (user != null)
-                    ContactNameOnTapSub(user.Id);
+                    ContactNameOnTapSub(user.Id, CurrentMapPageView.MapView);
             }
         }
 
@@ -1024,12 +1053,16 @@ namespace PinMessaging.View
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() {Width = new GridLength(110)});
             contactGrid.ColumnDefinitions.Add(new ColumnDefinition() {Width = new GridLength(1, GridUnitType.Star)});
 
-            var contactImg = new Image()
-            {
-                Name = where.Name + "contactImg" + user.Id,
-                Source = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative)),
-                Tag = user
-            };
+            Logs.Output.ShowOutput(user.ProfilPicture.ToString());
+
+
+            var contactImg = new Image();
+            contactImg.Name = where.Name + "contactImg" + user.Id;
+            contactImg.Tag = user;
+
+            if (Design.ProfilPictureUpdateUi(contactImg, user.Id) == false)
+                contactImg.Source = new BitmapImage(new Uri("/Images/Icons/neutral_profil.jpg", UriKind.Relative));
+
             var contactName = new TextBlock()
             {
                 Text = user.Pseudo,
@@ -1056,6 +1089,8 @@ namespace PinMessaging.View
             where.Children.Add(contactGrid);
 
             PMData.UserId = user.Id;
+
+            Logs.Output.ShowOutput(PMData.UserId);
 
             var userController = new PMUserController(RequestType.ProfilPicture,
                 where.Equals(SearchContactStackPanel)
@@ -1101,14 +1136,19 @@ namespace PinMessaging.View
             var img = grid.FindName(SearchContactStackPanel.Name + "contactImg" + user.Id);
             Logs.Output.ShowOutput(SearchContactStackPanel.Name + "contactImg" + user.Id);
 
+            /*foreach (var pic in PMData.ProfilPicturesList)
+            {
+                Logs.Output.ShowOutput("SearchContactPictureUpdateUi: " + pic.UserId + " " + pic.FieldBytes.Length);
+            }*/
+
             if (img == null)
             {
                 Logs.Output.ShowOutput("NOOOOOOOOOOOOOOO");
             }
             else
             {
-                Design.ProfilPictureUpdateUi((Image)img, PMData.UserId);
-                Logs.Output.ShowOutput("YESSSSSSSSSS");
+                Design.ProfilPictureUpdateUi((Image)img, user.Id);
+               // Logs.Output.ShowOutput("YESSSSSSSSSS");
             }
         }
 
@@ -1252,7 +1292,7 @@ namespace PinMessaging.View
                 return;
             }
 
-            ContactNameOnTapSub(userId);
+            ContactNameOnTapSub(userId, CurrentMapPageView.MapView);
         }
 
         private static string GetPinTypeName(PMPinModel.PinsType type, bool isPrivate)
@@ -1360,10 +1400,31 @@ namespace PinMessaging.View
             }
         }
 
+        private void PinAuthorDescriptionTextBlockLeftMenu_PostTap()
+        {
+            PinAuthorDescriptionLeftMenuLock(false);
+
+            try
+            {
+                if (PMData.User != null)
+                    NavigationService.Navigate(Paths.CurrentUserProfilView);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError(exp, Logs.Error.ErrorsPriority.Critical);
+            }
+        }
+
         private void PinAuthorDescriptionLock(bool lockStatus)
         {
             UnderMenuProgressBar.IsIndeterminate = lockStatus;
             UnderMenuProgressBar.Visibility = (lockStatus ? Visibility.Visible : Visibility.Collapsed);
+        }
+
+        private void PinAuthorDescriptionLeftMenuLock(bool lockStatus)
+        {
+            LeftMenuProgressBar.IsIndeterminate = lockStatus;
+            LeftMenuProgressBar.Visibility = (lockStatus ? Visibility.Visible : Visibility.Collapsed);
         }
 
         private void PinAuthorDescriptionTextBlock_OnTap(object sender, GestureEventArgs e)
@@ -1429,8 +1490,8 @@ namespace PinMessaging.View
                     canCreate = true;
                 }
             }
-
-            DropPinButton.IsEnabled = canCreate == true;
+            Logs.Output.ShowOutput(canCreate.ToString());
+            DropPinButton.Visibility = (canCreate == true ? Visibility.Visible : Visibility.Collapsed);
         }
 
         private static void ResetCreatePinModel()
@@ -1451,14 +1512,14 @@ namespace PinMessaging.View
         {
             DropPinProgressBar.Visibility = Visibility.Visible;
             DropPinProgressBar.IsIndeterminate = true;
-            DropPinButton.IsEnabled = false;
+            DropPinButton.Visibility = Visibility.Collapsed;
         }
 
         private void PostPinButton_ClickPostJob()
         {
             DropPinProgressBar.Visibility = Visibility.Collapsed;
             DropPinProgressBar.IsIndeterminate = false;
-            DropPinButton.IsEnabled = true;
+            DropPinButton.Visibility = Visibility.Visible;
             CloseMenuDownButton_Click(null, null);
 
             try
@@ -1627,7 +1688,7 @@ namespace PinMessaging.View
 
         private void PinCreateTitleTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (PinCreateTitleTextBox.Text.Equals(AppResources.CreatePinDescriptionTitle) == false && PinCreateTitleTextBox.Text.Length > 0)
+            if (PinCreateTitleTextBox.Text.Equals(AppResources.CreatePinDescriptionTitle) == false)
                 PinCreateModel.Title = PinCreateTitleTextBox.Text;
          
             CheckCanCreatePin();
@@ -1635,7 +1696,7 @@ namespace PinMessaging.View
 
         private void PinCreateMessageTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (PinCreateMessageTextBox.Text.Equals(AppResources.CreatePinDescription) == false && PinCreateMessageTextBox.Text.Length > 0)
+            if (PinCreateMessageTextBox.Text.Equals(AppResources.CreatePinDescription) == false)
                 PinCreateModel.Content = PinCreateMessageTextBox.Text;
             
             CheckCanCreatePin();

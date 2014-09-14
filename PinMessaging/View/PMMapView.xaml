@@ -66,56 +66,60 @@
 
                 <ScrollViewer HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Top" BorderThickness="0">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="{StaticResource MapMenuHeight}"/>
-                            <RowDefinition Height="2"/>
-                            <RowDefinition Height="{StaticResource MapMenuHeight}"/>
-                            <RowDefinition Height="{StaticResource MapMenuHeight}"/>
-                            <RowDefinition Height="{StaticResource MapMenuHeight}"/>
-                            <RowDefinition Height="2"/>
-                            <RowDefinition Height="{StaticResource MapMenuHeight}"/>
-                            <RowDefinition Height="2"/>
-                            <RowDefinition Height="{StaticResource MapMenuHeight}"/>
-                            <RowDefinition Height="2"/>
-                            <RowDefinition Height="{StaticResource MapMenuHeight}"/>
-                            <RowDefinition Height="2"/>
-                            <RowDefinition Height="{StaticResource MapMenuHeight}"/>
-                            <RowDefinition Height="2"/>
-                            <RowDefinition Height="{StaticResource MapMenuHeight}"/>
-                            <RowDefinition Height="2"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="100"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                        <ProgressBar VerticalAlignment="Top" x:Name="LeftMenuProgressBar" Height="5" IsIndeterminate="True" Foreground="{StaticResource PMOrange}" Visibility="Collapsed"/>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                                <RowDefinition Height="2"/>
+                                <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                                <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                                <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                                <RowDefinition Height="2"/>
+                                <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                                <RowDefinition Height="2"/>
+                                <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                                <RowDefinition Height="2"/>
+                                <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                                <RowDefinition Height="2"/>
+                                <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                                <RowDefinition Height="2"/>
+                                <RowDefinition Height="{StaticResource MapMenuHeight}"/>
+                                <RowDefinition Height="2"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Image  x:Name="ImgMap"  Grid.Column="0" Grid.Row="0" Tap="ButtonMap_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-                        <TextBlock x:Name="ButtonMap" Grid.Column="1" Grid.Row="0" Tap="ButtonMap_OnClick" Text="{Binding LocalizedResources.MenuMap, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
-                        <Canvas Grid.Column="1" Grid.Row="1" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
-                        <Image  x:Name="ImgFilters" Grid.Column="0" Grid.Row="2" Tap="ButtonFilters_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-                        <TextBlock x:Name="ButtonFilters" Grid.Column="1" Grid.Row="2" Tap="ButtonFilters_OnClick" Text="{Binding LocalizedResources.MenuFilters, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
-                        <Canvas x:Name="MyAccountCanvasLeft" Grid.Column="0" Grid.Row="3" Background="{StaticResource PMOrange}"></Canvas>
-                        <Canvas x:Name="MyAccountCanvasRight" Grid.Column="1" Grid.Row="3" Background="{StaticResource PMOrange}">
-                        <TextBlock x:Name="MyAccountTextBlock" FontSize="32" Text="{Binding LocalizedResources.MyAccount, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" FontWeight="Bold" Margin="-70,15,0,0"/>
-                        </Canvas>
-                        <Image  x:Name="ImgProfil"  Grid.Column="0" Grid.Row="4" Tap="ButtonProfil_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-                        <TextBlock x:Name="ButtonProfil" Grid.Column="1" Grid.Row="4" Tap="ButtonProfil_OnClick" Text="{Binding LocalizedResources.MenuProfil, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
-                        <Canvas Grid.Column="1" Grid.Row="5" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
-                        <Image  x:Name="ImgPins"  Grid.Column="0" Grid.Row="6" Tap="ButtonPins_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-                        <TextBlock x:Name="ButtonPins" Grid.Column="1" Grid.Row="6" Tap="ButtonPins_OnClick" Text="{Binding LocalizedResources.MenuPins, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
-                        <Canvas Grid.Column="1" Grid.Row="7" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
-                        <Image  x:Name="ImgSettings"  Grid.Column="0" Grid.Row="8" Tap="ButtonSettings_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-                        <TextBlock x:Name="ButtonSettings" Grid.Column="1" Grid.Row="8"  Tap="ButtonSettings_OnClick" Text="{Binding LocalizedResources.MenuSettings, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
-                        <Canvas Grid.Column="1" Grid.Row="9" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
-                        <Image  x:Name="ImgReward"  Grid.Column="0" Grid.Row="10" Tap="ButtonReward_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-                        <TextBlock x:Name="ButtonReward" Grid.Column="1" Grid.Row="10" Tap="ButtonReward_OnClick" Text="{Binding LocalizedResources.MenurRewards, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
-                        <Canvas Grid.Column="1" Grid.Row="11" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
-                        <Image  x:Name="ImgAbout"  Grid.Column="0" Grid.Row="12" Tap="ButtonAbout_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-                        <TextBlock x:Name="ButtonAbout" Grid.Column="1" Grid.Row="12" Tap="ButtonAbout_OnClick" Text="{Binding LocalizedResources.MenuAbout, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
-                        <Canvas Grid.Column="1" Grid.Row="13" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
-                        <Image  x:Name="ImgLogout"  Grid.Column="0" Grid.Row="14" Tap="ButtonLogout_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
-                        <TextBlock x:Name="ButtonLogout" Grid.Column="1" Grid.Row="14" Tap="ButtonLogout_OnClick" Text="{Binding LocalizedResources.MenuLogout, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
-                        <Canvas Grid.Column="1" Grid.Row="15" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
+                            <Image  x:Name="ImgMap"  Grid.Column="0" Grid.Row="0" Tap="ButtonMap_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                            <TextBlock x:Name="ButtonMap" Grid.Column="1" Grid.Row="0" Tap="ButtonMap_OnClick" Text="{Binding LocalizedResources.MenuMap, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
+                            <Canvas Grid.Column="1" Grid.Row="1" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
+                            <Image  x:Name="ImgFilters" Grid.Column="0" Grid.Row="2" Tap="ButtonFilters_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                            <TextBlock x:Name="ButtonFilters" Grid.Column="1" Grid.Row="2" Tap="ButtonFilters_OnClick" Text="{Binding LocalizedResources.MenuFilters, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
+                            <Canvas x:Name="MyAccountCanvasLeft" Grid.Column="0" Grid.Row="3" Background="{StaticResource PMOrange}"></Canvas>
+                            <Canvas x:Name="MyAccountCanvasRight" Grid.Column="1" Grid.Row="3" Background="{StaticResource PMOrange}">
+                                <TextBlock x:Name="MyAccountTextBlock" FontSize="32" Text="{Binding LocalizedResources.MyAccount, Source={StaticResource LocalizedStrings}}" Foreground="{StaticResource PhoneContrastBackgroundBrush}" FontWeight="Bold" Margin="-70,15,0,0"/>
+                            </Canvas>
+                            <Image  x:Name="ImgProfil"  Grid.Column="0" Grid.Row="4" Tap="ButtonProfil_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                            <TextBlock x:Name="ButtonProfil" Grid.Column="1" Grid.Row="4" Tap="ButtonProfil_OnClick" Text="{Binding LocalizedResources.MenuProfil, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
+                            <Canvas Grid.Column="1" Grid.Row="5" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
+                            <Image  x:Name="ImgPins"  Grid.Column="0" Grid.Row="6" Tap="ButtonPins_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                            <TextBlock x:Name="ButtonPins" Grid.Column="1" Grid.Row="6" Tap="ButtonPins_OnClick" Text="{Binding LocalizedResources.MenuPins, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
+                            <Canvas Grid.Column="1" Grid.Row="7" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
+                            <Image  x:Name="ImgSettings"  Grid.Column="0" Grid.Row="8" Tap="ButtonSettings_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                            <TextBlock x:Name="ButtonSettings" Grid.Column="1" Grid.Row="8"  Tap="ButtonSettings_OnClick" Text="{Binding LocalizedResources.MenuSettings, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
+                            <Canvas Grid.Column="1" Grid.Row="9" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
+                            <Image  x:Name="ImgReward"  Grid.Column="0" Grid.Row="10" Tap="ButtonReward_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                            <TextBlock x:Name="ButtonReward" Grid.Column="1" Grid.Row="10" Tap="ButtonReward_OnClick" Text="{Binding LocalizedResources.MenurRewards, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
+                            <Canvas Grid.Column="1" Grid.Row="11" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
+                            <Image  x:Name="ImgAbout"  Grid.Column="0" Grid.Row="12" Tap="ButtonAbout_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                            <TextBlock x:Name="ButtonAbout" Grid.Column="1" Grid.Row="12" Tap="ButtonAbout_OnClick" Text="{Binding LocalizedResources.MenuAbout, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
+                            <Canvas Grid.Column="1" Grid.Row="13" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
+                            <Image  x:Name="ImgLogout"  Grid.Column="0" Grid.Row="14" Tap="ButtonLogout_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="None"/>
+                            <TextBlock x:Name="ButtonLogout" Grid.Column="1" Grid.Row="14" Tap="ButtonLogout_OnClick" Text="{Binding LocalizedResources.MenuLogout, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" FontSize="25"/>
+                            <Canvas Grid.Column="1" Grid.Row="15" Background="{StaticResource PhoneProgressBarBackgroundBrush}" Margin="-100,0,0,0"></Canvas>
+
+                        </Grid>
 
                     </Grid>
                 </ScrollViewer>

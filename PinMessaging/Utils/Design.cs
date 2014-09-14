@@ -79,11 +79,22 @@ namespace PinMessaging.Utils
             var pic = PMData.GetUserProfilPicture(userId);
 
             if (pic == null)
+            {
+                Logs.Output.ShowOutput("ProfilPictureUpdateUi: no pic associated with " + userId);
                 return false;
+            }
+
+            //Logs.Output.ShowOutput("GetUserProfilPicture: " + userId + " " + pic.FieldBytes.Length);
 
             pic.CreateStream();
             if (pic.Img != null)
+            {
                 imgUi.Source = pic.Img;
+            }
+            else
+            {
+                Logs.Output.ShowOutput("ProfilPictureUpdateUi: pic.Img is null");
+            }
             return true;
         }
 

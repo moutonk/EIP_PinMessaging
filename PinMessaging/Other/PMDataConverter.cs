@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PinMessaging.Model;
@@ -137,8 +138,12 @@ namespace PinMessaging.Other
                 {
                     PMData.UserProfilPicture = Convert.FromBase64String(item[1]);
 
+                    //PMData.UserId is always the same. Demander a najim a renvoyer l'id dans la reponse
                     var pic = new PMPhotoModel { UserId = PMData.UserId, FieldBytes = new byte[PMData.UserProfilPicture.Length]};
                     PMData.UserProfilPicture.CopyTo(pic.FieldBytes, 0);
+
+                    if (PMData.ProfilPicturesList.Any(elem => elem.UserId.Equals(PMData.UserId)))
+                        return;
 
                     PMData.ProfilPicturesList.Add(pic);
                 }
