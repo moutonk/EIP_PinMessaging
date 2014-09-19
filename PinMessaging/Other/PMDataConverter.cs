@@ -477,7 +477,7 @@ namespace PinMessaging.Other
             {
                 Logs.Error.ShowError("ParseNotification: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
             }
-            return null;;
+            return null;
         }
     }   
 }

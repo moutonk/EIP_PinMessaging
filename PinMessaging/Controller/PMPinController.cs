@@ -52,8 +52,8 @@ namespace PinMessaging.Controller
         {
             var dictionary = new Dictionary<string, string>
             {
-                {"longitude", Utils.Utils.ConvertDoubleCommaToPoint(geoPos.Coordinate.Longitude.ToString()).ToString(CultureInfo.InvariantCulture)},
-                {"latitude", Utils.Utils.ConvertDoubleCommaToPoint(geoPos.Coordinate.Latitude.ToString()).ToString(CultureInfo.InvariantCulture)},
+                {"longitude", Utils.Utils.ConvertDoubleCommaToPoint(geoPos.Coordinate.Point.Position.Longitude.ToString()).ToString(CultureInfo.InvariantCulture)},
+                {"latitude", Utils.Utils.ConvertDoubleCommaToPoint(geoPos.Coordinate.Point.Position.Latitude.ToString()).ToString(CultureInfo.InvariantCulture)},
                 {"title", pin.Title},
                 {"contentType", ((int)pin.ContentType).ToString()},
                 {"content", pin.Content},

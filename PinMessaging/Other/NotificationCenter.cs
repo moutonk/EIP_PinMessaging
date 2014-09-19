@@ -114,10 +114,10 @@ namespace PinMessaging.Other
         {
             Logs.Output.ShowOutput("Notification received: " + DateTime.Now.TimeOfDay.ToString());
 
-            //var item = CheckNotifSyntax(e);
+            var item = CheckNotifSyntax(e);
 
-            //if (_map != null && item != null)
-            //    _map.NotificationUpdateUi(item);
+            if (_map != null && item != null)
+                _map.NotificationUpdateUi(item);
         }
     }
 }

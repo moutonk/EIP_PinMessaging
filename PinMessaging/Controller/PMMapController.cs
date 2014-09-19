@@ -231,8 +231,8 @@ namespace PinMessaging.Controller
                 return false;
             }
 
-            var userLongitude = _mapView._geoLocation.GeopositionUser.Coordinate.Longitude;
-            var userLatitude = _mapView._geoLocation.GeopositionUser.Coordinate.Latitude;
+            var userLongitude = _mapView._geoLocation.GeopositionUser.Coordinate.Point.Position.Longitude;
+            var userLatitude = _mapView._geoLocation.GeopositionUser.Coordinate.Point.Position.Latitude;
 
             Logs.Output.ShowOutput("Distance:" + (Math.Sqrt(Math.Pow(pinLongitude - userLongitude, 2) + Math.Pow(pinLatitude - userLatitude, 2))));
 

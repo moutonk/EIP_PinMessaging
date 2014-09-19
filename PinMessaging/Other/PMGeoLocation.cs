@@ -105,8 +105,8 @@ namespace PinMessaging.Other
                 return;
 
             var pc = new PMPinController(RequestType.GetPins, null);
-            pc.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Latitude.ToString()),
-                Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Longitude.ToString()));
+            pc.GetPins(Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Point.Position.Latitude.ToString()),
+                Utils.Utils.ConvertDoubleCommaToPoint(args.Position.Coordinate.Point.Position.Longitude.ToString()));
 
             var pc2 = new PMPinController(RequestType.GetPinsUser, null);
             pc2.GetPinsUser();

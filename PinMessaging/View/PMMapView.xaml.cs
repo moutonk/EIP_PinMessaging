@@ -281,14 +281,14 @@ namespace PinMessaging.View
             AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[5], false, false, true);
         }
 
-        private void MenuDown_CommonActionsBefore()
+        private async void MenuDown_CommonActionsBefore()
         {
             _currentView = CurrentMapPageView.UnderMenuView;
             _isUnderMenuOpen = true;
             _enableSwipe = false;
             ApplicationBar.IsVisible = false;
 
-            LoadSettings();
+            await LoadSettings();
         }
 
         private void MenuDown_CommonActionsAfter()
@@ -329,9 +329,9 @@ namespace PinMessaging.View
             return true;
         }
 
-        private void MenuDownContacts_OnClick(object sender, EventArgs e)
+        private async void MenuDownContacts_OnClick(object sender, EventArgs e)
         {
-            LoadSettings();
+            await LoadSettings();
             MenuDown_CommonActionsBefore();
             MenuDown_ContactOnClick();
             MenuDown_CommonActionsAfter();
@@ -379,7 +379,7 @@ namespace PinMessaging.View
             {
                 if (_userSpot.Visibility == Visibility.Collapsed)
                     _userSpot.Visibility = Visibility.Visible;
-                _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
+                _userSpotLayer.GeoCoordinate = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Point.Position.Latitude, _geoLocation.GeopositionUser.Coordinate.Point.Position.Longitude);
             });
         }
 
@@ -441,7 +441,7 @@ namespace PinMessaging.View
                 }
                 else if (_geoLocation.GeopositionUser != null)
                 {
-                    Map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Latitude, _geoLocation.GeopositionUser.Coordinate.Longitude);
+                    Map.Center = new GeoCoordinate(_geoLocation.GeopositionUser.Coordinate.Point.Position.Latitude, _geoLocation.GeopositionUser.Coordinate.Point.Position.Longitude);
                 }
             });
         }
@@ -516,8 +516,8 @@ namespace PinMessaging.View
             var pinController = new PMPinController(RequestType.GetPins, RefreshPinButton_PostClick);
 
             pinController.GetPins(
-                Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Latitude.ToString()),
-                Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Longitude.ToString()));
+                Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Point.Position.Latitude.ToString()),
+                Utils.Utils.ConvertDoubleCommaToPoint(_geoLocation.GeopositionUser.Coordinate.Point.Position.Longitude.ToString()));
         }
 
         private void Map_OnTouch(object sender, RoutedEventArgs e)
@@ -605,9 +605,9 @@ namespace PinMessaging.View
             }
         }
 
-        private void MoveViewWindow(double left)
+        private async void MoveViewWindow(double left)
         {
-            LoadSettings();
+            await LoadSettings();
 
             _viewMoved = true;
 
@@ -1851,9 +1851,9 @@ namespace PinMessaging.View
         /// 
         private void NotificationGrid_OnTap(object sender, GestureEventArgs e)
         {
-            NotificationGrid.Visibility = Visibility.Collapsed;
-            NotificationNumberTextBlock.Tag = 0;
-            NotificationNumberTextBlock.Text = "0";
+            ButtonNotification.Visibility = Visibility.Collapsed;
+            ButtonNotification.Tag = 0;
+            ButtonNotification.Content = "0";
             MenuDownNotification_OnClick(null, null);
         }
 
@@ -1861,13 +1861,17 @@ namespace PinMessaging.View
         {
             Dispatcher.BeginInvoke(() =>
             {
-                NotificationGrid.Visibility = Visibility.Visible;
-                var notifNum = (int)(NotificationNumberTextBlock.Tag);
-                notifNum += 1;
-
-                NotificationNumberTextBlock.Text = notifNum.ToString();
-
-                NotificationAddItem(notif);
+                ButtonNotification.Visibility = Visibility.Visible;
+                var notifString = (string)(ButtonNotification.Tag);
+                int notifNum;
+                
+                if (int.TryParse(notifString, out notifNum) == true)
+                {
+                    notifNum += 1;
+                    ButtonNotification.Content = notifNum.ToString();
+                    ButtonNotification.Tag = notifNum.ToString();
+                    NotificationAddItem(notif);
+                }
             });
             PMData.NotificationList.Add(notif);
             PMData.NotificationListToAdd.Remove(notif);
@@ -1920,9 +1924,16 @@ namespace PinMessaging.View
             notifGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(80) });
             notifGrid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(1, GridUnitType.Star) });
 
+            var stackP = new StackPanel
+            {
+                Orientation = System.Windows.Controls.Orientation.Vertical
+            };
+
             var img = new Image()
             {
                 Source = new BitmapImage(new Uri(GetNotificationIconType(notif), UriKind.Relative)),
+                Height = 50,
+                Width = 50
             };
 
             var notifText = new TextBlock()
@@ -1931,17 +1942,30 @@ namespace PinMessaging.View
                 FontSize = 25,
                 VerticalAlignment = VerticalAlignment.Center,
                 TextWrapping = TextWrapping.Wrap,
+                Margin = new Thickness(20, 10, 0, 0)
+            };
+
+            var notifTextTime = new TextBlock()
+            {
+                Text = DateTime.Today.ToShortDateString() + " " + DateTime.Now.ToShortTimeString(),
+                FontSize = 15,
+                Foreground = (Brush) Application.Current.Resources["PMOrange"],
+                VerticalAlignment = VerticalAlignment.Center,
+                TextWrapping = TextWrapping.Wrap,
                 Margin = new Thickness(20, 0, 0, 0)
             };
 
             notifGrid.Children.Add(img);
-            notifGrid.Children.Add(notifText);
+            notifGrid.Children.Add(stackP);
 
             Grid.SetRow(img, 0);
             Grid.SetColumn(img, 0);
 
-            Grid.SetRow(notifText, 0);
-            Grid.SetColumn(notifText, 1);
+            Grid.SetRow(stackP, 0);
+            Grid.SetColumn(stackP, 1);
+
+            stackP.Children.Add(notifText);
+            stackP.Children.Add(notifTextTime);
 
             NotificationStackPanel.Children.Add(notifGrid);
         }
