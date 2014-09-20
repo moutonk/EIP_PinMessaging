@@ -469,6 +469,7 @@ namespace PinMessaging.Other
             {
                 var item = JsonConvert.DeserializeObject<PMNotificationModel>(json);
 
+                item.DateCreation = DateTime.Now;
                 PMData.NotificationListToAdd.Add(item);
 
                 return item;

@@ -88,6 +88,9 @@ namespace PinMessaging.Other
         //contains all the pictures (serialized)
         private const string DataPicturesFile = "picturesStorage.dat";
 
+        //contains all the notifications (serialized)
+        private const string DataNotificationsFile = "notificationsStorage.dat";
+
         static PMData()
         {
             PinsList = new List<PMPinModel>();
@@ -160,7 +163,8 @@ namespace PinMessaging.Other
         {
             Pins,
             Favorites,
-            Pictures
+            Pictures, 
+            Notifications
         }
 
         public async static Task<bool> LoadPins()
@@ -242,6 +246,16 @@ namespace PinMessaging.Other
                     foreach (var pic in ProfilPicturesList)
                     {
                         Logs.Output.ShowOutput("UserId: " + pic.UserId + " length:" + pic.FieldBytes.Length);
+                    }
+                    break;
+                case StoredDataType.Notifications:
+                    Logs.Output.ShowOutput("------------------------SAVE NOTIFICATIONS BEGIN------------------");
+                    dataFilePath = DataNotificationsFile;
+                    list = NotificationList;
+                    Logs.Output.ShowOutput("Serialize " + NotificationList.Count + " elements");
+                    foreach (var notif in NotificationList)
+                    {
+                        Logs.Output.ShowOutput("Type: " + notif.Type + " ContentId:" + notif.ContentId + " Content:" + notif.Content);
                     }
                     break;
             }
@@ -358,6 +372,51 @@ namespace PinMessaging.Other
                 Logs.Error.ShowError("LoadProfilPictures", exp, Logs.Error.ErrorsPriority.NotCritical);
             }
             Logs.Output.ShowOutput("------------------------LOAD PICTURES END------------------");
+            return true;
+        }
+
+        public async static Task<bool> LoadNotifications()
+        {
+            Logs.Output.ShowOutput("------------------------LOAD NOTIFICATIONS BEGIN------------------");
+
+            var serializer = new JsonSerializer();
+
+            try
+            {
+                if (File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + DataNotificationsFile) == true)
+                {
+                    // Get the app data folder and create or replace the file we are storing the JSON in.            
+                    var textFile = await ApplicationData.Current.LocalFolder.GetFileAsync(DataNotificationsFile);
+
+                    // read the JSON string!
+                    using (var sw = new StreamReader(textFile.Path))
+                    using (JsonReader reader = new JsonTextReader(sw))
+                    {
+                        var list = serializer.Deserialize<List<PMNotificationModel>>(reader);
+
+                        if (list != null)
+                        {
+                            Logs.Output.ShowOutput("Deserialized " + list.Count.ToString() + " notifs");
+                            NotificationList = list;
+                        }
+
+                        foreach (var notif in NotificationList)
+                        {
+                            Logs.Output.ShowOutput("Type: " + notif.Type + " ContentId:" + notif.ContentId + " Content:" + notif.Content);
+                            PMMapNotifController.AddNotifToUi(notif);
+                        }
+                    }
+                }
+                else
+                {
+                    Logs.Output.ShowOutput("Storage file does not exist");
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("LoadNotifications", exp, Logs.Error.ErrorsPriority.NotCritical);
+            }
+            Logs.Output.ShowOutput("------------------------LOAD NOTIFICATIONS END------------------");
             return true;
         }
     }

@@ -274,4 +274,19 @@ namespace PinMessaging.Controller
             return "unknown pin";
         }
     }
+
+    public static class PMMapNotifController
+    {
+        private static PMMapView _mapView = null;
+
+        public static void Init(PMMapView mapview)
+        {
+            _mapView = mapview;
+        }
+
+        public static void AddNotifToUi(PMNotificationModel notif)
+        {
+            _mapView.NotificationAddItem(notif);
+        }
+    }
 }

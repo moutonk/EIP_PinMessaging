@@ -107,6 +107,8 @@ namespace PinMessaging.View
             NotificationCenter.Init(this);
             PMMapPinController.Init(this);
             PMMapContactController.Init(this);
+            PMMapNotifController.Init(this);
+
             LoadRessources();
 
             if (PMData.AppMode == PMData.ApplicationMode.Offline)
@@ -322,6 +324,7 @@ namespace PinMessaging.View
             {
                 await PMData.LoadProfilPictures();
                 await PMData.LoadFavorites();
+                await PMData.LoadNotifications();
 
                 _isSettingsLoaded = true;
             }
@@ -481,6 +484,7 @@ namespace PinMessaging.View
                 bool retPins = await PMData.SaveData(PMData.StoredDataType.Pins);
                 bool retFav = await PMData.SaveData(PMData.StoredDataType.Favorites);
                 bool retPic = await PMData.SaveData(PMData.StoredDataType.Pictures);
+                bool retNotif = await PMData.SaveData(PMData.StoredDataType.Notifications);
 
                 Application.Current.Terminate();
             }
@@ -1904,7 +1908,7 @@ namespace PinMessaging.View
                     return "New comment from " + notif.Content + " on your pin \"" + PMMapPinController.GetPinTitle(notif.ContentId.ToString() + "\"");
 
                 case NotificationCenter.NotificationType.NewFavorite:
-                    return notif.Content + " added you as his contact!";
+                    return notif.Content + " added you as his contact";
 
                 case NotificationCenter.NotificationType.NewGrade:
                     return "You earned a new grade!: " + notif.ContentId.ToString();
@@ -1915,7 +1919,7 @@ namespace PinMessaging.View
             return "";
         }
 
-        private void NotificationAddItem(PMNotificationModel notif)
+        public void NotificationAddItem(PMNotificationModel notif)
         {
             var notifGrid = new Grid();
 
@@ -1947,7 +1951,7 @@ namespace PinMessaging.View
 
             var notifTextTime = new TextBlock()
             {
-                Text = DateTime.Today.ToShortDateString() + " " + DateTime.Now.ToShortTimeString(),
+                Text = notif.DateCreation.ToShortDateString() + " " + notif.DateCreation.ToShortTimeString(),
                 FontSize = 15,
                 Foreground = (Brush) Application.Current.Resources["PMOrange"],
                 VerticalAlignment = VerticalAlignment.Center,
@@ -1967,7 +1971,7 @@ namespace PinMessaging.View
             stackP.Children.Add(notifText);
             stackP.Children.Add(notifTextTime);
 
-            NotificationStackPanel.Children.Add(notifGrid);
+            NotificationStackPanel.Children.Insert(0, notifGrid);
         }
 
         private void PinCreateMessageTextBox_OnKeyDown(object sender, KeyEventArgs e)

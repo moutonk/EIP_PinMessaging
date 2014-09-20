@@ -30,7 +30,7 @@
         		<Setter.Value>
         			<ControlTemplate TargetType="Button">
         				<Grid>
-        					<Rectangle x:Name="NotificationGrid" Fill="{StaticResource PMOrange}" RadiusY="50" RadiusX="50" Tap="NotificationGrid_OnTap" Visibility="Visible"/>
+        					<Rectangle x:Name="NotificationGrid" Fill="{StaticResource PMOrange}" RadiusY="50" RadiusX="50" Visibility="Visible"/>
         					<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
         				</Grid>
         			</ControlTemplate>
@@ -223,7 +223,7 @@
                                 <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill" ImageSource="/Images\Menu\target.png"/>
                             </Button.Background>
                         </Button>
-                        <Button Name="ButtonNotification"  Content="0" Tag="0" HorizontalAlignment="Right" Height="50" Margin="0,25,30,0" Visibility="Collapsed" Style="{StaticResource ButtonStyleNotif}" VerticalAlignment="Top" Width="50"/>
+                        <Button Name="ButtonNotification"  Tap="NotificationGrid_OnTap" Content="0" Tag="0" HorizontalAlignment="Right" Height="50" Margin="0,25,30,0" Visibility="Collapsed" Style="{StaticResource ButtonStyleNotif}" VerticalAlignment="Top" Width="50"/>
                         <Button Click="ButtonBase_OnClick" Content="-" HorizontalAlignment="Left" Margin="465,0,0,0" VerticalAlignment="Top" Height="50" Width="50"/>
                         <Button Name="RefreshPinButton" Visibility="Collapsed" Click="RefreshPinButton_OnClick" HorizontalAlignment="Left" Margin="158,11,0,0" BorderThickness="0" VerticalAlignment="Top" Width="73" Height="73" RenderTransformOrigin="1.315,0.603">
                             <Button.Background>
