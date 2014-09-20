@@ -1,7 +1,7 @@
-﻿<xapCache source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\PinMessaging_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="9/20/2014 5:35:48 PM">
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\resources.pri" archivePath="resources.pri" lastWriteTime="9/20/2014 5:17:32 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="9/20/2014 5:35:38 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\fr-FR\PinMessaging.resources.dll" archivePath="fr-FR\PinMessaging.resources.dll" lastWriteTime="9/20/2014 5:35:41 PM" />
+﻿<xapCache source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\PinMessaging_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="9/20/2014 5:50:20 PM">
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\resources.pri" archivePath="resources.pri" lastWriteTime="9/20/2014 5:38:33 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.dll" archivePath="PinMessaging.dll" lastWriteTime="9/20/2014 5:50:16 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\fr-FR\PinMessaging.resources.dll" archivePath="fr-FR\PinMessaging.resources.dll" lastWriteTime="9/20/2014 5:50:18 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\packages\WPtoolkit.4.2013.08.16\lib\wp8\fr-FR\Microsoft.Phone.Controls.Toolkit.resources.dll" archivePath="fr-FR\Microsoft.Phone.Controls.Toolkit.resources.dll" lastWriteTime="1/26/2014 7:31:23 AM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Assets\BadgeLogo.png" archivePath="Assets\BadgeLogo.png" lastWriteTime="9/14/2014 6:44:33 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Assets\Logo.png" archivePath="Assets\Logo.png" lastWriteTime="9/14/2014 6:44:34 PM" />
@@ -187,6 +187,6 @@
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Images\Logos\mediumTile.png" archivePath="Images\Logos\mediumTile.png" lastWriteTime="8/20/2014 10:38:19 AM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\whiteLogo.png" archivePath="whiteLogo.png" lastWriteTime="1/26/2014 7:31:22 AM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="9/14/2014 6:46:33 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\MDILProjectFiles.xml" archivePath="MDILProjectFiles.xml" lastWriteTime="9/20/2014 5:35:45 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\AppxManifest.xml" archivePath="AppxManifest.xml" lastWriteTime="9/20/2014 5:17:34 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\MDILProjectFiles.xml" archivePath="MDILProjectFiles.xml" lastWriteTime="9/20/2014 5:50:19 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\AppxManifest.xml" archivePath="AppxManifest.xml" lastWriteTime="9/20/2014 5:38:33 PM" />
 </xapCache>
