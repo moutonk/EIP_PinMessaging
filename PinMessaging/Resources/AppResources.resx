@@ -292,7 +292,7 @@
     <value>Actions</value>
   </data>
   <data name="AddContacts" xml:space="preserve">
-    <value>Add to contacts</value>
+    <value>contacts</value>
   </data>
   <data name="Grade" xml:space="preserve">
     <value>Grade</value>
@@ -310,7 +310,7 @@
     <value>Connected</value>
   </data>
   <data name="PrivateMessage" xml:space="preserve">
-    <value>Private message</value>
+    <value>message</value>
   </data>
   <data name="SharePin" xml:space="preserve">
     <value>Share a pin</value>

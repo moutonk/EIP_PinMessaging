@@ -256,6 +256,7 @@
   </data>
   <data name="PrivateMessage" xml:space="preserve">
     <value>Private message</value>
+    <comment></comment>
   </data>
   <data name="Online" xml:space="preserve">
     <value>Connected</value>
@@ -275,6 +276,7 @@
   </data>
   <data name="AddContacts" xml:space="preserve">
     <value>Add to contacts</value>
+    <comment></comment>
   </data>
   <data name="PinAuthor" xml:space="preserve">
     <value>PINS'S AUTHOR</value>

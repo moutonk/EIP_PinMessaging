@@ -339,12 +339,10 @@
                         </phone:PivotItem>
 
                     </phone:Pivot>
-                    
-                    <Grid Grid.Row="3" x:Name="UnderMenuNotificationGrid">
-                        <ScrollViewer>
-                            <StackPanel Name="NotificationStackPanel" Orientation="Vertical"></StackPanel>
-                        </ScrollViewer>
-                    </Grid>
+
+                    <ScrollViewer Grid.Row="3" x:Name="UnderMenuNotificationScrollViewer">
+                        <StackPanel Name="UnderMenuNotificationStackpanel" Orientation="Vertical"></StackPanel>
+                    </ScrollViewer>
 
                     <ScrollViewer Grid.Row="4" x:Name="UnderMenuPinDescriptionScrollView">
                         <Grid x:Name="UnderMenuPinDescriptionGrid" Height="484">

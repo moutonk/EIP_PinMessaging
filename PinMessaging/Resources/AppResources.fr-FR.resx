@@ -275,6 +275,7 @@
   </data>
   <data name="PrivateMessage" xml:space="preserve">
     <value>Message privé</value>
+    <comment></comment>
   </data>
   <data name="Online" xml:space="preserve">
     <value>En ligne</value>
@@ -293,6 +294,7 @@
   </data>
   <data name="AddContacts" xml:space="preserve">
     <value>ajouter contact</value>
+    <comment></comment>
   </data>
   <data name="Actions" xml:space="preserve">
     <value>Actions</value>

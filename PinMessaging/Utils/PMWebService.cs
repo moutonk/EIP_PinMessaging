@@ -266,11 +266,11 @@ namespace PinMessaging.Utils
             if (aResp != null)
             {
                 Logs.Output.ShowOutput("statusCode: " + (int)aResp.StatusCode);
-            }
-
-            using (var reader = new StreamReader(e.Response.GetResponseStream()))
-            {
-                Logs.Output.ShowOutput(reader.ReadToEnd());
+            
+                using (var reader = new StreamReader(aResp.GetResponseStream()))
+                {
+                    Logs.Output.ShowOutput(reader.ReadToEnd());
+                }
             }
         }
 

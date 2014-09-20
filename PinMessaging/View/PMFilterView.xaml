@@ -20,7 +20,7 @@
         </Grid>
     
         <StackPanel Name="ContentStackPanel">
-            <TextBlock Name="PinDisplayedInfoTextBlock" TextWrapping="Wrap" Text="{Binding LocalizedResources.PinDisplayedInfos, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="20,20,20,0" FontSize="25"></TextBlock>
+            <TextBlock Name="PinDisplayedInfoTextBlock" Visibility="Collapsed" TextWrapping="Wrap" Text="{Binding LocalizedResources.PinDisplayedInfos, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="20,20,20,0" FontSize="25"></TextBlock>
             <TextBlock Name="PinDisplayedTextBlock" TextWrapping="Wrap" Text="{Binding LocalizedResources.PinsDisplayed, Source={StaticResource LocalizedStrings}}" VerticalAlignment="Center" Margin="20,20,20,10" FontSize="35"></TextBlock>
             <StackPanel Name="PinDisplayedStackPanel" Margin="30,0,0,0">
                 <StackPanel Margin="10,10,0,0" Name="PublicMsgStackPanel" Tag="Message" Orientation="Horizontal" Tap="ItemOnTap">

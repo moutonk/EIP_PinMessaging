@@ -235,7 +235,7 @@ namespace PinMessaging.View
 
         }
 
-        private void AdaptUiUnderMenuClick(RowDefinition exept, bool pinDescFull, bool contactFull, bool pinCreateFull)
+        private void AdaptUiUnderMenuClick(RowDefinition exept, bool pinDescFull, bool contactFull, bool pinCreateFull, bool notifFull)
         {
             for (var i = 2; i < UnderMenuGrid.RowDefinitions.Count; i++)
             {
@@ -246,6 +246,7 @@ namespace PinMessaging.View
             UnderMenuPinDescriptionGrid.Height = (pinDescFull == true ? UnderMenuPinDescriptionScrollView.Height : 0);
             UnderMenuContactPanel.Height = (contactFull == true ? UnderMenuContactScrollViewer.Height : 0);
             UnderMenuCreatePinGrid.Height = (pinCreateFull == true ? UnderMenuCreatePinScrollViewer.Height : 0);
+            UnderMenuNotificationStackpanel.Height = (notifFull == true ? UnderMenuNotificationScrollViewer.Height : 0);
         }
 
         private void MenuDown_PinOnClick()
@@ -258,7 +259,7 @@ namespace PinMessaging.View
                 ApplicationBar.IsVisible = false;
 
                 //DownMenuTitle.Text = AppResources.Pin;
-                AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[4], true, false, false);
+                AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[4], true, false, false, false);
 
                 MainGridMap.RowDefinitions[2].Height = new GridLength(0);
                 MoveAnimationUp.Begin();
@@ -268,19 +269,19 @@ namespace PinMessaging.View
         private void MenuDown_NotificationOnClick()
         {
             DownMenuTitle.Text = AppResources.Notifications;
-            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[3], false, false, false);
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[3], false, false, false, true);
         }
 
         private void MenuDown_ContactOnClick()
         {
             DownMenuTitle.Text = AppResources.Contacts;
-            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[2], false, true, false);
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[2], false, true, false, false);
         }
 
         private void MenuDown_CreatePin()
         {
             DownMenuTitle.Text = AppResources.CreatePinTitle;
-            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[5], false, false, true);
+            AdaptUiUnderMenuClick(UnderMenuGrid.RowDefinitions[5], false, false, true, false);
         }
 
         private async void MenuDown_CommonActionsBefore()
@@ -836,7 +837,7 @@ namespace PinMessaging.View
             Grid.SetColumn(pinContentStackPanel, 1);
         }
 
-        private void ItemMyPinOnClick(object sender, RoutedEventArgs routedEventArgs)
+        private async void ItemMyPinOnClick(object sender, RoutedEventArgs routedEventArgs)
         {
             try
             {
@@ -865,7 +866,7 @@ namespace PinMessaging.View
                 }
 
                 OpenClose_Right(null, null);
-                PinTapped(pin);
+                await PinTapped(pin);
                 MapCenterOn(pin.GeoCoord);
             }
             catch (Exception exp)
@@ -1317,12 +1318,12 @@ namespace PinMessaging.View
             }
         }
 
-        public void PinTapped(PMPinModel pin)
+        public async Task<bool> PinTapped(PMPinModel pin)
         {
             if (pin == null)
             {
                 Logs.Error.ShowError("PinTapped: pin is null", Logs.Error.ErrorsPriority.NotCritical);
-                return;
+                return false;
             }
 
             CommentStackPanel.Children.Clear();
@@ -1376,6 +1377,8 @@ namespace PinMessaging.View
             _currentPinFocused = pin;
 
             MenuDown_OnClick(ButtonPins, new RoutedEventArgs());
+
+            return true;
         }
 
         private void ProfilPictureUpdateUi()
@@ -1971,7 +1974,7 @@ namespace PinMessaging.View
             stackP.Children.Add(notifText);
             stackP.Children.Add(notifTextTime);
 
-            NotificationStackPanel.Children.Insert(0, notifGrid);
+            UnderMenuNotificationStackpanel.Children.Insert(0, notifGrid);
         }
 
         private void PinCreateMessageTextBox_OnKeyDown(object sender, KeyEventArgs e)

@@ -97,7 +97,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Add to contacts.
+        ///   Recherche une chaîne localisée semblable à contacts.
         /// </summary>
         public static string AddContacts {
             get {
@@ -1215,7 +1215,7 @@ namespace PinMessaging.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à Private message.
+        ///   Recherche une chaîne localisée semblable à message.
         /// </summary>
         public static string PrivateMessage {
             get {

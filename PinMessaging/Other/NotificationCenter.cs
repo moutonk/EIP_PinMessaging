@@ -47,18 +47,20 @@ namespace PinMessaging.Other
             if (PushChannel == null)
             {
                 PushChannel = new HttpNotificationChannel(ChannelName);
-
+                
                 // Register for all the events before attempting to open the channel.
                 PushChannel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(PushChannel_ChannelUriUpdated);
                 PushChannel.ErrorOccurred += new EventHandler<NotificationChannelErrorEventArgs>(PushChannel_ErrorOccurred);
 
                 // Register for this notification only if you need to receive the notifications while your application is running.
-                PushChannel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(PushChannel_ShellToastNotificationReceived);
+                //PushChannel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(PushChannel_ShellToastNotificationReceived);
+                PushChannel.HttpNotificationReceived += new EventHandler<HttpNotificationEventArgs>(Test);
 
                 PushChannel.Open();
 
                 // Bind this new channel for toast events.
                 PushChannel.BindToShellToast();
+                //PushChannel.BindToShellTile();
             }
             else
             {
@@ -68,13 +70,18 @@ namespace PinMessaging.Other
 
                 // Register for this notification only if you need to receive the notifications while your application is running.
                 PushChannel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(PushChannel_ShellToastNotificationReceived);
-
+          
                 PushChannelUri = PushChannel.ChannelUri.ToString();
              
                 // Display the URI for testing purposes. Normally, the URI would be passed back to your web service at this point.
                 Logs.Output.ShowOutput(String.Format("Channel Uri is {0}", PushChannel.ChannelUri.ToString()));
             }
             Logs.Output.ShowOutput("NotificationCenter constructor end");
+        }
+
+        private static void Test(object sender, HttpNotificationEventArgs e)
+        {
+            Logs.Output.ShowOutput("ici");
         }
 
         static void PushChannel_ChannelUriUpdated(object sender, NotificationChannelUriEventArgs e)

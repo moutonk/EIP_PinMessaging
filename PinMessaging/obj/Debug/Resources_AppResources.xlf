@@ -239,8 +239,8 @@
           <target state="new">Actions</target>
         </trans-unit>
         <trans-unit id="Resx/AddContacts" translate="yes" xml:space="preserve">
-          <source>Add to contacts</source>
-          <target state="new">Add to contacts</target>
+          <source>contacts</source>
+          <target state="new">contacts</target>
         </trans-unit>
         <trans-unit id="Resx/Grade" translate="yes" xml:space="preserve">
           <source>Grade</source>
@@ -263,8 +263,8 @@
           <target state="new">Connected</target>
         </trans-unit>
         <trans-unit id="Resx/PrivateMessage" translate="yes" xml:space="preserve">
-          <source>Private message</source>
-          <target state="new">Private message</target>
+          <source>message</source>
+          <target state="new">message</target>
         </trans-unit>
         <trans-unit id="Resx/SharePin" translate="yes" xml:space="preserve">
           <source>Share a pin</source>
