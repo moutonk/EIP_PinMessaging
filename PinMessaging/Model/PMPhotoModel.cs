@@ -11,6 +11,7 @@ namespace PinMessaging.Model
     public class PMPhotoModel
     {
         [JsonProperty] public string UserId { get; set; }
+        [JsonProperty] public string Content { get; set; }
         [JsonProperty] public byte[] FieldBytes { get; set; }
         public BitmapImage Img { get; set; }
 
@@ -37,7 +38,7 @@ namespace PinMessaging.Model
             }
         }
 
-        [OnDeserialized]
+        //[OnDeserialized]
         private void CreateStream(StreamingContext context)
         {
             if (Img == null)

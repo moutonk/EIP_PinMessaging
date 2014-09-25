@@ -109,7 +109,13 @@ namespace PinMessaging.Other
             {
                 json = json.Replace('[', ' ');
                 json = json.Replace(']', ' ');
+                json = json.Replace('"', ' ');
+                json = json.Replace('}', ' ');
+                json = json.Replace('{', ' ');
                 json = json.Trim();
+                json = json.Replace("userId:", " ");
+                json = json.Replace("content:", " ");
+
 
                 return json.Split(new[] {", "}, StringSplitOptions.RemoveEmptyEntries);
             }
@@ -124,26 +130,28 @@ namespace PinMessaging.Other
         {
             try
             {
-                var item = MyParseProfilPicture(json);
+                var item = JsonConvert.DeserializeObject<JArray>(json);
 
                 if (item == null)
                     return;
 
-                if (item.Length == 1)
+                if (item.Count == 1)
                 {
-                    if (Boolean.Parse(item[0]) == false)
+                    if (Boolean.Parse(item[0].ToString()) == false)
                         Logs.Error.ShowError("ParseProfilPicture: no picture / incorrect id", Logs.Error.ErrorsPriority.NotCritical);
                 }
                 else
                 {
-                    PMData.UserProfilPicture = Convert.FromBase64String(item[1]/*item[2]*/);
+                    var picObj = JsonConvert.DeserializeObject<PMPhotoModel>(item[1].ToString());
 
-                    //PMData.UserId is always the same. Demander a najim a renvoyer l'id dans la reponse
-                    var pic = new PMPhotoModel { UserId = PMData.UserId /*UserId = item[1]*/, FieldBytes = new byte[PMData.UserProfilPicture.Length] };
-                    PMData.UserProfilPicture.CopyTo(pic.FieldBytes, 0);
-
-                    if (PMData.ProfilPicturesList.Any(elem => elem.UserId.Equals(PMData.UserId)))
+                    if (PMData.ProfilPicturesList.Any(elem => elem.UserId.Equals(picObj.UserId)))
                         return;
+
+                    //PMData.UserProfilPicture = Convert.FromBase64String(picObj.Content);
+                    var byteArray = Convert.FromBase64String(picObj.Content);
+
+                    var pic = new PMPhotoModel { UserId = picObj.UserId, FieldBytes = /*new byte[PMData.UserProfilPicture.Length]*/byteArray };
+                    //PMData.UserProfilPicture.CopyTo(pic.FieldBytes, 0);
 
                     PMData.ProfilPicturesList.Add(pic);
                 }
