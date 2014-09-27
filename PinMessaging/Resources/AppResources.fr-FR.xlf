@@ -311,10 +311,6 @@
           <source>You don't have any contacts. You cannot create private Pins. Start by adding people to your contacts</source>
           <target state="translated">Vous n'avez pas de contacts. Vous pourrez créer des Pins privés seulement quand vous aurez ajouté des utilisateurs à vos favoris</target>
         </trans-unit>
-        <trans-unit id="Resx/AddComment" translate="yes" xml:space="preserve">
-          <source>Add a comment</source>
-          <target state="new">Add a comment</target>
-        </trans-unit>
         <trans-unit id="Resx/ClearPins" translate="yes" xml:space="preserve">
           <source>Clear pins</source>
           <target state="new">Clear pins</target>

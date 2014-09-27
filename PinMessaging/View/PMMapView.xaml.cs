@@ -1528,6 +1528,8 @@ namespace PinMessaging.View
             DropPinProgressBar.IsIndeterminate = false;
             DropPinButton.Visibility = Visibility.Visible;
             CloseMenuDownButton_Click(null, null);
+            PinCreateTitleTextBox.Text = "";
+            PinCreateMessageTextBox.Text = "";
 
             try
             {

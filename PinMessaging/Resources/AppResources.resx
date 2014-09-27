@@ -558,9 +558,6 @@ Que vous soyez des touristes ou de simples internautes, PinMessaging est fait po
   <data name="NoContacts" xml:space="preserve">
     <value>You don't have any contacts. You cannot create private Pins. Start by adding people to your contacts</value>
   </data>
-  <data name="AddComment" xml:space="preserve">
-    <value>Add a comment</value>
-  </data>
   <data name="ClearPins" xml:space="preserve">
     <value>Clear pins</value>
   </data>
