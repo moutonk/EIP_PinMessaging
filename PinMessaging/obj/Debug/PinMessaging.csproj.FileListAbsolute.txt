@@ -71,7 +71,6 @@ C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\uz-La
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\vi-VN\Microsoft.Phone.Controls.Toolkit.resources.dll
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\zh-CN\Microsoft.Phone.Controls.Toolkit.resources.dll
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\Bin\Debug\zh-TW\Microsoft.Phone.Controls.Toolkit.resources.dll
-C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.csprojResolveAssemblyReference.cache
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.dll
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.pdb
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\XapCacheFile.xml
@@ -92,3 +91,4 @@ C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\quali
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\MultipleQualifiersPerDimensionFound.txt
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\ProjectArchitectures.txt
 C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\MDILProjectFiles.xml
+C:\Users\mouton_k\Documents\GitHub\EIP_PinMessaging\PinMessaging\obj\Debug\PinMessaging.csprojResolveAssemblyReference.cache

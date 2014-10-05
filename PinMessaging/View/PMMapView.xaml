@@ -217,7 +217,7 @@
                     <ProgressBar x:Name="ProgressBarMap" Visibility="Visible" IsIndeterminate="True" Foreground="{StaticResource PMOrange}"/>
 
                     <Grid Grid.Row="1" x:Name="GridMap">
-                        <maps:Map x:Name="Map" Tap="Map_OnTouch" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true" Margin="0,0,0,-89"/>
+                        <maps:Map x:Name="Map" Tap="Map_OnTouch" Loaded="Map_OnLoaded" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ZoomLevel="16" LandmarksEnabled="true" PedestrianFeaturesEnabled="true" Margin="0,0,0,-89"/>
                         <Button Click="Center_Click" HorizontalAlignment="Left" Margin="12,11,0,0" VerticalAlignment="Top" Height="73" Width="73" BorderThickness="0">
                             <Button.Background>
                                 <ImageBrush x:Name="ImgTarget" Stretch="UniformToFill" ImageSource="/Images\Menu\target.png"/>

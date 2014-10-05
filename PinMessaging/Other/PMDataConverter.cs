@@ -6,6 +6,8 @@ using Newtonsoft.Json.Linq;
 using PinMessaging.Model;
 using PinMessaging.Utils;
 using PinMessaging.Utils.WebService;
+using Microsoft.Phone.Notification;
+using System.Globalization;
 
 namespace PinMessaging.Other
 {
@@ -471,22 +473,52 @@ namespace PinMessaging.Other
             }
         }
 
-        public static PMNotificationModel ParseNotification(string json)
+        public static PMNotificationModel ParseNotification(NotificationEventArgs e)
         {
-            try
-            {
-                var item = JsonConvert.DeserializeObject<PMNotificationModel>(json);
+            //wp:Param: ?type=3&contentId=5&content=k.k
+            var notif = new PMNotificationModel();
 
-                item.DateCreation = DateTime.Now;
-                PMData.NotificationListToAdd.Add(item);
-
-                return item;
-            }
-            catch (Exception exp)
+            foreach (string key in e.Collection.Keys)
             {
-                Logs.Error.ShowError("ParseNotification: could not deserialize the JSON object. Return value: " + json, Logs.Error.ErrorsPriority.NotCritical);
+                Logs.Output.ShowOutput(String.Format("{0}: {1}\n", key, e.Collection[key]));
+
+                if (key.Equals("wp:Text1") == true)
+                {
+                    notif.Text1 = e.Collection[key];
+                }
+                else if (key.Equals("wp:Text2") == true)
+                {
+                    notif.Text2 = e.Collection[key];
+                }
+                else if (key.Equals("wp:Param") == true)
+                {
+                    try
+                    {
+                        string[] items = e.Collection[key].Split(new[] { "?type=", "&contentId=", "&content=" }, StringSplitOptions.RemoveEmptyEntries);
+                        items.ToList().ForEach(item => Logs.Output.ShowOutput(item));
+
+                        if (items.Count() == 3)
+                        {
+                            notif.Type = (NotificationCenter.NotificationType)Enum.Parse(typeof(NotificationCenter.NotificationType), items[0], true);
+                            notif.ContentId = (long)long.Parse(items[1], NumberStyles.None);
+                            notif.Content = items[2];
+                        }
+                    }
+                    catch (Exception exp)
+                    {
+                        Logs.Error.ShowError("ParseNotification error", exp, Utils.Logs.Error.ErrorsPriority.NotCritical);
+                        return null;
+                    }
+                }
             }
-            return null;
+            //var item = JsonConvert.DeserializeObject<PMNotificationModel>(json);
+
+            notif.DateCreation = DateTime.Now;
+            PMData.NotificationListToAdd.Add(notif);
+
+            Logs.Output.ShowOutput(notif.ToString());
+
+            return notif;
         }
     }   
 }

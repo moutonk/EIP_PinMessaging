@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="dd55a989-49a6-46e7-88e6-5fd06bc7ee84" Publisher="CN=mouton_k" Version="1.0.0.0" />
+  <Identity Name="37511moutonk.Pinmessaging" Publisher="CN=318412C2-DD3D-480E-842D-6C7D73A7E8E1" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="fd2c59b3-683b-46a7-bb75-889ab4003801" PhonePublisherId="2f771583-ff49-4e88-8969-cbbf1bbbde21" />
   <Properties>
     <DisplayName>PinMessaging</DisplayName>

@@ -8,6 +8,7 @@ using Microsoft.Phone.Tasks;
 using PinMessaging.Model;
 using PinMessaging.Utils;
 using PinMessaging.View;
+using System.Windows;
 
 namespace PinMessaging.Other
 {
@@ -54,7 +55,7 @@ namespace PinMessaging.Other
 
                 // Register for this notification only if you need to receive the notifications while your application is running.
                 //PushChannel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(PushChannel_ShellToastNotificationReceived);
-                PushChannel.HttpNotificationReceived += new EventHandler<HttpNotificationEventArgs>(Test);
+                PushChannel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(PushChannel_ShellToastNotificationReceived);
 
                 PushChannel.Open();
 
@@ -77,11 +78,6 @@ namespace PinMessaging.Other
                 Logs.Output.ShowOutput(String.Format("Channel Uri is {0}", PushChannel.ChannelUri.ToString()));
             }
             Logs.Output.ShowOutput("NotificationCenter constructor end");
-        }
-
-        private static void Test(object sender, HttpNotificationEventArgs e)
-        {
-            Logs.Output.ShowOutput("ici");
         }
 
         static void PushChannel_ChannelUriUpdated(object sender, NotificationChannelUriEventArgs e)
@@ -111,8 +107,8 @@ namespace PinMessaging.Other
             foreach (string key in e.Collection.Keys)
             {
                 Logs.Output.ShowOutput(String.Format("{0}: {1}\n", key, e.Collection[key]));
-                return PMDataConverter.ParseNotification(e.Collection[key]);
             }
+            return PMDataConverter.ParseNotification(e);
             Logs.Error.ShowError("CheckNotifSyntax: notif with incorrect value", Logs.Error.ErrorsPriority.NotCritical);
             return null;
         }

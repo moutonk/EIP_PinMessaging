@@ -1861,7 +1861,7 @@ namespace PinMessaging.View
         private void NotificationGrid_OnTap(object sender, GestureEventArgs e)
         {
             ButtonNotification.Visibility = Visibility.Collapsed;
-            ButtonNotification.Tag = 0;
+            ButtonNotification.Tag = "0";
             ButtonNotification.Content = "0";
             MenuDownNotification_OnClick(null, null);
         }
@@ -1985,6 +1985,12 @@ namespace PinMessaging.View
             {
                 PostPinButton_Click(null, null);
             }
+        }
+
+        private void Map_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Phone.Maps.MapsSettings.ApplicationContext.ApplicationId = "e4fd50c6-0d0d-495c-b754-28a745c2020f";
+            Microsoft.Phone.Maps.MapsSettings.ApplicationContext.AuthenticationToken = "l4aRjugfIY4noK4eiGCI4Q";
         }
     }
 }
